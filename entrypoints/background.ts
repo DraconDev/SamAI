@@ -8,12 +8,12 @@ export default defineBackground(() => {
 
   // Add click handler for the context menu item
   browser.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === 'samai-context-menu') {
+    if (info.menuItemId === "samai-context-menu") {
       browser.windows.create({
-        url: browser.runtime.getURL('/context-popup/index.html'),
-        type: 'popup',
+        url: browser.runtime.getURL("/context-popup.html"),
+        type: "popup",
         width: 400,
-        height: 200
+        height: 200,
       });
     }
   });
