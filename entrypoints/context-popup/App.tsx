@@ -33,7 +33,8 @@ export default function App() {
     console.log("Input submitted:", input);
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
-      const prompt = "Say cheese" + generateFormResponse;
+      const prompt = "Say cheese";
+      generateFormResponse;
     }
     // TODO: Handle the input
     setInput("");
