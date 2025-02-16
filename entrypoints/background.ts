@@ -10,7 +10,7 @@ export default defineBackground(() => {
   browser.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === 'samai-context-menu') {
       browser.windows.create({
-        url: browser.runtime.getURL('/context-popup.html'),
+        url: browser.runtime.getURL('/context-popup/index.html'),
         type: 'popup',
         width: 400,
         height: 200
