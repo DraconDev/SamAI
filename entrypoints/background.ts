@@ -12,39 +12,42 @@ export default defineBackground(() => {
 
     try {
       // Try to get input information if it's an input element
-      const response = await browser.tabs.sendMessage(tab.id, { type: 'getInputInfo' });
+      const message = { type: 'getInputInfo' };
+      console.log('Sending message to content script:', message);
+      
+      const response = await browser.tabs.sendMessage(tab.id, message);
       console.log('Background received response:', response);
       
-      // Create popup with input data in URL parameters if available
-      if (response?.messageType === 'inputInfo') {
-        console.log('Creating popup with input info');
-        const params = new URLSearchParams({
-          value: response.value || '',
-          placeholder: response.placeholder || '',
-          inputType: response.inputType || '',
-          elementId: response.id || '',
-          elementName: response.name || ''
-        });
+      let url = browser.runtime.getURL("/context-popup.html");
 
-        const popupUrl = `${browser.runtime.getURL("/context-popup.html")}?${params.toString()}`;
-        console.log('Opening popup with URL:', popupUrl);
-
-        browser.windows.create({
-          url: popupUrl,
-          type: "popup",
-          width: 400,
-          height: 300,
-        });
-      } else {
-        // Regular popup if not an input element
-        browser.windows.create({
-          url: browser.runtime.getURL("/context-popup.html"),
-          type: "popup",
-          width: 400,
-          height: 300,
-        });
+      // Check if we have valid input info
+      if (response && typeof response === 'object' && response.messageType === 'inputInfo') {
+        console.log('Valid input info received:', response);
+        const params = new URLSearchParams();
+        
+        // Only add params that exist
+        if (response.value) params.append('value', response.value);
+        if (response.placeholder) params.append('placeholder', response.placeholder);
+        if (response.inputType) params.append('inputType', response.inputType);
+        if (response.id) params.append('elementId', response.id);
+        if (response.name) params.append('elementName', response.name);
+        
+        // Only append params if we have any
+        if (params.toString()) {
+          url = `${url}?${params.toString()}`;
+          console.log('Created URL with params:', url);
+        }
       }
+
+      console.log('Opening popup with final URL:', url);
+      browser.windows.create({
+        url,
+        type: "popup",
+        width: 400,
+        height: 300,
+      });
     } catch (error) {
+      console.error('Error in background script:', error);
       // Open regular popup if message fails (non-input or error)
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
