@@ -39,6 +39,7 @@ export default function App() {
         console.error("Error generating response");
         return;
       }
+      console.log("Generated response:", response);
     }
     // TODO: Handle the input
     setInput("");
