@@ -13,7 +13,7 @@ function App() {
   }, []);
 
   const handleSave = async () => {
-    await apiKeyStore({ apiKey });
+    await apiKeyStore.setValue({ apiKey });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
