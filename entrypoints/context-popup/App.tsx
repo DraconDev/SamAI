@@ -31,9 +31,9 @@ export default function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Input submitted:", input);
+    console.log(inputInfo, "inputInfo");
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
-      console.log(inputInfo, "inputInfo");
       const prompt = "Say cheese";
       const response = await generateFormResponse(prompt);
       if (!response) {
