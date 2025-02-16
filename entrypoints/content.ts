@@ -13,8 +13,10 @@ export default defineContentScript({
       }
     });
 
-    // Listen for messages from the background script
-    browser.runtime.onMessage.addListener(async (message) => {
+    console.log('Content script initialized');
+
+    // Return true from the listener to indicate we want to send a response
+    browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log('Content script received message:', message);
       console.log('Last input element:', lastInputElement);
 
@@ -28,10 +30,12 @@ export default defineContentScript({
           inputType: lastInputElement instanceof HTMLInputElement ? lastInputElement.type : 'textarea'
         };
         console.log('Sending input info:', response);
-        return Promise.resolve(response);
+        sendResponse(response);
+      } else {
+        console.log('No input element or wrong message type');
+        sendResponse(false);
       }
-      console.log('No input element or wrong message type');
-      return Promise.resolve(false);
+      return true; // Will respond asynchronously
     });
   },
 });
