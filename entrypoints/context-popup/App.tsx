@@ -32,6 +32,7 @@ export default function App() {
     console.log("Input submitted:", input);
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
+      
     }
     // TODO: Handle the input
     setInput("");
