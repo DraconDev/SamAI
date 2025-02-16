@@ -14,7 +14,7 @@ export async function generateFormResponse(
   apiKey?: string
 ): Promise<string | null> {
   try {
-    const apiKey = apiKeyStore.getValue().then((store) => {
+    const apiKey = await apiKeyStore.getValue().then((store) => {
       return store.apiKey;
     });
     if (!model) {
