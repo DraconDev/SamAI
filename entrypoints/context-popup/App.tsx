@@ -15,7 +15,7 @@ export default function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-
+    console.log("Params:", params);
     // If we have input info params, store them
     if (params.has("inputType")) {
       setInputInfo({
