@@ -3,7 +3,7 @@ export default defineBackground(() => {
   browser.contextMenus.create({
     id: "samai-context-menu",
     title: "Sam",
-    contexts: ["all"],
+    contexts: ["editable"], // Only show for input elements
   });
 
   // Add click handler for the context menu item
