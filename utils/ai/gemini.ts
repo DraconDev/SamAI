@@ -10,13 +10,6 @@ export function initializeModel(apiKey: string) {
   });
 }
 
-interface FormFieldInfo {
-  label: string;
-  type: string;
-  options?: { text: string; value: string }[];
-  placeholder?: string;
-  ariaLabel?: string;
-}
 
 export async function generateFormResponse(
   fieldInfo: FormFieldInfo,
