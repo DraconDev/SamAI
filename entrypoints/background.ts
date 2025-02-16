@@ -8,7 +8,7 @@ export default defineBackground(() => {
 
   browser.contextMenus.create({
     id: "samai-input-menu",
-    title: "Sam Input",
+    title: "Sam Prompt",
     contexts: ["editable"],
   });
 
