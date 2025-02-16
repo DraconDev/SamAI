@@ -13,9 +13,11 @@ export default defineBackground(() => {
     try {
       // Try to get input information if it's an input element
       const response = await browser.tabs.sendMessage(tab.id, { type: 'getInputInfo' });
+      console.log('Background received response:', response);
       
       // Create popup with input data in URL parameters if available
       if (response?.messageType === 'inputInfo') {
+        console.log('Creating popup with input info');
         const params = new URLSearchParams({
           value: response.value || '',
           placeholder: response.placeholder || '',
