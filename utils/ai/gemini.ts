@@ -12,15 +12,12 @@ export function initializeModel(apiKey: string) {
 
 
 export async function generateFormResponse(
-  fieldInfo: FormFieldInfo,
   apiKey: string
 ): Promise<string | null> {
   try {
     if (!model) {
       initializeModel(apiKey);
     }
-
-
 
     const result = await model.generateContent(prompt);
 
