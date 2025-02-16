@@ -1,3 +1,4 @@
+import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 
 interface InputInfo {
@@ -32,7 +33,7 @@ export default function App() {
     console.log("Input submitted:", input);
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
-      
+      generateFormResponse
     }
     // TODO: Handle the input
     setInput("");
