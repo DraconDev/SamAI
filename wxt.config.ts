@@ -1,33 +1,30 @@
-import { defineConfig } from 'wxt';
+import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: 'chrome',
+  extensionApi: "chrome",
   manifest: {
     name: "SamAI - Free AI Assistant",
     description: "SamAI - Free AI Assistant",
-    version: "1.0.33",
+    version: "1.0.34",
     permissions: ["storage", "contextMenus"],
     icons: {
+      "16": "icon/16.png",
+      "32": "icon/32.png",
+      "48": "icon/48.png",
+      "96": "icon/96.png",
+      "128": "icon/128.png",
+    },
+    action: {
+      default_popup: "popup.html",
+      default_icon: {
         "16": "icon/16.png",
         "32": "icon/32.png",
         "48": "icon/48.png",
-        "96": "icon/96.png",
         "128": "icon/128.png",
+      },
+      default_title: "",
     },
-    action: {
-        default_popup: "popup.html",
-        default_icon: {
-            "16": "icon/16.png",
-            "32": "icon/32.png",
-            "48": "icon/48.png",
-            "128": "icon/128.png",
-        },
-        default_title: "",
-    },
-    content_security_policy: {
-        extension_pages: "script-src 'self'; object-src 'self'",
-    },
-},
-  modules: ['@wxt-dev/module-react'],
+  },
+  modules: ["@wxt-dev/module-react"],
 });
