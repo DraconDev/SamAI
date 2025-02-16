@@ -18,30 +18,24 @@ export default defineBackground(() => {
       const response = await browser.tabs.sendMessage(tab.id, message);
       console.log('Background received response:', response);
       
-      let url = browser.runtime.getURL("/context-popup.html");
-
-      // Check if we have valid input info
+      // Store input info in local storage if available
       if (response && typeof response === 'object' && response.messageType === 'inputInfo') {
-        console.log('Valid input info received:', response);
-        const params = new URLSearchParams();
-        
-        // Only add params that exist
-        if (response.value) params.append('value', response.value);
-        if (response.placeholder) params.append('placeholder', response.placeholder);
-        if (response.inputType) params.append('inputType', response.inputType);
-        if (response.id) params.append('elementId', response.id);
-        if (response.name) params.append('elementName', response.name);
-        
-        // Only append params if we have any
-        if (params.toString()) {
-          url = `${url}?${params.toString()}`;
-          console.log('Created URL with params:', url);
-        }
+        console.log('Storing input info:', response);
+        await browser.storage.local.set({ inputInfo: {
+          value: response.value || '',
+          placeholder: response.placeholder || '',
+          inputType: response.inputType || '',
+          elementId: response.id || '',
+          elementName: response.name || ''
+        }});
+      } else {
+        // Clear any existing input info if we're not clicking on an input
+        await browser.storage.local.remove('inputInfo');
       }
 
-      console.log('Opening popup with final URL:', url);
+      // Open popup
       browser.windows.create({
-        url,
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 300,
