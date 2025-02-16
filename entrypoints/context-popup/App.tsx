@@ -31,6 +31,11 @@ export default function App() {
     };
 
     loadInputInfo();
+
+    // Clear storage when popup closes
+    return () => {
+      browser.storage.local.remove('inputInfo').catch(console.error);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
