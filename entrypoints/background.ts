@@ -2,7 +2,7 @@ export default defineBackground(() => {
   // Create context menu item
   browser.contextMenus.create({
     id: 'samai-context-menu',
-    title: 'Sam',
+    title: 'Samai',
     contexts: ['all']
   });
 
