@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+interface InputInfo {
+  value: string;
+  placeholder: string;
+  inputType: string;
+  elementId: string;
+  elementName: string;
+}
 
 export default function App() {
   const [input, setInput] = useState("");
+  const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const value = params.get("value");
+    
+    // Only set input info if we have URL parameters
+    if (value !== null) {
+      setInputInfo({
+        value: value,
+        placeholder: params.get("placeholder") || "",
+        inputType: params.get("inputType") || "",
+        elementId: params.get("elementId") || "",
+        elementName: params.get("elementName") || ""
+      });
+      // Pre-fill input with the field's current value
+      setInput(value);
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Input submitted:", input);
+    if (inputInfo) {
+      console.log("Input field info:", inputInfo);
+    }
     // TODO: Handle the input
     setInput("");
   };
@@ -17,7 +47,7 @@ export default function App() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
+          placeholder={inputInfo?.placeholder || "Type your message..."}
           className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           autoFocus
         />
