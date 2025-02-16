@@ -15,15 +15,15 @@ export default function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    
+
     // If we have input info params, store them
-    if (params.has('inputType')) {
+    if (params.has("inputType")) {
       setInputInfo({
-        value: params.get('value') || '',
-        placeholder: params.get('placeholder') || '',
-        inputType: params.get('inputType') || '',
-        elementId: params.get('elementId') || '',
-        elementName: params.get('elementName') || ''
+        value: params.get("value") || "",
+        placeholder: params.get("placeholder") || "",
+        inputType: params.get("inputType") || "",
+        elementId: params.get("elementId") || "",
+        elementName: params.get("elementName") || "",
       });
     }
   }, []);
@@ -33,7 +33,9 @@ export default function App() {
     console.log("Input submitted:", input);
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
-      generateFormResponse
+      const prompt =
+        "Fill out the form with the following information:\n" +
+        generateFormResponse;
     }
     // TODO: Handle the input
     setInput("");
