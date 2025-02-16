@@ -17,6 +17,9 @@ export async function generateFormResponse(
     const apiKey = await apiKeyStore.getValue().then((store) => {
       return store.apiKey;
     });
+    if (!apiKey) {
+      return null;
+    }
     if (!model) {
       initializeModel(apiKey);
     }
