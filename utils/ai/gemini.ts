@@ -10,15 +10,13 @@ export function initializeModel(apiKey: string) {
   });
 }
 
-
 export async function generateFormResponse(
-
   apiKey?: string
 ): Promise<string | null> {
   try {
     storage.getItem("apiKey").then((apiKey) => {
       if (apiKey) {
-        initializeModel(apiKey);
+        initializeModel(apiKey as string);
       }
     });
     if (!model) {
@@ -45,7 +43,6 @@ export async function generateFormResponse(
 
     const response = result.response.candidates[0].content.parts[0].text;
     return response.trim();
-
   } catch (error: any) {
     console.error("Error analyzing HTML element:", {
       timestamp: new Date().toISOString(),
