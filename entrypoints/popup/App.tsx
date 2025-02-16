@@ -2,7 +2,7 @@ import { tabs } from "webextension-polyfill";
 
 function App() {
   const openApiKeyPage = () => {
-    tabs.create({ url: "apikey.html" });
+    tabs.create({ url: "/src/apikey/index.html" });
   };
 
   return (
