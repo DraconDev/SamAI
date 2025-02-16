@@ -15,8 +15,11 @@ export default defineContentScript({
 
     // Listen for messages from the background script
     browser.runtime.onMessage.addListener((message) => {
+      console.log('Content script received message:', message);
+      console.log('Last input element:', lastInputElement);
+
       if (message.type === 'getInputInfo' && lastInputElement) {
-        return {
+        const response = {
           messageType: 'inputInfo',
           value: lastInputElement.value,
           placeholder: lastInputElement.placeholder,
@@ -24,7 +27,10 @@ export default defineContentScript({
           name: lastInputElement.name,
           inputType: lastInputElement instanceof HTMLInputElement ? lastInputElement.type : 'textarea'
         };
+        console.log('Sending input info:', response);
+        return response;
       }
+      console.log('No input element or wrong message type');
       return false;
     });
   },
