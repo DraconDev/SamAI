@@ -11,6 +11,8 @@ export default defineBackground(() => {
     if (!tab?.id) return;
 
     try {
+      console.log('Content script registered in tab:', tab.id);
+      
       // Try to get input information if it's an input element
       const message = { type: 'getInputInfo' };
       console.log('Sending message to content script:', message);
@@ -19,8 +21,8 @@ export default defineBackground(() => {
       console.log('Background received response:', response);
       
       // Store input info in local storage if available
-      if (response && typeof response === 'object' && response.messageType === 'inputInfo') {
-        console.log('Storing input info:', response);
+      if (response && response.messageType === 'inputInfo') {
+        console.log('Input info received:', response);
         await browser.storage.local.set({ inputInfo: {
           value: response.value || '',
           placeholder: response.placeholder || '',
