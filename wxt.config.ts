@@ -6,7 +6,7 @@ export default defineConfig({
   manifest: {
     name: "SamAI - Free AI Assistant",
     description: "SamAI - Free AI Assistant",
-    version: "1.0.42",
+    version: "1.0.43",
     permissions: ["storage", "contextMenus"],
     icons: {
       "16": "icon/16.png",
