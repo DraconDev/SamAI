@@ -33,6 +33,7 @@ export default function App() {
     console.log("Input submitted:", input);
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
+      console.log();
       const prompt = "Say cheese";
       const response = await generateFormResponse(prompt);
       if (!response) {
