@@ -12,9 +12,11 @@ export function initializeModel(apiKey: string) {
 
 
 export async function generateFormResponse(
-  apiKey: string
+
+  apiKey?: string
 ): Promise<string | null> {
   try {
+    
     if (!model) {
       initializeModel(apiKey);
     }
