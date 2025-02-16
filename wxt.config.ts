@@ -6,7 +6,7 @@ export default defineConfig({
   manifest: {
     name: "SamAI - Free AI Assistant",
     description: "SamAI - Free AI Assistant",
-    version: "1.0.32",
+    version: "1.0.33",
     permissions: ["storage", "contextMenus"],
     icons: {
         "16": "icon/16.png",
@@ -24,6 +24,9 @@ export default defineConfig({
             "128": "icon/128.png",
         },
         default_title: "",
+    },
+    content_security_policy: {
+        extension_pages: "script-src 'self'; object-src 'self'",
     },
 },
   modules: ['@wxt-dev/module-react'],
