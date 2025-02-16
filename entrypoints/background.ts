@@ -12,8 +12,8 @@ export default defineBackground(() => {
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 400,
-        height: 200,
+        width: 300,
+        height: 300,
       });
     }
   });
