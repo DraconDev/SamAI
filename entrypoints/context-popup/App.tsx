@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function App() {
   const [input, setInput] = useState("");
-  const [isInputElement, setIsInputElement] = useState(false);
-
-  useEffect(() => {
-    // Check if we have any URL parameters, indicating an input element was clicked
-    const params = new URLSearchParams(window.location.search);
-    setIsInputElement(params.has("inputType"));
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Input submitted:", input);
-    if (isInputElement) {
-      console.log("Clicked on an input element");
-    } else {
-      console.log("Clicked on a regular element");
-    }
     // TODO: Handle the input
     setInput("");
   };
