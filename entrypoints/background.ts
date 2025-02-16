@@ -24,8 +24,11 @@ export default defineBackground(() => {
           elementName: response.name || ''
         });
 
+        const popupUrl = `${browser.runtime.getURL("/context-popup.html")}?${params.toString()}`;
+        console.log('Opening popup with URL:', popupUrl);
+
         browser.windows.create({
-          url: `${browser.runtime.getURL("/context-popup.html")}?${params.toString()}`,
+          url: popupUrl,
           type: "popup",
           width: 400,
           height: 300,
