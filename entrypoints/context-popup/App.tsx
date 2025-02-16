@@ -14,22 +14,23 @@ export default function App() {
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
 
   useEffect(() => {
-    console.log("Window location:", window.location.href);
-    const params = new URLSearchParams(window.location.search);
-    console.log("Raw params:", window.location.search);
-    console.log("Parsed params:", Object.fromEntries(params.entries()));
-    
-    // If we have input info params, store them
-    if (params.has("inputType")) {
-      console.log("Found input info params");
-      setInputInfo({
-        value: params.get("value") || "",
-        placeholder: params.get("placeholder") || "",
-        inputType: params.get("inputType") || "",
-        elementId: params.get("elementId") || "",
-        elementName: params.get("elementName") || "",
-      });
-    }
+    const loadInputInfo = async () => {
+      try {
+        const result = await browser.storage.local.get('inputInfo');
+        console.log('Loaded from storage:', result);
+        if (result.inputInfo) {
+          setInputInfo(result.inputInfo);
+          // Pre-fill input with value if available
+          if (result.inputInfo.value) {
+            setInput(result.inputInfo.value);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading input info:', error);
+      }
+    };
+
+    loadInputInfo();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
