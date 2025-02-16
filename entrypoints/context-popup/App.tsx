@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+interface InputInfo {
+  value: string;
+  placeholder: string;
+  inputType: string;
+  elementId: string;
+  elementName: string;
+}
 
 export default function App() {
   const [input, setInput] = useState("");
+  const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    
+    // If we have input info params, store them
+    if (params.has('inputType')) {
+      setInputInfo({
+        value: params.get('value') || '',
+        placeholder: params.get('placeholder') || '',
+        inputType: params.get('inputType') || '',
+        elementId: params.get('elementId') || '',
+        elementName: params.get('elementName') || ''
+      });
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Input submitted:", input);
+    if (inputInfo) {
+      console.log("Input field info:", inputInfo);
+    }
     // TODO: Handle the input
     setInput("");
   };
