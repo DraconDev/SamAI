@@ -14,10 +14,14 @@ export default function App() {
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
 
   useEffect(() => {
+    console.log("Window location:", window.location.href);
     const params = new URLSearchParams(window.location.search);
-    console.log("Params:", params);
+    console.log("Raw params:", window.location.search);
+    console.log("Parsed params:", Object.fromEntries(params.entries()));
+    
     // If we have input info params, store them
     if (params.has("inputType")) {
+      console.log("Found input info params");
       setInputInfo({
         value: params.get("value") || "",
         placeholder: params.get("placeholder") || "",
