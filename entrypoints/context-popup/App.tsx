@@ -28,7 +28,7 @@ export default function App() {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Input submitted:", input);
     if (inputInfo) {
