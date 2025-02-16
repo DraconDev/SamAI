@@ -1,7 +1,7 @@
 export default defineContentScript({
   matches: ['<all_urls>'],
   main() {
-    let lastInputElement: HTMLInputElement | null = null;
+    let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
 
     // Listen for right clicks to track the last input element
     document.addEventListener('contextmenu', (event) => {
@@ -17,12 +17,12 @@ export default defineContentScript({
     browser.runtime.onMessage.addListener((message) => {
       if (message.type === 'getInputInfo' && lastInputElement) {
         return {
-          type: 'inputInfo',
+          messageType: 'inputInfo',
           value: lastInputElement.value,
           placeholder: lastInputElement.placeholder,
           id: lastInputElement.id,
           name: lastInputElement.name,
-          type: lastInputElement.type
+          inputType: lastInputElement instanceof HTMLInputElement ? lastInputElement.type : 'textarea'
         };
       }
       return false;
