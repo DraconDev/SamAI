@@ -34,7 +34,7 @@ export default function App() {
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
       const prompt = "Say cheese";
-      generateFormResponse();
+      generateFormResponse(prompt);
     }
     // TODO: Handle the input
     setInput("");
