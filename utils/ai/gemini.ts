@@ -20,7 +20,7 @@ export async function generateFormResponse(
       if (apiKey) {
         initializeModel(apiKey);
       }
-    }
+    });
     if (!model) {
       initializeModel(apiKey);
     }
