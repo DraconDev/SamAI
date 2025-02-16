@@ -11,7 +11,7 @@ export function initializeModel(apiKey: string) {
 }
 
 export async function generateFormResponse(
-  apiKey?: string
+  prompt: string
 ): Promise<string | null> {
   try {
     const apiKey = await apiKeyStore.getValue().then((store) => {
