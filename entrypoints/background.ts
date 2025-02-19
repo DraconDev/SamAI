@@ -17,20 +17,19 @@ export default defineBackground(() => {
     
     if (message.type === "generateGeminiResponse") {
       console.log('[SamAI Background] Handling Gemini response request');
-      // Create a promise chain for async response
-      generateFormResponse(message.prompt)
-        .then(result => {
+      (async () => {
+        try {
+          const result = await generateFormResponse(message.prompt);
           console.log('[SamAI Background] Generated response:', result);
           sendResponse(result);
-        })
-        .catch(error => {
+        } catch (error) {
           console.error("[SamAI Background] Error generating Gemini response:", error);
           const errorDetails = error instanceof Error ? error.message : 'Unknown error';
           console.error("[SamAI Background] Error details:", errorDetails);
           sendResponse(null);
-        });
-      // Return true to indicate we will send response asynchronously
-      return true;
+        }
+      })();
+      return true; // Will respond asynchronously
     }
     
     if (message.type === "setInputValue" && sourceTabId) {
