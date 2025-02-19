@@ -1,27 +1,9 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 
+import { generateFormResponse } from "@/utils/ai/gemini";
+
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
-
-  // Listen for web navigation to search pages
-  browser.webNavigation.onCompleted.addListener(async (details) => {
-    const url = new URL(details.url);
-    // Detect search engine URLs
-    if (url.hostname === 'www.google.com' && url.pathname === '/search') {
-      const searchQuery = url.searchParams.get('q');
-      if (searchQuery) {
-        // Send search query to content script
-        try {
-          await browser.tabs.sendMessage(details.tabId, {
-            type: 'performGeminiSearch',
-            query: searchQuery
-          });
-        } catch (error) {
-          console.error('Error sending search query:', error);
-        }
-      }
-    }
-  });
 
   // Create context menu item
   browser.contextMenus.create({
