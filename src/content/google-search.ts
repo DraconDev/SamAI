@@ -35,19 +35,21 @@ export function initializeGoogleSearch() {
   // Initial search when function is called
   handleSearch();
 
-  // Watch for URL changes (for when user searches without page reload)
-  const observer = new MutationObserver(() => {
-    const currentQuery = extractSearchQuery(window.location.href);
-    if (currentQuery) {
-      handleSearch();
+  // Watch for URL changes using a more efficient approach
+  let lastUrl = window.location.href;
+  const checkForURLChange = () => {
+    if (window.location.href !== lastUrl) {
+      lastUrl = window.location.href;
+      const currentQuery = extractSearchQuery(lastUrl);
+      if (currentQuery) {
+        handleSearch();
+      }
     }
-  });
+  };
 
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true
-  });
+  // Check URL changes every second instead of watching all DOM changes
+  const urlCheckInterval = setInterval(checkForURLChange, 1000);
 
   // Return cleanup function
-  return () => observer.disconnect();
+  return () => clearInterval(urlCheckInterval);
 }
