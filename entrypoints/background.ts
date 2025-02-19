@@ -10,9 +10,9 @@ export default defineBackground(() => {
 
   // Listen for messages from popup to content script
   browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    if (message.target === 'content' && activeTabId) {
+    if (message.target === 'content' && message.data.tabId) {
       try {
-        const response = await browser.tabs.sendMessage(activeTabId, message.data);
+        const response = await browser.tabs.sendMessage(message.data.tabId, message.data);
         sendResponse(response);
       } catch (error) {
         console.error('Error sending message to content script:', error);
