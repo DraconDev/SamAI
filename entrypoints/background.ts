@@ -1,4 +1,3 @@
-
 import { generateFormResponse } from "@/utils/ai/gemini";
 
 export default defineBackground(() => {
@@ -12,78 +11,75 @@ export default defineBackground(() => {
   });
 
   // Listen for runtime messages and forward them to source tab
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    console.log('[SamAI Background] Received message:', message);
-    
-    if (message.type === "generateGeminiResponse") {
-      // Store sendResponse to use it after async operation
-      const callback = sendResponse;
-      // Handle Gemini response
-      generateFormResponse(message.prompt)
-        .then(result => {
-          console.log('[SamAI Background] Generated response:', result);
-          try {
-            callback(result);
-          } catch (e) {
-            console.error('[SamAI Background] Error sending response:', e);
-          }
-        })
-        .catch(error => {
-          console.error("[SamAI Background] Error generating Gemini response:", error);
-          try {
-            callback(null);
-          } catch (e) {
-            console.error('[SamAI Background] Error sending error response:', e);
-          }
-        });
-      return true; // Will respond asynchronously
-    }
-    
-    if (message.type === "setInputValue" && sourceTabId) {
-      try {
-        // Send message to the original source tab
-        const result = await browser.tabs.sendMessage(sourceTabId, message);
-        sendResponse(result);
-      } catch (error) {
-        console.error("Error forwarding message:", error);
-        sendResponse({ success: false, error: "Failed to forward message to content script" });
+  browser.runtime.onMessage.addListener(
+    async (message, sender, sendResponse) => {
+      console.log("[SamAI Background] Received message:", message);
+
+      if (message.type === "generateGeminiResponse") {
+        // Handle Gemini response directly in the async listener
+        try {
+          const result = await generateFormResponse(message.prompt);
+          console.log("[SamAI Background] Generated response:", result);
+          sendResponse(result);
+        } catch (error) {
+          console.error(
+            "[SamAI Background] Error generating Gemini response:",
+            error
+          );
+          sendResponse(null);
+        }
+        return true; // Will respond asynchronously
       }
-      return true;
+
+      if (message.type === "setInputValue" && sourceTabId) {
+        try {
+          // Send message to the original source tab
+          const result = await browser.tabs.sendMessage(sourceTabId, message);
+          sendResponse(result);
+        } catch (error) {
+          console.error("Error forwarding message:", error);
+          sendResponse({
+            success: false,
+            error: "Failed to forward message to content script",
+          });
+        }
+        return true;
+      }
     }
-  });
+  );
 
   // Add click handler for the context menu item
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
-    
+
     // Store the source tab ID
     sourceTabId = tab.id;
-    
+
     try {
-      console.log('Content script registered in tab:', tab.id);
-      
+      console.log("Content script registered in tab:", tab.id);
+
       // Try to get input information if it's an input element
-      const message = { type: 'getInputInfo' };
-      console.log('Sending message to content script:', message);
-      
+      const message = { type: "getInputInfo" };
+      console.log("Sending message to content script:", message);
+
       const response = await browser.tabs.sendMessage(tab.id, message);
-      console.log('Background received response:', response);
-      
+      console.log("Background received response:", response);
+
       // Store input info in local storage if available
-      if (response && response.messageType === 'inputInfo') {
-        console.log('Input info received:', response);
-        await browser.storage.local.set({ 
+      if (response && response.messageType === "inputInfo") {
+        console.log("Input info received:", response);
+        await browser.storage.local.set({
           inputInfo: {
-            value: response.value || '',
-            placeholder: response.placeholder || '',
-            inputType: response.inputType || '',
-            elementId: response.id || '',
-            elementName: response.name || ''
-          }
+            value: response.value || "",
+            placeholder: response.placeholder || "",
+            inputType: response.inputType || "",
+            elementId: response.id || "",
+            elementName: response.name || "",
+          },
         });
       } else {
         // Clear any existing input info if we're not clicking on an input
-        await browser.storage.local.remove('inputInfo');
+        await browser.storage.local.remove("inputInfo");
       }
 
       // Open popup
@@ -94,7 +90,7 @@ export default defineBackground(() => {
         height: 300,
       });
     } catch (error) {
-      console.error('Error in background script:', error);
+      console.error("Error in background script:", error);
       // Open regular popup if message fails (non-input or error)
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
