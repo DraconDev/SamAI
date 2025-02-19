@@ -58,13 +58,22 @@ export default defineBackground(() => {
     }
     
     browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-      if (message.type === "setInputValue") {
-        try {
-          const [activeTab] = await browser.tabs.query({ active: true, currentWindow: true });
-          if (activeTab?.id) {
-            const result = await browser.tabs.sendMessage(activeTab.id, message);
-            sendResponse(result);
-          }
+    if (message.type === "setInputValue") {
+      try {
+        const [activeTab] = await browser.tabs.query({ active: true, currentWindow: true });
+        if (activeTab?.id) {
+          // Ensure content script is injected in the active tab
+          await browser.scripting.executeScript({
+            target: { tabId: activeTab.id },
+            files: ["content.js"]
+          }).catch((err) => {
+            console.log("Content script already exists:", err);
+          });
+
+          // Now send the message
+          const result = await browser.tabs.sendMessage(activeTab.id, message);
+          sendResponse(result);
+        }
         } catch (error) {
           console.error("Error forwarding message:", error);
           sendResponse({ success: false, error: "Failed to forward message to content script" });
