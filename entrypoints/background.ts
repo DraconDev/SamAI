@@ -1,3 +1,5 @@
+import { generateFormResponse } from "@/utils/ai/gemini";
+
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
 
