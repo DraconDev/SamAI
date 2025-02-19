@@ -11,15 +11,24 @@ export function initializeModel(apiKey: string) {
   });
 }
 
+export interface GeminiResponse {
+  success: boolean;
+  text?: string;
+  error?: string;
+}
+
 export async function generateFormResponse(
   prompt: string
-): Promise<string | null> {
+): Promise<GeminiResponse> {
   try {
     const apiKey = await apiKeyStore.getValue().then((store) => {
       return store.apiKey;
     });
     if (!apiKey) {
-      return null;
+      return {
+        success: false,
+        error: "API key not found"
+      };
     }
     if (!model) {
       initializeModel(apiKey);
@@ -42,15 +51,20 @@ export async function generateFormResponse(
       throw new Error("No candidates in response from Gemini API");
     }
 
-    const response = result.response.candidates[0].content.parts[0].text;
-    return response.trim();
+    const text = result.response.candidates[0].content.parts[0].text.trim();
+    return {
+      success: true,
+      text: text
+    };
   } catch (error: any) {
-    console.error("Error analyzing HTML element:", {
+    console.error("Error generating Gemini response:", {
       timestamp: new Date().toISOString(),
       message: error.message,
-      stack: error.stack,
-      errorType: error.constructor.name,
+      stack: error.stack
     });
-    return null;
+    return {
+      success: false,
+      error: error.message || "Unknown error"
+    };
   }
 }
