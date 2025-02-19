@@ -27,16 +27,24 @@ export function initializeGoogleSearch() {
 
     try {
       console.log('[SamAI] Sending message to background script');
-      const response = await browser.runtime.sendMessage({
+      const result = await browser.runtime.sendMessage({
         type: 'generateGeminiResponse',
         prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
       });
-      console.log('[SamAI] Received response:', response);
+      console.log('[SamAI] Received response:', result);
 
-      displayResults(searchContainer.container, {
-        query: searchQuery,
-        geminiResponse: response
-      });
+      if (result && result.success) {
+        displayResults(searchContainer.container, {
+          query: searchQuery,
+          geminiResponse: result.data
+        });
+      } else {
+        console.error('[SamAI] No valid response received');
+        displayResults(searchContainer.container, {
+          query: searchQuery,
+          geminiResponse: null
+        });
+      }
     } catch (error) {
       console.error('[SamAI] Error handling search:', error);
       displayResults(searchContainer.container, {
