@@ -29,17 +29,18 @@ export default defineBackground(() => {
     }
 
     if (message.type === "setInputValue" && sourceTabId) {
-      try {
-        // Send message to the original source tab
-        const result = await browser.tabs.sendMessage(sourceTabId, message);
-        sendResponse(result);
-      } catch (error) {
-        console.error("Error forwarding message:", error);
-        sendResponse({
-          success: false,
-          error: "Failed to forward message to content script",
+      // Handle setInputValue asynchronously
+      browser.tabs.sendMessage(sourceTabId, message)
+        .then(result => {
+          sendResponse(result);
+        })
+        .catch(error => {
+          console.error("Error forwarding message:", error);
+          sendResponse({
+            success: false,
+            error: "Failed to forward message to content script",
+          });
         });
-      }
       return true;
     }
   });
