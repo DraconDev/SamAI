@@ -59,3 +59,26 @@ export default defineBackground(() => {
       // Open popup
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
+        type: "popup",
+        width: 400,
+        height: 300,
+      });
+    } catch (error) {
+      console.error('Error in background script:', error);
+      // Open regular popup if message fails (non-input or error)
+      browser.windows.create({
+        url: browser.runtime.getURL("/context-popup.html"),
+        type: "popup",
+        width: 400,
+        height: 300,
+      });
+    }
+  });
+
+  // Clean up when a tab is closed
+  browser.tabs.onRemoved.addListener((tabId) => {
+    if (tabId === activeTabId) {
+      activeTabId = null;
+    }
+  });
+});
