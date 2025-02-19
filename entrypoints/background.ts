@@ -12,90 +12,80 @@ export default defineBackground(() => {
 
   // Listen for runtime messages and forward them to source tab
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      console.log("[SamAI Background] Received message:", message);
+    console.log("[SamAI Background] Received message:", message);
 
-      if (message.type === "generateGeminiResponse") {
-        // Start async operation
-        generateFormResponse(message.prompt)
-          .then(text => {
-            console.log("[SamAI Background] Generated response:", text);
-            sendResponse(text);
-          })
-          .catch(error => {
-            console.error("[SamAI Background] Error:", error);
-            sendResponse(null);
-          });
-        return true; // Will respond asynchronously
-      }
+    if (message.type === "generateGeminiResponse") {
+      // Start async operation
+      generateFormResponse(message.prompt)
+        .then(text => {
+          console.log("[SamAI Background] Generated response:", text);
+          sendResponse(text);
+        })
+        .catch(error => {
+          console.error("[SamAI Background] Error:", error);
+          sendResponse(null);
+        });
+      return true; // Will respond asynchronously
+    }
 
-      if (message.type === "setInputValue" && sourceTabId) {
-        try {
-          // Send message to the original source tab
-          const result = await browser.tabs.sendMessage(sourceTabId, message);
+    if (message.type === "setInputValue" && sourceTabId) {
+      // Handle input value setting
+      browser.tabs.sendMessage(sourceTabId, message)
+        .then(result => {
           sendResponse(result);
-        } catch (error) {
+        })
+        .catch(error => {
           console.error("Error forwarding message:", error);
           sendResponse({
             success: false,
             error: "Failed to forward message to content script",
           });
-        }
-        return true;
-      }
+        });
+      return true;
     }
-  );
+  });
 
   // Add click handler for the context menu item
-  browser.contextMenus.onClicked.addListener(async (info, tab) => {
+  browser.contextMenus.onClicked.addListener((info, tab) => {
     if (!tab?.id) return;
-
-    // Store the source tab ID
     sourceTabId = tab.id;
 
-    try {
-      console.log("Content script registered in tab:", tab.id);
-
-      // Try to get input information if it's an input element
-      const message = { type: "getInputInfo" };
-      console.log("Sending message to content script:", message);
-
-      const response = await browser.tabs.sendMessage(tab.id, message);
-      console.log("Background received response:", response);
-
-      // Store input info in local storage if available
-      if (response && response.messageType === "inputInfo") {
-        console.log("Input info received:", response);
-        await browser.storage.local.set({
-          inputInfo: {
-            value: response.value || "",
-            placeholder: response.placeholder || "",
-            inputType: response.inputType || "",
-            elementId: response.id || "",
-            elementName: response.name || "",
-          },
+    // Try to get input information
+    browser.tabs.sendMessage(tab.id, { type: "getInputInfo" })
+      .then(response => {
+        if (response && response.messageType === "inputInfo") {
+          return browser.storage.local.set({
+            inputInfo: {
+              value: response.value || "",
+              placeholder: response.placeholder || "",
+              inputType: response.inputType || "",
+              elementId: response.id || "",
+              elementName: response.name || "",
+            },
+          });
+        } else {
+          return browser.storage.local.remove("inputInfo");
+        }
+      })
+      .then(() => {
+        // Open popup
+        browser.windows.create({
+          url: browser.runtime.getURL("/context-popup.html"),
+          type: "popup",
+          width: 400,
+          height: 300,
         });
-      } else {
-        // Clear any existing input info if we're not clicking on an input
-        await browser.storage.local.remove("inputInfo");
-      }
-
-      // Open popup
-      browser.windows.create({
-        url: browser.runtime.getURL("/context-popup.html"),
-        type: "popup",
-        width: 400,
-        height: 300,
+      })
+      .catch(error => {
+        console.error("Error in background script:", error);
+        // Open popup anyway
+        browser.windows.create({
+          url: browser.runtime.getURL("/context-popup.html"),
+          type: "popup",
+          width: 400,
+          height: 300,
+        });
       });
-    } catch (error) {
-      console.error("Error in background script:", error);
-      // Open regular popup if message fails (non-input or error)
-      browser.windows.create({
-        url: browser.runtime.getURL("/context-popup.html"),
-        type: "popup",
-        width: 400,
-        height: 300,
-      });
-    }
   });
 
   // Clear source tab ID when the tab is closed
