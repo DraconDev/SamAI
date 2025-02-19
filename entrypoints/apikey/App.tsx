@@ -4,6 +4,7 @@ import { apiKeyStore } from "@/utils/store";
 function App() {
   const [showApiLink, setShowApiLink] = useState(true);
   const [apiKey, setApiKey] = useState("");
+  const [showKey, setShowKey] = useState(false);
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,8 @@ function App() {
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
+
+  const maskedApiKey = showKey ? apiKey : apiKey.replace(/./g, '•');
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -45,14 +48,23 @@ function App() {
             >
               Enter your API Key
             </label>
-            <input
-              type="text"
-              id="apiKey"
-              value={"*" * apiKey.length}
-              onChange={(e) => setApiKey(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="sk-..."
-            />
+            <div className="relative">
+              <input
+                type={showKey ? "text" : "password"}
+                id="apiKey"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="sk-..."
+              />
+              <button
+                type="button"
+                onClick={() => setShowKey(!showKey)}
+                className="absolute text-gray-500 transform -translate-y-1/2 right-2 top-1/2 hover:text-gray-700"
+              >
+                {showKey ? '🙈' : '👁️'}
+              </button>
+            </div>
           </div>
 
           <button
