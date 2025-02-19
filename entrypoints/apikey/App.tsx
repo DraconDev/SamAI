@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { apiKeyStore } from "@/utils/store";
 
 function App() {
+  const [showApiLink, setShowApiLink] = useState(true);
   const [apiKey, setApiKey] = useState("");
   const [saved, setSaved] = useState(false);
 
@@ -9,6 +10,7 @@ function App() {
     // Load existing API key on mount
     apiKeyStore.getValue().then(store => {
       setApiKey(store.apiKey);
+      setShowApiLink(!store.apiKey);
     });
   }, []);
 
@@ -19,8 +21,19 @@ function App() {
   };
 
   return (
-    <div className="p-6 w-[400px] bg-gradient-to-br from-indigo-100 via-white to-purple-100">
-      <h1 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+    <div className="relative flex items-center justify-center min-h-screen bg-gray-50">
+      {showApiLink && (
+        <a
+          href="https://aistudio.google.com/apikey"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute text-sm font-medium text-indigo-600 top-4 right-4 hover:text-indigo-800"
+        >
+          Get API Key
+        </a>
+      )}
+      <div className="p-6 w-[400px] bg-gradient-to-br from-indigo-100 via-white to-purple-100 rounded-lg shadow-xl">
+      <h1 className="mb-6 text-2xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
         API Key Configuration
       </h1>
       
@@ -34,8 +47,7 @@ function App() {
             id="apiKey"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none 
-                     focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="sk-..."
           />
         </div>
@@ -50,7 +62,7 @@ function App() {
         </button>
 
         {saved && (
-          <p className="text-green-600 text-sm text-center animate-fade-in">
+          <p className="text-sm text-center text-green-600 animate-fade-in">
             API key saved successfully!
           </p>
         )}
