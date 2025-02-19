@@ -9,24 +9,24 @@ export function initializeGoogleSearch() {
   showSidePanel(null);
 
   // Get and show response with retry
-  const getResponse = async () => {
+  const getResponse = async (searchQuery: string) => {
     const response = await browser.runtime.sendMessage({
       type: 'generateGeminiResponse',
-      prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+      prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
     });
     if (!response) {
       // Wait and retry once
       await new Promise(resolve => setTimeout(resolve, 1000));
       return browser.runtime.sendMessage({
         type: 'generateGeminiResponse',
-        prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
       });
     }
     return response;
   };
 
   console.log('[SamAI] Sending request for query:', query);
-  getResponse()
+  getResponse(query)
     .then(response => {
       console.log('[SamAI] Got response:', response);
       showSidePanel(response);
@@ -42,7 +42,7 @@ export function initializeGoogleSearch() {
     if (newQuery && newQuery !== query) {
       showSidePanel(null);
       console.log('[SamAI] Sending request for new query:', newQuery);
-      getResponse()
+      getResponse(newQuery)
         .then(response => {
           console.log('[SamAI] Got response:', response);
           showSidePanel(response);
