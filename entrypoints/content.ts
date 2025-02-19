@@ -5,22 +5,22 @@ export default defineContentScript({
   matches: ["*://*.google.com/search*"],
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
-    function createGeminiContainer() {
-      if (geminiContainer) return;
+    let searchContainer: SearchContainer | null = null;
 
-      geminiContainer = document.createElement('div');
-      geminiContainer.id = 'samai-gemini-results';
-      geminiContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 300px;
-        height: 100vh;
-        background: white;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-        padding: 20px;
-        overflow-y: auto;
-        z-index: 1000;
+    // Function to handle search and display results
+    async function handleSearch() {
+      const query = extractSearchQuery(window.location.href);
+      if (!query) return;
+
+      // Create or get container
+      if (!searchContainer) {
+        searchContainer = createSearchContainer();
+      }
+
+      // Show loading state
+      showLoading(searchContainer.container);
+
+      try {
         font-family: Arial, sans-serif;
       `;
       document.body.appendChild(geminiContainer);
