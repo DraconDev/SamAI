@@ -30,6 +30,17 @@ export default defineBackground(() => {
 
   // Listen for runtime messages and forward them to source tab
   browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+    if (message.type === "generateGeminiResponse") {
+      try {
+        const result = await generateFormResponse(message.prompt);
+        sendResponse(result);
+      } catch (error) {
+        console.error("Error generating Gemini response:", error);
+        sendResponse(null);
+      }
+      return true;
+    }
+    
     if (message.type === "setInputValue" && sourceTabId) {
       try {
         // Send message to the original source tab
