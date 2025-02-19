@@ -5,12 +5,25 @@ export default defineContentScript({
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
     
+    // Debug logging for Google search initialization
+    console.log('[SamAI] Content script loaded', {
+      hostname: window.location.hostname,
+      pathname: window.location.pathname,
+      search: window.location.search
+    });
+
     // Initialize Google search functionality if we're on a search page with a query
     if (window.location.hostname === 'www.google.com' && 
         window.location.pathname === '/search' && 
         new URLSearchParams(window.location.search).has('q')) {
+      console.log('[SamAI] Initializing Google search functionality');
       // Delay initialization slightly to avoid blocking page load
-      setTimeout(initializeGoogleSearch, 500);
+      setTimeout(() => {
+        console.log('[SamAI] Running delayed initialization');
+        initializeGoogleSearch();
+      }, 500);
+    } else {
+      console.log('[SamAI] Not initializing - conditions not met');
     }
 
     // Listen for right clicks to track the last input element
