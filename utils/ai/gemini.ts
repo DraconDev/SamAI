@@ -7,28 +7,19 @@ export let model: any;
 export function initializeModel(apiKey: string) {
   genAI = new GoogleGenerativeAI(apiKey);
   model = genAI.getGenerativeModel({
-    model: "gemini-flas",
+    model: "gemini-pro",
   });
-}
-
-export interface GeminiResponse {
-  success: boolean;
-  text?: string;
-  error?: string;
 }
 
 export async function generateFormResponse(
   prompt: string
-): Promise<GeminiResponse> {
+): Promise<string | null> {
   try {
     const apiKey = await apiKeyStore.getValue().then((store) => {
       return store.apiKey;
     });
     if (!apiKey) {
-      return {
-        success: false,
-        error: "API key not found"
-      };
+      return null;
     }
     if (!model) {
       initializeModel(apiKey);
@@ -51,20 +42,15 @@ export async function generateFormResponse(
       throw new Error("No candidates in response from Gemini API");
     }
 
-    const text = result.response.candidates[0].content.parts[0].text.trim();
-    return {
-      success: true,
-      text: text
-    };
+    const response = result.response.candidates[0].content.parts[0].text;
+    return response.trim();
   } catch (error: any) {
-    console.error("Error generating Gemini response:", {
+    console.error("Error analyzing HTML element:", {
       timestamp: new Date().toISOString(),
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
+      errorType: error.constructor.name,
     });
-    return {
-      success: false,
-      error: error.message || "Unknown error"
-    };
+    return null;
   }
 }
