@@ -42,6 +42,7 @@ export default function App() {
     e.preventDefault();
     console.log("Input submitted:", input);
     console.log(inputInfo, "inputInfo");
+    if ()
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
       const response = await generateFormResponse(input);
