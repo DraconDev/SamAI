@@ -21,18 +21,18 @@ function App() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-gray-50">
-      {showApiLink && (
-        <a
-          href="https://aistudio.google.com/apikey"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute text-sm font-medium text-indigo-600 top-4 right-4 hover:text-indigo-800"
-        >
-          Get API Key
-        </a>
-      )}
-      <div className="p-6 w-[400px] bg-gradient-to-br from-indigo-100 via-white to-purple-100 rounded-lg shadow-xl">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="relative p-6 w-[400px] bg-gradient-to-br from-indigo-100 via-white to-purple-100 rounded-lg shadow-xl">
+        {showApiLink && (
+          <a
+            href="https://aistudio.google.com/apikey"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute text-sm font-medium text-indigo-600 top-2 right-4 hover:text-indigo-800"
+          >
+            Get API Key
+          </a>
+        )}
       <h1 className="mb-6 text-2xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
         API Key Configuration
       </h1>
