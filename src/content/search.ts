@@ -84,10 +84,15 @@ export function displayResults(container: HTMLDivElement, result: SearchResult) 
     const content = document.createElement('div');
     if (result.geminiResponse) {
       console.log('[SamAI] Rendering successful response');
+      // Process markdown-style formatting
+      const formattedResponse = result.geminiResponse
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+        .replace(/\n/g, '<br>'); // Line breaks
+
       content.innerHTML = `
         <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
         <div style="font-size: 14px; line-height: 1.6; color: #333;">
-          ${result.geminiResponse.replace(/\n/g, '<br>')}
+          ${formattedResponse}
         </div>
       `;
     } else {
