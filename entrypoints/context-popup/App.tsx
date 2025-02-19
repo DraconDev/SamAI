@@ -60,7 +60,7 @@ export default function App() {
       if (tab.id) {
         const result = await browser.tabs.sendMessage(tab.id, {
           type: "setInputValue",
-          value: "response",
+          value: response",
         });
         if (result) {
           console.log("Successfully updated input value");
