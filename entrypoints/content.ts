@@ -5,9 +5,12 @@ export default defineContentScript({
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
     
-    // Initialize Google search functionality if we're on a search page
-    if (window.location.hostname === 'www.google.com' && window.location.pathname === '/search') {
-      initializeGoogleSearch();
+    // Initialize Google search functionality if we're on a search page with a query
+    if (window.location.hostname === 'www.google.com' && 
+        window.location.pathname === '/search' && 
+        new URLSearchParams(window.location.search).has('q')) {
+      // Delay initialization slightly to avoid blocking page load
+      setTimeout(initializeGoogleSearch, 500);
     }
 
     // Listen for right clicks to track the last input element
