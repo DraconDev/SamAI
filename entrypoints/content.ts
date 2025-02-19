@@ -56,3 +56,34 @@ export default defineContentScript({
               : "textarea",
           tabId: tabId // Include tab ID in response
         };
+        console.log("Sending input info:", response);
+        sendResponse(response);
+      } else if (message.type === "setInputValue" && lastInputElement && message.value) {
+        try {
+          lastInputElement.value = message.value;
+          lastInputElement.dispatchEvent(new Event('input', { bubbles: true }));
+          lastInputElement.dispatchEvent(new Event('change', { bubbles: true }));
+          console.log("Updated input value:", message.value);
+          sendResponse({ success: true, tabId: tabId });
+        } catch (error) {
+          console.error("Error setting input value:", error);
+          sendResponse({ error: "Failed to set input value", tabId: tabId });
+        }
+      } else {
+        console.log("No input element or wrong message type");
+        sendResponse({ error: "Invalid request", tabId: tabId });
+      }
+      return true; // Will respond asynchronously
+    });
+
+    // Keep the content script active
+    setInterval(() => {
+      browser.runtime.sendMessage({
+        type: "contentScriptHeartbeat",
+        tabId: tabId
+      }).catch(() => {
+        // Ignore errors, this is just to keep the connection alive
+      });
+    }, 25000);
+  },
+});
