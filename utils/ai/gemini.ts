@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { apiKeyStore } from "@/utils/store";
 
 export let genAI: GoogleGenerativeAI;
 export let model: any;
@@ -6,7 +7,7 @@ export let model: any;
 export function initializeModel(apiKey: string) {
   genAI = new GoogleGenerativeAI(apiKey);
   model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
+    model: "gemini-pro",
   });
 }
 
@@ -30,7 +31,6 @@ export async function generateFormResponse(
     if (!result || !result.response) {
       throw new Error("Empty response from Gemini API");
     }
-
     if (
       !result.response.candidates ||
       !result.response.candidates[0] ||
