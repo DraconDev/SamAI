@@ -56,13 +56,14 @@ export default function App() {
       }
       console.log("Generated response:", response);
 
-      // Send the generated response through the background script
+      // Send the generated response through the background script using stored tab ID
       try {
         const result = await browser.runtime.sendMessage({
           target: 'content',
           data: {
             type: "setInputValue",
-            value: response
+            value: response,
+            tabId: inputInfo.tabId
           }
         });
         
