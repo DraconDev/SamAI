@@ -27,26 +27,12 @@ export function initializeGoogleSearch() {
 
     try {
       console.log('[SamAI] Sending message to background script');
-      // Send message to background script with timeout
-      console.log('[SamAI] Sending request to background script');
-      const response = await Promise.race([
-        browser.runtime.sendMessage({
-          type: 'generateGeminiResponse',
-          prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
-        }),
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Response timeout')), 30000)
-        )
-      ]);
-      
-      console.log('[SamAI] Received response from background:', response);
-      
-      if (!response) {
-        throw new Error('Empty response received from background script');
-      }
+      const response = await browser.runtime.sendMessage({
+        type: 'generateGeminiResponse',
+        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+      });
 
-      // Display the result
-      console.log('[SamAI] Processing response for display:', response);
+      console.log('[SamAI] Received response:', response);
       displayResults(searchContainer.container, {
         query: searchQuery,
         geminiResponse: response
