@@ -7,7 +7,6 @@ interface InputInfo {
   inputType: string;
   elementId: string;
   elementName: string;
-  tabId?: number;
 }
 
 export default function App() {
@@ -21,6 +20,7 @@ export default function App() {
         console.log("Loaded from storage:", result);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo);
+          // Pre-fill input with value if available
           // Pre-fill input with value if available
           if (result.inputInfo.value) {
             setInput(result.inputInfo.value);
