@@ -27,16 +27,20 @@ export function initializeGoogleSearch() {
 
     try {
       console.log('[SamAI] Sending message to background script');
-      const result = await browser.runtime.sendMessage({
-        type: 'generateGeminiResponse',
-        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+      // Use promise-based message passing
+      const result = await new Promise<string | null>(resolve => {
+        browser.runtime.sendMessage({
+          type: 'generateGeminiResponse',
+          prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+        }, response => {
+          console.log('[SamAI] Received response:', response);
+          resolve(response);
+        });
       });
-      console.log('[SamAI] Received response:', result);
 
-      // Modified to handle the raw response directly
       displayResults(searchContainer.container, {
         query: searchQuery,
-        geminiResponse: result || null
+        geminiResponse: result
       });
     } catch (error) {
       console.error('[SamAI] Error handling search:', error);
