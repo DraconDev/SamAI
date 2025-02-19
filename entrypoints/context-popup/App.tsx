@@ -72,7 +72,7 @@ export default function App() {
           console.log("Successfully updated input value");
         }
       } catch (error) {
-        console.error("Error while updating input value:", error);
+        console.error("Error sending message through background:", error);
       }
     }
     setInput("");
