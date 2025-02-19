@@ -59,29 +59,19 @@ export function createSearchContainer(): SearchContainer {
   container.appendChild(content);
   document.body.appendChild(container);
   return { container, remove };
-  // Clear existing content but keep the close button
-  const closeButton = container.querySelector('button');
-  container.innerHTML = '';
-  container.appendChild(closeButton!);
-  container.appendChild(loadingDiv);
 }
 
 // Update container with search results
 export function displayResults(container: HTMLDivElement, result: SearchResult) {
   console.log('[SamAI] Displaying results:', result);
 
-  try {
-    // Clear existing content but keep the close button
-    const closeButton = container.querySelector('button');
-    if (!closeButton) {
-      console.error('[SamAI] Close button not found');
-    }
-    container.innerHTML = '';
-    if (closeButton) {
-      container.appendChild(closeButton);
-    }
+  const content = container.querySelector('#gemini-content');
+  if (!content) {
+    console.error('[SamAI] Content container not found');
+    return;
+  }
 
-    const content = document.createElement('div');
+  try {
     if (result.geminiResponse) {
       console.log('[SamAI] Rendering successful response');
       // Process markdown-style formatting
@@ -98,20 +88,15 @@ export function displayResults(container: HTMLDivElement, result: SearchResult) 
     } else {
       console.log('[SamAI] Rendering error state');
       content.innerHTML = `
+        <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
         <div style="color: red; padding: 20px;">
-          Error loading Gemini results for query: ${result.query}
+          Error loading results for: ${result.query}
         </div>
       `;
     }
-    container.appendChild(content);
     console.log('[SamAI] Results displayed successfully');
   } catch (error) {
     console.error('[SamAI] Error displaying results:', error);
-    try {
-      container.innerHTML = '<div style="color: red; padding: 20px;">An error occurred while displaying results</div>';
-    } catch (e) {
-      console.error('[SamAI] Critical error - could not display error message:', e);
-    }
   }
 }
 
