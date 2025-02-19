@@ -42,7 +42,10 @@ export default function App() {
     e.preventDefault();
     console.log("Input submitted:", input);
     console.log(inputInfo, "inputInfo");
-    if (input.length < 3)
+    if (input.length < 3) {
+      console.error("Input too short");
+      return;
+    }
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
       const response = await generateFormResponse(input);
