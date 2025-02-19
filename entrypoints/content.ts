@@ -22,71 +22,7 @@ export default defineContentScript({
     });
 
     // Handle messages from the background script
-    browser.runtime.onMessage.addListener(
-      async (message, sender, sendResponse) => {
-        // Handle Gemini search requests
-        if (message.type === "performGeminiSearch") {
-          createGeminiContainer();
-          if (!geminiContainer) return;
-
-          // Show loading state
-          const loadingDiv = document.createElement("div");
-          loadingDiv.style.cssText = `
-          text-align: center;
-          padding: 20px;
-          color: #666;
-        `;
-          loadingDiv.innerHTML = "Loading Gemini results...";
-          geminiContainer.appendChild(loadingDiv);
-
-          try {
-            const response = await browser.runtime.sendMessage({
-              type: "generateGeminiResponse",
-              prompt: `Search query: ${message.query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
-            });
-
-            if (response && geminiContainer) {
-              // Clear loading state
-              geminiContainer.innerHTML = "";
-
-              // Add close button back
-              const closeButton = document.createElement("button");
-              closeButton.innerHTML = "×";
-              closeButton.style.cssText = `
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              background: none;
-              border: none;
-              font-size: 24px;
-              cursor: pointer;
-              color: #666;
-            `;
-              closeButton.onclick = () => {
-                geminiContainer?.remove();
-                geminiContainer = null;
-              };
-              geminiContainer.appendChild(closeButton);
-
-              // Add content
-              const content = document.createElement("div");
-              content.innerHTML = `
-              <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
-              <div style="font-size: 14px; line-height: 1.6; color: #333;">
-                ${response.replace(/\n/g, "<br>")}
-              </div>
-            `;
-              geminiContainer.appendChild(content);
-            }
-          } catch (error) {
-            if (geminiContainer) {
-              geminiContainer.innerHTML =
-                '<div style="color: red; padding: 20px;">Error loading Gemini results</div>';
-            }
-          }
-          return true;
-        }
-
+    browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         console.log("Content script received message:", message);
 
         if (message.type === "getInputInfo" && lastInputElement) {
