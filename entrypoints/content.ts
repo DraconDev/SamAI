@@ -2,43 +2,43 @@ export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
+    let geminiContainer: HTMLDivElement | null = null;
 
-    // Listen for right clicks to track the last input element
-    document.addEventListener("contextmenu", (event) => {
-      const target = event.target as HTMLElement;
-      if (
-        target instanceof HTMLInputElement ||
-        target instanceof HTMLTextAreaElement
-      ) {
-        lastInputElement = target;
-      }
-    });
+    // Function to create and inject Gemini results container
+    function createGeminiContainer() {
+      if (geminiContainer) return;
 
-    console.log("Content script initialized");
+      geminiContainer = document.createElement('div');
+      geminiContainer.id = 'samai-gemini-results';
+      geminiContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        overflow-y: auto;
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+      `;
+      document.body.appendChild(geminiContainer);
 
-    // Return true from the listener to indicate we want to send a response
-    browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      console.log("Content script received message:", message);
-
-      if (message.type === "getInputInfo" && lastInputElement) {
-        const response = {
-          messageType: "inputInfo",
-          value: lastInputElement.value,
-          placeholder: lastInputElement.placeholder,
-          id: lastInputElement.id,
-          name: lastInputElement.name,
-          inputType:
-            lastInputElement instanceof HTMLInputElement
-              ? lastInputElement.type
-              : "textarea"
-        };
-        console.log("Sending input info:", response);
-        sendResponse(response);
-      } else if (message.type === "setInputValue" && lastInputElement) {
-        try {
-          lastInputElement.value = message.value;
-          lastInputElement.dispatchEvent(new Event('input', { bubbles: true }));
-          lastInputElement.dispatchEvent(new Event('change', { bubbles: true }));
+      // Add close button
+      const closeButton = document.createElement('button');
+      closeButton.innerHTML = '×';
+      closeButton.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+      `;
+      closeButton.onclick = () => {
           console.log("Updated input value:", message.value);
           sendResponse({ success: true });
         } catch (error: unknown) {
