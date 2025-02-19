@@ -21,7 +21,7 @@ function App() {
     setTimeout(() => setSaved(false), 2000);
   };
 
-  const maskedApiKey = showKey ? apiKey : apiKey.replace(/./g, '•');
+  const maskedApiKey = showKey ? apiKey : apiKey.replace(/./g, "•");
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -62,7 +62,7 @@ function App() {
                 onClick={() => setShowKey(!showKey)}
                 className="absolute text-gray-500 transform -translate-y-1/2 right-2 top-1/2 hover:text-gray-700"
               >
-                {showKey ? '🙈' : '👁️'}
+                {showKey ? "🙈" : "👁️"}
               </button>
             </div>
           </div>
