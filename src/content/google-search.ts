@@ -1,5 +1,7 @@
 import { createSearchContainer, showLoading, displayResults, extractSearchQuery } from './search';
 import type { SearchContainer } from './search';
+import type { Browser } from 'webextension-polyfill-ts';
+declare const browser: Browser;
 
 export function initializeGoogleSearch() {
   let searchContainer: SearchContainer | null = null;
