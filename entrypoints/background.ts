@@ -13,12 +13,19 @@ export default defineBackground(() => {
 
   // Listen for runtime messages and forward them to source tab
   browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+    console.log('[SamAI Background] Received message:', message);
+    
     if (message.type === "generateGeminiResponse") {
+      console.log('[SamAI Background] Handling Gemini response request');
       try {
+        console.log('[SamAI Background] Calling generateFormResponse with prompt:', message.prompt);
         const result = await generateFormResponse(message.prompt);
+        console.log('[SamAI Background] Generated response:', result);
         sendResponse(result);
       } catch (error) {
-        console.error("Error generating Gemini response:", error);
+        console.error("[SamAI Background] Error generating Gemini response:", error);
+        const errorDetails = error instanceof Error ? error.message : 'Unknown error';
+        console.error("[SamAI Background] Error details:", errorDetails);
         sendResponse(null);
       }
       return true;
