@@ -18,18 +18,22 @@ export default defineBackground(() => {
       if (message.type === "generateGeminiResponse") {
         // Handle Gemini response directly in the async listener
         try {
-          const result = await generateFormResponse(message.prompt);
-          console.log("[SamAI Background] Generated response:", result);
-          // Send structured response
-          sendResponse({
-            success: true,
-            text: result,
-          });
+          const text = await generateFormResponse(message.prompt);
+          console.log("[SamAI Background] Generated response:", text);
+          if (text) {
+            try {
+              // Try to parse as JSON first
+              JSON.parse(text);
+              sendResponse(text);
+            } catch {
+              // If not JSON, send as string
+              sendResponse(text);
+            }
+          } else {
+            sendResponse(null);
+          }
         } catch (error) {
-          console.error(
-            "[SamAI Background] Error generating Gemini response:",
-            error
-          );
+          console.error("[SamAI Background] Error:", error);
           sendResponse(null);
         }
         return true; // Will respond asynchronously
