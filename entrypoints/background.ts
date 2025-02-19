@@ -21,14 +21,7 @@ export default defineBackground(() => {
         console.log('[SamAI Background] Calling generateFormResponse with prompt:', message.prompt);
         const result = await generateFormResponse(message.prompt);
         console.log('[SamAI Background] Generated response:', result);
-        // Ensure we're sending the response properly
-        if (result === null) {
-          console.log('[SamAI Background] No response generated');
-          sendResponse(null);
-        } else {
-          console.log('[SamAI Background] Sending response back to content script');
-          sendResponse({ success: true, data: result });
-        }
+        sendResponse(result);
       } catch (error) {
         console.error("[SamAI Background] Error generating Gemini response:", error);
         const errorDetails = error instanceof Error ? error.message : 'Unknown error';
