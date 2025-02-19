@@ -1,7 +1,10 @@
-import { createSearchContainer, showLoading, displayResults, extractSearchQuery } from './search';
-import type { SearchContainer } from './search';
-import type { Browser } from 'webextension-polyfill-ts';
-declare const browser: Browser;
+import {
+  createSearchContainer,
+  showLoading,
+  displayResults,
+  extractSearchQuery,
+} from "./search";
+import type { SearchContainer } from "./search";
 
 export function initializeGoogleSearch() {
   let searchContainer: SearchContainer | null = null;
@@ -18,18 +21,18 @@ export function initializeGoogleSearch() {
 
     try {
       const response = await browser.runtime.sendMessage({
-        type: 'generateGeminiResponse',
-        prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+        type: "generateGeminiResponse",
+        prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
       });
 
       displayResults(searchContainer.container, {
         query,
-        geminiResponse: response
+        geminiResponse: response,
       });
     } catch (error) {
       displayResults(searchContainer.container, {
         query,
-        geminiResponse: null
+        geminiResponse: null,
       });
     }
   };
