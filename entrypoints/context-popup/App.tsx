@@ -47,19 +47,19 @@ export default function App() {
       return;
     }
     if (inputInfo) {
-      console.log("Input field info:", inputInfo);
-      const response = await generateFormResponse(input);
-      if (!response) {
-        console.error("Error generating response");
-        return;
-      }
-      console.log("Generated response:", response);
+      // console.log("Input field info:", inputInfo);
+      // const response = await generateFormResponse(input);
+      // if (!response) {
+      //   console.error("Error generating response");
+      //   return;
+      // }
+      // console.log("Generated response:", response);
 
       // Send the response through runtime messaging
       try {
         const result = await browser.runtime.sendMessage({
           type: "setInputValue",
-          value: response
+          value: "response",
         });
         if (result && result.success) {
           console.log("Successfully updated input value");
