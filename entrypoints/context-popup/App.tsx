@@ -12,6 +12,7 @@ interface InputInfo {
 export default function App() {
   const [input, setInput] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadInputInfo = async () => {
@@ -40,6 +41,7 @@ export default function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log("Input submitted:", input);
     console.log(inputInfo, "inputInfo");
     if (input.length < 3) {
@@ -66,15 +68,13 @@ export default function App() {
       }
     }
     setInput("");
+    setIsLoading(false);
   };
 
   return (
-    <div className="p-4 min-w-[300px]">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg">
+      <div className="p-4">
+        <h1 className="text-lg font-semibold text-gray-700 mb-4">AI Assistant</h1>
           placeholder="Type your message..."
           className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           autoFocus
