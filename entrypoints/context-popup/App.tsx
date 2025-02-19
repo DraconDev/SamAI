@@ -44,8 +44,7 @@ export default function App() {
     console.log(inputInfo, "inputInfo");
     if (inputInfo) {
       console.log("Input field info:", inputInfo);
-      const prompt = "Say cheese";
-      const response = await generateFormResponse(prompt);
+      const response = await generateFormResponse(input);
       if (!response) {
         console.error("Error generating response");
         return;
@@ -59,12 +58,14 @@ export default function App() {
           currentWindow: true,
         });
         if (tab.id) {
-          await browser.tabs.sendMessage(tab.id, {
-            type: "setInputValue",
-            value: response
-          }).catch(error => {
-            console.error("Failed to send message to content script:", error);
-          });
+          await browser.tabs
+            .sendMessage(tab.id, {
+              type: "setInputValue",
+              value: response,
+            })
+            .catch((error) => {
+              console.error("Failed to send message to content script:", error);
+            });
         }
       } catch (error) {
         console.error("Error while updating input value:", error);
