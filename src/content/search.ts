@@ -68,23 +68,46 @@ export function showLoading(container: HTMLDivElement) {
 
 // Update container with search results
 export function displayResults(container: HTMLDivElement, result: SearchResult) {
-  // Clear existing content but keep the close button
-  const closeButton = container.querySelector('button');
-  container.innerHTML = '';
-  container.appendChild(closeButton!);
+  console.log('[SamAI] Displaying results:', result);
 
-  const content = document.createElement('div');
-  if (result.geminiResponse) {
-    content.innerHTML = `
-      <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
-      <div style="font-size: 14px; line-height: 1.6; color: #333;">
-        ${result.geminiResponse.replace(/\n/g, '<br>')}
-      </div>
-    `;
-  } else {
-    content.innerHTML = '<div style="color: red; padding: 20px;">Error loading Gemini results</div>';
+  try {
+    // Clear existing content but keep the close button
+    const closeButton = container.querySelector('button');
+    if (!closeButton) {
+      console.error('[SamAI] Close button not found');
+    }
+    container.innerHTML = '';
+    if (closeButton) {
+      container.appendChild(closeButton);
+    }
+
+    const content = document.createElement('div');
+    if (result.geminiResponse) {
+      console.log('[SamAI] Rendering successful response');
+      content.innerHTML = `
+        <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
+        <div style="font-size: 14px; line-height: 1.6; color: #333;">
+          ${result.geminiResponse.replace(/\n/g, '<br>')}
+        </div>
+      `;
+    } else {
+      console.log('[SamAI] Rendering error state');
+      content.innerHTML = `
+        <div style="color: red; padding: 20px;">
+          Error loading Gemini results for query: ${result.query}
+        </div>
+      `;
+    }
+    container.appendChild(content);
+    console.log('[SamAI] Results displayed successfully');
+  } catch (error) {
+    console.error('[SamAI] Error displaying results:', error);
+    try {
+      container.innerHTML = '<div style="color: red; padding: 20px;">An error occurred while displaying results</div>';
+    } catch (e) {
+      console.error('[SamAI] Critical error - could not display error message:', e);
+    }
   }
-  container.appendChild(content);
 }
 
 // Extract search query from URL
