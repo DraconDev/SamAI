@@ -1,16 +1,16 @@
 import { tabs } from "webextension-polyfill";
-import { useEffect, useState } from "react";
-import { searchSettingsStore } from "../../utils/store";
 
 function App() {
-  const [searchActive, setSearchActive] = useState(true);
+  const openApiKeyPage = () => {
+    tabs.create({ url: "apikey.html" });
+  };
 
-  useEffect(() => {
+  return (
     <div className="p-4 w-[300px] bg-gradient-to-br from-indigo-100 via-white to-purple-100">
       <h1 className="mb-4 text-xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
         Sam AI Assistant
       </h1>
-      
+
       <div className="space-y-4">
         <button
           onClick={openApiKeyPage}
