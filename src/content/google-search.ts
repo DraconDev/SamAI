@@ -15,10 +15,11 @@ export function initializeGoogleSearch() {
     prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
   }).then(response => {
     console.log('[SamAI] Got response:', response);
-    if (response && response.success) {
-      showSidePanel(response.text);
+    if (response) {
+      console.log('[SamAI] Processing response:', response);
+      showSidePanel(response);
     } else {
-      console.error('[SamAI] Invalid response format:', response);
+      console.error('[SamAI] No response received');
       showSidePanel(null);
     }
   }).catch(error => {
@@ -37,10 +38,11 @@ export function initializeGoogleSearch() {
         prompt: `Search query: ${newQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
       }).then(response => {
         console.log('[SamAI] Got response for new query:', response);
-        if (response && response.success) {
-          showSidePanel(response.text);
+        if (response) {
+          console.log('[SamAI] Processing new query response:', response);
+          showSidePanel(response);
         } else {
-          console.error('[SamAI] Invalid response format:', response);
+          console.error('[SamAI] No response received for new query');
           showSidePanel(null);
         }
       }).catch(error => {
