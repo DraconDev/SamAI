@@ -1,58 +1,7 @@
-import { createSearchContainer, showLoading, displayResults, extractSearchQuery } from '@/utils/search';
-import type { SearchContainer } from '@/utils/search';
-
 export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
-    let searchContainer: SearchContainer | null = null;
-
-    // Handle search functionality on Google search pages
-    if (window.location.hostname === 'www.google.com' && window.location.pathname === '/search') {
-      const handleSearch = async () => {
-        const query = extractSearchQuery(window.location.href);
-        if (!query) return;
-
-        if (!searchContainer) {
-          searchContainer = createSearchContainer();
-        }
-
-        showLoading(searchContainer.container);
-
-        try {
-          const response = await browser.runtime.sendMessage({
-            type: 'generateGeminiResponse',
-            prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
-          });
-
-          displayResults(searchContainer.container, {
-            query,
-            geminiResponse: response
-          });
-        } catch (error) {
-          displayResults(searchContainer.container, {
-            query,
-            geminiResponse: null
-          });
-        }
-      };
-
-      // Initial search
-      handleSearch();
-
-      // Watch for URL changes (for when user searches without page reload)
-      const observer = new MutationObserver(() => {
-        const currentQuery = extractSearchQuery(window.location.href);
-        if (currentQuery) {
-          handleSearch();
-        }
-      });
-
-      observer.observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
-    }
     let geminiContainer: HTMLDivElement | null = null;
 
     // Function to create and inject Gemini results container
