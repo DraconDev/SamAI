@@ -1,10 +1,10 @@
+import { createSearchContainer, showLoading, displayResults, extractSearchQuery } from '@/utils/search';
+import type { SearchContainer } from '@/utils/search';
+
 export default defineContentScript({
-  matches: ["<all_urls>"],
+  matches: ["*://*.google.com/search*"],
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
-    let geminiContainer: HTMLDivElement | null = null;
-
-    // Function to create and inject Gemini results container
     function createGeminiContainer() {
       if (geminiContainer) return;
 
