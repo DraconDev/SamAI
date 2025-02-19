@@ -15,7 +15,12 @@ export function initializeGoogleSearch() {
     prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
   }).then(response => {
     console.log('[SamAI] Got response:', response);
-    showSidePanel(response);
+    if (response && response.success) {
+      showSidePanel(response.text);
+    } else {
+      console.error('[SamAI] Invalid response format:', response);
+      showSidePanel(null);
+    }
   }).catch(error => {
     console.error('[SamAI] Request error:', error);
     showSidePanel(null);
@@ -32,7 +37,12 @@ export function initializeGoogleSearch() {
         prompt: `Search query: ${newQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
       }).then(response => {
         console.log('[SamAI] Got response for new query:', response);
-        showSidePanel(response);
+        if (response && response.success) {
+          showSidePanel(response.text);
+        } else {
+          console.error('[SamAI] Invalid response format:', response);
+          showSidePanel(null);
+        }
       }).catch(error => {
         console.error('[SamAI] Request error for new query:', error);
         showSidePanel(null);
