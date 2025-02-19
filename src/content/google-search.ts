@@ -7,54 +7,53 @@ import {
 import type { SearchContainer } from "./search";
 
 export function initializeGoogleSearch() {
-  let searchContainer: SearchContainer | null = null;
+  const query = new URLSearchParams(window.location.search).get('q');
+  if (!query) return;
 
-  const handleSearch = async () => {
-    const query = extractSearchQuery(window.location.href);
-    if (!query) return;
+  // Create container only when we have a valid query
+  const searchContainer = createSearchContainer();
 
-    if (!searchContainer) {
-      searchContainer = createSearchContainer();
-    }
-
+  const handleSearch = async (searchQuery: string) => {
     showLoading(searchContainer.container);
 
     try {
       const response = await browser.runtime.sendMessage({
-        type: "generateGeminiResponse",
-        prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
+        type: 'generateGeminiResponse',
+        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
       });
 
       displayResults(searchContainer.container, {
-        query,
-        geminiResponse: response,
+        query: searchQuery,
+        geminiResponse: response
       });
     } catch (error) {
       displayResults(searchContainer.container, {
-        query,
-        geminiResponse: null,
+        query: searchQuery,
+        geminiResponse: null
       });
     }
   };
 
-  // Initial search when function is called
-  handleSearch();
+  // Initial search
+  handleSearch(query);
 
-  // Watch for URL changes using a more efficient approach
-  let lastUrl = window.location.href;
-  const checkForURLChange = () => {
-    if (window.location.href !== lastUrl) {
-      lastUrl = window.location.href;
-      const currentQuery = extractSearchQuery(lastUrl);
-      if (currentQuery) {
-        handleSearch();
-      }
+  // Handle URL changes through history state updates
+  const handleURLChange = () => {
+    const newQuery = new URLSearchParams(window.location.search).get('q');
+    if (newQuery && newQuery !== query) {
+      handleSearch(newQuery);
     }
   };
 
-  // Check URL changes every second instead of watching all DOM changes
-  const urlCheckInterval = setInterval(checkForURLChange, 1000);
+  window.addEventListener('popstate', handleURLChange);
+  window.addEventListener('pushstate', handleURLChange);
+  window.addEventListener('replacestate', handleURLChange);
 
   // Return cleanup function
-  return () => clearInterval(urlCheckInterval);
+  return () => {
+    window.removeEventListener('popstate', handleURLChange);
+    window.removeEventListener('pushstate', handleURLChange);
+    window.removeEventListener('replacestate', handleURLChange);
+    searchContainer.remove();
+  };
 }
