@@ -39,18 +39,44 @@ export default defineContentScript({
         color: #666;
       `;
       closeButton.onclick = () => {
-          console.log("Updated input value:", message.value);
-          sendResponse({ success: true });
-        } catch (error: unknown) {
-          console.error("Error setting input value:", error);
-          const errorMessage = error instanceof Error ? error.message : "Unknown error";
-          sendResponse({ success: false, error: errorMessage });
-        }
-      } else {
-        console.log("No input element or wrong message type");
-        sendResponse(false);
+        geminiContainer?.remove();
+        geminiContainer = null;
+      };
+      geminiContainer.appendChild(closeButton);
+    }
+
+    // Listen for right clicks to track the last input element
+    document.addEventListener("contextmenu", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement
+      ) {
+        lastInputElement = target;
       }
-      return true; // Will respond asynchronously
     });
-  },
-});
+
+    // Handle messages from the background script
+    browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+      // Handle Gemini search requests
+      if (message.type === 'performGeminiSearch') {
+        createGeminiContainer();
+        if (!geminiContainer) return;
+
+        // Show loading state
+        const loadingDiv = document.createElement('div');
+        loadingDiv.style.cssText = `
+          text-align: center;
+          padding: 20px;
+          color: #666;
+        `;
+        loadingDiv.innerHTML = 'Loading Gemini results...';
+        geminiContainer.appendChild(loadingDiv);
+
+        try {
+          const response = await browser.runtime.sendMessage({
+            type: 'generateGeminiResponse',
+            prompt: `Search query: ${message.query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+          });
+
+          if (response && geminiContainer) {
