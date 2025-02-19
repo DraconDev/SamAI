@@ -46,10 +46,10 @@ export function initializeGoogleSearch() {
       }
 
       // Display the result
-      console.log('[SamAI] Processing response for display:', result);
+      console.log('[SamAI] Processing response for display:', response);
       displayResults(searchContainer.container, {
         query: searchQuery,
-        geminiResponse: result
+        geminiResponse: response
       });
       console.log('[SamAI] Results displayed successfully');
     } catch (error) {
