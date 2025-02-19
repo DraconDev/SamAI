@@ -1,7 +1,7 @@
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
 
-  // Create context menu item
+  // Listen for web navigation to search pages
   browser.contextMenus.create({
     id: "samai-context-menu",
     title: "Sam",
