@@ -1,6 +1,6 @@
 export default defineBackground(() => {
-  // Listen for runtime messages and forward them to active tab
-  
+  let sourceTabId: number | null = null;
+
   // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
@@ -8,9 +8,27 @@ export default defineBackground(() => {
     contexts: ["all"],
   });
 
+  // Listen for runtime messages and forward them to source tab
+  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+    if (message.type === "setInputValue" && sourceTabId) {
+      try {
+        // Send message to the original source tab
+        const result = await browser.tabs.sendMessage(sourceTabId, message);
+        sendResponse(result);
+      } catch (error) {
+        console.error("Error forwarding message:", error);
+        sendResponse({ success: false, error: "Failed to forward message to content script" });
+      }
+      return true;
+    }
+  });
+
   // Add click handler for the context menu item
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
+    
+    // Store the source tab ID
+    sourceTabId = tab.id;
     
     try {
       console.log('Content script registered in tab:', tab.id);
@@ -56,30 +74,12 @@ export default defineBackground(() => {
         height: 300,
       });
     }
-    
-    browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    if (message.type === "setInputValue") {
-      try {
-        const [activeTab] = await browser.tabs.query({ active: true, currentWindow: true });
-        if (activeTab?.id) {
-          // Ensure content script is injected in the active tab
-          await browser.scripting.executeScript({
-            target: { tabId: activeTab.id },
-            files: ["content.js"]
-          }).catch((err) => {
-            console.log("Content script already exists:", err);
-          });
+  });
 
-          // Now send the message
-          const result = await browser.tabs.sendMessage(activeTab.id, message);
-          sendResponse(result);
-        }
-        } catch (error) {
-          console.error("Error forwarding message:", error);
-          sendResponse({ success: false, error: "Failed to forward message to content script" });
-        }
-        return true;
-      }
-    });
+  // Clear source tab ID when the tab is closed
+  browser.tabs.onRemoved.addListener((tabId) => {
+    if (tabId === sourceTabId) {
+      sourceTabId = null;
+    }
   });
 });
