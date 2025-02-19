@@ -20,7 +20,10 @@ export default defineContentScript({
       console.log('Content script received message:', message);
       console.log('Last input element:', lastInputElement);
 
-      if (message.type === 'getInputInfo' && lastInputElement) {
+      if (message.type === 'setInputValue' && lastInputElement && message.value) {
+        lastInputElement.value = message.value;
+        sendResponse(true);
+      } else if (message.type === 'getInputInfo' && lastInputElement) {
         const response = {
           messageType: 'inputInfo',
           value: lastInputElement.value,
