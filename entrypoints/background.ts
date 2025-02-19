@@ -20,7 +20,11 @@ export default defineBackground(() => {
         try {
           const result = await generateFormResponse(message.prompt);
           console.log("[SamAI Background] Generated response:", result);
-          sendResponse(result);
+          // Send structured response
+          sendResponse({ 
+            success: true, 
+            text: result 
+          });
         } catch (error) {
           console.error(
             "[SamAI Background] Error generating Gemini response:",
