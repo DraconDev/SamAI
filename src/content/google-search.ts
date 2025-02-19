@@ -1,6 +1,11 @@
 import { showSidePanel } from "./search";
+import { searchSettingsStore } from "../../utils/store";
 
-export function initializeGoogleSearch() {
+export async function initializeGoogleSearch() {
+  // Check if search is enabled
+  const settings = await searchSettingsStore.get();
+  if (!settings.searchActive) return;
+
   // Get search query
   const query = new URLSearchParams(window.location.search).get("q");
   if (!query) return;
