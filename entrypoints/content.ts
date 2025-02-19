@@ -1,4 +1,4 @@
-import { initializeGoogleSearch } from '@/utils/google-search';
+import { initializeGoogleSearch } from '@/src/content/google-search';
 
 export default defineContentScript({
   matches: ["<all_urls>"],
