@@ -11,8 +11,6 @@ export default defineContentScript({
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
-      } else {
-        lastInputElement = null;
       }
     });
 
@@ -21,7 +19,6 @@ export default defineContentScript({
     // Return true from the listener to indicate we want to send a response
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("Content script received message:", message);
-      console.log("Last input element:", lastInputElement);
 
       if (message.type === "getInputInfo" && lastInputElement) {
         const response = {
@@ -33,20 +30,21 @@ export default defineContentScript({
           inputType:
             lastInputElement instanceof HTMLInputElement
               ? lastInputElement.type
-              : "textarea",
+              : "textarea"
         };
         console.log("Sending input info:", response);
         sendResponse(response);
-      } else if (
-        message.type === "setInputValue" &&
-        lastInputElement &&
-        message.value
-      ) {
-        lastInputElement.value = message.value;
-        lastInputElement.dispatchEvent(new Event("input", { bubbles: true }));
-        lastInputElement.dispatchEvent(new Event("change", { bubbles: true }));
-        console.log("Updated input value:", message.value);
-        sendResponse(true);
+      } else if (message.type === "setInputValue" && lastInputElement) {
+        try {
+          lastInputElement.value = message.value;
+          lastInputElement.dispatchEvent(new Event('input', { bubbles: true }));
+          lastInputElement.dispatchEvent(new Event('change', { bubbles: true }));
+          console.log("Updated input value:", message.value);
+          sendResponse({ success: true });
+        } catch (error) {
+          console.error("Error setting input value:", error);
+          sendResponse({ success: false, error: error.message });
+        }
       } else {
         console.log("No input element or wrong message type");
         sendResponse(false);
