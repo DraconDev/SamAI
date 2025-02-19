@@ -10,7 +10,7 @@ export function showSidePanel(response: string | null) {
       right: 0;
       width: 300px;
       height: 100vh;
-      background: black;
+      background: #0D0E13;
       box-shadow: -2px 0 5px rgba(0,0,0,0.1);
       padding: 20px;
       overflow-y: auto;
