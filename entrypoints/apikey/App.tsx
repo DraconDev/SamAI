@@ -66,6 +66,7 @@ function App() {
             API key saved successfully!
           </p>
         )}
+        </div>
       </div>
     </div>
   );
