@@ -40,6 +40,7 @@ export function showSidePanel(response: string | null) {
   // Update content
   panel.innerHTML = `
     <button style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;" onclick="this.parentElement.remove()">×</button>
+    <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Sam AI Results</h3>
     <div style="font-size: 14px; line-height: 1.6; color: #fff;">
       ${
         response
