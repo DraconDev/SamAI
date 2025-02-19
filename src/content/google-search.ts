@@ -20,15 +20,37 @@ export function initializeGoogleSearch() {
   console.log('[SamAI] Creating search container');
   const searchContainer = createSearchContainer();
 
+  const getGeminiResponse = async (prompt: string): Promise<string | null> => {
+    let attempts = 0;
+    const maxAttempts = 3;
+    const waitTime = 500; // 500ms between attempts
+
+    while (attempts < maxAttempts) {
+      try {
+        const response = await browser.runtime.sendMessage({
+          type: 'generateGeminiResponse',
+          prompt
+        });
+        if (response) return response;
+        attempts++;
+        if (attempts < maxAttempts) await new Promise(resolve => setTimeout(resolve, waitTime));
+      } catch (error) {
+        console.error(`[SamAI] Attempt ${attempts + 1} failed:`, error);
+        attempts++;
+        if (attempts < maxAttempts) await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
+    }
+    return null;
+  };
+
   const handleSearch = async (searchQuery: string) => {
     console.log('[SamAI] Handling search for query:', searchQuery);
 
     try {
       console.log('[SamAI] Sending message to background script');
-      const response = await browser.runtime.sendMessage({
-        type: 'generateGeminiResponse',
-        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
-      });
+      const response = await getGeminiResponse(
+        `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
+      );
 
       console.log('[SamAI] Received response:', response);
       displayResults(searchContainer.container, {
