@@ -3,7 +3,7 @@ import { searchSettingsStore } from "../../utils/store";
 
 export async function initializeGoogleSearch() {
   // Check if search is enabled
-  const settings = await searchSettingsStore.get();
+  const settings = await searchSettingsStore.getValue();
   if (!settings.searchActive) return;
 
   // Get search query
