@@ -55,19 +55,14 @@ export default function App() {
       // }
       // console.log("Generated response:", response);
 
-      // Send the response through runtime messaging
       try {
-        const result = await browser.runtime.sendMessage({
+        await browser.runtime.sendMessage({
           type: "setInputValue",
-          value: "response",
+          value: response
         });
-        if (result && result.success) {
-          console.log("Successfully updated input value");
-        } else {
-          console.error("Failed to update input value:", result?.error);
-        }
+        console.log("Message sent to background script");
       } catch (error) {
-        console.error("Error sending message:", error);
+        console.error("Error sending message to background:", error);
       }
     }
     setInput("");
