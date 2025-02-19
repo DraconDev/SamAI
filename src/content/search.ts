@@ -27,76 +27,49 @@ export function createSearchContainer(): SearchContainer {
     font-family: Arial, sans-serif;
   `;
 
-  // Add close button
-  const closeButton = document.createElement('button');
-  closeButton.innerHTML = '×';
-  closeButton.style.cssText = `
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-  `;
-
-  const remove = () => container.remove();
-  closeButton.onclick = remove;
-
-  // Add initial placeholder content
-  const content = document.createElement('div');
-  content.id = 'gemini-content';
-  content.innerHTML = `
-    <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
-    <div style="font-size: 14px; line-height: 1.6; color: #666; text-align: center;">
-      Getting AI insights...
-      <div style="margin-top: 10px; font-style: italic;">Analyzing search query to provide unique perspectives</div>
+  // Initial content
+  container.innerHTML = `
+    <button style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
+    <div id="gemini-content">
+      <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
+      <div style="font-size: 14px; line-height: 1.6; color: #666; text-align: center;">
+        Getting AI insights...
+      </div>
     </div>
   `;
 
-  container.appendChild(closeButton);
-  container.appendChild(content);
+  // Add close button handler
+  const closeButton = container.querySelector('button');
+  const remove = () => container.remove();
+  if (closeButton) closeButton.onclick = remove;
+
   document.body.appendChild(container);
   return { container, remove };
 }
 
 // Update container with search results
 export function displayResults(container: HTMLDivElement, result: SearchResult) {
-  console.log('[SamAI] Displaying results:', result);
-
   const content = container.querySelector('#gemini-content');
-  if (!content) {
-    console.error('[SamAI] Content container not found');
-    return;
-  }
+  if (!content) return;
 
-  try {
-    if (result.geminiResponse) {
-      console.log('[SamAI] Rendering successful response');
-      // Process markdown-style formatting
-      const formattedResponse = result.geminiResponse
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-        .replace(/\n/g, '<br>'); // Line breaks
-
-      content.innerHTML = `
-        <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
-        <div style="font-size: 14px; line-height: 1.6; color: #333;">
-          ${formattedResponse}
-        </div>
-      `;
-    } else {
-      console.log('[SamAI] Rendering error state');
-      content.innerHTML = `
-        <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
-        <div style="color: red; padding: 20px;">
-          Error loading results for: ${result.query}
-        </div>
-      `;
-    }
-    console.log('[SamAI] Results displayed successfully');
-  } catch (error) {
-    console.error('[SamAI] Error displaying results:', error);
+  if (result.geminiResponse) {
+    const formattedResponse = result.geminiResponse
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+    
+    content.innerHTML = `
+      <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
+      <div style="font-size: 14px; line-height: 1.6; color: #333;">
+        ${formattedResponse}
+      </div>
+    `;
+  } else {
+    content.innerHTML = `
+      <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
+      <div style="color: red; padding: 20px;">
+        Error loading results for: ${result.query}
+      </div>
+    `;
   }
 }
 
