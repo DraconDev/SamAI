@@ -2,8 +2,20 @@ export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
+    
+    // Track input elements on focus
+    document.addEventListener("focusin", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement
+      ) {
+        lastInputElement = target;
+        console.log("Input element focused:", lastInputElement);
+      }
+    });
 
-    // Listen for right clicks to track the last input element
+    // Also track on right click
     document.addEventListener("contextmenu", (event) => {
       const target = event.target as HTMLElement;
       if (
@@ -11,30 +23,18 @@ export default defineContentScript({
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
-      } else {
-        lastInputElement = null;
+        console.log("Input element right-clicked:", lastInputElement);
       }
     });
 
-    console.log("Content script initialized");
-
-    // Return true from the listener to indicate we want to send a response
-    browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      console.log("Content script received message:", message);
-      console.log("Last input element:", lastInputElement);
-
-      if (message.type === "getInputInfo" && lastInputElement) {
-        const response = {
-          messageType: "inputInfo",
-          value: lastInputElement.value,
-          placeholder: lastInputElement.placeholder,
-          id: lastInputElement.id,
-          name: lastInputElement.name,
-          inputType:
-            lastInputElement instanceof HTMLInputElement
-              ? lastInputElement.type
-              : "textarea",
-        };
+    // Listen for blur to maybe clear the reference
+    document.addEventListener("focusout", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement &&
+        target === lastInputElement
+      ) {
         console.log("Sending input info:", response);
         sendResponse(response);
       } else if (message.type === "setInputValue" && lastInputElement && message.value) {
