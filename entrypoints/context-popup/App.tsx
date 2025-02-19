@@ -58,7 +58,7 @@ export default function App() {
       try {
         await browser.runtime.sendMessage({
           type: "setInputValue",
-          value: response
+          value: "response"
         });
         console.log("Message sent to background script");
       } catch (error) {
