@@ -53,7 +53,7 @@ export default function App() {
       console.log("Generated response:", response);
     }
     // TODO: Handle the input
-    setInput("Test");
+    setInput("");
   };
 
   return (
