@@ -16,8 +16,8 @@ export default function App() {
   useEffect(() => {
     const loadInputInfo = async () => {
       try {
-        const result = await browser.storage.local.get('inputInfo');
-        console.log('Loaded from storage:', result);
+        const result = await browser.storage.local.get("inputInfo");
+        console.log("Loaded from storage:", result);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo);
           // Pre-fill input with value if available
@@ -26,7 +26,7 @@ export default function App() {
           }
         }
       } catch (error) {
-        console.error('Error loading input info:', error);
+        console.error("Error loading input info:", error);
       }
     };
 
@@ -34,7 +34,7 @@ export default function App() {
 
     // Clear storage when popup closes
     return () => {
-      browser.storage.local.remove('inputInfo').catch(console.error);
+      browser.storage.local.remove("inputInfo").catch(console.error);
     };
   }, []);
 
@@ -53,7 +53,7 @@ export default function App() {
       console.log("Generated response:", response);
     }
     // TODO: Handle the input
-    setInput("");
+    setInput("Test");
   };
 
   return (
