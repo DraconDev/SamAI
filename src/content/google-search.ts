@@ -33,18 +33,11 @@ export function initializeGoogleSearch() {
       });
       console.log('[SamAI] Received response:', result);
 
-      if (result && result.success) {
-        displayResults(searchContainer.container, {
-          query: searchQuery,
-          geminiResponse: result.data
-        });
-      } else {
-        console.error('[SamAI] No valid response received');
-        displayResults(searchContainer.container, {
-          query: searchQuery,
-          geminiResponse: null
-        });
-      }
+      // Modified to handle the raw response directly
+      displayResults(searchContainer.container, {
+        query: searchQuery,
+        geminiResponse: result || null
+      });
     } catch (error) {
       console.error('[SamAI] Error handling search:', error);
       displayResults(searchContainer.container, {
