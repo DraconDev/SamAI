@@ -56,6 +56,7 @@ export default defineBackground(() => {
         height: 300,
       });
     }
+    
     browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
       if (message.type === "setInputValue") {
         try {
