@@ -16,6 +16,7 @@ export function showSidePanel(response: string | null) {
       overflow-y: auto;
       z-index: 1000;
       font-family: Arial, sans-serif;
+      transition: transform 0.3s ease-out;
     `;
     document.body.appendChild(panel);
 
@@ -57,9 +58,14 @@ export function showSidePanel(response: string | null) {
     </div>
   `;
 
-  // Add click handler for close button
-  const closeButton = panel.querySelector('#samai-close');
+  // Add click handler for close button with animation
+  const closeButton = document.getElementById("samai-close");
   if (closeButton) {
-    closeButton.addEventListener('click', () => panel.remove());
+    closeButton.addEventListener("click", () => {
+      panel.style.transform = "translateX(100%)";
+      setTimeout(() => {
+        panel.remove();
+      }, 300); // Match the transition duration
+    });
   }
 }
