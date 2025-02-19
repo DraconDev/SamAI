@@ -7,25 +7,25 @@ import {
 import type { SearchContainer } from "./search";
 
 export function initializeGoogleSearch() {
+  console.log('[SamAI] Starting search initialization');
+  
   const query = new URLSearchParams(window.location.search).get('q');
-  if (!query) return;
+  console.log('[SamAI] Query found:', query);
+  
+  if (!query) {
+    console.log('[SamAI] No query found, aborting initialization');
+    return;
+  }
 
   // Create container only when we have a valid query
+  console.log('[SamAI] Creating search container');
   const searchContainer = createSearchContainer();
 
   const handleSearch = async (searchQuery: string) => {
+    console.log('[SamAI] Handling search for query:', searchQuery);
     showLoading(searchContainer.container);
 
     try {
-      const response = await browser.runtime.sendMessage({
-        type: 'generateGeminiResponse',
-        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
-      });
-
-      displayResults(searchContainer.container, {
-        query: searchQuery,
-        geminiResponse: response
-      });
     } catch (error) {
       displayResults(searchContainer.container, {
         query: searchQuery,
