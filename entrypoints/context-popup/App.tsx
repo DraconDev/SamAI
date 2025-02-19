@@ -51,6 +51,18 @@ export default function App() {
         return;
       }
       console.log("Generated response:", response);
+      
+      // Send the generated response back to the content script
+      const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+      if (tab.id) {
+        const result = await browser.tabs.sendMessage(tab.id, {
+          type: "setInputValue",
+          value: response
+        });
+        if (result) {
+          console.log("Successfully updated input value");
+        }
+      }
     }
     // TODO: Handle the input
     setInput("");
