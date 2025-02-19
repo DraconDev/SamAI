@@ -1,21 +1,6 @@
 export default defineBackground(() => {
   // Listen for runtime messages and forward them to active tab
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    if (message.type === "setInputValue") {
-      try {
-        const [activeTab] = await browser.tabs.query({ active: true, currentWindow: true });
-        if (activeTab?.id) {
-          const result = await browser.tabs.sendMessage(activeTab.id, message);
-          sendResponse(result);
-        }
-      } catch (error) {
-        console.error("Error forwarding message:", error);
-        sendResponse({ success: false, error: "Failed to forward message to content script" });
-      }
-      return true;
-    }
-  });
-
+  
   // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
@@ -26,7 +11,7 @@ export default defineBackground(() => {
   // Add click handler for the context menu item
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
-
+    
     try {
       console.log('Content script registered in tab:', tab.id);
       
@@ -71,5 +56,20 @@ export default defineBackground(() => {
         height: 300,
       });
     }
+    browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+      if (message.type === "setInputValue") {
+        try {
+          const [activeTab] = await browser.tabs.query({ active: true, currentWindow: true });
+          if (activeTab?.id) {
+            const result = await browser.tabs.sendMessage(activeTab.id, message);
+            sendResponse(result);
+          }
+        } catch (error) {
+          console.error("Error forwarding message:", error);
+          sendResponse({ success: false, error: "Failed to forward message to content script" });
+        }
+        return true;
+      }
+    });
   });
 });
