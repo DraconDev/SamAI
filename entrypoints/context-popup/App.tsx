@@ -55,24 +55,19 @@ export default function App() {
       }
       console.log("Generated response:", response);
 
-      // Broadcast the response to all content scripts
+      // Send the response through runtime messaging
       try {
-        await browser.tabs.query({ active: true }).then(tabs => {
-          tabs.forEach(tab => {
-            if (tab.id) {
-              browser.tabs.sendMessage(tab.id, {
-                type: "setInputValue",
-                value: response
-              }).catch(error => {
-                // Ignore errors for tabs that don't have the content script
-                console.log("Tab does not have content script:", error);
-              });
-            }
-          });
+        const result = await browser.runtime.sendMessage({
+          type: "setInputValue",
+          value: response
         });
-        console.log("Broadcasted response to content scripts");
+        if (result && result.success) {
+          console.log("Successfully updated input value");
+        } else {
+          console.error("Failed to update input value:", result?.error);
+        }
       } catch (error) {
-        console.error("Error broadcasting response:", error);
+        console.error("Error sending message:", error);
       }
     }
     setInput("");
