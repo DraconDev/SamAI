@@ -21,7 +21,6 @@ export default function App() {
         if (result.inputInfo) {
           setInputInfo(result.inputInfo);
           // Pre-fill input with value if available
-          // Pre-fill input with value if available
           if (result.inputInfo.value) {
             setInput(result.inputInfo.value);
           }
@@ -56,24 +55,24 @@ export default function App() {
       }
       console.log("Generated response:", response);
 
-      // Send the generated response through the background script using stored tab ID
+      // Broadcast the response to all content scripts
       try {
-        const result = await browser.runtime.sendMessage({
-          target: 'content',
-          data: {
-            type: "setInputValue",
-            value: response,
-            tabId: inputInfo.tabId
-          }
+        await browser.tabs.query({ active: true }).then(tabs => {
+          tabs.forEach(tab => {
+            if (tab.id) {
+              browser.tabs.sendMessage(tab.id, {
+                type: "setInputValue",
+                value: response
+              }).catch(error => {
+                // Ignore errors for tabs that don't have the content script
+                console.log("Tab does not have content script:", error);
+              });
+            }
+          });
         });
-        
-        if (result.error) {
-          console.error("Background script error:", result.error);
-        } else {
-          console.log("Successfully updated input value");
-        }
+        console.log("Broadcasted response to content scripts");
       } catch (error) {
-        console.error("Error sending message through background:", error);
+        console.error("Error broadcasting response:", error);
       }
     }
     setInput("");
