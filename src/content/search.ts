@@ -8,7 +8,7 @@ export function showSidePanel(response: string | null) {
       position: fixed;
       top: 0;
       right: 0;
-      width: 400px;
+      width: 450px;
       height: 100vh;
       background: #0D0E13;
       box-shadow: -2px 0 5px rgba(0,0,0,0.1);
@@ -20,7 +20,7 @@ export function showSidePanel(response: string | null) {
     document.body.appendChild(panel);
 
     // Add loading animation styles
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       @keyframes pulse {
         0% { opacity: 0.4; }
