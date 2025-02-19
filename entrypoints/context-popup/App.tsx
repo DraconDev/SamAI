@@ -7,6 +7,7 @@ interface InputInfo {
   inputType: string;
   elementId: string;
   elementName: string;
+  tabId?: number;
 }
 
 export default function App() {
@@ -55,21 +56,20 @@ export default function App() {
       }
       console.log("Generated response:", response);
 
-      // Send the generated response back to the content script
+      // Send the generated response through the background script
       try {
-        const [tab] = await browser.tabs.query({
-          active: true,
-          currentWindow: true,
+        const result = await browser.runtime.sendMessage({
+          target: 'content',
+          data: {
+            type: "setInputValue",
+            value: response
+          }
         });
-        if (tab.id) {
-          await browser.tabs
-            .sendMessage(tab.id, {
-              type: "setInputValue",
-              value: response,
-            })
-            .catch((error) => {
-              console.error("Failed to send message to content script:", error);
-            });
+        
+        if (result.error) {
+          console.error("Background script error:", result.error);
+        } else {
+          console.log("Successfully updated input value");
         }
       } catch (error) {
         console.error("Error while updating input value:", error);
