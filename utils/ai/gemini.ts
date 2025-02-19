@@ -7,7 +7,7 @@ export let model: any;
 export function initializeModel(apiKey: string) {
   genAI = new GoogleGenerativeAI(apiKey);
   model = genAI.getGenerativeModel({
-    model: "gemini-pro",
+    model: "gemini-2.0-flash",
   });
 }
 
@@ -31,6 +31,7 @@ export async function generateFormResponse(
     if (!result || !result.response) {
       throw new Error("Empty response from Gemini API");
     }
+
     if (
       !result.response.candidates ||
       !result.response.candidates[0] ||
@@ -45,7 +46,7 @@ export async function generateFormResponse(
     const response = result.response.candidates[0].content.parts[0].text;
     return response.trim();
   } catch (error: any) {
-    console.error("Error analyzing HTML element:", {
+    console.error("Error generating Gemini response:", {
       timestamp: new Date().toISOString(),
       message: error.message,
       stack: error.stack,
