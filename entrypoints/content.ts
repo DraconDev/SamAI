@@ -41,9 +41,10 @@ export default defineContentScript({
           lastInputElement.dispatchEvent(new Event('change', { bubbles: true }));
           console.log("Updated input value:", message.value);
           sendResponse({ success: true });
-        } catch (error) {
+        } catch (error: unknown) {
           console.error("Error setting input value:", error);
-          sendResponse({ success: false, error: error.message });
+          const errorMessage = error instanceof Error ? error.message : "Unknown error";
+          sendResponse({ success: false, error: errorMessage });
         }
       } else {
         console.log("No input element or wrong message type");
