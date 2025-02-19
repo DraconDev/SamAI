@@ -9,16 +9,16 @@ export function initializeGoogleSearch() {
   showSidePanel(null);
 
   // Get and show response
+  console.log('[SamAI] Sending request for query:', query);
   browser.runtime.sendMessage({
     type: 'generateGeminiResponse',
     prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
   }).then(response => {
+    console.log('[SamAI] Got response:', response);
     showSidePanel(response);
   }).catch(error => {
-    console.error('[SamAI] Error:', error);
+    console.error('[SamAI] Request error:', error);
     showSidePanel(null);
-  });
-
   // Handle URL changes for new searches
   window.addEventListener('popstate', () => {
     const newQuery = new URLSearchParams(window.location.search).get('q');
