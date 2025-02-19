@@ -27,21 +27,28 @@ export function initializeGoogleSearch() {
 
     try {
       console.log('[SamAI] Sending message to background script');
-      // Use promise-based message passing
-      const result = await new Promise<string | null>(resolve => {
-        browser.runtime.sendMessage({
-          type: 'generateGeminiResponse',
-          prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
-        }, response => {
-          console.log('[SamAI] Received response:', response);
-          resolve(response);
-        });
+      // Send message to background script and wait for response
+      console.log('[SamAI] Sending request to background script');
+      const response = await browser.runtime.sendMessage({
+        type: 'generateGeminiResponse',
+        prompt: `Search query: ${searchQuery}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`
       });
+      console.log('[SamAI] Received response from background:', response);
 
+      // Process the response
+      if (response === null || response === undefined) {
+        throw new Error('No response received from background script');
+      }
+
+      const result = response;
+
+      // Display the result
+      console.log('[SamAI] Processing response for display:', result);
       displayResults(searchContainer.container, {
         query: searchQuery,
         geminiResponse: result
       });
+      console.log('[SamAI] Results displayed successfully');
     } catch (error) {
       console.error('[SamAI] Error handling search:', error);
       displayResults(searchContainer.container, {
