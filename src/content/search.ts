@@ -43,22 +43,22 @@ export function createSearchContainer(): SearchContainer {
 
   const remove = () => container.remove();
   closeButton.onclick = remove;
-  container.appendChild(closeButton);
 
+  // Add initial placeholder content
+  const content = document.createElement('div');
+  content.id = 'gemini-content';
+  content.innerHTML = `
+    <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Gemini AI Results</h3>
+    <div style="font-size: 14px; line-height: 1.6; color: #666; text-align: center;">
+      Getting AI insights...
+      <div style="margin-top: 10px; font-style: italic;">Analyzing search query to provide unique perspectives</div>
+    </div>
+  `;
+
+  container.appendChild(closeButton);
+  container.appendChild(content);
   document.body.appendChild(container);
   return { container, remove };
-}
-
-// Update container with loading state
-export function showLoading(container: HTMLDivElement) {
-  const loadingDiv = document.createElement('div');
-  loadingDiv.style.cssText = `
-    text-align: center;
-    padding: 20px;
-    color: #666;
-  `;
-  loadingDiv.innerHTML = 'Loading Gemini results...';
-
   // Clear existing content but keep the close button
   const closeButton = container.querySelector('button');
   container.innerHTML = '';
