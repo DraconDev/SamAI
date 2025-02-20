@@ -3,17 +3,17 @@ import { generateFormResponse } from "@/utils/ai/gemini";
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
 
-  // Create context menu item
+  // Create context menu items
   browser.contextMenus.create({
     id: "samai-context-menu",
     title: "Sam",
     contexts: ["all"],
   });
 
-  // Listen for runtime messages and forward them to source tab
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("[SamAI Background] Received message:", message);
-
+  browser.contextMenus.create({
+    id: "samai-summarize",
+    title: "Summarize Page",
+    contexts: ["page"],
     if (message.type === "generateGeminiResponse") {
       // Start async operation
       generateFormResponse(message.prompt)
