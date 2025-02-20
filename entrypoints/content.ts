@@ -1,4 +1,5 @@
 import { initializeGoogleSearch } from '@/src/content/google-search';
+import { showSidePanel } from '@/src/content/search';
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -72,6 +73,9 @@ export default defineContentScript({
               error instanceof Error ? error.message : "Unknown error";
             sendResponse({ success: false, error: errorMessage });
           }
+        } else if (message.type === "showSummary") {
+          showSidePanel(message.summary);
+          sendResponse(true);
         } else {
           console.log("No input element or wrong message type");
           sendResponse(false);

@@ -13,6 +13,7 @@ export default function App() {
   const [input, setInput] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSummarizing, setIsSummarizing] = useState(false);
 
   useEffect(() => {
     const loadInputInfo = async () => {
@@ -71,10 +72,78 @@ export default function App() {
     setIsLoading(false);
   };
 
+  const handleSummarize = async () => {
+    setIsSummarizing(true);
+    try {
+      // Get current tab
+      const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+      if (!tab.id) return;
+
+      // Get page content
+      const [result] = await browser.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => document.body.innerText,
+      });
+
+      const pageContent = result.result;
+      const summary = await generateFormResponse(
+        `Summarize this content concisely:\n${pageContent}`
+      );
+
+      // Show summary in side panel
+      await browser.tabs.sendMessage(tab.id, {
+        type: "showSummary",
+        summary,
+      });
+
+      window.close();
+    } catch (error) {
+      console.error("Error summarizing page:", error);
+    } finally {
+      setIsSummarizing(false);
+    }
+  };
+
   return (
     <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg">
+      <div className="flex justify-end p-2">
+        <button
+          onClick={handleSummarize}
+          disabled={isSummarizing}
+          className={`px-3 py-1 text-sm bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg 
+                    hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 
+                    focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 
+                    transform hover:scale-[0.99] shadow-sm ${
+                      isSummarizing ? "opacity-75 cursor-not-allowed" : ""
+                    }`}
+        >
+          {isSummarizing ? (
+            <span className="inline-flex items-center">
+              <svg className="w-4 h-4 mr-1 animate-spin" viewBox="0 0 24 24">
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              Summarizing...
+            </span>
+          ) : (
+            "Summarize Page"
+          )}
+        </button>
+      </div>
       <div className="p-4">
-        <h1 className="text-lg font-semibold text-gray-700 mb-4">
+        <h1 className="mb-4 text-lg font-semibold text-gray-700">
           AI Assistant
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -83,7 +152,7 @@ export default function App() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-200 shadow-sm bg-white placeholder-gray-400"
+            className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             autoFocus
           />
           <button
