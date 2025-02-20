@@ -13,8 +13,6 @@ export default function App() {
   const [input, setInput] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSummarizing, setIsSummarizing] = useState(false);
-
   useEffect(() => {
     const loadInputInfo = async () => {
       try {
@@ -72,8 +70,8 @@ export default function App() {
     setIsLoading(false);
   };
 
-  const handleSummarize = async () => {
-    setIsSummarizing(true);
+  const handlePageContent = async () => {
+    setIsLoading(true);
     try {
       // Get current tab
       const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
@@ -86,72 +84,66 @@ export default function App() {
       });
 
       const pageContent = result.result;
-      const summary = await generateFormResponse(
-        `Summarize this content concisely:\n${pageContent}`
-      );
+      const response = await generateFormResponse(input || "Summarize this content concisely:", pageContent);
 
-      // Show summary in side panel
+      // Show response in side panel
       await browser.tabs.sendMessage(tab.id, {
         type: "showSummary",
-        summary,
+        summary: response,
       });
 
       window.close();
     } catch (error) {
-      console.error("Error summarizing page:", error);
+      console.error("Error processing page content:", error);
     } finally {
-      setIsSummarizing(false);
+      setIsLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    if (inputInfo) {
+      // Handle input field response
+      setIsLoading(true);
+      console.log("Input field info:", inputInfo);
+      const response = await generateFormResponse(input);
+      if (!response) {
+        console.error("Error generating response");
+        return;
+      }
+      console.log("Generated response:", response);
+
+      try {
+        await browser.runtime.sendMessage({
+          type: "setInputValue",
+          value: response,
+        });
+        console.log("Message sent to background script");
+      } catch (error) {
+        console.error("Error sending message to background:", error);
+      }
+      setInput("");
+      setIsLoading(false);
+    } else {
+      // Handle page content
+      handlePageContent();
     }
   };
 
   return (
     <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg">
-      <div className="flex justify-end p-2">
-        <button
-          onClick={handleSummarize}
-          disabled={isSummarizing}
-          className={`px-3 py-1 text-sm bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg 
-                    hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 
-                    focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 
-                    transform hover:scale-[0.99] shadow-sm ${
-                      isSummarizing ? "opacity-75 cursor-not-allowed" : ""
-                    }`}
-        >
-          {isSummarizing ? (
-            <span className="inline-flex items-center">
-              <svg className="w-4 h-4 mr-1 animate-spin" viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  fill="none"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              Summarizing...
-            </span>
-          ) : (
-            "Summarize Page"
-          )}
-        </button>
-      </div>
       <div className="p-4">
         <h1 className="mb-4 text-lg font-semibold text-gray-700">
-          AI Assistant
+          {inputInfo ? "Input Assistant" : "Page Assistant"}
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
+            placeholder={inputInfo ? "Type your message..." : "Type 'summarize' or ask a question about the page..."}
             className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             autoFocus
           />
