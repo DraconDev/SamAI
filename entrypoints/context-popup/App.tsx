@@ -10,9 +10,12 @@ interface InputInfo {
 }
 
 export default function App() {
-  const [input, setInput] = useState("");
+  const [inputPrompt, setInputPrompt] = useState("");
+  const [pagePrompt, setPagePrompt] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isInputLoading, setIsInputLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(false);
+
   useEffect(() => {
     const loadInputInfo = async () => {
       try {
@@ -22,7 +25,7 @@ export default function App() {
           setInputInfo(result.inputInfo);
           // Pre-fill input with value if available
           if (result.inputInfo.value) {
-            setInput(result.inputInfo.value);
+            setInputPrompt(result.inputInfo.value);
           }
         }
       } catch (error) {
@@ -38,46 +41,40 @@ export default function App() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleInputSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    console.log("Input submitted:", input);
-    console.log(inputInfo, "inputInfo");
-    if (input.length < 3) {
-      console.error("Input too short");
-      return;
-    }
-    if (inputInfo) {
-      console.log("Input field info:", inputInfo);
-      const response = await generateFormResponse(input);
+    if (!inputPrompt.trim() || isInputLoading || !inputInfo) return;
+
+    setIsInputLoading(true);
+    try {
+      const response = await generateFormResponse(inputPrompt);
       if (!response) {
         console.error("Error generating response");
         return;
       }
-      console.log("Generated response:", response);
 
-      try {
-        await browser.runtime.sendMessage({
-          type: "setInputValue",
-          value: response,
-        });
-        console.log("Message sent to background script");
-      } catch (error) {
-        console.error("Error sending message to background:", error);
-      }
+      await browser.runtime.sendMessage({
+        type: "setInputValue",
+        value: response,
+      });
+      
+      setInputPrompt("");
+      window.close();
+    } catch (error) {
+      console.error("Error processing input:", error);
+    } finally {
+      setIsInputLoading(false);
     }
-    setInput("");
-    setIsLoading(false);
   };
 
-  const handlePageContent = async () => {
-    setIsLoading(true);
+  const handlePageSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!pagePrompt.trim() || isPageLoading) return;
+
+    setIsPageLoading(true);
     try {
       // Get current tab
-      const [tab] = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
+      const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
       if (!tab.id) return;
 
       // Get page content
@@ -88,8 +85,7 @@ export default function App() {
 
       const pageContent = result.result;
       const response = await generateFormResponse(
-        input || "Summarize this content concisely:",
-        pageContent
+        `${pagePrompt}\n\nContent: ${pageContent}`
       );
 
       // Show response in side panel
@@ -98,97 +94,69 @@ export default function App() {
         summary: response,
       });
 
+      setPagePrompt("");
       window.close();
     } catch (error) {
-      console.error("Error processing page content:", error);
+      console.error("Error processing page:", error);
     } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    if (inputInfo) {
-      // Handle input field response
-      setIsLoading(true);
-      console.log("Input field info:", inputInfo);
-      const response = await generateFormResponse(input);
-      if (!response) {
-        console.error("Error generating response");
-        return;
-      }
-      console.log("Generated response:", response);
-
-      try {
-        await browser.runtime.sendMessage({
-          type: "setInputValue",
-          value: response,
-        });
-        console.log("Message sent to background script");
-      } catch (error) {
-        console.error("Error sending message to background:", error);
-      }
-      setInput("");
-      setIsLoading(false);
-    } else {
-      // Handle page content
-      handlePageContent();
+      setIsPageLoading(false);
     }
   };
 
   return (
-    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg">
-      <div className="p-4">
-        <h1 className="mb-4 text-lg font-semibold text-gray-700">
-          {inputInfo ? "Input Assistant" : "Page Assistant"}
-        </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={
-              inputInfo
-                ? "Type your message..."
-                : "Type 'summarize' or ask a question about the page..."
-            }
-            className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-            autoFocus
-          />
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`w-full p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[0.99] shadow-sm ${
-              isLoading ? "opacity-75 cursor-not-allowed" : ""
-            }`}
-          >
-            {isLoading ? (
-              <span className="inline-flex items-center">
-                <svg className="w-4 h-4 mr-2 animate-spin" viewBox="0 0 24 24">
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    fill="none"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                Processing...
-              </span>
-            ) : (
-              "Send"
-            )}
-          </button>
-        </form>
+    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg p-4">
+      <div className="space-y-4">
+        {inputInfo && (
+          <>
+            <h2 className="font-medium text-gray-700">Input Assistant</h2>
+            <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
+              <input
+                type="text"
+                value={inputPrompt}
+                onChange={(e) => setInputPrompt(e.target.value)}
+                placeholder="Type your message..."
+                className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+                autoFocus={!!inputInfo}
+              />
+              <button
+                type="submit"
+                disabled={isInputLoading}
+                className={`w-full p-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg 
+                          hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 
+                          focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 
+                          transform hover:scale-[0.99] shadow-sm
+                          ${isInputLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+              >
+                {isInputLoading ? "Processing..." : "Send"}
+              </button>
+            </form>
+          </>
+        )}
+
+        <div className={inputInfo ? "mt-6" : ""}>
+          <h2 className="font-medium text-gray-700">Page Assistant</h2>
+          <form onSubmit={handlePageSubmit} className="flex flex-col gap-3">
+            <input
+              type="text"
+              value={pagePrompt}
+              onChange={(e) => setPagePrompt(e.target.value)}
+              placeholder="Type 'summarize' or ask a question about the page..."
+              className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+              autoFocus={!inputInfo}
+            />
+            <button
+              type="submit"
+              disabled={isPageLoading}
+              className={`w-full p-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg 
+                        hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 
+                        focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 
+                        transform hover:scale-[0.99] shadow-sm
+                        ${isPageLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+            >
+              {isPageLoading ? "Processing..." : "Send"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
