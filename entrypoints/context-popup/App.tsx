@@ -13,8 +13,6 @@ export default function App() {
   const [input, setInput] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<"input" | "page">("page");
-
   useEffect(() => {
     const loadInputInfo = async () => {
       try {
@@ -22,7 +20,6 @@ export default function App() {
         console.log("Loaded from storage:", result);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo);
-          setMode("input");
           // Pre-fill input with value if available
           if (result.inputInfo.value) {
             setInput(result.inputInfo.value);
@@ -41,11 +38,46 @@ export default function App() {
     };
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    console.log("Input submitted:", input);
+    console.log(inputInfo, "inputInfo");
+    if (input.length < 3) {
+      console.error("Input too short");
+      return;
+    }
+    if (inputInfo) {
+      console.log("Input field info:", inputInfo);
+      const response = await generateFormResponse(input);
+      if (!response) {
+        console.error("Error generating response");
+        return;
+      }
+      console.log("Generated response:", response);
+
+      try {
+        await browser.runtime.sendMessage({
+          type: "setInputValue",
+          value: response,
+        });
+        console.log("Message sent to background script");
+      } catch (error) {
+        console.error("Error sending message to background:", error);
+      }
+    }
+    setInput("");
+    setIsLoading(false);
+  };
+
   const handlePageContent = async () => {
     setIsLoading(true);
     try {
       // Get current tab
-      const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+      const [tab] = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
       if (!tab.id) return;
 
       // Get page content
@@ -55,8 +87,10 @@ export default function App() {
       });
 
       const pageContent = result.result;
-      const prompt = input || "Summarize this content concisely:";
-      const response = await generateFormResponse(`${prompt}\n\nContent: ${pageContent}`);
+      const response = await generateFormResponse(
+        input || "Summarize this content concisely:",
+        pageContent
+      );
 
       // Show response in side panel
       await browser.tabs.sendMessage(tab.id, {
@@ -72,11 +106,14 @@ export default function App() {
     }
   };
 
-  const handleInputContent = async () => {
-    setIsLoading(true);
-    console.log("Input field info:", inputInfo);
-    
-    try {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    if (inputInfo) {
+      // Handle input field response
+      setIsLoading(true);
+      console.log("Input field info:", inputInfo);
       const response = await generateFormResponse(input);
       if (!response) {
         console.error("Error generating response");
@@ -84,66 +121,36 @@ export default function App() {
       }
       console.log("Generated response:", response);
 
-      await browser.runtime.sendMessage({
-        type: "setInputValue",
-        value: response,
-      });
-      console.log("Message sent to background script");
-      
-      window.close();
-    } catch (error) {
-      console.error("Error sending message to background:", error);
-    } finally {
+      try {
+        await browser.runtime.sendMessage({
+          type: "setInputValue",
+          value: response,
+        });
+        console.log("Message sent to background script");
+      } catch (error) {
+        console.error("Error sending message to background:", error);
+      }
+      setInput("");
       setIsLoading(false);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    if (mode === "input" && inputInfo) {
-      await handleInputContent();
     } else {
-      await handlePageContent();
+      // Handle page content
+      handlePageContent();
     }
   };
 
   return (
     <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg">
       <div className="p-4">
-        <div className="flex gap-2 mb-4">
-          {inputInfo && (
-            <button
-              onClick={() => setMode("input")}
-              className={`px-3 py-1 rounded-lg transition-all duration-200 ${
-                mode === "input"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
-            >
-              Input Assistant
-            </button>
-          )}
-          <button
-            onClick={() => setMode("page")}
-            className={`px-3 py-1 rounded-lg transition-all duration-200 ${
-              mode === "page"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
-          >
-            Page Assistant
-          </button>
-        </div>
-
+        <h1 className="mb-4 text-lg font-semibold text-gray-700">
+          {inputInfo ? "Input Assistant" : "Page Assistant"}
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={
-              mode === "input"
+              inputInfo
                 ? "Type your message..."
                 : "Type 'summarize' or ask a question about the page..."
             }
