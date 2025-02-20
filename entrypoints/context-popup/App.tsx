@@ -108,8 +108,7 @@ export default function App() {
       <div className="space-y-4">
         <div className="space-y-2">
           <h2 className="font-medium text-gray-700">Input Assistant</h2>
-          <>
-            <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
+          <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
               <input
                 type="text"
                 value={inputPrompt}
@@ -136,7 +135,6 @@ export default function App() {
                 Click on an input field to enable this assistant
               </p>
             )}
-          </form>
         </div>
 
         <div className={inputInfo ? "mt-6" : ""}>
