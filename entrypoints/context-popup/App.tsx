@@ -16,6 +16,18 @@ export default function App() {
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
 
+  // Clear storage when popup is closed
+  useEffect(() => {
+    const handleUnload = () => {
+      browser.storage.local.remove("inputInfo").catch(console.error);
+    };
+
+    window.addEventListener('unload', handleUnload);
+    return () => {
+      window.removeEventListener('unload', handleUnload);
+    };
+  }, []);
+
   useEffect(() => {
     const loadInputInfo = async () => {
       try {
