@@ -118,7 +118,7 @@ export default function App() {
   return (
     <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg p-4">
       <div className="space-y-4">
-        <div className="space-y-2">
+        <div className={`space-y-2 ${!inputInfo ? "opacity-50" : ""}`}>
           <h2 className="font-medium text-gray-700">Input Assistant</h2>
           <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
               <input
