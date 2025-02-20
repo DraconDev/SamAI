@@ -106,9 +106,9 @@ export default function App() {
   return (
     <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg p-4">
       <div className="space-y-4">
-        {inputInfo && (
+        <div className="space-y-2">
+          <h2 className="font-medium text-gray-700">Input Assistant</h2>
           <>
-            <h2 className="font-medium text-gray-700">Input Assistant</h2>
             <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
               <input
                 type="text"
@@ -117,10 +117,11 @@ export default function App() {
                 placeholder="Type your message..."
                 className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
                 autoFocus={!!inputInfo}
+                disabled={!inputInfo}
               />
               <button
                 type="submit"
-                disabled={isInputLoading}
+                disabled={isInputLoading || !inputInfo}
                 className={`w-full p-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg 
                           hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 
                           focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 
@@ -130,8 +131,13 @@ export default function App() {
                 {isInputLoading ? "Processing..." : "Send"}
               </button>
             </form>
-          </>
-        )}
+            {!inputInfo && (
+              <p className="text-sm italic text-gray-500">
+                Click on an input field to enable this assistant
+              </p>
+            )}
+          </form>
+        </div>
 
         <div className={inputInfo ? "mt-6" : ""}>
           <h2 className="font-medium text-gray-700">Page Assistant</h2>
