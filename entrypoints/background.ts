@@ -14,6 +14,12 @@ export default defineBackground(() => {
     id: "samai-summarize",
     title: "Summarize Page",
     contexts: ["page"],
+  });
+
+  // Listen for runtime messages and forward them to source tab
+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log("[SamAI Background] Received message:", message);
+
     if (message.type === "generateGeminiResponse") {
       // Start async operation
       generateFormResponse(message.prompt)
@@ -45,12 +51,37 @@ export default defineBackground(() => {
     }
   });
 
-  // Add click handler for the context menu item
+  // Add click handler for the context menu items
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
 
     // Store the source tab ID
     sourceTabId = tab.id;
+
+    if (info.menuItemId === "samai-summarize") {
+      try {
+        // Get page content
+        const [result] = await browser.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: () => document.body.innerText,
+        });
+
+        const pageContent = result.result;
+        // Send message to generate summary
+        const summary = await generateFormResponse(
+          `Summarize this content concisely:\n${pageContent}`
+        );
+
+        // Send message to content script to show panel with summary
+        browser.tabs.sendMessage(tab.id, {
+          type: "showSummary",
+          summary,
+        });
+      } catch (error) {
+        console.error("Error getting page content:", error);
+      }
+      return;
+    }
 
     try {
       console.log("Content script registered in tab:", tab.id);
