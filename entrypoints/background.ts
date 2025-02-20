@@ -3,17 +3,11 @@ import { generateFormResponse } from "@/utils/ai/gemini";
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
 
-  // Create context menu items
+  // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
     title: "Sam",
     contexts: ["all"],
-  });
-
-  browser.contextMenus.create({
-    id: "samai-summarize",
-    title: "Summarize Page",
-    contexts: ["page"],
   });
 
   // Listen for runtime messages and forward them to source tab
@@ -36,11 +30,12 @@ export default defineBackground(() => {
 
     if (message.type === "setInputValue" && sourceTabId) {
       // Handle setInputValue asynchronously
-      browser.tabs.sendMessage(sourceTabId, message)
-        .then(result => {
+      browser.tabs
+        .sendMessage(sourceTabId, message)
+        .then((result) => {
           sendResponse(result);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error forwarding message:", error);
           sendResponse({
             success: false,
@@ -51,37 +46,12 @@ export default defineBackground(() => {
     }
   });
 
-  // Add click handler for the context menu items
+  // Add click handler for the context menu item
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
 
     // Store the source tab ID
     sourceTabId = tab.id;
-
-    if (info.menuItemId === "samai-summarize") {
-      try {
-        // Get page content
-        const [result] = await browser.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: () => document.body.innerText,
-        });
-
-        const pageContent = result.result;
-        // Send message to generate summary
-        const summary = await generateFormResponse(
-          `Summarize this content concisely:\n${pageContent}`
-        );
-
-        // Send message to content script to show panel with summary
-        browser.tabs.sendMessage(tab.id, {
-          type: "showSummary",
-          summary,
-        });
-      } catch (error) {
-        console.error("Error getting page content:", error);
-      }
-      return;
-    }
 
     try {
       console.log("Content script registered in tab:", tab.id);
