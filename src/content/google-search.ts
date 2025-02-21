@@ -14,7 +14,7 @@ export async function initializeGoogleSearch() {
   showSidePanel(null);
 
   // Get and show response with retry
-  const getRespo nse = async () => {
+  const getResponse = async () => {
     const response = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
       prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
