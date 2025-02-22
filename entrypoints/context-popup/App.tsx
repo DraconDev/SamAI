@@ -95,6 +95,11 @@ export default function App() {
         target: { tabId: tab.id },
         func: () => document.body.innerText,
       });
+      
+      if (!result?.result) {
+        console.error("[Page Assistant] Failed to get page content");
+        throw new Error("Failed to get page content");
+      }
       console.log("[Page Assistant] Got page content, length:", result.result.length);
 
       const pageContent = result.result;
