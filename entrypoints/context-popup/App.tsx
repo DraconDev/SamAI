@@ -93,10 +93,28 @@ export default function App() {
         `${pagePrompt}\n\nContent: ${pageContent}`
       );
 
-      // Show response in side panel
-      await browser.tabs.sendMessage(tab.id, {
-        type: "showSummary",
-        summary: response,
+      // Open chat window
+      const chatWindow = await browser.windows.create({
+        url: browser.runtime.getURL("/chat.html"),
+        type: "popup",
+        width: 400,
+        height: 600
+      });
+
+      // Wait a bit for the chat window to initialize
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Send initial message to chat
+      await browser.runtime.sendMessage({
+        type: "chatMessage",
+        role: "user",
+        content: pagePrompt
+      });
+
+      await browser.runtime.sendMessage({
+        type: "chatMessage",
+        role: "assistant",
+        content: response
       });
 
       setPagePrompt("");
