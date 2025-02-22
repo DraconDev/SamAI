@@ -114,7 +114,7 @@ export default function App() {
 
       // Open chat in new tab
       await browser.tabs.create({
-        url: "chat.html" as PublicPath
+        url: "chat.html" 
       });
 
       setPagePrompt("");
