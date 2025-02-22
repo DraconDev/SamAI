@@ -77,31 +77,40 @@ export default function App() {
     e.preventDefault();
     if (!pagePrompt.trim() || isPageLoading) return;
 
+    console.log("[Page Assistant] Starting submission with prompt:", pagePrompt);
     setIsPageLoading(true);
     try {
       // Get current tab
+      console.log("[Page Assistant] Getting current tab...");
       const [tab] = await browser.tabs.query({
         active: true,
         currentWindow: true,
       });
+      console.log("[Page Assistant] Current tab:", tab);
       if (!tab.id) return;
 
       // Get page content
+      console.log("[Page Assistant] Getting page content...");
       const [result] = await browser.scripting.executeScript({
         target: { tabId: tab.id },
         func: () => document.body.innerText,
       });
+      console.log("[Page Assistant] Got page content, length:", result.result.length);
 
       const pageContent = result.result;
+      console.log("[Page Assistant] Generating response...");
       const response = await generateFormResponse(
         `${pagePrompt}\n\nContent: ${pageContent}`
       );
 
       if (!response) {
+        console.error("[Page Assistant] No response received");
         throw new Error("Failed to generate response");
       }
+      console.log("[Page Assistant] Response received, length:", response.length);
 
       // Save messages to store and open chat
+      console.log("[Page Assistant] Saving messages to store...");
       const newMessages = [
         {
           role: "user" as const,
@@ -116,13 +125,17 @@ export default function App() {
       ];
 
       await chatStore.setValue({ messages: newMessages });
+      console.log("[Page Assistant] Messages saved to store");
 
       // Open chat in new tab
+      console.log("[Page Assistant] Opening chat page...");
       await browser.tabs.create({
-        url: "chat.html",
+        url: "chat.html" 
       });
+      console.log("[Page Assistant] Chat page opened");
 
       setPagePrompt("");
+      console.log("[Page Assistant] Closing popup...");
       window.close();
     } catch (error) {
       console.error("Error processing page:", error);
