@@ -1,49 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-  timestamp: string;
-}
+import { chatStore, type ChatMessage } from "@/utils/store";
 
 export default function App() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Load messages from store
   useEffect(() => {
-    // Scroll to bottom whenever messages change
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  useEffect(() => {
-    // Listen for messages from content script
-    browser.runtime.onMessage.addListener((message) => {
-      if (message.type === "chatMessage") {
-        setMessages(prev => [
-          ...prev,
-          {
-            role: message.role,
-            content: message.content,
-            timestamp: new Date().toLocaleTimeString()
-          }
-        ]);
-      }
+    chatStore.getValue().then(store => {
+      setMessages(store.messages);
     });
   }, []);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = {
+    const userMessage: ChatMessage = {
       role: "user",
       content: input,
       timestamp: new Date().toLocaleTimeString()
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    // Update local state and store
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
+    await chatStore.setValue({ messages: newMessages });
+
     setInput("");
     setIsLoading(true);
 
@@ -53,24 +43,34 @@ export default function App() {
         prompt: input,
       });
 
-      setMessages(prev => [
-        ...prev,
-        {
-          role: "assistant",
-          content: response,
-          timestamp: new Date().toLocaleTimeString()
-        }
-      ]);
+      const aiMessage: ChatMessage = {
+        role: "assistant",
+        content: response,
+        timestamp: new Date().toLocaleTimeString()
+      };
+
+      const updatedMessages = [...newMessages, aiMessage];
+      setMessages(updatedMessages);
+      await chatStore.setValue({ messages: updatedMessages });
     } catch (error) {
       console.error("Error sending message:", error);
-      setMessages(prev => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Sorry, I encountered an error. Please try again.",
-          timestamp: new Date().toLocaleTimeString()
-        }
-      ]);
+      const errorMessage: ChatMessage = {
+        role: "assistant",
+        content: "Sorry, I encountered an error. Please try again.",
+        timestamp: new Date().toLocaleTimeString()
+      };
+      const updatedMessages = [...newMessages, errorMessage];
+      setMessages(updatedMessages);
+      await chatStore.setValue({ messages: updatedMessages });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
+      <header className="p-4 bg-white shadow-sm">
+        <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
     } finally {
       setIsLoading(false);
     }
