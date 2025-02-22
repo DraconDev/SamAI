@@ -95,7 +95,7 @@ export default function App() {
 
       // Open chat window
       const chatWindow = await browser.windows.create({
-        url: browser.runtime.getURL("/chat.html"),
+        url: browser.runtime.getURL("chat.html"),
         type: "popup",
         width: 400,
         height: 600
