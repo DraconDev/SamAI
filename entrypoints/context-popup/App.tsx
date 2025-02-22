@@ -1,5 +1,7 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
+import { chatStore } from "@/utils/store";
+
 
 interface InputInfo {
   value: string;
@@ -95,6 +97,10 @@ export default function App() {
       const response = await generateFormResponse(
         `${pagePrompt}\n\nContent: ${pageContent}`
       );
+
+      if (!response) {
+        throw new Error("Failed to generate response");
+      }
 
       // Save messages to store and open chat
       const newMessages = [
