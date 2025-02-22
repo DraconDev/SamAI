@@ -1,7 +1,6 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 
-
 interface InputInfo {
   value: string;
   placeholder: string;
@@ -40,9 +39,9 @@ export default function App() {
       browser.storage.local.remove("inputInfo").catch(console.error);
     };
 
-    window.addEventListener('unload', handleUnload);
+    window.addEventListener("unload", handleUnload);
     return () => {
-      window.removeEventListener('unload', handleUnload);
+      window.removeEventListener("unload", handleUnload);
       browser.storage.local.remove("inputInfo").catch(console.error);
     };
   }, []);
@@ -63,7 +62,7 @@ export default function App() {
         type: "setInputValue",
         value: response,
       });
-      
+
       setInputPrompt("");
       window.close();
     } catch (error) {
@@ -80,7 +79,10 @@ export default function App() {
     setIsPageLoading(true);
     try {
       // Get current tab
-      const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+      const [tab] = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
       if (!tab.id) return;
 
       // Get page content
@@ -95,25 +97,27 @@ export default function App() {
       );
 
       // Open chat window
-      await browser.tabs.create({
-        url: "chat.html" as PublicPath,
-        active: true
+      const chatWindow = await browser.windows.create({
+        url: browser.runtime.getURL("chat.html"),
+        type: "popup",
+        width: 400,
+        height: 600,
       });
 
       // Wait a bit for the chat window to initialize
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Send initial message to chat
       await browser.runtime.sendMessage({
         type: "chatMessage",
         role: "user",
-        content: pagePrompt
+        content: pagePrompt,
       });
 
       await browser.runtime.sendMessage({
         type: "chatMessage",
         role: "assistant",
-        content: response
+        content: response,
       });
 
       setPagePrompt("");
@@ -131,32 +135,36 @@ export default function App() {
         <div className={`space-y-2 ${!inputInfo ? "opacity-50" : ""}`}>
           <h2 className="font-medium text-gray-700">Input Assistant</h2>
           <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
-              <input
-                type="text"
-                value={inputPrompt}
-                onChange={(e) => setInputPrompt(e.target.value)}
-                placeholder="Type your message..."
-                className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-                autoFocus={!!inputInfo}
-                disabled={!inputInfo}
-              />
-              <button
-                type="submit"
-                disabled={isInputLoading || !inputInfo}
-                className={`w-full p-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg 
+            <input
+              type="text"
+              value={inputPrompt}
+              onChange={(e) => setInputPrompt(e.target.value)}
+              placeholder="Type your message..."
+              className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+              autoFocus={!!inputInfo}
+              disabled={!inputInfo}
+            />
+            <button
+              type="submit"
+              disabled={isInputLoading || !inputInfo}
+              className={`w-full p-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg 
                           hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 
                           focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 
                           transform hover:scale-[0.99] shadow-sm
-                          ${isInputLoading ? "opacity-75 cursor-not-allowed" : ""}`}
-              >
-                {isInputLoading ? "Processing..." : "Send"}
-              </button>
-            </form>
-            {!inputInfo && (
-              <p className="text-sm italic text-gray-500">
-                Click on an input field to enable this assistant
-              </p>
-            )}
+                          ${
+                            isInputLoading
+                              ? "opacity-75 cursor-not-allowed"
+                              : ""
+                          }`}
+            >
+              {isInputLoading ? "Processing..." : "Send"}
+            </button>
+          </form>
+          {!inputInfo && (
+            <p className="text-sm italic text-gray-500">
+              Click on an input field to enable this assistant
+            </p>
+          )}
         </div>
 
         <div className={inputInfo ? "mt-6" : ""}>
@@ -177,7 +185,9 @@ export default function App() {
                         hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 
                         focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 
                         transform hover:scale-[0.99] shadow-sm
-                        ${isPageLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+                        ${
+                          isPageLoading ? "opacity-75 cursor-not-allowed" : ""
+                        }`}
             >
               {isPageLoading ? "Processing..." : "Send"}
             </button>
