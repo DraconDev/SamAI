@@ -96,28 +96,25 @@ export default function App() {
         `${pagePrompt}\n\nContent: ${pageContent}`
       );
 
-      // Open chat window
-      const chatWindow = await browser.windows.create({
-        url: browser.runtime.getURL("chat.html"),
-        type: "popup",
-        width: 400,
-        height: 600,
-      });
+      // Save messages to store and open chat
+      const newMessages = [
+        {
+          role: "user" as const,
+          content: pagePrompt,
+          timestamp: new Date().toLocaleTimeString()
+        },
+        {
+          role: "assistant" as const,
+          content: response,
+          timestamp: new Date().toLocaleTimeString()
+        }
+      ];
 
-      // Wait a bit for the chat window to initialize
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await chatStore.setValue({ messages: newMessages });
 
-      // Send initial message to chat
-      await browser.runtime.sendMessage({
-        type: "chatMessage",
-        role: "user",
-        content: pagePrompt,
-      });
-
-      await browser.runtime.sendMessage({
-        type: "chatMessage",
-        role: "assistant",
-        content: response,
+      // Open chat in new tab
+      await browser.tabs.create({
+        url: "chat.html" as PublicPath
       });
 
       setPagePrompt("");
