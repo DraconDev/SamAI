@@ -71,79 +71,72 @@ export default function App() {
     <div className="h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
       <header className="p-4 bg-white shadow-sm">
         <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
-      <header className="p-4 bg-white shadow-sm">
-        <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
           Sam AI Chat
         </h1>
       </header>
 
-      <div className="flex-1 p-4 space-y-4 overflow-auto">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-          >
+      <div className="flex flex-col h-[calc(100vh-64px)]">
+        <div className="flex-1 p-4 space-y-4 overflow-auto">
+          {messages.map((message, index) => (
             <div
-              className={`max-w-[80%] p-3 rounded-lg ${
-                message.role === "user"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-white text-gray-800"
-              }`}
+              key={index}
+              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              <div className="whitespace-pre-wrap">
-                {message.content}
-              </div>
-              <div 
-                className={`text-xs mt-1 ${
-                  message.role === "user" ? "text-indigo-200" : "text-gray-400"
+              <div
+                className={`max-w-[80%] p-3 rounded-lg ${
+                  message.role === "user"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-white text-gray-800"
                 }`}
               >
-                {message.timestamp}
+                <div className="whitespace-pre-wrap">
+                  {message.content}
+                </div>
+                <div 
+                  className={`text-xs mt-1 ${
+                    message.role === "user" ? "text-indigo-200" : "text-gray-400"
+                  }`}
+                >
+                  {message.timestamp}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="max-w-[80%] p-3 rounded-lg bg-white text-gray-400">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+          ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="max-w-[80%] p-3 rounded-lg bg-white text-gray-400">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
-      </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
 
-      <div className="p-4 bg-white shadow-lg">
-        <form onSubmit={handleSendMessage} className="flex space-x-2">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-          />
-          <button
-            type="submit"
-            disabled={isLoading || !input.trim()}
-            className={`px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg
-                     font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 
-                     transition-all duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                     disabled:opacity-50 disabled:cursor-not-allowed`}
-          >
-            Send
-          </button>
-        </form>
+        <div className="p-4 bg-white shadow-lg">
+          <form onSubmit={handleSendMessage} className="flex space-x-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className={`px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg
+                       font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 
+                       transition-all duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                       disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              Send
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
