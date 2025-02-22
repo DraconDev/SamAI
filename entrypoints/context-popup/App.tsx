@@ -1,6 +1,7 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 
+
 interface InputInfo {
   value: string;
   placeholder: string;
@@ -94,11 +95,9 @@ export default function App() {
       );
 
       // Open chat window
-      const chatWindow = await browser.windows.create({
-        url: browser.runtime.getURL("chat.html"),
-        type: "popup",
-        width: 400,
-        height: 600
+      await browser.tabs.create({
+        url: "chat.html" as PublicPath,
+        active: true
       });
 
       // Wait a bit for the chat window to initialize
