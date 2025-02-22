@@ -2,7 +2,6 @@ import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { chatStore } from "@/utils/store";
 
-
 interface InputInfo {
   value: string;
   placeholder: string;
@@ -107,20 +106,20 @@ export default function App() {
         {
           role: "user" as const,
           content: pagePrompt,
-          timestamp: new Date().toLocaleTimeString()
+          timestamp: new Date().toLocaleTimeString(),
         },
         {
           role: "assistant" as const,
           content: response,
-          timestamp: new Date().toLocaleTimeString()
-        }
+          timestamp: new Date().toLocaleTimeString(),
+        },
       ];
 
       await chatStore.setValue({ messages: newMessages });
 
       // Open chat in new tab
       await browser.tabs.create({
-        url: "chat.html" 
+        url: "chat.html",
       });
 
       setPagePrompt("");
