@@ -1,3 +1,21 @@
+export interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+  timestamp: string;
+}
+
+export interface ChatStore {
+  messages: ChatMessage[];
+}
+
+export const defaultChatStore: ChatStore = {
+  messages: [],
+};
+
+export const chatStore = storage.defineItem<ChatStore>("sync:chat", {
+  fallback: defaultChatStore,
+});
+
 export interface SearchSettingsStore {
     searchActive: boolean;
 }
