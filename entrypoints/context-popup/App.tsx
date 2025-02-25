@@ -105,6 +105,24 @@ export default function App() {
       } else {
         // Only try to execute script on non-extension pages
         try {
+          const [result] = await browser.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: () => document.body.innerText,
+          });
+          
+          if (!result?.result) {
+            console.error("[Page Assistant] Failed to get page content");
+            throw new Error("Failed to get page content");
+          }
+          console.log("[Page Assistant] Got page content, length:", result.result.length);
+          pageContent = result.result;
+        } catch (error) {
+          console.error("[Page Assistant] Error executing script:", error);
+          pageContent = "Unable to access page content. This might be due to browser restrictions.";
+        }
+      }
+      console.log("[Page Assistant] Generating response...");
+      const response = await generateFormResponse(
         `${pagePrompt}\n\nContent: ${pageContent}`
       );
 
