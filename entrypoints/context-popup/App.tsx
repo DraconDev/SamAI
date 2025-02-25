@@ -91,20 +91,20 @@ export default function App() {
 
       // Get page content
       console.log("[Page Assistant] Getting page content...");
-      const [result] = await browser.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: () => document.body.innerText,
-      });
       
-      if (!result?.result) {
-        console.error("[Page Assistant] Failed to get page content");
-        throw new Error("Failed to get page content");
-      }
-      console.log("[Page Assistant] Got page content, length:", result.result.length);
-
-      const pageContent = result.result;
-      console.log("[Page Assistant] Generating response...");
-      const response = await generateFormResponse(
+      // Check if the current tab is an extension page
+      const isExtensionPage = tab.url?.startsWith('chrome-extension://') || 
+                             tab.url?.startsWith('moz-extension://') || 
+                             tab.url?.startsWith('extension://');
+      
+      let pageContent = '';
+      
+      if (isExtensionPage) {
+        console.log("[Page Assistant] Detected extension page, using fallback content");
+        pageContent = "This is a browser extension page. Limited content is available for analysis.";
+      } else {
+        // Only try to execute script on non-extension pages
+        try {
         `${pagePrompt}\n\nContent: ${pageContent}`
       );
 
