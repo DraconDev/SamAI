@@ -29,16 +29,36 @@ export default defineContentScript({
       console.log("[SamAI] Not initializing - conditions not met");
     }
 
-    // Listen for right clicks to track the last input element
-    document.addEventListener("contextmenu", (event) => {
+    // Track input elements on click and right-click
+    const handleInputInteraction = async (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
+        
+        // For regular clicks (not right-clicks), open the assistant
+        if (event.type === "click") {
+          await browser.storage.local.set({
+            inputInfo: {
+              value: target.value,
+              placeholder: target.placeholder,
+              inputType: target instanceof HTMLInputElement ? target.type : "textarea",
+              elementId: target.id,
+              elementName: target.name,
+            },
+          });
+
+          // Request to open the popup
+          browser.runtime.sendMessage({ type: "openAssistant" });
+        }
       }
-    });
+    };
+
+    // Listen for both regular clicks and right-clicks
+    document.addEventListener("contextmenu", handleInputInteraction);
+    document.addEventListener("click", handleInputInteraction);
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
