@@ -104,7 +104,7 @@ export default function App() {
 
   const handlePageSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!pagePrompt.trim() || isPageLoading) return;
+    if (!pagePrompt.trim() || isPageLoading || isLoadingPage) return;
 
     console.log("[Page Assistant] Starting submission with prompt:", pagePrompt);
     setIsPageLoading(true);
