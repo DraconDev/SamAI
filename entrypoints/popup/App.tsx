@@ -44,6 +44,7 @@ function App() {
       
       <div className="space-y-4">
         <h2 className="text-sm font-medium tracking-wide text-gray-400 uppercase">General Settings</h2>
+        <div className="flex flex-col gap-3 p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
           <div className="flex items-center justify-between">
             <label className="font-medium text-gray-300">Search Enhancement</label>
             <button
@@ -102,12 +103,14 @@ function App() {
           )}
         </div>
 
-        <div className="flex items-center justify-between p-3 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
-          <div className="flex flex-col">
+        <h2 className="mt-6 text-sm font-medium tracking-wide text-gray-400 uppercase">Chat Settings</h2>
+        <div className="flex items-center justify-between p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
+          <div className="flex flex-col gap-0.5">
             <label className="font-medium text-gray-300">Continue Previous Chat</label>
-            <span className="text-xs text-gray-500">When disabled, starts a fresh chat each time</span>
+            <span className="text-xs text-gray-500">Keep chat history between sessions</span>
           </div>
           <button
+            aria-label={continuePreviousChat ? "Disable chat continuation" : "Enable chat continuation"}
             onClick={() => {
               const newValue = !continuePreviousChat;
               setContinuePreviousChat(newValue);
@@ -128,29 +131,31 @@ function App() {
           </button>
         </div>
 
-        <button
-          onClick={openApiKeyPage}
-          className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
-                   hover:opacity-90 focus:outline-none focus:ring-2 
-                   focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                   transition-all duration-200 transform hover:scale-[0.98]
-                   font-medium"
-        >
-          Configure API Key
-        </button>
+        <div className="flex flex-col gap-3 mt-6">
+          <button
+            onClick={openApiKeyPage}
+            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                     hover:opacity-90 focus:outline-none focus:ring-2 
+                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                     transition-all duration-200 transform hover:scale-[0.98]
+                     font-medium"
+          >
+            Configure API Key
+          </button>
 
-        <button
-          onClick={openDonateLink}
-          className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5]/20 to-[#818cf8]/20 text-[#818cf8] rounded-lg 
-                   hover:from-[#4f46e5]/30 hover:to-[#818cf8]/30
-                   focus:outline-none focus:ring-2 
-                   focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                   transition-all duration-200 transform hover:scale-[0.98]
-                   font-medium flex items-center justify-center gap-2"
-        >
-          <span>Support Development</span>
-          <span className="text-lg">☕</span>
-        </button>
+          <button
+            onClick={openDonateLink}
+            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5]/20 to-[#818cf8]/20 text-[#818cf8] rounded-lg 
+                     hover:from-[#4f46e5]/30 hover:to-[#818cf8]/30
+                     focus:outline-none focus:ring-2 
+                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                     transition-all duration-200 transform hover:scale-[0.98]
+                     font-medium flex items-center justify-center gap-2"
+          >
+            <span>Support Development</span>
+            <span className="text-lg">☕</span>
+          </button>
+        </div>
       </div>
     </div>
   );
