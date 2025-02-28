@@ -84,6 +84,17 @@ function App() {
                   <button
                     key={value}
                     type="button"
+                    onClick={() => {
+                      const newStyle = value as PromptStyle;
+                      setPromptStyle(newStyle);
+                      searchSettingsStore.setValue({
+                        searchActive,
+                        promptStyle: newStyle,
+                        continuePreviousChat
+                      });
+                    }}
+                    className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
+                              hover:transform hover:scale-[1.02]
                               ${promptStyle === value 
                                 ? 'border-[#4f46e5] bg-[#4f46e5]/10' 
                                 : 'border-[#2E2F3E] hover:border-[#4f46e5] hover:bg-[#4f46e5]/5'}`}
@@ -110,9 +121,9 @@ function App() {
             <label className="font-medium text-gray-300">Continue Previous Chat</label>
             <span className="text-xs text-gray-500">Keep chat history between sessions</span>
           </div>
-          <button
-            aria-label={continuePreviousChat ? "Disable chat continuation" : "Enable chat continuation"}
-            onClick={() => {
+          <ToggleButton
+            isEnabled={continuePreviousChat}
+            onToggle={() => {
               const newValue = !continuePreviousChat;
               setContinuePreviousChat(newValue);
               searchSettingsStore.setValue({
@@ -121,15 +132,8 @@ function App() {
                 continuePreviousChat: newValue
               });
             }}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 
-                       ${continuePreviousChat ? 'bg-[#4f46e5] ring-2 ring-[#4f46e5]/50' : 'bg-gray-600'} 
-                       focus:outline-none focus:ring-2 focus:ring-[#4f46e5] hover:opacity-90`}
-          >
-            <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
-                         ${continuePreviousChat ? 'translate-x-6' : 'translate-x-1'}`}
-            />
-          </button>
+            ariaLabel={continuePreviousChat ? "Disable chat continuation" : "Enable chat continuation"}
+          />
         </div>
 
         <div className="flex flex-col gap-3 mt-8 pt-4 border-t border-[#2E2F3E]">
