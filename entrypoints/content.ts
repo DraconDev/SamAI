@@ -27,16 +27,26 @@ export default defineContentScript({
       console.log('[SamAI] Not initializing - conditions not met');
     }
 
-    // Listen for right clicks to track the last input element
-    document.addEventListener("contextmenu", (event) => {
+    // Track the last focused/clicked input element
+    const updateLastInputElement = (event: Event) => {
       const target = event.target as HTMLElement;
       if (
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
+        console.log('[SamAI] Input element tracked:', {
+          type: target instanceof HTMLInputElement ? 'input' : 'textarea',
+          id: target.id,
+          name: target.name
+        });
       }
-    });
+    };
+
+    // Listen for various input interaction events
+    document.addEventListener("contextmenu", updateLastInputElement);
+    document.addEventListener("focus", updateLastInputElement, true);
+    document.addEventListener("click", updateLastInputElement);
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
