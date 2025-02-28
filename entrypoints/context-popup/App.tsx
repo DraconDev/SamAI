@@ -168,66 +168,104 @@ export default function App() {
   };
 
   return (
-    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-white to-blue-50 shadow-lg p-4">
-      <div className="space-y-4">
-        <div className={`space-y-2 ${!inputInfo ? "opacity-50" : ""}`}>
-          <h2 className="font-medium text-gray-700">Input Assistant</h2>
+    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100">
+      <div className="space-y-6">
+        <div className={`space-y-3 ${!inputInfo ? "opacity-50" : ""}`}>
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">Input Assistant</h2>
           <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
             <input
               type="text"
               value={inputPrompt}
               onChange={(e) => setInputPrompt(e.target.value)}
               placeholder="Type your message..."
-              className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+              className="w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
               autoFocus={!!inputInfo}
               disabled={!inputInfo}
             />
             <button
               type="submit"
               disabled={isInputLoading || !inputInfo}
-              className={`w-full p-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg 
-                          hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 
-                          focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 
-                          transform hover:scale-[0.99] shadow-sm
-                          ${
-                            isInputLoading
-                              ? "opacity-75 cursor-not-allowed"
-                              : ""
-                          }`}
+              className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                          hover:opacity-90 focus:outline-none focus:ring-2 
+                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                          transition-all duration-200 transform hover:scale-[0.98] 
+                          ${isInputLoading ? "opacity-75 cursor-not-allowed" : ""}`}
             >
-              {isInputLoading ? "Processing..." : "Send"}
+              {isInputLoading ? 
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4">
+                    <svg viewBox="0 0 50 50">
+                      <path
+                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        className="animate-[dash_1.5s_ease-in-out_infinite]"
+                        style={{
+                          strokeDasharray: "90,150",
+                          strokeDashoffset: "-35",
+                          animation: "dash 1.5s ease-in-out infinite, rotate 2s linear infinite"
+                        }}
+                      />
+                    </svg>
+                  </div>
+                  <span>Processing...</span>
+                </div>
+                : "Send"
+              }
             </button>
           </form>
           {!inputInfo && (
-            <p className="text-sm italic text-gray-500">
+            <p className="text-sm italic text-gray-400">
               Click on an input field to enable this assistant
             </p>
           )}
         </div>
 
-        <div className={inputInfo ? "mt-6" : ""}>
-          <h2 className="font-medium text-gray-700">Page Assistant</h2>
+        <div className={inputInfo ? "mt-8" : "mt-6"}>
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">Page Assistant</h2>
           <form onSubmit={handlePageSubmit} className="flex flex-col gap-3">
             <input
               type="text"
               value={pagePrompt}
               onChange={(e) => setPagePrompt(e.target.value)}
               placeholder="Type 'summarize' or ask a question about the page..."
-              className="w-full p-3 placeholder-gray-400 transition-all duration-200 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+              className="w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
               autoFocus={!inputInfo}
             />
             <button
               type="submit"
               disabled={isPageLoading}
-              className={`w-full p-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg 
-                        hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 
-                        focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 
-                        transform hover:scale-[0.99] shadow-sm
-                        ${
-                          isPageLoading ? "opacity-75 cursor-not-allowed" : ""
-                        }`}
+              className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                        hover:opacity-90 focus:outline-none focus:ring-2 
+                        focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                        transition-all duration-200 transform hover:scale-[0.98]
+                        ${isPageLoading ? "opacity-75 cursor-not-allowed" : ""}`}
             >
-              {isPageLoading ? "Processing..." : "Send"}
+              {isPageLoading ? 
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4">
+                    <svg viewBox="0 0 50 50">
+                      <path
+                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        className="animate-[dash_1.5s_ease-in-out_infinite]"
+                        style={{
+                          strokeDasharray: "90,150",
+                          strokeDashoffset: "-35",
+                          animation: "dash 1.5s ease-in-out infinite, rotate 2s linear infinite"
+                        }}
+                      />
+                    </svg>
+                  </div>
+                  <span>Processing...</span>
+                </div>
+                : "Send"
+              }
             </button>
           </form>
         </div>
