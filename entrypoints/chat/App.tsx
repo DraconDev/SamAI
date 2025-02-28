@@ -107,7 +107,7 @@ export default function App() {
                 message.role === "user"
                   ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
                   : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
-                }`}
+              }`}
               >
                 <div
                   className={`leading-relaxed whitespace-pre-wrap ${
