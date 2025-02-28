@@ -5,11 +5,13 @@ import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 function App() {
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
+  const [continuePreviousChat, setContinuePreviousChat] = useState(true);
 
   useEffect(() => {
     searchSettingsStore.getValue().then(settings => {
       setSearchActive(settings.searchActive);
       setPromptStyle(settings.promptStyle);
+      setContinuePreviousChat(settings.continuePreviousChat);
     });
   }, []);
 
@@ -17,7 +19,8 @@ function App() {
     const newValue = !searchActive;
     await searchSettingsStore.setValue({ 
       searchActive: newValue,
-      promptStyle 
+      promptStyle,
+      continuePreviousChat
     });
     setSearchActive(newValue);
   };
@@ -73,7 +76,8 @@ function App() {
                       setPromptStyle(newStyle);
                       searchSettingsStore.setValue({
                         searchActive,
-                        promptStyle: newStyle
+                        promptStyle: newStyle,
+                        continuePreviousChat
                       });
                     }}
                     className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
@@ -96,6 +100,32 @@ function App() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="flex items-center justify-between p-3 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
+          <div className="flex flex-col">
+            <label className="font-medium text-gray-300">Continue Previous Chat</label>
+            <span className="text-xs text-gray-500">When disabled, starts a fresh chat each time</span>
+          </div>
+          <button
+            onClick={() => {
+              const newValue = !continuePreviousChat;
+              setContinuePreviousChat(newValue);
+              searchSettingsStore.setValue({
+                searchActive,
+                promptStyle,
+                continuePreviousChat: newValue
+              });
+            }}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 
+                       ${continuePreviousChat ? 'bg-[#4f46e5]' : 'bg-gray-600'} 
+                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1E1F2E] focus:ring-[#4f46e5]`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
+                         ${continuePreviousChat ? 'translate-x-6' : 'translate-x-1'}`}
+            />
+          </button>
         </div>
 
         <button
