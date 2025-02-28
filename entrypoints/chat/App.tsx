@@ -96,88 +96,91 @@ export default function App() {
       <div className="flex flex-col h-[calc(100vh-80px)]">
         <div className="flex-1 p-6 space-y-6 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
           <div className="w-full max-w-5xl mx-auto space-y-6">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              } animate-fade-in`}
-            >
+            {messages.map((message, index) => (
               <div
-              className={`max-w-[80%] p-5 rounded-xl shadow-xl ${
-                message.role === "user"
-                  ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
-                  : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
-              }`}
+                key={index}
+                className={`flex ${
+                  message.role === "user" ? "justify-end" : "justify-start"
+                } animate-fade-in`}
               >
                 <div
-                  className={`leading-relaxed text-[15px] prose-pre:my-2 prose-pre:bg-black/20 prose-pre:p-3 prose-pre:rounded-lg prose-code:bg-black/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-p:my-2 prose-headings:font-semibold prose-h1:text-xl prose-h2:text-lg ${
-                    message.role === "user" &&
-                    message.content.startsWith("Question about page:")
-                      ? "flex items-center gap-2"
-                      : ""
+                  className={`max-w-[80%] p-5 rounded-xl shadow-xl ${
+                    message.role === "user"
+                      ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
+                      : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
                   }`}
                 >
-                  {message.role === "user" &&
-                    message.content.startsWith("Question about page:") && (
-                      <svg
-                        className="w-4 h-4 opacity-80"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        />
-                      </svg>
-                    )}
-                  {message.role === "user" ? (
-                    message.content.startsWith("Question about page:") 
-                      ? message.content.replace("Question about page:", "").trim()
-                      : message.content
-                  ) : (
-                    <div className="whitespace-pre-wrap">
-                      {message.content.split('```').map((block, i) => 
-                        i % 2 === 0 ? (
-                          <span key={i}>{block}</span>
-                        ) : (
-                          <pre key={i} className="font-mono text-sm"><code>{block}</code></pre>
-                        )
+                  <div
+                    className={`leading-relaxed whitespace-pre-wrap text-[15px] ${
+                      message.role === "user" &&
+                      message.content.startsWith("Question about page:")
+                        ? "flex items-center gap-2"
+                        : ""
+                    }`}
+                  >
+                    {message.role === "user" &&
+                      message.content.startsWith("Question about page:") && (
+                        <svg
+                          className="w-4 h-4 opacity-80"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
                       )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center space-x-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
-                    <div className="relative flex space-x-1">
-                      <div className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <div className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <div className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-                    </div>
+                    {message.role === "user" &&
+                    message.content.startsWith("Question about page:")
+                      ? message.content
+                          .replace("Question about page:", "")
+                          .trim()
+                      : message.content}
                   </div>
-                  <span className="text-sm font-medium text-[#818cf8]">
-                    AI is thinking...
-                  </span>
                 </div>
               </div>
-            </div>
-          )}
+            ))}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
+                  <div className="flex items-center space-x-4">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
+                      <div className="relative flex space-x-1">
+                        <div
+                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                          style={{ animationDelay: "0ms" }}
+                        />
+                        <div
+                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                          style={{ animationDelay: "150ms" }}
+                        />
+                        <div
+                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                          style={{ animationDelay: "300ms" }}
+                        />
+                      </div>
+                    </div>
+                    <span className="text-sm font-medium text-[#818cf8]">
+                      AI is thinking...
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div ref={messagesEndRef} className="h-4" />
         </div>
 
         <div className="p-6 bg-gradient-to-t from-[#1E1F2E] to-[#1a1b2e] border-t border-[#2E2F3E]/50 backdrop-blur-sm">
-          <form onSubmit={handleSendMessage} className="flex max-w-4xl mx-auto space-x-4">
+          <form
+            onSubmit={handleSendMessage}
+            className="flex max-w-4xl mx-auto space-x-4"
+          >
             <input
               type="text"
               value={input}
@@ -199,7 +202,18 @@ export default function App() {
             >
               <span className="flex items-center gap-2">
                 Send
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform transform translate-x-0 group-hover:translate-x-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-transform transform translate-x-0 group-hover:translate-x-1"
+                >
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>

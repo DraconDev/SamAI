@@ -2,7 +2,7 @@
   "name": "wxt-react-starter",
   "description": "manifest.json description",
   "private": true,
-  "version": "1.1.130",
+  "version": "1.1.131",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -19,7 +19,9 @@
     "@tailwindcss/postcss": "^4.0.6",
     "@tailwindcss/vite": "^4.0.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.0.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.280",
