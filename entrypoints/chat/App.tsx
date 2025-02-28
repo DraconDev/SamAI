@@ -29,10 +29,9 @@ export default function App() {
       timestamp: new Date().toLocaleTimeString(),
     };
 
-    // Update local state and store
-    const newMessages = [...messages, userMessage];
+    // Add user message and update local state
+    const newMessages = await addChatMessage(userMessage);
     setMessages(newMessages);
-    await chatStore.setValue({ messages: newMessages });
 
     setInput("");
     setIsLoading(true);
@@ -49,9 +48,9 @@ export default function App() {
         timestamp: new Date().toLocaleTimeString(),
       };
 
-      const updatedMessages = [...newMessages, aiMessage];
+      // Add AI message and update local state
+      const updatedMessages = await addChatMessage(aiMessage);
       setMessages(updatedMessages);
-      await chatStore.setValue({ messages: updatedMessages });
     } catch (error) {
       console.error("Error sending message:", error);
       const errorMessage: ChatMessage = {
@@ -59,9 +58,9 @@ export default function App() {
         content: "Sorry, I encountered an error. Please try again.",
         timestamp: new Date().toLocaleTimeString(),
       };
-      const updatedMessages = [...newMessages, errorMessage];
+      // Add error message and update local state
+      const updatedMessages = await addChatMessage(errorMessage);
       setMessages(updatedMessages);
-      await chatStore.setValue({ messages: updatedMessages });
     } finally {
       setIsLoading(false);
     }
