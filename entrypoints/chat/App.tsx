@@ -134,10 +134,21 @@ export default function App() {
                         />
                       </svg>
                     )}
-                  {message.role === "user" &&
-                  message.content.startsWith("Question about page:")
-                    ? message.content.replace("Question about page:", "").trim()
-                    : message.content}
+                  {message.role === "user" ? (
+                    message.content.startsWith("Question about page:") 
+                      ? message.content.replace("Question about page:", "").trim()
+                      : message.content
+                  ) : (
+                    <div className="whitespace-pre-wrap">
+                      {message.content.split('```').map((block, i) => 
+                        i % 2 === 0 ? (
+                          <span key={i}>{block}</span>
+                        ) : (
+                          <pre key={i} className="font-mono text-sm"><code>{block}</code></pre>
+                        )
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
