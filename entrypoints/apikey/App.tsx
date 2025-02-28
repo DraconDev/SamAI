@@ -24,25 +24,6 @@ function App() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16]">
       <div className="relative p-8 w-[400px] bg-[#1E1F2E] rounded-lg shadow-2xl border border-[#2E2F3E]">
-        <a
-          href="https://aistudio.google.com/apikey"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group absolute text-sm font-medium text-[#818cf8] top-4 right-4 flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
-        >
-          Get API Key
-          <svg
-            className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </a>
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
             API Key Configuration
@@ -58,6 +39,25 @@ function App() {
             >
               Enter your API Key
             </label>
+            <a
+              href="https://aistudio.google.com/apikey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group absolute text-sm font-medium text-[#818cf8] top-4 right-4 flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
+            >
+              Get API Key
+              <svg
+                className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
             <div className="relative">
               <input
                 type={showKey ? "text" : "password"}
