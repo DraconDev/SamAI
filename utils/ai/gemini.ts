@@ -15,23 +15,23 @@ export async function generateFormResponse(
   prompt: string
 ): Promise<string | null> {
   try {
+    console.log("[SamAI Gemini] Generating response for prompt:", prompt);
+    
     const apiKey = await apiKeyStore.getValue().then((store) => {
       return store.apiKey;
     });
     if (!apiKey) {
+      console.warn("[SamAI Gemini] No API key found");
       return null;
     }
+    
     if (!model) {
+      console.log("[SamAI Gemini] Initializing model with API key");
       initializeModel(apiKey);
     }
 
+    console.log("[SamAI Gemini] Sending request to Gemini API");
     const result = await model.generateContent(prompt);
-
-    // Validate API response structure
-    if (!result || !result.response) {
-      throw new Error("Empty response from Gemini API");
-    }
-
     if (
       !result.response.candidates ||
       !result.response.candidates[0] ||
