@@ -104,10 +104,10 @@ export default function App() {
               } animate-fade-in`}
             >
               <div
-              className={`max-w-[80%] p-5 rounded-xl shadow-xl transition-all duration-200 hover:scale-[1.01] ${
+              className={`max-w-[80%] p-5 rounded-xl shadow-xl ${
                 message.role === "user"
-                  ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20 hover:shadow-indigo-500/30"
-                  : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20 hover:border-[#2E2F3E]"
+                  ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
+                  : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
               }`}
               >
                 <div
@@ -183,14 +183,14 @@ export default function App() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1 p-4 bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-500
+              className="flex-1 p-5 text-[15px] bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-500
                        focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] 
                        transition-all duration-200 shadow-lg backdrop-blur-sm"
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className={`px-6 py-4 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl
+              className={`px-8 py-5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl text-[15px]
                        font-medium hover:opacity-90 transform hover:scale-[0.98] shadow-lg
                        transition-all duration-200 focus:outline-none focus:ring-2 
                        focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
