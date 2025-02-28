@@ -86,9 +86,9 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
-      <header className="p-4 bg-[#1E1F2E] border-b border-[#2E2F3E]">
-        <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
+    <div className="h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100 antialiased">
+      <header className="py-6 bg-gradient-to-b from-[#1E1F2E] to-[#1a1b2e] border-b border-[#2E2F3E]/50 backdrop-blur-sm">
+        <h1 className="text-2xl font-bold text-center text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text drop-shadow-lg">
           Sam AI Chat
         </h1>
       </header>
@@ -103,10 +103,10 @@ export default function App() {
               }`}
             >
               <div
-                className={`max-w-[80%] p-4 rounded-lg shadow-lg ${
-                  message.role === "user"
-                    ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white"
-                    : "bg-[#1E1F2E] border border-[#2E2F3E] text-gray-100"
+              className={`max-w-[80%] p-4 rounded-xl shadow-xl transition-transform duration-200 hover:scale-[1.01] ${
+                message.role === "user"
+                  ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
+                  : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
                 }`}
               >
                 <div
