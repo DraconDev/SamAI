@@ -1,6 +1,5 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
-import { extractPageContent } from "@/utils/page-content";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -54,15 +53,9 @@ export default defineContentScript({
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      console.log("[SamAI Content] Received message:", message);
+      console.log("Content script received message:", message);
 
-      if (message.type === "getPageContent") {
-        console.log("[SamAI Content] Extracting page content");
-        const content = extractPageContent();
-        console.log("[SamAI Content] Content length:", content.length);
-        sendResponse({ content });
-      }
-      else if (message.type === "getInputInfo" && lastInputElement) {
+      if (message.type === "getInputInfo" && lastInputElement) {
         const response = {
           messageType: "inputInfo",
           value: lastInputElement.value,
