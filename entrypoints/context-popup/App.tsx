@@ -120,7 +120,6 @@ export default function App() {
       console.error("Error processing input:", error);
     } finally {
       setIsInputLoading(false);
-      setInputPrompt("");
     }
   };
 
