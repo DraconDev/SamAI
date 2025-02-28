@@ -22,33 +22,37 @@ function App() {
   };
 
   return (
-    <div className="p-4 w-[300px] bg-gradient-to-br from-indigo-100 via-white to-purple-100">
-      <h1 className="mb-4 text-xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
-        Sam AI Assistant
-      </h1>
+    <div className="p-6 w-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
+      <div className="mb-6 text-center">
+        <h1 className="text-xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
+          Sam AI Assistant
+        </h1>
+        <div className="h-0.5 w-16 mx-auto mt-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8]"></div>
+      </div>
       
-      <div className="space-y-4">
-        <div className="flex items-center justify-between p-2 bg-white rounded-md shadow-sm">
-          <label className="font-medium text-gray-700">Search Enhancement</label>
+      <div className="space-y-5">
+        <div className="flex items-center justify-between p-3 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
+          <label className="font-medium text-gray-300">Search Enhancement</label>
           <button
             onClick={toggleSearch}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-              searchActive ? 'bg-indigo-600' : 'bg-gray-200'
-            }`}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 
+                       ${searchActive ? 'bg-[#4f46e5]' : 'bg-gray-600'} 
+                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1E1F2E] focus:ring-[#4f46e5]`}
           >
             <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                searchActive ? 'translate-x-6' : 'translate-x-1'
-              }`}
+              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
+                         ${searchActive ? 'translate-x-6' : 'translate-x-1'}`}
             />
           </button>
         </div>
 
         <button
           onClick={openApiKeyPage}
-          className="w-full px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-md
-                   font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 
-                   transition-all duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                   hover:opacity-90 focus:outline-none focus:ring-2 
+                   focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                   transition-all duration-200 transform hover:scale-[0.98]
+                   font-medium"
         >
           Configure API Key
         </button>
