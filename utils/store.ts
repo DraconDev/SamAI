@@ -12,9 +12,24 @@ export const defaultChatStore: ChatStore = {
   messages: [],
 };
 
-export const chatStore = storage.defineItem<ChatStore>("sync:chat", {
+// Use local storage for chat messages and limit to 50 messages
+export const chatStore = storage.defineItem<ChatStore>("local:chat", {
   fallback: defaultChatStore,
 });
+
+// Helper function to clean up old messages
+export async function addChatMessage(message: ChatMessage) {
+  const store = await chatStore.getValue();
+  const messages = [...store.messages, message];
+  
+  // Keep only the last 50 messages
+  if (messages.length > 50) {
+    messages.splice(0, messages.length - 50);
+  }
+  
+  await chatStore.setValue({ messages });
+  return messages;
+}
 
 export interface SearchSettingsStore {
     searchActive: boolean;
