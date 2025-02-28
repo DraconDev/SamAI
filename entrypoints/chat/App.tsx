@@ -102,6 +102,7 @@ export default function App() {
               className={`flex ${
                 message.role === "user" ? "justify-end" : "justify-start"
               } animate-fade-in`}
+            >
               <div
               className={`max-w-[80%] p-4 rounded-xl shadow-xl transition-transform duration-200 hover:scale-[1.01] ${
                 message.role === "user"
@@ -152,30 +153,25 @@ export default function App() {
           ))}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="max-w-[80%] p-3 rounded-lg bg-[#1E1F2E] border border-[#2E2F3E] shadow-lg">
+              <div className="max-w-[80%] p-4 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
                 <div className="flex items-center space-x-3">
-                  <div className="flex space-x-1">
-                    <div
-                      className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse"
-                      style={{ animationDelay: "0ms" }}
-                    />
-                    <div
-                      className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse"
-                      style={{ animationDelay: "150ms" }}
-                    />
-                    <div
-                      className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse"
-                      style={{ animationDelay: "300ms" }}
-                    />
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
+                    <div className="relative flex space-x-1">
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </div>
                   </div>
-                  <span className="text-sm text-[#818cf8]">
+                  <span className="text-sm font-medium text-[#818cf8]">
                     AI is thinking...
                   </span>
                 </div>
               </div>
             </div>
           )}
-          <div ref={messagesEndRef} />
+          </div>
+          <div ref={messagesEndRef} className="h-4" />
         </div>
 
         <div className="p-6 bg-gradient-to-t from-[#1E1F2E] to-[#1a1b2e] border-t border-[#2E2F3E]/50 backdrop-blur-sm">
