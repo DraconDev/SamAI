@@ -132,16 +132,19 @@ function App() {
           </button>
         </div>
 
-        <div className="flex flex-col gap-3 mt-6">
+        <div className="flex flex-col gap-3 mt-8 pt-4 border-t border-[#2E2F3E]">
           <button
             onClick={openApiKeyPage}
             className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
                      hover:opacity-90 focus:outline-none focus:ring-2 
                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
                      transition-all duration-200 transform hover:scale-[0.98]
-                     font-medium"
+                     font-medium flex items-center justify-center gap-2"
           >
-            Configure API Key
+            <span>Configure API Key</span>
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
           </button>
 
           <button
