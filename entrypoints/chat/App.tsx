@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { chatStore, type ChatMessage, addChatMessage, searchSettingsStore } from "@/utils/store";
+import {
+  chatStore,
+  type ChatMessage,
+  addChatMessage,
+  searchSettingsStore,
+} from "@/utils/store";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -12,14 +17,11 @@ export default function App() {
     const loadData = async () => {
       const [chatData, settings] = await Promise.all([
         chatStore.getValue(),
-        searchSettingsStore.getValue()
+        searchSettingsStore.getValue(),
       ]);
 
       if (settings.continuePreviousChat) {
-        // Keep only the last 2 messages
-        const lastTwoMessages = chatData.messages.slice(-2);
-        setMessages(lastTwoMessages);
-        await chatStore.setValue({ messages: lastTwoMessages }); // Update stored messages
+        setMessages(chatData.messages);
       } else {
         setMessages([]); // Start with empty chat
         await chatStore.setValue({ messages: [] }); // Clear stored messages
@@ -105,18 +107,32 @@ export default function App() {
                     : "bg-[#1E1F2E] border border-[#2E2F3E] text-gray-100"
                 }`}
               >
-                <div className={`leading-relaxed whitespace-pre-wrap ${
-                  message.role === "user" && message.content.startsWith("Question about page:") 
-                  ? "flex items-center gap-2" 
-                  : ""
-                }`}>
-                  {message.role === "user" && message.content.startsWith("Question about page:") && (
-                    <svg className="w-4 h-4 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  )}
-                  {message.role === "user" && message.content.startsWith("Question about page:") 
+                <div
+                  className={`leading-relaxed whitespace-pre-wrap ${
+                    message.role === "user" &&
+                    message.content.startsWith("Question about page:")
+                      ? "flex items-center gap-2"
+                      : ""
+                  }`}
+                >
+                  {message.role === "user" &&
+                    message.content.startsWith("Question about page:") && (
+                      <svg
+                        className="w-4 h-4 opacity-80"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                    )}
+                  {message.role === "user" &&
+                  message.content.startsWith("Question about page:")
                     ? message.content.replace("Question about page:", "").trim()
                     : message.content}
                 </div>
