@@ -147,9 +147,6 @@ export default function App() {
                       <MarkdownRenderer content={message.content} />
                     )}
                   </div>
-                  <div className="mt-3 text-xs text-right opacity-70">
-                    {message.timestamp}
-                  </div>
                 </div>
               </div>
             ))}
