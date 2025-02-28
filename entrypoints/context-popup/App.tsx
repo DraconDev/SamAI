@@ -27,7 +27,7 @@ export default function App() {
           active: true,
           currentWindow: true,
         });
-        
+
         if (!tab?.id) return;
 
         // Check if extension page
@@ -37,7 +37,9 @@ export default function App() {
           tab.url?.startsWith("extension://");
 
         if (isExtensionPage) {
-          setPageContent("This is a browser extension page. Limited content is available for analysis.");
+          setPageContent(
+            "This is a browser extension page. Limited content is available for analysis."
+          );
           return;
         }
 
@@ -54,7 +56,9 @@ export default function App() {
         }
       } catch (error) {
         console.error("Error loading page content:", error);
-        setPageContent("Unable to access page content due to browser restrictions.");
+        setPageContent(
+          "Unable to access page content due to browser restrictions."
+        );
       } finally {
         setIsLoadingPage(false);
       }
@@ -116,6 +120,7 @@ export default function App() {
       console.error("Error processing input:", error);
     } finally {
       setIsInputLoading(false);
+      setInputPrompt("");
     }
   };
 
@@ -206,7 +211,7 @@ export default function App() {
             content: response,
             timestamp: new Date().toLocaleTimeString(),
           },
-        ]
+        ],
       });
       console.log("[Page Assistant] Messages saved to store");
 
@@ -293,32 +298,34 @@ export default function App() {
           )}
         </div>
 
-          <div className="relative flex-1">
-            {isLoadingPage && (
-              <div className="absolute inset-0 bg-[#1E1F2E]/80 flex items-center justify-center z-10 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4">
-                    <svg viewBox="0 0 50 50">
-                      <path
-                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        className="animate-[dash_1.5s_ease-in-out_infinite]"
-                        style={{
-                          strokeDasharray: "90,150",
-                          strokeDashoffset: "-35",
-                          animation:
-                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
-                        }}
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-sm text-[#818cf8]">Loading page content...</span>
+        <div className="relative flex-1">
+          {isLoadingPage && (
+            <div className="absolute inset-0 bg-[#1E1F2E]/80 flex items-center justify-center z-10 rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-4 h-4">
+                  <svg viewBox="0 0 50 50">
+                    <path
+                      d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      className="animate-[dash_1.5s_ease-in-out_infinite]"
+                      style={{
+                        strokeDasharray: "90,150",
+                        strokeDashoffset: "-35",
+                        animation:
+                          "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
+                      }}
+                    />
+                  </svg>
                 </div>
+                <span className="text-sm text-[#818cf8]">
+                  Loading page content...
+                </span>
               </div>
-            )}
+            </div>
+          )}
           <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">
             Page Assistant
           </h2>
