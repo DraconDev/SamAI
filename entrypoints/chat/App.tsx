@@ -93,15 +93,15 @@ export default function App() {
         </h1>
       </header>
 
-      <div className="flex flex-col h-[calc(100vh-64px)]">
-        <div className="flex-1 p-4 space-y-4 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
+      <div className="flex flex-col h-[calc(100vh-80px)]">
+        <div className="flex-1 p-6 space-y-6 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
+          <div className="w-full max-w-5xl mx-auto space-y-6">
           {messages.map((message, index) => (
             <div
               key={index}
               className={`flex ${
                 message.role === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
+              } animate-fade-in`}
               <div
               className={`max-w-[80%] p-4 rounded-xl shadow-xl transition-transform duration-200 hover:scale-[1.01] ${
                 message.role === "user"
