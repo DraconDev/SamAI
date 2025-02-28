@@ -20,6 +20,22 @@ export default function App() {
   const [isLoadingPage, setIsLoadingPage] = useState(true);
 
   useEffect(() => {
+    // Load input info from storage
+    const loadInputInfo = async () => {
+      try {
+        const result = await browser.storage.local.get("inputInfo");
+        if (result.inputInfo) {
+          setInputInfo(result.inputInfo);
+        }
+      } catch (error) {
+        console.error("Error loading input info:", error);
+      }
+    };
+
+    loadInputInfo();
+  }, []);
+
+  useEffect(() => {
     const loadPageContent = async () => {
       try {
         // Get current tab
