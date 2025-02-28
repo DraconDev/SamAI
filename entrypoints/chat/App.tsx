@@ -93,8 +93,8 @@ export default function App() {
                   {message.content}
                 </div>
                 <div 
-                  className={`text-xs mt-2 ${
-                    message.role === "user" ? "text-indigo-200" : "text-gray-400"
+                  className={`text-xs message-timestamp ${
+                    message.role === "user" ? "text-indigo-200" : "text-[#818cf8]"
                   }`}
                 >
                   {message.timestamp}
@@ -104,11 +104,14 @@ export default function App() {
           ))}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="max-w-[80%] p-3 rounded-lg bg-[#1E1F2E] border border-[#2E2F3E] text-[#818cf8]">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              <div className="max-w-[80%] p-3 rounded-lg bg-[#1E1F2E] border border-[#2E2F3E] shadow-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="flex space-x-1">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse" style={{ animationDelay: "0ms" }} />
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse" style={{ animationDelay: "150ms" }} />
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse" style={{ animationDelay: "300ms" }} />
+                  </div>
+                  <span className="text-sm text-[#818cf8]">AI is thinking...</span>
                 </div>
               </div>
             </div>
