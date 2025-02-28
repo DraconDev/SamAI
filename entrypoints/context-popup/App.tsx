@@ -106,61 +106,9 @@ export default function App() {
     e.preventDefault();
     if (!pagePrompt.trim() || isPageLoading) return;
 
-    console.log(
-      "[Page Assistant] Starting submission with prompt:",
-      pagePrompt
-    );
+    console.log("[Page Assistant] Starting submission with prompt:", pagePrompt);
     setIsPageLoading(true);
     try {
-      // Get current tab
-      console.log("[Page Assistant] Getting current tab...");
-      const [tab] = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
-      console.log("[Page Assistant] Current tab:", tab);
-      if (!tab.id) return;
-
-      // Get page content
-      console.log("[Page Assistant] Getting page content...");
-
-      // Check if the current tab is an extension page
-      const isExtensionPage =
-        tab.url?.startsWith("chrome-extension://") ||
-        tab.url?.startsWith("moz-extension://") ||
-        tab.url?.startsWith("extension://");
-
-      let pageContent = "";
-
-      if (isExtensionPage) {
-        console.log(
-          "[Page Assistant] Detected extension page, using fallback content"
-        );
-        // Use already loaded page content
-        pageContent = pageContent || "Unable to analyze this page.";
-      } else {
-        // Only try to execute script on non-extension pages
-        try {
-          const [result] = await browser.scripting.executeScript({
-            target: { tabId: tab.id },
-            func: () => document.body.innerText,
-          });
-
-          if (!result?.result) {
-            console.error("[Page Assistant] Failed to get page content");
-            throw new Error("Failed to get page content");
-          }
-          console.log(
-            "[Page Assistant] Got page content, length:",
-            result.result.length
-          );
-          pageContent = result.result;
-        } catch (error) {
-          console.error("[Page Assistant] Error executing script:", error);
-          pageContent =
-            "Unable to access page content. This might be due to browser restrictions.";
-        }
-      }
       console.log("[Page Assistant] Generating response...");
       const response = await generateFormResponse(
         `${pagePrompt}\n\nContent: ${pageContent}`
