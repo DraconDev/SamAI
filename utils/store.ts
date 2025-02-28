@@ -21,36 +21,39 @@ export const chatStore = storage.defineItem<ChatStore>("local:chat", {
 export async function addChatMessage(message: ChatMessage) {
   const store = await chatStore.getValue();
   const messages = [...store.messages, message];
-  
-  // Keep only the last 50 messages
+
+  // Keep only the last 200 messages
   if (messages.length > 200) {
     messages.splice(0, messages.length - 200);
   }
-  
+
   await chatStore.setValue({ messages });
   return messages;
 }
 
 export interface SearchSettingsStore {
-    searchActive: boolean;
+  searchActive: boolean;
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
-    searchActive: true,
+  searchActive: true,
 };
 
-export const searchSettingsStore = storage.defineItem<SearchSettingsStore>('sync:searchSettings', {
+export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
+  "sync:searchSettings",
+  {
     fallback: defaultSearchSettingsStore,
-});
+  }
+);
 
 export interface ApiKeyStore {
-    apiKey: string;
+  apiKey: string;
 }
 
 export const defaultApiKeyStore: ApiKeyStore = {
-    apiKey: "",
+  apiKey: "",
 };
 
-export const apiKeyStore = storage.defineItem<ApiKeyStore>('sync:apiKey', {
-    fallback: defaultApiKeyStore,
+export const apiKeyStore = storage.defineItem<ApiKeyStore>("sync:apiKey", {
+  fallback: defaultApiKeyStore,
 });

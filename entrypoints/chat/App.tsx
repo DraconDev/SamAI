@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { chatStore, type ChatMessage } from "@/utils/store";
+import { chatStore, type ChatMessage, addChatMessage } from "@/utils/store";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
