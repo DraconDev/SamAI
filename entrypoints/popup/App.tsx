@@ -2,6 +2,23 @@ import { tabs } from "webextension-polyfill";
 import { useEffect, useState } from "react";
 import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 
+function ToggleButton({ isEnabled, onToggle, ariaLabel }: { isEnabled: boolean; onToggle: () => void; ariaLabel: string }) {
+  return (
+    <button
+      aria-label={ariaLabel}
+      onClick={onToggle}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 
+                 ${isEnabled ? 'bg-[#4f46e5] ring-2 ring-[#4f46e5]/50' : 'bg-gray-600'} 
+                 focus:outline-none focus:ring-2 focus:ring-[#4f46e5] hover:opacity-90`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
+                   ${isEnabled ? 'translate-x-6' : 'translate-x-1'}`}
+      />
+    </button>
+  );
+}
+
 function App() {
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
@@ -48,17 +65,11 @@ function App() {
         <div className="flex flex-col gap-3 p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
           <div className="flex items-center justify-between">
             <label className="font-medium text-gray-300">Search Enhancement</label>
-            <button
-              onClick={toggleSearch}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 
-                         ${searchActive ? 'bg-[#4f46e5] ring-2 ring-[#4f46e5]/50' : 'bg-gray-600'} 
-                         focus:outline-none focus:ring-2 focus:ring-[#4f46e5] hover:opacity-90`}
-            >
-              <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
-                           ${searchActive ? 'translate-x-6' : 'translate-x-1'}`}
-              />
-            </button>
+            <ToggleButton
+              isEnabled={searchActive}
+              onToggle={toggleSearch}
+              ariaLabel={searchActive ? "Disable search enhancement" : "Enable search enhancement"}
+            />
           </div>
 
           {searchActive && (
@@ -73,17 +84,6 @@ function App() {
                   <button
                     key={value}
                     type="button"
-                    onClick={() => {
-                      const newStyle = value as PromptStyle;
-                      setPromptStyle(newStyle);
-                      searchSettingsStore.setValue({
-                        searchActive,
-                        promptStyle: newStyle,
-                        continuePreviousChat
-                      });
-                    }}
-                    className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
-                              hover:transform hover:scale-[1.02]
                               ${promptStyle === value 
                                 ? 'border-[#4f46e5] bg-[#4f46e5]/10' 
                                 : 'border-[#2E2F3E] hover:border-[#4f46e5] hover:bg-[#4f46e5]/5'}`}
