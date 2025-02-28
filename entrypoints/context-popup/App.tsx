@@ -182,8 +182,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100">
-      <div className="space-y-6">
+    <div className="min-w-[300px] min-h-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100 overflow-y-auto">
+      <div className="flex flex-col h-full space-y-6">
         <div className={`space-y-3 ${!inputInfo ? "opacity-50" : ""}`}>
           <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
             Input Assistant
