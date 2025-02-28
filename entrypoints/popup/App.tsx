@@ -50,9 +50,9 @@ function App() {
             <label className="font-medium text-gray-300">Search Enhancement</label>
             <button
               onClick={toggleSearch}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 
-                         ${searchActive ? 'bg-[#4f46e5]' : 'bg-gray-600'} 
-                         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1E1F2E] focus:ring-[#4f46e5]`}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 
+                         ${searchActive ? 'bg-[#4f46e5] ring-2 ring-[#4f46e5]/50' : 'bg-gray-600'} 
+                         focus:outline-none focus:ring-2 focus:ring-[#4f46e5] hover:opacity-90`}
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
@@ -121,9 +121,9 @@ function App() {
                 continuePreviousChat: newValue
               });
             }}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 
-                       ${continuePreviousChat ? 'bg-[#4f46e5]' : 'bg-gray-600'} 
-                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1E1F2E] focus:ring-[#4f46e5]`}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 
+                       ${continuePreviousChat ? 'bg-[#4f46e5] ring-2 ring-[#4f46e5]/50' : 'bg-gray-600'} 
+                       focus:outline-none focus:ring-2 focus:ring-[#4f46e5] hover:opacity-90`}
           >
             <span
               className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition-transform duration-200 
