@@ -108,7 +108,7 @@ export default function App() {
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
                   <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
               </div>
             </div>
@@ -116,21 +116,23 @@ export default function App() {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="p-4 bg-white shadow-lg">
-          <form onSubmit={handleSendMessage} className="flex space-x-2">
+        <div className="p-4 bg-[#1E1F2E] border-t border-[#2E2F3E]">
+          <form onSubmit={handleSendMessage} className="flex space-x-3">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="flex-1 p-3 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg text-gray-100 placeholder-gray-500
+                       focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] transition-all duration-200"
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className={`px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg
-                       font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 
-                       transition-all duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+              className={`px-4 py-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg
+                       font-medium hover:opacity-90 transform hover:scale-[0.98]
+                       transition-all duration-200 focus:outline-none focus:ring-2 
+                       focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
                        disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               Send
