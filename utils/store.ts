@@ -33,15 +33,23 @@ export async function addChatMessage(message: ChatMessage) {
 
 export type PromptStyle = 'short' | 'medium' | 'long';
 
-export interface SearchSettingsStore {
+export interface AppSettingsStore {
     searchActive: boolean;
     promptStyle: PromptStyle;
+    persistChat: boolean;
 }
 
-export const defaultSearchSettingsStore: SearchSettingsStore = {
+export const defaultAppSettingsStore: AppSettingsStore = {
     searchActive: true,
-    promptStyle: 'short'
+    promptStyle: 'short',
+    persistChat: true
 };
+
+export const appSettingsStore = storage.defineItem<AppSettingsStore>("sync:settings", {
+    fallback: defaultAppSettingsStore,
+});
+
+// Deprecated, use appSettingsStore instead
 
 export const PROMPT_TEMPLATES = {
     short: 'Provide a concise but informative search result that offers unique insights or perspectives on this topic.',
@@ -49,12 +57,23 @@ export const PROMPT_TEMPLATES = {
     long: 'Provide an in-depth analysis of this search query covering multiple aspects: key facts, historical context, current developments, different perspectives, and potential implications. Include relevant examples and expert insights where applicable. Aim to give a thorough understanding while maintaining clarity and structure.'
 };
 
-export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
-  "sync:searchSettings",
-  {
-    fallback: defaultSearchSettingsStore,
+// Keep for backward compatibility, but forward to appSettingsStore
+export const searchSettingsStore = {
+  getValue: async () => {
+    const settings = await appSettingsStore.getValue();
+    return {
+      searchActive: settings.searchActive,
+      promptStyle: settings.promptStyle
+    };
+  },
+  setValue: async (value: Pick<AppSettingsStore, 'searchActive' | 'promptStyle'>) => {
+    const currentSettings = await appSettingsStore.getValue();
+    await appSettingsStore.setValue({
+      ...currentSettings,
+      ...value
+    });
   }
-);
+};
 
 export interface ApiKeyStore {
   apiKey: string;
