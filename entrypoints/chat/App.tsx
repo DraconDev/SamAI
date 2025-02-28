@@ -139,12 +139,12 @@ export default function App() {
                     ? message.content.replace("Question about page:", "").trim()
                     : message.content}
                 </div>
-                <div className="pt-2 mt-2 border-t border-white/10">
+                <div className="pt-3 mt-3 border-t border-white/10">
                   <div
-                    className={`text-xs ${
+                    className={`text-xs tracking-wide ${
                       message.role === "user"
-                        ? "text-indigo-200"
-                        : "text-[#818cf8]"
+                        ? "text-indigo-200/90"
+                        : "text-[#818cf8]/90"
                     }`}
                   >
                     {message.timestamp}
@@ -155,8 +155,8 @@ export default function App() {
           ))}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="max-w-[80%] p-4 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center space-x-3">
+              <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
+                <div className="flex items-center space-x-4">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
                     <div className="relative flex space-x-1">
