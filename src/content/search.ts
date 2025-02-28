@@ -31,21 +31,23 @@ export function showSidePanel(response: string | null) {
     // Add styles
     const style = document.createElement("style");
     style.textContent = `
-      @keyframes pulse {
-        0% { transform: scale(0.95); opacity: 0.5; }
-        50% { transform: scale(1); opacity: 0.8; }
-        100% { transform: scale(0.95); opacity: 0.5; }
-      }
-
-      @keyframes ripple {
-        0% { transform: scale(1); opacity: 1; }
-        100% { transform: scale(1.5); opacity: 0; }
+      @keyframes dash {
+        0% {
+          stroke-dashoffset: 120;
+        }
+        50% {
+          stroke-dashoffset: 30;
+          transform: rotate(240deg);
+        }
+        100% {
+          stroke-dashoffset: 120;
+          transform: rotate(720deg);
+        }
       }
 
       @keyframes fadeInOut {
-        0% { opacity: 0.4; }
+        0%, 100% { opacity: 0.4; }
         50% { opacity: 1; }
-        100% { opacity: 0.4; }
       }
 
       .loading-container {
@@ -53,44 +55,19 @@ export function showSidePanel(response: string | null) {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 200px;
       }
 
       .loading-indicator {
         position: relative;
-        width: 40px;
-        height: 40px;
-        margin-bottom: 20px;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 16px;
       }
 
-      .loading-circle {
-        position: absolute;
+      .loading-indicator svg {
         width: 100%;
         height: 100%;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #4f46e5, #818cf8);
-        animation: pulse 2s ease-in-out infinite;
-      }
-
-      .loading-ripple {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: 2px solid #4f46e5;
-        animation: ripple 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-      }
-
-      .loading-ripple:nth-child(2) {
-        animation-delay: -0.5s;
-        opacity: 0.6;
-      }
-
-      .loading-ripple:nth-child(3) {
-        animation-delay: -1s;
-        opacity: 0.3;
+        animation: dash 3s linear infinite;
       }
 
       .loading-text {
@@ -98,8 +75,7 @@ export function showSidePanel(response: string | null) {
         font-weight: 500;
         font-size: 0.9rem;
         letter-spacing: 0.5px;
-        animation: fadeInOut 2s infinite;
-        margin-top: 8px;
+        animation: fadeInOut 2s ease-in-out infinite;
       }
 
       .markdown-content {
@@ -177,10 +153,22 @@ export function showSidePanel(response: string | null) {
           : `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
               <div class="loading-container" style="margin-top: -40px">
                 <div class="loading-indicator">
-                  <div class="loading-circle"></div>
-                  <div class="loading-ripple"></div>
-                  <div class="loading-ripple"></div>
-                  <div class="loading-ripple"></div>
+                  <svg viewBox="0 0 50 50">
+                    <path
+                      d="M25,5 A20,20 0 1,1 24.9,5"
+                      fill="none"
+                      stroke="url(#gradient)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                      stroke-dasharray="120"
+                    />
+                    <defs>
+                      <linearGradient id="gradient">
+                        <stop offset="0%" stop-color="#4f46e5" />
+                        <stop offset="100%" stop-color="#818cf8" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
                 <div class="loading-text">Generating insights...</div>
               </div>
