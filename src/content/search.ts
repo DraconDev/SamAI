@@ -37,35 +37,48 @@ export function showSidePanel(response: string | null) {
         background: #4f46e5;
         border-radius: 50%;
         animation: pulse 1.4s infinite;
-
-  // Update content
-  panel.innerHTML = `
-    <button id="samai-close" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
-    <h3 style="margin: 0 0 15px 0; color: #1a73e8; padding-right: 30px;">Sam AI Results</h3>
-    <div style="font-size: 14px; line-height: 1.6; color: #fff;">
-      ${
-        response
-          ? response
-              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-              .replace(/\n/g, "<br>")
-          : `<div style="color: #666; text-align: center;">
-              <div style="margin-bottom: 10px;">Getting AI insights</div>
-              <div class="loading-dots" style="font-size: 24px;">
-                <span>•</span><span>•</span><span>•</span>
-              </div>
-             </div>`
+        animation-fill-mode: both;
       }
-    </div>
-  `;
+      .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+      .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
 
-  // Add click handler for close button with animation
-  const closeButton = document.getElementById("samai-close");
-  if (closeButton) {
-    closeButton.addEventListener("click", () => {
-      panel.style.transform = "translateX(100%)";
-      setTimeout(() => {
-        panel.remove();
-      }, 300); // Match the transition duration
-    });
-  }
-}
+      .markdown-content {
+        color: #e2e8f0;
+        line-height: 1.7;
+      }
+
+      .markdown-content p {
+        margin: 1em 0;
+      }
+
+      .markdown-content strong {
+        color: #818cf8;
+        font-weight: 600;
+      }
+
+      .markdown-content ul, .markdown-content ol {
+        margin: 1em 0;
+        padding-left: 1.5em;
+      }
+
+      .markdown-content li {
+        margin: 0.5em 0;
+      }
+
+      .markdown-content code {
+        background: rgba(255,255,255,0.1);
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9em;
+      }
+
+      .close-button {
+        opacity: 0.6;
+        transition: all 0.2s ease;
+      }
+
+      .close-button:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
