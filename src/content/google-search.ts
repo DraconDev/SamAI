@@ -42,11 +42,11 @@ export async function initializeGoogleSearch() {
   console.log("[SamAI Search] Initiating search for query:", query);
   getResponse()
     .then((response) => {
-      console.log("[SamAI] Got response:", response);
+      console.log("[SamAI Search] Received response:", response);
       showSidePanel(response);
     })
     .catch((error) => {
-      console.error("[SamAI] Request error:", error);
+      console.error("[SamAI Search] Failed to get response:", error);
       showSidePanel(null);
     });
 
@@ -58,11 +58,11 @@ export async function initializeGoogleSearch() {
       console.log("[SamAI Search] URL changed, sending request for new query:", newQuery);
       getResponse()
         .then((response) => {
-          console.log("[SamAI] Got response:", response);
+          console.log("[SamAI Search] Received response for new query:", response);
           showSidePanel(response);
         })
         .catch((error) => {
-          console.error("[SamAI] Request error:", error);
+          console.error("[SamAI Search] Failed to get response for new query:", error);
           showSidePanel(null);
         });
     }

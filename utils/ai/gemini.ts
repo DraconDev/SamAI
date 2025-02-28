@@ -7,7 +7,7 @@ export let model: any;
 export function initializeModel(apiKey: string) {
   genAI = new GoogleGenerativeAI(apiKey);
   model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.0-flashbu",
   });
 }
 
