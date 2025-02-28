@@ -17,19 +17,17 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
       components={{
-        code({ node, inline, className, children, ...props }) {
+        code({ className, children, ...props }: any) {
           const match = /language-(\w+)/.exec(className || "");
-          return !inline && match ? (
+          const inline = !match;
+          return !inline ? (
             <SyntaxHighlighter
-              style={{
-                ...vscDarkPlus,
-                'pre[class*="language-"]': {
-                  ...vscDarkPlus['pre[class*="language-"]'],
-                  background: '#1a1b2e',
-                  padding: '1rem',
-                  borderRadius: '0.5rem',
-                  border: '1px solid rgba(46, 47, 62, 0.5)',
-                },
+              style={vscDarkPlus}
+              customStyle={{
+                background: '#1a1b2e',
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                border: '1px solid rgba(46, 47, 62, 0.5)',
               }}
               language={match[1]}
               PreTag="div"
