@@ -65,6 +65,49 @@ export function showSidePanel(response: string | null) {
 
       .loading-circle {
         position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4f46e5, #818cf8);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .loading-ripple {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid #4f46e5;
+        animation: ripple 2s linear infinite;
+      }
+
+      .loading-text {
+        color: #818cf8;
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        animation: fadeInOut 2s infinite;
+        margin-top: 8px;
+      }
+
+      .markdown-content {
+        color: #e2e8f0;
+        line-height: 1.7;
+      }
+
+      .markdown-content p {
+        margin: 1em 0;
+      }
+
+      .markdown-content strong {
+        color: #818cf8;
+        font-weight: 600;
+      }
+
+      .markdown-content ul, .markdown-content ol {
+        margin: 1em 0;
         padding-left: 1.5em;
       }
 
@@ -122,9 +165,12 @@ export function showSidePanel(response: string | null) {
               .replace(/\n\n/g, "</p><p>")
               .replace(/\n/g, "<br>")
           : `<div style="text-align: center; padding: 40px 20px;">
-              <div style="margin-bottom: 16px; color: #818cf8; font-weight: 500;">Generating AI insights...</div>
-              <div class="loading-dots">
-                <span></span><span></span><span></span>
+              <div class="loading-container">
+                <div class="loading-indicator">
+                  <div class="loading-circle"></div>
+                  <div class="loading-ripple"></div>
+                </div>
+                <div class="loading-text">Generating insights...</div>
               </div>
              </div>`
       }
