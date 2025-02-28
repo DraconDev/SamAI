@@ -33,31 +33,33 @@ function App() {
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <label
-              htmlFor="apiKey"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Enter your API Key
-            </label>
-            <a
-              href="https://aistudio.google.com/apikey"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group absolute text-sm font-medium text-[#818cf8] top-2 right-2 flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
-            >
-              Get API Key
-              <svg
-                className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="apiKey"
+                className="block text-sm font-medium text-gray-300"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
+                Enter your API Key
+              </label>
+              <a
+                href="https://aistudio.google.com/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group text-sm font-medium text-[#818cf8] flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
+              >
+                Get API Key
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
             <div className="relative">
               <input
                 type={showKey ? "text" : "password"}
