@@ -115,6 +115,8 @@ export default function App() {
       });
 
       setInputPrompt("");
+      // Explicitly clear the input info from storage after submission
+      await browser.storage.local.remove("inputInfo");
       window.close();
     } catch (error) {
       console.error("Error processing input:", error);
