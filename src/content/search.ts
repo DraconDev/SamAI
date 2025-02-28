@@ -82,3 +82,22 @@ export function showSidePanel(response: string | null) {
         opacity: 1;
         transform: scale(1.1);
       }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Update content
+  panel.innerHTML = `
+    <button id="samai-close" class="close-button" style="position: absolute; top: 20px; right: 20px; background: none; border: none; width: 32px; height: 32px; cursor: pointer; color: #e2e8f0; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div style="margin-bottom: 24px;">
+      <h3 style="margin: 0; font-size: 20px; font-weight: 600; background: linear-gradient(90deg, #818cf8, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-right: 30px;">Sam AI Results</h3>
+      <div style="height: 2px; width: 40px; background: #4f46e5; margin-top: 8px;"></div>
+    </div>
+    <div class="markdown-content" style="font-size: 15px;">
+      ${
+        response
+          ? response
