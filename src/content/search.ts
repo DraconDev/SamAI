@@ -10,33 +10,33 @@ export function showSidePanel(response: string | null) {
       right: 0;
       width: 450px;
       height: 100vh;
-      background: #0D0E16;
-      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-      padding: 20px;
+      background: linear-gradient(135deg, #1a1b2e, #0D0E16);
+      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+      padding: 24px;
       overflow-y: auto;
       z-index: 1000;
-      font-family: Arial, sans-serif;
-      transition: transform 0.3s ease-out;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 1px solid rgba(255,255,255,0.1);
     `;
     document.body.appendChild(panel);
 
-    // Add loading animation styles
+    // Add styles
     const style = document.createElement("style");
     style.textContent = `
       @keyframes pulse {
-        0% { opacity: 0.4; }
+        0%, 100% { opacity: 0.4; }
         50% { opacity: 1; }
-        100% { opacity: 0.4; }
       }
+      
       .loading-dots span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin: 0 4px;
+        background: #4f46e5;
+        border-radius: 50%;
         animation: pulse 1.4s infinite;
-        animation-fill-mode: both;
-      }
-      .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-      .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-    `;
-    document.head.appendChild(style);
-  }
 
   // Update content
   panel.innerHTML = `
