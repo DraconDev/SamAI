@@ -14,8 +14,54 @@ export default function App() {
   const [inputPrompt, setInputPrompt] = useState("");
   const [pagePrompt, setPagePrompt] = useState("");
   const [pageContent, setPageContent] = useState("");
+  const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(true);
+
+  useEffect(() => {
+    const loadPageContent = async () => {
+      try {
+        // Get current tab
+        const [tab] = await browser.tabs.query({
+          active: true,
+          currentWindow: true,
+        });
+        
+        if (!tab?.id) return;
+
+        // Check if extension page
+        const isExtensionPage =
+          tab.url?.startsWith("chrome-extension://") ||
+          tab.url?.startsWith("moz-extension://") ||
+          tab.url?.startsWith("extension://");
+
+        if (isExtensionPage) {
+          setPageContent("This is a browser extension page. Limited content is available for analysis.");
+          return;
+        }
+
+        // Get page content
+        const [result] = await browser.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: () => document.body.innerText,
+        });
+
+        if (result?.result) {
+          setPageContent(result.result);
+        } else {
+          setPageContent("Unable to access page content.");
+        }
+      } catch (error) {
+        console.error("Error loading page content:", error);
+        setPageContent("Unable to access page content due to browser restrictions.");
+      } finally {
+        setIsLoadingPage(false);
+      }
+    };
+
+    loadPageContent();
+  }, []);
 
   useEffect(() => {
     const loadInputInfo = async () => {
@@ -107,8 +153,8 @@ export default function App() {
         console.log(
           "[Page Assistant] Detected extension page, using fallback content"
         );
-        pageContent =
-          "This is a browser extension page. Limited content is available for analysis.";
+        // Use already loaded page content
+        pageContent = pageContent || "Unable to analyze this page.";
       } else {
         // Only try to execute script on non-extension pages
         try {
@@ -247,7 +293,32 @@ export default function App() {
           )}
         </div>
 
-        <div className="flex-1">
+          <div className="relative flex-1">
+            {isLoadingPage && (
+              <div className="absolute inset-0 bg-[#1E1F2E]/80 flex items-center justify-center z-10 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-4 h-4">
+                    <svg viewBox="0 0 50 50">
+                      <path
+                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        className="animate-[dash_1.5s_ease-in-out_infinite]"
+                        style={{
+                          strokeDasharray: "90,150",
+                          strokeDashoffset: "-35",
+                          animation:
+                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
+                        }}
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-sm text-[#818cf8]">Loading page content...</span>
+                </div>
+              </div>
+            )}
           <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">
             Page Assistant
           </h2>
