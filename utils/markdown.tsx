@@ -21,17 +21,26 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
             <SyntaxHighlighter
-              style={vscDarkPlus}
+              style={{
+                ...vscDarkPlus,
+                'pre[class*="language-"]': {
+                  ...vscDarkPlus['pre[class*="language-"]'],
+                  background: '#1a1b2e',
+                  padding: '1rem',
+                  borderRadius: '0.5rem',
+                  border: '1px solid rgba(46, 47, 62, 0.5)',
+                },
+              }}
               language={match[1]}
               PreTag="div"
-              className="my-3 rounded-md"
+              className="my-4 rounded-xl"
               {...props}
             >
               {String(children).replace(/\n$/, "")}
             </SyntaxHighlighter>
           ) : (
             <code
-              className={`${className} px-1 py-0.5 bg-[#2E2F3E] rounded text-sm`}
+              className={`${className} px-1.5 py-0.5 bg-[#1a1b2e] border border-[#2E2F3E]/50 rounded text-sm`}
               {...props}
             >
               {children}
