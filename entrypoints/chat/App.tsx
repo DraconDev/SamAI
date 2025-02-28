@@ -23,8 +23,10 @@ export default function App() {
       if (settings.continuePreviousChat) {
         setMessages(chatData.messages);
       } else {
-        setMessages([]); // Start with empty chat
-        await chatStore.setValue({ messages: [] }); // Clear stored messages
+        // Keep only the last 2 messages
+        const lastTwoMessages = chatData.messages.slice(-2);
+        setMessages(lastTwoMessages);
+        await chatStore.setValue({ messages: lastTwoMessages }); // Update stored messages
       }
     };
 
