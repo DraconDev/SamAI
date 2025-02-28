@@ -16,13 +16,30 @@ export default defineBackground(() => {
 
     if (message.type === "generateGeminiResponse") {
       // Start async operation
+      console.log("[SamAI Background] Attempting to generate Gemini response");
+      
+      // Check if sender is a valid tab
+      if (!sender.tab) {
+        console.error("[SamAI Background] No sender tab found");
+        sendResponse(null);
+        return true;
+      }
+      
       generateFormResponse(message.prompt)
         .then((text) => {
-          console.log("[SamAI Background] Generated response:", text);
+          if (text === null) {
+            console.error("[SamAI Background] Response generation failed - null response");
+          } else {
+            console.log("[SamAI Background] Successfully generated response");
+          }
+          console.log("[SamAI Background] Response text:", text);
           sendResponse(text);
         })
         .catch((error) => {
-          console.error("[SamAI Background] Error:", error);
+          console.error("[SamAI Background] Error generating response:", {
+            message: error.message,
+            stack: error.stack
+          });
           sendResponse(null);
         });
       return true; // Will respond asynchronously
