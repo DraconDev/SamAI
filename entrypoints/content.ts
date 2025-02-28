@@ -29,26 +29,27 @@ export default defineContentScript({
       console.log("[SamAI] Not initializing - conditions not met");
     }
 
-    // Handle input element tracking
-    const handleInputClick = (event: MouseEvent) => {
+    // Track input element on right clicks
+    document.addEventListener("contextmenu", (event) => {
       const target = event.target as HTMLElement;
-      
-      // If clicked on an input/textarea, track it
-      if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement
+      ) {
         lastInputElement = target;
-        // For left clicks (not right-clicks), open assistant popup
-        if (event.button === 0) {
-          browser.runtime.sendMessage({ type: "openAssistant" });
-        }
-      } else {
-        // If clicked anywhere else, clear the tracked input
+      }
+    });
+
+    // Clear lastInputElement when clicking anywhere except inputs
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        !(target instanceof HTMLInputElement) &&
+        !(target instanceof HTMLTextAreaElement)
+      ) {
         lastInputElement = null;
       }
-    };
-
-    // Listen for all clicks and right-clicks
-    document.addEventListener("click", handleInputClick);
-    document.addEventListener("contextmenu", handleInputClick);
+    });
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
