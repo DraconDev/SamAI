@@ -146,21 +146,9 @@ export default function App() {
         response.length
       );
 
-      // Save chat messages without page content
+      // Save chat messages
       console.log("[Page Assistant] Saving messages to store...");
-      const chatMessages = [
-        {
-          role: "user" as const,
-          content: pagePrompt, // Store only the user's question
-          timestamp: new Date().toLocaleTimeString(),
-        },
-        {
-          role: "assistant" as const,
-          content: response,
-          timestamp: new Date().toLocaleTimeString(),
-        },
-      ];
-      await chatStore.setValue({ 
+      await chatStore.setValue({
         messages: [
           {
             role: "user" as const,
