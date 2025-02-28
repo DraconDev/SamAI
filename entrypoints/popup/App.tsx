@@ -44,9 +44,6 @@ function App() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-sm font-medium tracking-wide text-gray-400 uppercase">
-          General Settings
-        </h2>
         <div className="flex flex-col gap-3 p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
           <div className="flex items-center justify-between">
             <label className="font-medium text-gray-300">
