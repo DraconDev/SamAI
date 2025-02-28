@@ -40,6 +40,29 @@ export default defineContentScript({
       }
     });
 
+    // Track input elements on focus and click
+    document.addEventListener("focus", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement
+      ) {
+        lastInputElement = target;
+        console.log('[SamAI] Input element focused:', target);
+      }
+    }, true);
+
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement
+      ) {
+        lastInputElement = target;
+        console.log('[SamAI] Input element clicked:', target);
+      }
+    });
+
     // Handle messages from the background script
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("Content script received message:", message);
