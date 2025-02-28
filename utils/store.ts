@@ -23,8 +23,8 @@ export async function addChatMessage(message: ChatMessage) {
   const messages = [...store.messages, message];
   
   // Keep only the last 50 messages
-  if (messages.length > 50) {
-    messages.splice(0, messages.length - 50);
+  if (messages.length > 200) {
+    messages.splice(0, messages.length - 200);
   }
   
   await chatStore.setValue({ messages });
