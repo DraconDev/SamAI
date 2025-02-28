@@ -55,7 +55,7 @@ function App() {
           {searchActive && (
             <div className="pt-3 border-t border-[#2E2F3E]">
               <label className="block mb-3 text-sm font-medium text-gray-300">Response Style</label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-2.5">
                 {[
                   { value: 'short', label: 'Short', icon: '⚡', desc: 'Quick & concise' },
                   { value: 'medium', label: 'Medium', icon: '⚖️', desc: 'Balanced info' },
@@ -72,17 +72,19 @@ function App() {
                         promptStyle: newStyle
                       });
                     }}
-                    className={`group flex flex-col items-center p-2 rounded-lg border transition-all duration-200 
+                    className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
+                              hover:transform hover:scale-[1.02]
                               ${promptStyle === value 
                                 ? 'border-[#4f46e5] bg-[#4f46e5]/10' 
                                 : 'border-[#2E2F3E] hover:border-[#4f46e5] hover:bg-[#4f46e5]/5'}`}
                   >
-                    <span className="mb-1 text-lg">{icon}</span>
-                    <span className={`text-xs font-medium mb-0.5 
-                                   ${promptStyle === value ? 'text-[#818cf8]' : 'text-gray-400 group-hover:text-[#818cf8]'}`}>
+                    <span className="mb-1 text-lg transition-transform transform group-hover:scale-110">{icon}</span>
+                    <span className={`text-xs font-medium mb-0.5
+                                   ${promptStyle === value ? 'text-[#818cf8]' : 'text-gray-400 group-hover:text-[#818cf8]'}
+                                   transition-colors`}>
                       {label}
                     </span>
-                    <span className="text-[10px] text-gray-500">
+                    <span className="text-[10px] text-gray-500 transition-colors group-hover:text-gray-400">
                       {desc}
                     </span>
                   </button>
