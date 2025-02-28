@@ -41,7 +41,6 @@ function App() {
           Sam AI
         </h1>
         <div className="h-0.5 w-16 mx-auto mt-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8]"></div>
-        <p className="mt-2 text-xs font-medium text-gray-400">Settings</p>
       </div>
 
       <div className="space-y-4">
