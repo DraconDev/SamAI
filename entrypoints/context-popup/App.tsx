@@ -1,6 +1,6 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
-import { chatStore } from "@/utils/store";
+import { addChatMessage } from "@/utils/store";
 import { extractPageContent } from "@/utils/page-content";
 
 interface InputInfo {
