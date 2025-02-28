@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { chatStore, type ChatMessage, addChatMessage, searchSettingsStore } from "@/utils/store";
-import { ToggleButton } from "@/src/components/ToggleButton";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -82,31 +81,9 @@ export default function App() {
   return (
     <div className="h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
       <header className="p-4 bg-[#1E1F2E] border-b border-[#2E2F3E]">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-            Sam AI Chat
-          </h1>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500">Continue Chat</span>
-            <ToggleButton
-              isEnabled={continuePreviousChat}
-              onToggle={() => {
-                const newValue = !continuePreviousChat;
-                setContinuePreviousChat(newValue);
-                searchSettingsStore.setValue({
-                  searchActive: true,
-                  promptStyle: "short",
-                  continuePreviousChat: newValue
-                });
-                if (!newValue) {
-                  setMessages([]); // Clear messages immediately when disabled
-                  chatStore.setValue({ messages: [] });
-                }
-              }}
-              ariaLabel={continuePreviousChat ? "Disable chat continuation" : "Enable chat continuation"}
-            />
-          </div>
-        </div>
+        <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
+          Sam AI Chat
+        </h1>
       </header>
 
       <div className="flex flex-col h-[calc(100vh-64px)]">
@@ -159,6 +136,29 @@ export default function App() {
                   <div className="flex space-x-1">
                     <div
                       className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse"
+                      style={{ animationDelay: "0ms" }}
+                    />
+                    <div
+                      className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse"
+                      style={{ animationDelay: "150ms" }}
+                    />
+                    <div
+                      className="w-1.5 h-1.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-pulse"
+                      style={{ animationDelay: "300ms" }}
+                    />
+                  </div>
+                  <span className="text-sm text-[#818cf8]">
+                    AI is thinking...
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="p-4 bg-[#1E1F2E] border-t border-[#2E2F3E]">
+          <form onSubmit={handleSendMessage} className="flex space-x-3">
             <input
               type="text"
               value={input}
