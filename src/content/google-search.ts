@@ -23,9 +23,9 @@ export async function initializeGoogleSearch() {
     console.log("[SamAI Search] Sending initial request to Gemini");
     const response = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
-      prompt: `Search query: ${query}\n\nProvide a detailed analysis that covers:\n- Core concepts and key information\n- Notable details and important context\n- Expert insights and unique perspectives\n- Practical implications or applications\n\nEnsure the response is thorough while remaining clear and well-structured.`,
+      prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
     });
-    
+
     if (!response) {
       console.log("[SamAI Search] No response, retrying after 1s delay");
       // Wait and retry once
@@ -55,14 +55,23 @@ export async function initializeGoogleSearch() {
     const newQuery = new URLSearchParams(window.location.search).get("q");
     if (newQuery && newQuery !== query) {
       showSidePanel(null);
-      console.log("[SamAI Search] URL changed, sending request for new query:", newQuery);
+      console.log(
+        "[SamAI Search] URL changed, sending request for new query:",
+        newQuery
+      );
       getResponse()
         .then((response) => {
-          console.log("[SamAI Search] Received response for new query:", response);
+          console.log(
+            "[SamAI Search] Received response for new query:",
+            response
+          );
           showSidePanel(response);
         })
         .catch((error) => {
-          console.error("[SamAI Search] Failed to get response for new query:", error);
+          console.error(
+            "[SamAI Search] Failed to get response for new query:",
+            error
+          );
           showSidePanel(null);
         });
     }
