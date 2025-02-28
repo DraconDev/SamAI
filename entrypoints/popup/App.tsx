@@ -35,11 +35,12 @@ function App() {
 
   return (
     <div className="p-6 w-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
-      <div className="mb-6 text-center">
-        <h1 className="text-xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-          Sam AI Assistant
+      <div className="mb-8 text-center">
+        <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
+          Sam AI
         </h1>
         <div className="h-0.5 w-16 mx-auto mt-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8]"></div>
+        <p className="mt-2 text-xs font-medium text-gray-400">Settings</p>
       </div>
       
       <div className="space-y-4">
