@@ -68,9 +68,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // const loadInputInfo = async () => {
-    //   try {
-    //     const result = await browser.storage.local.get("inputInfo");
+    const handleUnload = () => {
+      browser.storage.local.remove("inputInfo").catch(console.error);
+    };
     //     console.log("Loaded from storage:", result);
     //     if (result.inputInfo) {
     //       setInputInfo(result.inputInfo);
