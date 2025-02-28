@@ -1,6 +1,7 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { chatStore } from "@/utils/store";
+import { extractPageContent } from "@/utils/page-content";
 
 interface InputInfo {
   value: string;
@@ -49,7 +50,7 @@ export default function App() {
         // Get page content
         const [result] = await browser.scripting.executeScript({
           target: { tabId: tab.id },
-          func: () => document.body.innerText,
+          func: extractPageContent,
         });
 
         if (result?.result) {
