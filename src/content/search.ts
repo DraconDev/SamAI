@@ -18,7 +18,12 @@ export function showSidePanel(response: string | null) {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border-left: 1px solid rgba(255,255,255,0.1);
+      transform: translateX(100%);
     `;
+    // Trigger entrance animation after a short delay
+    setTimeout(() => {
+      panel.style.transform = 'translateX(0)';
+    }, 50);
     document.body.appendChild(panel);
 
     // Add styles
@@ -73,6 +78,15 @@ export function showSidePanel(response: string | null) {
         font-size: 0.9em;
       }
 
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .content-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+
       .close-button {
         opacity: 0.6;
         transition: all 0.2s ease;
@@ -97,7 +111,7 @@ export function showSidePanel(response: string | null) {
       <h3 style="margin: 0; font-size: 20px; font-weight: 600; background: linear-gradient(90deg, #818cf8, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-right: 30px;">Sam AI Results</h3>
       <div style="height: 2px; width: 40px; background: #4f46e5; margin-top: 8px;"></div>
     </div>
-    <div class="markdown-content" style="font-size: 15px;">
+    <div class="markdown-content content-fade-in" style="font-size: 15px;">
       ${
         response
           ? response
