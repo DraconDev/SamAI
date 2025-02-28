@@ -144,36 +144,28 @@ export function showSidePanel(response: string | null) {
       <div style="height: 2px; width: 40px; background: #4f46e5; margin-top: 8px;"></div>
     </div>
     <div class="markdown-content content-fade-in" style="font-size: 15px;">
-      ${
-        response
-          ? response
-              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-              .replace(/`(.*?)`/g, "<code>$1</code>")
-              .replace(/\n\n/g, "</p><p>")
-              .replace(/\n/g, "<br>")
-          : `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
-              <div class="loading-container" style="margin-top: -40px">
-                <div class="loading-indicator">
-                  <svg viewBox="0 0 50 50">
-                    <path
-                      d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                      fill="none"
-                      stroke="url(#gradient)"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                    />
-                    <defs>
-                      <linearGradient id="gradient">
-                        <stop offset="0%" stop-color="#4f46e5" />
-                        <stop offset="100%" stop-color="#818cf8" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <div class="loading-text">Generating insights...</div>
-              </div>
-             </div>`
-      }
+      ${response ? response : `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+        <div class="loading-container" style="margin-top: -40px">
+          <div class="loading-indicator">
+            <svg viewBox="0 0 50 50">
+              <path
+                d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                fill="none"
+                stroke="url(#gradient)"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <defs>
+                <linearGradient id="gradient">
+                  <stop offset="0%" stop-color="#4f46e5" />
+                  <stop offset="100%" stop-color="#818cf8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="loading-text">Generating insights...</div>
+        </div>
+      </div>`}
     </div>
   `;
 
