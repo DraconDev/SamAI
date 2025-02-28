@@ -31,12 +31,22 @@ export async function addChatMessage(message: ChatMessage) {
   return messages;
 }
 
+export type PromptStyle = 'short' | 'medium' | 'long';
+
 export interface SearchSettingsStore {
-  searchActive: boolean;
+    searchActive: boolean;
+    promptStyle: PromptStyle;
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
-  searchActive: true,
+    searchActive: true,
+    promptStyle: 'short'
+};
+
+export const PROMPT_TEMPLATES = {
+    short: 'Provide a concise but informative search result that offers unique insights or perspectives on this topic.',
+    medium: 'Analyze this search query and provide a comprehensive response that includes key facts, important context, and notable viewpoints. Focus on delivering balanced information that helps understand the topic better.',
+    long: 'Provide an in-depth analysis of this search query covering multiple aspects: key facts, historical context, current developments, different perspectives, and potential implications. Include relevant examples and expert insights where applicable. Aim to give a thorough understanding while maintaining clarity and structure.'
 };
 
 export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
