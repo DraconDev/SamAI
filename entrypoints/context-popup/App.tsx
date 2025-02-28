@@ -46,19 +46,6 @@ export default function App() {
 
         if (!tab?.id) return;
 
-        // Check if extension page
-        const isExtensionPage =
-          tab.url?.startsWith("chrome-extension://") ||
-          tab.url?.startsWith("moz-extension://") ||
-          tab.url?.startsWith("extension://");
-
-        if (isExtensionPage) {
-          setPageContent(
-            "This is a browser extension page. Limited content is available for analysis."
-          );
-          return;
-        }
-
         // Get page content
         const [result] = await browser.scripting.executeScript({
           target: { tabId: tab.id },
