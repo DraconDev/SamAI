@@ -80,7 +80,17 @@ export function showSidePanel(response: string | null) {
         height: 100%;
         border-radius: 50%;
         border: 2px solid #4f46e5;
-        animation: ripple 2s linear infinite;
+        animation: ripple 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      .loading-ripple:nth-child(2) {
+        animation-delay: -0.5s;
+        opacity: 0.6;
+      }
+
+      .loading-ripple:nth-child(3) {
+        animation-delay: -1s;
+        opacity: 0.3;
       }
 
       .loading-text {
@@ -168,6 +178,8 @@ export function showSidePanel(response: string | null) {
               <div class="loading-container">
                 <div class="loading-indicator">
                   <div class="loading-circle"></div>
+                  <div class="loading-ripple"></div>
+                  <div class="loading-ripple"></div>
                   <div class="loading-ripple"></div>
                 </div>
                 <div class="loading-text">Generating insights...</div>
