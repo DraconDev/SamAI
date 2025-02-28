@@ -35,7 +35,7 @@ function App() {
   };
 
   return (
-    <div className="p-6 w-[300px] h-[800px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
+    <div className="p-6 w-[300px] h-[400px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
           Sam AI
