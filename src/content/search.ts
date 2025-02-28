@@ -144,11 +144,14 @@ export function showSidePanel(response: string | null) {
       <div style="height: 2px; width: 40px; background: #4f46e5; margin-top: 8px;"></div>
     </div>
     <div class="markdown-content content-fade-in" style="font-size: 15px;">
-      <div id="samai-content">
-        ${
-          response
-            ? ''
-            : `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+      ${
+        response
+          ? response
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+              .replace(/`(.*?)`/g, "<code>$1</code>")
+              .replace(/\n\n/g, "</p><p>")
+              .replace(/\n/g, "<br>")
+          : `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
               <div class="loading-container" style="margin-top: -40px">
                 <div class="loading-indicator">
                   <svg viewBox="0 0 50 50">
@@ -170,8 +173,6 @@ export function showSidePanel(response: string | null) {
                 <div class="loading-text">Generating insights...</div>
               </div>
              </div>`
-        }
-      </div>
       }
     </div>
   `;
