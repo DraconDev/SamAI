@@ -104,14 +104,14 @@ export default function App() {
               } animate-fade-in`}
             >
               <div
-              className={`max-w-[80%] p-4 rounded-xl shadow-xl transition-transform duration-200 hover:scale-[1.01] ${
+              className={`max-w-[80%] p-5 rounded-xl shadow-xl transition-all duration-200 hover:scale-[1.01] ${
                 message.role === "user"
-                  ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
-                  : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
+                  ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20 hover:shadow-indigo-500/30"
+                  : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20 hover:border-[#2E2F3E]"
               }`}
               >
                 <div
-                  className={`leading-relaxed whitespace-pre-wrap ${
+                  className={`leading-relaxed whitespace-pre-wrap text-[15px] ${
                     message.role === "user" &&
                     message.content.startsWith("Question about page:")
                       ? "flex items-center gap-2"
