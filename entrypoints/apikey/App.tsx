@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { apiKeyStore } from "@/utils/store";
 
 function App() {
-  const [showApiLink, setShowApiLink] = useState(true);
   const [apiKey, setApiKey] = useState("");
   const [showKey, setShowKey] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -11,7 +10,6 @@ function App() {
     // Load existing API key on mount
     apiKeyStore.getValue().then((store) => {
       setApiKey(store.apiKey);
-      setShowApiLink(!store.apiKey);
     });
   }, []);
 
