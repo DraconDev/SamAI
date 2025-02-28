@@ -106,7 +106,10 @@ export default function App() {
     e.preventDefault();
     if (!pagePrompt.trim() || isPageLoading || isLoadingPage) return;
 
-    console.log("[Page Assistant] Starting submission with prompt:", pagePrompt);
+    console.log(
+      "[Page Assistant] Starting submission with prompt:",
+      pagePrompt
+    );
     setIsPageLoading(true);
     try {
       console.log("[Page Assistant] Generating response...");
@@ -260,8 +263,14 @@ export default function App() {
               type="text"
               value={pagePrompt}
               onChange={(e) => setPagePrompt(e.target.value)}
-              placeholder={isLoadingPage ? "Loading page content..." : "Type 'summarize' or ask a question about the page..."}
-              className={`w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] ${isLoadingPage ? 'opacity-50' : ''}`}
+              placeholder={
+                isLoadingPage
+                  ? "Loading page content..."
+                  : "Type 'summarize' or ask a question about the page..."
+              }
+              className={`w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] ${
+                isLoadingPage ? "opacity-50" : ""
+              }`}
               autoFocus={!inputInfo}
               disabled={isLoadingPage}
             />
