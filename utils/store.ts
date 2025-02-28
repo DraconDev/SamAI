@@ -31,49 +31,32 @@ export async function addChatMessage(message: ChatMessage) {
   return messages;
 }
 
-export type PromptStyle = 'short' | 'medium' | 'long';
+export type PromptStyle = "short" | "medium" | "long";
 
-export interface AppSettingsStore {
-    searchActive: boolean;
-    promptStyle: PromptStyle;
-    persistChat: boolean;
+export interface SearchSettingsStore {
+  searchActive: boolean;
+  promptStyle: PromptStyle;
 }
 
-export const defaultAppSettingsStore: AppSettingsStore = {
-    searchActive: true,
-    promptStyle: 'short',
-    persistChat: true
+export const defaultSearchSettingsStore: SearchSettingsStore = {
+  searchActive: true,
+  promptStyle: "short",
 };
-
-export const appSettingsStore = storage.defineItem<AppSettingsStore>("sync:settings", {
-    fallback: defaultAppSettingsStore,
-});
-
-// Deprecated, use appSettingsStore instead
 
 export const PROMPT_TEMPLATES = {
-    short: 'Provide a concise but informative search result that offers unique insights or perspectives on this topic.',
-    medium: 'Analyze this search query and provide a comprehensive response that includes key facts, important context, and notable viewpoints. Focus on delivering balanced information that helps understand the topic better.',
-    long: 'Provide an in-depth analysis of this search query covering multiple aspects: key facts, historical context, current developments, different perspectives, and potential implications. Include relevant examples and expert insights where applicable. Aim to give a thorough understanding while maintaining clarity and structure.'
+  short:
+    "Provide a concise but informative search result that offers unique insights or perspectives on this topic.",
+  medium:
+    "Analyze this search query and provide a comprehensive response that includes key facts, important context, and notable viewpoints. Focus on delivering balanced information that helps understand the topic better.",
+  long: "Provide an in-depth analysis of this search query covering multiple aspects: key facts, historical context, current developments, different perspectives, and potential implications. Include relevant examples and expert insights where applicable. Aim to give a thorough understanding while maintaining clarity and structure.",
 };
 
-// Keep for backward compatibility, but forward to appSettingsStore
-export const searchSettingsStore = {
-  getValue: async () => {
-    const settings = await appSettingsStore.getValue();
-    return {
-      searchActive: settings.searchActive,
-      promptStyle: settings.promptStyle
-    };
-  },
-  setValue: async (value: Pick<AppSettingsStore, 'searchActive' | 'promptStyle'>) => {
-    const currentSettings = await appSettingsStore.getValue();
-    await appSettingsStore.setValue({
-      ...currentSettings,
-      ...value
-    });
+export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
+  "sync:searchSettings",
+  {
+    fallback: defaultSearchSettingsStore,
   }
-};
+);
 
 export interface ApiKeyStore {
   apiKey: string;
