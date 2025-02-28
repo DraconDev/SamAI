@@ -8,7 +8,7 @@ export function showSidePanel(response: string | null) {
       position: fixed;
       top: 0;
       right: 0;
-      width: 450px;
+      width: 420px;
       height: 100vh;
       background: linear-gradient(135deg, #1a1b2e, #0D0E16);
       box-shadow: -5px 0 15px rgba(0,0,0,0.2);
