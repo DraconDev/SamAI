@@ -9,7 +9,7 @@ import { MarkdownRenderer } from "@/utils/markdown";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Load messages and settings from store
