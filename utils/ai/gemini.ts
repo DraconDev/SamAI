@@ -5,10 +5,22 @@ export let genAI: GoogleGenerativeAI;
 export let model: any;
 
 export function initializeModel(apiKey: string) {
-  genAI = new GoogleGenerativeAI(apiKey);
-  model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flashbu",
-  });
+  try {
+    console.log("[SamAI Gemini] Initializing GoogleGenerativeAI");
+    genAI = new GoogleGenerativeAI(apiKey);
+    
+    console.log("[SamAI Gemini] Creating model instance");
+    model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash",
+    });
+    console.log("[SamAI Gemini] Model initialized successfully");
+  } catch (error) {
+    console.error("[SamAI Gemini] Error initializing model:", {
+      message: error.message,
+      stack: error.stack,
+    });
+    throw error;
+  }
 }
 
 export async function generateFormResponse(
@@ -17,17 +29,19 @@ export async function generateFormResponse(
   try {
     console.log("[SamAI Gemini] Generating response for prompt:", prompt);
     
-    const apiKey = await apiKeyStore.getValue().then((store) => {
-      return store.apiKey;
-    });
-    if (!apiKey) {
-      console.warn("[SamAI Gemini] No API key found");
+    const store = await apiKeyStore.getValue();
+    console.log("[SamAI Gemini] Retrieved store:", { hasApiKey: !!store.apiKey });
+    
+    if (!store.apiKey) {
+      console.warn("[SamAI Gemini] No API key found in store");
       return null;
     }
     
     if (!model) {
-      console.log("[SamAI Gemini] Initializing model with API key");
-      initializeModel(apiKey);
+      console.log("[SamAI Gemini] Model not initialized, initializing with API key");
+      initializeModel(store.apiKey);
+    } else {
+      console.log("[SamAI Gemini] Using existing model instance");
     }
 
     console.log("[SamAI Gemini] Sending request to Gemini API");
