@@ -77,7 +77,10 @@ export default function App() {
     e.preventDefault();
     if (!pagePrompt.trim() || isPageLoading) return;
 
-    console.log("[Page Assistant] Starting submission with prompt:", pagePrompt);
+    console.log(
+      "[Page Assistant] Starting submission with prompt:",
+      pagePrompt
+    );
     setIsPageLoading(true);
     try {
       // Get current tab
@@ -91,17 +94,21 @@ export default function App() {
 
       // Get page content
       console.log("[Page Assistant] Getting page content...");
-      
+
       // Check if the current tab is an extension page
-      const isExtensionPage = tab.url?.startsWith('chrome-extension://') || 
-                             tab.url?.startsWith('moz-extension://') || 
-                             tab.url?.startsWith('extension://');
-      
-      let pageContent = '';
-      
+      const isExtensionPage =
+        tab.url?.startsWith("chrome-extension://") ||
+        tab.url?.startsWith("moz-extension://") ||
+        tab.url?.startsWith("extension://");
+
+      let pageContent = "";
+
       if (isExtensionPage) {
-        console.log("[Page Assistant] Detected extension page, using fallback content");
-        pageContent = "This is a browser extension page. Limited content is available for analysis.";
+        console.log(
+          "[Page Assistant] Detected extension page, using fallback content"
+        );
+        pageContent =
+          "This is a browser extension page. Limited content is available for analysis.";
       } else {
         // Only try to execute script on non-extension pages
         try {
@@ -109,16 +116,20 @@ export default function App() {
             target: { tabId: tab.id },
             func: () => document.body.innerText,
           });
-          
+
           if (!result?.result) {
             console.error("[Page Assistant] Failed to get page content");
             throw new Error("Failed to get page content");
           }
-          console.log("[Page Assistant] Got page content, length:", result.result.length);
+          console.log(
+            "[Page Assistant] Got page content, length:",
+            result.result.length
+          );
           pageContent = result.result;
         } catch (error) {
           console.error("[Page Assistant] Error executing script:", error);
-          pageContent = "Unable to access page content. This might be due to browser restrictions.";
+          pageContent =
+            "Unable to access page content. This might be due to browser restrictions.";
         }
       }
       console.log("[Page Assistant] Generating response...");
@@ -130,7 +141,10 @@ export default function App() {
         console.error("[Page Assistant] No response received");
         throw new Error("Failed to generate response");
       }
-      console.log("[Page Assistant] Response received, length:", response.length);
+      console.log(
+        "[Page Assistant] Response received, length:",
+        response.length
+      );
 
       // Save messages to store and open chat
       console.log("[Page Assistant] Saving messages to store...");
@@ -153,7 +167,7 @@ export default function App() {
       // Open chat in new tab
       console.log("[Page Assistant] Opening chat page...");
       await browser.tabs.create({
-        url: "chat.html" 
+        url: "chat.html",
       });
       console.log("[Page Assistant] Chat page opened");
 
@@ -168,10 +182,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-w-[300px] min-h-[400px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-8 text-gray-100">
-      <div className="flex flex-col h-full space-y-8">
+    <div className="min-w-[300px] min-h-[200px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100">
+      <div className="space-y-6">
         <div className={`space-y-3 ${!inputInfo ? "opacity-50" : ""}`}>
-          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">Input Assistant</h2>
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
+            Input Assistant
+          </h2>
           <form onSubmit={handleInputSubmit} className="flex flex-col gap-3">
             <input
               type="text"
@@ -189,9 +205,13 @@ export default function App() {
                           hover:opacity-90 focus:outline-none focus:ring-2 
                           focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
                           transition-all duration-200 transform hover:scale-[0.98] 
-                          ${isInputLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+                          ${
+                            isInputLoading
+                              ? "opacity-75 cursor-not-allowed"
+                              : ""
+                          }`}
             >
-              {isInputLoading ? 
+              {isInputLoading ? (
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-4 h-4">
                     <svg viewBox="0 0 50 50">
@@ -205,15 +225,17 @@ export default function App() {
                         style={{
                           strokeDasharray: "90,150",
                           strokeDashoffset: "-35",
-                          animation: "dash 1.5s ease-in-out infinite, rotate 2s linear infinite"
+                          animation:
+                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
                         }}
                       />
                     </svg>
                   </div>
                   <span>Processing...</span>
                 </div>
-                : "Send"
-              }
+              ) : (
+                "Send"
+              )}
             </button>
           </form>
           {!inputInfo && (
@@ -223,8 +245,10 @@ export default function App() {
           )}
         </div>
 
-        <div className="flex-1">
-          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">Page Assistant</h2>
+        <div className={inputInfo ? "mt-8" : "mt-6"}>
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">
+            Page Assistant
+          </h2>
           <form onSubmit={handlePageSubmit} className="flex flex-col gap-3">
             <input
               type="text"
@@ -241,9 +265,11 @@ export default function App() {
                         hover:opacity-90 focus:outline-none focus:ring-2 
                         focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
                         transition-all duration-200 transform hover:scale-[0.98]
-                        ${isPageLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+                        ${
+                          isPageLoading ? "opacity-75 cursor-not-allowed" : ""
+                        }`}
             >
-              {isPageLoading ? 
+              {isPageLoading ? (
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-4 h-4">
                     <svg viewBox="0 0 50 50">
@@ -257,15 +283,17 @@ export default function App() {
                         style={{
                           strokeDasharray: "90,150",
                           strokeDashoffset: "-35",
-                          animation: "dash 1.5s ease-in-out infinite, rotate 2s linear infinite"
+                          animation:
+                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
                         }}
                       />
                     </svg>
                   </div>
                   <span>Processing...</span>
                 </div>
-                : "Send"
-              }
+              ) : (
+                "Send"
+              )}
             </button>
           </form>
         </div>
