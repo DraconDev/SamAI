@@ -68,23 +68,23 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const loadInputInfo = async () => {
-      try {
-        const result = await browser.storage.local.get("inputInfo");
-        console.log("Loaded from storage:", result);
-        if (result.inputInfo) {
-          setInputInfo(result.inputInfo);
-          // Pre-fill input with value if available
-          if (result.inputInfo.value) {
-            setInputPrompt(result.inputInfo.value);
-          }
-        }
-      } catch (error) {
-        console.error("Error loading input info:", error);
-      }
-    };
+    // const loadInputInfo = async () => {
+    //   try {
+    //     const result = await browser.storage.local.get("inputInfo");
+    //     console.log("Loaded from storage:", result);
+    //     if (result.inputInfo) {
+    //       setInputInfo(result.inputInfo);
+    //       // Pre-fill input with value if available
+    //       if (result.inputInfo.value) {
+    //         setInputPrompt(result.inputInfo.value);
+    //       }
+    //     }
+    //   } catch (error) {
+    //     console.error("Error loading input info:", error);
+    //   }
+    // };
 
-    loadInputInfo();
+    // loadInputInfo();
 
     const handleUnload = () => {
       browser.storage.local.remove("inputInfo").catch(console.error);
