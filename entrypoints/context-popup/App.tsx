@@ -14,61 +14,28 @@ interface InputInfo {
 export default function App() {
   const [inputPrompt, setInputPrompt] = useState("");
   const [pagePrompt, setPagePrompt] = useState("");
-  const [pageContent, setPageContent] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
+  const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(true);
 
   useEffect(() => {
-    // Load input info from storage
-    const loadInputInfo = async () => {
+    // Load stored data from local storage
+    const loadStoredData = async () => {
       try {
-        const result = await browser.storage.local.get("inputInfo");
+        const result = await browser.storage.local.get(["inputInfo", "pageContent"]);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo);
         }
-      } catch (error) {
-        console.error("Error loading input info:", error);
-      }
-    };
-
-    loadInputInfo();
-  }, []);
-
-  useEffect(() => {
-    const loadPageContent = async () => {
-      try {
-        // Get current tab
-        const [tab] = await browser.tabs.query({
-          active: true,
-          currentWindow: true,
-        });
-
-        if (!tab?.id) return;
-
-        // Get page content
-        const [result] = await browser.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: extractPageContent,
-        });
-
-        if (result?.result) {
-          setPageContent(result.result);
-        } else {
-          setPageContent("Unable to access page content.");
+        if (result.pageContent) {
+          setPageContent(result.pageContent);
         }
       } catch (error) {
-        console.error("Error loading page content:", error);
-        setPageContent(
-          "Unable to access page content due to browser restrictions."
-        );
-      } finally {
-        setIsLoadingPage(false);
+        console.error("Error loading stored data:", error);
       }
     };
 
-    loadPageContent();
+    loadStoredData();
   }, []);
 
   useEffect(() => {
@@ -272,11 +239,8 @@ export default function App() {
                   ? "Loading page content..."
                   : "Type 'summarize' or ask a question about the page..."
               }
-              className={`w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] ${
-                isLoadingPage ? "opacity-50" : ""
-              }`}
-              autoFocus={!inputInfo}
-              disabled={isLoadingPage}
+              className="w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
+          autoFocus={!inputInfo}
             />
             <button
               type="submit"
