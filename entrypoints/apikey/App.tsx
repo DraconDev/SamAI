@@ -43,7 +43,7 @@ function App() {
               href="https://aistudio.google.com/apikey"
               target="_blank"
               rel="noopener noreferrer"
-              className="group absolute text-sm font-medium text-[#818cf8] top-4 right-4 flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
+              className="group absolute text-sm font-medium text-[#818cf8] top-2 right-2 flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
             >
               Get API Key
               <svg
