@@ -109,3 +109,26 @@ function App() {
                     className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
                   />
                   <span className="ml-2 text-sm text-gray-300">Long & Detailed</span>
+                </label>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <button
+          onClick={openApiKeyPage}
+          className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                   hover:opacity-90 focus:outline-none focus:ring-2 
+                   focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                   transition-all duration-200 transform hover:scale-[0.98]
+                   font-medium"
+        >
+          Configure API Key
+        </button>
+
+      </div>
+    </div>
+  );
+}
+
+export default App;
