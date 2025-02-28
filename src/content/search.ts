@@ -31,18 +31,14 @@ export function showSidePanel(response: string | null) {
     // Add styles
     const style = document.createElement("style");
     style.textContent = `
+      @keyframes rotate {
+        100% { transform: rotate(360deg); }
+      }
+
       @keyframes dash {
-        0% {
-          stroke-dashoffset: 120;
-        }
-        50% {
-          stroke-dashoffset: 30;
-          transform: rotate(240deg);
-        }
-        100% {
-          stroke-dashoffset: 120;
-          transform: rotate(720deg);
-        }
+        0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+        50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+        100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
       }
 
       @keyframes fadeInOut {
@@ -67,7 +63,12 @@ export function showSidePanel(response: string | null) {
       .loading-indicator svg {
         width: 100%;
         height: 100%;
-        animation: dash 3s linear infinite;
+        transform-origin: center;
+        animation: rotate 2s linear infinite;
+      }
+
+      .loading-indicator svg path {
+        animation: dash 1.5s ease-in-out infinite;
       }
 
       .loading-text {
@@ -155,12 +156,11 @@ export function showSidePanel(response: string | null) {
                 <div class="loading-indicator">
                   <svg viewBox="0 0 50 50">
                     <path
-                      d="M25,5 A20,20 0 1,1 24.9,5"
+                      d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
                       fill="none"
                       stroke="url(#gradient)"
-                      stroke-width="4"
+                      stroke-width="3"
                       stroke-linecap="round"
-                      stroke-dasharray="120"
                     />
                     <defs>
                       <linearGradient id="gradient">
