@@ -54,12 +54,58 @@ function App() {
 
           {searchActive && (
             <div className="pt-2 border-t border-[#2E2F3E]">
-          Configure API Key
-        </button>
-
-      </div>
-    </div>
-  );
-}
-
-export default App;
+              <label className="block mb-2 text-sm font-medium text-gray-300">Response Style</label>
+              <div className="flex flex-col gap-2">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="promptStyle"
+                    value="short"
+                    checked={promptStyle === "short"}
+                    onChange={(e) => {
+                      const newStyle = e.target.value as PromptStyle;
+                      setPromptStyle(newStyle);
+                      searchSettingsStore.setValue({
+                        searchActive,
+                        promptStyle: newStyle
+                      });
+                    }}
+                    className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
+                  />
+                  <span className="ml-2 text-sm text-gray-300">Short & Concise</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="promptStyle"
+                    value="medium"
+                    checked={promptStyle === "medium"}
+                    onChange={(e) => {
+                      const newStyle = e.target.value as PromptStyle;
+                      setPromptStyle(newStyle);
+                      searchSettingsStore.setValue({
+                        searchActive,
+                        promptStyle: newStyle
+                      });
+                    }}
+                    className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
+                  />
+                  <span className="ml-2 text-sm text-gray-300">Medium & Balanced</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="promptStyle"
+                    value="long"
+                    checked={promptStyle === "long"}
+                    onChange={(e) => {
+                      const newStyle = e.target.value as PromptStyle;
+                      setPromptStyle(newStyle);
+                      searchSettingsStore.setValue({
+                        searchActive,
+                        promptStyle: newStyle
+                      });
+                    }}
+                    className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
+                  />
+                  <span className="ml-2 text-sm text-gray-300">Long & Detailed</span>
