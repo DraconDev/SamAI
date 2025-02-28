@@ -14,10 +14,11 @@ export function initializeModel(apiKey: string) {
       model: "gemini-2.0-flash",
     });
     console.log("[SamAI Gemini] Model initialized successfully");
-  } catch (error) {
+  } catch (error: any) {
     console.error("[SamAI Gemini] Error initializing model:", {
       message: error.message,
       stack: error.stack,
+      errorType: error.constructor.name,
     });
     throw error;
   }
