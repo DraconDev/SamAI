@@ -62,54 +62,31 @@ function App() {
                   { value: 'long', label: 'Long', icon: '📚', desc: 'In-depth analysis' }
                 ].map(({ value, label, icon, desc }) => (
                   <button
-                    onChange={(e) => {
-                      const newStyle = e.target.value as PromptStyle;
+                    key={value}
+                    type="button"
+                    onClick={() => {
+                      const newStyle = value as PromptStyle;
                       setPromptStyle(newStyle);
                       searchSettingsStore.setValue({
                         searchActive,
                         promptStyle: newStyle
                       });
                     }}
-                    className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
-                  />
-                  <span className="ml-2 text-sm text-gray-300">Short & Concise</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="promptStyle"
-                    value="medium"
-                    checked={promptStyle === "medium"}
-                    onChange={(e) => {
-                      const newStyle = e.target.value as PromptStyle;
-                      setPromptStyle(newStyle);
-                      searchSettingsStore.setValue({
-                        searchActive,
-                        promptStyle: newStyle
-                      });
-                    }}
-                    className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
-                  />
-                  <span className="ml-2 text-sm text-gray-300">Medium & Balanced</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="promptStyle"
-                    value="long"
-                    checked={promptStyle === "long"}
-                    onChange={(e) => {
-                      const newStyle = e.target.value as PromptStyle;
-                      setPromptStyle(newStyle);
-                      searchSettingsStore.setValue({
-                        searchActive,
-                        promptStyle: newStyle
-                      });
-                    }}
-                    className="w-4 h-4 text-[#4f46e5] bg-gray-700 border-[#2E2F3E] focus:ring-[#4f46e5] focus:ring-offset-[#1E1F2E]"
-                  />
-                  <span className="ml-2 text-sm text-gray-300">Long & Detailed</span>
-                </label>
+                    className={`group flex flex-col items-center p-2 rounded-lg border transition-all duration-200 
+                              ${promptStyle === value 
+                                ? 'border-[#4f46e5] bg-[#4f46e5]/10' 
+                                : 'border-[#2E2F3E] hover:border-[#4f46e5] hover:bg-[#4f46e5]/5'}`}
+                  >
+                    <span className="mb-1 text-lg">{icon}</span>
+                    <span className={`text-xs font-medium mb-0.5 
+                                   ${promptStyle === value ? 'text-[#818cf8]' : 'text-gray-400 group-hover:text-[#818cf8]'}`}>
+                      {label}
+                    </span>
+                    <span className="text-[10px] text-gray-500">
+                      {desc}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           )}
