@@ -26,6 +26,10 @@ function App() {
     tabs.create({ url: "apikey.html" });
   };
 
+  const openDonateLink = () => {
+    tabs.create({ url: "https://ko-fi.com/adamdracon" });
+  };
+
   return (
     <div className="p-6 w-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
       <div className="mb-6 text-center">
@@ -105,6 +109,18 @@ function App() {
           Configure API Key
         </button>
 
+        <button
+          onClick={openDonateLink}
+          className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5]/20 to-[#818cf8]/20 text-[#818cf8] rounded-lg 
+                   hover:from-[#4f46e5]/30 hover:to-[#818cf8]/30
+                   focus:outline-none focus:ring-2 
+                   focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                   transition-all duration-200 transform hover:scale-[0.98]
+                   font-medium flex items-center justify-center gap-2"
+        >
+          <span>Support Development</span>
+          <span className="text-lg">☕</span>
+        </button>
       </div>
     </div>
   );
