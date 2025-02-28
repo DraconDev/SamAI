@@ -137,13 +137,12 @@ export default function App() {
                       <MarkdownRenderer content={message.content} />
                     )}
                   </div>
-                  <div className="text-xs opacity-70 mt-3 text-right">
+                  <div className="mt-3 text-xs text-right opacity-70">
                     {message.timestamp}
                   </div>
                 </div>
               </div>
             ))}
-            {isLoading && (
             {isLoading && (
               <div className="flex justify-start">
                 <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
