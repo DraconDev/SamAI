@@ -13,7 +13,7 @@ interface InputInfo {
 export default function App() {
   const [inputPrompt, setInputPrompt] = useState("");
   const [pagePrompt, setPagePrompt] = useState("");
-  const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
+  const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
 
