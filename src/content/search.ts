@@ -32,39 +32,39 @@ export function showSidePanel(response: string | null) {
     const style = document.createElement("style");
     style.textContent = `
       @keyframes pulse {
-        0%, 100% { opacity: 0.4; }
+        0% { transform: scale(0.95); opacity: 0.5; }
+        50% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(0.95); opacity: 0.5; }
+      }
+
+      @keyframes ripple {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(1.5); opacity: 0; }
+      }
+
+      @keyframes fadeInOut {
+        0% { opacity: 0.4; }
         50% { opacity: 1; }
-      }
-      
-      .loading-dots span {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        margin: 0 4px;
-        background: #4f46e5;
-        border-radius: 50%;
-        animation: pulse 1.4s infinite;
-        animation-fill-mode: both;
-      }
-      .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-      .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-      .markdown-content {
-        color: #e2e8f0;
-        line-height: 1.7;
+        100% { opacity: 0.4; }
       }
 
-      .markdown-content p {
-        margin: 1em 0;
+      .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
       }
 
-      .markdown-content strong {
-        color: #818cf8;
-        font-weight: 600;
+      .loading-indicator {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        margin-bottom: 20px;
       }
 
-      .markdown-content ul, .markdown-content ol {
-        margin: 1em 0;
+      .loading-circle {
+        position: absolute;
         padding-left: 1.5em;
       }
 
