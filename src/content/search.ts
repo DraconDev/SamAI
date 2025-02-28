@@ -101,3 +101,28 @@ export function showSidePanel(response: string | null) {
       ${
         response
           ? response
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+              .replace(/`(.*?)`/g, "<code>$1</code>")
+              .replace(/\n\n/g, "</p><p>")
+              .replace(/\n/g, "<br>")
+          : `<div style="text-align: center; padding: 40px 20px;">
+              <div style="margin-bottom: 16px; color: #818cf8; font-weight: 500;">Generating AI insights...</div>
+              <div class="loading-dots">
+                <span></span><span></span><span></span>
+              </div>
+             </div>`
+      }
+    </div>
+  `;
+
+  // Add click handler for close button with animation
+  const closeButton = document.getElementById("samai-close");
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      panel.style.transform = "translateX(100%)";
+      setTimeout(() => {
+        panel.remove();
+      }, 300); // Match the transition duration
+    });
+  }
+}
