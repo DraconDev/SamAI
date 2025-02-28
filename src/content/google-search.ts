@@ -1,5 +1,5 @@
 import { showSidePanel } from "./search";
-import { searchSettingsStore } from "../../utils/store";
+import { searchSettingsStore, PROMPT_TEMPLATES } from "../../utils/store";
 
 export async function initializeGoogleSearch() {
   // Check if search is enabled
@@ -23,7 +23,7 @@ export async function initializeGoogleSearch() {
     console.log("[SamAI Search] Sending initial request to Gemini");
     const response = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
-      prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
+      prompt: `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`,
     });
 
     if (!response) {
@@ -33,7 +33,7 @@ export async function initializeGoogleSearch() {
       console.log("[SamAI Search] Sending retry request to Gemini");
       return browser.runtime.sendMessage({
         type: "generateGeminiResponse",
-        prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
+        prompt: `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`,
       });
     }
     return response;
