@@ -97,23 +97,19 @@ export default function App() {
         response.length
       );
 
-      // Save chat messages
-      console.log("[Page Assistant] Saving messages to store...");
-      await chatStore.setValue({
-        messages: [
-          {
-            role: "user" as const,
-            content: `Question about page: ${pagePrompt}`,
-            timestamp: new Date().toLocaleTimeString(),
-          },
-          {
-            role: "assistant" as const,
-            content: response,
-            timestamp: new Date().toLocaleTimeString(),
-          },
-        ],
+      // Add messages to chat
+      console.log("[Page Assistant] Adding messages to chat...");
+      await addChatMessage({
+        role: "user",
+        content: `Question about page: ${pagePrompt}`,
+        timestamp: new Date().toLocaleTimeString(),
       });
-      console.log("[Page Assistant] Messages saved to store");
+      await addChatMessage({
+        role: "assistant",
+        content: response,
+        timestamp: new Date().toLocaleTimeString(),
+      });
+      console.log("[Page Assistant] Messages added to chat");
 
       // Open chat in new tab
       console.log("[Page Assistant] Opening chat page...");
