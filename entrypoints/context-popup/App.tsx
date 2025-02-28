@@ -97,18 +97,29 @@ export default function App() {
         response.length
       );
 
-      // Add messages to chat
+      // Check chat continuation setting and add messages
       console.log("[Page Assistant] Adding messages to chat...");
-      await addChatMessage({
-        role: "user",
+      const settings = await searchSettingsStore.getValue();
+      
+      if (!settings.continuePreviousChat) {
+        console.log("[Page Assistant] Starting fresh chat...");
+        await chatStore.setValue({ messages: [] });
+      }
+
+      const userMessage = {
+        role: "user" as const,
         content: `Question about page: ${pagePrompt}`,
         timestamp: new Date().toLocaleTimeString(),
-      });
-      await addChatMessage({
-        role: "assistant",
+      };
+      
+      const aiMessage = {
+        role: "assistant" as const,
         content: response,
         timestamp: new Date().toLocaleTimeString(),
-      });
+      };
+
+      await addChatMessage(userMessage);
+      await addChatMessage(aiMessage);
       console.log("[Page Assistant] Messages added to chat");
 
       // Open chat in new tab
