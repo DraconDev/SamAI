@@ -8,7 +8,7 @@ export function showSidePanel(response: string | null) {
       position: fixed;
       top: 0;
       right: 0;
-      width: 420px;
+      width: 400px;
       height: 100vh;
       background: linear-gradient(135deg, #1a1b2e, #0D0E16);
       box-shadow: -5px 0 15px rgba(0,0,0,0.2);
@@ -21,10 +21,12 @@ export function showSidePanel(response: string | null) {
       transform: translateX(100%);
     `;
     // Trigger entrance animation after a short delay
-    setTimeout(() => {
-      panel.style.transform = 'translateX(0)';
-    }, 50);
     document.body.appendChild(panel);
+    requestAnimationFrame(() => {
+      if (panel) {
+        panel.style.transform = 'translateX(0)';
+      }
+    });
 
     // Add styles
     const style = document.createElement("style");
