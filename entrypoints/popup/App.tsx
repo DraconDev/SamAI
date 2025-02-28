@@ -42,8 +42,8 @@ function App() {
         <div className="h-0.5 w-16 mx-auto mt-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8]"></div>
       </div>
       
-      <div className="space-y-5">
-        <div className="flex flex-col gap-4 p-3 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
+      <div className="space-y-4">
+        <h2 className="text-sm font-medium tracking-wide text-gray-400 uppercase">General Settings</h2>
           <div className="flex items-center justify-between">
             <label className="font-medium text-gray-300">Search Enhancement</label>
             <button
