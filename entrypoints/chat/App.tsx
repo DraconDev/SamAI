@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { chatStore, type ChatMessage, addChatMessage } from "@/utils/store";
+import { chatStore, type ChatMessage, addChatMessage, searchSettingsStore } from "@/utils/store";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -7,11 +7,23 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Load messages from store
+  // Load messages and settings from store
   useEffect(() => {
-    chatStore.getValue().then((store) => {
-      setMessages(store.messages);
-    });
+    const loadData = async () => {
+      const [chatData, settings] = await Promise.all([
+        chatStore.getValue(),
+        searchSettingsStore.getValue()
+      ]);
+
+      if (settings.continuePreviousChat) {
+        setMessages(chatData.messages);
+      } else {
+        setMessages([]); // Start with empty chat
+        await chatStore.setValue({ messages: [] }); // Clear stored messages
+      }
+    };
+
+    loadData();
   }, []);
 
   // Scroll to bottom when messages change
