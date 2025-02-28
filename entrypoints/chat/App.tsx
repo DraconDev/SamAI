@@ -178,26 +178,34 @@ export default function App() {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="p-4 bg-[#1E1F2E] border-t border-[#2E2F3E]">
-          <form onSubmit={handleSendMessage} className="flex space-x-3">
+        <div className="p-6 bg-gradient-to-t from-[#1E1F2E] to-[#1a1b2e] border-t border-[#2E2F3E]/50 backdrop-blur-sm">
+          <form onSubmit={handleSendMessage} className="flex max-w-4xl mx-auto space-x-4">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1 p-3 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg text-gray-100 placeholder-gray-500
-                       focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] transition-all duration-200"
+              className="flex-1 p-4 bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-500
+                       focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] 
+                       transition-all duration-200 shadow-lg backdrop-blur-sm"
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className={`px-4 py-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg
-                       font-medium hover:opacity-90 transform hover:scale-[0.98]
+              className={`px-6 py-4 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl
+                       font-medium hover:opacity-90 transform hover:scale-[0.98] shadow-lg
                        transition-all duration-200 focus:outline-none focus:ring-2 
                        focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
-                       disabled:opacity-50 disabled:cursor-not-allowed`}
+                       disabled:opacity-50 disabled:cursor-not-allowed group relative
+                       hover:shadow-indigo-500/25`}
             >
-              Send
+              <span className="flex items-center gap-2">
+                Send
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform transform translate-x-0 group-hover:translate-x-1">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
             </button>
           </form>
         </div>
