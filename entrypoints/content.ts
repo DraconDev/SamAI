@@ -42,28 +42,9 @@ export default defineContentScript({
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        console.log("Content script received message:", message);
+      console.log("Content script received message:", message);
 
-        if (message.type === "setInputValue" && lastInputElement) {
-          try {
-            lastInputElement.value = message.value;
-            lastInputElement.dispatchEvent(
-              new Event("input", { bubbles: true })
-            );
-            lastInputElement.dispatchEvent(
-              new Event("change", { bubbles: true })
-            );
-            // Clear the last input element after successful update
-            lastInputElement = null;
-            console.log("Updated input value and cleared lastInputElement");
-            sendResponse({ success: true });
-          } catch (error: unknown) {
-            console.error("Error setting input value:", error);
-            const errorMessage =
-              error instanceof Error ? error.message : "Unknown error";
-            sendResponse({ success: false, error: errorMessage });
-          }
-        } else if (message.type === "getInputInfo" && lastInputElement) {
+      if (message.type === "getInputInfo" && lastInputElement) {
         const response = {
           messageType: "inputInfo",
           value: lastInputElement.value,
