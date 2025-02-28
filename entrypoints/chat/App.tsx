@@ -76,24 +76,24 @@ export default function App() {
       </header>
 
       <div className="flex flex-col h-[calc(100vh-64px)]">
-        <div className="flex-1 p-4 space-y-4 overflow-auto">
+        <div className="flex-1 p-4 space-y-4 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
           {messages.map((message, index) => (
             <div
               key={index}
               className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[80%] p-3 rounded-lg ${
+                className={`max-w-[80%] p-4 rounded-lg shadow-lg ${
                   message.role === "user"
                     ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white"
                     : "bg-[#1E1F2E] border border-[#2E2F3E] text-gray-100"
                 }`}
               >
-                <div className="whitespace-pre-wrap">
+                <div className="leading-relaxed whitespace-pre-wrap">
                   {message.content}
                 </div>
                 <div 
-                  className={`text-xs mt-1 ${
+                  className={`text-xs mt-2 ${
                     message.role === "user" ? "text-indigo-200" : "text-gray-400"
                   }`}
                 >
