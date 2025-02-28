@@ -260,13 +260,14 @@ export default function App() {
               type="text"
               value={pagePrompt}
               onChange={(e) => setPagePrompt(e.target.value)}
-              placeholder="Type 'summarize' or ask a question about the page..."
-              className="w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
+              placeholder={isLoadingPage ? "Loading page content..." : "Type 'summarize' or ask a question about the page..."}
+              className={`w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] ${isLoadingPage ? 'opacity-50' : ''}`}
               autoFocus={!inputInfo}
+              disabled={isLoadingPage}
             />
             <button
               type="submit"
-              disabled={isPageLoading}
+              disabled={isPageLoading || isLoadingPage}
               className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
                         hover:opacity-90 focus:outline-none focus:ring-2 
                         focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
