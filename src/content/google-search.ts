@@ -23,7 +23,7 @@ export async function initializeGoogleSearch() {
     console.log("[SamAI Search] Sending initial request to Gemini");
     const response = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
-      prompt: `Search query: ${query}\nProvide a concise but informative search result that offers unique insights or perspectives on this topic.`,
+      prompt: `Search query: ${query}\n\nAs a companion to Google search results, provide key insights about this topic that:\n- Add valuable context beyond basic facts\n- Highlight interesting connections or perspectives\n- Keep the response focused but informative`,
     });
 
     if (!response) {
