@@ -68,9 +68,9 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
-      <header className="p-4 bg-white shadow-sm">
-        <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
+    <div className="h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
+      <header className="p-4 bg-[#1E1F2E] border-b border-[#2E2F3E]">
+        <h1 className="text-xl font-bold text-center text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
           Sam AI Chat
         </h1>
       </header>
@@ -85,8 +85,8 @@ export default function App() {
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
                   message.role === "user"
-                    ? "bg-indigo-600 text-white"
-                    : "bg-white text-gray-800"
+                    ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white"
+                    : "bg-[#1E1F2E] border border-[#2E2F3E] text-gray-100"
                 }`}
               >
                 <div className="whitespace-pre-wrap">
@@ -104,10 +104,10 @@ export default function App() {
           ))}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="max-w-[80%] p-3 rounded-lg bg-white text-gray-400">
+              <div className="max-w-[80%] p-3 rounded-lg bg-[#1E1F2E] border border-[#2E2F3E] text-[#818cf8]">
                 <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <div className="w-2 h-2 bg-[#818cf8] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
               </div>
