@@ -139,14 +139,16 @@ export default function App() {
                     ? message.content.replace("Question about page:", "").trim()
                     : message.content}
                 </div>
-                <div
-                  className={`text-xs message-timestamp ${
-                    message.role === "user"
-                      ? "text-indigo-200"
-                      : "text-[#818cf8]"
-                  }`}
-                >
-                  {message.timestamp}
+                <div className="pt-2 mt-2 border-t border-white/10">
+                  <div
+                    className={`text-xs ${
+                      message.role === "user"
+                        ? "text-indigo-200"
+                        : "text-[#818cf8]"
+                    }`}
+                  >
+                    {message.timestamp}
+                  </div>
                 </div>
               </div>
             </div>
