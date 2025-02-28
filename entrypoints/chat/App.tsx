@@ -125,25 +125,25 @@ export default function App() {
                               strokeLinecap="round"
                               strokeLinejoin="round"
                               strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                      )}
-                    {message.role === "user" &&
-                    message.content.startsWith("Question about page:")
-                      ? message.content
-                          .replace("Question about page:", "")
-                          .trim()
-                      : message.content}
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                          {message.content.replace("Question about page:", "").trim()}
+                        </div>
+                      ) : (
+                        <div className="whitespace-pre-wrap text-[15px]">{message.content}</div>
+                      )
+                    ) : (
+                      <MarkdownRenderer content={message.content} />
+                    )}
+                  </div>
+                  <div className="text-xs opacity-70 mt-3 text-right">
+                    {message.timestamp}
                   </div>
                 </div>
               </div>
             ))}
+            {isLoading && (
             {isLoading && (
               <div className="flex justify-start">
                 <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
