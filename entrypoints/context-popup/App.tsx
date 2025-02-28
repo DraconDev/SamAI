@@ -71,24 +71,6 @@ export default function App() {
     const handleUnload = () => {
       browser.storage.local.remove("inputInfo").catch(console.error);
     };
-    //     console.log("Loaded from storage:", result);
-    //     if (result.inputInfo) {
-    //       setInputInfo(result.inputInfo);
-    //       // Pre-fill input with value if available
-    //       if (result.inputInfo.value) {
-    //         setInputPrompt(result.inputInfo.value);
-    //       }
-    //     }
-    //   } catch (error) {
-    //     console.error("Error loading input info:", error);
-    //   }
-    // };
-
-    // loadInputInfo();
-
-    const handleUnload = () => {
-      browser.storage.local.remove("inputInfo").catch(console.error);
-    };
 
     window.addEventListener("unload", handleUnload);
     return () => {
