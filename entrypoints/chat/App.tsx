@@ -111,7 +111,7 @@ export default function App() {
               }`}
               >
                 <div
-                  className={`leading-relaxed whitespace-pre-wrap text-[15px] ${
+                  className={`leading-relaxed text-[15px] prose-pre:my-2 prose-pre:bg-black/20 prose-pre:p-3 prose-pre:rounded-lg prose-code:bg-black/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-p:my-2 prose-headings:font-semibold prose-h1:text-xl prose-h2:text-lg ${
                     message.role === "user" &&
                     message.content.startsWith("Question about page:")
                       ? "flex items-center gap-2"
