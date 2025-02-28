@@ -6,6 +6,7 @@ export interface ChatMessage {
 
 export interface ChatStore {
   messages: ChatMessage[];
+  pageContent?: string;
 }
 
 export const defaultChatStore: ChatStore = {
