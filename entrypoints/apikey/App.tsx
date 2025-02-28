@@ -80,6 +80,40 @@ function App() {
                   strokeLinejoin="round"
                 >
                   {showKey ? (
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24 M1 1l22 22" />
+                  ) : (
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 0 1 0 6 3 3 0 0 1 0-6z" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button
+            onClick={handleSave}
+            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                     hover:opacity-90 focus:outline-none focus:ring-2 
+                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
+                     transition-all duration-200 transform hover:scale-[0.98]"
+          >
+            Save API Key
+          </button>
+
+          {saved && (
+            <div className="flex items-center justify-center text-sm text-[#818cf8] animate-[fadeIn_0.3s_ease-out]">
+              <svg
+                className="w-4 h-4 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              API key saved successfully!
+            </div>
           )}
         </div>
       </div>
