@@ -36,11 +36,13 @@ export type PromptStyle = "short" | "medium" | "long";
 export interface SearchSettingsStore {
   searchActive: boolean;
   promptStyle: PromptStyle;
+  continuePreviousChat: boolean;
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
   searchActive: true,
   promptStyle: "short",
+  continuePreviousChat: true
 };
 
 export const PROMPT_TEMPLATES = {
