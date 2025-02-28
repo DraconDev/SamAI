@@ -80,7 +80,10 @@ export default defineBackground(() => {
       const response = await browser.tabs.sendMessage(tab.id, message);
       console.log("Background received response:", response);
 
-      // Store input info in local storage if available
+      // Store input info and page content in local storage
+      const pageContent = await browser.tabs.sendMessage(tab.id, { type: "getPageContent" });
+      console.log("[SamAI Background] Page content length:", pageContent?.length || 0);
+      
       if (response && response.messageType === "inputInfo") {
         console.log("Input info received:", response);
         await browser.storage.local.set({
@@ -91,10 +94,14 @@ export default defineBackground(() => {
             elementId: response.id || "",
             elementName: response.name || "",
           },
+          pageContent: pageContent || "Unable to access page content"
         });
       } else {
-        // Clear any existing input info if we're not clicking on an input
+        // Clear input info but keep page content if we're not clicking on an input
         await browser.storage.local.remove("inputInfo");
+        await browser.storage.local.set({
+          pageContent: pageContent || "Unable to access page content"
+        });
       }
 
       // Open popup
