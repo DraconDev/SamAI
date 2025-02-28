@@ -9,13 +9,16 @@ interface SearchPanelProps {
 export default function SearchPanel({ response, onClose }: SearchPanelProps) {
   return (
     <div
-      className="fixed top-0 right-0 w-[430px] h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl border-l border-white/10 p-6 overflow-y-auto z-50"
+      className="fixed top-0 right-0 w-[430px] h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl border-l border-white/10 p-6 overflow-y-auto z-50 animate-slide-in"
       style={{
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
     >
       <button
-        onClick={onClose}
+        onClick={(e) => {
+          e.currentTarget.closest("#samai-panel")?.classList.replace("animate-slide-in", "animate-slide-out");
+          setTimeout(onClose, 300);
+        }}
         className="absolute flex items-center justify-center w-8 h-8 text-gray-300 transition-all duration-200 bg-transparent border-0 rounded-md cursor-pointer top-5 right-5 opacity-60 hover:opacity-100 hover:scale-110"
       >
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
