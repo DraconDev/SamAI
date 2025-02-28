@@ -111,13 +111,7 @@ export default function App() {
                       : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
                   }`}
                 >
-                  <div
-                    className={`leading-relaxed ${
-                      message.role === "user"
-                        ? "whitespace-pre-wrap text-[15px]"
-                        : ""
-                    }`}
-                  >
+                  <div className={message.role === "user" ? "text-[15px] leading-relaxed" : "text-[15px]"}>
                     {message.role === "user" ? (
                       message.content.startsWith("Question about page:") ? (
                         <div className="flex items-center gap-2">
@@ -139,7 +133,7 @@ export default function App() {
                             .trim()}
                         </div>
                       ) : (
-                        <div className="whitespace-pre-wrap text-[15px]">
+                        <div className="leading-relaxed">
                           {message.content}
                         </div>
                       )
