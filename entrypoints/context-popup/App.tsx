@@ -161,8 +161,21 @@ export default function App() {
         },
       ];
 
-      await chatStore.setValue({ messages: newMessages });
-      console.log("[Page Assistant] Messages saved to store");
+      // Save just the prompt and response to chat, keeping page content out of sync storage
+      const chatMessages = [
+        {
+          role: "user" as const,
+          content: pagePrompt, // Store only the user's question
+          timestamp: new Date().toLocaleTimeString(),
+        },
+        {
+          role: "assistant" as const,
+          content: response,
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ];
+      await chatStore.setValue({ messages: chatMessages });
+      console.log("[Page Assistant] Chat messages saved to store");
 
       // Open chat in new tab
       console.log("[Page Assistant] Opening chat page...");
