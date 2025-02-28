@@ -49,34 +49,7 @@ export default function App() {
         // Get page content
         const [result] = await browser.scripting.executeScript({
           target: { tabId: tab.id },
-          func: () => {
-            // Get all visible text content
-            const walk = document.createTreeWalker(
-              document.body,
-              NodeFilter.SHOW_TEXT,
-              {
-                acceptNode: (node) => {
-                  // Skip hidden elements
-                  const style = window.getComputedStyle(node.parentElement);
-                  if (style.display === 'none' || style.visibility === 'hidden') {
-                    return NodeFilter.FILTER_REJECT;
-                  }
-                  // Skip empty text nodes or those with only whitespace
-                  if (!node.textContent?.trim()) {
-                    return NodeFilter.FILTER_REJECT;
-                  }
-                  return NodeFilter.FILTER_ACCEPT;
-                }
-              }
-            );
-
-            let content = '';
-            let node;
-            while ((node = walk.nextNode())) {
-              content += node.textContent?.trim() + ' ';
-            }
-            return content.trim();
-          },
+          func: () => document.body.innerText,
         });
 
         if (result?.result) {
