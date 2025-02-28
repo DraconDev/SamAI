@@ -10,6 +10,7 @@ import { MarkdownRenderer } from "@/utils/markdown";
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Load messages and settings from store
@@ -110,21 +111,20 @@ export default function App() {
                       : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
                   }`}
                 >
-                  <div
-                    className={`leading-relaxed whitespace-pre-wrap text-[15px] ${
-                      message.role === "user" &&
-                      message.content.startsWith("Question about page:")
-                        ? "flex items-center gap-2"
-                        : ""
-                    }`}
-                  >
-                    {message.role === "user" &&
-                      message.content.startsWith("Question about page:") && (
-                        <svg
-                          className="w-4 h-4 opacity-80"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
+                  <div className={`leading-relaxed ${message.role === "user" ? "whitespace-pre-wrap text-[15px]" : ""}`}>
+                    {message.role === "user" ? (
+                      message.content.startsWith("Question about page:") ? (
+                        <div className="flex items-center gap-2">
+                          <svg
+                            className="w-4 h-4 opacity-80"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
                         >
                           <path
                             strokeLinecap="round"
