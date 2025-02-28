@@ -53,15 +53,15 @@ function App() {
           </div>
 
           {searchActive && (
-            <div className="pt-2 border-t border-[#2E2F3E]">
-              <label className="block mb-2 text-sm font-medium text-gray-300">Response Style</label>
-              <div className="flex flex-col gap-2">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="promptStyle"
-                    value="short"
-                    checked={promptStyle === "short"}
+            <div className="pt-3 border-t border-[#2E2F3E]">
+              <label className="block mb-3 text-sm font-medium text-gray-300">Response Style</label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { value: 'short', label: 'Short', icon: '⚡', desc: 'Quick & concise' },
+                  { value: 'medium', label: 'Medium', icon: '⚖️', desc: 'Balanced info' },
+                  { value: 'long', label: 'Long', icon: '📚', desc: 'In-depth analysis' }
+                ].map(({ value, label, icon, desc }) => (
+                  <button
                     onChange={(e) => {
                       const newStyle = e.target.value as PromptStyle;
                       setPromptStyle(newStyle);
