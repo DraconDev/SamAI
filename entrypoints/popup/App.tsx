@@ -129,10 +129,6 @@ function App() {
             </div>
           )}
         </div>
-
-        <h2 className="mt-6 text-sm font-medium tracking-wide text-gray-400 uppercase">
-          Chat Settings
-        </h2>
         <div className="flex items-center justify-between p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
           <div className="flex flex-col gap-0.5">
             <label className="font-medium text-gray-300">
