@@ -174,8 +174,8 @@ export function showSidePanel(response: string | null) {
               .replace(/`(.*?)`/g, "<code>$1</code>")
               .replace(/\n\n/g, "</p><p>")
               .replace(/\n/g, "<br>")
-          : `<div style="text-align: center; padding: 40px 20px;">
-              <div class="loading-container">
+          : `<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+              <div class="loading-container" style="margin-top: -40px">
                 <div class="loading-indicator">
                   <div class="loading-circle"></div>
                   <div class="loading-ripple"></div>
