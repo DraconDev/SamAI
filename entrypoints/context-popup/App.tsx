@@ -67,17 +67,12 @@ export default function App() {
     loadPageContent();
   }, []);
 
-  // useEffect(() => {
-  //   const handleUnload = () => {
-  //     browser.storage.local.remove("inputInfo").catch(console.error);
-  //   };
-
-  //   window.addEventListener("unload", handleUnload);
-  //   return () => {
-  //     window.removeEventListener("unload", handleUnload);
-  //     browser.storage.local.remove("inputInfo").catch(console.error);
-  //   };
-  // }, []);
+  useEffect(() => {
+    // Clean up the input info when component unmounts or popup closes
+    return () => {
+      browser.storage.local.remove("inputInfo").catch(console.error);
+    };
+  }, []);
 
   const handleInputSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
