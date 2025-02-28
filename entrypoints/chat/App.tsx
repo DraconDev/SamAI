@@ -5,10 +5,10 @@ import {
   addChatMessage,
   searchSettingsStore,
 } from "@/utils/store";
+import { MarkdownRenderer } from "@/utils/markdown";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

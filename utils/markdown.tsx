@@ -22,7 +22,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
               style={vscDarkPlus}
               language={match[1]}
               PreTag="div"
-              className="rounded-md my-3"
+              className="my-3 rounded-md"
               {...props}
             >
               {String(children).replace(/\n$/, '')}
@@ -42,22 +42,22 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
           />
         ),
         ul: ({ node, ...props }) => (
-          <ul className="list-disc pl-6 my-2" {...props} />
+          <ul className="pl-6 my-2 list-disc" {...props} />
         ),
         ol: ({ node, ...props }) => (
-          <ol className="list-decimal pl-6 my-2" {...props} />
+          <ol className="pl-6 my-2 list-decimal" {...props} />
         ),
         li: ({ node, ...props }) => (
           <li className="my-1" {...props} />
         ),
         h1: ({ node, ...props }) => (
-          <h1 className="text-xl font-bold my-3" {...props} />
+          <h1 className="my-3 text-xl font-bold" {...props} />
         ),
         h2: ({ node, ...props }) => (
-          <h2 className="text-lg font-bold my-3" {...props} />
+          <h2 className="my-3 text-lg font-bold" {...props} />
         ),
         h3: ({ node, ...props }) => (
-          <h3 className="text-base font-bold my-2" {...props} />
+          <h3 className="my-2 text-base font-bold" {...props} />
         ),
         p: ({ node, ...props }) => (
           <p className="my-2" {...props} />
@@ -66,7 +66,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
           <blockquote className="border-l-4 border-[#2E2F3E] pl-4 my-2 italic" {...props} />
         ),
         table: ({ node, ...props }) => (
-          <div className="overflow-x-auto my-4">
+          <div className="my-4 overflow-x-auto">
             <table className="min-w-full divide-y divide-[#2E2F3E]" {...props} />
           </div>
         ),
@@ -74,7 +74,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
           <thead className="bg-[#2E2F3E]" {...props} />
         ),
         th: ({ node, ...props }) => (
-          <th className="px-3 py-2 text-left text-sm font-semibold" {...props} />
+          <th className="px-3 py-2 text-sm font-semibold text-left" {...props} />
         ),
         tbody: ({ node, ...props }) => (
           <tbody className="divide-y divide-[#2E2F3E]" {...props} />
