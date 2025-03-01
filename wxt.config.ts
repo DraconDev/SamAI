@@ -4,10 +4,10 @@ import { defineConfig } from "wxt";
 export default defineConfig({
   extensionApi: "chrome",
   manifest: {
-    name: "SamAI - Smart AI Assistant (Free)",
-    description: "✨ Free AI assistant that enhances search results, provides insights, and helps with writing. 🔒 Private, fast, and seamlessly integrated. No subscriptions!",
+    name: "SamAI - Smart AI Assistant",
+    description: "✨ Free AI assistant that enhances search results, provides insights, and helps with writing. ",
     manifest_version: 3,
-    version: "1.2.4",
+    version: "1.2.5",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
