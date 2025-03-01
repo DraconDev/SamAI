@@ -42,7 +42,7 @@ export interface SearchSettingsStore {
 export const defaultSearchSettingsStore: SearchSettingsStore = {
   searchActive: true,
   promptStyle: "short",
-  continuePreviousChat: true
+  continuePreviousChat: false,
 };
 
 export const PROMPT_TEMPLATES = {

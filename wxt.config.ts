@@ -5,9 +5,9 @@ export default defineConfig({
   extensionApi: "chrome",
   manifest: {
     name: "SamAI - Smart AI Assistant",
-    description: "Your intelligent AI companion powered by Google Gemini. Enhances web search, chat with context, and helps with writing & research. Privacy focused.",
+    description: "Your personal AI assistant that enhances search results, provides contextual insights, and helps with writing & research. Fast, private, and seamlessly integrated into your browser.",
     manifest_version: 3,
-    version: "1.1.169",
+    version: "1.1.170",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
