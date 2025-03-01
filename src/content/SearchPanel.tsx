@@ -9,7 +9,19 @@ interface SearchPanelProps {
 export default function SearchPanel({ response, onClose }: SearchPanelProps) {
   return (
     <div
-      className="fixed top-0 right-0 w-[430px] h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl border-l border-white/10 p-6 overflow-y-auto z-50 animate-slide-in"
+      style={{
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        width: '430px',
+        height: '100vh',
+        background: 'linear-gradient(135deg, #1a1b2e, #0D0E16)',
+        boxShadow: '-5px 0 15px rgba(0,0,0,0.2)',
+        padding: '24px',
+        overflowY: 'auto',
+        zIndex: 9999,
+      }}
+      className="animate-slide-in"
       style={{
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
@@ -19,15 +31,41 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
           e.currentTarget.closest("#samai-panel")?.classList.replace("animate-slide-in", "animate-slide-out");
           setTimeout(onClose, 300);
         }}
-        className="absolute flex items-center justify-center w-8 h-8 text-gray-300 transition-all duration-200 bg-transparent border-0 rounded-md cursor-pointer top-5 right-5 opacity-60 hover:opacity-100 hover:scale-110"
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          width: '32px',
+          height: '32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'transparent',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          opacity: 0.6,
+          transition: 'all 0.2s',
+          color: '#e2e8f0',
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+        onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}
       >
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         </svg>
       </button>
 
-      <div className="mb-6">
-        <h3 className="m-0 text-xl font-semibold bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text text-transparent pr-8">
+      <div style={{ marginBottom: '24px' }}>
+        <h3 style={{ 
+          margin: 0,
+          fontSize: '20px',
+          fontWeight: 600,
+          background: 'linear-gradient(90deg, #818cf8, #4f46e5)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          paddingRight: '32px'
+        }}>
           Sam AI Results
         </h3>
         <div className="h-0.5 w-10 bg-[#4f46e5] mt-2" />
