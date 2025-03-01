@@ -7,7 +7,7 @@ export default defineConfig({
     name: "SamAI - Smart AI Assistant",
     description: "Your personal AI assistant that enhances search results, provides contextual insights, and helps with writing & research. Fast, private, and seamlessly integrated into your browser.",
     manifest_version: 3,
-    version: "1.1.172",
+    version: "1.2.0",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
