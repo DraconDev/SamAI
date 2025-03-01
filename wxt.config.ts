@@ -5,9 +5,9 @@ export default defineConfig({
   extensionApi: "chrome",
   manifest: {
     name: "SamAI - Smart AI Assistant",
-    description: "✨ Free AI assistant that enhances search results, provides insights, and helps with writing. ",
+    description: "✨ Free AI assistant that enhances search results, provides smart insights, and helps with writing. Fast, private, and always free! 🚀",
     manifest_version: 3,
-    version: "1.2.5",
+    version: "1.2.6",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
@@ -25,7 +25,7 @@ export default defineConfig({
         "48": "icon/48.png",
         "128": "icon/128.png",
       },
-      default_title: "SamAI - Smart AI Assistant (Free)",
+      default_title: "SamAI - Smart AI Assistant",
     }
   },
   modules: ["@wxt-dev/module-react"],
