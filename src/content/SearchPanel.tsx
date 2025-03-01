@@ -20,13 +20,13 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
         padding: '24px',
         overflowY: 'auto',
         zIndex: 9999,
-      }}
-      className="animate-slide-in"
-      style={{
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
+      className="animate-slide-in"
     >
       <button
+        onClick={(e) => {
+          e.currentTarget.closest("#samai-container")?.classList.replace("animate-slide-in", "animate-slide-out");
         onClick={(e) => {
           e.currentTarget.closest("#samai-panel")?.classList.replace("animate-slide-in", "animate-slide-out");
           setTimeout(onClose, 300);
