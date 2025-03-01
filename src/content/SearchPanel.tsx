@@ -27,8 +27,6 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
       <button
         onClick={(e) => {
           e.currentTarget.closest("#samai-container")?.classList.replace("animate-slide-in", "animate-slide-out");
-        onClick={(e) => {
-          e.currentTarget.closest("#samai-panel")?.classList.replace("animate-slide-in", "animate-slide-out");
           setTimeout(onClose, 300);
         }}
         style={{
@@ -68,16 +66,30 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
         }}>
           Sam AI Results
         </h3>
-        <div className="h-0.5 w-10 bg-[#4f46e5] mt-2" />
+        <div style={{ height: '2px', width: '40px', background: '#4f46e5', marginTop: '8px' }} />
       </div>
 
-      <div className="min-h-[200px]">
+      <div style={{ minHeight: '200px' }}>
         {response ? (
-          <MarkdownRenderer content={response} />
+          <div className="markdown-content">
+            <MarkdownRenderer content={response} />
+          </div>
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center pt-20">
-            <div className="flex flex-col items-center mt-[-40px]">
-              <div className="relative w-[50px] h-[50px] mb-4">
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingTop: '80px'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginTop: '-40px'
+            }}>
+              <div style={{ position: 'relative', width: '50px', height: '50px', marginBottom: '16px' }}>
                 <svg viewBox="0 0 50 50" className="animate-spin">
                   <path
                     d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
@@ -94,7 +106,12 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
                   </defs>
                 </svg>
               </div>
-              <div className="text-[#818cf8] font-medium text-sm tracking-wide animate-pulse">
+              <div style={{
+                color: '#818cf8',
+                fontWeight: 500,
+                fontSize: '14px',
+                letterSpacing: '0.5px'
+              }} className="animate-pulse">
                 Generating insights...
               </div>
             </div>
