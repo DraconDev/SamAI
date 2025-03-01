@@ -9,10 +9,10 @@ function injectStyles() {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
-    @keyframes slideIn {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
+    /* Markdown styles */
+    #samai-container pre {
+      background: #1a1b2e;
+      border: 1px solid rgba(46, 47, 62, 0.5);
 
     @keyframes slideOut {
       from { transform: translateX(0); }
