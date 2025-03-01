@@ -4,9 +4,15 @@ import SearchPanel from "./SearchPanel";
 
 function injectStyles() {
   const styleTag = document.createElement("style");
+  styleTag.id = "samai-styles";
   styleTag.textContent = `
-    #samai-container * {
+    /* Reset container styles */
+    #samai-container {
+      all: initial;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #e2e8f0;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Markdown styles */
@@ -35,11 +41,17 @@ function injectStyles() {
     #samai-container h1, #samai-container h2, #samai-container h3 {
       font-weight: 600;
       margin: 1.5em 0 0.5em;
+      color: #e2e8f0;
     }
 
     #samai-container ul, #samai-container ol {
       margin: 1em 0;
       padding-left: 1.5em;
+      list-style-type: disc;
+    }
+
+    #samai-container ol {
+      list-style-type: decimal;
     }
 
     #samai-container li {
@@ -53,6 +65,11 @@ function injectStyles() {
 
     #samai-container a:hover {
       color: #4f46e5;
+    }
+
+    #samai-container strong {
+      color: #818cf8;
+      font-weight: 600;
     }
 
     @keyframes slideIn {
@@ -95,17 +112,22 @@ function injectStyles() {
 }
 
 export function showSidePanel(response: string | null) {
+  // Remove existing panel if present
+  const existingPanel = document.getElementById("samai-container");
+  if (existingPanel) {
+    const root = createRoot(existingPanel);
+    root.unmount();
+    existingPanel.remove();
+  }
+
+  // Create new panel container
+  const panelContainer = document.createElement("div");
+  panelContainer.id = "samai-container";
+  document.body.appendChild(panelContainer);
+
   // Inject styles if not already present
   if (!document.querySelector("#samai-styles")) {
     injectStyles();
-  }
-
-  // Create or get existing panel container
-  let panelContainer = document.getElementById("samai-container");
-  if (!panelContainer) {
-    panelContainer = document.createElement("div");
-    panelContainer.id = "samai-container";
-    document.body.appendChild(panelContainer);
   }
 
   // Initialize React root and render
@@ -116,7 +138,7 @@ export function showSidePanel(response: string | null) {
       onClose: () => {
         // Cleanup React root before removing container
         root.unmount();
-        panelContainer?.remove();
+        panelContainer.remove();
       },
     })
   );
