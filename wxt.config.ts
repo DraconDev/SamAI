@@ -5,9 +5,9 @@ export default defineConfig({
   extensionApi: "chrome",
   manifest: {
     name: "SamAI - Smart AI Assistant",
-    description: "Your personal AI assistant that enhances search results, provides contextual insights, and helps with writing & research. Fast, private, and seamlessly integrated into your browser.",
+    description: "Your personal AI assistant that enhances search results, provides contextual insights, and helps with writing & research.",
     manifest_version: 3,
-    version: "1.2.1",
+    version: "1.2.2",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
