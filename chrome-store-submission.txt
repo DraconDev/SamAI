@@ -1,0 +1,26 @@
+Single Purpose Description:
+SamAI is a search enhancement tool that uses AI to analyze and improve web search results, providing instant summaries and insights directly in your browser. Every feature - from contextual chat to writing assistance - serves this core purpose of making web search and content discovery more efficient and productive.
+
+Permission Justifications:
+
+storage:
+Stores user preferences and settings locally to provide a personalized experience and maintain your chosen configurations across browsing sessions.
+
+contextMenus:
+Enables right-click access to AI features, making it easy to get instant help with writing and research from any webpage.
+
+activeTab:
+Allows the AI to understand the current page content when you request assistance, while ensuring privacy by only accessing content when you explicitly ask.
+
+tabs:
+Manages the extension's interface across different tabs to provide a seamless experience when using search enhancements and chat features.
+
+scripting:
+Powers the AI assistance interface and markdown formatting for search results and responses, ensuring clear and readable presentation of information.
+
+Host Permission (<all_urls>):
+Enables AI assistance across websites for:
+1. Smart search result analysis
+2. Contextual page understanding
+3. Universal writing assistance
+Access is limited to when you actively request help, preserving your privacy and security.
