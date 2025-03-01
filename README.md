@@ -1,9 +1,5 @@
 # SamAI - Smart AI Assistant
 
-<p align="center">
-  <img src="public/icon/128.png" alt="SamAI Logo" width="128" height="128"/>
-</p>
-
 SamAI is a powerful browser extension that brings intelligent AI assistance directly into your browsing experience. With seamless integration and privacy-focused design, it enhances your productivity across various web activities.
 
 ## ✨ Features
