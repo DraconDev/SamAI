@@ -7,7 +7,7 @@ export default defineConfig({
     name: "SamAI - Smart AI Assistant",
     description: "Your intelligent AI companion powered by Google Gemini. Enhances web search, chat with context, and helps with writing & research. Privacy focused.",
     manifest_version: 3,
-    version: "1.1.168",
+    version: "1.1.169",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
@@ -26,9 +26,7 @@ export default defineConfig({
         "128": "icon/128.png",
       },
       default_title: "SamAI - Smart AI Assistant",
-    },
-    author: "Sam AI Team",
-    homepage_url: "https://samai.dev",
+    }
   },
   modules: ["@wxt-dev/module-react"],
 });
