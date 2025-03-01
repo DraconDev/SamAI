@@ -23,6 +23,13 @@ SamAI is a powerful browser extension that brings intelligent AI assistance dire
 - Context-aware suggestions
 - Multiple writing styles support
 
+### 🎯 Key Benefits
+- Fast and responsive
+- Privacy-focused design
+- Seamless browser integration
+- Rich markdown support
+- Smart context awareness
+
 ## 🚀 Getting Started
 
 1. **Install Dependencies**
@@ -54,15 +61,17 @@ bun zip:firefox   # Create zip for Firefox
 - TypeScript
 - Tailwind CSS
 - WXT (Web Extension Tools)
-- Markdown Support
-- Google Gemini AI
+- Advanced Markdown Support
+- Real-time AI Processing
 
-## 🔐 Privacy
+## 🔐 Privacy & Security
 
-SamAI is designed with privacy in mind:
+SamAI is designed with user privacy as a core principle:
+- No data collection or tracking
 - All processing happens locally
-- No data collection
-- AI interactions are private and secure
+- Secure AI interactions
+- No personal data storage
+- Open-source transparency
 
 ## 🧩 Project Structure
 
