@@ -7,7 +7,7 @@ export default defineConfig({
     name: "SamAI - Smart AI Assistant",
     description:
       "✨ Free AI assistant that enhances search results, provides insights, and helps with writing. ",
-    version: "1.2.14",
+    version: "1.2.15",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     icons: {
@@ -21,6 +21,9 @@ export default defineConfig({
       gecko: {
         id: "dracsharp@gmail.com",
       },
+    },
+    zip: {
+      name: "SamAI",
     },
   },
   modules: ["@wxt-dev/module-react"],
