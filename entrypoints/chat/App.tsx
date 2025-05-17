@@ -7,6 +7,7 @@ import {
   apiKeyStore, // Import apiKeyStore
 } from "@/utils/store";
 import { MarkdownRenderer } from "@/utils/markdown";
+import { tabs } from "webextension-polyfill";
 
 export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
