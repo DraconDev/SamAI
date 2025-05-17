@@ -73,8 +73,8 @@ export default function App() {
     }
   };
 
-  const handlePageSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handlePageSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     if (!pagePrompt.trim() || isPageLoading) return;
 
     console.log(
