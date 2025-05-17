@@ -79,7 +79,7 @@ export default defineContentScript({
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener(
-      (message: ContentScriptMessage, sender, sendResponse) => {
+      (message, sender, sendResponse) => { // Removed ContentScriptMessage type annotation
         console.log("[SamAI Content] Received message:", message);
 
         if (message.type === "getPageContent") {
