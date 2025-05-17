@@ -69,6 +69,12 @@ export default defineBackground(() => {
         });
       return true;
     }
+
+    if ((message as any).type === "openApiKeyPage") {
+      console.log("[SamAI Background] Received request to open API key page");
+      browser.tabs.create({ url: "apikey.html" });
+      return true; // No response needed for this message
+    }
   });
 
   // Add click handler for the context menu item
