@@ -166,7 +166,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-w-[300px] min-h-[400px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100 overflow-y-auto">
+    <div className="min-w-[300px] min-h-[500px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-4 text-gray-100 overflow-y-auto">
       <div className="flex flex-col h-full space-y-6">
         <div
           className={`space-y-3 flex-none ${!inputInfo ? "opacity-50" : ""}`}
@@ -296,11 +296,11 @@ export default function App() {
           </form>
         </div>
 
-        <div className="mt-4">
-          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-2">
+        <div className="mt-2">
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-1 text-sm">
             Scrape Assistant
           </h2>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <input
               type="text"
               value={scrapeUrl}
