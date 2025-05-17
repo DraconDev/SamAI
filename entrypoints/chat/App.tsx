@@ -106,167 +106,155 @@ export default function App() {
       </header>
 
       <div className="flex flex-col h-[calc(100vh-80px)]">
-        <div className="flex-1 p-6 space-y-6 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
-          <div className="w-full max-w-5xl mx-auto space-y-6">
-            {!isApiKeySet && (
-              <div className="flex justify-center animate-fade-in">
-                <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
-                  <p className="mb-3">
-                    Your API key is not set. Please set it to use SamAI.
-                  </p>
-                  <button
-                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
-                    className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
-                  >
-                    Set API Key
-                  </button>
-                </div>
-              </div>
-            )}
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  message.role === "user" ? "justify-end" : "justify-start"
-                } animate-fade-in`}
+        {!isApiKeySet ? (
+          <div className="flex items-center justify-center flex-1 p-6 animate-fade-in">
+            <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
+              <p className="mb-3">
+                Your API key is not set. Please set it to use SamAI.
+              </p>
+              <button
+                onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
               >
-                <div
-                  className={`max-w-[80%] p-5 rounded-xl shadow-xl ${
-                    message.role === "user"
-                      ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
-                      : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
-                  }`}
-                >
+                Set API Key
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="flex-1 p-6 space-y-6 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
+              <div className="w-full max-w-5xl mx-auto space-y-6">
+                {messages.map((message, index) => (
                   <div
-                    className={
-                      message.role === "user"
-                        ? "text-[15px] leading-relaxed"
-                        : "text-[15px]"
-                    }
+                    key={index}
+                    className={`flex ${
+                      message.role === "user" ? "justify-end" : "justify-start"
+                    } animate-fade-in`}
                   >
-                    {message.role === "user" ? (
-                      message.content.startsWith("Question about page:") ? (
-                        <div className="flex items-center gap-2">
-                          <svg
-                            className="w-4 h-4 opacity-80"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                            />
-                          </svg>
-                          {message.content
-                            .replace("Question about page:", "")
-                            .trim()}
-                        </div>
-                      ) : (
-                        <div className="leading-relaxed">{message.content}</div>
-                      )
-                    ) : (
-                      <MarkdownRenderer content={message.content} />
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-            {isLoading && !isApiKeySet && (
-              <div className="flex justify-center animate-fade-in">
-                <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
-                  <p className="mb-3">
-                    Please set your API key to use this feature.
-                  </p>
-                  <button
-                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
-                    className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
-                  >
-                    Set API Key
-                  </button>
-                </div>
-              </div>
-            )}
-            {isLoading && isApiKeySet && (
-              <div className="flex justify-start">
-                <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
-                  <div className="flex items-center space-x-4">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
-                      <div className="relative flex space-x-1">
-                        <div
-                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
-                          style={{ animationDelay: "0ms" }}
-                        />
-                        <div
-                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
-                          style={{ animationDelay: "150ms" }}
-                        />
-                        <div
-                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
-                          style={{ animationDelay: "300ms" }}
-                        />
+                    <div
+                      className={`max-w-[80%] p-5 rounded-xl shadow-xl ${
+                        message.role === "user"
+                          ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-indigo-500/20"
+                          : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
+                      }`}
+                    >
+                      <div
+                        className={
+                          message.role === "user"
+                            ? "text-[15px] leading-relaxed"
+                            : "text-[15px]"
+                        }
+                      >
+                        {message.role === "user" ? (
+                          message.content.startsWith("Question about page:") ? (
+                            <div className="flex items-center gap-2">
+                              <svg
+                                className="w-4 h-4 opacity-80"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                />
+                              </svg>
+                              {message.content
+                                .replace("Question about page:", "")
+                                .trim()}
+                            </div>
+                          ) : (
+                            <div className="leading-relaxed">{message.content}</div>
+                          )
+                        ) : (
+                          <MarkdownRenderer content={message.content} />
+                        )}
                       </div>
                     </div>
-                    <span className="text-sm font-medium text-[#818cf8]">
-                      AI is thinking...
-                    </span>
                   </div>
-                </div>
+                ))}
+                {isLoading && (
+                  <div className="flex justify-start">
+                    <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
+                      <div className="flex items-center space-x-4">
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
+                          <div className="relative flex space-x-1">
+                            <div
+                              className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                              style={{ animationDelay: "0ms" }}
+                            />
+                            <div
+                              className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                              style={{ animationDelay: "150ms" }}
+                            />
+                            <div
+                              className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                              style={{ animationDelay: "300ms" }}
+                            />
+                          </div>
+                        </div>
+                        <span className="text-sm font-medium text-[#818cf8]">
+                          AI is thinking...
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div ref={messagesEndRef} className="h-4" />
-        </div>
+              <div ref={messagesEndRef} className="h-4" />
+            </div>
 
-        <div className="p-6 bg-gradient-to-t from-[#1E1F2E] to-[#1a1b2e] border-t border-[#2E2F3E]/50 backdrop-blur-sm">
-          <form
-            onSubmit={handleSendMessage}
-            className="flex max-w-4xl mx-auto space-x-4"
-          >
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-1 p-5 text-[15px] bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-500
+            <div className="p-6 bg-gradient-to-t from-[#1E1F2E] to-[#1a1b2e] border-t border-[#2E2F3E]/50 backdrop-blur-sm">
+              <form
+                onSubmit={handleSendMessage}
+                className="flex max-w-4xl mx-auto space-x-4"
+              >
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type your message..."
+                  className="flex-1 p-5 text-[15px] bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-500
                        focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] 
                        transition-all duration-200 shadow-lg backdrop-blur-sm"
-              disabled={!isApiKeySet || isLoading} // Disable input if API key not set or loading
-            />
-            <button
-              type="submit"
-              disabled={isLoading || !input.trim() || !isApiKeySet} // Disable button if API key not set, loading, or input empty
-              className={`px-8 py-5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl text-[15px]
+                  disabled={!isApiKeySet || isLoading} // Disable input if API key not set or loading
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !input.trim() || !isApiKeySet} // Disable button if API key not set, loading, or input empty
+                  className={`px-8 py-5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl text-[15px]
                        font-medium hover:opacity-90 transform hover:scale-[0.98] shadow-lg
                        transition-all duration-200 focus:outline-none focus:ring-2 
                        focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
                        disabled:opacity-50 disabled:cursor-not-allowed group relative
                        hover:shadow-indigo-500/25`}
-            >
-              <span className="flex items-center gap-2">
-                Send
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-transform transform translate-x-0 group-hover:translate-x-1"
                 >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </button>
-          </form>
-        </div>
+                  <span className="flex items-center gap-2">
+                    Send
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="transition-transform transform translate-x-0 group-hover:translate-x-1"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </button>
+              </form>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
