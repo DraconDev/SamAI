@@ -38,40 +38,40 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
           }}>
             Sam AI Results
           </h1>
-          background: 'transparent',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          opacity: 0.6,
-          transition: 'all 0.2s',
-          color: '#e2e8f0',
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-        onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}
-      >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      </button>
-
-      <div style={{ marginBottom: '24px' }}>
-        <h3 style={{ 
-          margin: 0,
-          fontSize: '20px',
-          fontWeight: 600,
-          background: 'linear-gradient(90deg, #818cf8, #4f46e5)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          paddingRight: '32px'
-        }}>
-          Sam AI Results
-        </h3>
-        <div style={{ height: '2px', width: '40px', background: '#4f46e5', marginTop: '8px' }} />
-      </div>
-
-      <div style={{ minHeight: '200px' }}>
-        {response ? (
-          <div className="markdown-content">
+          <div style={{ height: '2px', width: '40px', background: '#4f46e5', marginTop: '8px' }} />
+        </div>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <button
+            onClick={onSummarize}
+            style={{
+              padding: '8px 12px',
+              background: 'linear-gradient(90deg, #4f46e5, #818cf8)',
+              border: 'none',
+              borderRadius: '6px',
+              color: 'white',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              fontSize: '14px'
+            }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          >
+            Summarize
+          </button>
+          <button
+            onClick={onClose}
+            style={{
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'transparent',
+              border: '1px solid #4f46e5',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              color: '#e2e8f0',
             <MarkdownRenderer content={response} />
           </div>
         ) : (
