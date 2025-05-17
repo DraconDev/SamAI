@@ -16,10 +16,14 @@ export default function App() {
   // Load messages and settings from store
   useEffect(() => {
     const loadData = async () => {
-      const [chatData, settings] = await Promise.all([
+      const [chatData, settings, apiKeyData] = await Promise.all([
         chatStore.getValue(),
         searchSettingsStore.getValue(),
+        apiKeyStore.getValue(), // Load API key status
       ]);
+
+      // Check if API key is set
+      setIsApiKeySet(!!apiKeyData?.apiKey); // Safely access apiKey
 
       if (settings.continuePreviousChat) {
         setMessages(chatData.messages);
