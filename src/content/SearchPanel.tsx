@@ -106,8 +106,8 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
               justifyContent: 'center',
               paddingTop: '80px'
             }} className="animate-fade-in">
-              <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
-                <p className="mb-3">
+              <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white text-center shadow-indigo-500/20">
+                <p className="mb-3 text-[15px] leading-relaxed">
                   Your API key is not set. Please set it to use SamAI.
                 </p>
                 <button
