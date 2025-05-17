@@ -185,7 +185,17 @@ export default function App() {
 
       if (!response) {
         console.error("[Scrape Assistant] No response received");
-        throw new Error("Failed to generate response");
+        // Add a message to the chat indicating failure and suggesting API key check
+        const errorMessage = {
+          role: "assistant" as const,
+          content: "SamAI could not generate a response. Please check your API key in the extension settings.",
+          timestamp: new Date().toLocaleTimeString(),
+        };
+        await addChatMessage(errorMessage);
+        // Open chat in new tab
+        await browser.tabs.create({ url: "chat.html" });
+        window.close(); // Close popup after adding message
+        throw new Error("Failed to generate response"); // Still throw to enter catch block if needed
       }
       console.log(
         "[Scrape Assistant] Response received, length:",
