@@ -1,5 +1,5 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
 import { extractPageContent } from "@/utils/page-content";
 
@@ -146,25 +146,31 @@ export default function App() {
   const handleScrapeBody = async () => {
     console.log("[Scrape Assistant] handleScrapeBody started");
     try {
-      console.log("[Scrape Assistant] Requesting page content from content script...");
-      const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+      console.log(
+        "[Scrape Assistant] Requesting page content from content script..."
+      );
+      const tabs = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
       if (tabs.length === 0 || !tabs[0].id) {
         console.error("[Scrape Assistant] No active tab found.");
         return;
       }
       const tabId = tabs[0].id;
       console.log(`[Scrape Assistant] Sending message to tab ID: ${tabId}`);
-      const bodyContent = await browser.tabs.sendMessage(
-        tabId,
-        { type: "getPageContent" }
-      ) as string; // Cast to string
+      const bodyContent = (await browser.tabs.sendMessage(tabId, {
+        type: "getPageContent",
+      })) as string; // Cast to string
       console.log(
         "[Scrape Assistant] Page content received, length:",
         bodyContent.length
       );
 
       if (!scrapeUrl.trim()) {
-        console.warn("[Scrape Assistant] No instructions provided for scraping.");
+        console.warn(
+          "[Scrape Assistant] No instructions provided for scraping."
+        );
         // Optionally, provide feedback to the user or just scrape without AI
         // For now, we'll proceed with a default action or just extract
         // If you want to require instructions, add a return here.
@@ -172,7 +178,9 @@ export default function App() {
 
       console.log("[Scrape Assistant] Generating response...");
       const response = await generateFormResponse(
-        `${scrapeUrl.trim() || "Analyze the following page content:"}\n\nContent: ${bodyContent}`
+        `${
+          scrapeUrl.trim() || "Analyze the following page content:"
+        }\n\nContent: ${bodyContent}`
       );
 
       if (!response) {
@@ -195,7 +203,9 @@ export default function App() {
 
       const userMessage = {
         role: "user" as const,
-        content: `Instructions for scraped content: ${scrapeUrl.trim() || "Analyze page content"}`,
+        content: `Instructions for scraped content: ${
+          scrapeUrl.trim() || "Analyze page content"
+        }`,
         timestamp: new Date().toLocaleTimeString(),
       };
 
