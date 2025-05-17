@@ -140,6 +140,32 @@ export default function App() {
     }
   };
 
+  const handleScrapeBody = async () => {
+    if (!scrapeUrl) return;
+    try {
+      const response = await fetch(scrapeUrl);
+      const text = await response.text();
+      const bodyContent = new DOMParser()
+        .parseFromString(text, "text/html")
+        .querySelector("body")?.textContent;
+      setPagePrompt(`Summarize this content: ${bodyContent}`);
+    } catch (error) {
+      console.error("Scraping failed:", error);
+    }
+  };
+
+  const handleScrapeHTML = async () => {
+    if (!scrapeUrl) return;
+    try {
+      const response = await fetch(scrapeUrl);
+      const html = await response.text();
+      setPagePrompt(`Analyze this HTML: ${html.substring(0, 1000)}...`);
+    } catch (error) {
+      console.error("Scraping failed:", error);
+    }
+  };
+
+  return (
     <div className="min-w-[300px] min-h-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100 overflow-y-auto">
       <div className="flex flex-col h-full space-y-6">
         <div
@@ -269,7 +295,14 @@ export default function App() {
             </button>
           </form>
         </div>
-      </div>
-    </div>
-  );
-}
+
+        <div className="mt-6">
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">
+            Scrape Assistant
+          </h2>
+          <div className="flex flex-col gap-3">
+            <input
+              type="text"
+              value={scrapeUrl}
+              onChange={(e) => setScrapeUrl(e.target.value)}
+              placeholder="Enter URL to scrape"
