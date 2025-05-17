@@ -70,7 +70,7 @@ export default defineBackground(() => {
 
       if (!isBackgroundMessage(message)) {
         console.warn("[SamAI Background] Received message with invalid structure:", message);
-        return false; // Indicate that the message was not handled
+        return undefined; // Indicate that the message was not handled synchronously
       }
 
       switch (message.type) {
@@ -83,7 +83,7 @@ export default defineBackground(() => {
             if (!sender.tab) {
               console.error("[SamAI Background] No sender tab found");
               sendResponse(null);
-              return true;
+              return true; // Will respond asynchronously
             }
 
             generateFormResponse(geminiMessage.prompt)
@@ -109,7 +109,7 @@ export default defineBackground(() => {
         case "openApiKeyPage":
           console.log("[SamAI Background] Received request to open API key page");
           browser.tabs.create({ url: "apikey.html" });
-          return true; // No response needed for this message
+          return undefined; // No response needed, handled synchronously
 
         case "setInputValue":
           {
@@ -128,11 +128,11 @@ export default defineBackground(() => {
                     error: "Failed to forward message to content script",
                   });
                 });
-              return true;
+              return true; // Will respond asynchronously
             } else {
               console.warn("[SamAI Background] Received setInputValue message but sourceTabId is null");
               sendResponse({ success: false, error: "Source tab not available" });
-              return true;
+              return true; // Will respond asynchronously
             }
           }
 
@@ -140,18 +140,18 @@ export default defineBackground(() => {
           // This message is typically handled by the content script, not the background.
           // If it reaches here, it might be an unexpected message or a misconfiguration.
           console.warn("[SamAI Background] Received unexpected getInputInfo message in background");
-          return false; // Not handled by background
+          return undefined; // Not handled by background synchronously
 
         case "getPageContent":
           // This message is typically handled by the content script, not the background.
           // If it reaches here, it might be an unexpected message or a misconfiguration.
           console.warn("[SamAI Background] Received unexpected getPageContent message in background");
-          return false; // Not handled by background
+          return undefined; // Not handled by background synchronously
 
         default:
           // If message.type is a string but not one of the known types
-          console.warn("[SamAI Background] Received unknown message type:", message.type);
-          return false; // Indicate that the message was not handled
+          console.warn("[SamAI Background] Received unknown message:", message); // Log the whole message
+          return undefined; // Indicate that the message was not handled synchronously
       }
     }
   );
