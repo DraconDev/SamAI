@@ -70,7 +70,7 @@ export default function App() {
 
       const aiMessage: ChatMessage = {
         role: "assistant",
-        content: response,
+        content: response as string, // Assert response as string
         timestamp: new Date().toLocaleTimeString(),
       };
 
