@@ -248,49 +248,49 @@ export default function App() {
               autoFocus={!inputInfo}
               disabled={isPageLoading}
             />
-            <button
-              type="submit"
-              disabled={isPageLoading}
-              className={`w-full p-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-md text-sm
-                        hover:opacity-95 focus:outline-none focus:ring-2
-                        focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                        transition-all duration-200 ease-in-out
-                        ${
-                          isPageLoading ? "opacity-60 cursor-not-allowed" : ""
-                        }`}
-            >
-              {isPageLoading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-4 h-4">
-                    <svg viewBox="0 0 50 50">
-                      <path
-                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        className="animate-[dash_1.5s_ease-in-out_infinite]"
-                        style={{
-                          strokeDasharray: "90,150",
-                          strokeDashoffset: "-35",
-                          animation:
-                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
-                        }}
-                      />
-                    </svg>
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                disabled={isPageLoading}
+                className={`flex-1 p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                          hover:opacity-90 focus:outline-none focus:ring-2 
+                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                          transition-all duration-200 transform hover:scale-[0.98]
+                          ${
+                            isPageLoading ? "opacity-75 cursor-not-allowed" : ""
+                          }`}
+              >
+                {isPageLoading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="w-4 h-4">
+                      <svg viewBox="0 0 50 50">
+                        <path
+                          d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          className="animate-[dash_1.5s_ease-in-out_infinite]"
+                          style={{
+                            strokeDasharray: "90,150",
+                            strokeDashoffset: "-35",
+                            animation:
+                              "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
+                          }}
+                        />
+                      </svg>
+                    </div>
+                    <span>Processing...</span>
                   </div>
-                  <span>Processing...</span>
-                </div>
-              ) : (
-                "Send"
-              )}
-            </button>
-            <button
-              onClick={() => {
-                setPagePrompt("summarize");
-                handlePageSubmit();
-              }}
-              className={`w-full p-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-md text-sm
+                ) : (
+                  "Send"
+                )}
+              </button>
+              <button
+                onClick={() => {
+                  setPagePrompt("summarize");
+                  handlePageSubmit();
+                }}
                         hover:opacity-95 focus:outline-none focus:ring-2
                         focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
                         transition-all duration-200 ease-in-out mt-1`}
