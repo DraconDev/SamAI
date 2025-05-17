@@ -123,3 +123,17 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
                 </svg>
               </div>
               <div style={{
+                color: '#818cf8',
+                fontWeight: 500,
+                fontSize: '14px',
+                letterSpacing: '0.5px'
+              }} className="animate-pulse">
+                Generating insight...
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
