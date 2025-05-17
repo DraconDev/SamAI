@@ -69,7 +69,7 @@ export default defineBackground(() => {
       message: unknown,
       sender: browser.runtime.MessageSender,
       sendResponse: (response?: any) => void
-    ): boolean | Promise<any> | undefined => {
+    ): boolean | Promise<any> => {
       console.log("[SamAI Background] Received message:", message);
 
       if (!isBackgroundMessage(message)) {
