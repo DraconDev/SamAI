@@ -18,6 +18,7 @@ export default function App() {
   const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const [scrapeUrl, setScrapeUrl] = useState("");
 
   useEffect(() => {
     // Load stored data from local storage
@@ -139,7 +140,6 @@ export default function App() {
     }
   };
 
-  return (
     <div className="min-w-[300px] min-h-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100 overflow-y-auto">
       <div className="flex flex-col h-full space-y-6">
         <div
