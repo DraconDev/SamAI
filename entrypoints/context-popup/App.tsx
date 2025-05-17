@@ -151,11 +151,59 @@ export default function App() {
       const parser = new DOMParser();
       const doc = parser.parseFromString(text, "text/html");
       const bodyContent = doc.body.textContent || "";
-      setPageContent(bodyContent);
-      setPagePrompt(scrapeUrl);
-      await handlePageSubmit();
+      console.log("[Scrape Assistant] Generating response...");
+      const response = await generateFormResponse(
+        `${scrapeUrl}\n\nContent: ${bodyContent}`
+      );
+
+      if (!response) {
+        console.error("[Scrape Assistant] No response received");
+        throw new Error("Failed to generate response");
+      }
+      console.log(
+        "[Scrape Assistant] Response received, length:",
+        response.length
+      );
+
+      // Check chat continuation setting and add messages
+      console.log("[Scrape Assistant] Adding messages to chat...");
+      const settings = await searchSettingsStore.getValue();
+
+      if (!settings.continuePreviousChat) {
+        console.log("[Scrape Assistant] Starting fresh chat...");
+        await chatStore.setValue({ messages: [] });
+      }
+
+      const userMessage = {
+        role: "user" as const,
+        content: `Instructions for scraped content: ${scrapeUrl}`,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      const aiMessage = {
+        role: "assistant" as const,
+        content: response,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      await addChatMessage(userMessage);
+      await addChatMessage(aiMessage);
+      console.log("[Scrape Assistant] Messages added to chat");
+
+      // Open chat in new tab
+      console.log("[Scrape Assistant] Opening chat page...");
+      await browser.tabs.create({
+        url: "chat.html",
+      });
+      console.log("[Scrape Assistant] Chat page opened");
+
+      setScrapeUrl(""); // Clear the scrape URL input after submission
+      console.log("[Scrape Assistant] Closing popup...");
+      window.close();
     } catch (error) {
       console.error("Scraping failed:", error);
+    } finally {
+      // Consider if you need a loading state for scraping
     }
   };
 
