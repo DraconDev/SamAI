@@ -45,3 +45,32 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
             onClick={onSummarize}
             style={{
               padding: '8px 12px',
+              background: 'linear-gradient(90deg, #4f46e5, #818cf8)',
+              border: 'none',
+              borderRadius: '6px',
+              color: 'white',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              fontSize: '14px'
+            }}
+          >
+            Summarize
+          </button>
+          <button
+            onClick={onClose}
+            style={{
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'transparent',
+              border: '1px solid #4f46e5',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              color: '#e2e8f0',
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
