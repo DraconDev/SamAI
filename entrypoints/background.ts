@@ -12,9 +12,11 @@ export default defineBackground(() => {
 
   // Listen for runtime messages and forward them to source tab
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("[SamAI Background] Received message:", message);
+    const typedMessage = message as any; // Simple type assertion
 
-    if (message.type === "generateGeminiResponse") {
+    console.log("[SamAI Background] Received message:", typedMessage);
+
+    if (typedMessage.type === "generateGeminiResponse") {
       // Start async operation
       console.log("[SamAI Background] Attempting to generate Gemini response");
 
@@ -25,7 +27,7 @@ export default defineBackground(() => {
         return true;
       }
 
-      generateFormResponse(message.prompt)
+      generateFormResponse(typedMessage.prompt)
         .then((text) => {
           if (text === null) {
             console.error(
@@ -47,16 +49,16 @@ export default defineBackground(() => {
       return true; // Will respond asynchronously
     }
 
-    if (message.type === "openApiKeyPage") {
+    if (typedMessage.type === "openApiKeyPage") {
       console.log("[SamAI Background] Received request to open API key page");
       browser.tabs.create({ url: "apikey.html" });
       return true; // No response needed for this message
     }
 
-    if (message.type === "setInputValue" && sourceTabId) {
+    if (typedMessage.type === "setInputValue" && sourceTabId) {
       // Handle setInputValue asynchronously
       browser.tabs
-        .sendMessage(sourceTabId, message)
+        .sendMessage(sourceTabId, typedMessage)
         .then((result) => {
           sendResponse(result);
         })
@@ -68,12 +70,6 @@ export default defineBackground(() => {
           });
         });
       return true;
-    }
-
-    if ((message as any).type === "openApiKeyPage") {
-      console.log("[SamAI Background] Received request to open API key page");
-      browser.tabs.create({ url: "apikey.html" });
-      return true; // No response needed for this message
     }
   });
 
