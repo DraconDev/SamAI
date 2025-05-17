@@ -169,7 +169,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-w-[300px] min-h-[1050px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-4 text-gray-100 font-sans">
+    <div className="min-w-[300px] min-h-[450px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-4 text-gray-100 font-sans">
       <div className="flex flex-col h-full space-y-4">
         <div
           className={`space-y-2 flex-none ${!inputInfo ? "opacity-60" : ""}`}
