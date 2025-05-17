@@ -5,6 +5,14 @@ import { extractPageContent } from "@/utils/page-content";
 export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
+    // Create context menu items
+    browser.contextMenus.create({
+      id: "summarize",
+      title: "Summarize with Sam",
+      contexts: ["all"],
+      documentUrlPatterns: ["<all_urls>"]
+    });
+
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
 
     // Debug logging for Google search initialization
@@ -93,6 +101,11 @@ export default defineContentScript({
       } else if (message.type === "showSummary") {
         showSidePanel(message.summary);
         sendResponse(true);
+      } else if (info.menuItemId === "summarize") {
+        browser.runtime.sendMessage({
+          type: "showSummary",
+          summary: "Summary of the page content"
+        });
       } else {
         console.log("No input element or wrong message type");
         sendResponse(false);
