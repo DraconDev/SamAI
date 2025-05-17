@@ -47,7 +47,8 @@ export default function App() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isApiKeySet) { // Check if API key is set first
+    if (!isApiKeySet) {
+      // Check if API key is set first
       console.warn("API key not set. Cannot send message.");
       return;
     }
@@ -168,52 +169,53 @@ export default function App() {
                       )
                     ) : (
                       <MarkdownRenderer content={message.content} />
-            )}
-            {isLoading && (
-              <div className={`flex ${isApiKeySet ? 'justify-start' : 'justify-center'} animate-fade-in`}>
-                {isApiKeySet ? (
-                  <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
-                    <div className="flex items-center space-x-4">
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
-                        <div className="relative flex space-x-1">
-                          <div
-                            className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
-                            style={{ animationDelay: "0ms" }}
-                          />
-                          <div
-                            className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
-                            style={{ animationDelay: "150ms" }}
-                          />
-                          <div
-                            className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
-                            style={{ animationDelay: "300ms" }}
-                          />
-                        </div>
-                      </div>
-                      <span className="text-sm font-medium text-[#818cf8]">
-                        AI is thinking...
-                      </span>
-                    </div>
+                    )}
                   </div>
-                ) : (
-                  <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
-                    <p className="mb-3">
-                      Please set your API key to use this feature.
-                    </p>
-                    <button
-                      onClick={() => browser.tabs.create({ url: "apikey.html" })}
-                      className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
-                    >
-                      Set API Key
-                    </button>
-                  </div>
-                )}
+                </div>
+              </div>
+            ))}
+            {isLoading && !isApiKeySet && (
+              <div className="flex justify-center animate-fade-in">
+                <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
+                  <p className="mb-3">
+                    Please set your API key to use this feature.
+                  </p>
+                  <button
+                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                    className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
+                  >
+                    Set API Key
+                  </button>
+                </div>
               </div>
             )}
-          </div>
-          <div ref={messagesEndRef} className="h-4" />
-        </div>
+            {isLoading && isApiKeySet && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
+                  <div className="flex items-center space-x-4">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-ping opacity-20"></div>
+                      <div className="relative flex space-x-1">
+                        <div
+                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                          style={{ animationDelay: "0ms" }}
+                        />
+                        <div
+                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                          style={{ animationDelay: "150ms" }}
+                        />
+                        <div
+                          className="w-2 h-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-full animate-bounce"
+                          style={{ animationDelay: "300ms" }}
+                        />
+                      </div>
+                    </div>
+                    <span className="text-sm font-medium text-[#818cf8]">
+                      AI is thinking...
+                    </span>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
           <div ref={messagesEndRef} className="h-4" />
