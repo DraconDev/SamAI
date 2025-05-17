@@ -187,51 +187,46 @@ export default function App() {
               autoFocus={!!inputInfo}
               disabled={!inputInfo || isInputLoading}
             />
-            <button
-              type="submit"
-              disabled={isInputLoading || !inputInfo}
-              className={`w-full p-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-md text-sm
-                          hover:opacity-95 focus:outline-none focus:ring-2
-                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 ease-in-out
-                          ${
-                            isInputLoading || !inputInfo
-                              ? "opacity-60 cursor-not-allowed"
-                              : ""
-                          }`}
-            >
-              {isInputLoading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-4 h-4">
-                    <svg viewBox="0 0 50 50">
-                      <path
-                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        className="animate-[dash_1.5s_ease-in-out_infinite]"
-                        style={{
-                          strokeDasharray: "90,150",
-                          strokeDashoffset: "-35",
-                          animation:
-                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
-                        }}
-                      />
-                    </svg>
-                  </div>
-                  <span>Processing...</span>
-                </div>
-              ) : (
-                "Send"
-              )}
-            </button>
-          </form>
-          {!inputInfo && (
-            <p className="mt-1 text-xs italic text-gray-400">
-              Click on an input field to enable this assistant.
-            </p>
+        <button
+          type="submit"
+          disabled={isInputLoading || !inputInfo}
+          className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                      hover:opacity-90 focus:outline-none focus:ring-2 
+                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                      transition-all duration-200 transform hover:scale-[0.98] 
+                      ${
+                        isInputLoading || !inputInfo ? "opacity-75 cursor-not-allowed" : ""
+                      }`}
+        >
+          {isInputLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-4 h-4">
+                <svg viewBox="0 0 50 50">
+                  <path
+                    d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    className="animate-[dash_1.5s_ease-in-out_infinite]"
+                    style={{
+                      strokeDasharray: "90,150",
+                      strokeDashoffset: "-35",
+                      animation:
+                        "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
+                    }}
+                  />
+                </svg>
+              </div>
+              <span>Processing...</span>
+            </div>
+          ) : inputInfo ? (
+            "Send"
+          ) : (
+            "Click on an input field to enable this assistant"
           )}
+        </button>
+      </form>
         </div>
 
         <div className="relative flex-1 space-y-2">
