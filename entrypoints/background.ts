@@ -1,4 +1,5 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
+import type { Runtime } from "wxt/browser";
 
 // Define message types
 interface BaseMessage {
@@ -67,7 +68,7 @@ export default defineBackground(() => {
   browser.runtime.onMessage.addListener(
     (
       message: unknown,
-      sender: browser.runtime.MessageSender,
+      sender: Runtime.MessageSender,
       sendResponse: (response?: any) => void
     ): true | Promise<any> | undefined => {
       console.log("[SamAI Background] Received message:", message);
