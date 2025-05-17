@@ -144,14 +144,16 @@ export default function App() {
   };
 
   const handleScrapeBody = async () => {
-    if (!scrapeUrl) return;
+    const currentUrl = window.location.href;
     try {
-      const response = await fetch(scrapeUrl);
+      const response = await fetch(currentUrl);
       const text = await response.text();
-      const bodyContent = new DOMParser()
-        .parseFromString(text, "text/html")
-        .querySelector("body")?.textContent;
-      setPagePrompt(`Summarize this content: ${bodyContent}`);
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+      const bodyContent = doc.body.textContent || "";
+      setPageContent(bodyContent);
+      setPagePrompt(scrapeUrl);
+      await handlePageSubmit();
     } catch (error) {
       console.error("Scraping failed:", error);
     }
