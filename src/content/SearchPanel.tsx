@@ -106,13 +106,13 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
               justifyContent: 'center',
               paddingTop: '80px'
             }} className="animate-fade-in">
-              <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white text-center shadow-indigo-500/20">
-                <p className="mb-3 text-[15px] leading-relaxed">
+              <div className="max-w-[80%] p-6 rounded-lg shadow-lg bg-[#1E1F2E] border border-[#4f46e5] text-gray-100 text-center">
+                <p className="mb-4 text-[15px] leading-relaxed font-medium">
                   Your API key is not set. Please set it to use SamAI.
                 </p>
                 <button
                   onClick={() => browser.tabs.create({ url: "apikey.html" })}
-                  className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
+                  className="px-6 py-2.5 font-semibold text-white transition-opacity bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-md hover:opacity-90 shadow-md"
                 >
                   Set API Key
                 </button>
