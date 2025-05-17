@@ -57,9 +57,17 @@ export default defineContentScript({
       console.log("[SamAI Content] Received message:", message);
 
       if (message.type === "getPageContent") {
-        console.log("[SamAI Content] Extracting page content");
-        sendResponse(extractPageContent());
-        return true;
+        console.log("[SamAI Content] Handling getPageContent message");
+        try {
+          console.log("[SamAI Content] Calling extractPageContent");
+          const pageContent = extractPageContent();
+          console.log("[SamAI Content] extractPageContent finished, sending response");
+          sendResponse(pageContent);
+        } catch (error) {
+          console.error("[SamAI Content] Error extracting page content:", error);
+          sendResponse({ error: error instanceof Error ? error.message : "Unknown error" });
+        }
+        return true; // Will respond asynchronously
       } else if (message.type === "getInputInfo" && lastInputElement) {
         const response = {
           messageType: "inputInfo",
@@ -72,7 +80,7 @@ export default defineContentScript({
               ? lastInputElement.type
               : "textarea",
         };
-        console.log("Sending input info:", response);
+        console.log("[SamAI Content] Sending input info:", response);
         sendResponse(response);
       } else if (message.type === "setInputValue" && lastInputElement) {
         try {
@@ -81,10 +89,10 @@ export default defineContentScript({
           lastInputElement.dispatchEvent(
             new Event("change", { bubbles: true })
           );
-          console.log("Updated input value:", message.value);
+          console.log("[SamAI Content] Updated input value:", message.value);
           sendResponse({ success: true });
         } catch (error: unknown) {
-          console.error("Error setting input value:", error);
+          console.error("[SamAI Content] Error setting input value:", error);
           const errorMessage =
             error instanceof Error ? error.message : "Unknown error";
           sendResponse({ success: false, error: errorMessage });
@@ -93,7 +101,7 @@ export default defineContentScript({
         showSidePanel(message.summary);
         sendResponse(true);
       } else {
-        console.log("No input element or wrong message type");
+        console.log("[SamAI Content] Unhandled message type or no input element");
         sendResponse(false);
       }
       return true; // Will respond asynchronously
