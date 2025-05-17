@@ -169,7 +169,22 @@ export default function App() {
                 </div>
               </div>
             ))}
-            {isLoading && (
+            {isLoading && !isApiKeySet && (
+              <div className="flex justify-center animate-fade-in">
+                <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
+                  <p className="mb-3">
+                    Please set your API key to use this feature.
+                  </p>
+                  <button
+                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                    className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
+                  >
+                    Set API Key
+                  </button>
+                </div>
+              </div>
+            )}
+            {isLoading && isApiKeySet && (
               <div className="flex justify-start">
                 <div className="max-w-[80%] p-5 rounded-xl bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 shadow-xl backdrop-blur-sm">
                   <div className="flex items-center space-x-4">
