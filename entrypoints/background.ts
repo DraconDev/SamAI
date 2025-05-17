@@ -45,6 +45,12 @@ export default defineBackground(() => {
       return true; // Will respond asynchronously
     }
 
+    if (message.type === "openApiKeyPage") {
+      console.log("[SamAI Background] Received request to open API key page");
+      browser.tabs.create({ url: "apikey.html" });
+      return true; // No response needed for this message
+    }
+
     if (message.type === "setInputValue" && sourceTabId) {
       // Handle setInputValue asynchronously
       browser.tabs
