@@ -149,7 +149,7 @@ export default function App() {
       const bodyContent = await browser.tabs.sendMessage(
         (await browser.tabs.query({ active: true, currentWindow: true }))[0].id!,
         { type: "getPageContent" }
-      );
+      ) as string; // Cast to string
       console.log(
         "[Scrape Assistant] Page content received, length:",
         bodyContent.length
