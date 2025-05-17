@@ -53,58 +53,60 @@ export default defineContentScript({
     });
 
     // Handle messages from the background script
-    browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      console.log("[SamAI Content] Received message:", message);
+    browser.runtime.onMessage.addListener(
+      (message: ContentScriptMessage, sender, sendResponse) => {
+        console.log("[SamAI Content] Received message:", message);
 
-      if (message.type === "getPageContent") {
-        console.log("[SamAI Content] Handling getPageContent message");
-        try {
-          console.log("[SamAI Content] Calling extractPageContent");
-          const pageContent = extractPageContent();
-          console.log("[SamAI Content] extractPageContent finished, sending response");
-          sendResponse(pageContent);
-        } catch (error) {
-          console.error("[SamAI Content] Error extracting page content:", error);
-          sendResponse({ error: error instanceof Error ? error.message : "Unknown error" });
+        if (message.type === "getPageContent") {
+          console.log("[SamAI Content] Handling getPageContent message");
+          try {
+            console.log("[SamAI Content] Calling extractPageContent");
+            const pageContent = extractPageContent();
+            console.log("[SamAI Content] extractPageContent finished, sending response");
+            sendResponse(pageContent);
+          } catch (error) {
+            console.error("[SamAI Content] Error extracting page content:", error);
+            sendResponse({ error: error instanceof Error ? error.message : "Unknown error" });
+          }
+          return true; // Will respond asynchronously
+        } else if (message.type === "getInputInfo" && lastInputElement) {
+          const response = {
+            messageType: "inputInfo",
+            value: lastInputElement.value,
+            placeholder: lastInputElement.placeholder,
+            id: lastInputElement.id,
+            name: lastInputElement.name,
+            inputType:
+              lastInputElement instanceof HTMLInputElement
+                ? lastInputElement.type
+                : "textarea",
+          };
+          console.log("[SamAI Content] Sending input info:", response);
+          sendResponse(response);
+        } else if (message.type === "setInputValue" && lastInputElement) {
+          try {
+            lastInputElement.value = message.value;
+            lastInputElement.dispatchEvent(new Event("input", { bubbles: true }));
+            lastInputElement.dispatchEvent(
+              new Event("change", { bubbles: true })
+            );
+            console.log("[SamAI Content] Updated input value:", message.value);
+            sendResponse({ success: true });
+          } catch (error: unknown) {
+            console.error("[SamAI Content] Error setting input value:", error);
+            const errorMessage =
+              error instanceof Error ? error.message : "Unknown error";
+            sendResponse({ success: false, error: errorMessage });
+          }
+        } else if (message.type === "showSummary") {
+          showSidePanel(message.summary);
+          sendResponse(true);
+        } else {
+          console.log("[SamAI Content] Unhandled message type or no input element");
+          sendResponse(false);
         }
         return true; // Will respond asynchronously
-      } else if (message.type === "getInputInfo" && lastInputElement) {
-        const response = {
-          messageType: "inputInfo",
-          value: lastInputElement.value,
-          placeholder: lastInputElement.placeholder,
-          id: lastInputElement.id,
-          name: lastInputElement.name,
-          inputType:
-            lastInputElement instanceof HTMLInputElement
-              ? lastInputElement.type
-              : "textarea",
-        };
-        console.log("[SamAI Content] Sending input info:", response);
-        sendResponse(response);
-      } else if (message.type === "setInputValue" && lastInputElement) {
-        try {
-          lastInputElement.value = message.value;
-          lastInputElement.dispatchEvent(new Event("input", { bubbles: true }));
-          lastInputElement.dispatchEvent(
-            new Event("change", { bubbles: true })
-          );
-          console.log("[SamAI Content] Updated input value:", message.value);
-          sendResponse({ success: true });
-        } catch (error: unknown) {
-          console.error("[SamAI Content] Error setting input value:", error);
-          const errorMessage =
-            error instanceof Error ? error.message : "Unknown error";
-          sendResponse({ success: false, error: errorMessage });
-        }
-      } else if (message.type === "showSummary") {
-        showSidePanel(message.summary);
-        sendResponse(true);
-      } else {
-        console.log("[SamAI Content] Unhandled message type or no input element");
-        sendResponse(false);
       }
-      return true; // Will respond asynchronously
-    });
+    );
   },
 });
