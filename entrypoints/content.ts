@@ -1,6 +1,7 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
 import { extractPageContent } from "@/utils/page-content";
+import { tabs } from "webextension-polyfill";
 
 // Define message types
 interface GetPageContentMessage {
