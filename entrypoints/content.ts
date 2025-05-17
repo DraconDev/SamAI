@@ -2,6 +2,31 @@ import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
 import { extractPageContent } from "@/utils/page-content";
 
+// Define message types
+interface GetPageContentMessage {
+  type: "getPageContent";
+}
+
+interface GetInputInfoMessage {
+  type: "getInputInfo";
+}
+
+interface SetInputValueMessage {
+  type: "setInputValue";
+  value: string;
+}
+
+interface ShowSummaryMessage {
+  type: "showSummary";
+  summary: string;
+}
+
+type ContentScriptMessage =
+  | GetPageContentMessage
+  | GetInputInfoMessage
+  | SetInputValueMessage
+  | ShowSummaryMessage;
+
 export default defineContentScript({
   matches: ["<all_urls>"],
   main() {
