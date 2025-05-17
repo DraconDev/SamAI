@@ -106,44 +106,16 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
               justifyContent: 'center',
               paddingTop: '80px'
             }} className="animate-fade-in">
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                marginTop: '-40px'
-              }}>
-                <div style={{
-                  maxWidth: '80%',
-                  padding: '20px',
-                  borderRadius: '10px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  backgroundColor: 'rgba(255, 255, 0, 0.1)', // Yellowish background
-                  border: '1px solid rgba(255, 255, 0, 0.3)', // Yellowish border
-                  color: '#ffffcc', // Light yellow text
-                  textAlign: 'center'
-                }}>
-                  <p style={{ marginBottom: '15px', fontSize: '15px' }}>
-                    Your API key is not set. Please set it to use SamAI.
-                  </p>
-                  <button
-                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
-                    style={{
-                      padding: '10px 20px',
-                      fontWeight: 600,
-                      color: '#333', // Dark text for contrast
-                      backgroundColor: '#ffcc00', // Yellow button
-                      borderRadius: '5px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'opacity 0.2s',
-                      fontSize: '14px'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                    onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-                  >
-                    Set API Key
-                  </button>
-                </div>
+              <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
+                <p className="mb-3">
+                  Your API key is not set. Please set it to use SamAI.
+                </p>
+                <button
+                  onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                  className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
+                >
+                  Set API Key
+                </button>
               </div>
             </div>
           ) : (
