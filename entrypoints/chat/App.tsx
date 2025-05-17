@@ -47,7 +47,11 @@ export default function App() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading || !isApiKeySet) return; // Add check for isApiKeySet
+    if (!isApiKeySet) { // Check if API key is set first
+      console.warn("API key not set. Cannot send message.");
+      return;
+    }
+    if (!input.trim() || isLoading) return;
 
     const userMessage: ChatMessage = {
       role: "user",
