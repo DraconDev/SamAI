@@ -80,6 +80,22 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               <path d="M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div style={{ minHeight: '200px' }}>
+        {response ? (
+          <div className="markdown-content">
+            <MarkdownRenderer content={response} />
+          </div>
+        ) : (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
             paddingTop: '80px'
           }}>
@@ -93,9 +109,9 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
                 <svg viewBox="0 0 50 50" className="animate-spin">
                   <path
                     d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                    fill="none"
-                    stroke="url(#gradient)"
-                    strokeWidth="3"
+                    fill="none",
+                    stroke="url(#gradient)",
+                    strokeWidth="3",
                     strokeLinecap="round"
                   />
                   <defs>
@@ -107,17 +123,3 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
                 </svg>
               </div>
               <div style={{
-                color: '#818cf8',
-                fontWeight: 500,
-                fontSize: '14px',
-                letterSpacing: '0.5px'
-              }} className="animate-pulse">
-                Generating insights...
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
