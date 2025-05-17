@@ -25,10 +25,10 @@ export default function App() {
       try {
         const result = await browser.storage.local.get(["inputInfo", "pageContent"]);
         if (result.inputInfo) {
-          setInputInfo(result.inputInfo);
+          setInputInfo(result.inputInfo as InputInfo);
         }
         if (result.pageContent) {
-          setPageContent(result.pageContent);
+          setPageContent(result.pageContent as string);
         }
       } catch (error) {
         console.error("Error loading stored data:", error);
@@ -258,7 +258,10 @@ export default function App() {
             <button
               onClick={() => {
                 setPagePrompt("summarize");
-                handlePageSubmit(new Event('submit') as React.FormEvent);
+                handlePageSubmit({ 
+                  preventDefault: () => {},
+                  currentTarget: document.createElement('form')
+                } as React.FormEvent);
               }}
               className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
                         hover:opacity-90 focus:outline-none focus:ring-2 
