@@ -258,10 +258,7 @@ export default function App() {
             <button
               onClick={() => {
                 setPagePrompt("summarize");
-                handlePageSubmit({ 
-                  preventDefault: () => {},
-                  currentTarget: document.createElement('form')
-                } as React.FormEvent);
+                handlePageSubmit();
               }}
               className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
                         hover:opacity-90 focus:outline-none focus:ring-2 
