@@ -40,16 +40,6 @@ export default function App() {
     loadData();
   }, []);
 
-  // Watch for changes in apiKeyStore and update isApiKeySet state
-  useEffect(() => {
-    const unsubscribe = apiKeyStore.watch((newValue) => {
-      setIsApiKeySet(!!newValue?.apiKey);
-    });
-
-    // Cleanup the watcher on component unmount
-    return () => unsubscribe();
-  }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
-
   // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
