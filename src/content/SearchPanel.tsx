@@ -131,7 +131,26 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
               </p>
               <button
                 onClick={() => browser.tabs.create({ url: "apikey.html" })}
-                className="px-6 py-2.5 font-semibold text-white transition-opacity bg-gradient-to-r from-[#4f46e5] to-[#818cf8] rounded-md hover:opacity-90 shadow-md"
+                style={{
+                  padding: "10px 24px",
+                  fontWeight: 700,
+                  color: "white",
+                  background: "linear-gradient(90deg, #4f46e5, #818cf8)",
+                  border: "none",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease-in-out",
+                  fontSize: "15px",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = "0.95";
+                  e.currentTarget.style.boxShadow = "0 6px 15px rgba(0, 0, 0, 0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = "1";
+                  e.currentTarget.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+                }}
               >
                 Set API Key
               </button>
