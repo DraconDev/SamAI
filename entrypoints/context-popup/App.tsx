@@ -308,7 +308,7 @@ export default function App() {
               type="text"
               value={scrapeUrl}
               onChange={(e) => setScrapeUrl(e.target.value)}
-              placeholder="Enter URL to scrape"
+              placeholder="Enter what you want to be scraped"
               className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 text-sm"
             />
             <div className="flex gap-2">
