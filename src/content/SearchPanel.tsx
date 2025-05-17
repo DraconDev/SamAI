@@ -130,7 +130,7 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
                 Your API key is not set. Please set it to use SamAI.
               </p>
               <button
-                onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                onClick={() => browser.tabs.create({ url: "index/apikey.html" })}
                 style={{
                   padding: "10px 24px",
                   fontWeight: 700,
