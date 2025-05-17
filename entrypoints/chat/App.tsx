@@ -100,7 +100,9 @@ export default function App() {
             {!isApiKeySet && (
               <div className="flex justify-center animate-fade-in">
                 <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
-                  <p className="mb-3">Your API key is not set. Please set it to use SamAI.</p>
+                  <p className="mb-3">
+                    Your API key is not set. Please set it to use SamAI.
+                  </p>
                   <button
                     onClick={() => browser.tabs.create({ url: "apikey.html" })}
                     className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
@@ -124,7 +126,13 @@ export default function App() {
                       : "bg-gradient-to-br from-[#1E1F2E] to-[#1a1b2e] border border-[#2E2F3E]/50 text-gray-100 shadow-black/20"
                   }`}
                 >
-                  <div className={message.role === "user" ? "text-[15px] leading-relaxed" : "text-[15px]"}>
+                  <div
+                    className={
+                      message.role === "user"
+                        ? "text-[15px] leading-relaxed"
+                        : "text-[15px]"
+                    }
+                  >
                     {message.role === "user" ? (
                       message.content.startsWith("Question about page:") ? (
                         <div className="flex items-center gap-2">
@@ -146,9 +154,7 @@ export default function App() {
                             .trim()}
                         </div>
                       ) : (
-                        <div className="leading-relaxed">
-                          {message.content}
-                        </div>
+                        <div className="leading-relaxed">{message.content}</div>
                       )
                     ) : (
                       <MarkdownRenderer content={message.content} />
