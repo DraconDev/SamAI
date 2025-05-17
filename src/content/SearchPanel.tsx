@@ -72,14 +72,14 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
               borderRadius: '6px',
               cursor: 'pointer',
               color: '#e2e8f0',
-            <MarkdownRenderer content={response} />
-          </div>
-        ) : (
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '0.6'}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
             justifyContent: 'center',
             paddingTop: '80px'
           }}>
