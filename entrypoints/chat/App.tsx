@@ -113,7 +113,7 @@ export default function App() {
                 Your API key is not set. Please set it to use SamAI.
               </p>
               <button
-                onClick={() => browser.tabs.create({ url: "/apikey/index.html" })}
+                onClick={() => browser.tabs.create({ url: "apikey.html" })}
                 className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
               >
                 Set API Key
@@ -166,7 +166,9 @@ export default function App() {
                                 .trim()}
                             </div>
                           ) : (
-                            <div className="leading-relaxed">{message.content}</div>
+                            <div className="leading-relaxed">
+                              {message.content}
+                            </div>
                           )
                         ) : (
                           <MarkdownRenderer content={message.content} />
