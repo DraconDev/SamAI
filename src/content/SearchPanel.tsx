@@ -75,47 +75,98 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
             <MarkdownRenderer content={response} />
           </div>
         ) : (
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: '80px'
-          }}>
+          !isApiKeySet ? (
             <div style={{
+              position: 'absolute',
+              inset: 0,
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
-              marginTop: '-40px'
-            }}>
-              <div style={{ position: 'relative', width: '50px', height: '50px', marginBottom: '16px' }}>
-                <svg viewBox="0 0 50 50" className="animate-spin">
-                  <path
-                    d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                    fill="none"
-                    stroke="url(#gradient)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                  <defs>
-                    <linearGradient id="gradient">
-                      <stop offset="0%" stopColor="#4f46e5" />
-                      <stop offset="100%" stopColor="#818cf8" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
+              justifyContent: 'center',
+              paddingTop: '80px'
+            }} className="animate-fade-in">
               <div style={{
-                color: '#818cf8',
-                fontWeight: 500,
-                fontSize: '14px',
-                letterSpacing: '0.5px'
-              }} className="animate-pulse">
-                Generating insights...
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginTop: '-40px'
+              }}>
+                <div style={{
+                  maxWidth: '80%',
+                  padding: '20px',
+                  borderRadius: '10px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  backgroundColor: 'rgba(255, 255, 0, 0.1)', // Yellowish background
+                  border: '1px solid rgba(255, 255, 0, 0.3)', // Yellowish border
+                  color: '#ffffcc', // Light yellow text
+                  textAlign: 'center'
+                }}>
+                  <p style={{ marginBottom: '15px', fontSize: '15px' }}>
+                    Your API key is not set. Please set it to use SamAI.
+                  </p>
+                  <button
+                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                    style={{
+                      padding: '10px 20px',
+                      fontWeight: 600,
+                      color: '#333', // Dark text for contrast
+                      backgroundColor: '#ffcc00', // Yellow button
+                      borderRadius: '5px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'opacity 0.2s',
+                      fontSize: '14px'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                    onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                  >
+                    Set API Key
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: '80px'
+            }}>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginTop: '-40px'
+              }}>
+                <div style={{ position: 'relative', width: '50px', height: '50px', marginBottom: '16px' }}>
+                  <svg viewBox="0 0 50 50" className="animate-spin">
+                    <path
+                      d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
+                      fill="none"
+                      stroke="url(#gradient)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <defs>
+                      <linearGradient id="gradient">
+                        <stop offset="0%" stopColor="#4f46e5" />
+                        <stop offset="100%" stopColor="#818cf8" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div style={{
+                  color: '#818cf8',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  letterSpacing: '0.5px'
+                }} className="animate-pulse">
+                  Generating insights...
+                </div>
+              </div>
+            </div>
+          )
         )}
       </div>
     </div>
