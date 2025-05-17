@@ -145,10 +145,13 @@ export default function App() {
 
   const handleScrapeBody = async () => {
     try {
-      console.log("[Scrape Assistant] Extracting page content...");
-      const bodyContent = extractPageContent();
+      console.log("[Scrape Assistant] Requesting page content from content script...");
+      const bodyContent = await browser.tabs.sendMessage(
+        (await browser.tabs.query({ active: true, currentWindow: true }))[0].id!,
+        { type: "getPageContent" }
+      );
       console.log(
-        "[Scrape Assistant] Page content extracted, length:",
+        "[Scrape Assistant] Page content received, length:",
         bodyContent.length
       );
 
