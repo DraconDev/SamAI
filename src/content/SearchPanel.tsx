@@ -4,9 +4,10 @@ import { MarkdownRenderer } from "@/utils/markdown";
 interface SearchPanelProps {
   response: string | null;
   onClose: () => void;
+  onSummarize: () => void;
 }
 
-export default function SearchPanel({ response, onClose }: SearchPanelProps) {
+export default function SearchPanel({ response, onClose, onSummarize }: SearchPanelProps) {
   return (
     <div
       style={{
@@ -15,7 +16,6 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
         right: 0,
         width: '430px',
         height: '100vh',
-        background: 'linear-gradient(135deg, #1a1b2e, #0D0E16)',
         boxShadow: '-5px 0 15px rgba(0,0,0,0.2)',
         padding: '24px',
         overflowY: 'auto',
