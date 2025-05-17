@@ -166,7 +166,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-w-[300px] min-h-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100 overflow-y-auto">
+    <div className="min-w-[300px] min-h-[400px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-6 text-gray-100 overflow-y-auto">
       <div className="flex flex-col h-full space-y-6">
         <div
           className={`space-y-3 flex-none ${!inputInfo ? "opacity-50" : ""}`}
@@ -296,19 +296,19 @@ export default function App() {
           </form>
         </div>
 
-        <div className="mt-6">
-          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-3">
+        <div className="mt-4">
+          <h2 className="font-semibold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text mb-2">
             Scrape Assistant
           </h2>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             <input
               type="text"
               value={scrapeUrl}
               onChange={(e) => setScrapeUrl(e.target.value)}
               placeholder="Enter URL to scrape"
-              className="w-full p-3 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
+              className="w-full p-2 placeholder-gray-500 transition-all duration-200 bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]"
             />
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <button
                 onClick={handleScrapeBody}
                 className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
