@@ -144,18 +144,74 @@ export default function App() {
   };
 
   const handleScrapeBody = async () => {
-    const currentUrl = window.location.href;
     try {
-      const response = await fetch(currentUrl);
-      const text = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(text, "text/html");
-      const bodyContent = doc.body.textContent || "";
-      setPageContent(bodyContent);
-      setPagePrompt(scrapeUrl);
-      await handlePageSubmit();
+      console.log("[Scrape Assistant] Extracting page content...");
+      const bodyContent = extractPageContent();
+      console.log(
+        "[Scrape Assistant] Page content extracted, length:",
+        bodyContent.length
+      );
+
+      if (!scrapeUrl.trim()) {
+        console.warn("[Scrape Assistant] No instructions provided for scraping.");
+        // Optionally, provide feedback to the user or just scrape without AI
+        // For now, we'll proceed with a default action or just extract
+        // If you want to require instructions, add a return here.
+      }
+
+      console.log("[Scrape Assistant] Generating response...");
+      const response = await generateFormResponse(
+        `${scrapeUrl.trim() || "Analyze the following page content:"}\n\nContent: ${bodyContent}`
+      );
+
+      if (!response) {
+        console.error("[Scrape Assistant] No response received");
+        throw new Error("Failed to generate response");
+      }
+      console.log(
+        "[Scrape Assistant] Response received, length:",
+        response.length
+      );
+
+      // Check chat continuation setting and add messages
+      console.log("[Scrape Assistant] Adding messages to chat...");
+      const settings = await searchSettingsStore.getValue();
+
+      if (!settings.continuePreviousChat) {
+        console.log("[Scrape Assistant] Starting fresh chat...");
+        await chatStore.setValue({ messages: [] });
+      }
+
+      const userMessage = {
+        role: "user" as const,
+        content: `Instructions for scraped content: ${scrapeUrl.trim() || "Analyze page content"}`,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      const aiMessage = {
+        role: "assistant" as const,
+        content: response,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      await addChatMessage(userMessage);
+      await addChatMessage(aiMessage);
+      console.log("[Scrape Assistant] Messages added to chat");
+
+      // Open chat in new tab
+      console.log("[Scrape Assistant] Opening chat page...");
+      await browser.tabs.create({
+        url: "chat.html",
+      });
+      console.log("[Scrape Assistant] Chat page opened");
+
+      setScrapeUrl(""); // Clear the scrape URL input after submission
+      console.log("[Scrape Assistant] Closing popup...");
+      window.close();
     } catch (error) {
       console.error("Scraping failed:", error);
+    } finally {
+      // Consider if you need a loading state for scraping
     }
   };
 
