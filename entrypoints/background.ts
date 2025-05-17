@@ -1,5 +1,54 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 
+// Define message types
+interface BaseMessage {
+  type: string;
+}
+
+interface GenerateGeminiResponseRequest extends BaseMessage {
+  type: "generateGeminiResponse";
+  prompt: string;
+}
+
+interface OpenApiKeyPageRequest extends BaseMessage {
+  type: "openApiKeyPage";
+}
+
+interface SetInputValueRequest extends BaseMessage {
+  type: "setInputValue";
+  value: string;
+}
+
+interface GetInputInfoRequest extends BaseMessage {
+  type: "getInputInfo";
+}
+
+interface GetPageContentRequest extends BaseMessage {
+  type: "getPageContent";
+}
+
+interface InputInfoResponse {
+  messageType: "inputInfo";
+  value?: string;
+  placeholder?: string;
+  inputType?: string;
+  id?: string;
+  name?: string;
+}
+
+type BackgroundMessage =
+  | GenerateGeminiResponseRequest
+  | OpenApiKeyPageRequest
+  | SetInputValueRequest
+  | GetInputInfoRequest
+  | GetPageContentRequest;
+
+// Type guard for incoming messages
+function isBackgroundMessage(message: any): message is BackgroundMessage {
+  return typeof message === 'object' && message !== null && 'type' in message && typeof message.type === 'string';
+}
+
+
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
 
@@ -10,68 +59,102 @@ export default defineBackground(() => {
     contexts: ["all"],
   });
 
-  // Listen for runtime messages and forward them to source tab
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    const typedMessage = message as any; // Simple type assertion
+  // Listen for runtime messages
+  browser.runtime.onMessage.addListener(
+    (
+      message: unknown,
+      sender: browser.runtime.MessageSender,
+      sendResponse: (response?: any) => void
+    ): boolean | Promise<any> => {
+      console.log("[SamAI Background] Received message:", message);
 
-    console.log("[SamAI Background] Received message:", typedMessage);
-
-    if (typedMessage.type === "generateGeminiResponse") {
-      // Start async operation
-      console.log("[SamAI Background] Attempting to generate Gemini response");
-
-      // Check if sender is a valid tab
-      if (!sender.tab) {
-        console.error("[SamAI Background] No sender tab found");
-        sendResponse(null);
-        return true;
+      if (!isBackgroundMessage(message)) {
+        console.warn("[SamAI Background] Received message with invalid structure:", message);
+        return false; // Indicate that the message was not handled
       }
 
-      generateFormResponse(typedMessage.prompt)
-        .then((text) => {
-          if (text === null) {
-            console.error(
-              "[SamAI Background] Response generation failed - null response"
-            );
-          } else {
-            console.log("[SamAI Background] Successfully generated response");
+      switch (message.type) {
+        case "generateGeminiResponse":
+          {
+            const geminiMessage = message as GenerateGeminiResponseRequest; // Assert after type guard
+            console.log("[SamAI Background] Attempting to generate Gemini response");
+
+            // Check if sender is a valid tab
+            if (!sender.tab) {
+              console.error("[SamAI Background] No sender tab found");
+              sendResponse(null);
+              return true;
+            }
+
+            generateFormResponse(geminiMessage.prompt)
+              .then((text) => {
+                if (text === null) {
+                  console.error("[SamAI Background] Response generation failed - null response");
+                } else {
+                  console.log("[SamAI Background] Successfully generated response");
+                }
+                console.log("[SamAI Background] Response text:", text);
+                sendResponse(text);
+              })
+              .catch((error) => {
+                console.error("[SamAI Background] Error generating response:", {
+                  message: error.message,
+                  stack: error.stack,
+                });
+                sendResponse(null);
+              });
+            return true; // Will respond asynchronously
           }
-          console.log("[SamAI Background] Response text:", text);
-          sendResponse(text);
-        })
-        .catch((error) => {
-          console.error("[SamAI Background] Error generating response:", {
-            message: error.message,
-            stack: error.stack,
-          });
-          sendResponse(null);
-        });
-      return true; // Will respond asynchronously
-    }
 
-    if (typedMessage.type === "openApiKeyPage") {
-      console.log("[SamAI Background] Received request to open API key page");
-      browser.tabs.create({ url: "apikey.html" });
-      return true; // No response needed for this message
-    }
+        case "openApiKeyPage":
+          console.log("[SamAI Background] Received request to open API key page");
+          browser.tabs.create({ url: "apikey.html" });
+          return true; // No response needed for this message
 
-    if (typedMessage.type === "setInputValue" && sourceTabId) {
-      // Handle setInputValue asynchronously
-      browser.tabs
-        .sendMessage(sourceTabId, typedMessage)
-        .then((result) => {
-          sendResponse(result);
-        })
-        .catch((error) => {
-          console.error("Error forwarding message:", error);
-          sendResponse({
-            success: false,
-            error: "Failed to forward message to content script",
-          });
-        });
-      return true;
+        case "setInputValue":
+          {
+            const setInputMessage = message as SetInputValueRequest; // Assert after type guard
+            if (sourceTabId) {
+              // Handle setInputValue asynchronously
+              browser.tabs
+                .sendMessage(sourceTabId, setInputMessage)
+                .then((result) => {
+                  sendResponse(result);
+                })
+                .catch((error) => {
+                  console.error("Error forwarding message:", error);
+                  sendResponse({
+                    success: false,
+                    error: "Failed to forward message to content script",
+                  });
+                });
+              return true;
+            } else {
+              console.warn("[SamAI Background] Received setInputValue message but sourceTabId is null");
+              sendResponse({ success: false, error: "Source tab not available" });
+              return true;
+            }
+          }
+
+        case "getInputInfo":
+          // This message is typically handled by the content script, not the background.
+          // If it reaches here, it might be an unexpected message or a misconfiguration.
+          console.warn("[SamAI Background] Received unexpected getInputInfo message in background");
+          return false; // Not handled by background
+
+        case "getPageContent":
+          // This message is typically handled by the content script, not the background.
+          // If it reaches here, it might be an unexpected message or a misconfiguration.
+          console.warn("[SamAI Background] Received unexpected getPageContent message in background");
+          return false; // Not handled by background
+
+        default:
+          // If message.type is a string but not one of the known types
+          console.warn("[SamAI Background] Received unknown message type:", message.type);
+          return false; // Indicate that the message was not handled
+      }
     }
-  });
+  );
 
   // Add click handler for the context menu item
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
@@ -84,38 +167,36 @@ export default defineBackground(() => {
       console.log("Content script registered in tab:", tab.id);
 
       // Try to get input information if it's an input element
-      const message = { type: "getInputInfo" };
-      console.log("Sending message to content script:", message);
+      const getInputMessage: GetInputInfoRequest = { type: "getInputInfo" };
+      console.log("Sending message to content script:", getInputMessage);
 
-      const response = await browser.tabs.sendMessage(tab.id, message);
-      console.log("Background received response:", response);
+      const inputResponse = await browser.tabs.sendMessage(tab.id, getInputMessage);
+      console.log("Background received input response:", inputResponse);
 
       // Store input info and page content in local storage
-      const pageContent = await browser.tabs.sendMessage(tab.id, {
-        type: "getPageContent",
-      });
-      console.log(
-        "[SamAI Background] Page content length:",
-        pageContent?.length || 0
-      );
+      const getPageContentMessage: GetPageContentRequest = { type: "getPageContent" };
+      const pageContentResponse = await browser.tabs.sendMessage(tab.id, getPageContentMessage);
+      console.log("[SamAI Background] Page content length:", (pageContentResponse as any)?.length || 0); // Use type assertion
 
-      if (response && response.messageType === "inputInfo") {
-        console.log("Input info received:", response);
+      // Assuming the content script sends back an object with a messageType property
+      if (inputResponse && typeof inputResponse === 'object' && 'messageType' in inputResponse && (inputResponse as InputInfoResponse).messageType === "inputInfo") {
+        console.log("Input info received:", inputResponse);
+        const typedInputResponse = inputResponse as InputInfoResponse; // Assert to InputInfoResponse
         await browser.storage.local.set({
           inputInfo: {
-            value: response.value || "",
-            placeholder: response.placeholder || "",
-            inputType: response.inputType || "",
-            elementId: response.id || "",
-            elementName: response.name || "",
+            value: typedInputResponse.value || "",
+            placeholder: typedInputResponse.placeholder || "",
+            inputType: typedInputResponse.inputType || "",
+            elementId: typedInputResponse.id || "",
+            elementName: typedInputResponse.name || "",
           },
-          pageContent: pageContent || "Unable to access page content",
+          pageContent: pageContentResponse || "Unable to access page content"
         });
       } else {
         // Clear input info but keep page content if we're not clicking on an input
         await browser.storage.local.remove("inputInfo");
         await browser.storage.local.set({
-          pageContent: pageContent || "Unable to access page content",
+          pageContent: pageContentResponse || "Unable to access page content"
         });
       }
 
