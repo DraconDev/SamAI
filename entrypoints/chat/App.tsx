@@ -1,3 +1,47 @@
+import React, { useState, useEffect, useRef } from "react";
+import {
+  chatStore,
+  type ChatMessage,
+  addChatMessage,
+  searchSettingsStore,
+} from "@/utils/store";
+import { MarkdownRenderer } from "@/utils/markdown";
+
+export default function App() {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Load messages and settings from store
+  useEffect(() => {
+    const loadData = async () => {
+      const [chatData, settings] = await Promise.all([
+        chatStore.getValue(),
+        searchSettingsStore.getValue(),
+      ]);
+
+      if (settings.continuePreviousChat) {
+        setMessages(chatData.messages);
+      } else {
+        // Keep only the last 2 messages
+        const lastTwoMessages = chatData.messages.slice(-2);
+        setMessages(lastTwoMessages);
+        await chatStore.setValue({ messages: lastTwoMessages }); // Update stored messages
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
 
     const userMessage: ChatMessage = {
       role: "user",
@@ -53,6 +97,19 @@
       <div className="flex flex-col h-[calc(100vh-80px)]">
         <div className="flex-1 p-6 space-y-6 overflow-auto scrollbar-thin scrollbar-thumb-[#2E2F3E] scrollbar-track-[#1a1b2e] hover:scrollbar-thumb-[#4f46e5]">
           <div className="w-full max-w-5xl mx-auto space-y-6">
+            {!isApiKeySet && (
+              <div className="flex justify-center animate-fade-in">
+                <div className="max-w-[80%] p-5 rounded-xl shadow-xl bg-yellow-600/20 border border-yellow-600/50 text-yellow-100 text-center">
+                  <p className="mb-3">Your API key is not set. Please set it to use SamAI.</p>
+                  <button
+                    onClick={() => browser.tabs.create({ url: "apikey.html" })}
+                    className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
+                  >
+                    Set API Key
+                  </button>
+                </div>
+              </div>
+            )}
             {messages.map((message, index) => (
               <div
                 key={index}
