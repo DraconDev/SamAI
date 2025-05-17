@@ -144,10 +144,18 @@ export default function App() {
   };
 
   const handleScrapeBody = async () => {
+    console.log("[Scrape Assistant] handleScrapeBody started");
     try {
       console.log("[Scrape Assistant] Requesting page content from content script...");
+      const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+      if (tabs.length === 0 || !tabs[0].id) {
+        console.error("[Scrape Assistant] No active tab found.");
+        return;
+      }
+      const tabId = tabs[0].id;
+      console.log(`[Scrape Assistant] Sending message to tab ID: ${tabId}`);
       const bodyContent = await browser.tabs.sendMessage(
-        (await browser.tabs.query({ active: true, currentWindow: true }))[0].id!,
+        tabId,
         { type: "getPageContent" }
       ) as string; // Cast to string
       console.log(
@@ -214,6 +222,7 @@ export default function App() {
     } catch (error) {
       console.error("Scraping failed:", error);
     } finally {
+      console.log("[Scrape Assistant] handleScrapeBody finished");
       // Consider if you need a loading state for scraping
     }
   };
