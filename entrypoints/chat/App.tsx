@@ -12,7 +12,7 @@ export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isApiKeySet, setIsApiKeySet] = useState(true); // Add isApiKeySet state
+  const [isApiKeySet, setIsApiKeySet] = useState(false); // Initialize isApiKeySet to false
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Load messages and settings from store
