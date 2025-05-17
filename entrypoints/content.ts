@@ -86,7 +86,7 @@ export default defineContentScript({
         if (typeof message !== 'object' || message === null || !('type' in message)) {
           console.warn("[SamAI Content] Received message with invalid structure:", message);
           sendResponse(false);
-          return false; // Indicate that the message was not handled
+          return; // Indicate that the message was not handled (implicitly returns undefined)
         }
 
         switch (message.type) {
@@ -166,7 +166,7 @@ export default defineContentScript({
           default:
             console.log("[SamAI Content] Unhandled message type:", message.type);
             sendResponse(false);
-            return false; // Indicate that the message was not handled
+            return; // Indicate that the message was not handled (implicitly returns undefined)
         }
       }
     );
