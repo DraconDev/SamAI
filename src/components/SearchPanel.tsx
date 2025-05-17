@@ -103,3 +103,32 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
               <div style={{ position: 'relative', width: '50px', height: '50px', marginBottom: '16px' }}>
                 <svg viewBox="0 0 50 50" className="animate-spin">
                   <path
+                    d="M25,25m-20,0a20,20 0 1,1 40,0a20,20 0 1,1 -40,0"
+                    fill="none"
+                    stroke="url(#gradient)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient id="gradient">
+                      <stop offset="0%" stopColor="#4f46e5" />
+                      <stop offset="100%" stopColor="#818cf8" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div style={{
+                color: '#818cf8',
+                fontWeight: 500,
+                fontSize: '14px',
+                letterSpacing: '0.5px'
+              }}>
+                Generating insight...
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
