@@ -16,6 +16,7 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
         right: 0,
         width: '430px',
         height: '100vh',
+        background: 'linear-gradient(135deg, #1a1b20, #0D0E16)',
         boxShadow: '-5px 0 15px rgba(0,0,0,0.2)',
         padding: '24px',
         overflowY: 'auto',
@@ -24,20 +25,19 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
       }}
       className="animate-slide-in"
     >
-      <button
-        onClick={(e) => {
-          e.currentTarget.closest("#samai-container")?.classList.replace("animate-slide-in", "animate-slide-out");
-          setTimeout(onClose, 300);
-        }}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '20px',
-          width: '32px',
-          height: '32px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px' }}>
+        <div>
+          <h1 style={{ 
+            margin: 0,
+            fontSize: '20px',
+            fontWeight: 600,
+            background: 'linear-gradient(90deg, #818cf8, #4f46e5)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            paddingRight: '32px'
+          }}>
+            Sam AI Results
+          </h1>
           background: 'transparent',
           border: 'none',
           borderRadius: '6px',
