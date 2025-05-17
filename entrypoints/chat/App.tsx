@@ -114,7 +114,7 @@ export default function App() {
                 Your API key is not set. Please set it to use SamAI.
               </p>
               <button
-                onClick={() => tabs.create({ url: "apikey.html" })}
+                onClick={() => tabs.create({ url: "apikey/index.html" })}
                 className="px-4 py-2 font-semibold text-white transition-opacity bg-yellow-600 rounded-md hover:opacity-90"
               >
                 Set API Key
