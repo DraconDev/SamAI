@@ -74,3 +74,32 @@ export default function SearchPanel({ response, onClose, onSummarize }: SearchPa
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="M5 5L15 15" stroke="currentColor"  strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div style={{ minHeight: '200px' }}>
+        {response ? (
+          <div className="markdown-content">
+            <MarkdownRenderer content={response} />
+          </div>
+        ) : (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingTop: '80px'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginTop: '-40px'
+            }}>
+              <div style={{ position: 'relative', width: '50px', height: '50px', marginBottom: '16px' }}>
+                <svg viewBox="0 0 50 50" className="animate-spin">
+                  <path
