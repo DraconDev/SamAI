@@ -104,8 +104,7 @@ export default defineBackground(() => {
 
           try {
             console.log("[SamAI Background] Calling generateFormResponse with prompt:", geminiMessage.prompt);
-            // const text = await generateFormResponse(geminiMessage.prompt); // Temporarily commented out
-            const text = "This is a test response from the background script."; // Hardcoded test response
+            const text = await generateFormResponse(geminiMessage.prompt);
             console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null");
             sendResponse(text); // Send response immediately after getting text
             console.log("[SamAI Background] sendResponse called with:", text ? "text" : "null");
