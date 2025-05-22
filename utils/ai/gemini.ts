@@ -45,14 +45,16 @@ export async function generateFormResponse(
       console.log("[SamAI Gemini] Using existing model instance");
     }
 
+:start_line:49
+-------
     console.log("[SamAI Gemini] Sending request to Gemini API");
     const result = await model.generateContent(prompt);
-    console.log("[SamAI Gemini] Raw API response:", result); // Log full result directly
+    console.log("[SamAI Gemini] Raw API response (full object):", JSON.stringify(result, null, 2)); // Log full result directly
 
     // Validate API response structure
     if (!result || !result.response) {
-      console.error("[SamAI Gemini] Empty response from API:", result);
-      throw new Error("Empty response from Gemini API");
+      console.error("[SamAI Gemini] Empty or invalid top-level response from API:", result);
+      throw new Error("Empty or invalid top-level response from Gemini API");
     }
 
     if (
@@ -63,11 +65,12 @@ export async function generateFormResponse(
       !result.response.candidates[0].content.parts[0] ||
       !result.response.candidates[0].content.parts[0].text
     ) {
-      console.error("[SamAI Gemini] Invalid response structure:", result.response); // Log full response directly
-      throw new Error("No candidates in response from Gemini API");
+      console.error("[SamAI Gemini] Invalid response structure (missing text content):", JSON.stringify(result.response, null, 2)); // Log full response directly
+      throw new Error("No candidates or text content in response from Gemini API");
     }
 
     const response = result.response.candidates[0].content.parts[0].text;
+    console.log("[SamAI Gemini] Extracted response text (before trim):", response); // NEW LOG
     console.log("[SamAI Gemini] Successfully generated response");
     return response.trim();
   } catch (error: unknown) { // Explicitly type error as unknown
