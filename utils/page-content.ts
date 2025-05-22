@@ -39,7 +39,12 @@ export function extractPageContent(outputFormat: OutputFormat): string {
 
             // Skip hidden elements
             const style = window.getComputedStyle(parentElement);
-            if (style.display === "none" || style.visibility === "hidden") {
+            if (
+              style.display === "none" ||
+              style.visibility === "hidden" ||
+              style.opacity === "0" ||
+              style.pointerEvents === "none"
+            ) {
               return NodeFilter.FILTER_REJECT;
             }
 
