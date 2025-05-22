@@ -31,9 +31,11 @@ export default function App() {
           "pageBodyText", // Load body text
           "pageOptimizedHtml", // Load optimized HTML
         ]);
+        console.log("[SamAI Context Popup] Initial data loaded:", result);
         if (result.inputInfo) {
           const info = result.inputInfo as InputInfo;
           setInputInfo(info);
+          console.log("[SamAI Context Popup] Input info set:", info);
           // Pre-fill inputPrompt if an input field was clicked
           if (info.value) {
             setInputPrompt(`Refine "${info.value}"`);
@@ -42,6 +44,8 @@ export default function App() {
           } else {
             setInputPrompt("Generate text for this field");
           }
+        } else {
+          console.log("[SamAI Context Popup] No input info found in storage.");
         }
         if (result.pageBodyText) {
           setPageBodyText(result.pageBodyText as string);
