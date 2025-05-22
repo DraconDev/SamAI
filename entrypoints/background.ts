@@ -38,6 +38,15 @@ interface PageContentResponseMessage extends BaseMessage {
   error?: string; // Optional error message
 }
 
+interface InputInfoResponse {
+  messageType: "inputInfo";
+  value?: string;
+  placeholder?: string;
+  inputType?: string;
+  id?: string;
+  name?: string;
+}
+
 type BackgroundMessage =
   | GenerateGeminiResponseRequest
   | OpenApiKeyPageRequest
