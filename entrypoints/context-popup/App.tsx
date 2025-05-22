@@ -236,7 +236,7 @@ export default function App() {
               ) : inputInfo ? (
                 "Send"
               ) : (
-                "Click on an input field to enable this assistant"
+                "Select an input field" // Changed text
               )}
             </button>
           </form>
