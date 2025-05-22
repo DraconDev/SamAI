@@ -60,7 +60,8 @@ export default function App() {
   // Update scrapeMode in store when changed
   const handleScrapeModeChange = async (newMode: OutputFormat) => {
     setScrapeMode(newMode);
-    await searchSettingsStore.setValue({ outputFormat: newMode });
+    const currentSettings = await searchSettingsStore.getValue();
+    await searchSettingsStore.setValue({ ...currentSettings, outputFormat: newMode });
   };
 
   const handleInputSubmit = async (e: React.FormEvent) => {
