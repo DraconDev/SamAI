@@ -37,9 +37,16 @@ export function extractPageContent(outputFormat: OutputFormat): string {
               return NodeFilter.FILTER_REJECT;
             }
 
-            // Skip hidden elements
+            // Skip elements not in viewport or hidden
             const style = window.getComputedStyle(parentElement);
+            const rect = parentElement.getBoundingClientRect();
             if (
+              rect.width === 0 ||
+              rect.height === 0 ||
+              rect.x < 0 ||
+              rect.y < 0 ||
+              rect.x > window.innerWidth ||
+              rect.y > window.innerHeight ||
               style.display === "none" ||
               style.visibility === "hidden" ||
               style.opacity === "0" ||
