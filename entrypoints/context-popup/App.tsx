@@ -50,9 +50,19 @@ export default function App() {
 
     loadInitialData();
 
+    // Listen for changes in storage for inputInfo
+    const handleStorageChange = (changes: { [key: string]: browser.Storage.StorageChange }, areaName: string) => {
+      if (areaName === "local" && changes.inputInfo) {
+        setInputInfo(changes.inputInfo.newValue as InputInfo | null);
+      }
+    };
+
+    browser.storage.local.onChanged.addListener(handleStorageChange);
+
     // Clean up the input info when component unmounts or popup closes
     return () => {
       browser.storage.local.remove("inputInfo").catch(console.error);
+      browser.storage.local.onChanged.removeListener(handleStorageChange); // Clean up listener
       // No need to remove page content from storage here, as it's persistent
     };
   }, []);
