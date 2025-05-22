@@ -151,13 +151,6 @@ export default defineBackground(() => {
           }
         }
 
-        case "getInputInfo":
-          // This message is typically handled by the content script, not the background.
-          // If it reaches here, it might be an unexpected message or a misconfiguration.
-          console.warn(
-            "[SamAI Background] Received unexpected getInputInfo message in background"
-          );
-          return undefined; // Not handled synchronously
 
         case "getPageContent":
           // This message is typically handled by the content script, not the background.
