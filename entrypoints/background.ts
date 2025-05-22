@@ -24,7 +24,7 @@ interface ClearInputElementMessage extends BaseMessage {
   type: "clearInputElement";
 }
 
-import { OutputFormat } => "@/utils/page-content"; // Import OutputFormat
+import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { InputElementClickedMessage } from "@/entrypoints/content"; // Import InputElementClickedMessage
 
 interface GetPageContentRequest extends BaseMessage {
@@ -194,6 +194,11 @@ export default defineBackground(() => {
           }
           return undefined; // Handled asynchronously, no direct response to this message
         }
+
+        case "clearInputElement":
+          console.log("[SamAI Background] Received clearInputElement message, removing inputInfo from storage.");
+          await browser.storage.local.remove("inputInfo");
+          return undefined; // Handled asynchronously
 
         default:
           // If message.type is a string but not one of the known types
