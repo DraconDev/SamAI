@@ -44,9 +44,6 @@ export interface InputElementClickedMessage {
   };
 }
 
-export interface ClearInputElementMessage {
-  type: "clearInputElement";
-}
 
 type ContentScriptMessage =
   | GetPageContentMessage
@@ -55,7 +52,7 @@ type ContentScriptMessage =
   | ShowSummaryMessage
   | PageContentResponseMessage
   | InputElementClickedMessage // Add new type
-  | ClearInputElementMessage; // Add new type
+// Add new type
 
 export default defineContentScript({
   matches: ["http://*/*", "https://*/*"], // Exclude chrome-extension:// URLs
