@@ -106,7 +106,7 @@ export default function App() {
         console.log(`[Page Assistant] Fetching HTML from: ${currentTabUrl}`);
         const response = await fetch(currentTabUrl);
         const htmlContent = await response.text();
-        contentToAnalyze = htmlContent;
+        contentToAnalyze = optimizeHtmlContent(htmlContent); // Apply optimization
         userMessageContent = `Question about page (Optimized HTML): ${pagePrompt}`;
       }
 
