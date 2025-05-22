@@ -309,10 +309,6 @@ export default defineBackground(() => {
         tab.id
       );
 
-      // Ensure inputInfo is cleared, as this context menu action is for page summarization
-      // This line is now redundant as it's handled above, but keeping it for now to match the original structure
-      await browser.storage.local.remove("inputInfo");
-
       // Open popup
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
