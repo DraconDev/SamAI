@@ -57,9 +57,7 @@ type BackgroundMessage =
   | SetInputValueRequest
   | GetInputInfoRequest
   | GetPageContentRequest
-  | PageContentResponseMessage
-  | InputElementClickedMessage // Add new type
-  | ClearInputElementMessage; // Add new type
+  | PageContentResponseMessage;
 
 // Type guard for incoming messages
 function isBackgroundMessage(message: any): message is BackgroundMessage {
@@ -216,23 +214,6 @@ export default defineBackground(() => {
           return undefined; // Handled asynchronously, no direct response to this message
         }
 
-        case "inputElementClicked": {
-          const inputElementMessage = message as InputElementClickedMessage;
-          console.log(
-            "[SamAI Background] Received inputElementClicked message:",
-            inputElementMessage.inputInfo
-          );
-          await browser.storage.local.set({
-            inputInfo: inputElementMessage.inputInfo,
-          });
-          return undefined; // Handled asynchronously
-        }
-
-        case "clearInputElement": {
-          console.log("[SamAI Background] Received clearInputElement message");
-          await browser.storage.local.remove("inputInfo");
-          return undefined; // Handled asynchronously
-        }
 
         default:
           // If message.type is a string but not one of the known types
