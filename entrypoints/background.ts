@@ -243,14 +243,24 @@ export default defineBackground(() => {
         await browser.storage.local.remove("inputInfo");
       }
 
-      // Send message to content script to get page content (no await here)
-      const getPageContentMessage: GetPageContentRequest = {
+      // Send messages to content script to get both text and HTML content
+      const getBodyTextMessage: GetPageContentRequest = {
         type: "getPageContent",
+        outputFormat: "text",
       };
-      browser.tabs.sendMessage(tab.id, getPageContentMessage).catch((error) => {
-        console.error("[SamAI Background] Error sending getPageContent message:", error);
+      browser.tabs.sendMessage(tab.id, getBodyTextMessage).catch((error) => {
+        console.error("[SamAI Background] Error sending getPageContent (text) message:", error);
       });
-      console.log("[SamAI Background] Sent getPageContent message to tab:", tab.id);
+      console.log("[SamAI Background] Sent getPageContent (text) message to tab:", tab.id);
+
+      const getOptimizedHtmlMessage: GetPageContentRequest = {
+        type: "getPageContent",
+        outputFormat: "html",
+      };
+      browser.tabs.sendMessage(tab.id, getOptimizedHtmlMessage).catch((error) => {
+        console.error("[SamAI Background] Error sending getPageContent (html) message:", error);
+      });
+      console.log("[SamAI Background] Sent getPageContent (html) message to tab:", tab.id);
 
       // Ensure inputInfo is cleared, as this context menu action is for page summarization
       // This line is now redundant as it's handled above, but keeping it for now to match the original structure
