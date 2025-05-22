@@ -96,12 +96,25 @@ export default function App() {
     try {
       console.log("[Page Assistant] Generating response...");
 
-      let contentToAnalyze = pageContent;
+      let contentToAnalyze = pageContent; // Default to body text
       let userMessageContent = `Question about page: ${pagePrompt}`;
 
       if (scrapeMode === "optimizedHtml") {
-        // pageContent already contains the raw HTML when optimizedHtml is selected
-        contentToAnalyze = optimizeHtmlContent(pageContent);
+        const tabs = await browser.tabs.query({
+          active: true,
+          currentWindow: true,
+        });
+        if (tabs.length === 0 || !tabs[0].url) {
+          console.error(
+            "[Page Assistant] No active tab URL found for HTML scraping."
+          );
+          throw new Error("No active tab URL found.");
+        }
+        const currentTabUrl = tabs[0].url;
+        console.log(`[Page Assistant] Fetching HTML from: ${currentTabUrl}`);
+        const response = await fetch(currentTabUrl);
+        const htmlContent = await response.text();
+        contentToAnalyze = optimizeHtmlContent(htmlContent); // Apply optimization
         userMessageContent = `Question about page (Optimized HTML): ${pagePrompt}`;
       }
 
@@ -161,7 +174,10 @@ export default function App() {
   };
 
   return (
-    <div id="samai-context-popup-root" className="min-w-[300px] min-h-[450px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-4 text-gray-100 font-sans">
+    <div
+      id="samai-context-popup-root"
+      className="min-w-[300px] min-h-[450px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-4 text-gray-100 font-sans"
+    >
       <div className="flex flex-col h-full space-y-4">
         <div
           className={`space-y-2 flex-none ${!inputInfo ? "opacity-60" : ""}`}
