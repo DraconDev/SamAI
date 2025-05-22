@@ -245,27 +245,31 @@ export default function App() {
               autoFocus={!inputInfo}
               disabled={isPageLoading}
             />
-            <div className="flex items-center gap-4 text-sm">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  value="text"
-                  checked={scrapeMode === "text"}
-                  onChange={() => handleScrapeModeChange("text")}
-                  className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
-                />
-                <span className="ml-2 text-gray-300">Body Text</span>
-              </label>
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  value="html"
-                  checked={scrapeMode === "html"}
-                  onChange={() => handleScrapeModeChange("html")}
-                  className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
-                />
-                <span className="ml-2 text-gray-300">Optimized HTML</span>
-              </label>
+            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-sm">
+              <button
+                type="button"
+                onClick={() => handleScrapeModeChange("text")}
+                className={`flex-1 p-2 text-center transition-colors duration-200 
+                          ${
+                            scrapeMode === "text"
+                              ? "bg-[#4f46e5] text-white"
+                              : "bg-[#1E1F2E] text-gray-300 hover:bg-[#2E2F3E]"
+                          }`}
+              >
+                Body Text
+              </button>
+              <button
+                type="button"
+                onClick={() => handleScrapeModeChange("html")}
+                className={`flex-1 p-2 text-center transition-colors duration-200 
+                          ${
+                            scrapeMode === "html"
+                              ? "bg-[#4f46e5] text-white"
+                              : "bg-[#1E1F2E] text-gray-300 hover:bg-[#2E2F3E]"
+                          }`}
+              >
+                Optimized HTML
+              </button>
             </div>
             <div className="flex gap-2">
               <button
