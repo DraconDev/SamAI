@@ -1,5 +1,5 @@
 /// <reference types="wxt/browser" />
-import { generateFormResponse } => "@/utils/ai/gemini";
+import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
@@ -60,23 +60,9 @@ export default function App() {
 
     loadInitialData();
 
-    // Listen for changes in storage for inputInfo
-    const handleStorageChange = (changes: {
-      [key: string]: browser.Storage.StorageChange;
-    }) => {
-      if (changes.inputInfo) {
-        setInputInfo(changes.inputInfo.newValue as InputInfo | null);
-      }
-    };
-
-    browser.storage.local.onChanged.addListener(handleStorageChange);
-
-    // Clean up the input info when component unmounts or popup closes
-    return () => {
-      browser.storage.local.remove("inputInfo").catch(console.error);
-      browser.storage.local.onChanged.removeListener(handleStorageChange); // Clean up listener
-      // No need to remove page content from storage here, as it's persistent
-    };
+    // No need to listen for storage changes for inputInfo, as per user feedback.
+    // inputInfo is expected to be set before the popup opens.
+    // No need to remove inputInfo from storage on unmount, as it's handled by background script.
   }, []);
 
   // Update scrapeMode in store when changed
