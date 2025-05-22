@@ -211,7 +211,49 @@ export default defineBackground(() => {
     try {
       console.log("Content script registered in tab:", tab.id);
 
+      // Try to get input information if it's an input element
+      const getInputMessage: GetInputInfoRequest = { type: "getInputInfo" };
+      console.log("Sending message to content script:", getInputMessage);
+
+      const inputResponse = await browser.tabs.sendMessage(
+        tab.id,
+        getInputMessage
+      );
+      console.log("Background received input response:", inputResponse);
+
+      // Store input info in local storage
+      if (
+        inputResponse &&
+        typeof inputResponse === "object" &&
+        "messageType" in inputResponse &&
+        (inputResponse as InputInfoResponse).messageType === "inputInfo"
+      ) {
+        console.log("Input info received:", inputResponse);
+        const typedInputResponse = inputResponse as InputInfoResponse;
+        await browser.storage.local.set({
+          inputInfo: {
+            value: typedInputResponse.value || "",
+            placeholder: typedInputResponse.placeholder || "",
+            inputType: typedInputResponse.inputType || "",
+            elementId: typedInputResponse.id || "",
+            elementName: typedInputResponse.name || "",
+          },
+        });
+      } else {
+        await browser.storage.local.remove("inputInfo");
+      }
+
+      // Send message to content script to get page content (no await here)
+      const getPageContentMessage: GetPageContentRequest = {
+        type: "getPageContent",
+      };
+      browser.tabs.sendMessage(tab.id, getPageContentMessage).catch((error) => {
+        console.error("[SamAI Background] Error sending getPageContent message:", error);
+      });
+      console.log("[SamAI Background] Sent getPageContent message to tab:", tab.id);
+
       // Ensure inputInfo is cleared, as this context menu action is for page summarization
+      // This line is now redundant as it's handled above, but keeping it for now to match the original structure
       await browser.storage.local.remove("inputInfo");
 
       // Open popup
