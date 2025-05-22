@@ -4,6 +4,7 @@ import { searchSettingsStore, PROMPT_TEMPLATES } from "../../utils/store";
 export async function initializeGoogleSearch() {
   // Check if search is enabled
   const settings = await searchSettingsStore.getValue();
+  console.log("[SamAI Search] searchActive setting:", settings.searchActive); // NEW LOG
   if (!settings.searchActive) return;
 
   // Get search query
@@ -20,20 +21,22 @@ export async function initializeGoogleSearch() {
 
   // Get and show response with retry
   const getResponse = async () => {
-    console.log("[SamAI Search] Sending initial request to Gemini");
+    const fullPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`; // NEW
+    console.log("[SamAI Search] Sending initial request to Gemini with prompt:", fullPrompt); // NEW LOG
     const response = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
-      prompt: `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`,
+      prompt: fullPrompt, // Use fullPrompt
     });
 
     if (!response) {
       console.log("[SamAI Search] No response, retrying after 1s delay");
       // Wait and retry once
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("[SamAI Search] Sending retry request to Gemini");
+      const retryPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`; // NEW
+      console.log("[SamAI Search] Sending retry request to Gemini with prompt:", retryPrompt); // NEW LOG
       return browser.runtime.sendMessage({
         type: "generateGeminiResponse",
-        prompt: `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`,
+        prompt: retryPrompt, // Use retryPrompt
       });
     }
     return response;
@@ -47,6 +50,7 @@ export async function initializeGoogleSearch() {
     })
     .catch((error) => {
       console.error("[SamAI Search] Failed to get response:", error);
+      console.error("[SamAI Search] Error details:", error); // NEW LOG
       showSidePanel(null);
     });
 
@@ -72,6 +76,7 @@ export async function initializeGoogleSearch() {
             "[SamAI Search] Failed to get response for new query:",
             error
           );
+          console.error("[SamAI Search] Error details for new query:", error); // NEW LOG
           showSidePanel(null);
         });
     }
