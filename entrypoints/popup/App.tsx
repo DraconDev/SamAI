@@ -7,7 +7,6 @@ function App() {
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
   const [continuePreviousChat, setContinuePreviousChat] = useState(true);
-  const [outputFormat, setOutputFormat] = useState<OutputFormat>("text"); // New state for output format
 
   useEffect(() => {
     searchSettingsStore.getValue().then((settings) => {
@@ -15,7 +14,6 @@ function App() {
       setSearchActive(settings.searchActive);
       setPromptStyle(settings.promptStyle);
       setContinuePreviousChat(settings.continuePreviousChat);
-      setOutputFormat(settings.outputFormat); // Initialize outputFormat
     });
   }, []);
 
@@ -25,7 +23,6 @@ function App() {
       searchActive: newValue,
       promptStyle,
       continuePreviousChat,
-      outputFormat, // Include outputFormat
     });
     setSearchActive(newValue);
   };
@@ -100,7 +97,6 @@ function App() {
                       searchActive,
                       promptStyle: newStyle,
                       continuePreviousChat,
-                      outputFormat, // Include outputFormat
                     });
                     }}
                     className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
@@ -176,7 +172,6 @@ function App() {
                   searchActive,
                   promptStyle,
                   continuePreviousChat: newValue,
-                  outputFormat, // Include outputFormat
                 });
               }}
               ariaLabel={
@@ -185,59 +180,6 @@ function App() {
                   : "Enable chat continuation"
               }
             />
-          </div>
-
-          {/* New section for Output Format */}
-          <div className="flex flex-col gap-2 p-2 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
-            <label className="block mb-3 text-sm font-medium text-gray-300">
-              Output Format
-            </label>
-            <div className="grid grid-cols-2 gap-2.5">
-              {[
-                { value: "text", label: "Text", icon: "📄" },
-                { value: "html", label: "Optimized HTML", icon: "🌐" },
-              ].map(({ value, label, icon }) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={async () => { // Make onClick async
-                    const newFormat = value as OutputFormat;
-                    setOutputFormat(newFormat);
-                    const updatedSettings = { // Create updated settings object
-                      searchActive,
-                      promptStyle,
-                      continuePreviousChat,
-                      outputFormat: newFormat,
-                    };
-                    console.log("[SamAI Popup] Setting new output format:", newFormat); // Debug log
-                    await searchSettingsStore.setValue(updatedSettings); // Await the setValue call
-                    console.log("[SamAI Popup] Settings after update:", await searchSettingsStore.getValue()); // Verify after update
-                  }}
-                  className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
-                            hover:transform hover:scale-[1.02]
-                            ${
-                              outputFormat === value
-                                ? "border-[#4f46e5] bg-[#4f46e5]/10"
-                                : "border-[#2E2F3E] hover:border-[#4f46e5] hover:bg-[#4f46e5]/5"
-                            }`}
-                >
-                  <span className="mb-1 text-lg transition-transform transform group-hover:scale-110">
-                    {icon}
-                  </span>
-                  <span
-                    className={`text-xs font-medium mb-0.5
-                                 ${
-                                   outputFormat === value
-                                     ? "text-[#818cf8]"
-                                     : "text-gray-400 group-hover:text-[#818cf8]"
-                                 }
-                                 transition-colors`}
-                  >
-                    {label}
-                  </span>
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
