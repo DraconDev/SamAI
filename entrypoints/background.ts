@@ -101,27 +101,26 @@ export default defineBackground(() => {
             return true; // Will respond asynchronously
           }
 
-          generateFormResponse(geminiMessage.prompt)
-            .then((text) => {
-              if (text === null) {
-                console.error(
-                  "[SamAI Background] Response generation failed - null response"
-                );
-              } else {
-                console.log(
-                  "[SamAI Background] Successfully generated response"
-                );
-              }
-              console.log("[SamAI Background] Response text:", text);
-              sendResponse(text);
-            })
-            .catch((error) => {
-              console.error("[SamAI Background] Error generating response:", {
-                message: error.message,
-                stack: error.stack,
-              });
-              sendResponse(null);
+          try {
+            const text = await generateFormResponse(geminiMessage.prompt);
+            if (text === null) {
+              console.error(
+                "[SamAI Background] Response generation failed - null response"
+              );
+            } else {
+              console.log(
+                "[SamAI Background] Successfully generated response"
+              );
+            }
+            console.log("[SamAI Background] Response text:", text);
+            sendResponse(text);
+          } catch (error) {
+            console.error("[SamAI Background] Error generating response:", {
+              message: error.message,
+              stack: (error as Error).stack, // Cast error to Error to access stack
             });
+            sendResponse(null);
+          }
           return true; // Will respond asynchronously
         }
 
