@@ -35,7 +35,7 @@ export default function App() {
         }
         if (result.pageBodyText) {
           setPageBodyText(result.pageBodyText as string);
-       d }
+        }
         if (result.pageOptimizedHtml) {
           setPageOptimizedHtml(result.pageOptimizedHtml as string);
         }
