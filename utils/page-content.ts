@@ -1,5 +1,7 @@
 /**
-import { type OutputFormat } from "./store"; // Import OutputFormat
+ * Defines the output format for page content extraction.
+ */
+export type OutputFormat = "html" | "text";
 
 /**
  * Extract visible text content or optimized HTML from a webpage
