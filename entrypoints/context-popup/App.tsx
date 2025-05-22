@@ -249,9 +249,9 @@ export default function App() {
               <label className="flex items-center cursor-pointer">
                 <input
                   type="radio"
-                  value="bodyText"
-                  checked={scrapeMode === "bodyText"}
-                  onChange={() => setScrapeMode("bodyText")}
+                  value="text"
+                  checked={scrapeMode === "text"}
+                  onChange={() => handleScrapeModeChange("text")}
                   className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
                 />
                 <span className="ml-2 text-gray-300">Body Text</span>
@@ -259,9 +259,9 @@ export default function App() {
               <label className="flex items-center cursor-pointer">
                 <input
                   type="radio"
-                  value="optimizedHtml"
-                  checked={scrapeMode === "optimizedHtml"}
-                  onChange={() => setScrapeMode("optimizedHtml")}
+                  value="html"
+                  checked={scrapeMode === "html"}
+                  onChange={() => handleScrapeModeChange("html")}
                   className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
                 />
                 <span className="ml-2 text-gray-300">Optimized HTML</span>
