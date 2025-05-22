@@ -167,6 +167,14 @@ export default function App() {
         bodyContent.length
       );
 
+      // Add the raw scraped content as a user message to the chat
+      const rawScrapedMessage = {
+        role: "user" as const,
+        content: `Scraped Page Content:\n\n${bodyContent}`,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+      await addChatMessage(rawScrapedMessage);
+
       if (!scrapeUrl.trim()) {
         console.warn(
           "[Scrape Assistant] No instructions provided for scraping."
