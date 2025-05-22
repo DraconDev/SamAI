@@ -27,12 +27,16 @@ export default function App() {
         const result = await browser.storage.local.get([
           "inputInfo",
           "pageContent",
+          "scrapeMode" // Add scrapeMode here
         ]);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo as InputInfo);
         }
         if (result.pageContent) {
           setPageContent(result.pageContent as string);
+        }
+        if (result.scrapeMode) { // Load scrapeMode
+          setScrapeMode(result.scrapeMode as 'bodyText' | 'optimizedHtml');
         }
       } catch (error) {
         console.error("Error loading stored data:", error);
