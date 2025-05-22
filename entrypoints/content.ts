@@ -1,6 +1,7 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
 import { extractPageContent } from "@/utils/page-content";
+import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
 import { tabs } from "webextension-polyfill";
 
 // Define message types
@@ -94,8 +95,12 @@ export default defineContentScript({
           case "getPageContent":
             console.log("[SamAI Content] Handling getPageContent message");
             try {
-              console.log("[SamAI Content] Calling extractPageContent");
-              const pageContent = extractPageContent();
+              // Get output format from store
+              const settings = await searchSettingsStore.getValue();
+              const outputFormat = settings.outputFormat;
+
+              console.log(`[SamAI Content] Calling extractPageContent with format: ${outputFormat}`);
+              const pageContent = extractPageContent(outputFormat); // Pass outputFormat
               console.log("[SamAI Content] extractPageContent finished, sending response");
               sendResponse(pageContent);
             } catch (error) {
