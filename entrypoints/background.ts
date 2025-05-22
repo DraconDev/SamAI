@@ -20,10 +20,6 @@ interface SetInputValueRequest extends BaseMessage {
   value: string;
 }
 
-interface GetInputInfoRequest extends BaseMessage {
-  type: "getInputInfo";
-}
-
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
 interface GetPageContentRequest extends BaseMessage {
@@ -38,20 +34,10 @@ interface PageContentResponseMessage extends BaseMessage {
   error?: string; // Optional error message
 }
 
-interface InputInfoResponse {
-  messageType: "inputInfo";
-  value?: string;
-  placeholder?: string;
-  inputType?: string;
-  id?: string;
-  name?: string;
-}
-
 type BackgroundMessage =
   | GenerateGeminiResponseRequest
   | OpenApiKeyPageRequest
   | SetInputValueRequest
-  | GetInputInfoRequest
   | GetPageContentRequest
   | PageContentResponseMessage;
 
