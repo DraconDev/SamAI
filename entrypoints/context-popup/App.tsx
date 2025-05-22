@@ -88,8 +88,26 @@ export default function App() {
     setIsPageLoading(true);
     try {
       console.log("[Page Assistant] Generating response...");
+
+      let contentToAnalyze = pageContent; // Default to body text
+      let userMessageContent = `Question about page: ${pagePrompt}`;
+
+      if (scrapeMode === 'optimizedHtml') {
+        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+        if (tabs.length === 0 || !tabs[0].url) {
+          console.error("[Page Assistant] No active tab URL found for HTML scraping.");
+          throw new Error("No active tab URL found.");
+        }
+        const currentTabUrl = tabs[0].url;
+        console.log(`[Page Assistant] Fetching HTML from: ${currentTabUrl}`);
+        const response = await fetch(currentTabUrl);
+        const htmlContent = await response.text();
+        contentToAnalyze = htmlContent;
+        userMessageContent = `Question about page (Optimized HTML): ${pagePrompt}`;
+      }
+
       const response = await generateFormResponse(
-        `${pagePrompt}\n\nContent: ${pageContent}`
+        `${pagePrompt}\n\nContent: ${contentToAnalyze}`
       );
 
       if (!response) {
@@ -112,7 +130,7 @@ export default function App() {
 
       const userMessage = {
         role: "user" as const,
-        content: `Question about page: ${pagePrompt}`,
+        content: userMessageContent, // Use the updated user message content
         timestamp: new Date().toLocaleTimeString(),
       };
 
