@@ -33,12 +33,29 @@ interface PageContentResponseMessage {
   error?: string; // Optional error message
 }
 
+interface InputElementClickedMessage {
+  type: "inputElementClicked";
+  inputInfo: {
+    value: string;
+    placeholder: string;
+    id: string;
+    name: string;
+    inputType: string;
+  };
+}
+
+interface ClearInputElementMessage {
+  type: "clearInputElement";
+}
+
 type ContentScriptMessage =
   | GetPageContentMessage
   | GetInputInfoMessage
   | SetInputValueMessage
   | ShowSummaryMessage
-  | PageContentResponseMessage; // Add new type
+  | PageContentResponseMessage
+  | InputElementClickedMessage // Add new type
+  | ClearInputElementMessage; // Add new type
 
 export default defineContentScript({
   matches: ["http://*/*", "https://*/*"], // Exclude chrome-extension:// URLs
