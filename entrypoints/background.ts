@@ -70,6 +70,8 @@ function isBackgroundMessage(message: any): message is BackgroundMessage {
 }
 
 export default defineBackground(() => {
+  let sourceTabId: number | null = null;
+
   // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
@@ -143,10 +145,10 @@ export default defineBackground(() => {
 
         case "setInputValue": {
           const setInputMessage = message as SetInputValueRequest; // Assert after type guard
-          if (sender.tab?.id) { // Use sender.tab.id directly
+          if (sourceTabId) {
             // Handle setInputValue asynchronously
             browser.tabs
-              .sendMessage(sender.tab.id, setInputMessage)
+              .sendMessage(sourceTabId, setInputMessage)
               .then((result) => {
                 sendResponse(result);
               })
@@ -160,7 +162,7 @@ export default defineBackground(() => {
             return true; // Will respond asynchronously
           } else {
             console.warn(
-              "[SamAI Background] Received setInputValue message but no sender tab ID"
+              "[SamAI Background] Received setInputValue message but sourceTabId is null"
             );
             sendResponse({ success: false, error: "Source tab not available" });
             return true; // Will respond asynchronously
@@ -224,12 +226,43 @@ export default defineBackground(() => {
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
 
-    // Determine the mode based on whether an editable element was clicked
-    const mode = info.editable ? "input" : "page";
-    const popupUrl = browser.runtime.getURL(`/context-popup.html?mode=${mode}`);
+    // Store the source tab ID
+    sourceTabId = tab.id;
 
     try {
       console.log("Content script registered in tab:", tab.id);
+
+      // Try to get input information if it's an input element
+      const getInputMessage: GetInputInfoRequest = { type: "getInputInfo" };
+      console.log("Sending message to content script:", getInputMessage);
+
+      const inputResponse = await browser.tabs.sendMessage(
+        tab.id,
+        getInputMessage
+      );
+      console.log("Background received input response:", inputResponse);
+
+      // Store input info in local storage
+      if (
+        inputResponse &&
+        typeof inputResponse === "object" &&
+        "messageType" in inputResponse &&
+        (inputResponse as InputInfoResponse).messageType === "inputInfo"
+      ) {
+        console.log("Input info received:", inputResponse);
+        const typedInputResponse = inputResponse as InputInfoResponse;
+        await browser.storage.local.set({
+          inputInfo: {
+            value: typedInputResponse.value || "",
+            placeholder: typedInputResponse.placeholder || "",
+            inputType: typedInputResponse.inputType || "",
+            elementId: typedInputResponse.id || "",
+            elementName: typedInputResponse.name || "",
+          },
+        });
+      } else {
+        await browser.storage.local.remove("inputInfo");
+      }
 
       // Send messages to content script to get both text and HTML content
       const getBodyTextMessage: GetPageContentRequest = {
@@ -264,9 +297,9 @@ export default defineBackground(() => {
         tab.id
       );
 
-      // Open popup with mode parameter
+      // Open popup
       browser.windows.create({
-        url: popupUrl,
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 350,
@@ -276,11 +309,18 @@ export default defineBackground(() => {
       // If there's an error getting page content, still open the popup,
       // but it will indicate "Unable to access page content"
       browser.windows.create({
-        url: popupUrl, // Use the mode-aware URL even on error
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 350,
       });
+    }
+  });
+
+  // Clear source tab ID when the tab is closed
+  browser.tabs.onRemoved.addListener((tabId) => {
+    if (tabId === sourceTabId) {
+      sourceTabId = null;
     }
   });
 });

@@ -1,4 +1,5 @@
-import { generateFormResponse } from "@/utils/ai/gemini";
+/// <reference types="wxt/browser" />
+import { generateFormResponse } => "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
