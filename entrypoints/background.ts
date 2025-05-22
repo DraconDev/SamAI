@@ -77,7 +77,7 @@ export default defineBackground(() => {
       sendResponse: (response?: any) => void
     ): Promise<true | undefined> => {
       // Corrected return type
-      console.log("[SamAI Background] Received message:", message);
+      console.log("[SamAI Background] Listener received message:", message); // More specific log
 
       if (!isBackgroundMessage(message)) {
         console.warn(
@@ -89,6 +89,7 @@ export default defineBackground(() => {
 
       switch (message.type) {
         case "generateGeminiResponse": {
+          console.log("[SamAI Background] Handling generateGeminiResponse message."); // NEW LOG
           const geminiMessage = message as GenerateGeminiResponseRequest; // Assert after type guard
           console.log(
             "[SamAI Background] Attempting to generate Gemini response"
