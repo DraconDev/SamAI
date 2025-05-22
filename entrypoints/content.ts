@@ -5,8 +5,10 @@ import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsSto
 import { tabs } from "webextension-polyfill";
 
 // Define message types
+import { extractPageContent, OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 interface GetPageContentMessage {
   type: "getPageContent";
+  outputFormat: OutputFormat; // Add outputFormat
 }
 
 interface GetInputInfoMessage {
@@ -27,6 +29,8 @@ interface ShowSummaryMessage {
 interface PageContentResponseMessage {
   type: "pageContentResponse";
   content: string;
+  outputFormat: OutputFormat; // Add outputFormat
+  error?: string;
 }
 
 type ContentScriptMessage =
