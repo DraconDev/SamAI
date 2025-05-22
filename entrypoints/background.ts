@@ -75,8 +75,7 @@ export default defineBackground(() => {
       message: unknown,
       sender: Runtime.MessageSender,
       sendResponse: (response?: any) => void
-    ): Promise<true | undefined> => {
-      // Corrected return type
+    ): Promise<string | null | undefined> => { // Corrected return type to allow string or null
       console.log("[SamAI Background] Listener received message:", message); // More specific log
 
       if (!isBackgroundMessage(message)) {
