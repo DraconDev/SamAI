@@ -103,16 +103,16 @@ export default defineBackground(() => {
 
           try {
             console.log("[SamAI Background] Calling generateFormResponse with prompt:", geminiMessage.prompt);
-            const textPromise = generateFormResponse(geminiMessage.prompt);
-            console.log("[SamAI Background] Returning promise from generateFormResponse.");
-            return textPromise; // Directly return the promise
+            const text = await generateFormResponse(geminiMessage.prompt);
+            console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null");
+            return text; // Directly return the text or null
           } catch (error: unknown) { // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
               message: err.message,
               stack: err.stack,
             });
-            return Promise.resolve(null); // Return a resolved promise with null on error
+            return null; // Return null on error
           }
         }
 
