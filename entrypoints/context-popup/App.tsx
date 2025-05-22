@@ -274,40 +274,6 @@ export default function App() {
           </form>
         </div>
 
-        <div className="mt-2 space-y-2">
-          <h2 className="text-base font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-            Scrape Assistant
-          </h2>
-          <div className="flex flex-col gap-2">
-            <input
-              type="text"
-              value={scrapeUrl}
-              onChange={(e) => setScrapeUrl(e.target.value)}
-              placeholder="Enter what you want to be scraped"
-              className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 text-sm"
-            />
-            <div className="flex gap-2">
-              <button
-                onClick={handleScrapeBody}
-                className={`w-full p-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-md text-sm
-                          hover:opacity-95 focus:outline-none focus:ring-2
-                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 ease-in-out`}
-              >
-                Scrape Body
-              </button>
-              <button
-                onClick={handleScrapeHTML}
-                className={`w-full p-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-md text-sm
-                          hover:opacity-95 focus:outline-none focus:ring-2
-                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 ease-in-out`}
-              >
-                Scrape HTML
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
