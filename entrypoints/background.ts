@@ -104,20 +104,17 @@ export default defineBackground(() => {
 
           try {
             console.log("[SamAI Background] Calling generateFormResponse with prompt:", geminiMessage.prompt);
-            const text = await generateFormResponse(geminiMessage.prompt);
-            console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null");
-            sendResponse(text); // Send response immediately after getting text
-            console.log("[SamAI Background] sendResponse called with:", text ? "text" : "null");
+            const textPromise = generateFormResponse(geminiMessage.prompt);
+            console.log("[SamAI Background] Returning promise from generateFormResponse.");
+            return textPromise; // Directly return the promise
           } catch (error: unknown) { // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
               message: err.message,
               stack: err.stack,
             });
-            sendResponse(null);
-            console.log("[SamAI Background] sendResponse called with null due to error.");
+            return Promise.resolve(null); // Return a resolved promise with null on error
           }
-          return true; // Will respond asynchronously
         }
 
         case "openApiKeyPage":
