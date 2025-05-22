@@ -41,9 +41,8 @@ export default function App() {
             setInputPrompt(`Refine "${info.value}"`);
           } else if (info.placeholder) {
             setInputPrompt(`Generate text for "${info.placeholder}"`);
-          } else {
-            setInputPrompt("Generate text for this field");
           }
+          // Removed the else block that set "Generate text for this field"
         } else {
           console.log("[SamAI Context Popup] No input info found in storage.");
         }
