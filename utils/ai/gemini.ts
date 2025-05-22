@@ -47,7 +47,7 @@ export async function generateFormResponse(
 
     console.log("[SamAI Gemini] Sending request to Gemini API");
     const result = await model.generateContent(prompt);
-    console.log("[SamAI Gemini] Raw API response:", JSON.stringify(result, null, 2)); // Log full result as JSON
+    console.log("[SamAI Gemini] Raw API response:", result); // Log full result directly
 
     // Validate API response structure
     if (!result || !result.response) {
@@ -63,7 +63,7 @@ export async function generateFormResponse(
       !result.response.candidates[0].content.parts[0] ||
       !result.response.candidates[0].content.parts[0].text
     ) {
-      console.error("[SamAI Gemini] Invalid response structure:", JSON.stringify(result.response, null, 2)); // Log full response as JSON
+      console.error("[SamAI Gemini] Invalid response structure:", result.response); // Log full response directly
       throw new Error("No candidates in response from Gemini API");
     }
 
