@@ -1,69 +1,78 @@
 /**
- * Extract visible text content from a webpage
- * Filters out hidden elements and empty text nodes
+import { type OutputFormat } from "./store"; // Import OutputFormat
+
+/**
+ * Extract visible text content or optimized HTML from a webpage
+ * Filters out hidden elements and empty text nodes for text extraction
  */
-export function extractPageContent(): string {
+export function extractPageContent(outputFormat: OutputFormat): string {
   try {
-    // Get all visible text, filtering out hidden elements and scripts
-    const walk = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: (node) => {
-          // Get parent element
-          const parent = node.parentElement;
-          if (!parent) return NodeFilter.FILTER_REJECT;
+    if (outputFormat === "html") {
+      // Return optimized HTML of the entire page
+      const fullHtml = document.documentElement.outerHTML;
+      return optimizeHtmlContent(fullHtml);
+    } else {
+      // Get all visible text, filtering out hidden elements and scripts
+      const walk = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) => {
+            // Get parent element
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_REJECT;
 
-          // Skip script and style tags
-          if (
-            parent.tagName === "SCRIPT" ||
-            parent.tagName === "STYLE" ||
-            parent.tagName === "NOSCRIPT"
-          ) {
-            return NodeFilter.FILTER_REJECT;
-          }
+            // Skip script and style tags
+            if (
+              parent.tagName === "SCRIPT" ||
+              parent.tagName === "STYLE" ||
+              parent.tagName === "NOSCRIPT"
+            ) {
+              return NodeFilter.FILTER_REJECT;
+            }
 
-          // Skip hidden elements
-          const style = window.getComputedStyle(parent);
-          if (style.display === "none" || style.visibility === "hidden") {
-            return NodeFilter.FILTER_REJECT;
-          }
+            // Skip hidden elements
+            const style = window.getComputedStyle(parent);
+            if (style.display === "none" || style.visibility === "hidden") {
+              return NodeFilter.FILTER_REJECT;
+            }
 
-          // Skip empty text nodes
-          if (!node.textContent?.trim()) {
-            return NodeFilter.FILTER_REJECT;
-          }
+            // Skip empty text nodes
+            if (!node.textContent?.trim()) {
+              return NodeFilter.FILTER_REJECT;
+            }
 
-          return NodeFilter.FILTER_ACCEPT;
-        },
+            return NodeFilter.FILTER_ACCEPT;
+          },
+        }
+      );
+
+      const blockElements = new Set([
+        'ADDRESS', 'ARTICLE', 'ASIDE', 'BLOCKQUOTE', 'DETAILS', 'DIALOG', 'DD', 'DIV', 'DL', 'DT',
+        'FIELDSET', 'FIGCAPTION', 'FIGURE', 'FOOTER', 'FORM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
+        'HEADER', 'HGROUP', 'HR', 'LI', 'MAIN', 'NAV', 'OL', 'P', 'PRE', 'SECTION', 'TABLE', 'UL'
+      ]);
+
+      function isBlockElement(element: HTMLElement): boolean {
+        return blockElements.has(element.tagName);
       }
-    );
 
-    const blockElements = new Set([
-      'ADDRESS', 'ARTICLE', 'ASIDE', 'BLOCKQUOTE', 'DETAILS', 'DIALOG', 'DD', 'DIV', 'DL', 'DT',
-      'FIELDSET', 'FIGCAPTION', 'FIGURE', 'FOOTER', 'FORM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
-      'HEADER', 'HGROUP', 'HR', 'LI', 'MAIN', 'NAV', 'OL', 'P', 'PRE', 'SECTION', 'TABLE', 'UL'
-    ]);
-
-    function isBlockElement(element: HTMLElement): boolean {
-      return blockElements.has(element.tagName);
-    }
-
-    let content = "";
-    let node;
-    while ((node = walk.nextNode())) {
-      const text = node.textContent?.trim() || "";
-      if (text) {
-        content += text;
-        if (node.parentElement && isBlockElement(node.parentElement)) {
-          content += "\n"; // Add newline for block elements
-        } else {
-          content += " "; // Add space for inline elements
+      let content = "";
+      let node;
+      while ((node = walk.nextNode())) {
+        const text = node.textContent?.trim() || "";
+        if (text) {
+          content += text;
+          if (node.parentElement && isBlockElement(node.parentElement)) {
+            content += "\n"; // Add newline for block elements
+          } else {
+            content += " "; // Add space for inline elements
+          }
         }
       }
-    }
 
-    return content.trim();
+      return content.trim();
+    }
   } catch (error) {
     console.error("Error extracting page content:", error);
     return ""; // Return empty string on error
