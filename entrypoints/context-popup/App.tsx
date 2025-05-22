@@ -296,15 +296,15 @@ export default function App() {
                 Summarize
               </button>
             </div>
-            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs">
+            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs shadow-inner">
               <button
                 type="button"
                 onClick={() => handleScrapeModeChange("text")}
-                className={`flex-1 px-3 py-1.5 text-center transition-colors duration-200 
+                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 
                           ${
                             scrapeMode === "text"
-                              ? "bg-[#4f46e5] text-white"
-                              : "bg-[#1E1F2E] text-gray-300 hover:bg-[#2E2F3E]"
+                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-md"
+                              : "bg-[#1E1F2E] text-gray-400 hover:bg-[#2E2F3E] hover:text-gray-200"
                           }`}
               >
                 Body Text
@@ -312,11 +312,11 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => handleScrapeModeChange("html")}
-                className={`flex-1 px-3 py-1.5 text-center transition-colors duration-200 
+                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 
                           ${
                             scrapeMode === "html"
-                              ? "bg-[#4f46e5] text-white"
-                              : "bg-[#1E1F2E] text-gray-300 hover:bg-[#2E2F3E]"
+                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-md"
+                              : "bg-[#1E1F2E] text-gray-400 hover:bg-[#2E2F3E] hover:text-gray-200"
                           }`}
               >
                 Optimized HTML
