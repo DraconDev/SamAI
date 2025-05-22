@@ -115,7 +115,8 @@ export default defineContentScript({
               console.log(
                 "[SamAI Content] extractPageContent finished, sending response"
               );
-              sendResponse(pageContent);
+              // Temporarily send a hardcoded string for debugging message passing
+              sendResponse("TEST_CONTENT_SUCCESS");
             } catch (error) {
               console.error(
                 "[SamAI Content] Error extracting page content:",
