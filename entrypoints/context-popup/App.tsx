@@ -18,7 +18,9 @@ export default function App() {
   const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const [scrapeMode, setScrapeMode] = useState<'bodyText' | 'optimizedHtml'>('bodyText');
+  const [scrapeMode, setScrapeMode] = useState<"bodyText" | "optimizedHtml">(
+    "bodyText"
+  );
 
   useEffect(() => {
     // Load stored data from local storage
@@ -27,7 +29,7 @@ export default function App() {
         const result = await browser.storage.local.get([
           "inputInfo",
           "pageContent",
-          "scrapeMode" // Add scrapeMode here
+          "scrapeMode", // Add scrapeMode here
         ]);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo as InputInfo);
@@ -35,8 +37,9 @@ export default function App() {
         if (result.pageContent) {
           setPageContent(result.pageContent as string);
         }
-        if (result.scrapeMode) { // Load scrapeMode
-          setScrapeMode(result.scrapeMode as 'bodyText' | 'optimizedHtml');
+        if (result.scrapeMode) {
+          // Load scrapeMode
+          setScrapeMode(result.scrapeMode as "bodyText" | "optimizedHtml");
         }
       } catch (error) {
         console.error("Error loading stored data:", error);
@@ -96,10 +99,15 @@ export default function App() {
       let contentToAnalyze = pageContent; // Default to body text
       let userMessageContent = `Question about page: ${pagePrompt}`;
 
-      if (scrapeMode === 'optimizedHtml') {
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+      if (scrapeMode === "optimizedHtml") {
+        const tabs = await browser.tabs.query({
+          active: true,
+          currentWindow: true,
+        });
         if (tabs.length === 0 || !tabs[0].url) {
-          console.error("[Page Assistant] No active tab URL found for HTML scraping.");
+          console.error(
+            "[Page Assistant] No active tab URL found for HTML scraping."
+          );
           throw new Error("No active tab URL found.");
         }
         const currentTabUrl = tabs[0].url;
@@ -164,7 +172,6 @@ export default function App() {
       setIsPageLoading(false);
     }
   };
-
 
   return (
     <div className="min-w-[300px] min-h-[450px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] shadow-xl p-4 text-gray-100 font-sans">
@@ -248,8 +255,8 @@ export default function App() {
                 <input
                   type="radio"
                   value="bodyText"
-                  checked={scrapeMode === 'bodyText'}
-                  onChange={() => setScrapeMode('bodyText')}
+                  checked={scrapeMode === "bodyText"}
+                  onChange={() => setScrapeMode("bodyText")}
                   className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
                 />
                 <span className="ml-2 text-gray-300">Body Text</span>
@@ -258,8 +265,8 @@ export default function App() {
                 <input
                   type="radio"
                   value="optimizedHtml"
-                  checked={scrapeMode === 'optimizedHtml'}
-                  onChange={() => setScrapeMode('optimizedHtml')}
+                  checked={scrapeMode === "optimizedHtml"}
+                  onChange={() => setScrapeMode("optimizedHtml")}
                   className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
                 />
                 <span className="ml-2 text-gray-300">Optimized HTML</span>
@@ -318,7 +325,6 @@ export default function App() {
             </div>
           </form>
         </div>
-
       </div>
     </div>
   );
