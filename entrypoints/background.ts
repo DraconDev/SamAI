@@ -114,10 +114,11 @@ export default defineBackground(() => {
             }
             console.log("[SamAI Background] Response text:", text);
             sendResponse(text);
-          } catch (error) {
+          } catch (error: unknown) { // Explicitly type error as unknown
+            const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
-              message: error.message,
-              stack: (error as Error).stack, // Cast error to Error to access stack
+              message: err.message,
+              stack: err.stack,
             });
             sendResponse(null);
           }
