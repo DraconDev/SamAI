@@ -129,6 +129,29 @@ function App() {
             </div>
           )}
         </div>
+          {/* New button for opening chat */}
+          <button
+            onClick={() => tabs.create({ url: "chat.html" })}
+            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg
+                     hover:opacity-90 focus:outline-none focus:ring-2
+                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                     transition-all duration-200 transform hover:scale-[0.98]
+                     font-medium flex items-center justify-center gap-2"
+          >
+            <span>Open SamAI Chat</span>
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+
         <div className="flex items-center justify-between p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
           <div className="flex flex-col gap-0.5">
             <label className="font-medium text-gray-300">
@@ -182,28 +205,6 @@ function App() {
             </svg>
           </button>
 
-          {/* New button for opening chat */}
-          <button
-            onClick={() => tabs.create({ url: "chat.html" })}
-            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
-                     hover:opacity-90 focus:outline-none focus:ring-2 
-                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                     transition-all duration-200 transform hover:scale-[0.98]
-                     font-medium flex items-center justify-center gap-2"
-          >
-            <span>Open SamAI Chat</span>
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
 
           <button
             onClick={openDonateLink}
