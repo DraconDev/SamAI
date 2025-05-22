@@ -129,6 +129,7 @@ function App() {
             </div>
           )}
         </div>
+        <div className="flex flex-col gap-4 p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
           {/* New button for opening chat */}
           <button
             onClick={() => tabs.create({ url: "chat.html" })}
@@ -152,32 +153,33 @@ function App() {
             </svg>
           </button>
 
-        <div className="flex items-center justify-between p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
-          <div className="flex flex-col gap-0.5">
-            <label className="font-medium text-gray-300">
-              Continue Previous Chat
-            </label>
-            <span className="text-xs text-gray-500">
-              Keep chat history between sessions
-            </span>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-0.5">
+              <label className="font-medium text-gray-300">
+                Continue Previous Chat
+              </label>
+              <span className="text-xs text-gray-500">
+                Keep chat history between sessions
+              </span>
+            </div>
+            <ToggleButton
+              isEnabled={continuePreviousChat}
+              onToggle={() => {
+                const newValue = !continuePreviousChat;
+                setContinuePreviousChat(newValue);
+                searchSettingsStore.setValue({
+                  searchActive,
+                  promptStyle,
+                  continuePreviousChat: newValue,
+                });
+              }}
+              ariaLabel={
+                continuePreviousChat
+                  ? "Disable chat continuation"
+                  : "Enable chat continuation"
+              }
+            />
           </div>
-          <ToggleButton
-            isEnabled={continuePreviousChat}
-            onToggle={() => {
-              const newValue = !continuePreviousChat;
-              setContinuePreviousChat(newValue);
-              searchSettingsStore.setValue({
-                searchActive,
-                promptStyle,
-                continuePreviousChat: newValue,
-              });
-            }}
-            ariaLabel={
-              continuePreviousChat
-                ? "Disable chat continuation"
-                : "Enable chat continuation"
-            }
-          />
         </div>
 
         <div className="flex flex-col gap-3 mt-8 pt-4 border-t border-[#2E2F3E]">
