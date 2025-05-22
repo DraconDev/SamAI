@@ -24,6 +24,14 @@ export function extractPageContent(outputFormat: OutputFormat): string {
             let currentElement: HTMLElement | null = node.parentElement;
             if (!currentElement) return NodeFilter.FILTER_REJECT;
 
+            // Traverse up the DOM tree to check for the context popup root
+            while (currentElement) {
+              if (currentElement.id === "samai-context-popup-root") {
+                return NodeFilter.FILTER_REJECT; // Skip elements within the context popup
+              }
+              currentElement = currentElement.parentElement;
+            }
+
             // Ensure currentElement is not null for subsequent checks
             const parentElement = node.parentElement;
             if (!parentElement) return NodeFilter.FILTER_REJECT; // Should already be caught, but for type safety
