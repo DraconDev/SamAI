@@ -20,11 +20,8 @@ interface SetInputValueRequest extends BaseMessage {
   value: string;
 }
 
-interface GetInputInfoRequest extends BaseMessage {
-  type: "getInputInfo";
-}
-
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+import { InputElementClickedMessage } from "@/entrypoints/content"; // Import InputElementClickedMessage
 
 interface GetPageContentRequest extends BaseMessage {
   type: "getPageContent";
@@ -38,21 +35,13 @@ interface PageContentResponseMessage extends BaseMessage {
   error?: string; // Optional error message
 }
 
-interface InputInfoResponse {
-  messageType: "inputInfo";
-  value?: string;
-  placeholder?: string;
-  inputType?: string;
-  id?: string;
-  name?: string;
-}
-
 type BackgroundMessage =
   | GenerateGeminiResponseRequest
   | OpenApiKeyPageRequest
   | SetInputValueRequest
   | GetPageContentRequest
-  | PageContentResponseMessage;
+  | PageContentResponseMessage
+  | InputElementClickedMessage; // Add new message type
 
 // Type guard for incoming messages
 function isBackgroundMessage(message: any): message is BackgroundMessage {
