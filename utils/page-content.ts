@@ -81,7 +81,7 @@ export function optimizeHtmlContent(html: string): string {
   const comments = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_COMMENT, null);
   let node;
   while ((node = comments.nextNode())) {
-    node.remove();
+    node.parentNode?.removeChild(node); // Use optional chaining for parentNode
   }
 
   return doc.documentElement.outerHTML; // Return the cleaned HTML
