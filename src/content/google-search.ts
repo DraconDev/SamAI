@@ -1,11 +1,18 @@
 import { showSidePanel } from "./search";
 import { searchSettingsStore, PROMPT_TEMPLATES } from "../../utils/store";
-// import { browser } from "webextension-polyfill-ts"; // Removed explicit import, relying on global 'browser'
+
+// Listen for responses from the background script
+browser.runtime.onMessage.addListener((message: any) => {
+  if (message.type === "googleSearchSummaryReady") {
+    console.log("[SamAI Search] Received summary from background:", message.summary);
+    showSidePanel(message.summary);
+  }
+});
 
 export async function initializeGoogleSearch() {
   // Check if search is enabled
   const settings = await searchSettingsStore.getValue();
-  console.log("[SamAI Search] searchActive setting:", settings.searchActive); // NEW LOG
+  console.log("[SamAI Search] searchActive setting:", settings.searchActive);
   if (!settings.searchActive) return;
 
   // Get search query
@@ -17,81 +24,38 @@ export async function initializeGoogleSearch() {
 
   console.log("[SamAI Search] Found search query:", query);
 
-  // Show initial panel
+  // Show initial panel (spinner)
   showSidePanel(null);
 
-  // Get and show response with retry
-  const getResponse = async () => {
-    const fullPrompt = `Search query: ${query}\n${
-      PROMPT_TEMPLATES[settings.promptStyle]
-    }`; // NEW
-    console.log(
-      "[SamAI Search] Sending initial request to Gemini with prompt:",
-      fullPrompt
-    ); // NEW LOG
-    const response = (await browser.runtime.sendMessage({
-      // Cast to string | null
-      type: "generateGeminiResponse",
-      prompt: fullPrompt, // Use fullPrompt
-    })) as string | null; // Type assertion
-
-    if (!response) {
-      console.log("[SamAI Search] No response, retrying after 1s delay");
-      // Wait and retry once
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const retryPrompt = `Search query: ${query}\n${
-        PROMPT_TEMPLATES[settings.promptStyle]
-      }`; // NEW
-      console.log(
-        "[SamAI Search] Sending retry request to Gemini with prompt:",
-        retryPrompt
-      ); // NEW LOG
-      return (await browser.runtime.sendMessage({
-        // Cast to string | null
-        type: "generateGeminiResponse",
-        prompt: retryPrompt, // Use retryPrompt
-      })) as string | null; // Type assertion
-    }
-    return response;
-  };
-
-  console.log("[SamAI Search] Initiating search for query:", query);
-  getResponse()
-    .then((response) => {
-      console.log("[SamAI Search] Received response:", response);
-      showSidePanel(response);
-    })
-    .catch((error) => {
-      console.error("[SamAI Search] Failed to get response:", error);
-      console.error("[SamAI Search] Error details:", error); // NEW LOG
-      showSidePanel(null);
-    });
+  // Send the search prompt to the background script
+  const fullPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
+  console.log("[SamAI Search] Sending prompt to background script:", fullPrompt);
+  browser.runtime.sendMessage({
+    type: "generateGoogleSearchSummary", // New message type for one-way communication
+    prompt: fullPrompt,
+    tabId: (await browser.tabs.getCurrent()).id // Pass current tabId for targeted response
+  }).catch(error => {
+    console.error("[SamAI Search] Error sending initial message to background:", error);
+    showSidePanel(null);
+  });
 
   // Handle URL changes for new searches
-  window.addEventListener("popstate", () => {
+  window.addEventListener("popstate", async () => {
     const newQuery = new URLSearchParams(window.location.search).get("q");
     if (newQuery && newQuery !== query) {
-      showSidePanel(null);
-      console.log(
-        "[SamAI Search] URL changed, sending request for new query:",
-        newQuery
-      );
-      getResponse()
-        .then((response) => {
-          console.log(
-            "[SamAI Search] Received response for new query:",
-            response
-          );
-          showSidePanel(response);
-        })
-        .catch((error) => {
-          console.error(
-            "[SamAI Search] Failed to get response for new query:",
-            error
-          );
-          console.error("[SamAI Search] Error details for new query:", error); // NEW LOG
-          showSidePanel(null);
-        });
+      console.log("[SamAI Search] URL changed, sending request for new query:", newQuery);
+      showSidePanel(null); // Show spinner for new search
+
+      const newFullPrompt = `Search query: ${newQuery}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
+      console.log("[SamAI Search] Sending new prompt to background script:", newFullPrompt);
+      browser.runtime.sendMessage({
+        type: "generateGoogleSearchSummary",
+        prompt: newFullPrompt,
+        tabId: (await browser.tabs.getCurrent()).id // Pass current tabId
+      }).catch(error => {
+        console.error("[SamAI Search] Error sending new query message to background:", error);
+        showSidePanel(null);
+      });
     }
   });
 }
