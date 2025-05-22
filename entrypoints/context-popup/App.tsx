@@ -2,6 +2,7 @@ import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+import { browser } from "webextension-polyfill"; // Import browser
 
 interface InputInfo {
   value: string;
@@ -51,8 +52,8 @@ export default function App() {
     loadInitialData();
 
     // Listen for changes in storage for inputInfo
-    const handleStorageChange = (changes: { [key: string]: browser.Storage.StorageChange }, areaName: string) => {
-      if (areaName === "local" && changes.inputInfo) {
+    const handleStorageChange = (changes: { [key: string]: browser.Storage.StorageChange }) => {
+      if (changes.inputInfo) {
         setInputInfo(changes.inputInfo.newValue as InputInfo | null);
       }
     };
