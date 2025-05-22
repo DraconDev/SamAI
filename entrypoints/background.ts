@@ -65,8 +65,6 @@ function isBackgroundMessage(message: any): message is BackgroundMessage {
 }
 
 export default defineBackground(() => {
-  let sourceTabId: number | null = null;
-
   // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
@@ -140,10 +138,10 @@ export default defineBackground(() => {
 
         case "setInputValue": {
           const setInputMessage = message as SetInputValueRequest; // Assert after type guard
-          if (sourceTabId) {
+          if (sender.tab?.id) { // Use sender.tab.id directly
             // Handle setInputValue asynchronously
             browser.tabs
-              .sendMessage(sourceTabId, setInputMessage)
+              .sendMessage(sender.tab.id, setInputMessage)
               .then((result) => {
                 sendResponse(result);
               })
@@ -157,7 +155,7 @@ export default defineBackground(() => {
             return true; // Will respond asynchronously
           } else {
             console.warn(
-              "[SamAI Background] Received setInputValue message but sourceTabId is null"
+              "[SamAI Background] Received setInputValue message but no sender tab ID"
             );
             sendResponse({ success: false, error: "Source tab not available" });
             return true; // Will respond asynchronously
@@ -213,9 +211,6 @@ export default defineBackground(() => {
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     if (!tab?.id) return;
 
-    // Store the source tab ID
-    sourceTabId = tab.id;
-
     try {
       console.log("Content script registered in tab:", tab.id);
 
@@ -248,6 +243,7 @@ export default defineBackground(() => {
           },
         });
       } else {
+        // If no input info, ensure it's cleared from storage
         await browser.storage.local.remove("inputInfo");
       }
 
@@ -301,13 +297,6 @@ export default defineBackground(() => {
         width: 400,
         height: 350,
       });
-    }
-  });
-
-  // Clear source tab ID when the tab is closed
-  browser.tabs.onRemoved.addListener((tabId) => {
-    if (tabId === sourceTabId) {
-      sourceTabId = null;
     }
   });
 });
