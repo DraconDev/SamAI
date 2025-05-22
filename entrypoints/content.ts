@@ -72,25 +72,18 @@ export default defineContentScript({
       console.log("[SamAI] Not initializing - conditions not met");
     }
 
-    // Track input element on right clicks
-    document.addEventListener("contextmenu", (event) => {
+    // Track input element on clicks
+    document.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;
       if (
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
-      }
-    });
-
-    // Clear lastInputElement when clicking anywhere except inputs
-    document.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (
-        !(target instanceof HTMLInputElement) &&
-        !(target instanceof HTMLTextAreaElement)
-      ) {
+        console.log("[SamAI Content] Input element clicked:", lastInputElement);
+      } else {
         lastInputElement = null;
+        console.log("[SamAI Content] Clicked outside input, lastInputElement cleared.");
       }
     });
 
