@@ -9,8 +9,14 @@ export type OutputFormat = "html" | "text";
  */
 export function extractPageContent(outputFormat: OutputFormat): string {
   try {
-    console.log("[SamAI Content] extractPageContent called. Output format:", outputFormat);
-    console.log("[SamAI Content] document.body.outerHTML length:", document.body.outerHTML.length);
+    console.log(
+      "[SamAI Content] extractPageContent called. Output format:",
+      outputFormat
+    );
+    console.log(
+      "[SamAI Content] document.body.outerHTML length:",
+      document.body.outerHTML.length
+    );
 
     if (outputFormat === "html") {
       // Return optimized HTML of the entire page
@@ -19,7 +25,10 @@ export function extractPageContent(outputFormat: OutputFormat): string {
     } else {
       // Use innerText for simpler text extraction for debugging
       const content = document.body.innerText;
-      console.log("[SamAI Content] Extracted content using innerText. Length:", content.length);
+      console.log(
+        "[SamAI Content] Extracted content using innerText. Length:",
+        content.length
+      );
       return content.trim();
     }
   } catch (error) {
@@ -32,10 +41,10 @@ export function optimizeHtmlContent(html: string): string {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
-  // Remove script, style, and other non-content/structural tags
+  // Remove script, style, and other non-content/embedding tags
   doc
     .querySelectorAll(
-      "script, style, noscript, link, meta, header, footer, nav, aside, img, svg, canvas, form, button, input, textarea, select, iframe"
+      "script, style, noscript, link, meta, iframe, svg, canvas, audio, video, picture, source, map, area, track, embed, object"
     )
     .forEach((el) => el.remove());
 
