@@ -11,6 +11,7 @@ function App() {
 
   useEffect(() => {
     searchSettingsStore.getValue().then((settings) => {
+      console.log("[SamAI Popup] Loaded settings:", settings); // Debug log
       setSearchActive(settings.searchActive);
       setPromptStyle(settings.promptStyle);
       setContinuePreviousChat(settings.continuePreviousChat);
@@ -199,15 +200,18 @@ function App() {
                 <button
                   key={value}
                   type="button"
-                  onClick={() => {
+                  onClick={async () => { // Make onClick async
                     const newFormat = value as OutputFormat;
                     setOutputFormat(newFormat);
-                    searchSettingsStore.setValue({
+                    const updatedSettings = { // Create updated settings object
                       searchActive,
                       promptStyle,
                       continuePreviousChat,
                       outputFormat: newFormat,
-                    });
+                    };
+                    console.log("[SamAI Popup] Setting new output format:", newFormat); // Debug log
+                    await searchSettingsStore.setValue(updatedSettings); // Await the setValue call
+                    console.log("[SamAI Popup] Settings after update:", await searchSettingsStore.getValue()); // Verify after update
                   }}
                   className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
                             hover:transform hover:scale-[1.02]
