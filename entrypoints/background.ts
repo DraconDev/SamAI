@@ -73,7 +73,7 @@ export default defineBackground(() => {
 
   // Listen for runtime messages
   browser.runtime.onMessage.addListener(
-    (
+    async ( // Add async here
       message: unknown,
       sender: Runtime.MessageSender,
       sendResponse: (response?: any) => void
