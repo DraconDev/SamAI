@@ -1,3 +1,4 @@
+/// <reference types="webextension-polyfill" />
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
