@@ -25,7 +25,10 @@ interface GetInputInfoRequest extends BaseMessage {
 }
 
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
-import type { InputElementClickedMessage, ClearInputElementMessage } from "@/entrypoints/content"; // Import new message types
+import type {
+  InputElementClickedMessage,
+  ClearInputElementMessage,
+} from "@/entrypoints/content"; // Import new message types
 
 interface GetPageContentRequest extends BaseMessage {
   type: "getPageContent";
@@ -215,8 +218,13 @@ export default defineBackground(() => {
 
         case "inputElementClicked": {
           const inputElementMessage = message as InputElementClickedMessage;
-          console.log("[SamAI Background] Received inputElementClicked message:", inputElementMessage.inputInfo);
-          await browser.storage.local.set({ inputInfo: inputElementMessage.inputInfo });
+          console.log(
+            "[SamAI Background] Received inputElementClicked message:",
+            inputElementMessage.inputInfo
+          );
+          await browser.storage.local.set({
+            inputInfo: inputElementMessage.inputInfo,
+          });
           return undefined; // Handled asynchronously
         }
 
