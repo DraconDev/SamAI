@@ -59,5 +59,11 @@ export function optimizeHtmlContent(html: string): string {
     node.parentNode?.removeChild(node); // Use optional chaining for parentNode
   }
 
-  return doc.documentElement.outerHTML; // Return the cleaned HTML
+  // Get the cleaned HTML string
+  let cleanedHtml = doc.documentElement.outerHTML;
+
+  // Collapse multiple whitespace characters into a single space
+  cleanedHtml = cleanedHtml.replace(/\s+/g, " ").trim();
+
+  return cleanedHtml; // Return the cleaned HTML
 }
