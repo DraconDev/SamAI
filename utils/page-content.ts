@@ -19,20 +19,31 @@ export function extractPageContent(outputFormat: OutputFormat): string {
         {
           acceptNode: (node) => {
             // Get parent element
-            const parent = node.parentElement;
-            if (!parent) return NodeFilter.FILTER_REJECT;
+            let currentElement: HTMLElement | null = node.parentElement;
+            if (!currentElement) return NodeFilter.FILTER_REJECT;
+
+            // Traverse up the DOM tree to check for the context popup root
+            while (currentElement) {
+              if (currentElement.id === "samai-context-popup-root") {
+                return NodeFilter.FILTER_REJECT; // Skip elements within the context popup
+              }
+              currentElement = currentElement.parentElement;
+            }
+
+            // Reset currentElement to the direct parent for subsequent checks
+            currentElement = node.parentElement;
 
             // Skip script and style tags
             if (
-              parent.tagName === "SCRIPT" ||
-              parent.tagName === "STYLE" ||
-              parent.tagName === "NOSCRIPT"
+              currentElement.tagName === "SCRIPT" ||
+              currentElement.tagName === "STYLE" ||
+              currentElement.tagName === "NOSCRIPT"
             ) {
               return NodeFilter.FILTER_REJECT;
             }
 
             // Skip hidden elements
-            const style = window.getComputedStyle(parent);
+            const style = window.getComputedStyle(currentElement);
             if (style.display === "none" || style.visibility === "hidden") {
               return NodeFilter.FILTER_REJECT;
             }
