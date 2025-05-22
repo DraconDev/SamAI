@@ -32,9 +32,11 @@ export function optimizeHtmlContent(html: string): string {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
-  // Remove script and style tags
+  // Remove script, style, and other non-content/structural tags
   doc
-    .querySelectorAll("script, style, noscript, link, meta")
+    .querySelectorAll(
+      "script, style, noscript, link, meta, header, footer, nav, aside, img, svg, canvas, form, button, input, textarea, select, iframe"
+    )
     .forEach((el) => el.remove());
 
   // Remove comments
