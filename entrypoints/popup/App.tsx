@@ -182,7 +182,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 mt-8 pt-4 border-t border-[#2E2F3E]">
+        <div className="flex flex-col gap-3 pt-4 ">
           <button
             onClick={openApiKeyPage}
             className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
@@ -206,7 +206,6 @@ function App() {
               />
             </svg>
           </button>
-
 
           <button
             onClick={openDonateLink}
