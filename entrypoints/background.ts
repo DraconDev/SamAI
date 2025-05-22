@@ -175,6 +175,24 @@ export default defineBackground(() => {
           );
           return undefined; // Not handled synchronously
 
+        case "pageContentResponse": {
+          const pageContentMessage = message as PageContentResponseMessage;
+          console.log(
+            "[SamAI Background] Received pageContentResponse. Content length:",
+            pageContentMessage.content.length
+          );
+          if (pageContentMessage.error) {
+            console.error(
+              "[SamAI Background] Error from content script:",
+              pageContentMessage.error
+            );
+          }
+          await browser.storage.local.set({
+            pageContent: pageContentMessage.content || "Unable to access page content",
+          });
+          return undefined; // Handled asynchronously, no direct response to this message
+        }
+
         default:
           // If message.type is a string but not one of the known types
           console.warn("[SamAI Background] Received unknown message:", message); // Log the whole message
