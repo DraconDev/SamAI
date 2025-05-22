@@ -97,8 +97,7 @@ export default defineBackground(() => {
           // Check if sender is a valid tab
           if (!sender.tab) {
             console.error("[SamAI Background] No sender tab found");
-            sendResponse(null);
-            return true; // Will respond asynchronously
+            return null; // Directly return null
           }
 
           try {
