@@ -17,80 +17,9 @@ export function extractPageContent(outputFormat: OutputFormat): string {
       const fullHtml = document.documentElement.outerHTML;
       return optimizeHtmlContent(fullHtml);
     } else {
-      // Get all visible text, filtering out hidden elements and scripts
-      const walk = document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT,
-        {
-          acceptNode: (node) => {
-            // Temporarily skip all filters except for empty text nodes for debugging
-            if (!node.textContent?.trim()) {
-              return NodeFilter.FILTER_REJECT;
-            }
-            console.log("[SamAI Content] Accepted node text:", node.textContent); // Log accepted text
-            return NodeFilter.FILTER_ACCEPT;
-          },
-        }
-      );
-
-      const blockElements = new Set([
-        "ADDRESS",
-        "ARTICLE",
-        "ASIDE",
-        "BLOCKQUOTE",
-        "DETAILS",
-        "DIALOG",
-        "DD",
-        "DIV",
-        "DL",
-        "DT",
-        "FIELDSET",
-        "FIGCAPTION",
-        "FIGURE",
-        "FOOTER",
-        "FORM",
-        "H1",
-        "H2",
-        "H3",
-        "H4",
-        "H5",
-        "H6",
-        "HEADER",
-        "HGROUP",
-        "HR",
-        "LI",
-        "MAIN",
-        "NAV",
-        "OL",
-        "P",
-        "PRE",
-        "SECTION",
-        "TABLE",
-        "UL",
-      ]);
-
-      function isBlockElement(element: HTMLElement): boolean {
-        return blockElements.has(element.tagName);
-      }
-
-      let content = "";
-      let node;
-      let nodeCount = 0; // Add node counter
-      while ((node = walk.nextNode())) {
-        nodeCount++; // Increment counter
-        const text = node.textContent?.trim() || "";
-        if (text) {
-          content += text;
-          if (node.parentElement && isBlockElement(node.parentElement)) {
-            content += "\n"; // Add newline for block elements
-          } else {
-            content += " "; // Add space for inline elements
-          }
-        }
-      }
-      console.log("[SamAI Content] Total nodes processed by TreeWalker:", nodeCount); // Log total nodes
-      console.log("[SamAI Content] Final extracted content length:", content.trim().length); // Log final length
-
+      // Use innerText for simpler text extraction for debugging
+      const content = document.body.innerText;
+      console.log("[SamAI Content] Extracted content using innerText. Length:", content.length);
       return content.trim();
     }
   } catch (error) {
