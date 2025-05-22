@@ -28,6 +28,12 @@ interface GetPageContentRequest extends BaseMessage {
   type: "getPageContent";
 }
 
+interface PageContentResponseMessage extends BaseMessage {
+  type: "pageContentResponse";
+  content: string;
+  error?: string; // Optional error message
+}
+
 interface InputInfoResponse {
   messageType: "inputInfo";
   value?: string;
@@ -42,7 +48,8 @@ type BackgroundMessage =
   | OpenApiKeyPageRequest
   | SetInputValueRequest
   | GetInputInfoRequest
-  | GetPageContentRequest;
+  | GetPageContentRequest
+  | PageContentResponseMessage; // Add new type
 
 // Type guard for incoming messages
 function isBackgroundMessage(message: any): message is BackgroundMessage {
