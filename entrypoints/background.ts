@@ -25,10 +25,6 @@ interface GetInputInfoRequest extends BaseMessage {
 }
 
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
-import type {
-  InputElementClickedMessage,
-  ClearInputElementMessage,
-} from "@/entrypoints/content"; // Import new message types
 
 interface GetPageContentRequest extends BaseMessage {
   type: "getPageContent";
