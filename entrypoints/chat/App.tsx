@@ -223,11 +223,11 @@ export default function App() {
                   className="flex-1 p-5 text-[15px] bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-500
                        focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5] 
                        transition-all duration-200 shadow-lg backdrop-blur-sm"
-                  disabled={!isApiKeySet || isLoading} // Disable input if API key not set or loading
+                  disabled={isLoading} // Disable input if loading
                 />
                 <button
                   type="submit"
-                  disabled={isLoading || !input.trim() || !isApiKeySet} // Disable button if API key not set, loading, or input empty
+                  disabled={isLoading || !input.trim()} // Disable button if loading or input empty
                   className={`px-8 py-5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl text-[15px]
                        font-medium hover:opacity-90 transform hover:scale-[0.98] shadow-lg
                        transition-all duration-200 focus:outline-none focus:ring-2 
