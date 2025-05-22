@@ -73,7 +73,7 @@ export default defineBackground(() => {
 
   // Listen for runtime messages
   browser.runtime.onMessage.addListener(
-    async ( // Add async here
+    (
       message: unknown,
       sender: Runtime.MessageSender,
       sendResponse: (response?: any) => void
@@ -188,7 +188,8 @@ export default defineBackground(() => {
             );
           }
           await browser.storage.local.set({
-            pageContent: pageContentMessage.content || "Unable to access page content",
+            pageContent:
+              pageContentMessage.content || "Unable to access page content",
           });
           return undefined; // Handled asynchronously, no direct response to this message
         }
@@ -248,9 +249,15 @@ export default defineBackground(() => {
         type: "getPageContent",
       };
       browser.tabs.sendMessage(tab.id, getPageContentMessage).catch((error) => {
-        console.error("[SamAI Background] Error sending getPageContent message:", error);
+        console.error(
+          "[SamAI Background] Error sending getPageContent message:",
+          error
+        );
       });
-      console.log("[SamAI Background] Sent getPageContent message to tab:", tab.id);
+      console.log(
+        "[SamAI Background] Sent getPageContent message to tab:",
+        tab.id
+      );
 
       // Ensure inputInfo is cleared, as this context menu action is for page summarization
       // This line is now redundant as it's handled above, but keeping it for now to match the original structure
