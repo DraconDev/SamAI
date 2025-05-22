@@ -104,17 +104,7 @@ export default defineBackground(() => {
 
           try {
             const text = await generateFormResponse(geminiMessage.prompt);
-            if (text === null) {
-              console.error(
-                "[SamAI Background] Response generation failed - null response"
-              );
-            } else {
-              console.log(
-                "[SamAI Background] Successfully generated response"
-              );
-            }
-            console.log("[SamAI Background] Response text:", text);
-            sendResponse(text);
+            sendResponse(text); // Send response immediately after getting text
           } catch (error: unknown) { // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
