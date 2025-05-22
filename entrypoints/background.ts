@@ -80,11 +80,13 @@ export default defineBackground(() => {
 
   // Listen for runtime messages
   browser.runtime.onMessage.addListener(
-    async ( // Marked as async to allow await expressions
+    async (
+      // Marked as async to allow await expressions
       message: unknown,
       sender: Runtime.MessageSender,
       sendResponse: (response?: any) => void
-    ): Promise<true | undefined> => { // Corrected return type
+    ): Promise<true | undefined> => {
+      // Corrected return type
       console.log("[SamAI Background] Received message:", message);
 
       if (!isBackgroundMessage(message)) {
@@ -199,11 +201,13 @@ export default defineBackground(() => {
           // Store content based on its format
           if (pageContentMessage.outputFormat === "text") {
             await browser.storage.local.set({
-              pageBodyText: pageContentMessage.content || "Unable to access page content",
+              pageBodyText:
+                pageContentMessage.content || "Unable to access page content",
             });
           } else if (pageContentMessage.outputFormat === "html") {
             await browser.storage.local.set({
-              pageOptimizedHtml: pageContentMessage.content || "Unable to access page content",
+              pageOptimizedHtml:
+                pageContentMessage.content || "Unable to access page content",
             });
           }
           return undefined; // Handled asynchronously, no direct response to this message
@@ -265,18 +269,32 @@ export default defineBackground(() => {
         outputFormat: "text",
       };
       browser.tabs.sendMessage(tab.id, getBodyTextMessage).catch((error) => {
-        console.error("[SamAI Background] Error sending getPageContent (text) message:", error);
+        console.error(
+          "[SamAI Background] Error sending getPageContent (text) message:",
+          error
+        );
       });
-      console.log("[SamAI Background] Sent getPageContent (text) message to tab:", tab.id);
+      console.log(
+        "[SamAI Background] Sent getPageContent (text) message to tab:",
+        tab.id
+      );
 
       const getOptimizedHtmlMessage: GetPageContentRequest = {
         type: "getPageContent",
         outputFormat: "html",
       };
-      browser.tabs.sendMessage(tab.id, getOptimizedHtmlMessage).catch((error) => {
-        console.error("[SamAI Background] Error sending getPageContent (html) message:", error);
-      });
-      console.log("[SamAI Background] Sent getPageContent (html) message to tab:", tab.id);
+      browser.tabs
+        .sendMessage(tab.id, getOptimizedHtmlMessage)
+        .catch((error) => {
+          console.error(
+            "[SamAI Background] Error sending getPageContent (html) message:",
+            error
+          );
+        });
+      console.log(
+        "[SamAI Background] Sent getPageContent (html) message to tab:",
+        tab.id
+      );
 
       // Ensure inputInfo is cleared, as this context menu action is for page summarization
       // This line is now redundant as it's handled above, but keeping it for now to match the original structure
