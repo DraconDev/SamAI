@@ -31,7 +31,16 @@ export default function App() {
           "pageOptimizedHtml", // Load optimized HTML
         ]);
         if (result.inputInfo) {
-          setInputInfo(result.inputInfo as InputInfo);
+          const info = result.inputInfo as InputInfo;
+          setInputInfo(info);
+          // Pre-fill inputPrompt if an input field was clicked
+          if (info.value) {
+            setInputPrompt(`Refine "${info.value}"`);
+          } else if (info.placeholder) {
+            setInputPrompt(`Generate text for "${info.placeholder}"`);
+          } else {
+            setInputPrompt("Generate text for this field");
+          }
         }
         if (result.pageBodyText) {
           setPageBodyText(result.pageBodyText as string);
