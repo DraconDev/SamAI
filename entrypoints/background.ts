@@ -102,9 +102,9 @@ export default defineBackground(() => {
 
           try {
             console.log("[SamAI Background] Calling generateFormResponse with prompt:", geminiMessage.prompt);
-            const text = await generateFormResponse(geminiMessage.prompt);
-            console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null");
-            return text; // Directly return the text or null
+            const text = "This is a hardcoded test response from background.";
+            console.log("[SamAI Background] Returning hardcoded response:", text);
+            return text; // Directly return the hardcoded text
           } catch (error: unknown) { // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
