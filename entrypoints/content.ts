@@ -23,11 +23,18 @@ interface ShowSummaryMessage {
   summary: string;
 }
 
+// Define new message type for response
+interface PageContentResponseMessage {
+  type: "pageContentResponse";
+  content: string;
+}
+
 type ContentScriptMessage =
   | GetPageContentMessage
   | GetInputInfoMessage
   | SetInputValueMessage
-  | ShowSummaryMessage;
+  | ShowSummaryMessage
+  | PageContentResponseMessage; // Add new type
 
 export default defineContentScript({
   matches: ["http://*/*", "https://*/*"], // Exclude chrome-extension:// URLs
@@ -96,7 +103,7 @@ export default defineContentScript({
             "[SamAI Content] Received message with invalid structure:",
             message
           );
-          sendResponse(false);
+          // No sendResponse here, as it's not a direct response to a specific message type
           return; // Indicate that the message was not handled (implicitly returns undefined)
         }
 
@@ -113,20 +120,18 @@ export default defineContentScript({
               );
               const pageContent = extractPageContent(outputFormat); // Pass outputFormat
               console.log(
-                "[SamAI Content] extractPageContent finished, sending response"
+                "[SamAI Content] extractPageContent finished, sending response via new message"
               );
-              // Temporarily send a hardcoded string for debugging message passing
-              sendResponse("TEST_CONTENT_SUCCESS");
+              // Send content back to background script via a new message
+              browser.runtime.sendMessage({ type: "pageContentResponse", content: pageContent });
             } catch (error) {
               console.error(
                 "[SamAI Content] Error extracting page content:",
                 error
               );
-              sendResponse({
-                error: error instanceof Error ? error.message : "Unknown error",
-              });
+              browser.runtime.sendMessage({ type: "pageContentResponse", content: "", error: error instanceof Error ? error.message : "Unknown error" });
             }
-            return true; // Will respond asynchronously
+            return; // No longer returning true for async response to original message
 
           case "getInputInfo":
             if (lastInputElement) {
@@ -206,7 +211,7 @@ export default defineContentScript({
               "[SamAI Content] Unhandled message type:",
               message.type
             );
-            sendResponse(false);
+            // No sendResponse here, as it's not a direct response to a specific message type
             return; // Indicate that the message was not handled (implicitly returns undefined)
         }
       }
