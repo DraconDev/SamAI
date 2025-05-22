@@ -259,7 +259,13 @@ export default function App() {
                   type="radio"
                   value="bodyText"
                   checked={scrapeMode === "bodyText"}
-                  onChange={() => setScrapeMode("bodyText")}
+                  onChange={async () => {
+                    setScrapeMode("bodyText");
+                    await searchSettingsStore.setValue((prev) => ({
+                      ...prev,
+                      outputFormat: "text",
+                    }));
+                  }}
                   className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
                 />
                 <span className="ml-2 text-gray-300">Body Text</span>
@@ -269,7 +275,13 @@ export default function App() {
                   type="radio"
                   value="optimizedHtml"
                   checked={scrapeMode === "optimizedHtml"}
-                  onChange={() => setScrapeMode("optimizedHtml")}
+                  onChange={async () => {
+                    setScrapeMode("optimizedHtml");
+                    await searchSettingsStore.setValue((prev) => ({
+                      ...prev,
+                      outputFormat: "html",
+                    }));
+                  }}
                   className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
                 />
                 <span className="ml-2 text-gray-300">Optimized HTML</span>
@@ -314,9 +326,9 @@ export default function App() {
                 )}
               </button>
               <button
-                onClick={() => {
+                onClick={async () => { // Make this async
                   setPagePrompt("summarize");
-                  handlePageSubmit();
+                  await handlePageSubmit(); // Await the submission
                 }}
                 className={`flex-1 p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
                           hover:opacity-90 focus:outline-none focus:ring-2 
