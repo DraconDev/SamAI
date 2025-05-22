@@ -33,7 +33,7 @@ interface PageContentResponseMessage {
   error?: string; // Optional error message
 }
 
-interface InputElementClickedMessage {
+export interface InputElementClickedMessage {
   type: "inputElementClicked";
   inputInfo: {
     value: string;
@@ -44,7 +44,7 @@ interface InputElementClickedMessage {
   };
 }
 
-interface ClearInputElementMessage {
+export interface ClearInputElementMessage {
   type: "clearInputElement";
 }
 
