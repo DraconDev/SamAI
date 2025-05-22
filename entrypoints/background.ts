@@ -238,16 +238,18 @@ export default defineBackground(() => {
       ) {
         console.log("Input info received:", inputResponse);
         const typedInputResponse = inputResponse as InputInfoResponse;
-        await browser.storage.local.set({
-          inputInfo: {
+        const inputInfoToStore = {
             value: typedInputResponse.value || "",
             placeholder: typedInputResponse.placeholder || "",
             inputType: typedInputResponse.inputType || "",
             elementId: typedInputResponse.id || "",
             elementName: typedInputResponse.name || "",
-          },
-        });
+        };
+        console.log("[SamAI Background] Attempting to store inputInfo:", inputInfoToStore);
+        await browser.storage.local.set({ inputInfo: inputInfoToStore });
+        console.log("[SamAI Background] inputInfo stored successfully.");
       } else {
+        console.log("[SamAI Background] Input response invalid or not 'inputInfo' type, removing inputInfo from storage.");
         await browser.storage.local.remove("inputInfo");
       }
 
