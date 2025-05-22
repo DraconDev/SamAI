@@ -33,16 +33,20 @@ export async function addChatMessage(message: ChatMessage) {
 
 export type PromptStyle = "short" | "medium" | "long";
 
+export type OutputFormat = "text" | "html";
+
 export interface SearchSettingsStore {
   searchActive: boolean;
   promptStyle: PromptStyle;
   continuePreviousChat: boolean;
+  outputFormat: OutputFormat; // Add outputFormat
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
   searchActive: true,
   promptStyle: "short",
   continuePreviousChat: false,
+  outputFormat: "text", // Default to text
 };
 
 export const PROMPT_TEMPLATES = {
