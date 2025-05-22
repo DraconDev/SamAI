@@ -30,7 +30,7 @@ type ContentScriptMessage =
   | ShowSummaryMessage;
 
 export default defineContentScript({
-  matches: ["<all_urls>"],
+  matches: ["http://*/*", "https://*/*"], // Exclude chrome-extension:// URLs
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
 
