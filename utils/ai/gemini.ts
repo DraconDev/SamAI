@@ -34,7 +34,7 @@ export async function generateFormResponse(
     console.log("[SamAI Gemini] Retrieved store:", { hasApiKey: !!store.apiKey });
     
     if (!store.apiKey) {
-      console.warn("[SamAI Gemini] No API key found in store");
+      console.warn("[SamAI Gemini] No API key found in store. Returning null."); // Added more specific log
       return null;
     }
     
@@ -47,7 +47,7 @@ export async function generateFormResponse(
 
     console.log("[SamAI Gemini] Sending request to Gemini API");
     const result = await model.generateContent(prompt);
-    console.log("[SamAI Gemini] Raw API response:", result);
+    console.log("[SamAI Gemini] Raw API response:", JSON.stringify(result, null, 2)); // Log full result as JSON
 
     // Validate API response structure
     if (!result || !result.response) {
@@ -63,19 +63,20 @@ export async function generateFormResponse(
       !result.response.candidates[0].content.parts[0] ||
       !result.response.candidates[0].content.parts[0].text
     ) {
-      console.error("[SamAI Gemini] Invalid response structure:", result.response);
+      console.error("[SamAI Gemini] Invalid response structure:", JSON.stringify(result.response, null, 2)); // Log full response as JSON
       throw new Error("No candidates in response from Gemini API");
     }
 
     const response = result.response.candidates[0].content.parts[0].text;
     console.log("[SamAI Gemini] Successfully generated response");
     return response.trim();
-  } catch (error: any) {
-    console.error("Error generating Gemini response:", {
+  } catch (error: unknown) { // Explicitly type error as unknown
+    const err = error as Error; // Cast to Error for property access
+    console.error("[SamAI Gemini] Error generating Gemini response:", {
       timestamp: new Date().toISOString(),
-      message: error.message,
-      stack: error.stack,
-      errorType: error.constructor.name,
+      message: err.message,
+      stack: err.stack,
+      errorType: err.constructor.name,
     });
     return null;
   }
