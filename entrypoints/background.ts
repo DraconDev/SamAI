@@ -229,6 +229,28 @@ export default defineBackground(() => {
       );
       console.log("Background received input response:", inputResponse);
 
+      // Store input info in local storage
+      if (
+        inputResponse &&
+        typeof inputResponse === "object" &&
+        "messageType" in inputResponse &&
+        (inputResponse as InputInfoResponse).messageType === "inputInfo"
+      ) {
+        console.log("Input info received:", inputResponse);
+        const typedInputResponse = inputResponse as InputInfoResponse;
+        await browser.storage.local.set({
+          inputInfo: {
+            value: typedInputResponse.value || "",
+            placeholder: typedInputResponse.placeholder || "",
+            inputType: typedInputResponse.inputType || "",
+            elementId: typedInputResponse.id || "",
+            elementName: typedInputResponse.name || "",
+          },
+        });
+      } else {
+        await browser.storage.local.remove("inputInfo");
+      }
+
       // Send messages to content script to get both text and HTML content
       const getBodyTextMessage: GetPageContentRequest = {
         type: "getPageContent",
@@ -262,28 +284,9 @@ export default defineBackground(() => {
         tab.id
       );
 
-      let popupUrl = browser.runtime.getURL("/context-popup.html");
-      if (
-        inputResponse &&
-        typeof inputResponse === "object" &&
-        "messageType" in inputResponse &&
-        (inputResponse as InputInfoResponse).messageType === "inputInfo"
-      ) {
-        console.log("Input info received:", inputResponse);
-        const typedInputResponse = inputResponse as InputInfoResponse;
-        const encodedInputInfo = encodeURIComponent(JSON.stringify({
-          value: typedInputResponse.value || "",
-          placeholder: typedInputResponse.placeholder || "",
-          inputType: typedInputResponse.inputType || "",
-          elementId: typedInputResponse.id || "",
-          elementName: typedInputResponse.name || "",
-        }));
-        popupUrl += `?inputInfo=${encodedInputInfo}`;
-      }
-
       // Open popup
       browser.windows.create({
-        url: popupUrl,
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 350,
@@ -293,7 +296,7 @@ export default defineBackground(() => {
       // If there's an error getting page content, still open the popup,
       // but it will indicate "Unable to access page content"
       browser.windows.create({
-        url: browser.runtime.getURL("/context-popup.html"), // Fallback to default URL
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 350,
