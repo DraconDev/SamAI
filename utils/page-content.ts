@@ -69,3 +69,20 @@ export function extractPageContent(): string {
     return ""; // Return empty string on error
   }
 }
+
+export function optimizeHtmlContent(html: string): string {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // Remove script and style tags
+  doc.querySelectorAll('script, style, noscript, link, meta').forEach(el => el.remove());
+
+  // Remove comments
+  const comments = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_COMMENT, null);
+  let node;
+  while ((node = comments.nextNode())) {
+    node.remove();
+  }
+
+  return doc.documentElement.outerHTML; // Return the cleaned HTML
+}
