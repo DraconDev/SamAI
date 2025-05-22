@@ -20,6 +20,10 @@ interface SetInputValueRequest extends BaseMessage {
   value: string;
 }
 
+interface GetInputInfoRequest extends BaseMessage {
+  type: "getInputInfo";
+}
+
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
 interface GetPageContentRequest extends BaseMessage {
