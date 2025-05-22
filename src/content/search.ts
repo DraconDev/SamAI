@@ -1,7 +1,10 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client"; // Import Root type
 import SearchPanel from "./SearchPanel";
 import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
+
+let samaiRoot: Root | null = null; // Module-scoped root
+let samaiPanelContainer: HTMLDivElement | null = null; // Module-scoped container
 
 function injectStyles() {
   const styleTag = document.createElement("style");
