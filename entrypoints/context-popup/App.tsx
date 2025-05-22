@@ -1,4 +1,3 @@
-/// <reference types="webextension-polyfill" />
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
@@ -52,7 +51,9 @@ export default function App() {
     loadInitialData();
 
     // Listen for changes in storage for inputInfo
-    const handleStorageChange = (changes: { [key: string]: browser.Storage.StorageChange }) => {
+    const handleStorageChange = (changes: {
+      [key: string]: browser.Storage.StorageChange;
+    }) => {
       if (changes.inputInfo) {
         setInputInfo(changes.inputInfo.newValue as InputInfo | null);
       }
@@ -72,7 +73,10 @@ export default function App() {
   const handleScrapeModeChange = async (newMode: OutputFormat) => {
     setScrapeMode(newMode);
     const currentSettings = await searchSettingsStore.getValue();
-    await searchSettingsStore.setValue({ ...currentSettings, outputFormat: newMode });
+    await searchSettingsStore.setValue({
+      ...currentSettings,
+      outputFormat: newMode,
+    });
   };
 
   const handleInputSubmit = async (e: React.FormEvent) => {
