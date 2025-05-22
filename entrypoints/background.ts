@@ -211,23 +211,6 @@ export default defineBackground(() => {
     try {
       console.log("Content script registered in tab:", tab.id);
 
-      // Always get the full page content for summarization via the "Sam" context menu
-      const getPageContentMessage: GetPageContentRequest = {
-        type: "getPageContent",
-      };
-      const pageContentResponse = await browser.tabs.sendMessage(
-        tab.id,
-        getPageContentMessage
-      );
-      console.log(
-        "[SamAI Background] Page content length:",
-        (pageContentResponse as any)?.length || 0
-      );
-
-      // Store only page content in local storage for the context popup
-      await browser.storage.local.set({
-        pageContent: pageContentResponse || "Unable to access page content",
-      });
       // Ensure inputInfo is cleared, as this context menu action is for page summarization
       await browser.storage.local.remove("inputInfo");
 
