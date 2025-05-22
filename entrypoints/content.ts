@@ -82,6 +82,7 @@ export default defineContentScript({
     // Handle messages from the background script
     browser.runtime.onMessage.addListener(
       async (message, sender, sendResponse) => { // Made the listener async
+        console.log("[SamAI Content] Listener entered. Message:", message); // NEW LOG
         console.log("[SamAI Content] Received message:", message);
 
         // Use type guards to handle different message types
