@@ -116,23 +116,18 @@ export default defineContentScript({
 
         switch (message.type) {
           case "getPageContent":
-            console.log("[SamAI Content] Handling getPageContent message");
+            // Assert message type for getPageContent
+            const getPageContentMsg = message as GetPageContentMessage;
+            console.log("[SamAI Content] Handling getPageContent message with format:", getPageContentMsg.outputFormat);
             try {
-              // Get output format from store
-              const settings = await searchSettingsStore.getValue();
-              const outputFormat = settings.outputFormat;
-
-              console.log(
-                `[SamAI Content] Calling extractPageContent with format: ${outputFormat}`
-              );
-              const pageContent = extractPageContent(outputFormat); // Pass outputFormat
+              const pageContent = extractPageContent(getPageContentMsg.outputFormat);
               console.log(
                 "[SamAI Content] extractPageContent finished, sending response via new message"
               );
-              // Send content back to background script via a new message
               browser.runtime.sendMessage({
                 type: "pageContentResponse",
                 content: pageContent,
+                outputFormat: getPageContentMsg.outputFormat, // Include outputFormat in response
               });
             } catch (error) {
               console.error(
@@ -142,10 +137,11 @@ export default defineContentScript({
               browser.runtime.sendMessage({
                 type: "pageContentResponse",
                 content: "",
+                outputFormat: getPageContentMsg.outputFormat, // Include outputFormat in response even on error
                 error: error instanceof Error ? error.message : "Unknown error",
               });
             }
-            return; // No longer returning true for async response to original message
+            return;
 
           case "getInputInfo":
             if (lastInputElement) {
