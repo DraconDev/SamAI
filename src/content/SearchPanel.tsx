@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"; // Import useState and useEffect
 import { MarkdownRenderer } from "@/utils/markdown";
-import { apiKeyStore } from "@/utils/store"; // Import apiKeyStore
+import { apiKeyStore, type OutputFormat } from "@/utils/store"; // Import apiKeyStore and OutputFormat
 
 interface SearchPanelProps {
   response: string | null;
   onClose: () => void;
+  outputFormat: OutputFormat; // Add outputFormat prop
 }
 
-export default function SearchPanel({ response, onClose }: SearchPanelProps) {
+export default function SearchPanel({ response, onClose, outputFormat }: SearchPanelProps) {
   const [isApiKeySet, setIsApiKeySet] = useState(false); // Add isApiKeySet state
 
   // Load API key status on mount
@@ -110,9 +111,16 @@ export default function SearchPanel({ response, onClose }: SearchPanelProps) {
 
       <div style={{ minHeight: "200px" }}>
         {response ? (
-          <div className="markdown-content">
-            <MarkdownRenderer content={response} />
-          </div>
+          outputFormat === "html" ? (
+            <div
+              className="optimized-html-content"
+              dangerouslySetInnerHTML={{ __html: response }}
+            />
+          ) : (
+            <div className="markdown-content">
+              <MarkdownRenderer content={response} />
+            </div>
+          )
         ) : !isApiKeySet ? (
           <div
             style={{
