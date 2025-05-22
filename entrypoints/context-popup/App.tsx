@@ -296,14 +296,14 @@ export default function App() {
                 Summarize
               </button>
             </div>
-            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs shadow-inner">
+            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs">
               <button
                 type="button"
                 onClick={() => handleScrapeModeChange("text")}
                 className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 
                           ${
                             scrapeMode === "text"
-                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-md"
+                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white ring-2 ring-[#818cf8] ring-offset-1 ring-offset-[#1a1b2e]"
                               : "bg-[#1E1F2E] text-gray-400 hover:bg-[#2E2F3E] hover:text-gray-200"
                           }`}
               >
@@ -315,7 +315,7 @@ export default function App() {
                 className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 
                           ${
                             scrapeMode === "html"
-                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-md"
+                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white ring-2 ring-[#818cf8] ring-offset-1 ring-offset-[#1a1b2e]"
                               : "bg-[#1E1F2E] text-gray-400 hover:bg-[#2E2F3E] hover:text-gray-200"
                           }`}
               >
