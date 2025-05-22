@@ -30,20 +30,21 @@ export function extractPageContent(outputFormat: OutputFormat): string {
               currentElement = currentElement.parentElement;
             }
 
-            // Reset currentElement to the direct parent for subsequent checks
-            currentElement = node.parentElement;
+            // Ensure currentElement is not null for subsequent checks
+            const parentElement = node.parentElement;
+            if (!parentElement) return NodeFilter.FILTER_REJECT; // Should already be caught, but for type safety
 
             // Skip script and style tags
             if (
-              currentElement.tagName === "SCRIPT" ||
-              currentElement.tagName === "STYLE" ||
-              currentElement.tagName === "NOSCRIPT"
+              parentElement.tagName === "SCRIPT" ||
+              parentElement.tagName === "STYLE" ||
+              parentElement.tagName === "NOSCRIPT"
             ) {
               return NodeFilter.FILTER_REJECT;
             }
 
             // Skip hidden elements
-            const style = window.getComputedStyle(currentElement);
+            const style = window.getComputedStyle(parentElement);
             if (style.display === "none" || style.visibility === "hidden") {
               return NodeFilter.FILTER_REJECT;
             }
