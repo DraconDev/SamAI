@@ -58,7 +58,8 @@ export async function initializeGoogleSearch() {
   console.log("[SamAI Search] Initiating search for query:", query);
   getResponse()
     .then((response) => {
-      console.log("[SamAI Search] Received response:", response ? "Received text" : "Received null");
+      console.log("[SamAI Search] Received response in .then():", response);
+      console.log("[SamAI Search] Type of response in .then():", typeof response);
       showSidePanel(response);
     })
     .catch((error) => {
@@ -79,8 +80,12 @@ export async function initializeGoogleSearch() {
       getResponse()
         .then((response) => {
           console.log(
-            "[SamAI Search] Received response for new query:",
-            response ? "Received text" : "Received null"
+            "[SamAI Search] Received response for new query in .then():",
+            response
+          );
+          console.log(
+            "[SamAI Search] Type of response for new query in .then():",
+            typeof response
           );
           showSidePanel(response);
         })
