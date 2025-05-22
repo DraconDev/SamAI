@@ -20,7 +20,11 @@ interface SetInputValueRequest extends BaseMessage {
   value: string;
 }
 
-import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+interface ClearInputElementMessage extends BaseMessage {
+  type: "clearInputElement";
+}
+
+import { OutputFormat } => "@/utils/page-content"; // Import OutputFormat
 import { InputElementClickedMessage } from "@/entrypoints/content"; // Import InputElementClickedMessage
 
 interface GetPageContentRequest extends BaseMessage {
@@ -41,7 +45,8 @@ type BackgroundMessage =
   | SetInputValueRequest
   | GetPageContentRequest
   | PageContentResponseMessage
-  | InputElementClickedMessage; // Add new message type
+  | InputElementClickedMessage
+  | ClearInputElementMessage; // Add new message type
 
 // Type guard for incoming messages
 function isBackgroundMessage(message: any): message is BackgroundMessage {
