@@ -29,11 +29,12 @@ export async function initializeGoogleSearch() {
       "[SamAI Search] Sending initial request to Gemini with prompt:",
       fullPrompt
     ); // NEW LOG
-    const response = (await browser.runtime.sendMessage({
-      // Cast to string | null
+    const rawResponse = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
       prompt: fullPrompt, // Use fullPrompt
-    })) as string | null; // Type assertion
+    });
+    console.log("[SamAI Search] Raw message response from background (initial):", rawResponse);
+    const response = rawResponse as string | null; // Type assertion
 
     if (!response) {
       console.log("[SamAI Search] No response, retrying after 1s delay");
@@ -46,11 +47,12 @@ export async function initializeGoogleSearch() {
         "[SamAI Search] Sending retry request to Gemini with prompt:",
         retryPrompt
       ); // NEW LOG
-      return (await browser.runtime.sendMessage({
-        // Cast to string | null
+      const rawRetryResponse = await browser.runtime.sendMessage({
         type: "generateGeminiResponse",
         prompt: retryPrompt, // Use retryPrompt
-      })) as string | null; // Type assertion
+      });
+      console.log("[SamAI Search] Raw message response from background (retry):", rawRetryResponse);
+      return rawRetryResponse as string | null; // Type assertion
     }
     return response;
   };
