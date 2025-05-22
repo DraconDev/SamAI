@@ -1,11 +1,11 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
 import { extractPageContent } from "@/utils/page-content";
-import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
+import { searchSettingsStore } from "@/utils/store";
 import { tabs } from "webextension-polyfill";
+import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
 // Define message types
-import { extractPageContent, OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 interface GetPageContentMessage {
   type: "getPageContent";
   outputFormat: OutputFormat; // Add outputFormat
@@ -30,7 +30,7 @@ interface PageContentResponseMessage {
   type: "pageContentResponse";
   content: string;
   outputFormat: OutputFormat; // Add outputFormat
-  error?: string;
+  error?: string; // Optional error message
 }
 
 type ContentScriptMessage =
@@ -51,7 +51,10 @@ export default defineContentScript({
       pathname: window.location.pathname,
       search: window.location.search,
     });
-    console.log("[SamAI] document.body.innerText length on load:", document.body.innerText.length); // NEW LOG
+    console.log(
+      "[SamAI] document.body.innerText length on load:",
+      document.body.innerText.length
+    ); // NEW LOG
 
     // Initialize Google search functionality if we're on a search page with a query
     if (
@@ -127,13 +130,20 @@ export default defineContentScript({
                 "[SamAI Content] extractPageContent finished, sending response via new message"
               );
               // Send content back to background script via a new message
-              browser.runtime.sendMessage({ type: "pageContentResponse", content: pageContent });
+              browser.runtime.sendMessage({
+                type: "pageContentResponse",
+                content: pageContent,
+              });
             } catch (error) {
               console.error(
                 "[SamAI Content] Error extracting page content:",
                 error
               );
-              browser.runtime.sendMessage({ type: "pageContentResponse", content: "", error: error instanceof Error ? error.message : "Unknown error" });
+              browser.runtime.sendMessage({
+                type: "pageContentResponse",
+                content: "",
+                error: error instanceof Error ? error.message : "Unknown error",
+              });
             }
             return; // No longer returning true for async response to original message
 
