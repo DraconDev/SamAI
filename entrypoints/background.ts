@@ -186,7 +186,17 @@ export default defineBackground(() => {
     try {
       console.log("Content script registered in tab:", tab.id);
 
-      // Store page content in local storage
+      // Try to get input information if it's an input element
+      const getInputMessage: GetInputInfoRequest = { type: "getInputInfo" };
+      console.log("Sending message to content script:", getInputMessage);
+
+      const inputResponse = await browser.tabs.sendMessage(
+        tab.id,
+        getInputMessage
+      );
+      console.log("Background received input response:", inputResponse);
+
+      // Store input info and page content in local storage
       const getPageContentMessage: GetPageContentRequest = {
         type: "getPageContent",
       };
@@ -199,25 +209,48 @@ export default defineBackground(() => {
         (pageContentResponse as any)?.length || 0
       ); // Use type assertion
 
-      await browser.storage.local.set({
-        pageContent: pageContentResponse || "Unable to access page content",
-      });
+      // Assuming the content script sends back an object with a messageType property
+      if (
+        inputResponse &&
+        typeof inputResponse === "object" &&
+        "messageType" in inputResponse &&
+        (inputResponse as InputInfoResponse).messageType === "inputInfo"
+      ) {
+        console.log("Input info received:", inputResponse);
+        const typedInputResponse = inputResponse as InputInfoResponse; // Assert to InputInfoResponse
+        await browser.storage.local.set({
+          inputInfo: {
+            value: typedInputResponse.value || "",
+            placeholder: typedInputResponse.placeholder || "",
+            inputType: typedInputResponse.inputType || "",
+            elementId: typedInputResponse.id || "",
+            elementName: typedInputResponse.name || "",
+          },
+          pageContent: pageContentResponse || "Unable to access page content",
+        });
+      } else {
+        // Clear input info but keep page content if we're not clicking on an input
+        await browser.storage.local.remove("inputInfo");
+        await browser.storage.local.set({
+          pageContent: pageContentResponse || "Unable to access page content",
+        });
+      }
 
-      // Open chat page
+      // Open popup
       browser.windows.create({
-        url: browser.runtime.getURL("/chat/index.html"),
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 800, // Adjust width for chat page
-        height: 600, // Adjust height for chat page
+        width: 400,
+        height: 450,
       });
     } catch (error) {
       console.error("Error in background script:", error);
-      // Open chat page even on error
+      // Open regular popup if message fails (non-input or error)
       browser.windows.create({
-        url: browser.runtime.getURL("/chat/index.html"),
+        url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 800,
-        height: 600,
+        width: 400,
+        height: 450,
       });
     }
   });
