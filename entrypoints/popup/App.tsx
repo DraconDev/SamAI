@@ -2,11 +2,13 @@ import { tabs } from "webextension-polyfill";
 import { useEffect, useState } from "react";
 import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 import { ToggleButton } from "../../src/components/ToggleButton";
+import { type OutputFormat } from "../../utils/page-content"; // Import OutputFormat
 
 function App() {
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
   const [continuePreviousChat, setContinuePreviousChat] = useState(true);
+  const [outputFormat, setOutputFormat] = useState<OutputFormat>("text"); // Add outputFormat state
 
   useEffect(() => {
     searchSettingsStore.getValue().then((settings) => {
@@ -14,6 +16,7 @@ function App() {
       setSearchActive(settings.searchActive);
       setPromptStyle(settings.promptStyle);
       setContinuePreviousChat(settings.continuePreviousChat);
+      setOutputFormat(settings.outputFormat); // Load outputFormat
     });
   }, []);
 
@@ -23,6 +26,7 @@ function App() {
       searchActive: newValue,
       promptStyle,
       continuePreviousChat,
+      outputFormat, // Include outputFormat
     });
     setSearchActive(newValue);
   };
@@ -94,10 +98,11 @@ function App() {
                       const newStyle = value as PromptStyle;
                       setPromptStyle(newStyle);
                       searchSettingsStore.setValue({
-                      searchActive,
-                      promptStyle: newStyle,
-                      continuePreviousChat,
-                    });
+                    searchActive,
+                    promptStyle: newStyle,
+                    continuePreviousChat,
+                    outputFormat, // Include outputFormat
+                  });
                     }}
                     className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
                               hover:transform hover:scale-[1.02]
@@ -169,10 +174,11 @@ function App() {
                 const newValue = !continuePreviousChat;
                 setContinuePreviousChat(newValue);
                 searchSettingsStore.setValue({
-                  searchActive,
-                  promptStyle,
-                  continuePreviousChat: newValue,
-                });
+                searchActive,
+                promptStyle,
+                continuePreviousChat: newValue,
+                outputFormat, // Include outputFormat
+              });
               }}
               ariaLabel={
                 continuePreviousChat
