@@ -284,7 +284,7 @@ export default defineBackground(() => {
         tab.id
       );
 
-      // Open popup
+      // Open popup only after inputInfo is potentially stored
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
@@ -293,8 +293,7 @@ export default defineBackground(() => {
       });
     } catch (error) {
       console.error("Error in background script:", error);
-      // If there's an error getting page content, still open the popup,
-      // but it will indicate "Unable to access page content"
+      // If there's an error, still open the popup, but it might not have inputInfo
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
