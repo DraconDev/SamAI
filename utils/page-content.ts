@@ -16,16 +16,16 @@ export function extractPageContent(): string {
 
           // Skip script and style tags
           if (
-            parent.tagName === 'SCRIPT' ||
-            parent.tagName === 'STYLE' ||
-            parent.tagName === 'NOSCRIPT'
+            parent.tagName === "SCRIPT" ||
+            parent.tagName === "STYLE" ||
+            parent.tagName === "NOSCRIPT"
           ) {
             return NodeFilter.FILTER_REJECT;
           }
 
           // Skip hidden elements
           const style = window.getComputedStyle(parent);
-          if (style.display === 'none' || style.visibility === 'hidden') {
+          if (style.display === "none" || style.visibility === "hidden") {
             return NodeFilter.FILTER_REJECT;
           }
 
@@ -35,37 +35,22 @@ export function extractPageContent(): string {
           }
 
           return NodeFilter.FILTER_ACCEPT;
-        }
+        },
       }
     );
 
-    const blockElements = new Set([
-      'ADDRESS', 'ARTICLE', 'ASIDE', 'BLOCKQUOTE', 'DETAILS', 'DIALOG', 'DD', 'DIV', 'DL', 'DT',
-      'FIELDSET', 'FIGCAPTION', 'FIGURE', 'FOOTER', 'FORM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
-      'HEADER', 'HGROUP', 'HR', 'LI', 'MAIN', 'NAV', 'OL', 'P', 'PRE', 'SECTION', 'TABLE', 'UL'
-    ]);
-
-    function isBlockElement(element: HTMLElement): boolean {
-      return blockElements.has(element.tagName);
-    }
-
-    let content = '';
+    let content = "";
     let node;
     while ((node = walk.nextNode())) {
-      const text = node.textContent?.trim() || '';
+      const text = node.textContent?.trim() || "";
       if (text) {
-        content += text;
-        if (node.parentElement && isBlockElement(node.parentElement)) {
-          content += '\n'; // Add newline for block elements
-        } else {
-          content += ' '; // Add space for inline elements
-        }
+        content += text + " ";
       }
     }
 
     return content.trim();
   } catch (error) {
-    console.error('Error extracting page content:', error);
-    return ''; // Return empty string on error
+    console.error("Error extracting page content:", error);
+    return document.body.innerText; // Fallback to simple innerText
   }
 }
