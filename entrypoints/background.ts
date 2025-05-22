@@ -52,8 +52,6 @@ function isBackgroundMessage(message: any): message is BackgroundMessage {
 }
 
 export default defineBackground(() => {
-  let sourceTabId: number | null = null;
-
   // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
