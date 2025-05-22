@@ -20,39 +20,10 @@ export function extractPageContent(outputFormat: OutputFormat): string {
         NodeFilter.SHOW_TEXT,
         {
           acceptNode: (node) => {
-            // Get parent element
-            let currentElement: HTMLElement | null = node.parentElement;
-            if (!currentElement) return NodeFilter.FILTER_REJECT;
-
-            // Ensure currentElement is not null for subsequent checks
-            const parentElement = node.parentElement;
-            if (!parentElement) return NodeFilter.FILTER_REJECT; // Should already be caught, but for type safety
-
-            // Skip script and style tags
-            if (
-              parentElement.tagName === "SCRIPT" ||
-              parentElement.tagName === "STYLE" ||
-              parentElement.tagName === "NOSCRIPT"
-            ) {
-              return NodeFilter.FILTER_REJECT;
-            }
-
-            // Skip hidden elements
-            const style = window.getComputedStyle(parentElement);
-            if (
-              style.display === "none" ||
-              style.visibility === "hidden" ||
-              style.opacity === "0" ||
-              style.pointerEvents === "none"
-            ) {
-              return NodeFilter.FILTER_REJECT;
-            }
-
-            // Skip empty text nodes
+            // Temporarily skip all filters except for empty text nodes for debugging
             if (!node.textContent?.trim()) {
               return NodeFilter.FILTER_REJECT;
             }
-
             return NodeFilter.FILTER_ACCEPT;
           },
         }
