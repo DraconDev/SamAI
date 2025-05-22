@@ -53,7 +53,9 @@ type BackgroundMessage =
   | SetInputValueRequest
   | GetInputInfoRequest
   | GetPageContentRequest
-  | PageContentResponseMessage; // Add new type
+  | PageContentResponseMessage
+  | InputElementClickedMessage // Add new type
+  | ClearInputElementMessage; // Add new type
 
 // Type guard for incoming messages
 function isBackgroundMessage(message: any): message is BackgroundMessage {
