@@ -39,6 +39,16 @@ export function extractPageContent(): string {
       }
     );
 
+    const blockElements = new Set([
+      'ADDRESS', 'ARTICLE', 'ASIDE', 'BLOCKQUOTE', 'DETAILS', 'DIALOG', 'DD', 'DIV', 'DL', 'DT',
+      'FIELDSET', 'FIGCAPTION', 'FIGURE', 'FOOTER', 'FORM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
+      'HEADER', 'HGROUP', 'HR', 'LI', 'MAIN', 'NAV', 'OL', 'P', 'PRE', 'SECTION', 'TABLE', 'UL'
+    ]);
+
+    function isBlockElement(element: HTMLElement): boolean {
+      return blockElements.has(element.tagName);
+    }
+
     let content = "";
     let node;
     while ((node = walk.nextNode())) {
