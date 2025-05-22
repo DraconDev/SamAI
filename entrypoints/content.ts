@@ -111,24 +111,17 @@ export default defineContentScript({
           },
         }).catch(error => console.error("Error sending inputElementClicked message:", error));
 
+      } else {
+        // If right-clicked element is NOT an input, clear any existing inputInfo
+        console.log("[SamAI Content] Right-clicked element is not an input, sending clearInputElement message.");
+        browser.runtime.sendMessage({
+          type: "clearInputElement",
+        }).catch(error => console.error("Error sending clearInputElement message on non-input right-click:", error));
       }
     });
 
-    // Clear lastInputElement when clicking anywhere except inputs, and send clear message
-    document.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (
-        !(target instanceof HTMLInputElement) &&
-        !(target instanceof HTMLTextAreaElement)
-      ) {
-        lastInputElement = null;
-        console.log("[SamAI Content] Clicked outside input, lastInputElement cleared.");
-        // Also clear inputInfo in storage if clicked outside an input
-        browser.runtime.sendMessage({
-          type: "clearInputElement",
-        }).catch(error => console.error("Error sending clearInputElement message:", error));
-      }
-    });
+    // The click listener for clearing input is already present, but the contextmenu listener is more direct for this specific request.
+    // Keeping the click listener for general clearing on non-input clicks.
 
     // Handle messages from the background script
     browser.runtime.onMessage.addListener(
