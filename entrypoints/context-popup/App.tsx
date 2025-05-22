@@ -1,4 +1,3 @@
-/// <reference types="webextension-polyfill" />
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
@@ -52,7 +51,9 @@ export default function App() {
     loadInitialData();
 
     // Listen for changes in storage for inputInfo
-    const handleStorageChange = (changes: { [key: string]: browser.Storage.StorageChange }) => {
+    const handleStorageChange = (changes: {
+      [key: string]: browser.Storage.StorageChange;
+    }) => {
       if (changes.inputInfo) {
         setInputInfo(changes.inputInfo.newValue as InputInfo | null);
       }
@@ -72,7 +73,10 @@ export default function App() {
   const handleScrapeModeChange = async (newMode: OutputFormat) => {
     setScrapeMode(newMode);
     const currentSettings = await searchSettingsStore.getValue();
-    await searchSettingsStore.setValue({ ...currentSettings, outputFormat: newMode });
+    await searchSettingsStore.setValue({
+      ...currentSettings,
+      outputFormat: newMode,
+    });
   };
 
   const handleInputSubmit = async (e: React.FormEvent) => {
@@ -339,38 +343,3 @@ export default function App() {
     </div>
   );
 }
-
-</final_file_content>
-
-IMPORTANT: For any future changes to this file, use the final_file_content shown above as your reference. This content reflects the current state of the file, including any auto-formatting (e.g., if you used single quotes but the formatter converted them to double quotes). Always base your SEARCH/REPLACE operations on this final version to ensure accuracy.
-
-
-
-New problems detected after saving the file:
-entrypoints/context-popup/App.tsx
-- [ts Error] Line 54: Cannot find namespace 'browser'.<environment_details>
-# VSCode Visible Files
-entrypoints/context-popup/App.tsx
-
-# VSCode Open Tabs
-src/components/SearchPanel.tsx
-wxt.config.ts
-src/content/search.ts
-src/content/SearchPanel.tsx
-utils/store.ts
-utils/page-content.ts
-entrypoints/chat/App.tsx
-entrypoints/content.ts
-entrypoints/background.ts
-entrypoints/context-popup/App.tsx
-entrypoints/popup/App.tsx
-
-# Current Time
-5/22/2025, 11:09:54 PM (Europe/London, UTC+1:00)
-
-# Context Window Usage
-210,371 / 1,048.576K tokens used (20%)
-
-# Current Mode
-ACT MODE
-</environment_details>
