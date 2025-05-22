@@ -186,17 +186,7 @@ export default defineBackground(() => {
     try {
       console.log("Content script registered in tab:", tab.id);
 
-      // Try to get input information if it's an input element
-      const getInputMessage: GetInputInfoRequest = { type: "getInputInfo" };
-      console.log("Sending message to content script:", getInputMessage);
-
-      const inputResponse = await browser.tabs.sendMessage(
-        tab.id,
-        getInputMessage
-      );
-      console.log("Background received input response:", inputResponse);
-
-      // Store input info and page content in local storage
+      // Always get the full page content for summarization via the "Sam" context menu
       const getPageContentMessage: GetPageContentRequest = {
         type: "getPageContent",
       };
@@ -207,34 +197,14 @@ export default defineBackground(() => {
       console.log(
         "[SamAI Background] Page content length:",
         (pageContentResponse as any)?.length || 0
-      ); // Use type assertion
+      );
 
-      // Assuming the content script sends back an object with a messageType property
-      if (
-        inputResponse &&
-        typeof inputResponse === "object" &&
-        "messageType" in inputResponse &&
-        (inputResponse as InputInfoResponse).messageType === "inputInfo"
-      ) {
-        console.log("Input info received:", inputResponse);
-        const typedInputResponse = inputResponse as InputInfoResponse; // Assert to InputInfoResponse
-        await browser.storage.local.set({
-          inputInfo: {
-            value: typedInputResponse.value || "",
-            placeholder: typedInputResponse.placeholder || "",
-            inputType: typedInputResponse.inputType || "",
-            elementId: typedInputResponse.id || "",
-            elementName: typedInputResponse.name || "",
-          },
-          pageContent: pageContentResponse || "Unable to access page content",
-        });
-      } else {
-        // Clear input info but keep page content if we're not clicking on an input
-        await browser.storage.local.remove("inputInfo");
-        await browser.storage.local.set({
-          pageContent: pageContentResponse || "Unable to access page content",
-        });
-      }
+      // Store only page content in local storage for the context popup
+      await browser.storage.local.set({
+        pageContent: pageContentResponse || "Unable to access page content",
+      });
+      // Ensure inputInfo is cleared, as this context menu action is for page summarization
+      await browser.storage.local.remove("inputInfo");
 
       // Open popup
       browser.windows.create({
@@ -245,7 +215,8 @@ export default defineBackground(() => {
       });
     } catch (error) {
       console.error("Error in background script:", error);
-      // Open regular popup if message fails (non-input or error)
+      // If there's an error getting page content, still open the popup,
+      // but it will indicate "Unable to access page content"
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
