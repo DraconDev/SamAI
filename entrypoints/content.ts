@@ -89,20 +89,47 @@ export default defineContentScript({
       console.log("[SamAI] Not initializing - conditions not met");
     }
 
-    // Track input element on clicks
-    document.addEventListener("click", (event) => {
+    // Track input element on right clicks and send info to background script
+    document.addEventListener("contextmenu", (event) => {
       const target = event.target as HTMLElement;
       if (
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
-        console.log("[SamAI Content] Input element clicked:", lastInputElement);
-      } else {
+        console.log("[SamAI Content] Input element right-clicked:", lastInputElement);
+
+        // Send input info to background script
+        browser.runtime.sendMessage({
+          type: "inputElementClicked",
+          inputInfo: {
+            value: lastInputElement.value,
+            placeholder: lastInputElement.placeholder,
+            id: lastInputElement.id,
+            name: lastInputElement.name,
+            inputType:
+              lastInputElement instanceof HTMLInputElement
+                ? lastInputElement.type
+                : "textarea",
+          },
+        }).catch(error => console.error("Error sending inputElementClicked message:", error));
+
+      }
+    });
+
+    // Clear lastInputElement when clicking anywhere except inputs, and send clear message
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        !(target instanceof HTMLInputElement) &&
+        !(target instanceof HTMLTextAreaElement)
+      ) {
         lastInputElement = null;
-        console.log(
-          "[SamAI Content] Clicked outside input, lastInputElement cleared."
-        );
+        console.log("[SamAI Content] Clicked outside input, lastInputElement cleared.");
+        // Also clear inputInfo in storage if clicked outside an input
+        browser.runtime.sendMessage({
+          type: "clearInputElement",
+        }).catch(error => console.error("Error sending clearInputElement message:", error));
       }
     });
 
