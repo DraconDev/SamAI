@@ -133,7 +133,7 @@ function App() {
           {/* New button for opening chat */}
           <button
             onClick={() => tabs.create({ url: "chat.html" })}
-            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg
+            className="w-full p-2.5 bg-gradient-to-r from-[#3a3478] to-[#635ee7] text-white rounded-lg
                      hover:opacity-90 focus:outline-none focus:ring-2
                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
                      transition-all duration-200 transform hover:scale-[0.98]
@@ -185,8 +185,8 @@ function App() {
         <div className="flex flex-col gap-3 pt-4 ">
           <button
             onClick={openApiKeyPage}
-            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
-                     hover:opacity-90 focus:outline-none focus:ring-2 
+            className="w-full p-2.5 bg-gradient-to-r from-[#3a3478] to-[#635ee7] text-white rounded-lg
+                     hover:opacity-90 focus:outline-none focus:ring-2
                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
                      transition-all duration-200 transform hover:scale-[0.98]
                      font-medium flex items-center justify-center gap-2"
