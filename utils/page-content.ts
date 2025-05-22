@@ -7,12 +7,21 @@ import { type OutputFormat } from "./store"; // Import OutputFormat
  */
 export function extractPageContent(outputFormat: OutputFormat): string {
   try {
+    // Get the SamAI container element, if it exists
+    const samaiContainer = document.getElementById("samai-container");
+
     if (outputFormat === "html") {
-      // Return optimized HTML of the entire page
-      const fullHtml = document.documentElement.outerHTML;
-      return optimizeHtmlContent(fullHtml);
+      // Clone the document to remove the SamAI container before optimizing
+      const clonedDoc = document.documentElement.cloneNode(true) as HTMLElement;
+      if (samaiContainer) {
+        const clonedSamaiContainer = clonedDoc.querySelector("#samai-container");
+        if (clonedSamaiContainer) {
+          clonedSamaiContainer.remove();
+        }
+      }
+      return optimizeHtmlContent(clonedDoc.outerHTML);
     } else {
-      // Get all visible text, filtering out hidden elements and scripts
+      // Get all visible text, filtering out hidden elements, scripts, and the SamAI container
       const walk = document.createTreeWalker(
         document.body,
         NodeFilter.SHOW_TEXT,
@@ -39,6 +48,11 @@ export function extractPageContent(outputFormat: OutputFormat): string {
 
             // Skip empty text nodes
             if (!node.textContent?.trim()) {
+              return NodeFilter.FILTER_REJECT;
+            }
+
+            // Skip nodes within the SamAI container
+            if (samaiContainer && samaiContainer.contains(node)) {
               return NodeFilter.FILTER_REJECT;
             }
 
