@@ -59,5 +59,72 @@ export function optimizeHtmlContent(html: string): string {
     node.parentNode?.removeChild(node); // Use optional chaining for parentNode
   }
 
-  return doc.documentElement.outerHTML; // Return the cleaned HTML
+  // Remove irrelevant attributes from all elements
+  const attributesToRemove = [
+    "id",
+    "class",
+    "style",
+    "data-", // Matches all data-* attributes
+    "aria-", // Matches all aria-* attributes
+    "tabindex",
+    "role",
+    "onclick",
+    "onmouseover",
+    "onload",
+    "width",
+    "height",
+    "src",
+    "srcset",
+    "sizes",
+    "loading",
+    "decoding",
+    "rel",
+    "target",
+    "title", // Can be relevant, but often noise for AI summarization
+    "alt", // Images are removed, so alt is not needed
+    "href", // Keep for <a> tags, remove for others if present
+    "value", // Keep for input elements, remove for others
+  ];
+
+  doc.querySelectorAll("*").forEach((element) => {
+    Array.from(element.attributes).forEach((attr) => {
+      const attrName = attr.name.toLowerCase();
+      let shouldRemove = false;
+
+      for (const prefix of attributesToRemove) {
+        if (prefix.endsWith("-")) {
+          if (attrName.startsWith(prefix)) {
+            shouldRemove = true;
+            break;
+          }
+        } else if (attrName === prefix) {
+          // Special handling for 'href' and 'value'
+          if (attrName === "href" && element.tagName.toLowerCase() === "a") {
+            shouldRemove = false; // Keep href for anchor tags
+          } else if (
+            attrName === "value" &&
+            (element.tagName.toLowerCase() === "input" ||
+              element.tagName.toLowerCase() === "textarea" ||
+              element.tagName.toLowerCase() === "select")
+          ) {
+            shouldRemove = false; // Keep value for input elements
+          } else {
+            shouldRemove = true;
+          }
+          break;
+        }
+      }
+
+      if (shouldRemove) {
+        element.removeAttribute(attr.name);
+      }
+    });
+  });
+
+  // Collapse multiple whitespace characters into a single space
+  // This is a simple text-based replacement, not DOM manipulation
+  let cleanedHtml = doc.documentElement.outerHTML;
+  cleanedHtml = cleanedHtml.replace(/\s+/g, " ").trim();
+
+  return cleanedHtml; // Return the cleaned HTML
 }
