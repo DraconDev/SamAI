@@ -227,12 +227,12 @@ export default function App() {
       await addChatMessage(aiMessage);
       console.log("[Scrape Assistant] Messages added to chat");
 
-      // Open chat in new tab
-      console.log("[Scrape Assistant] Opening chat page...");
-      await browser.tabs.create({
+      // Navigate current tab to chat page
+      console.log("[Scrape Assistant] Navigating current tab to chat page...");
+      await browser.tabs.update(tabId, {
         url: "chat.html",
       });
-      console.log("[Scrape Assistant] Chat page opened");
+      console.log("[Scrape Assistant] Current tab navigated to chat page.");
 
       setScrapeUrl(""); // Clear the scrape URL input after submission
       console.log("[Scrape Assistant] Closing popup...");
