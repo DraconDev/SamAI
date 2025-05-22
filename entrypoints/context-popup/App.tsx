@@ -18,18 +18,21 @@ export default function App() {
   const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const [scrapeMode, setScrapeMode] = useState<"bodyText" | "optimizedHtml">(
-    "bodyText"
-  );
+  const [inputPrompt, setInputPrompt] = useState("");
+  const [pagePrompt, setPagePrompt] = useState("");
+  const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
+  const [pageContent, setPageContent] = useState("");
+  const [isInputLoading, setIsInputLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(false);
+  const [scrapeMode, setScrapeMode] = useState<OutputFormat>("text"); // Default to "text"
 
+  // Load initial settings and page content
   useEffect(() => {
-    // Load stored data from local storage
-    const loadStoredData = async () => {
+    const loadInitialData = async () => {
       try {
         const result = await browser.storage.local.get([
           "inputInfo",
           "pageContent",
-          "scrapeMode", // Add scrapeMode here
         ]);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo as InputInfo);
@@ -37,24 +40,54 @@ export default function App() {
         if (result.pageContent) {
           setPageContent(result.pageContent as string);
         }
-        if (result.scrapeMode) {
-          // Load scrapeMode
-          setScrapeMode(result.scrapeMode as "bodyText" | "optimizedHtml");
-        }
+
+        // Load scrapeMode from searchSettingsStore
+        const settings = await searchSettingsStore.getValue();
+        setScrapeMode(settings.outputFormat);
       } catch (error) {
-        console.error("Error loading stored data:", error);
+        console.error("Error loading initial data:", error);
       }
     };
 
-    loadStoredData();
-  }, []);
+    loadInitialData();
 
-  useEffect(() => {
-    // Clean up the input info when component unmounts or popup closes
+    // Listen for messages from the content script (e.g., page content response)
+    const messageListener = (
+      message: any,
+      sender: browser.runtime.MessageSender
+    ) => {
+      if (message.type === "pageContentResponse" && message.content) {
+        console.log(
+          "[Page Assistant] Received pageContentResponse:",
+          message.content.length,
+          "bytes"
+        );
+        setPageContent(message.content);
+        setIsPageLoading(false); // Stop loading after content is received
+      } else if (message.type === "pageContentResponse" && message.error) {
+        console.error(
+          "[Page Assistant] Error in pageContentResponse:",
+          message.error
+        );
+        setIsPageLoading(false);
+      }
+    };
+
+    browser.runtime.onMessage.addListener(messageListener);
+
     return () => {
       browser.storage.local.remove("inputInfo").catch(console.error);
+      browser.runtime.onMessage.removeListener(messageListener);
     };
   }, []);
+
+  // Update scrapeMode in store when changed
+  const handleScrapeModeChange = async (
+    newMode: "text" | "html"
+  ) => {
+    setScrapeMode(newMode);
+    await searchSettingsStore.setValue({ outputFormat: newMode });
+  };
 
   const handleInputSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,7 +107,6 @@ export default function App() {
       });
 
       setInputPrompt("");
-      // Explicitly clear the input info from storage after submission
       await browser.storage.local.remove("inputInfo");
       window.close();
     } catch (error) {
@@ -99,23 +131,40 @@ export default function App() {
       let contentToAnalyze = pageContent; // Default to body text
       let userMessageContent = `Question about page: ${pagePrompt}`;
 
-      if (scrapeMode === "optimizedHtml") {
-        const tabs = await browser.tabs.query({
-          active: true,
-          currentWindow: true,
-        });
-        if (tabs.length === 0 || !tabs[0].url) {
-          console.error(
-            "[Page Assistant] No active tab URL found for HTML scraping."
-          );
-          throw new Error("No active tab URL found.");
+      if (scrapeMode === "html") {
+        // Request optimized HTML from the content script
+        console.log("[Page Assistant] Requesting optimized HTML from content script...");
+        // Send message to background script, which will forward to content script
+        await browser.runtime.sendMessage({ type: "getPageContent" });
+
+        // The content will be set by the message listener in useEffect
+        // We need to wait for it before proceeding with generateFormResponse
+        // This is a simplified approach; a more robust solution might use a promise/callback
+        // For now, we assume pageContent will be updated by the listener before the next step
+        // A better approach would be to move the AI call into the message listener or use a state to track content readiness.
+        // For this fix, we'll rely on the pageContent state being updated.
+        // The prompt will be sent with the *currently available* pageContent.
+        // If the content hasn't arrived yet, it will use the old content.
+        // This needs to be fixed.
+
+        // FIX: Instead of relying on state update, directly get content here after message.
+        // The content script sends back the content directly.
+        // We need to await the response from the content script.
+        const responseFromContent = await browser.tabs.sendMessage(
+          (await browser.tabs.query({ active: true, currentWindow: true }))[0].id!,
+          { type: "getPageContent" }
+        );
+
+        if (responseFromContent && responseFromContent.content) {
+          contentToAnalyze = responseFromContent.content;
+          userMessageContent = `Question about page (Optimized HTML): ${pagePrompt}`;
+        } else if (responseFromContent && responseFromContent.error) {
+          console.error("[Page Assistant] Error getting content from content script:", responseFromContent.error);
+          throw new Error(`Failed to get page content: ${responseFromContent.error}`);
+        } else {
+          console.error("[Page Assistant] No content received from content script.");
+          throw new Error("No content received from content script.");
         }
-        const currentTabUrl = tabs[0].url;
-        console.log(`[Page Assistant] Fetching HTML from: ${currentTabUrl}`);
-        const response = await fetch(currentTabUrl);
-        const htmlContent = await response.text();
-        contentToAnalyze = optimizeHtmlContent(htmlContent); // Apply optimization
-        userMessageContent = `Question about page (Optimized HTML): ${pagePrompt}`;
       }
 
       const response = await generateFormResponse(
@@ -131,7 +180,6 @@ export default function App() {
         response.length
       );
 
-      // Check chat continuation setting and add messages
       console.log("[Page Assistant] Adding messages to chat...");
       const settings = await searchSettingsStore.getValue();
 
@@ -142,7 +190,7 @@ export default function App() {
 
       const userMessage = {
         role: "user" as const,
-        content: userMessageContent, // Use the updated user message content
+        content: userMessageContent,
         timestamp: new Date().toLocaleTimeString(),
       };
 
@@ -156,7 +204,6 @@ export default function App() {
       await addChatMessage(aiMessage);
       console.log("[Page Assistant] Messages added to chat");
 
-      // Open chat in new tab
       console.log("[Page Assistant] Opening chat page...");
       await browser.tabs.create({
         url: "chat.html",
