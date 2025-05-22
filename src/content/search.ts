@@ -116,39 +116,43 @@ function injectStyles() {
 }
 
 export async function showSidePanel(response: string | null) {
-  // Remove existing panel if present
-  const existingPanel = document.getElementById("samai-container");
-  if (existingPanel) {
-    const root = createRoot(existingPanel);
-    root.unmount();
-    existingPanel.remove();
-  }
+  if (!samaiPanelContainer) {
+    // Create new panel container if it doesn't exist
+    samaiPanelContainer = document.createElement("div");
+    samaiPanelContainer.id = "samai-container";
+    document.body.appendChild(samaiPanelContainer);
 
-  // Create new panel container
-  const panelContainer = document.createElement("div");
-  panelContainer.id = "samai-container";
-  document.body.appendChild(panelContainer);
+    // Inject styles if not already present
+    if (!document.querySelector("#samai-styles")) {
+      injectStyles();
+    }
 
-  // Inject styles if not already present
-  if (!document.querySelector("#samai-styles")) {
-    injectStyles();
+    // Initialize React root
+    samaiRoot = createRoot(samaiPanelContainer);
   }
 
   // Get current output format from store
   const settings = await searchSettingsStore.getValue();
   const outputFormat = settings.outputFormat;
 
-  // Initialize React root and render
-  const root = createRoot(panelContainer);
-  root.render(
-    React.createElement(SearchPanel, {
-      response,
-      outputFormat, // Pass outputFormat as a prop
-      onClose: () => {
-        // Cleanup React root before removing container
-        root.unmount();
-        panelContainer.remove();
-      },
-    })
-  );
+  // Render or update the SearchPanel
+  if (samaiRoot) {
+    samaiRoot.render(
+      React.createElement(SearchPanel, {
+        response,
+        outputFormat,
+        onClose: () => {
+          // Cleanup React root and container
+          if (samaiRoot) {
+            samaiRoot.unmount();
+            samaiRoot = null;
+          }
+          if (samaiPanelContainer) {
+            samaiPanelContainer.remove();
+            samaiPanelContainer = null;
+          }
+        },
+      })
+    );
+  }
 }
