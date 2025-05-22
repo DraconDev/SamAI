@@ -1,13 +1,10 @@
 import { showSidePanel } from "./search";
 import { searchSettingsStore, PROMPT_TEMPLATES } from "../../utils/store";
-import type { Port } from "wxt/browser"; // Import Port type
-
-let googleSearchPort: Port | null = null; // Declare a module-scoped port
 
 export async function initializeGoogleSearch() {
   // Check if search is enabled
   const settings = await searchSettingsStore.getValue();
-  console.log("[SamAI Search] searchActive setting:", settings.searchActive);
+  console.log("[SamAI Search] searchActive setting:", settings.searchActive); // NEW LOG
   if (!settings.searchActive) return;
 
   // Get search query
@@ -19,64 +16,81 @@ export async function initializeGoogleSearch() {
 
   console.log("[SamAI Search] Found search query:", query);
 
-  // Show initial panel (spinner)
+  // Show initial panel
   showSidePanel(null);
 
-  // Establish a long-lived connection if not already established
-  if (!googleSearchPort) {
-    console.log("[SamAI Search] Connecting to background script for Google Search.");
-    googleSearchPort = browser.runtime.connect({ name: "googleSearchPort" });
+  // Get and show response with retry
+  const getResponse = async () => {
+    const fullPrompt = `Search query: ${query}\n${
+      PROMPT_TEMPLATES[settings.promptStyle]
+    }`; // NEW
+    console.log(
+      "[SamAI Search] Sending initial request to Gemini with prompt:",
+      fullPrompt
+    ); // NEW LOG
+    const response = (await browser.runtime.sendMessage({
+      // Cast to string | null
+      type: "generateGeminiResponse",
+      prompt: fullPrompt, // Use fullPrompt
+    })) as string | null; // Type assertion
 
-    // Listen for messages from the background script
-    googleSearchPort.onMessage.addListener((message: any) => {
-      if (message.type === "googleSearchResponse") {
-        console.log("[SamAI Search] Received response from background script:", message.summary);
-        showSidePanel(message.summary);
-      } else if (message.type === "googleSearchError") {
-        console.error("[SamAI Search] Received error from background script:", message.error);
-        showSidePanel(null); // Show spinner or error state
-      }
-    });
+    if (!response) {
+      console.log("[SamAI Search] No response, retrying after 1s delay");
+      // Wait and retry once
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const retryPrompt = `Search query: ${query}\n${
+        PROMPT_TEMPLATES[settings.promptStyle]
+      }`; // NEW
+      console.log(
+        "[SamAI Search] Sending retry request to Gemini with prompt:",
+        retryPrompt
+      ); // NEW LOG
+      return (await browser.runtime.sendMessage({
+        // Cast to string | null
+        type: "generateGeminiResponse",
+        prompt: retryPrompt, // Use retryPrompt
+      })) as string | null; // Type assertion
+    }
+    return response;
+  };
 
-    // Handle disconnection
-    googleSearchPort.onDisconnect.addListener(() => {
-      console.log("[SamAI Search] Disconnected from background script.");
-      googleSearchPort = null;
-      showSidePanel(null); // Clear panel on disconnect
+  console.log("[SamAI Search] Initiating search for query:", query);
+  getResponse()
+    .then((response) => {
+      console.log("[SamAI Search] Received response:", response);
+      showSidePanel(response);
+    })
+    .catch((error) => {
+      console.error("[SamAI Search] Failed to get response:", error);
+      console.error("[SamAI Search] Error details:", error); // NEW LOG
+      showSidePanel(null);
     });
-  }
-
-  // Send the search prompt to the background script via the port
-  if (googleSearchPort) {
-    const fullPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
-    console.log("[SamAI Search] Sending prompt to background script via port:", fullPrompt);
-    googleSearchPort.postMessage({
-      type: "generateGoogleSearchSummary", // New message type for port communication
-      prompt: fullPrompt,
-    });
-  } else {
-    console.error("[SamAI Search] Port not established, cannot send prompt.");
-    showSidePanel(null);
-  }
 
   // Handle URL changes for new searches
   window.addEventListener("popstate", () => {
     const newQuery = new URLSearchParams(window.location.search).get("q");
     if (newQuery && newQuery !== query) {
-      console.log("[SamAI Search] URL changed, sending request for new query:", newQuery);
-      showSidePanel(null); // Show spinner for new search
-
-      if (googleSearchPort) {
-        const newFullPrompt = `Search query: ${newQuery}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
-        console.log("[SamAI Search] Sending new prompt to background script via port:", newFullPrompt);
-        googleSearchPort.postMessage({
-          type: "generateGoogleSearchSummary",
-          prompt: newFullPrompt,
+      showSidePanel(null);
+      console.log(
+        "[SamAI Search] URL changed, sending request for new query:",
+        newQuery
+      );
+      getResponse()
+        .then((response) => {
+          console.log(
+            "[SamAI Search] Received response for new query:",
+            response
+          );
+          showSidePanel(response);
+        })
+        .catch((error) => {
+          console.error(
+            "[SamAI Search] Failed to get response for new query:",
+            error
+          );
+          console.error("[SamAI Search] Error details for new query:", error); // NEW LOG
+          showSidePanel(null);
         });
-      } else {
-        console.error("[SamAI Search] Port not established for new query, cannot send prompt.");
-        showSidePanel(null);
-      }
     }
   });
 }
