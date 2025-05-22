@@ -9,6 +9,9 @@ export type OutputFormat = "html" | "text";
  */
 export function extractPageContent(outputFormat: OutputFormat): string {
   try {
+    console.log("[SamAI Content] extractPageContent called. Output format:", outputFormat);
+    console.log("[SamAI Content] document.body.outerHTML length:", document.body.outerHTML.length);
+
     if (outputFormat === "html") {
       // Return optimized HTML of the entire page
       const fullHtml = document.documentElement.outerHTML;
@@ -24,6 +27,7 @@ export function extractPageContent(outputFormat: OutputFormat): string {
             if (!node.textContent?.trim()) {
               return NodeFilter.FILTER_REJECT;
             }
+            console.log("[SamAI Content] Accepted node text:", node.textContent); // Log accepted text
             return NodeFilter.FILTER_ACCEPT;
           },
         }
@@ -71,7 +75,9 @@ export function extractPageContent(outputFormat: OutputFormat): string {
 
       let content = "";
       let node;
+      let nodeCount = 0; // Add node counter
       while ((node = walk.nextNode())) {
+        nodeCount++; // Increment counter
         const text = node.textContent?.trim() || "";
         if (text) {
           content += text;
@@ -82,11 +88,13 @@ export function extractPageContent(outputFormat: OutputFormat): string {
           }
         }
       }
+      console.log("[SamAI Content] Total nodes processed by TreeWalker:", nodeCount); // Log total nodes
+      console.log("[SamAI Content] Final extracted content length:", content.trim().length); // Log final length
 
       return content.trim();
     }
   } catch (error) {
-    console.error("Error extracting page content:", error);
+    console.error("[SamAI Content] Error extracting page content:", error);
     return ""; // Return empty string on error
   }
 }
