@@ -208,40 +208,6 @@ export default defineBackground(() => {
     try {
       console.log("Content script registered in tab:", tab.id);
 
-      // Try to get input information if it's an input element
-      const getInputMessage: GetInputInfoRequest = { type: "getInputInfo" };
-      console.log("Sending message to content script:", getInputMessage);
-
-      const inputResponse = await browser.tabs.sendMessage(
-        tab.id,
-        getInputMessage
-      );
-      console.log("Background received input response:", inputResponse);
-
-      // Store input info in local storage
-      if (
-        inputResponse &&
-        typeof inputResponse === "object" &&
-        "messageType" in inputResponse &&
-        (inputResponse as InputInfoResponse).messageType === "inputInfo"
-      ) {
-        console.log("Input info received:", inputResponse);
-        const typedInputResponse = inputResponse as InputInfoResponse;
-        const inputInfoToStore = {
-            value: typedInputResponse.value || "",
-            placeholder: typedInputResponse.placeholder || "",
-            inputType: typedInputResponse.inputType || "",
-            elementId: typedInputResponse.id || "",
-            elementName: typedInputResponse.name || "",
-        };
-        console.log("[SamAI Background] Attempting to store inputInfo:", inputInfoToStore);
-        await browser.storage.local.set({ inputInfo: inputInfoToStore });
-        console.log("[SamAI Background] inputInfo stored successfully.");
-      } else {
-        console.log("[SamAI Background] Input response invalid or not 'inputInfo' type, removing inputInfo from storage.");
-        await browser.storage.local.remove("inputInfo");
-      }
-
       // Send messages to content script to get both text and HTML content
       const getBodyTextMessage: GetPageContentRequest = {
         type: "getPageContent",
@@ -275,7 +241,7 @@ export default defineBackground(() => {
         tab.id
       );
 
-      // Open popup only after inputInfo is potentially stored
+      // Open popup
       browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
@@ -291,6 +257,21 @@ export default defineBackground(() => {
         width: 400,
         height: 350,
       });
+    }
+  });
+
+  // Add new case for inputElementClicked
+  browser.runtime.onMessage.addListener(async (message: unknown) => {
+    if (
+      typeof message === "object" &&
+      message !== null &&
+      "type" in message &&
+      message.type === "inputElementClicked"
+    ) {
+      const inputElementClickedMsg = message as InputElementClickedMessage;
+      console.log("[SamAI Background] Received inputElementClicked message:", inputElementClickedMsg);
+      await browser.storage.local.set({ inputInfo: inputElementClickedMsg.inputInfo });
+      console.log("[SamAI Background] inputInfo stored from inputElementClicked.");
     }
   });
 
