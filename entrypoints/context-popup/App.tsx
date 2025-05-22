@@ -18,7 +18,6 @@ export default function App() {
   const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const [scrapeUrl, setScrapeUrl] = useState("");
 
   useEffect(() => {
     // Load stored data from local storage
