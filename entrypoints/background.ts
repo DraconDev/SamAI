@@ -241,7 +241,7 @@ export default defineBackground(() => {
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
-        height: 450,
+        height: 350,
       });
     } catch (error) {
       console.error("Error in background script:", error);
@@ -250,7 +250,7 @@ export default defineBackground(() => {
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
-        height: 450,
+        height: 350,
       });
     }
   });
