@@ -72,7 +72,7 @@ export default defineContentScript({
       console.log("[SamAI] Not initializing - conditions not met");
     }
 
-    // Track input element on clicks
+    // Track input element on clicks and send info to background script
     document.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;
       if (
@@ -81,9 +81,29 @@ export default defineContentScript({
       ) {
         lastInputElement = target;
         console.log("[SamAI Content] Input element clicked:", lastInputElement);
+
+        // Send input info to background script
+        browser.runtime.sendMessage({
+          type: "inputElementClicked",
+          inputInfo: {
+            value: lastInputElement.value,
+            placeholder: lastInputElement.placeholder,
+            id: lastInputElement.id,
+            name: lastInputElement.name,
+            inputType:
+              lastInputElement instanceof HTMLInputElement
+                ? lastInputElement.type
+                : "textarea",
+          },
+        }).catch(error => console.error("Error sending inputElementClicked message:", error));
+
       } else {
         lastInputElement = null;
         console.log("[SamAI Content] Clicked outside input, lastInputElement cleared.");
+        // Also clear inputInfo in storage if clicked outside an input
+        browser.runtime.sendMessage({
+          type: "clearInputElement",
+        }).catch(error => console.error("Error sending clearInputElement message:", error));
       }
     });
 
