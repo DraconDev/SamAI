@@ -40,6 +40,7 @@ export default defineContentScript({
       pathname: window.location.pathname,
       search: window.location.search,
     });
+    console.log("[SamAI] document.body.innerText length on load:", document.body.innerText.length); // NEW LOG
 
     // Initialize Google search functionality if we're on a search page with a query
     if (
