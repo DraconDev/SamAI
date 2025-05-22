@@ -24,13 +24,17 @@ interface GetInputInfoRequest extends BaseMessage {
   type: "getInputInfo";
 }
 
+import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+
 interface GetPageContentRequest extends BaseMessage {
   type: "getPageContent";
+  outputFormat: OutputFormat; // Add outputFormat
 }
 
 interface PageContentResponseMessage extends BaseMessage {
   type: "pageContentResponse";
   content: string;
+  outputFormat: OutputFormat; // Add outputFormat
   error?: string; // Optional error message
 }
 
@@ -178,7 +182,9 @@ export default defineBackground(() => {
         case "pageContentResponse": {
           const pageContentMessage = message as PageContentResponseMessage;
           console.log(
-            "[SamAI Background] Received pageContentResponse. Content length:",
+            "[SamAI Background] Received pageContentResponse for format:",
+            pageContentMessage.outputFormat,
+            "Content length:",
             pageContentMessage.content.length
           );
           if (pageContentMessage.error) {
@@ -187,9 +193,16 @@ export default defineBackground(() => {
               pageContentMessage.error
             );
           }
-          await browser.storage.local.set({
-            pageContent: pageContentMessage.content || "Unable to access page content",
-          });
+          // Store content based on its format
+          if (pageContentMessage.outputFormat === "text") {
+            await browser.storage.local.set({
+              pageBodyText: pageContentMessage.content || "Unable to access page content",
+            });
+          } else if (pageContentMessage.outputFormat === "html") {
+            await browser.storage.local.set({
+              pageOptimizedHtml: pageContentMessage.content || "Unable to access page content",
+            });
+          }
           return undefined; // Handled asynchronously, no direct response to this message
         }
 
