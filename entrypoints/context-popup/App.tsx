@@ -18,6 +18,9 @@ export default function App() {
   const [pageContent, setPageContent] = useState("");
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const [scrapeMode, setScrapeMode] = useState<"bodyText" | "optimizedHtml">(
+    "bodyText"
+  );
 
   useEffect(() => {
     // Load stored data from local storage
@@ -26,12 +29,17 @@ export default function App() {
         const result = await browser.storage.local.get([
           "inputInfo",
           "pageContent",
+          "scrapeMode", // Add scrapeMode here
         ]);
         if (result.inputInfo) {
           setInputInfo(result.inputInfo as InputInfo);
         }
         if (result.pageContent) {
           setPageContent(result.pageContent as string);
+        }
+        if (result.scrapeMode) {
+          // Load scrapeMode
+          setScrapeMode(result.scrapeMode as "bodyText" | "optimizedHtml");
         }
       } catch (error) {
         console.error("Error loading stored data:", error);
@@ -88,8 +96,27 @@ export default function App() {
     try {
       console.log("[Page Assistant] Generating response...");
 
-      let contentToAnalyze = pageContent; // Always use body text as default
+      let contentToAnalyze = pageContent; // Default to body text
       let userMessageContent = `Question about page: ${pagePrompt}`;
+
+      if (scrapeMode === "optimizedHtml") {
+        const tabs = await browser.tabs.query({
+          active: true,
+          currentWindow: true,
+        });
+        if (tabs.length === 0 || !tabs[0].url) {
+          console.error(
+            "[Page Assistant] No active tab URL found for HTML scraping."
+          );
+          throw new Error("No active tab URL found.");
+        }
+        const currentTabUrl = tabs[0].url;
+        console.log(`[Page Assistant] Fetching HTML from: ${currentTabUrl}`);
+        const response = await fetch(currentTabUrl);
+        const htmlContent = await response.text();
+        contentToAnalyze = optimizeHtmlContent(htmlContent); // Apply optimization
+        userMessageContent = `Question about page (Optimized HTML): ${pagePrompt}`;
+      }
 
       const response = await generateFormResponse(
         `${pagePrompt}\n\nContent: ${contentToAnalyze}`
@@ -223,6 +250,28 @@ export default function App() {
               autoFocus={!inputInfo}
               disabled={isPageLoading}
             />
+            <div className="flex items-center gap-4 text-sm">
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  value="bodyText"
+                  checked={scrapeMode === "bodyText"}
+                  onChange={() => setScrapeMode("bodyText")}
+                  className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
+                />
+                <span className="ml-2 text-gray-300">Body Text</span>
+              </label>
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  value="optimizedHtml"
+                  checked={scrapeMode === "optimizedHtml"}
+                  onChange={() => setScrapeMode("optimizedHtml")}
+                  className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
+                />
+                <span className="ml-2 text-gray-300">Optimized HTML</span>
+              </label>
+            </div>
             <div className="flex gap-2">
               <button
                 type="submit"
