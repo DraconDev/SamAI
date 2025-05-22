@@ -7,21 +7,12 @@ import { type OutputFormat } from "./store"; // Import OutputFormat
  */
 export function extractPageContent(outputFormat: OutputFormat): string {
   try {
-    // Get the SamAI container element, if it exists
-    const samaiContainer = document.getElementById("samai-container");
-
     if (outputFormat === "html") {
-      // Clone the document to remove the SamAI container before optimizing
-      const clonedDoc = document.documentElement.cloneNode(true) as HTMLElement;
-      if (samaiContainer) {
-        const clonedSamaiContainer = clonedDoc.querySelector("#samai-container");
-        if (clonedSamaiContainer) {
-          clonedSamaiContainer.remove();
-        }
-      }
-      return optimizeHtmlContent(clonedDoc.outerHTML);
+      // Return optimized HTML of the entire page
+      const fullHtml = document.documentElement.outerHTML;
+      return optimizeHtmlContent(fullHtml);
     } else {
-      // Get all visible text, filtering out hidden elements, scripts, and the SamAI container
+      // Get all visible text, filtering out hidden elements and scripts
       const walk = document.createTreeWalker(
         document.body,
         NodeFilter.SHOW_TEXT,
@@ -51,20 +42,45 @@ export function extractPageContent(outputFormat: OutputFormat): string {
               return NodeFilter.FILTER_REJECT;
             }
 
-            // Skip nodes within the SamAI container
-            if (samaiContainer && samaiContainer.contains(node)) {
-              return NodeFilter.FILTER_REJECT;
-            }
-
             return NodeFilter.FILTER_ACCEPT;
           },
         }
       );
 
       const blockElements = new Set([
-        'ADDRESS', 'ARTICLE', 'ASIDE', 'BLOCKQUOTE', 'DETAILS', 'DIALOG', 'DD', 'DIV', 'DL', 'DT',
-        'FIELDSET', 'FIGCAPTION', 'FIGURE', 'FOOTER', 'FORM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
-        'HEADER', 'HGROUP', 'HR', 'LI', 'MAIN', 'NAV', 'OL', 'P', 'PRE', 'SECTION', 'TABLE', 'UL'
+        "ADDRESS",
+        "ARTICLE",
+        "ASIDE",
+        "BLOCKQUOTE",
+        "DETAILS",
+        "DIALOG",
+        "DD",
+        "DIV",
+        "DL",
+        "DT",
+        "FIELDSET",
+        "FIGCAPTION",
+        "FIGURE",
+        "FOOTER",
+        "FORM",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "HEADER",
+        "HGROUP",
+        "HR",
+        "LI",
+        "MAIN",
+        "NAV",
+        "OL",
+        "P",
+        "PRE",
+        "SECTION",
+        "TABLE",
+        "UL",
       ]);
 
       function isBlockElement(element: HTMLElement): boolean {
@@ -95,13 +111,19 @@ export function extractPageContent(outputFormat: OutputFormat): string {
 
 export function optimizeHtmlContent(html: string): string {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
+  const doc = parser.parseFromString(html, "text/html");
 
   // Remove script and style tags
-  doc.querySelectorAll('script, style, noscript, link, meta').forEach(el => el.remove());
+  doc
+    .querySelectorAll("script, style, noscript, link, meta")
+    .forEach((el) => el.remove());
 
   // Remove comments
-  const comments = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_COMMENT, null);
+  const comments = doc.createTreeWalker(
+    doc.documentElement,
+    NodeFilter.SHOW_COMMENT,
+    null
+  );
   let node;
   while ((node = comments.nextNode())) {
     node.parentNode?.removeChild(node); // Use optional chaining for parentNode
