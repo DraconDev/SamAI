@@ -74,18 +74,11 @@ function isBackgroundMessage(message: any): message is BackgroundMessage {
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
 
-  // Create context menu item for general actions
+  // Create context menu item
   browser.contextMenus.create({
     id: "samai-context-menu",
     title: "Sam",
     contexts: ["all"],
-  });
-
-  // Create context menu item for filling input fields
-  browser.contextMenus.create({
-    id: "samai-fill-input",
-    title: "SamAI: Fill with AI",
-    contexts: ["editable"], // Only show for editable elements (input, textarea)
   });
 
   // Listen for runtime messages
