@@ -221,6 +221,28 @@ export default function App() {
               autoFocus={!inputInfo}
               disabled={isPageLoading}
             />
+            <div className="flex items-center gap-4 text-sm">
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  value="bodyText"
+                  checked={scrapeMode === 'bodyText'}
+                  onChange={() => setScrapeMode('bodyText')}
+                  className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
+                />
+                <span className="ml-2 text-gray-300">Body Text</span>
+              </label>
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  value="optimizedHtml"
+                  checked={scrapeMode === 'optimizedHtml'}
+                  onChange={() => setScrapeMode('optimizedHtml')}
+                  className="form-radio h-4 w-4 text-[#4f46e5] transition-colors duration-200 focus:ring-[#4f46e5]"
+                />
+                <span className="ml-2 text-gray-300">Optimized HTML</span>
+              </label>
+            </div>
             <div className="flex gap-2">
               <button
                 type="submit"
