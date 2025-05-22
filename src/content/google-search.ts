@@ -1,5 +1,6 @@
 import { showSidePanel } from "./search";
 import { searchSettingsStore, PROMPT_TEMPLATES } from "../../utils/store";
+import { browser } from "webextension-polyfill-ts"; // Explicitly import browser
 
 export async function initializeGoogleSearch() {
   // Check if search is enabled
