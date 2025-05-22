@@ -197,6 +197,9 @@ export default defineBackground(() => {
       console.log("Background received input response:", inputResponse);
 
       // Store input info and page content in local storage
+      // Add a small delay to allow the context menu to disappear
+      await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms delay
+
       const getPageContentMessage: GetPageContentRequest = {
         type: "getPageContent",
       };
