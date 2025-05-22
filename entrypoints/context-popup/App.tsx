@@ -2,7 +2,6 @@ import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
 import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
-import { browser } from "webextension-polyfill"; // Import browser
 
 interface InputInfo {
   value: string;
