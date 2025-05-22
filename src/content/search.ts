@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import SearchPanel from "./SearchPanel";
+import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
 
 function injectStyles() {
   const styleTag = document.createElement("style");
@@ -111,7 +112,7 @@ function injectStyles() {
   document.head.appendChild(styleTag);
 }
 
-export function showSidePanel(response: string | null) {
+export async function showSidePanel(response: string | null) {
   // Remove existing panel if present
   const existingPanel = document.getElementById("samai-container");
   if (existingPanel) {
@@ -130,11 +131,16 @@ export function showSidePanel(response: string | null) {
     injectStyles();
   }
 
+  // Get current output format from store
+  const settings = await searchSettingsStore.getValue();
+  const outputFormat = settings.outputFormat;
+
   // Initialize React root and render
   const root = createRoot(panelContainer);
   root.render(
     React.createElement(SearchPanel, {
       response,
+      outputFormat, // Pass outputFormat as a prop
       onClose: () => {
         // Cleanup React root before removing container
         root.unmount();
