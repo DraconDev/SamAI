@@ -91,57 +91,50 @@ export default defineBackground(() => {
         case "generateGeminiResponse": {
           console.log(
             "[SamAI Background] Handling generateGeminiResponse message."
-          ); // NEW LOG
-          const geminiMessage = message as GenerateGeminiResponseRequest; // Assert after type guard
-          console.log(
-            "[SamAI Background] Attempting to generate Gemini response"
           );
+          const geminiMessage = message as GenerateGeminiResponseRequest;
 
           // Check if sender is a valid tab
           if (!sender.tab) {
             console.error("[SamAI Background] No sender tab found");
-            // It's better to call sendResponse(null) and return true if we intend to respond asynchronously,
-            // but since this is an early exit for an invalid state, Promise.resolve(null) might be acceptable
-            // if WXT handles it. However, to be consistent with the sendResponse/return true pattern:
-            sendResponse(null);
-            return true;
+            return Promise.resolve(null); // Return a resolved promise with null
           }
 
-          let text: string | null = null;
-          try {
-            console.log(
-              "[SamAI Background] Calling generateFormResponse with prompt:",
-              geminiMessage.prompt
-            );
-            text = await generateFormResponse(geminiMessage.prompt);
-            console.log(
-              "[SamAI Background] Response from generateFormResponse:",
-              text ? "Received text" : "Received null"
-            );
-          } catch (error: unknown) {
-            const err = error as Error; // Cast to Error for property access
-            console.error("[SamAI Background] Error in generateFormResponse call:", { // More specific error log
-              message: err.message,
-              stack: err.stack,
-            });
-            // text will remain null
-          }
+          return (async () => {
+            // Return an async IIFE (Immediately Invoked Function Expression)
+            let text: string | null = null;
+            try {
+              console.log(
+                "[SamAI Background] Calling generateFormResponse with prompt:",
+                geminiMessage.prompt
+              );
+              text = await generateFormResponse(geminiMessage.prompt);
+              console.log(
+                "[SamAI Background] Response from generateFormResponse:",
+                text ? "Received text" : "Received null"
+              );
+            } catch (error: unknown) {
+              const err = error as Error;
+              console.error("[SamAI Background] Error in generateFormResponse call:", {
+                message: err.message,
+                stack: err.stack,
+              });
+            }
 
-          // Now, send the response based on the outcome of generateFormResponse
-          if (text !== null) {
-            const responseToSend = JSON.stringify({ responseText: text });
-            console.log(
-              "[SamAI Background] Sending response to content script:",
-              responseToSend
-            );
-            sendResponse(responseToSend);
-          } else {
-            console.log(
-              "[SamAI Background] Sending null to content script (either due to error or explicit null from Gemini)."
-            );
-            sendResponse(null);
-          }
-          return true; // Indicate that sendResponse will be called asynchronously
+            if (text !== null) {
+              const responseToSend = JSON.stringify({ responseText: text });
+              console.log(
+                "[SamAI Background] Sending response to content script (via Promise.resolve):",
+                responseToSend
+              );
+              return responseToSend; // Resolve the promise with the string
+            } else {
+              console.log(
+                "[SamAI Background] Sending null to content script (via Promise.resolve)."
+              );
+              return null; // Resolve the promise with null
+            }
+          })(); // Call the IIFE
         }
 
         case "openApiKeyPage":
