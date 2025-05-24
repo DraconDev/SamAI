@@ -60,7 +60,7 @@ export default function SearchPanel({
             }}
           />
         </div>
-        <div style={{ display: "flex", gap: "6px" }}>
+        <div style={{ display: "flex", gap: "2px" }}>
           <button
             onClick={onSummarize}
             style={{
