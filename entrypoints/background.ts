@@ -115,10 +115,10 @@ export default defineBackground(() => {
             );
             const responseToSend = JSON.stringify({ responseText: text }); // Wrap in object and stringify
             console.log(
-              "[SamAI Background] Returning response to content script:",
+              "[SamAI Background] Sending response to content script:", // Changed "Returning" to "Sending"
               responseToSend
             );
-            return Promise.resolve(responseToSend); // Explicitly return a resolved Promise
+            sendResponse(responseToSend); // Call sendResponse directly
           } catch (error: unknown) {
             // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
@@ -127,10 +127,11 @@ export default defineBackground(() => {
               stack: err.stack,
             });
             console.log(
-              "[SamAI Background] Returning null to content script due to error."
+              "[SamAI Background] Sending null to content script due to error." // Changed "Returning" to "Sending"
             );
-            return Promise.resolve(null); // Return a resolved Promise with null
+            sendResponse(null); // Call sendResponse directly with null
           }
+          return true; // Indicate that sendResponse will be called asynchronously
         }
 
         case "openApiKeyPage":
