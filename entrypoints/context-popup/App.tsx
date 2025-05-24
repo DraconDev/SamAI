@@ -206,7 +206,7 @@ export default function App() {
   return (
     <div
       id="samai-context-popup-root"
-      className="min-w-[300px] min-h-[650px] bg-gradient-to-br from-[#1a1b2e] to-[#10111a] shadow-lg p-4 text-gray-100 font-sans"
+      className="min-w-[400px] min-h-[750px] bg-gradient-to-br from-[#1a1b2e] to-[#10111a] shadow-lg p-4 text-gray-100 font-sans"
     >
       <div className="flex flex-col h-full space-y-4">
         <div
