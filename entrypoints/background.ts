@@ -105,16 +105,18 @@ export default defineBackground(() => {
             const text = await generateFormResponse(geminiMessage.prompt);
             console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null");
             const responseToSend = JSON.stringify({ responseText: text }); // Wrap in object and stringify
-            console.log("[SamAI Background] Returning response to content script:", responseToSend);
-            return responseToSend;
+            console.log("[SamAI Background] Sending response to content script via sendResponse:", responseToSend);
+            sendResponse(responseToSend);
+            return true; // Indicate that the response will be sent asynchronously
           } catch (error: unknown) { // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
               message: err.message,
               stack: err.stack,
             });
-            console.log("[SamAI Background] Returning null to content script due to error.");
-            return null; // Return null on error
+            console.log("[SamAI Background] Sending null response to content script via sendResponse due to error.");
+            sendResponse(null); // Send null on error
+            return true; // Indicate that the response will be sent asynchronously
           }
         }
 
