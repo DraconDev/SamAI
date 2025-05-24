@@ -34,25 +34,24 @@ export async function initializeGoogleSearch() {
       prompt: fullPrompt, // Use fullPrompt
     });
     console.log("[SamAI Search] Raw message response from background (initial):", rawResponse);
-    const response = rawResponse as string | null; // Type assertion
+    // Ensure response is always a string or null
+    const response = typeof rawResponse === 'string' ? rawResponse : null;
 
     if (!response) {
-      console.log("[SamAI Search] No response, retrying after 1s delay");
-      // Wait and retry once
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const retryPrompt = `Search query: ${query}\n${
-        PROMPT_TEMPLATES[settings.promptStyle]
-      }`; // NEW
-      console.log(
-        "[SamAI Search] Sending retry request to Gemini with prompt:",
-        retryPrompt
-      ); // NEW LOG
+      console.log("[SamAI Search] Initial response was null or not a string. Retrying after 1s delay.");
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
+
+      const retryPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
+      console.log("[SamAI Search] Sending retry request to Gemini with prompt:", retryPrompt);
+
       const rawRetryResponse = await browser.runtime.sendMessage({
         type: "generateGeminiResponse",
-        prompt: retryPrompt, // Use retryPrompt
+        prompt: retryPrompt,
       });
       console.log("[SamAI Search] Raw message response from background (retry):", rawRetryResponse);
-      return rawRetryResponse as string | null; // Type assertion
+
+      // Ensure retry response is also a string or null
+      return typeof rawRetryResponse === 'string' ? rawRetryResponse : null;
     }
     return response;
   };
