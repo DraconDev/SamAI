@@ -206,7 +206,7 @@ export default function App() {
   return (
     <div
       id="samai-context-popup-root"
-      className="min-w-[300px] min-h-[550px] bg-gradient-to-br from-[#1a1b2e] to-[#10111a] shadow-lg p-4 text-gray-100 font-sans"
+      className="min-w-[300px] min-h-[650px] bg-gradient-to-br from-[#1a1b2e] to-[#10111a] shadow-lg p-4 text-gray-100 font-sans"
     >
       <div className="flex flex-col h-full space-y-4">
         <div
@@ -235,7 +235,7 @@ export default function App() {
                   );
                   return (
                     filteredInputTexts.length > 0 && (
-                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
+                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-60 overflow-y-auto shadow-lg">
                         {filteredInputTexts.map((text, index) => (
                           <div
                             key={index}
@@ -323,7 +323,7 @@ export default function App() {
                     );
                   return (
                     filteredPageAssistantTexts.length > 0 && (
-                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
+                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-60 overflow-y-auto shadow-lg">
                         {filteredPageAssistantTexts.map((text, index) => (
                           <div
                             key={index}
