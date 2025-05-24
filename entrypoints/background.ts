@@ -75,7 +75,8 @@ export default defineBackground(() => {
       message: unknown,
       sender: Runtime.MessageSender,
       sendResponse: (response?: any) => void
-    ): Promise<string | null | boolean | undefined> => { // Corrected return type to allow string, null, boolean, or undefined
+    ): Promise<string | null | boolean | undefined> => {
+      // Corrected return type to allow string, null, boolean, or undefined
       console.log("[SamAI Background] Listener received message:", message); // More specific log
 
       if (!isBackgroundMessage(message)) {
@@ -88,7 +89,9 @@ export default defineBackground(() => {
 
       switch (message.type) {
         case "generateGeminiResponse": {
-          console.log("[SamAI Background] Handling generateGeminiResponse message."); // NEW LOG
+          console.log(
+            "[SamAI Background] Handling generateGeminiResponse message."
+          ); // NEW LOG
           const geminiMessage = message as GenerateGeminiResponseRequest; // Assert after type guard
           console.log(
             "[SamAI Background] Attempting to generate Gemini response"
@@ -101,20 +104,32 @@ export default defineBackground(() => {
           }
 
           try {
-            console.log("[SamAI Background] Calling generateFormResponse with prompt:", geminiMessage.prompt);
+            console.log(
+              "[SamAI Background] Calling generateFormResponse with prompt:",
+              geminiMessage.prompt
+            );
             const text = await generateFormResponse(geminiMessage.prompt);
-            console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null");
-            const responseToSend = { responseText: text }; // Send a plain object
-            console.log("[SamAI Background] Sending response to content script via sendResponse:", responseToSend);
+            console.log(
+              "[SamAI Background] Response from generateFormResponse:",
+              text ? "Received text" : "Received null"
+            );
+            const responseToSend = JSON.stringify({ responseText: text }); // Wrap in object and stringify
+            console.log(
+              "[SamAI Background] Sending response to content script via sendResponse:",
+              responseToSend
+            );
             sendResponse(responseToSend);
             return true; // Indicate that the response will be sent asynchronously
-          } catch (error: unknown) { // Explicitly type error as unknown
+          } catch (error: unknown) {
+            // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
             console.error("[SamAI Background] Error generating response:", {
               message: err.message,
               stack: err.stack,
             });
-            console.log("[SamAI Background] Sending null response to content script via sendResponse due to error.");
+            console.log(
+              "[SamAI Background] Sending null response to content script via sendResponse due to error."
+            );
             sendResponse(null); // Send null on error
             return true; // Indicate that the response will be sent asynchronously
           }
@@ -191,7 +206,9 @@ export default defineBackground(() => {
         }
 
         case "clearInputElement":
-          console.log("[SamAI Background] Received clearInputElement message, removing inputInfo from storage.");
+          console.log(
+            "[SamAI Background] Received clearInputElement message, removing inputInfo from storage."
+          );
           await browser.storage.local.remove("inputInfo");
           return undefined; // Handled asynchronously
 
@@ -274,9 +291,16 @@ export default defineBackground(() => {
       message.type === "inputElementClicked"
     ) {
       const inputElementClickedMsg = message as InputElementClickedMessage;
-      console.log("[SamAI Background] Received inputElementClicked message:", inputElementClickedMsg);
-      await browser.storage.local.set({ inputInfo: inputElementClickedMsg.inputInfo });
-      console.log("[SamAI Background] inputInfo stored from inputElementClicked.");
+      console.log(
+        "[SamAI Background] Received inputElementClicked message:",
+        inputElementClickedMsg
+      );
+      await browser.storage.local.set({
+        inputInfo: inputElementClickedMsg.inputInfo,
+      });
+      console.log(
+        "[SamAI Background] inputInfo stored from inputElementClicked."
+      );
     }
   });
 
