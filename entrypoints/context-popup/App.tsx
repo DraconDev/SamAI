@@ -227,22 +227,31 @@ export default function App() {
                 className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 disabled={!inputInfo || isInputLoading}
               />
-              {showInputHistory && lastInputTexts.length > 0 && (
-                <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
-                  {lastInputTexts.map((text, index) => (
-                    <div
-                      key={index}
-                      className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
-                      onClick={() => {
-                        setInputPrompt(text);
-                        setShowInputHistory(false);
-                      }}
-                    >
-                      {text}
-                    </div>
-                  ))}
-                </div>
-              )}
+              {showInputHistory &&
+                lastInputTexts.length > 0 &&
+                (() => {
+                  const filteredInputTexts = lastInputTexts.filter((text) =>
+                    text.toLowerCase().includes(inputPrompt.toLowerCase())
+                  );
+                  return (
+                    filteredInputTexts.length > 0 && (
+                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
+                        {filteredInputTexts.map((text, index) => (
+                          <div
+                            key={index}
+                            className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            onClick={() => {
+                              setInputPrompt(text);
+                              setShowInputHistory(false);
+                            }}
+                          >
+                            {text}
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  );
+                })()}
             </div>
             <button
               type="submit"
@@ -304,22 +313,32 @@ export default function App() {
                 className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 disabled={isPageLoading}
               />
-              {showPageHistory && lastPageAssistantTexts.length > 0 && (
-                <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
-                  {lastPageAssistantTexts.map((text, index) => (
-                    <div
-                      key={index}
-                      className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
-                      onClick={() => {
-                        setPagePrompt(text);
-                        setShowPageHistory(false);
-                      }}
-                    >
-                      {text}
-                    </div>
-                  ))}
-                </div>
-              )}
+              {showPageHistory &&
+                lastPageAssistantTexts.length > 0 &&
+                (() => {
+                  const filteredPageAssistantTexts =
+                    lastPageAssistantTexts.filter((text) =>
+                      text.toLowerCase().includes(pagePrompt.toLowerCase())
+                    );
+                  return (
+                    filteredPageAssistantTexts.length > 0 && (
+                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
+                        {filteredPageAssistantTexts.map((text, index) => (
+                          <div
+                            key={index}
+                            className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            onClick={() => {
+                              setPagePrompt(text);
+                              setShowPageHistory(false);
+                            }}
+                          >
+                            {text}
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  );
+                })()}
             </div>
             <div className="flex gap-2">
               <button
