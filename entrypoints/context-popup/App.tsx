@@ -327,7 +327,7 @@ export default function App() {
                         {filteredPageAssistantTexts.map((text, index) => (
                           <div
                             key={index}
-                            className="p-0 cursor-pointer hover:bg-[#2E2F3E] text-"
+                            className="p-0 cursor-pointer hover:bg-[#2E2F3E] text-md"
                             onClick={() => {
                               setPagePrompt(text);
                               setShowPageHistory(false);
