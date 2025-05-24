@@ -239,7 +239,7 @@ export default function App() {
                         {filteredInputTexts.map((text, index) => (
                           <div
                             key={index}
-                            className="p-1 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            className="p-0 cursor-pointer hover:bg-[#2E2F3E] text-xs"
                             onClick={() => {
                               setInputPrompt(text);
                               setShowInputHistory(false);
