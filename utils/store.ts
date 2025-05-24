@@ -75,3 +75,47 @@ export const defaultApiKeyStore: ApiKeyStore = {
 export const apiKeyStore = storage.defineItem<ApiKeyStore>("sync:apiKey", {
   fallback: defaultApiKeyStore,
 });
+
+export interface LastUsedTexts {
+  inputTexts: string[];
+  pageAssistantTexts: string[];
+}
+
+export interface LastUsedTextsStore {
+  texts: LastUsedTexts;
+}
+
+export const defaultLastUsedTextsStore: LastUsedTextsStore = {
+  texts: {
+    inputTexts: [],
+    pageAssistantTexts: [],
+  },
+};
+
+export const lastUsedTextsStore = storage.defineItem<LastUsedTextsStore>(
+  "sync:lastUsedTexts",
+  {
+    fallback: defaultLastUsedTextsStore,
+  }
+);
+
+export async function addInputText(text: string) {
+  const store = await lastUsedTextsStore.getValue();
+  const inputTexts = [text, ...store.texts.inputTexts].slice(0, 10);
+  await lastUsedTextsStore.setValue({
+    texts: { ...store.texts, inputTexts },
+  });
+  return inputTexts;
+}
+
+export async function addPageAssistantText(text: string) {
+  const store = await lastUsedTextsStore.getValue();
+  const pageAssistantTexts = [text, ...store.texts.pageAssistantTexts].slice(
+    0,
+    10
+  );
+  await lastUsedTextsStore.setValue({
+    texts: { ...store.texts, pageAssistantTexts },
+  });
+  return pageAssistantTexts;
+}
