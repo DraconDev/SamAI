@@ -1,7 +1,14 @@
 /// <reference types="wxt/browser" />
 import { generateFormResponse } from "@/utils/ai/gemini";
 import React, { useState, useEffect } from "react";
-import { addChatMessage, chatStore, searchSettingsStore } from "@/utils/store";
+import {
+  addChatMessage,
+  chatStore,
+  searchSettingsStore,
+  lastUsedTextsStore,
+  addInputText,
+  addPageAssistantText,
+} from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
 interface InputInfo {
@@ -21,6 +28,10 @@ export default function App() {
   const [isInputLoading, setIsInputLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [scrapeMode, setScrapeMode] = useState<OutputFormat>("text"); // Default to "text"
+  const [lastInputTexts, setLastInputTexts] = useState<string[]>([]);
+  const [lastPageAssistantTexts, setLastPageAssistantTexts] = useState<
+    string[]
+  >([]);
 
   // Load initial settings and page content
   useEffect(() => {
@@ -31,6 +42,10 @@ export default function App() {
           "pageBodyText", // Load body text
           "pageOptimizedHtml", // Load optimized HTML
         ]);
+        const lastUsed = await lastUsedTextsStore.getValue();
+        setLastInputTexts(lastUsed.texts.inputTexts);
+        setLastPageAssistantTexts(lastUsed.texts.pageAssistantTexts);
+
         console.log("[SamAI Context Popup] Initial data loaded:", result);
         if (result.inputInfo) {
           const info = result.inputInfo as InputInfo;
@@ -90,6 +105,8 @@ export default function App() {
         return;
       }
 
+      await addInputText(inputPrompt); // Save input text
+
       await browser.runtime.sendMessage({
         type: "setInputValue",
         value: response,
@@ -108,6 +125,8 @@ export default function App() {
   const handlePageSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!pagePrompt.trim() || isPageLoading) return;
+
+    await addPageAssistantText(pagePrompt); // Save page assistant text
 
     console.log(
       "[Page Assistant] Starting submission with prompt:",
