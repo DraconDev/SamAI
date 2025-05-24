@@ -28,29 +28,54 @@ export async function initializeGoogleSearch() {
     console.log(
       "[SamAI Search] Sending initial request to Gemini with prompt:",
       fullPrompt
-    ); // NEW LOG
-    const rawResponseString = await browser.runtime.sendMessage({
-      type: "generateGeminiResponse",
-      prompt: fullPrompt, // Use fullPrompt
-    });
-    console.log(
-      "[SamAI Search] Raw message response from background (initial):",
-      rawResponseString
     );
 
-    let parsedResponse: { responseText: string | null } | null = null;
-    try {
-      parsedResponse = JSON.parse(rawResponseString as string); // Cast to string
-    } catch (e) {
-      console.error("[SamAI Search] Error parsing initial response:", e);
-    }
-    const response = parsedResponse?.responseText || null;
-
-    if (!response) {
+    const processResponsePayload = (payload: any, attemptType: 'initial' | 'retry'): string | null => {
       console.log(
-        "[SamAI Search] Initial response was null or not a string. Retrying after 1s delay."
+        `[SamAI Search] Raw message payload from background (${attemptType}):`,
+        payload,
+        "Type:", typeof payload
       );
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
+
+      let responseText: string | null = null;
+      if (typeof payload === 'string') {
+        try {
+          const parsedJson = JSON.parse(payload);
+          if (parsedJson && typeof parsedJson.responseText === 'string') {
+            responseText = parsedJson.responseText;
+          } else if (parsedJson && parsedJson.responseText === null) {
+            console.log(`[SamAI Search] Parsed responseText is null (${attemptType}).`);
+            responseText = null;
+          } else {
+            console.error(`[SamAI Search] Parsed response does not contain expected responseText format (${attemptType}):`, parsedJson);
+            responseText = null;
+          }
+        } catch (e) {
+          console.error(`[SamAI Search] Error parsing response string (${attemptType}):`, e, "Raw string was:", payload);
+          responseText = null;
+        }
+      } else if (payload === null) {
+        console.log(`[SamAI Search] Received literal null from background (${attemptType}). Treating as null response.`);
+        responseText = null;
+      } else {
+        console.warn(`[SamAI Search] Unexpected payload type from background (${attemptType}):`, payload, "Type:", typeof payload);
+        responseText = null;
+      }
+      return responseText;
+    };
+
+    // Initial attempt
+    const rawInitialPayload = await browser.runtime.sendMessage({
+      type: "generateGeminiResponse",
+      prompt: fullPrompt,
+    });
+    let responseText = processResponsePayload(rawInitialPayload, 'initial');
+
+    if (!responseText) {
+      console.log(
+        "[SamAI Search] Initial response processed to null or empty. Retrying after 1s delay."
+      );
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const retryPrompt = `Search query: ${query}\n${
         PROMPT_TEMPLATES[settings.promptStyle]
@@ -60,35 +85,24 @@ export async function initializeGoogleSearch() {
         retryPrompt
       );
 
-      const rawRetryResponseString = await browser.runtime.sendMessage({
+      const rawRetryPayload = await browser.runtime.sendMessage({
         type: "generateGeminiResponse",
         prompt: retryPrompt,
       });
-      console.log(
-        "[SamAI Search] Raw message response from background (retry):",
-        rawRetryResponseString
-      );
-
-      let parsedRetryResponse: { responseText: string | null } | null = null;
-      try {
-        parsedRetryResponse = JSON.parse(rawRetryResponseString as string); // Cast to string
-      } catch (e) {
-        console.error("[SamAI Search] Error parsing retry response:", e);
-      }
-      return parsedRetryResponse?.responseText || null;
+      responseText = processResponsePayload(rawRetryPayload, 'retry');
     }
-    return response;
+    return responseText;
   };
 
   console.log("[SamAI Search] Initiating search for query:", query);
   getResponse()
-    .then((response) => {
-      console.log("[SamAI Search] Received response in .then():", response);
+    .then((finalResponseText) => {
+      console.log("[SamAI Search] Received final responseText in .then():", finalResponseText);
       console.log(
-        "[SamAI Search] Type of response in .then():",
-        typeof response
+        "[SamAI Search] Type of finalResponseText in .then():",
+        typeof finalResponseText
       );
-      showSidePanel(response);
+      showSidePanel(finalResponseText);
     })
     .catch((error) => {
       console.error("[SamAI Search] Failed to get response:", error);
