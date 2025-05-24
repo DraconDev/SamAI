@@ -56,8 +56,6 @@ export default function App() {
           // Pre-fill inputPrompt if an input field was clicked
           if (info.value) {
             setInputPrompt(`Refine "${info.value}"`);
-          } else if (info.placeholder) {
-            setInputPrompt(`Generate text for "${info.placeholder}"`);
           }
           // Removed the else block that set "Generate text for this field"
         } else {
