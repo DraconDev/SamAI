@@ -115,7 +115,7 @@ export default defineBackground(() => {
             );
             const responseToSend = JSON.stringify({ responseText: text }); // Wrap in object and stringify
             console.log("[SamAI Background] Returning response to content script:", responseToSend);
-            return responseToSend; // Directly return the string
+            return Promise.resolve(responseToSend); // Explicitly return a resolved Promise
           } catch (error: unknown) {
             // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
@@ -124,7 +124,7 @@ export default defineBackground(() => {
               stack: err.stack,
             });
             console.log("[SamAI Background] Returning null to content script due to error.");
-            return null; // Return null on error
+            return Promise.resolve(null); // Return a resolved Promise with null
           }
         }
 
