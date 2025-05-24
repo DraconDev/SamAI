@@ -101,7 +101,7 @@ export const lastUsedTextsStore = storage.defineItem<LastUsedTextsStore>(
 
 export async function addInputText(text: string) {
   const store = await lastUsedTextsStore.getValue();
-  const inputTexts = [text, ...store.texts.inputTexts].slice(0, 10);
+  const inputTexts = [text, ...store.texts.inputTexts].slice(0, 5);
   await lastUsedTextsStore.setValue({
     texts: { ...store.texts, inputTexts },
   });
@@ -112,7 +112,7 @@ export async function addPageAssistantText(text: string) {
   const store = await lastUsedTextsStore.getValue();
   const pageAssistantTexts = [text, ...store.texts.pageAssistantTexts].slice(
     0,
-    10
+    5
   );
   await lastUsedTextsStore.setValue({
     texts: { ...store.texts, pageAssistantTexts },
