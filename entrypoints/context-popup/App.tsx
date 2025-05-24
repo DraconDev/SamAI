@@ -313,9 +313,11 @@ export default function App() {
             <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs">
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e: React.MouseEvent) => {
                   handleScrapeModeChange("text");
-                  window.close();
+                  if (e.button === 2) {
+                    window.close();
+                  }
                 }}
                 className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200
                           ${
@@ -328,9 +330,11 @@ export default function App() {
               </button>
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e: React.MouseEvent) => {
                   handleScrapeModeChange("html");
-                  window.close();
+                  if (e.button === 2) {
+                    window.close();
+                  }
                 }}
                 className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200
                           ${
