@@ -95,8 +95,8 @@ export default function App() {
     });
   };
 
-  const handleInputSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleInputSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     if (!inputPrompt.trim() || isInputLoading || !inputInfo) return;
 
     setIsInputLoading(true);
@@ -243,7 +243,6 @@ export default function App() {
                             onClick={() => {
                               setInputPrompt(text);
                               setShowInputHistory(false);
-                              handleInputSubmit(); // Trigger send
                             }}
                           >
                             {text}
@@ -331,7 +330,6 @@ export default function App() {
                             onClick={() => {
                               setPagePrompt(text);
                               setShowPageHistory(false);
-                              handlePageSubmit(); // Trigger send
                             }}
                           >
                             {text}
