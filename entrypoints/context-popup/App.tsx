@@ -239,7 +239,7 @@ export default function App() {
                         {filteredInputTexts.map((text, index) => (
                           <div
                             key={index}
-                            className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            className="p-1 cursor-pointer hover:bg-[#2E2F3E] text-sm"
                             onClick={() => {
                               setInputPrompt(text);
                               setShowInputHistory(false);
@@ -327,7 +327,7 @@ export default function App() {
                         {filteredPageAssistantTexts.map((text, index) => (
                           <div
                             key={index}
-                            className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            className="p-1 cursor-pointer hover:bg-[#2E2F3E] text-sm"
                             onClick={() => {
                               setPagePrompt(text);
                               setShowPageHistory(false);
