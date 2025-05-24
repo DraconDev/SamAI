@@ -33,6 +33,8 @@ export default function App() {
     string[]
   >([]);
   const [showInputHistory, setShowInputHistory] = useState(false);
+  const [showPageHistory, setShowPageHistory] = useState(false);
+
   // Load initial settings and page content
   useEffect(() => {
     const loadInitialData = async () => {
@@ -211,15 +213,35 @@ export default function App() {
             Input Assistant
           </h2>
           <form onSubmit={handleInputSubmit} className="flex flex-col gap-2">
-            <input
-              type="text"
-              value={inputPrompt}
-              onChange={(e) => setInputPrompt(e.target.value)}
-              placeholder="Type your message..."
-              className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-              autoFocus={!!inputInfo}
-              disabled={!inputInfo || isInputLoading}
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={inputPrompt}
+                onChange={(e) => setInputPrompt(e.target.value)}
+                onFocus={() => setShowInputHistory(true)}
+                onBlur={() => setTimeout(() => setShowInputHistory(false), 100)} // Delay to allow click on history item
+                placeholder="Type your message..."
+                className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                autoFocus={!!inputInfo}
+                disabled={!inputInfo || isInputLoading}
+              />
+              {showInputHistory && lastInputTexts.length > 0 && (
+                <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
+                  {lastInputTexts.map((text, index) => (
+                    <div
+                      key={index}
+                      className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                      onClick={() => {
+                        setInputPrompt(text);
+                        setShowInputHistory(false);
+                      }}
+                    >
+                      {text}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               type="submit"
               disabled={isInputLoading || !inputInfo}
@@ -269,15 +291,35 @@ export default function App() {
             Page Assistant
           </h2>
           <form onSubmit={handlePageSubmit} className="flex flex-col gap-2">
-            <input
-              type="text"
-              value={pagePrompt}
-              onChange={(e) => setPagePrompt(e.target.value)}
-              placeholder="Ask a question about the page"
-              className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-              autoFocus={!inputInfo}
-              disabled={isPageLoading}
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={pagePrompt}
+                onChange={(e) => setPagePrompt(e.target.value)}
+                onFocus={() => setShowPageHistory(true)}
+                onBlur={() => setTimeout(() => setShowPageHistory(false), 100)} // Delay to allow click on history item
+                placeholder="Ask a question about the page"
+                className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                autoFocus={!inputInfo}
+                disabled={isPageLoading}
+              />
+              {showPageHistory && lastPageAssistantTexts.length > 0 && (
+                <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-40 overflow-y-auto shadow-lg">
+                  {lastPageAssistantTexts.map((text, index) => (
+                    <div
+                      key={index}
+                      className="p-2 cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                      onClick={() => {
+                        setPagePrompt(text);
+                        setShowPageHistory(false);
+                      }}
+                    >
+                      {text}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <div className="flex gap-2">
               <button
                 type="submit"
