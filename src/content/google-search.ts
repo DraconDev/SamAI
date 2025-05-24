@@ -37,7 +37,7 @@ export async function initializeGoogleSearch() {
 
     let parsedResponse: { responseText: string | null } | null = null;
     try {
-      parsedResponse = JSON.parse(rawResponseString);
+      parsedResponse = JSON.parse(rawResponseString as string); // Cast to string
     } catch (e) {
       console.error("[SamAI Search] Error parsing initial response:", e);
     }
@@ -58,7 +58,7 @@ export async function initializeGoogleSearch() {
 
       let parsedRetryResponse: { responseText: string | null } | null = null;
       try {
-        parsedRetryResponse = JSON.parse(rawRetryResponseString);
+        parsedRetryResponse = JSON.parse(rawRetryResponseString as string); // Cast to string
       } catch (e) {
         console.error("[SamAI Search] Error parsing retry response:", e);
       }
