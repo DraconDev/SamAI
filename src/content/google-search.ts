@@ -29,54 +29,49 @@ export async function initializeGoogleSearch() {
       "[SamAI Search] Sending initial request to Gemini with prompt:",
       fullPrompt
     ); // NEW LOG
-    const rawResponseString = await new Promise<string | null>((resolve) => {
-      browser.runtime.sendMessage(
-        {
-          type: "generateGeminiResponse",
-          prompt: fullPrompt, // Use fullPrompt
-        },
-        (response) => {
-          resolve(response);
-        }
-      );
+    const rawResponseString = await browser.runtime.sendMessage({
+      type: "generateGeminiResponse",
+      prompt: fullPrompt, // Use fullPrompt
     });
-    console.log("[SamAI Search] Raw message response from background (initial):", rawResponseString);
+    console.log(
+      "[SamAI Search] Raw message response from background (initial):",
+      rawResponseString
+    );
 
     let parsedResponse: { responseText: string | null } | null = null;
     try {
-      if (rawResponseString) { // Only parse if not null
-        parsedResponse = JSON.parse(rawResponseString as string); // Cast to string
-      }
+      parsedResponse = JSON.parse(rawResponseString as string); // Cast to string
     } catch (e) {
       console.error("[SamAI Search] Error parsing initial response:", e);
     }
     const response = parsedResponse?.responseText || null;
 
     if (!response) {
-      console.log("[SamAI Search] Initial response was null or not a string. Retrying after 1s delay.");
+      console.log(
+        "[SamAI Search] Initial response was null or not a string. Retrying after 1s delay."
+      );
       await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
 
-      const retryPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
-      console.log("[SamAI Search] Sending retry request to Gemini with prompt:", retryPrompt);
+      const retryPrompt = `Search query: ${query}\n${
+        PROMPT_TEMPLATES[settings.promptStyle]
+      }`;
+      console.log(
+        "[SamAI Search] Sending retry request to Gemini with prompt:",
+        retryPrompt
+      );
 
-      const rawRetryResponseString = await new Promise<string | null>((resolve) => {
-        browser.runtime.sendMessage(
-          {
-            type: "generateGeminiResponse",
-            prompt: retryPrompt,
-          },
-          (response) => {
-            resolve(response);
-          }
-        );
+      const rawRetryResponseString = await browser.runtime.sendMessage({
+        type: "generateGeminiResponse",
+        prompt: retryPrompt,
       });
-      console.log("[SamAI Search] Raw message response from background (retry):", rawRetryResponseString);
+      console.log(
+        "[SamAI Search] Raw message response from background (retry):",
+        rawRetryResponseString
+      );
 
       let parsedRetryResponse: { responseText: string | null } | null = null;
       try {
-        if (rawRetryResponseString) { // Only parse if not null
-          parsedRetryResponse = JSON.parse(rawRetryResponseString as string); // Cast to string
-        }
+        parsedRetryResponse = JSON.parse(rawRetryResponseString as string); // Cast to string
       } catch (e) {
         console.error("[SamAI Search] Error parsing retry response:", e);
       }
@@ -89,7 +84,10 @@ export async function initializeGoogleSearch() {
   getResponse()
     .then((response) => {
       console.log("[SamAI Search] Received response in .then():", response);
-      console.log("[SamAI Search] Type of response in .then():", typeof response);
+      console.log(
+        "[SamAI Search] Type of response in .then():",
+        typeof response
+      );
       showSidePanel(response);
     })
     .catch((error) => {
