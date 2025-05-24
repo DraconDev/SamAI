@@ -108,11 +108,14 @@ export default defineBackground(() => {
               "[SamAI Background] Calling generateFormResponse with prompt:",
               geminiMessage.prompt
             );
-            // const text = await generateFormResponse(geminiMessage.prompt); // Commented out
-            // console.log("[SamAI Background] Response from generateFormResponse:", text ? "Received text" : "Received null"); // Commented out
-            const responseToSend = "TEST_RESPONSE"; // Return a simple string
-            console.log("[SamAI Background] Returning simple test response to content script:", responseToSend);
-            return responseToSend;
+            const text = await generateFormResponse(geminiMessage.prompt);
+            console.log(
+              "[SamAI Background] Response from generateFormResponse:",
+              text ? "Received text" : "Received null"
+            );
+            const responseToSend = JSON.stringify({ responseText: text }); // Wrap in object and stringify
+            console.log("[SamAI Background] Returning response to content script:", responseToSend);
+            return responseToSend; // Directly return the string
           } catch (error: unknown) {
             // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
@@ -120,9 +123,7 @@ export default defineBackground(() => {
               message: err.message,
               stack: err.stack,
             });
-            console.log(
-              "[SamAI Background] Returning null to content script due to error."
-            );
+            console.log("[SamAI Background] Returning null to content script due to error.");
             return null; // Return null on error
           }
         }
