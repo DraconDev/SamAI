@@ -18,7 +18,7 @@ export default function SearchPanel({
         position: "fixed",
         top: 0,
         right: 0,
-        width: "430px",
+        width: "500px",
         height: "100vh",
         background: "linear-gradient(135deg, #1a1b20, #0d0e16)",
         boxShadow: "-5px 0 15px rgba(0,0,0,0.2)",
