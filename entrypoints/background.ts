@@ -100,36 +100,46 @@ export default defineBackground(() => {
           // Check if sender is a valid tab
           if (!sender.tab) {
             console.error("[SamAI Background] No sender tab found");
-            return Promise.resolve(null); // Directly return a resolved promise with null
+            // It's better to call sendResponse(null) and return true if we intend to respond asynchronously,
+            // but since this is an early exit for an invalid state, Promise.resolve(null) might be acceptable
+            // if WXT handles it. However, to be consistent with the sendResponse/return true pattern:
+            sendResponse(null);
+            return true;
           }
 
+          let text: string | null = null;
           try {
             console.log(
               "[SamAI Background] Calling generateFormResponse with prompt:",
               geminiMessage.prompt
             );
-            const text = await generateFormResponse(geminiMessage.prompt);
+            text = await generateFormResponse(geminiMessage.prompt);
             console.log(
               "[SamAI Background] Response from generateFormResponse:",
               text ? "Received text" : "Received null"
             );
-            const responseToSend = JSON.stringify({ responseText: text }); // Wrap in object and stringify
-            console.log(
-              "[SamAI Background] Sending response to content script:", // Changed "Returning" to "Sending"
-              responseToSend
-            );
-            sendResponse(responseToSend); // Call sendResponse directly
           } catch (error: unknown) {
-            // Explicitly type error as unknown
             const err = error as Error; // Cast to Error for property access
-            console.error("[SamAI Background] Error generating response:", {
+            console.error("[SamAI Background] Error in generateFormResponse call:", { // More specific error log
               message: err.message,
               stack: err.stack,
             });
+            // text will remain null
+          }
+
+          // Now, send the response based on the outcome of generateFormResponse
+          if (text !== null) {
+            const responseToSend = JSON.stringify({ responseText: text });
             console.log(
-              "[SamAI Background] Sending null to content script due to error." // Changed "Returning" to "Sending"
+              "[SamAI Background] Sending response to content script:",
+              responseToSend
             );
-            sendResponse(null); // Call sendResponse directly with null
+            sendResponse(responseToSend);
+          } else {
+            console.log(
+              "[SamAI Background] Sending null to content script (either due to error or explicit null from Gemini)."
+            );
+            sendResponse(null);
           }
           return true; // Indicate that sendResponse will be called asynchronously
         }
