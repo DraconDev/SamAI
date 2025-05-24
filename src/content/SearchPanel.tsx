@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; // Import useState and useEffect
 import { MarkdownRenderer } from "@/utils/markdown";
-import { apiKeyStore, type OutputFormat } from "@/utils/store"; // Import apiKeyStore and OutputFormat
+import { apiKeyStore } from "@/utils/store"; // Import apiKeyStore and OutputFormat
 
 interface SearchPanelProps {
   response: string | null;
