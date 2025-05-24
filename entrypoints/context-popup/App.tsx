@@ -32,7 +32,7 @@ export default function App() {
   const [lastPageAssistantTexts, setLastPageAssistantTexts] = useState<
     string[]
   >([]);
-
+  const [showInputHistory, setShowInputHistory] = useState(false);
   // Load initial settings and page content
   useEffect(() => {
     const loadInitialData = async () => {
