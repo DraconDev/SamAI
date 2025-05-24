@@ -128,7 +128,10 @@ export default function App() {
     e?.preventDefault();
     if (!pagePrompt.trim() || isPageLoading) return;
 
-    await addPageAssistantText(pagePrompt); // Save page assistant text
+    // Only save pagePrompt to history if it's not "summarize"
+    if (pagePrompt !== "summarize") {
+      await addPageAssistantText(pagePrompt);
+    }
 
     console.log(
       "[Page Assistant] Starting submission with prompt:",
