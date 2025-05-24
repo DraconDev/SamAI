@@ -210,6 +210,21 @@ export default defineBackground(() => {
           await browser.storage.local.remove("inputInfo");
           return undefined; // Handled asynchronously
 
+        case "inputElementClicked": {
+          const inputElementClickedMsg = message as InputElementClickedMessage;
+          console.log(
+            "[SamAI Background] Received inputElementClicked message:",
+            inputElementClickedMsg
+          );
+          await browser.storage.local.set({
+            inputInfo: inputElementClickedMsg.inputInfo,
+          });
+          console.log(
+            "[SamAI Background] inputInfo stored from inputElementClicked."
+          );
+          return undefined; // Handled asynchronously, no response needed
+        }
+
         default:
           // If message.type is a string but not one of the known types
           console.warn("[SamAI Background] Received unknown message:", message); // Log the whole message
@@ -277,28 +292,6 @@ export default defineBackground(() => {
         width: 400,
         height: 350,
       });
-    }
-  });
-
-  // Add new case for inputElementClicked
-  browser.runtime.onMessage.addListener(async (message: unknown) => {
-    if (
-      typeof message === "object" &&
-      message !== null &&
-      "type" in message &&
-      message.type === "inputElementClicked"
-    ) {
-      const inputElementClickedMsg = message as InputElementClickedMessage;
-      console.log(
-        "[SamAI Background] Received inputElementClicked message:",
-        inputElementClickedMsg
-      );
-      await browser.storage.local.set({
-        inputInfo: inputElementClickedMsg.inputInfo,
-      });
-      console.log(
-        "[SamAI Background] inputInfo stored from inputElementClicked."
-      );
     }
   });
 
