@@ -222,7 +222,6 @@ export default function App() {
                 onBlur={() => setTimeout(() => setShowInputHistory(false), 100)} // Delay to allow click on history item
                 placeholder="Type your message..."
                 className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                autoFocus={!!inputInfo}
                 disabled={!inputInfo || isInputLoading}
               />
               {showInputHistory && lastInputTexts.length > 0 && (
@@ -300,7 +299,6 @@ export default function App() {
                 onBlur={() => setTimeout(() => setShowPageHistory(false), 100)} // Delay to allow click on history item
                 placeholder="Ask a question about the page"
                 className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                autoFocus={!inputInfo}
                 disabled={isPageLoading}
               />
               {showPageHistory && lastPageAssistantTexts.length > 0 && (
