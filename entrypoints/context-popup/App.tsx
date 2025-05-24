@@ -243,6 +243,7 @@ export default function App() {
                             onClick={() => {
                               setInputPrompt(text);
                               setShowInputHistory(false);
+                              handleInputSubmit(); // Trigger send
                             }}
                           >
                             {text}
@@ -330,6 +331,7 @@ export default function App() {
                             onClick={() => {
                               setPagePrompt(text);
                               setShowPageHistory(false);
+                              handlePageSubmit(); // Trigger send
                             }}
                           >
                             {text}
