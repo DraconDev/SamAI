@@ -94,29 +94,80 @@ export default defineContentScript({
         target instanceof HTMLTextAreaElement
       ) {
         lastInputElement = target;
-        console.log("[SamAI Content] Input element right-clicked:", lastInputElement);
+        console.log(
+          "[SamAI Content] Input element right-clicked:",
+          lastInputElement
+        );
 
         // Send input info to background script
-        browser.runtime.sendMessage({
-          type: "inputElementClicked",
-          inputInfo: {
-            value: lastInputElement.value,
-            placeholder: lastInputElement.placeholder,
-            id: lastInputElement.id,
-            name: lastInputElement.name,
-            inputType:
-              lastInputElement instanceof HTMLInputElement
-                ? lastInputElement.type
-                : "textarea",
-          },
-        }).catch(error => console.error("Error sending inputElementClicked message:", error));
-
+        browser.runtime
+          .sendMessage({
+            type: "inputElementClicked",
+            inputInfo: {
+              value: lastInputElement.value,
+              placeholder: lastInputElement.placeholder,
+              id: lastInputElement.id,
+              name: lastInputElement.name,
+              inputType:
+                lastInputElement instanceof HTMLInputElement
+                  ? lastInputElement.type
+                  : "textarea",
+            },
+          })
+          .catch((error) =>
+            console.error("Error sending inputElementClicked message:", error)
+          );
       } else {
         // If right-clicked element is NOT an input, clear any existing inputInfo
-        console.log("[SamAI Content] Right-clicked element is not an input, sending clearInputElement message.");
-        browser.runtime.sendMessage({
-          type: "clearInputElement",
-        }).catch(error => console.error("Error sending clearInputElement message on non-input right-click:", error));
+        console.log(
+          "[SamAI Content] Right-clicked element is not an input, sending clearInputElement message."
+        );
+        browser.runtime
+          .sendMessage({
+            type: "clearInputElement",
+          })
+          .catch((error) =>
+            console.error(
+              "Error sending clearInputElement message on non-input right-click:",
+              error
+            )
+          );
+      }
+    });
+
+    // Track input element on left clicks and send info to background script
+    document.addEventListener("mousedown", (event) => {
+      const target = event.target as HTMLElement;
+      // Check if it's a left click (event.button === 0) and the target is an input or textarea
+      if (
+        event.button === 0 &&
+        (target instanceof HTMLInputElement ||
+          target instanceof HTMLTextAreaElement)
+      ) {
+        lastInputElement = target;
+        console.log(
+          "[SamAI Content] Input element left-clicked:",
+          lastInputElement
+        );
+
+        // Send input info to background script to open the context popup
+        browser.runtime
+          .sendMessage({
+            type: "inputElementClicked", // Reuse existing message type
+            inputInfo: {
+              value: lastInputElement.value,
+              placeholder: lastInputElement.placeholder,
+              id: lastInputElement.id,
+              name: lastInputElement.name,
+              inputType:
+                lastInputElement instanceof HTMLInputElement
+                  ? lastInputElement.type
+                  : "textarea",
+            },
+          })
+          .catch((error) =>
+            console.error("Error sending inputElementClicked message:", error)
+          );
       }
     });
 
