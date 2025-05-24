@@ -54,11 +54,13 @@ export async function initializeGoogleSearch() {
           console.error(`[SamAI Search] Error parsing response string (${attemptType}):`, e, "Raw string was:", payload);
           responseText = null;
         }
-      } else if (payload === null) {
-        console.log(`[SamAI Search] Received literal null from background (${attemptType}). Treating as null response.`);
+      } else if (payload === null || payload === undefined) { // Handle undefined as well
+        console.log(`[SamAI Search] Received literal null/undefined from background (${attemptType}). Treating as null response.`);
         responseText = null;
       } else {
         console.warn(`[SamAI Search] Unexpected payload type from background (${attemptType}):`, payload, "Type:", typeof payload);
+        // If it's not a string or null/undefined, it might be the 'true' boolean from an implicit sendResponse.
+        // In this case, we should treat it as an empty response and let the retry logic handle it.
         responseText = null;
       }
       return responseText;
@@ -102,7 +104,8 @@ export async function initializeGoogleSearch() {
         "[SamAI Search] Type of finalResponseText in .then():",
         typeof finalResponseText
       );
-      showSidePanel(finalResponseText);
+      // Ensure finalResponseText is a string before passing to showSidePanel
+      showSidePanel(typeof finalResponseText === 'string' ? finalResponseText : null);
     })
     .catch((error) => {
       console.error("[SamAI Search] Failed to get response:", error);
