@@ -29,13 +29,19 @@ export async function initializeGoogleSearch() {
       "[SamAI Search] Sending initial request to Gemini with prompt:",
       fullPrompt
     ); // NEW LOG
-    const rawResponse = await browser.runtime.sendMessage({
+    const rawResponseString = await browser.runtime.sendMessage({
       type: "generateGeminiResponse",
       prompt: fullPrompt, // Use fullPrompt
     });
-    console.log("[SamAI Search] Raw message response from background (initial):", rawResponse);
-    // Ensure response is always a string or null
-    const response = typeof rawResponse === 'string' ? rawResponse : null;
+    console.log("[SamAI Search] Raw message response from background (initial):", rawResponseString);
+
+    let parsedResponse: { responseText: string | null } | null = null;
+    try {
+      parsedResponse = JSON.parse(rawResponseString);
+    } catch (e) {
+      console.error("[SamAI Search] Error parsing initial response:", e);
+    }
+    const response = parsedResponse?.responseText || null;
 
     if (!response) {
       console.log("[SamAI Search] Initial response was null or not a string. Retrying after 1s delay.");
@@ -44,14 +50,19 @@ export async function initializeGoogleSearch() {
       const retryPrompt = `Search query: ${query}\n${PROMPT_TEMPLATES[settings.promptStyle]}`;
       console.log("[SamAI Search] Sending retry request to Gemini with prompt:", retryPrompt);
 
-      const rawRetryResponse = await browser.runtime.sendMessage({
+      const rawRetryResponseString = await browser.runtime.sendMessage({
         type: "generateGeminiResponse",
         prompt: retryPrompt,
       });
-      console.log("[SamAI Search] Raw message response from background (retry):", rawRetryResponse);
+      console.log("[SamAI Search] Raw message response from background (retry):", rawRetryResponseString);
 
-      // Ensure retry response is also a string or null
-      return typeof rawRetryResponse === 'string' ? rawRetryResponse : null;
+      let parsedRetryResponse: { responseText: string | null } | null = null;
+      try {
+        parsedRetryResponse = JSON.parse(rawRetryResponseString);
+      } catch (e) {
+        console.error("[SamAI Search] Error parsing retry response:", e);
+      }
+      return parsedRetryResponse?.responseText || null;
     }
     return response;
   };
