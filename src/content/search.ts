@@ -1,7 +1,7 @@
+import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
 import React from "react";
 import { createRoot, type Root } from "react-dom/client"; // Import Root type
 import SearchPanel from "./SearchPanel";
-import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
 
 let samaiRoot: Root | null = null; // Module-scoped root
 let samaiPanelContainer: HTMLDivElement | null = null; // Module-scoped container
@@ -116,26 +116,34 @@ function injectStyles() {
 }
 
 export async function showSidePanel(response: string | null) {
-  if (!samaiPanelContainer) {
-    // Create new panel container if it doesn't exist
-    samaiPanelContainer = document.createElement("div");
-    samaiPanelContainer.id = "samai-container";
-    document.body.appendChild(samaiPanelContainer);
-
-    // Inject styles if not already present
-    if (!document.querySelector("#samai-styles")) {
-      injectStyles();
-    }
-
-    // Initialize React root
-    samaiRoot = createRoot(samaiPanelContainer);
+  // If a panel already exists, close it first to ensure only one instance
+  if (samaiRoot) {
+    samaiRoot.unmount();
+    samaiRoot = null;
   }
+  if (samaiPanelContainer) {
+    samaiPanelContainer.remove();
+    samaiPanelContainer = null;
+  }
+
+  // Create new panel container
+  samaiPanelContainer = document.createElement("div");
+  samaiPanelContainer.id = "samai-container";
+  document.body.appendChild(samaiPanelContainer);
+
+  // Inject styles if not already present
+  if (!document.querySelector("#samai-styles")) {
+    injectStyles();
+  }
+
+  // Initialize React root
+  samaiRoot = createRoot(samaiPanelContainer);
 
   // Get current output format from store
   const settings = await searchSettingsStore.getValue();
   const outputFormat = settings.outputFormat;
 
-  // Render or update the SearchPanel
+  // Render the SearchPanel with a close handler
   if (samaiRoot) {
     samaiRoot.render(
       React.createElement(SearchPanel, {
