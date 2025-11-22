@@ -11,7 +11,7 @@ export function initializeModel(apiKey: string) {
 
     console.log("[SamAI Gemini] Creating model instance");
     model = genAI.getGenerativeModel({
-      model: "gemini-flash-list-latest",
+      model: "gemini-flash-lite-latest",
     });
     console.log("[SamAI Gemini] Model initialized successfully");
   } catch (error: any) {
