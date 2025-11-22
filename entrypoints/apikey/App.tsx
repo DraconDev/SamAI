@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [googleKey, setGoogleKey] = useState("");
+  const [googleModel, setGoogleModel] = useState("");
   const [openaiKey, setOpenaiKey] = useState("");
+  const [openaiModel, setOpenaiModel] = useState("");
   const [anthropicKey, setAnthropicKey] = useState("");
+  const [anthropicModel, setAnthropicModel] = useState("");
   const [openrouterKey, setOpenrouterKey] = useState("");
   const [openrouterModel, setOpenrouterModel] = useState("");
   const [selectedProvider, setSelectedProvider] = useState<AiProvider>("google");
@@ -15,10 +18,13 @@ function App() {
     // Load existing API keys on mount
     apiKeyStore.getValue().then((store) => {
       setGoogleKey(store.googleApiKey || "");
+      setGoogleModel(store.googleModel || "gemini-flash-lite-latest");
       setOpenaiKey(store.openaiApiKey || "");
+      setOpenaiModel(store.openaiModel || "gpt-4o-mini");
       setAnthropicKey(store.anthropicApiKey || "");
+      setAnthropicModel(store.anthropicModel || "claude-3-haiku-20240307");
       setOpenrouterKey(store.openrouterApiKey || "");
-      setOpenrouterModel(store.openrouterModel || "google/gemini-flash-1.5");
+      setOpenrouterModel(store.openrouterModel || "openai/gpt-oss-20b");
       setSelectedProvider(store.selectedProvider || "google");
     });
   }, []);
@@ -26,8 +32,11 @@ function App() {
   const handleSave = async () => {
     await apiKeyStore.setValue({
       googleApiKey: googleKey,
+      googleModel: googleModel,
       openaiApiKey: openaiKey,
+      openaiModel: openaiModel,
       anthropicApiKey: anthropicKey,
+      anthropicModel: anthropicModel,
       openrouterApiKey: openrouterKey,
       openrouterModel: openrouterModel,
       selectedProvider: selectedProvider,
@@ -115,6 +124,36 @@ function App() {
     </div>
   );
 
+  const renderModelInput = (
+    label: string,
+    value: string,
+    setValue: (val: string) => void,
+    id: string,
+    placeholder: string,
+    helpText: string
+  ) => (
+    <div className="space-y-2">
+      <label
+        htmlFor={id}
+        className="block text-sm font-medium text-gray-300"
+      >
+        {label}
+      </label>
+      <input
+        type="text"
+        id={id}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className="w-full px-3 py-2.5 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg shadow-sm 
+                 text-gray-100 placeholder-gray-500
+                 focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]
+                 transition-all duration-200"
+        placeholder={placeholder}
+      />
+      <p className="text-xs text-gray-500">{helpText}</p>
+    </div>
+  );
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16]">
       <div className="relative p-8 w-[450px] bg-[#1E1F2E] rounded-lg shadow-2xl border border-[#2E2F3E] max-h-[90vh] overflow-y-auto">
@@ -149,81 +188,102 @@ function App() {
           </div>
 
           <div className="space-y-6 border-t border-[#2E2F3E] pt-6">
-            {renderKeyInput(
-              "Google Gemini API Key",
-              googleKey,
-              setGoogleKey,
-              "google",
-              "AIzaSy...",
-              "https://aistudio.google.com/apikey"
-            )}
-            {renderKeyInput(
-              "OpenAI API Key",
-              openaiKey,
-              setOpenaiKey,
-              "openai",
-              "sk-...",
-              "https://platform.openai.com/api-keys"
-            )}
-            {renderKeyInput(
-              "Anthropic API Key",
-              anthropicKey,
-              setAnthropicKey,
-              "anthropic",
-              "sk-ant-...",
-              "https://console.anthropic.com/settings/keys"
-            )}
-            {renderKeyInput(
-              "OpenRouter API Key",
-              openrouterKey,
-              setOpenrouterKey,
-              "openrouter",
-              "sk-or-...",
-              "https://openrouter.ai/keys"
-            )}
-            
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="openrouterModel"
-                  className="block text-sm font-medium text-gray-300"
-                >
-                  OpenRouter Model
-                </label>
-                <a
-                  href="https://openrouter.ai/models"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group text-sm font-medium text-[#818cf8] flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
-                >
-                  Browse Models
-                  <svg
-                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
+            {/* Google Section */}
+            <div className={selectedProvider === "google" ? "block" : "hidden"}>
+              <div className="space-y-4">
+                {renderKeyInput(
+                  "Google Gemini API Key",
+                  googleKey,
+                  setGoogleKey,
+                  "google",
+                  "AIzaSy...",
+                  "https://aistudio.google.com/apikey"
+                )}
+                {renderModelInput(
+                  "Gemini Model",
+                  googleModel,
+                  setGoogleModel,
+                  "googleModel",
+                  "gemini-flash-lite-latest",
+                  "e.g., gemini-1.5-pro, gemini-1.5-flash"
+                )}
               </div>
-              <input
-                type="text"
-                id="openrouterModel"
-                value={openrouterModel}
-                onChange={(e) => setOpenrouterModel(e.target.value)}
-                className="w-full px-3 py-2.5 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg shadow-sm 
-                         text-gray-100 placeholder-gray-500
-                         focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]
-                         transition-all duration-200"
-                placeholder="google/gemini-flash-1.5"
-              />
-              <p className="text-xs text-gray-500">
-                Enter the model ID from OpenRouter (e.g., meta-llama/llama-3-8b-instruct)
-              </p>
+            </div>
+
+            {/* OpenAI Section */}
+            <div className={selectedProvider === "openai" ? "block" : "hidden"}>
+              <div className="space-y-4">
+                {renderKeyInput(
+                  "OpenAI API Key",
+                  openaiKey,
+                  setOpenaiKey,
+                  "openai",
+                  "sk-...",
+                  "https://platform.openai.com/api-keys"
+                )}
+                {renderModelInput(
+                  "OpenAI Model",
+                  openaiModel,
+                  setOpenaiModel,
+                  "openaiModel",
+                  "gpt-4o-mini",
+                  "e.g., gpt-4o, gpt-3.5-turbo"
+                )}
+              </div>
+            </div>
+
+            {/* Anthropic Section */}
+            <div className={selectedProvider === "anthropic" ? "block" : "hidden"}>
+              <div className="space-y-4">
+                {renderKeyInput(
+                  "Anthropic API Key",
+                  anthropicKey,
+                  setAnthropicKey,
+                  "anthropic",
+                  "sk-ant-...",
+                  "https://console.anthropic.com/settings/keys"
+                )}
+                {renderModelInput(
+                  "Anthropic Model",
+                  anthropicModel,
+                  setAnthropicModel,
+                  "anthropicModel",
+                  "claude-3-haiku-20240307",
+                  "e.g., claude-3-opus-20240229"
+                )}
+              </div>
+            </div>
+
+            {/* OpenRouter Section */}
+            <div className={selectedProvider === "openrouter" ? "block" : "hidden"}>
+              <div className="space-y-4">
+                {renderKeyInput(
+                  "OpenRouter API Key",
+                  openrouterKey,
+                  setOpenrouterKey,
+                  "openrouter",
+                  "sk-or-...",
+                  "https://openrouter.ai/keys"
+                )}
+                {renderModelInput(
+                  "OpenRouter Model",
+                  openrouterModel,
+                  setOpenrouterModel,
+                  "openrouterModel",
+                  "openai/gpt-oss-20b",
+                  "Enter model ID from OpenRouter"
+                )}
+                <div className="text-right">
+                  <a
+                    href="https://openrouter.ai/models"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-[#818cf8] hover:text-[#4f46e5] transition-colors"
+                  >
+                    Browse OpenRouter Models →
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
