@@ -1,11 +1,11 @@
 import { MarkdownRenderer } from "@/utils/markdown";
 import {
-    addChatMessage,
-    apiKeyStore,
-    chatStore,
-    pageContextStore,
-    searchSettingsStore,
-    type ChatMessage,
+  addChatMessage,
+  apiKeyStore,
+  chatStore,
+  pageContextStore,
+  searchSettingsStore,
+  type ChatMessage,
 } from "@/utils/store";
 import React, { useEffect, useRef, useState } from "react";
 import { tabs } from "webextension-polyfill";
@@ -27,7 +27,10 @@ export default function App() {
       ]);
 
       // Check if API key is set
-      setIsApiKeySet(!!apiKeyData?.apiKey); // Safely access apiKey
+      // Check if API key is set for the selected provider
+      const provider = apiKeyData.selectedProvider || "google";
+      const key = apiKeyData[`${provider}ApiKey` as keyof typeof apiKeyData];
+      setIsApiKeySet(!!key);
 
       if (settings.continuePreviousChat) {
         setMessages(chatData.messages);
