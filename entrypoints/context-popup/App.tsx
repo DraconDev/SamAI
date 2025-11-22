@@ -348,7 +348,7 @@ export default function App() {
                 onFocus={() => setShowPageHistory(true)}
                 onBlur={() => setTimeout(() => setShowPageHistory(false), 100)}
                 placeholder="Ask about this page..."
-                className="w-full px-3 py-2.5 bg-[#0D0E16] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#818cf8] focus:border-transparent placeholder-gray-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm group-hover:border-[#818cf8]/50"
+                className="w-full px-4 py-3 bg-[#0D0E16]/50 border border-[#2E2F3E]/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#818cf8]/50 focus:border-[#818cf8]/50 focus:bg-[#0D0E16]/80 placeholder-gray-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm hover:border-[#818cf8]/30 shadow-inner"
                 disabled={isPageLoading}
               />
               {showPageHistory &&
@@ -360,7 +360,7 @@ export default function App() {
                     );
                   return (
                     filteredPageAssistantTexts.length > 0 && (
-                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg mt-1 max-h-60 overflow-y-auto shadow-xl scrollbar-thin scrollbar-thumb-[#818cf8] scrollbar-track-transparent">
+                      <div className="absolute z-10 w-full bg-[#1E1F2E]/95 backdrop-blur-xl border border-[#2E2F3E]/80 rounded-xl mt-1 max-h-60 overflow-y-auto shadow-2xl shadow-black/50">
                         {filteredPageAssistantTexts.map((text, index) => (
                           <div
                             key={index}
@@ -383,12 +383,12 @@ export default function App() {
               <button
                 type="submit"
                 disabled={isPageLoading}
-                className={`flex-1 p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-medium rounded-lg 
-                          hover:opacity-90 focus:outline-none focus:ring-2 
-                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 transform hover:scale-[0.98] shadow-lg shadow-[#4f46e5]/20
+                className={`flex-1 p-3 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-xl 
+                          hover:shadow-xl hover:shadow-[#4f46e5]/30 focus:outline-none focus:ring-2 
+                          focus:ring-[#4f46e5]/50 focus:ring-offset-2 focus:ring-offset-transparent
+                          transition-all duration-300 transform hover:scale-[0.99] active:scale-[0.97]
                           ${
-                            isPageLoading ? "opacity-75 cursor-not-allowed shadow-none" : ""
+                            isPageLoading ? "opacity-50 cursor-not-allowed shadow-none" : "shadow-lg shadow-[#4f46e5]/20"
                           }`}
               >
                 {isPageLoading ? (
@@ -405,15 +405,14 @@ export default function App() {
                   setPagePrompt("summarize");
                   handlePageSubmit();
                 }}
-                className={`flex-1 p-2.5 bg-[#2E2F3E] text-gray-200 font-medium rounded-lg 
-                          hover:bg-[#3E3F4E] hover:text-white focus:outline-none focus:ring-2 
-                          focus:ring-[#818cf8] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 transform hover:scale-[0.98] border border-[#3E3F4E]`}
+                type="button"
+                className="flex-1 p-3 bg-[#2E2F3E]/80 text-gray-200 font-semibold rounded-xl hover:bg-[#3E3F4E] hover:text-white hover:shadow-lg hover:shadow-[#818cf8]/20 focus:outline-none focus:ring-2 focus:ring-[#818cf8]/50 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 transform hover:scale-[0.99] active:scale-[0.97] border border-[#3E3F4E]/50"
+              >
               >
                 Summarize
               </button>
             </div>
-            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs bg-[#0D0E16] p-0.5">
+            <div className="flex rounded-xl overflow-hidden border border-[#2E2F3E]/50 text-xs bg-[#0D0E16]/30 p-1 backdrop-blur-sm">
               <button
                 type="button"
                 onClick={(e: React.MouseEvent) => {
@@ -422,11 +421,11 @@ export default function App() {
                     window.close();
                   }
                 }}
-                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 rounded-md
+                className={`flex-1 px-3 py-2 text-center font-semibold transition-all duration-200 rounded-lg
                           ${
                             scrapeMode === "text"
-                              ? "bg-[#2E2F3E] text-white shadow-sm"
-                              : "text-gray-500 hover:text-gray-300"
+                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-lg shadow-[#4f46e5]/30"
+                              : "text-gray-400 hover:text-gray-200 hover:bg-[#2E2F3E]/50"
                           }`}
               >
                 Text
@@ -439,11 +438,11 @@ export default function App() {
                     window.close();
                   }
                 }}
-                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 rounded-md
+                className={`flex-1 px-3 py-2 text-center font-semibold transition-all duration-200 rounded-lg
                           ${
                             scrapeMode === "html"
-                              ? "bg-[#2E2F3E] text-white shadow-sm"
-                              : "text-gray-500 hover:text-gray-300"
+                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-lg shadow-[#4f46e5]/30"
+                              : "text-gray-400 hover:text-gray-200 hover:bg-[#2E2F3E]/50"
                           }`}
               >
                 HTML
