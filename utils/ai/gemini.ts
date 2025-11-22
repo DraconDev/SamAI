@@ -4,88 +4,117 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export let genAI: GoogleGenerativeAI;
 export let model: any;
 
-export function initializeModel(apiKey: string) {
+export function initializeGeminiModel(apiKey: string) {
   try {
-    console.log("[SamAI Gemini] Initializing GoogleGenerativeAI");
+    console.log("[SamAI] Initializing GoogleGenerativeAI");
     genAI = new GoogleGenerativeAI(apiKey);
-
-    console.log("[SamAI Gemini] Creating model instance");
     model = genAI.getGenerativeModel({
       model: "gemini-flash-lite-latest",
     });
-    console.log("[SamAI Gemini] Model initialized successfully");
+    console.log("[SamAI] Gemini model initialized successfully");
   } catch (error: any) {
-    console.error("[SamAI Gemini] Error initializing model:", {
-      message: error.message,
-      stack: error.stack,
-      errorType: error.constructor.name,
-    });
+    console.error("[SamAI] Error initializing Gemini model:", error);
     throw error;
   }
 }
 
-export async function generateFormResponse(
-  prompt: string
-): Promise<string | null> {
+async function generateGeminiResponse(apiKey: string, prompt: string): Promise<string | null> {
+  if (!model) {
+    initializeGeminiModel(apiKey);
+  }
   try {
-    console.log("[SamAI Gemini] Generating response for prompt:", prompt);
+    const result = await model.generateContent(prompt);
+    if (!result || !result.response) throw new Error("Empty response from Gemini API");
+    return result.response.text();
+  } catch (error) {
+    console.error("[SamAI] Gemini API Error:", error);
+    return null;
+  }
+}
 
-    const store = await apiKeyStore.getValue();
-    console.log("[SamAI Gemini] Retrieved store:", {
-      hasApiKey: !!store.apiKey,
+async function generateOpenAIResponse(apiKey: string, prompt: string): Promise<string | null> {
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: prompt }],
+      }),
     });
 
-    if (!store.apiKey) {
-      console.warn("[SamAI Gemini] No API key found in store. Returning null."); // Added more specific log
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error?.message || "OpenAI API Error");
+    }
+
+    const data = await response.json();
+    return data.choices[0]?.message?.content || null;
+  } catch (error) {
+    console.error("[SamAI] OpenAI API Error:", error);
+    return null;
+  }
+}
+
+async function generateAnthropicResponse(apiKey: string, prompt: string): Promise<string | null> {
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "dangerously-allow-browser": "true", // Required for browser extensions
+      },
+      body: JSON.stringify({
+        model: "claude-3-haiku-20240307",
+        max_tokens: 1024,
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error?.message || "Anthropic API Error");
+    }
+
+    const data = await response.json();
+    return data.content[0]?.text || null;
+  } catch (error) {
+    console.error("[SamAI] Anthropic API Error:", error);
+    return null;
+  }
+}
+
+export async function generateFormResponse(prompt: string): Promise<string | null> {
+  try {
+    const store = await apiKeyStore.getValue();
+    const provider = store.selectedProvider || "google";
+    const apiKey = store[`${provider}ApiKey` as keyof typeof store] as string;
+
+    if (!apiKey) {
+      console.warn(`[SamAI] No API key found for provider: ${provider}`);
       return null;
     }
 
-    if (!model) {
-      console.log(
-        "[SamAI Gemini] Model not initialized, initializing with API key"
-      );
-      initializeModel(store.apiKey);
-    } else {
-      console.log("[SamAI Gemini] Using existing model instance");
+    console.log(`[SamAI] Generating response using provider: ${provider}`);
+
+    switch (provider) {
+      case "google":
+        return await generateGeminiResponse(apiKey, prompt);
+      case "openai":
+        return await generateOpenAIResponse(apiKey, prompt);
+      case "anthropic":
+        return await generateAnthropicResponse(apiKey, prompt);
+      default:
+        console.error("[SamAI] Unknown provider:", provider);
+        return null;
     }
-
-    console.log("[SamAI Gemini] Sending request to Gemini API");
-    const result = await model.generateContent(prompt);
-    console.log("[SamAI Gemini] Raw API response:", result); // Log full result directly
-
-    // Validate API response structure
-    if (!result || !result.response) {
-      console.error("[SamAI Gemini] Empty response from API:", result);
-      throw new Error("Empty response from Gemini API");
-    }
-
-    if (
-      !result.response.candidates ||
-      !result.response.candidates[0] ||
-      !result.response.candidates[0].content ||
-      !result.response.candidates[0].content.parts ||
-      !result.response.candidates[0].content.parts[0] ||
-      !result.response.candidates[0].content.parts[0].text
-    ) {
-      console.error(
-        "[SamAI Gemini] Invalid response structure:",
-        result.response
-      ); // Log full response directly
-      throw new Error("No candidates in response from Gemini API");
-    }
-
-    const response = result.response.candidates[0].content.parts[0].text;
-    console.log("[SamAI Gemini] Successfully generated response");
-    return response.trim();
-  } catch (error: unknown) {
-    // Explicitly type error as unknown
-    const err = error as Error; // Cast to Error for property access
-    console.error("[SamAI Gemini] Error generating Gemini response:", {
-      timestamp: new Date().toISOString(),
-      message: err.message,
-      stack: err.stack,
-      errorType: err.constructor.name,
-    });
+  } catch (error) {
+    console.error("[SamAI] Error generating response:", error);
     return null;
   }
 }
