@@ -24,3 +24,13 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Auto-committer ignored files
+*.tmp
+*.temp
+*.cache
+*.dll
+*.exe
+*.env
+*.kilocode
+node_modules/

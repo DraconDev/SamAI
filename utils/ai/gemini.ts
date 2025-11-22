@@ -1,5 +1,5 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { apiKeyStore } from "@/utils/store";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export let genAI: GoogleGenerativeAI;
 export let model: any;
