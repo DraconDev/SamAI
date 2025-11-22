@@ -4,12 +4,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export let genAI: GoogleGenerativeAI;
 export let model: any;
 
-export function initializeGeminiModel(apiKey: string) {
+export function initializeGeminiModel(apiKey: string, modelName: string) {
   try {
-    console.log("[SamAI] Initializing GoogleGenerativeAI");
+    console.log("[SamAI] Initializing GoogleGenerativeAI with model:", modelName);
     genAI = new GoogleGenerativeAI(apiKey);
     model = genAI.getGenerativeModel({
-      model: "gemini-flash-lite-latest",
+      model: modelName,
     });
     console.log("[SamAI] Gemini model initialized successfully");
   } catch (error: any) {
@@ -18,9 +18,9 @@ export function initializeGeminiModel(apiKey: string) {
   }
 }
 
-async function generateGeminiResponse(apiKey: string, prompt: string): Promise<string | null> {
+async function generateGeminiResponse(apiKey: string, modelName: string, prompt: string): Promise<string | null> {
   if (!model) {
-    initializeGeminiModel(apiKey);
+    initializeGeminiModel(apiKey, modelName);
   }
   try {
     const result = await model.generateContent(prompt);
@@ -32,7 +32,7 @@ async function generateGeminiResponse(apiKey: string, prompt: string): Promise<s
   }
 }
 
-async function generateOpenAIResponse(apiKey: string, prompt: string): Promise<string | null> {
+async function generateOpenAIResponse(apiKey: string, model: string, prompt: string): Promise<string | null> {
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -41,7 +41,7 @@ async function generateOpenAIResponse(apiKey: string, prompt: string): Promise<s
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: model || "gpt-4o-mini",
         messages: [{ role: "user", content: prompt }],
       }),
     });
@@ -59,7 +59,7 @@ async function generateOpenAIResponse(apiKey: string, prompt: string): Promise<s
   }
 }
 
-async function generateAnthropicResponse(apiKey: string, prompt: string): Promise<string | null> {
+async function generateAnthropicResponse(apiKey: string, model: string, prompt: string): Promise<string | null> {
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -70,7 +70,7 @@ async function generateAnthropicResponse(apiKey: string, prompt: string): Promis
         "dangerously-allow-browser": "true", // Required for browser extensions
       },
       body: JSON.stringify({
-        model: "claude-3-haiku-20240307",
+        model: model || "claude-3-haiku-20240307",
         max_tokens: 1024,
         messages: [{ role: "user", content: prompt }],
       }),
@@ -100,7 +100,7 @@ async function generateOpenRouterResponse(apiKey: string, model: string, prompt:
         "X-Title": "SamAI", // Optional. Shows in rankings on openrouter.ai.
       },
       body: JSON.stringify({
-        model: model || "google/gemini-flash-1.5",
+        model: model || "openai/gpt-oss-20b",
         messages: [{ role: "user", content: prompt }],
       }),
     });
@@ -133,11 +133,11 @@ export async function generateFormResponse(prompt: string): Promise<string | nul
 
     switch (provider) {
       case "google":
-        return await generateGeminiResponse(apiKey, prompt);
+        return await generateGeminiResponse(apiKey, store.googleModel, prompt);
       case "openai":
-        return await generateOpenAIResponse(apiKey, prompt);
+        return await generateOpenAIResponse(apiKey, store.openaiModel, prompt);
       case "anthropic":
-        return await generateAnthropicResponse(apiKey, prompt);
+        return await generateAnthropicResponse(apiKey, store.anthropicModel, prompt);
       case "openrouter":
         return await generateOpenRouterResponse(apiKey, store.openrouterModel, prompt);
       default:
