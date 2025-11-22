@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  chatStore,
-  type ChatMessage,
-  addChatMessage,
-  searchSettingsStore,
-  apiKeyStore,
-  pageContextStore, // Import pageContextStore
-} from "@/utils/store";
 import { MarkdownRenderer } from "@/utils/markdown";
+import {
+    addChatMessage,
+    apiKeyStore,
+    chatStore,
+    pageContextStore,
+    searchSettingsStore,
+    type ChatMessage,
+} from "@/utils/store";
+import React, { useEffect, useRef, useState } from "react";
 import { tabs } from "webextension-polyfill";
 
 export default function App() {
@@ -85,9 +85,20 @@ Page Content: ${pageContext.content}`;
         prompt: fullPrompt,
       });
 
+      let aiResponseText = response as string;
+      try {
+        const parsed = JSON.parse(aiResponseText);
+        if (parsed && parsed.responseText) {
+          aiResponseText = parsed.responseText;
+        }
+      } catch (e) {
+        // If parsing fails, assume it's already plain text or handle as needed
+        console.log("Response is not JSON, using as is");
+      }
+
       const aiMessage: ChatMessage = {
         role: "assistant",
-        content: response as string, // Assert response as string
+        content: aiResponseText,
         timestamp: new Date().toLocaleTimeString(),
       };
 
