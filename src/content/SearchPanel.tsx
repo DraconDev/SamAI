@@ -190,6 +190,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
 
       {/* Tab Content */}
       {activeTab === 'search' && (
+      <>
       <div style={{ marginBottom: "32px" }}>
         <div style={{ 
           display: "flex", 
@@ -347,6 +348,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
           </div>
         )}
       </div>
+      </>
       )}
 
       {/* Scrape Tab Content */}
