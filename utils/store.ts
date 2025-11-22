@@ -64,16 +64,43 @@ export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
   }
 );
 
+export type AiProvider = "google" | "openai" | "anthropic";
+
 export interface ApiKeyStore {
-  apiKey: string;
+  googleApiKey: string;
+  openaiApiKey: string;
+  anthropicApiKey: string;
+  selectedProvider: AiProvider;
 }
 
 export const defaultApiKeyStore: ApiKeyStore = {
-  apiKey: "",
+  googleApiKey: "",
+  openaiApiKey: "",
+  anthropicApiKey: "",
+  selectedProvider: "google",
 };
 
 export const apiKeyStore = storage.defineItem<ApiKeyStore>("sync:apiKey", {
   fallback: defaultApiKeyStore,
+  migrations: {
+    // Migrate old string-based api key to googleApiKey
+    1: (oldValue: any) => {
+      if (typeof oldValue === "string") {
+        return {
+          ...defaultApiKeyStore,
+          googleApiKey: oldValue,
+        };
+      }
+      // If it was an object but with old structure (though strictly typed before, storage might be raw)
+      if (typeof oldValue === "object" && oldValue !== null && "apiKey" in oldValue) {
+         return {
+          ...defaultApiKeyStore,
+          googleApiKey: oldValue.apiKey,
+        };
+      }
+      return defaultApiKeyStore;
+    },
+  },
 });
 
 export interface LastUsedTexts {
