@@ -8,6 +8,7 @@ import {
   lastUsedTextsStore,
   addInputText,
   addPageAssistantText,
+  pageContextStore,
 } from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
