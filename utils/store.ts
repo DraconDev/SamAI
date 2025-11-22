@@ -64,12 +64,14 @@ export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
   }
 );
 
-export type AiProvider = "google" | "openai" | "anthropic";
+export type AiProvider = "google" | "openai" | "anthropic" | "openrouter";
 
 export interface ApiKeyStore {
   googleApiKey: string;
   openaiApiKey: string;
   anthropicApiKey: string;
+  openrouterApiKey: string;
+  openrouterModel: string;
   selectedProvider: AiProvider;
 }
 
@@ -77,6 +79,8 @@ export const defaultApiKeyStore: ApiKeyStore = {
   googleApiKey: "",
   openaiApiKey: "",
   anthropicApiKey: "",
+  openrouterApiKey: "",
+  openrouterModel: "google/gemini-flash-1.5", // Cheap default
   selectedProvider: "google",
 };
 
