@@ -68,8 +68,11 @@ export type AiProvider = "google" | "openai" | "anthropic" | "openrouter";
 
 export interface ApiKeyStore {
   googleApiKey: string;
+  googleModel: string;
   openaiApiKey: string;
+  openaiModel: string;
   anthropicApiKey: string;
+  anthropicModel: string;
   openrouterApiKey: string;
   openrouterModel: string;
   selectedProvider: AiProvider;
@@ -77,10 +80,13 @@ export interface ApiKeyStore {
 
 export const defaultApiKeyStore: ApiKeyStore = {
   googleApiKey: "",
+  googleModel: "gemini-flash-lite-latest",
   openaiApiKey: "",
+  openaiModel: "gpt-4o-mini",
   anthropicApiKey: "",
+  anthropicModel: "claude-3-haiku-20240307",
   openrouterApiKey: "",
-  openrouterModel: "google/gemini-flash-1.5", // Cheap default
+  openrouterModel: "openai/gpt-oss-20b", // User requested default
   selectedProvider: "google",
 };
 
