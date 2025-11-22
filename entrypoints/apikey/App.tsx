@@ -1,101 +1,172 @@
-import { useState, useEffect } from "react";
-import { apiKeyStore } from "@/utils/store";
+import { apiKeyStore, type AiProvider } from "@/utils/store";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [apiKey, setApiKey] = useState("");
-  const [showKey, setShowKey] = useState(false);
+  const [googleKey, setGoogleKey] = useState("");
+  const [openaiKey, setOpenaiKey] = useState("");
+  const [anthropicKey, setAnthropicKey] = useState("");
+  const [selectedProvider, setSelectedProvider] = useState<AiProvider>("google");
+  const [showKey, setShowKey] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    // Load existing API key on mount
+    // Load existing API keys on mount
     apiKeyStore.getValue().then((store) => {
-      setApiKey(store.apiKey);
+      setGoogleKey(store.googleApiKey || "");
+      setOpenaiKey(store.openaiApiKey || "");
+      setAnthropicKey(store.anthropicApiKey || "");
+      setSelectedProvider(store.selectedProvider || "google");
     });
   }, []);
 
   const handleSave = async () => {
-    await apiKeyStore.setValue({ apiKey });
+    await apiKeyStore.setValue({
+      googleApiKey: googleKey,
+      openaiApiKey: openaiKey,
+      anthropicApiKey: anthropicKey,
+      selectedProvider: selectedProvider,
+    });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
 
-  const maskedApiKey = showKey ? apiKey : apiKey.replace(/./g, "•");
+  const toggleShowKey = (provider: string) => {
+    setShowKey((prev) => ({ ...prev, [provider]: !prev[provider] }));
+  };
+
+  const renderKeyInput = (
+    label: string,
+    value: string,
+    setValue: (val: string) => void,
+    providerId: string,
+    placeholder: string,
+    link: string
+  ) => (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <label
+          htmlFor={providerId}
+          className="block text-sm font-medium text-gray-300"
+        >
+          {label}
+        </label>
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group text-sm font-medium text-[#818cf8] flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
+        >
+          Get Key
+          <svg
+            className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
+      <div className="relative">
+        <input
+          type={showKey[providerId] ? "text" : "password"}
+          id={providerId}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="w-full px-3 py-2.5 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg shadow-sm 
+                   text-gray-100 placeholder-gray-500
+                   focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]
+                   transition-all duration-200"
+          placeholder={placeholder}
+        />
+        <button
+          type="button"
+          onClick={() => toggleShowKey(providerId)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 
+                   rounded-md hover:bg-[#2E2F3E] transition-all duration-200"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {showKey[providerId] ? (
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24 M1 1l22 22" />
+            ) : (
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 0 1 0 6 3 3 0 0 1 0-6z" />
+            )}
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16]">
-      <div className="relative p-8 w-[400px] bg-[#1E1F2E] rounded-lg shadow-2xl border border-[#2E2F3E]">
+      <div className="relative p-8 w-[450px] bg-[#1E1F2E] rounded-lg shadow-2xl border border-[#2E2F3E] max-h-[90vh] overflow-y-auto">
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-            API Key Configuration
+            AI Provider Settings
           </h1>
           <div className="h-0.5 w-16 mx-auto mt-3 bg-gradient-to-r from-[#4f46e5] to-[#818cf8]"></div>
         </div>
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="apiKey"
-                className="block text-sm font-medium text-gray-300"
-              >
-                Enter your API Key
-              </label>
-              <a
-                href="https://aistudio.google.com/apikey"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group text-sm font-medium text-[#818cf8] flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
-              >
-                Get API Key
-                <svg
-                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+            <label className="block text-sm font-medium text-gray-300">
+              Select Active Provider
+            </label>
+            <div className="grid grid-cols-3 gap-2 p-1 bg-[#1a1b2e] rounded-lg border border-[#2E2F3E]">
+              {(["google", "openai", "anthropic"] as const).map((provider) => (
+                <button
+                  key={provider}
+                  onClick={() => setSelectedProvider(provider)}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 capitalize
+                    ${
+                      selectedProvider === provider
+                        ? "bg-[#4f46e5] text-white shadow-lg"
+                        : "text-gray-400 hover:text-gray-200 hover:bg-[#2E2F3E]"
+                    }`}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
+                  {provider}
+                </button>
+              ))}
             </div>
-            <div className="relative">
-              <input
-                type={showKey ? "text" : "password"}
-                id="apiKey"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="w-full px-3 py-2.5 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg shadow-sm 
-                         text-gray-100 placeholder-gray-500
-                         focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]
-                         transition-all duration-200"
-                placeholder="sk-..."
-              />
-              <button
-                type="button"
-                onClick={() => setShowKey(!showKey)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 
-                         rounded-md hover:bg-[#2E2F3E] transition-all duration-200"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {showKey ? (
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24 M1 1l22 22" />
-                  ) : (
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 0 1 0 6 3 3 0 0 1 0-6z" />
-                  )}
-                </svg>
-              </button>
-            </div>
+          </div>
+
+          <div className="space-y-6 border-t border-[#2E2F3E] pt-6">
+            {renderKeyInput(
+              "Google Gemini API Key",
+              googleKey,
+              setGoogleKey,
+              "google",
+              "AIzaSy...",
+              "https://aistudio.google.com/apikey"
+            )}
+            {renderKeyInput(
+              "OpenAI API Key",
+              openaiKey,
+              setOpenaiKey,
+              "openai",
+              "sk-...",
+              "https://platform.openai.com/api-keys"
+            )}
+            {renderKeyInput(
+              "Anthropic API Key",
+              anthropicKey,
+              setAnthropicKey,
+              "anthropic",
+              "sk-ant-...",
+              "https://console.anthropic.com/settings/keys"
+            )}
           </div>
 
           <button
@@ -103,9 +174,9 @@ function App() {
             className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
                      hover:opacity-90 focus:outline-none focus:ring-2 
                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
-                     transition-all duration-200 transform hover:scale-[0.98]"
+                     transition-all duration-200 transform hover:scale-[0.98] mt-4"
           >
-            Save API Key
+            Save Configuration
           </button>
 
           {saved && (
@@ -121,7 +192,7 @@ function App() {
                   clipRule="evenodd"
                 />
               </svg>
-              API key saved successfully!
+              Settings saved successfully!
             </div>
           )}
         </div>
