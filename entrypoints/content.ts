@@ -1,9 +1,7 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
+import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { extractPageContent } from "@/utils/page-content";
-import { searchSettingsStore } from "@/utils/store";
-import { tabs } from "webextension-polyfill";
-import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
 // Define message types
 interface GetPageContentMessage {
