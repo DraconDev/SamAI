@@ -2,15 +2,15 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import {
-    addChatMessage,
-    addInputText,
-    addPageAssistantText,
-    chatStore,
-    lastUsedTextsStore,
-    pageContextStore,
-    searchSettingsStore,
+  addChatMessage,
+  addInputText,
+  addPageAssistantText,
+  chatStore,
+  lastUsedTextsStore,
+  pageContextStore,
+  searchSettingsStore,
 } from "@/utils/store";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface InputInfo {
   value: string;
@@ -21,7 +21,6 @@ interface InputInfo {
 }
 
 export default function App() {
-  const popupRef = useRef<HTMLDivElement>(null);
   const [inputPrompt, setInputPrompt] = useState("");
   const [pagePrompt, setPagePrompt] = useState("");
   const [inputInfo, setInputInfo] = useState<InputInfo | null>(null);
@@ -37,16 +36,17 @@ export default function App() {
   const [showInputHistory, setShowInputHistory] = useState(false);
   const [showPageHistory, setShowPageHistory] = useState(false);
 
-  // Close popup when clicking outside
+  // Close popup when window loses focus (user clicks away)
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
+    const handleBlur = () => {
+      // Small delay to allow clicking buttons within the popup
+      setTimeout(() => {
         window.close();
-      }
+      }, 100);
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('blur', handleBlur);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('blur', handleBlur);
     };
   }, []);
 
@@ -234,7 +234,6 @@ export default function App() {
 
   return (
     <div
-      ref={popupRef}
       id="samai-context-popup-root"
       className="min-w-[320px] h-[340px] bg-[#1a1b2e] shadow-2xl p-5 text-gray-100 font-sans border border-[#2E2F3E] rounded-xl"
     >
