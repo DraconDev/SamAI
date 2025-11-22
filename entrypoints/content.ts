@@ -72,7 +72,8 @@ export default defineContentScript({
     if (
       window.location.hostname === "www.google.com" &&
       window.location.pathname === "/search" &&
-      new URLSearchParams(window.location.search).has("q")
+      new URLSearchParams(window.location.search).has("q") &&
+      !new URLSearchParams(window.location.search).has("tbm") // Exclude specific search types like images (tbm=isch)
     ) {
       console.log("[SamAI] Initializing Google search functionality");
       // Delay initialization slightly to avoid blocking page load
