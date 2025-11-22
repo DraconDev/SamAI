@@ -116,7 +116,7 @@ function injectStyles() {
 }
 
 export async function showSidePanel(response: string | null) {
-  // If a panel already exists, close it first to ensure only one instance
+  // If a panel already exists, close it and exit (toggle behavior)
   if (samaiRoot) {
     samaiRoot.unmount();
     samaiRoot = null;
@@ -124,6 +124,8 @@ export async function showSidePanel(response: string | null) {
   if (samaiPanelContainer) {
     samaiPanelContainer.remove();
     samaiPanelContainer = null;
+    // If we just closed an existing panel, do not reopen a new one
+    return;
   }
 
   // Create new panel container
