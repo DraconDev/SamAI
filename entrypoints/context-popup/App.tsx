@@ -2,13 +2,13 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import {
-    addChatMessage,
-    addInputText,
-    addPageAssistantText,
-    chatStore,
-    lastUsedTextsStore,
-    pageContextStore,
-    searchSettingsStore,
+  addChatMessage,
+  addInputText,
+  addPageAssistantText,
+  chatStore,
+  lastUsedTextsStore,
+  pageContextStore,
+  searchSettingsStore,
 } from "@/utils/store";
 import React, { useEffect, useState } from "react";
 
@@ -221,25 +221,28 @@ export default function App() {
   return (
     <div
       id="samai-context-popup-root"
-      className="min-w-[300px] h-[300px] bg-gradient-to-br from-[#1a1b2e] to-[#10111a] shadow-lg p-4 text-gray-100 font-sans"
+      className="min-w-[320px] h-[340px] bg-[#1a1b2e] shadow-2xl p-5 text-gray-100 font-sans border border-[#2E2F3E] rounded-xl"
     >
-      <div className="flex flex-col h-full space-y-4">
+      <div className="flex flex-col h-full space-y-5">
         <div
-          className={`space-y-2 flex-none ${!inputInfo ? "opacity-60" : ""}`}
+          className={`space-y-3 flex-none ${!inputInfo ? "opacity-60 grayscale" : ""}`}
         >
-          <h2 className="text-lg font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-            Input Assistant
-          </h2>
+          <div className="flex items-center gap-2">
+            <div className="w-1 h-4 bg-gradient-to-b from-[#4f46e5] to-[#818cf8] rounded-full"></div>
+            <h2 className="text-sm font-bold tracking-wide text-gray-200 uppercase">
+              Input Assistant
+            </h2>
+          </div>
           <form onSubmit={handleInputSubmit} className="flex flex-col gap-2">
-            <div className="relative">
+            <div className="relative group">
               <input
                 type="text"
                 value={inputPrompt}
                 onChange={(e) => setInputPrompt(e.target.value)}
                 onFocus={() => setShowInputHistory(true)}
-                onBlur={() => setTimeout(() => setShowInputHistory(false), 100)} // Delay to allow click on history item
-                placeholder="Type your message..."
-                className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                onBlur={() => setTimeout(() => setShowInputHistory(false), 100)}
+                placeholder="Refine or generate text..."
+                className="w-full px-3 py-2.5 bg-[#0D0E16] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm group-hover:border-[#4f46e5]/50"
                 disabled={!inputInfo || isInputLoading}
               />
               {showInputHistory &&
@@ -250,15 +253,15 @@ export default function App() {
                   );
                   return (
                     filteredInputTexts.length > 0 && (
-                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-60 overflow-y-auto shadow-lg">
+                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg mt-1 max-h-60 overflow-y-auto shadow-xl scrollbar-thin scrollbar-thumb-[#4f46e5] scrollbar-track-transparent">
                         {filteredInputTexts.map((text, index) => (
                           <div
                             key={index}
-                            className="p-[1px] cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            className="px-3 py-2 cursor-pointer hover:bg-[#2E2F3E] text-sm text-gray-300 hover:text-white transition-colors"
                             onClick={() => {
                               setInputPrompt(text);
                               setShowInputHistory(false);
-                              handleInputSubmit(); // Trigger send
+                              handleInputSubmit();
                             }}
                           >
                             {text}
@@ -272,61 +275,49 @@ export default function App() {
             <button
               type="submit"
               disabled={isInputLoading || !inputInfo}
-              className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+              className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-medium rounded-lg 
                       hover:opacity-90 focus:outline-none focus:ring-2 
                       focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                      transition-all duration-200 transform hover:scale-[0.98] 
+                      transition-all duration-200 transform hover:scale-[0.98] shadow-lg shadow-[#4f46e5]/20
                       ${
                         isInputLoading || !inputInfo
-                          ? "opacity-75 cursor-not-allowed"
+                          ? "opacity-75 cursor-not-allowed shadow-none"
                           : ""
                       }`}
             >
               {isInputLoading ? (
                 <div className="flex items-center justify-center gap-2">
-                  <div className="w-4 h-4">
-                    <svg viewBox="0 0 50 50">
-                      <path
-                        d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        className="animate-[dash_1.5s_ease-in-out_infinite]"
-                        style={{
-                          strokeDasharray: "90,150",
-                          strokeDashoffset: "-35",
-                          animation:
-                            "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
-                        }}
-                      />
-                    </svg>
-                  </div>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   <span>Processing...</span>
                 </div>
               ) : inputInfo ? (
-                "Send"
+                "Generate & Insert"
               ) : (
-                "Select an input field" // Changed text
+                "Select an input field"
               )}
             </button>
           </form>
         </div>
 
-        <div className="relative flex-1 space-y-2">
-          <h2 className="text-lg font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-            Page Assistant
-          </h2>
+        <div className="w-full h-px bg-[#2E2F3E]"></div>
+
+        <div className="relative flex-1 space-y-3">
+          <div className="flex items-center gap-2">
+            <div className="w-1 h-4 bg-gradient-to-b from-[#818cf8] to-[#a5b4fc] rounded-full"></div>
+            <h2 className="text-sm font-bold tracking-wide text-gray-200 uppercase">
+              Page Assistant
+            </h2>
+          </div>
           <form onSubmit={handlePageSubmit} className="flex flex-col gap-2">
-            <div className="relative">
+            <div className="relative group">
               <input
                 type="text"
                 value={pagePrompt}
                 onChange={(e) => setPagePrompt(e.target.value)}
                 onFocus={() => setShowPageHistory(true)}
-                onBlur={() => setTimeout(() => setShowPageHistory(false), 100)} // Delay to allow click on history item
-                placeholder="Ask a question about the page"
-                className="w-full p-2 bg-[#1E1F2E] border border-[#2E2F3E] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                onBlur={() => setTimeout(() => setShowPageHistory(false), 100)}
+                placeholder="Ask about this page..."
+                className="w-full px-3 py-2.5 bg-[#0D0E16] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#818cf8] focus:border-transparent placeholder-gray-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm group-hover:border-[#818cf8]/50"
                 disabled={isPageLoading}
               />
               {showPageHistory &&
@@ -338,15 +329,15 @@ export default function App() {
                     );
                   return (
                     filteredPageAssistantTexts.length > 0 && (
-                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-md mt-1 max-h-60 overflow-y-auto shadow-lg">
+                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg mt-1 max-h-60 overflow-y-auto shadow-xl scrollbar-thin scrollbar-thumb-[#818cf8] scrollbar-track-transparent">
                         {filteredPageAssistantTexts.map((text, index) => (
                           <div
                             key={index}
-                            className="p-[1px] cursor-pointer hover:bg-[#2E2F3E] text-sm"
+                            className="px-3 py-2 cursor-pointer hover:bg-[#2E2F3E] text-sm text-gray-300 hover:text-white transition-colors"
                             onClick={() => {
                               setPagePrompt(text);
                               setShowPageHistory(false);
-                              handlePageSubmit(); // Trigger send
+                              handlePageSubmit();
                             }}
                           >
                             {text}
@@ -361,38 +352,21 @@ export default function App() {
               <button
                 type="submit"
                 disabled={isPageLoading}
-                className={`flex-1 p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
+                className={`flex-1 p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-medium rounded-lg 
                           hover:opacity-90 focus:outline-none focus:ring-2 
                           focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 transform hover:scale-[0.98]
+                          transition-all duration-200 transform hover:scale-[0.98] shadow-lg shadow-[#4f46e5]/20
                           ${
-                            isPageLoading ? "opacity-75 cursor-not-allowed" : ""
+                            isPageLoading ? "opacity-75 cursor-not-allowed shadow-none" : ""
                           }`}
               >
                 {isPageLoading ? (
                   <div className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4">
-                      <svg viewBox="0 0 50 50">
-                        <path
-                          d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          className="animate-[dash_1.5s_ease-in-out_infinite]"
-                          style={{
-                            strokeDasharray: "90,150",
-                            strokeDashoffset: "-35",
-                            animation:
-                              "dash 1.5s ease-in-out infinite, rotate 2s linear infinite",
-                          }}
-                        />
-                      </svg>
-                    </div>
-                    <span>Processing...</span>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span>Thinking...</span>
                   </div>
                 ) : (
-                  "Send"
+                  "Ask"
                 )}
               </button>
               <button
@@ -400,15 +374,15 @@ export default function App() {
                   setPagePrompt("summarize");
                   handlePageSubmit();
                 }}
-                className={`flex-1 p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
-                          hover:opacity-90 focus:outline-none focus:ring-2 
-                          focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                          transition-all duration-200 transform hover:scale-[0.98]`}
+                className={`flex-1 p-2.5 bg-[#2E2F3E] text-gray-200 font-medium rounded-lg 
+                          hover:bg-[#3E3F4E] hover:text-white focus:outline-none focus:ring-2 
+                          focus:ring-[#818cf8] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                          transition-all duration-200 transform hover:scale-[0.98] border border-[#3E3F4E]`}
               >
                 Summarize
               </button>
             </div>
-            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs">
+            <div className="flex rounded-lg overflow-hidden border border-[#2E2F3E] text-xs bg-[#0D0E16] p-0.5">
               <button
                 type="button"
                 onClick={(e: React.MouseEvent) => {
@@ -417,14 +391,14 @@ export default function App() {
                     window.close();
                   }
                 }}
-                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200
+                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 rounded-md
                           ${
                             scrapeMode === "text"
-                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white ring-2 ring-[#818cf8] ring-offset-1 ring-offset-[#1a1b2e]"
-                              : "bg-[#1E1F2E] text-gray-400 hover:bg-[#2E2F3E] hover:text-gray-200"
+                              ? "bg-[#2E2F3E] text-white shadow-sm"
+                              : "text-gray-500 hover:text-gray-300"
                           }`}
               >
-                Body Text
+                Text
               </button>
               <button
                 type="button"
@@ -434,14 +408,14 @@ export default function App() {
                     window.close();
                   }
                 }}
-                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200
+                className={`flex-1 px-3 py-1.5 text-center font-medium transition-all duration-200 rounded-md
                           ${
                             scrapeMode === "html"
-                              ? "bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white ring-2 ring-[#818cf8] ring-offset-1 ring-offset-[#1a1b2e]"
-                              : "bg-[#1E1F2E] text-gray-400 hover:bg-[#2E2F3E] hover:text-gray-200"
+                              ? "bg-[#2E2F3E] text-white shadow-sm"
+                              : "text-gray-500 hover:text-gray-300"
                           }`}
               >
-                Optimized HTML
+                HTML
               </button>
             </div>
           </form>
