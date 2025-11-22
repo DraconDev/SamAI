@@ -5,6 +5,8 @@ function App() {
   const [googleKey, setGoogleKey] = useState("");
   const [openaiKey, setOpenaiKey] = useState("");
   const [anthropicKey, setAnthropicKey] = useState("");
+  const [openrouterKey, setOpenrouterKey] = useState("");
+  const [openrouterModel, setOpenrouterModel] = useState("");
   const [selectedProvider, setSelectedProvider] = useState<AiProvider>("google");
   const [showKey, setShowKey] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
@@ -15,6 +17,8 @@ function App() {
       setGoogleKey(store.googleApiKey || "");
       setOpenaiKey(store.openaiApiKey || "");
       setAnthropicKey(store.anthropicApiKey || "");
+      setOpenrouterKey(store.openrouterApiKey || "");
+      setOpenrouterModel(store.openrouterModel || "google/gemini-flash-1.5");
       setSelectedProvider(store.selectedProvider || "google");
     });
   }, []);
@@ -24,6 +28,8 @@ function App() {
       googleApiKey: googleKey,
       openaiApiKey: openaiKey,
       anthropicApiKey: anthropicKey,
+      openrouterApiKey: openrouterKey,
+      openrouterModel: openrouterModel,
       selectedProvider: selectedProvider,
     });
     setSaved(true);
@@ -124,12 +130,12 @@ function App() {
             <label className="block text-sm font-medium text-gray-300">
               Select Active Provider
             </label>
-            <div className="grid grid-cols-3 gap-2 p-1 bg-[#1a1b2e] rounded-lg border border-[#2E2F3E]">
-              {(["google", "openai", "anthropic"] as const).map((provider) => (
+            <div className="grid grid-cols-4 gap-2 p-1 bg-[#1a1b2e] rounded-lg border border-[#2E2F3E]">
+              {(["google", "openai", "anthropic", "openrouter"] as const).map((provider) => (
                 <button
                   key={provider}
                   onClick={() => setSelectedProvider(provider)}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 capitalize
+                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-200 capitalize truncate
                     ${
                       selectedProvider === provider
                         ? "bg-[#4f46e5] text-white shadow-lg"
@@ -167,6 +173,58 @@ function App() {
               "sk-ant-...",
               "https://console.anthropic.com/settings/keys"
             )}
+            {renderKeyInput(
+              "OpenRouter API Key",
+              openrouterKey,
+              setOpenrouterKey,
+              "openrouter",
+              "sk-or-...",
+              "https://openrouter.ai/keys"
+            )}
+            
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="openrouterModel"
+                  className="block text-sm font-medium text-gray-300"
+                >
+                  OpenRouter Model
+                </label>
+                <a
+                  href="https://openrouter.ai/models"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group text-sm font-medium text-[#818cf8] flex items-center gap-1 hover:text-[#4f46e5] transition-colors"
+                >
+                  Browse Models
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <input
+                type="text"
+                id="openrouterModel"
+                value={openrouterModel}
+                onChange={(e) => setOpenrouterModel(e.target.value)}
+                className="w-full px-3 py-2.5 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg shadow-sm 
+                         text-gray-100 placeholder-gray-500
+                         focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-[#4f46e5]
+                         transition-all duration-200"
+                placeholder="google/gemini-flash-1.5"
+              />
+              <p className="text-xs text-gray-500">
+                Enter the model ID from OpenRouter (e.g., meta-llama/llama-3-8b-instruct)
+              </p>
+            </div>
           </div>
 
           <button
