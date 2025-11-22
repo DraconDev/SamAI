@@ -1,7 +1,8 @@
+```typescript
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface SearchPanelProps {
   response: string | null;
@@ -10,19 +11,6 @@ interface SearchPanelProps {
 }
 
 export default function SearchPanel({ response, onClose, outputFormat }: SearchPanelProps) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  // Close when clicking outside the panel
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        onClose();
-      }
-    };
-    document.addEventListener('mousedown', handleClick);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, [onClose]);
   const [isApiKeySet, setIsApiKeySet] = useState(false);
 
   // Load API key status on mount
@@ -48,7 +36,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   }, []);
 
   return (
-    <div ref={panelRef}
+    <div
       style={{
         position: "fixed",
         top: 0,
