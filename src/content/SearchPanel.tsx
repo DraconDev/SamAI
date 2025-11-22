@@ -63,7 +63,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         const response = await browser.tabs.sendMessage(tabs[0].id, {
           type: 'getPageContent',
           outputFormat: outputFormat
-        });
+        }) as { content?: string };
         
         if (response?.content) {
           // Store content in pageContextStore
