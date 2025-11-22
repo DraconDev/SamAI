@@ -163,6 +163,15 @@ export default function App() {
       );
 
       console.log("[Page Assistant] Adding messages to chat...");
+      
+      // Store page context for follow-up questions
+      await pageContextStore.setValue({
+        content: contentToAnalyze,
+        url: window.location.href,
+        title: document.title,
+        timestamp: new Date().toISOString(),
+        format: scrapeMode,
+      });
       const settings = await searchSettingsStore.getValue();
 
       if (!settings.continuePreviousChat) {

@@ -4,7 +4,8 @@ import {
   type ChatMessage,
   addChatMessage,
   searchSettingsStore,
-  apiKeyStore, // Import apiKeyStore
+  apiKeyStore,
+  pageContextStore, // Import pageContextStore
 } from "@/utils/store";
 import { MarkdownRenderer } from "@/utils/markdown";
 import { tabs } from "webextension-polyfill";
@@ -69,6 +70,16 @@ export default function App() {
     setIsLoading(true);
 
     try {
+      // Check for stored page context and include it in the prompt
+      const pageContext = await pageContextStore.getValue();
+      let fullPrompt = input;
+      
+      if (pageContext.content) {
+        fullPrompt = `${input}
+
+Page Content: ${pageContext.content}`;
+        console.log("[Chat] Including stored page context in prompt");
+      }
       const response = await browser.runtime.sendMessage({
         type: "generateGeminiResponse",
         prompt: input,
