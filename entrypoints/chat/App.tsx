@@ -82,7 +82,7 @@ Page Content: ${pageContext.content}`;
       }
       const response = await browser.runtime.sendMessage({
         type: "generateGeminiResponse",
-        prompt: input,
+        prompt: fullPrompt,
       });
 
       const aiMessage: ChatMessage = {

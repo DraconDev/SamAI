@@ -10,6 +10,9 @@ This roadmap outlines the complete development strategy for SamAI, transforming 
 
 ---
 
+dont show am ai on image routes on google 
+
+
 ## 📅 Phase 1: Foundation & Core Enhancement (Weeks 1-4)
 
 ### 🔧 Technical Foundation
