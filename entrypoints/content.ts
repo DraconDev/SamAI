@@ -4,16 +4,10 @@ import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { extractPageContent } from "@/utils/page-content";
 import { searchSettingsStore } from "@/utils/store";
 
-// ... (interfaces remain the same)
-
-    // Floating Icon Logic
-    const injectFloatingIcon = async () => {
-      const settings = await searchSettingsStore.getValue();
-      const showIcon = settings.showFloatingIcon ?? true;
-
-      if (!showIcon) return;
+// Define message types
+interface GetPageContentMessage {
   type: "getPageContent";
-  outputFormat: OutputFormat; // Add outputFormat
+  outputFormat: OutputFormat;
 }
 
 interface GetInputInfoMessage {
