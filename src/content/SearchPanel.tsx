@@ -1,7 +1,7 @@
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface SearchPanelProps {
   response: string | null;
@@ -10,7 +10,25 @@ interface SearchPanelProps {
 }
 
 export default function SearchPanel({ response, onClose, outputFormat }: SearchPanelProps) {
+  const panelRef = useRef<HTMLDivElement>(null);
   const [isApiKeySet, setIsApiKeySet] = useState(false);
+
+  // Close panel when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+    // Small delay to prevent immediate closure on panel creation
+    const timer = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+    }, 100);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
 
   // Load API key status on mount
   useEffect(() => {
@@ -36,6 +54,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
 
   return (
     <div
+      ref={panelRef}
       style={{
         position: "fixed",
         top: 0,
@@ -54,46 +73,6 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       }}
       className="animate-slide-in"
     >
-      <button
-        onClick={(e) => {
-          const container = e.currentTarget.closest("#samai-container");
-          if (container) {
-            container.classList.replace("animate-slide-in", "animate-slide-out");
-            setTimeout(onClose, 300);
-          } else {
-            onClose();
-          }
-        }}
-        style={{
-          position: "absolute",
-          top: "24px",
-          right: "24px",
-          width: "36px",
-          height: "36px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "rgba(255, 255, 255, 0.05)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "12px",
-          cursor: "pointer",
-          transition: "all 0.2s ease",
-          color: "#94a3b8",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-          e.currentTarget.style.color = "#fff";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
-          e.currentTarget.style.color = "#94a3b8";
-        }}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-      </button>
-
       <div style={{ marginBottom: "32px" }}>
         <div style={{ 
           display: "flex", 

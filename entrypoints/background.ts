@@ -297,8 +297,8 @@ export default defineBackground(() => {
       const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 400,
-        height: 350,
+        width: 460,
+        height: 520,
       });
       contextPopupWindowId = popupWindow.id || null;
     } catch (error) {
@@ -319,8 +319,8 @@ export default defineBackground(() => {
       const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 400,
-        height: 350,
+        width: 460,
+        height: 520,
       });
       contextPopupWindowId = popupWindow.id || null;
     }
