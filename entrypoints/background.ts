@@ -24,8 +24,8 @@ interface ClearInputElementMessage extends BaseMessage {
   type: "clearInputElement";
 }
 
-import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { InputElementClickedMessage } from "@/entrypoints/content"; // Import InputElementClickedMessage
+import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
 interface GetPageContentRequest extends BaseMessage {
   type: "getPageContent";
@@ -60,6 +60,7 @@ function isBackgroundMessage(message: any): message is BackgroundMessage {
 
 export default defineBackground(() => {
   let sourceTabId: number | null = null;
+  let contextPopupWindowId: number | null = null; // Track the context popup window
 
   // Create context menu item
   browser.contextMenus.create({
@@ -280,22 +281,48 @@ export default defineBackground(() => {
         tab.id
       );
 
-      // Open popup
-      browser.windows.create({
+      // Close existing popup if open
+      if (contextPopupWindowId !== null) {
+        try {
+          await browser.windows.remove(contextPopupWindowId);
+          contextPopupWindowId = null;
+        } catch (error) {
+          // Window might already be closed, ignore error
+          console.log("[SamAI Background] Previous popup already closed");
+          contextPopupWindowId = null;
+        }
+      }
+
+      // Open popup and store window ID
+      const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 350,
       });
+      contextPopupWindowId = popupWindow.id || null;
     } catch (error) {
       console.error("Error in background script:", error);
+      // Close existing popup if open
+      if (contextPopupWindowId !== null) {
+        try {
+          await browser.windows.remove(contextPopupWindowId);
+          contextPopupWindowId = null;
+        } catch (error) {
+          // Window might already be closed, ignore error
+          console.log("[SamAI Background] Previous popup already closed");
+          contextPopupWindowId = null;
+        }
+      }
+
       // If there's an error, still open the popup, but it might not have inputInfo
-      browser.windows.create({
+      const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
         width: 400,
         height: 350,
       });
+      contextPopupWindowId = popupWindow.id || null;
     }
   });
 
@@ -303,6 +330,13 @@ export default defineBackground(() => {
   browser.tabs.onRemoved.addListener((tabId) => {
     if (tabId === sourceTabId) {
       sourceTabId = null;
+    }
+  });
+
+  // Clear popup window ID when the window is closed
+  browser.windows.onRemoved.addListener((windowId) => {
+    if (windowId === contextPopupWindowId) {
+      contextPopupWindowId = null;
     }
   });
 });
