@@ -1,15 +1,16 @@
 import { MarkdownRenderer } from "@/utils/markdown";
-import { apiKeyStore } from "@/utils/store"; // Import apiKeyStore and OutputFormat
-import { useEffect, useState } from "react"; // Import useState and useEffect
+import type { OutputFormat } from "@/utils/page-content";
+import { apiKeyStore } from "@/utils/store";
+import { useEffect, useState } from "react";
 
 interface SearchPanelProps {
   response: string | null;
   onClose: () => void;
-  outputFormat: OutputFormat; // Add outputFormat prop
+  outputFormat: OutputFormat;
 }
 
 export default function SearchPanel({ response, onClose, outputFormat }: SearchPanelProps) {
-  const [isApiKeySet, setIsApiKeySet] = useState(false); // Add isApiKeySet state
+  const [isApiKeySet, setIsApiKeySet] = useState(false);
 
   // Load API key status on mount
   useEffect(() => {
@@ -30,7 +31,6 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       setIsApiKeySet(!!key);
     });
 
-    // Cleanup the watcher on component unmount
     return () => unsubscribe();
   }, []);
 
@@ -40,75 +40,100 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         position: "fixed",
         top: 0,
         right: 0,
-        width: "430px",
+        width: "450px",
         height: "100vh",
-        background: "linear-gradient(135deg, #1a1b2e, #0D0E16)",
-        boxShadow: "-5px 0 15px rgba(0,0,0,0.2)",
-        padding: "24px",
+        background: "rgba(26, 27, 46, 0.95)",
+        backdropFilter: "blur(12px)",
+        boxShadow: "-10px 0 30px rgba(0,0,0,0.5)",
+        padding: "32px",
         overflowY: "auto",
-        zIndex: 9999,
-        fontFamily:
-          "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        zIndex: 2147483647, // Max z-index
+        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+        borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
+        color: "#e2e8f0",
       }}
       className="animate-slide-in"
     >
       <button
         onClick={(e) => {
-          e.currentTarget
-            .closest("#samai-container")
-            ?.classList.replace("animate-slide-in", "animate-slide-out");
-          setTimeout(onClose, 300);
+          const container = e.currentTarget.closest("#samai-container");
+          if (container) {
+            container.classList.replace("animate-slide-in", "animate-slide-out");
+            setTimeout(onClose, 300);
+          } else {
+            onClose();
+          }
         }}
         style={{
           position: "absolute",
-          top: "20px",
-          right: "20px",
-          width: "32px",
-          height: "32px",
+          top: "24px",
+          right: "24px",
+          width: "36px",
+          height: "36px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "transparent",
-          border: "none",
-          borderRadius: "6px",
+          background: "rgba(255, 255, 255, 0.05)",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
+          borderRadius: "12px",
           cursor: "pointer",
-          opacity: 0.6,
-          transition: "all 0.2s",
-          color: "#e2e8f0",
+          transition: "all 0.2s ease",
+          color: "#94a3b8",
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+          e.currentTarget.style.color = "#fff";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
+          e.currentTarget.style.color = "#94a3b8";
+        }}
       >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path
-            d="M15 5L5 15M5 5L15 15"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 6L6 18M6 6l12 12" />
         </svg>
       </button>
 
-      <div style={{ marginBottom: "24px" }}>
-        <h3
-          style={{
-            margin: 0,
-            fontSize: "20px",
-            fontWeight: 600,
-            background: "linear-gradient(90deg, #818cf8, #4f46e5)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            paddingRight: "32px",
-          }}
-        >
-          Sam AI Results
-        </h3>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{ 
+          display: "flex", 
+          alignItems: "center", 
+          gap: "12px",
+          marginBottom: "16px" 
+        }}>
+          <div style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "8px",
+            background: "linear-gradient(135deg, #4f46e5, #818cf8)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 17L12 22L22 17" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 12L12 17L22 12" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <h3
+            style={{
+              margin: 0,
+              fontSize: "24px",
+              fontWeight: 700,
+              background: "linear-gradient(90deg, #fff, #94a3b8)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            SamAI
+          </h3>
+        </div>
         <div
           style={{
-            height: "2px",
-            width: "40px",
-            background: "#4f46e5",
-            marginTop: "8px",
+            height: "1px",
+            width: "100%",
+            background: "linear-gradient(90deg, rgba(79, 70, 229, 0.5), transparent)",
           }}
         />
       </div>
@@ -117,112 +142,112 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {response ? (
           outputFormat === "html" ? (
             <div
-              className="optimized-html-content"
+              className="optimized-html-content prose prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: response }}
             />
           ) : (
-            <div className="markdown-content">
+            <div className="markdown-content prose prose-invert max-w-none">
               <MarkdownRenderer content={response} />
             </div>
           )
         ) : !isApiKeySet ? (
           <div
             style={{
-              position: "absolute",
-              inset: 0,
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              paddingTop: "80px",
+              height: "300px",
+              textAlign: "center",
+              padding: "0 20px"
             }}
             className="animate-fade-in"
           >
-            <div className="max-w-[80%] p-6 rounded-lg shadow-lg bg-[#1E1F2E] border border-[#4f46e5] text-gray-100 text-center">
-              <p className="mb-4 text-[15px] leading-relaxed font-medium">
-                Your API key is not set. Please set it to use SamAI.
-              </p>
-              <button
-                onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
-                style={{
-                  padding: "10px 24px",
-                  fontWeight: 700,
-                  color: "white",
-                  background: "linear-gradient(90deg, #4f46e5, #818cf8)",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease-in-out",
-                  fontSize: "15px",
-                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.opacity = "0.95";
-                  e.currentTarget.style.boxShadow = "0 6px 15px rgba(0, 0, 0, 0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = "1";
-                  e.currentTarget.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
-                }}
-              >
-                Set API Key
-              </button>
+            <div style={{
+              width: "64px",
+              height: "64px",
+              borderRadius: "20px",
+              background: "rgba(79, 70, 229, 0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "24px",
+              border: "1px solid rgba(79, 70, 229, 0.2)"
+            }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2">
+                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
+            <h4 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "8px", color: "#fff" }}>
+              Setup Required
+            </h4>
+            <p style={{ fontSize: "14px", color: "#94a3b8", marginBottom: "24px", lineHeight: "1.5" }}>
+              Please configure your API key to start using SamAI's powerful features.
+            </p>
+            <button
+              onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
+              style={{
+                padding: "12px 24px",
+                fontWeight: 600,
+                color: "white",
+                background: "linear-gradient(135deg, #4f46e5, #818cf8)",
+                border: "none",
+                borderRadius: "12px",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                fontSize: "14px",
+                boxShadow: "0 4px 12px rgba(79, 70, 229, 0.3)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow = "0 6px 20px rgba(79, 70, 229, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(79, 70, 229, 0.3)";
+              }}
+            >
+              Configure API Key
+            </button>
           </div>
         ) : (
           <div
             style={{
-              position: "absolute",
-              inset: 0,
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              paddingTop: "80px",
+              height: "300px",
             }}
           >
+            <div className="loading-orb"></div>
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                marginTop: "-40px",
+                marginTop: "24px",
+                color: "#94a3b8",
+                fontWeight: 500,
+                fontSize: "14px",
+                letterSpacing: "0.5px",
               }}
+              className="animate-pulse"
             >
-              <div
-                style={{
-                  position: "relative",
-                  width: "50px",
-                  height: "50px",
-                  marginBottom: "16px",
-                }}
-              >
-                <svg viewBox="0 0 50 50" className="animate-spin">
-                  <path
-                    d="M25,25 m-20,0 a20,20 0 1,1 40,0 a20,20 0 1,1 -40,0"
-                    fill="none"
-                    stroke="url(#gradient)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                  <defs>
-                    <linearGradient id="gradient">
-                      <stop offset="0%" stopColor="#4f46e5" />
-                      <stop offset="100%" stopColor="#818cf8" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div
-                style={{
-                  color: "#818cf8",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  letterSpacing: "0.5px",
-                }}
-                className="animate-pulse"
-              >
-                Generating insights...
-              </div>
+              Generating insights...
             </div>
+            <style>{`
+              .loading-orb {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #4f46e5, #818cf8);
+                filter: blur(20px);
+                animation: pulse-glow 2s infinite;
+              }
+              @keyframes pulse-glow {
+                0% { transform: scale(0.8); opacity: 0.5; }
+                50% { transform: scale(1.2); opacity: 0.8; }
+                100% { transform: scale(0.8); opacity: 0.5; }
+              }
+            `}</style>
           </div>
         )}
       </div>
