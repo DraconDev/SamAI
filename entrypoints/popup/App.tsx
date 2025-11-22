@@ -43,18 +43,27 @@ function App() {
   };
 
   return (
-    <div className="p-6 w-[300px]  bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
+    <div className="p-7 w-[340px] bg-gradient-to-br from-[#1a1b2e]/98 to-[#0D0E16]/98 text-gray-100 backdrop-blur-xl border border-[#2E2F3E]/50 shadow-2xl" style={{ backdropFilter: 'blur(16px)' }}>
       <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] to-[#4f46e5] bg-clip-text">
-          Sam AI
-        </h1>
-        <div className="h-0.5 w-16 mx-auto mt-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8]"></div>
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] shadow-lg shadow-[#4f46e5]/40">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              <path d="M2 17L12 22L22 17"/>
+              <path d="M2 12L12 17L22 12"/>
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text">
+            Sam AI
+          </h1>
+        </div>
+        <div className="h-1 w-20 mx-auto bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#818cf8] rounded-full shadow-lg shadow-[#4f46e5]/30"></div>
       </div>
 
-      <div className="space-y-4">
-        <div className="flex flex-col gap-2 p-2 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
+      <div className="space-y-5">
+        <div className="flex flex-col gap-3 p-4 bg-[#1E1F2E]/80 backdrop-blur-sm rounded-xl border border-[#2E2F3E]/60 shadow-lg">
           <div className="flex items-center justify-between">
-            <label className="font-medium text-gray-300">
+            <label className="font-semibold text-gray-200 text-sm">
               Search Enhancement
             </label>
             <ToggleButton
@@ -69,7 +78,7 @@ function App() {
           </div>
 
           {searchActive && (
-            <div className="pt-3 border-t border-[#2E2F3E]">
+            <div className="pt-4 border-t border-[#2E2F3E]/50">
               <label className="block mb-3 text-sm font-medium text-gray-300">
                 Response Style
               </label>
@@ -108,12 +117,12 @@ function App() {
                     showFloatingIcon, // Include showFloatingIcon
                   });
                     }}
-                    className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
-                              hover:transform hover:scale-[1.02]
+                    className={`group relative flex flex-col items-center p-3 rounded-xl border transition-all duration-300
+                              hover:transform hover:scale-[1.03] hover:shadow-lg
                               ${
                                 promptStyle === value
-                                  ? "border-[#4f46e5] bg-[#4f46e5]/10"
-                                  : "border-[#2E2F3E] hover:border-[#4f46e5] hover:bg-[#4f46e5]/5"
+                                  ? "border-[#4f46e5] bg-gradient-to-br from-[#4f46e5]/20 to-[#818cf8]/10 shadow-lg shadow-[#4f46e5]/20"
+                                  : "border-[#2E2F3E]/60 hover:border-[#4f46e5]/60 hover:bg-[#4f46e5]/5"
                               }`}
                   >
                     <span className="mb-1 text-lg transition-transform transform group-hover:scale-110">
