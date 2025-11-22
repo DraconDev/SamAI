@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"; // Import useState and useEffect
 import { MarkdownRenderer } from "@/utils/markdown";
 import { apiKeyStore } from "@/utils/store"; // Import apiKeyStore and OutputFormat
+import { useEffect, useState } from "react"; // Import useState and useEffect
 
 interface SearchPanelProps {
   response: string | null;
@@ -15,7 +15,9 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   useEffect(() => {
     const checkApiKey = async () => {
       const apiKeyData = await apiKeyStore.getValue();
-      setIsApiKeySet(!!apiKeyData?.apiKey);
+      const provider = apiKeyData.selectedProvider || "google";
+      const key = apiKeyData[`${provider}ApiKey` as keyof typeof apiKeyData];
+      setIsApiKeySet(!!key);
     };
     checkApiKey();
   }, []);
@@ -23,7 +25,9 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   // Watch for changes in apiKeyStore and update isApiKeySet state
   useEffect(() => {
     const unsubscribe = apiKeyStore.watch((newValue) => {
-      setIsApiKeySet(!!newValue?.apiKey);
+      const provider = newValue.selectedProvider || "google";
+      const key = newValue[`${provider}ApiKey` as keyof typeof newValue];
+      setIsApiKeySet(!!key);
     });
 
     // Cleanup the watcher on component unmount
