@@ -1,14 +1,15 @@
-import { tabs } from "webextension-polyfill";
 import { useEffect, useState } from "react";
-import { searchSettingsStore, type PromptStyle } from "../../utils/store";
+import { tabs } from "webextension-polyfill";
 import { ToggleButton } from "../../src/components/ToggleButton";
 import { type OutputFormat } from "../../utils/page-content"; // Import OutputFormat
+import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 
 function App() {
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
   const [continuePreviousChat, setContinuePreviousChat] = useState(true);
   const [outputFormat, setOutputFormat] = useState<OutputFormat>("text"); // Add outputFormat state
+  const [showFloatingIcon, setShowFloatingIcon] = useState(true); // Add showFloatingIcon state
 
   useEffect(() => {
     searchSettingsStore.getValue().then((settings) => {
@@ -17,6 +18,7 @@ function App() {
       setPromptStyle(settings.promptStyle);
       setContinuePreviousChat(settings.continuePreviousChat);
       setOutputFormat(settings.outputFormat); // Load outputFormat
+      setShowFloatingIcon(settings.showFloatingIcon); // Load showFloatingIcon
     });
   }, []);
 
@@ -27,6 +29,7 @@ function App() {
       promptStyle,
       continuePreviousChat,
       outputFormat, // Include outputFormat
+      showFloatingIcon, // Include showFloatingIcon
     });
     setSearchActive(newValue);
   };
@@ -102,6 +105,7 @@ function App() {
                     promptStyle: newStyle,
                     continuePreviousChat,
                     outputFormat, // Include outputFormat
+                    showFloatingIcon, // Include showFloatingIcon
                   });
                     }}
                     className={`group relative flex flex-col items-center p-2 rounded-lg border transition-all duration-200
@@ -178,6 +182,7 @@ function App() {
                 promptStyle,
                 continuePreviousChat: newValue,
                 outputFormat, // Include outputFormat
+                showFloatingIcon, // Include showFloatingIcon
               });
               }}
               ariaLabel={
