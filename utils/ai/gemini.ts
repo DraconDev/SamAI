@@ -89,6 +89,35 @@ async function generateAnthropicResponse(apiKey: string, prompt: string): Promis
   }
 }
 
+async function generateOpenRouterResponse(apiKey: string, model: string, prompt: string): Promise<string | null> {
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+        "HTTP-Referer": "https://github.com/google/wxt", // Optional, for including your app on openrouter.ai rankings.
+        "X-Title": "SamAI", // Optional. Shows in rankings on openrouter.ai.
+      },
+      body: JSON.stringify({
+        model: model || "google/gemini-flash-1.5",
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error?.message || "OpenRouter API Error");
+    }
+
+    const data = await response.json();
+    return data.choices[0]?.message?.content || null;
+  } catch (error) {
+    console.error("[SamAI] OpenRouter API Error:", error);
+    return null;
+  }
+}
+
 export async function generateFormResponse(prompt: string): Promise<string | null> {
   try {
     const store = await apiKeyStore.getValue();
@@ -109,6 +138,8 @@ export async function generateFormResponse(prompt: string): Promise<string | nul
         return await generateOpenAIResponse(apiKey, prompt);
       case "anthropic":
         return await generateAnthropicResponse(apiKey, prompt);
+      case "openrouter":
+        return await generateOpenRouterResponse(apiKey, store.openrouterModel, prompt);
       default:
         console.error("[SamAI] Unknown provider:", provider);
         return null;
