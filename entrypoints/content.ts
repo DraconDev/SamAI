@@ -193,29 +193,32 @@ export default defineContentScript({
       `;
       Object.assign(icon.style, {
         position: "fixed",
-        bottom: "20px",
-        right: "20px",
-        width: "50px",
-        height: "50px",
+        bottom: "24px",
+        right: "24px",
+        width: "56px",
+        height: "56px",
         borderRadius: "50%",
-        backgroundColor: "#4f46e5",
-        boxShadow: "0 4px 15px rgba(79, 70, 229, 0.4)",
+        background: "linear-gradient(135deg, #4f46e5 0%, #818cf8 100%)",
+        boxShadow: "0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         cursor: "pointer",
         zIndex: "999999",
-        transition: "all 0.3s ease",
-        opacity: "0.9",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        opacity: "0.95",
+        animation: "pulse-glow 3s ease-in-out infinite",
       });
 
       icon.onmouseenter = () => {
-        icon.style.transform = "scale(1.1)";
+        icon.style.transform = "scale(1.15) rotate(5deg)";
         icon.style.opacity = "1";
+        icon.style.boxShadow = "0 12px 32px rgba(79, 70, 229, 0.6), 0 0 30px rgba(79, 70, 229, 0.4)";
       };
       icon.onmouseleave = () => {
-        icon.style.transform = "scale(1)";
-        icon.style.opacity = "0.9";
+        icon.style.transform = "scale(1) rotate(0deg)";
+        icon.style.opacity = "0.95";
+        icon.style.boxShadow = "0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3)";
       };
 
       icon.onclick = () => {
