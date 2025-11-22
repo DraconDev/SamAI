@@ -235,15 +235,24 @@ export default function App() {
   return (
     <div
       id="samai-context-popup-root"
-      className="min-w-[320px] h-[340px] bg-[#1a1b2e] shadow-2xl p-5 text-gray-100 font-sans border border-[#2E2F3E] rounded-xl"
+      className="min-w-[360px] h-[380px] bg-gradient-to-br from-[#1a1b2e]/95 to-[#0D0E16]/95 backdrop-blur-xl shadow-2xl p-6 text-gray-100 font-sans border border-[#2E2F3E]/50 rounded-2xl"
+      style={{
+        background: 'linear-gradient(135deg, rgba(26, 27, 46, 0.95) 0%, rgba(13, 14, 22, 0.95) 100%)',
+        backdropFilter: 'blur(20px)',
+      }}
     >
-      <div className="flex flex-col h-full space-y-5">
+      <div className="flex flex-col h-full space-y-6">
         <div
-          className={`space-y-3 flex-none ${!inputInfo ? "opacity-60 grayscale" : ""}`}
+          className={`space-y-3 flex-none transition-all duration-300 ${!inputInfo ? "opacity-50 grayscale" : "opacity-100"}`}
         >
-          <div className="flex items-center gap-2">
-            <div className="w-1 h-4 bg-gradient-to-b from-[#4f46e5] to-[#818cf8] rounded-full"></div>
-            <h2 className="text-sm font-bold tracking-wide text-gray-200 uppercase">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#4f46e5] to-[#818cf8] shadow-lg shadow-[#4f46e5]/30">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </div>
+            <h2 className="text-base font-bold tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Input Assistant
             </h2>
           </div>
@@ -255,8 +264,8 @@ export default function App() {
                 onChange={(e) => setInputPrompt(e.target.value)}
                 onFocus={() => setShowInputHistory(true)}
                 onBlur={() => setTimeout(() => setShowInputHistory(false), 100)}
-                placeholder="Refine or generate text..."
-                className="w-full px-3 py-2.5 bg-[#0D0E16] border border-[#2E2F3E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent placeholder-gray-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm group-hover:border-[#4f46e5]/50"
+               placeholder="Refine or generate text..."
+                className="w-full px-4 py-3 bg-[#0D0E16]/50 border border-[#2E2F3E]/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/50 focus:border-[#4f46e5]/50 focus:bg-[#0D0E16]/80 placeholder-gray-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm hover:border-[#4f46e5]/30 shadow-inner"
                 disabled={!inputInfo || isInputLoading}
               />
               {showInputHistory &&
@@ -267,7 +276,7 @@ export default function App() {
                   );
                   return (
                     filteredInputTexts.length > 0 && (
-                      <div className="absolute z-10 w-full bg-[#1E1F2E] border border-[#2E2F3E] rounded-lg mt-1 max-h-60 overflow-y-auto shadow-xl scrollbar-thin scrollbar-thumb-[#4f46e5] scrollbar-track-transparent">
+                      <div className="absolute z-10 w-full bg-[#1E1F2E]/95 backdrop-blur-xl border border-[#2E2F3E]/80 rounded-xl mt-1 max-h-60 overflow-y-auto shadow-2xl shadow-black/50">
                         {filteredInputTexts.map((text, index) => (
                           <div
                             key={index}
@@ -289,14 +298,14 @@ export default function App() {
             <button
               type="submit"
               disabled={isInputLoading || !inputInfo}
-              className={`w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-medium rounded-lg 
-                      hover:opacity-90 focus:outline-none focus:ring-2 
-                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                      transition-all duration-200 transform hover:scale-[0.98] shadow-lg shadow-[#4f46e5]/20
+              className={`w-full p-3 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-xl 
+                      hover:shadow-xl hover:shadow-[#4f46e5]/30 focus:outline-none focus:ring-2 
+                      focus:ring-[#4f46e5]/50 focus:ring-offset-2 focus:ring-offset-transparent
+                      transition-all duration-300 transform hover:scale-[0.99] active:scale-[0.97]
                       ${
                         isInputLoading || !inputInfo
-                          ? "opacity-75 cursor-not-allowed shadow-none"
-                          : ""
+                          ? "opacity-50 cursor-not-allowed shadow-none"
+                          : "shadow-lg shadow-[#4f46e5]/20"
                       }`}
             >
               {isInputLoading ? (
@@ -313,12 +322,20 @@ export default function App() {
           </form>
         </div>
 
-        <div className="w-full h-px bg-[#2E2F3E]"></div>
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-[#2E2F3E] to-transparent"></div>
 
         <div className="relative flex-1 space-y-3">
-          <div className="flex items-center gap-2">
-            <div className="w-1 h-4 bg-gradient-to-b from-[#818cf8] to-[#a5b4fc] rounded-full"></div>
-            <h2 className="text-sm font-bold tracking-wide text-gray-200 uppercase">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#818cf8] to-[#c7d2fe] shadow-lg shadow-[#818cf8]/30">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <h2 className="text-base font-bold tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Page Assistant
             </h2>
           </div>
