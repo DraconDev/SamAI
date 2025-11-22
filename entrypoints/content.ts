@@ -2,9 +2,16 @@ import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
 import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { extractPageContent } from "@/utils/page-content";
+import { searchSettingsStore } from "@/utils/store";
 
-// Define message types
-interface GetPageContentMessage {
+// ... (interfaces remain the same)
+
+    // Floating Icon Logic
+    const injectFloatingIcon = async () => {
+      const settings = await searchSettingsStore.getValue();
+      const showIcon = settings.showFloatingIcon ?? true;
+
+      if (!showIcon) return;
   type: "getPageContent";
   outputFormat: OutputFormat; // Add outputFormat
 }
@@ -175,8 +182,8 @@ export default defineContentScript({
 
     // Floating Icon Logic
     const injectFloatingIcon = async () => {
-      const settings = await browser.storage.sync.get("searchSettings");
-      const showIcon = settings.searchSettings?.showFloatingIcon ?? true;
+      const settings = await searchSettingsStore.getValue();
+      const showIcon = settings.showFloatingIcon ?? true;
 
       if (!showIcon) return;
 
