@@ -58,9 +58,8 @@ SamAI is free and open-source, but your support helps us build better features:
 
 ### 💝 **Donations**
 Support ongoing development through:
-- [GitHub Sponsors](https://github.com/sponsors/your-repo)
-- [Ko-fi](https://ko-fi.com/your-account)
-- [Patreon](https://patreon.com/your-account)
+- [GitHub Sponsors](https://github.com/sponsors/DraconDev)
+- [Ko-fi](https://ko-fi.com/adamdracon)
 
 ### ⭐ **Premium Features** (Coming Soon)
 - Advanced UI themes and customization
@@ -92,8 +91,8 @@ Support ongoing development through:
 2. **Manual Installation**
    ```bash
    # Clone the repository
-   git clone https://github.com/your-repo/sam-ai.git
-   cd sam-ai
+   git clone https://github.com/DraconDev/SamAI.git
+   cd SamAI
 
    # Install dependencies
    bun install
@@ -166,7 +165,7 @@ We welcome contributions! SamAI is community-driven and transparent.
 ### **Development Setup**
 ```bash
 # Fork and clone
-git clone https://github.com/your-fork/sam-ai.git
+git clone https://github.com/DraconDev/SamAI.git
 
 # Install dependencies
 bun install
