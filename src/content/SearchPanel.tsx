@@ -120,18 +120,18 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       }}
       className="animate-slide-in"
     >
-      {/* Tab Navigation */}
-      <div className="flex gap-2 mb-6 p-1 bg-[#0D0E16]/50 rounded-xl border border-[#2E2F3E]/50" style={{ backdropFilter: 'blur(8px)' }}>
+      {/* Tab Navigation - Modern Design */}
+      <div className="flex gap-2 mb-6 p-2 bg-gradient-to-br from-[#0D0E16] to-[#1a1b2e] rounded-2xl border border-[#2E2F3E] shadow-2xl">
         {/* Search Tab */}
         <button
           onClick={() => setActiveTab('search')}
-          className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
             activeTab === 'search'
-              ? 'bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white shadow-lg shadow-[#4f46e5]/30'
-              : 'text-gray-400 hover:text-gray-200 hover:bg-[#1E1F2E]/50'
+              ? 'bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#818cf8] text-white shadow-xl shadow-[#4f46e5]/50 scale-[1.02]'
+              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
           }`}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"/>
             <path d="m21 21-4.35-4.35"/>
           </svg>
@@ -141,13 +141,13 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {/* Scrape Tab */}
         <button
           onClick={() => setActiveTab('scrape')}
-          className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
             activeTab === 'scrape'
-              ? 'bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] text-white shadow-lg shadow-[#3b82f6]/30'
-              : 'text-gray-400 hover:text-gray-200 hover:bg-[#1E1F2E]/50'
+              ? 'bg-gradient-to-r from-[#3b82f6] via-[#2563eb] to-[#60a5fa] text-white shadow-xl shadow-[#3b82f6]/50 scale-[1.02]'
+              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
           }`}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
             <polyline points="14 2 14 8 20 8"/>
           </svg>
@@ -157,13 +157,13 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {/* Form Tab */}
         <button
           onClick={() => setActiveTab('form')}
-          className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
             activeTab === 'form'
-              ? 'bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa] text-white shadow-lg shadow-[#8b5cf6]/30'
-              : 'text-gray-400 hover:text-gray-200 hover:bg-[#1E1F2E]/50'
+              ? 'bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#a78bfa] text-white shadow-xl shadow-[#8b5cf6]/50 scale-[1.02]'
+              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
           }`}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
           </svg>
@@ -173,13 +173,13 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {/* Image Tab */}
         <button
           onClick={() => setActiveTab('image')}
-          className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
             activeTab === 'image'
-              ? 'bg-gradient-to-r from-[#ec4899] to-[#f472b6] text-white shadow-lg shadow-[#ec4899]/30'
-              : 'text-gray-400 hover:text-gray-200 hover:bg-[#1E1F2E]/50'
+              ? 'bg-gradient-to-r from-[#ec4899] via-[#db2777] to-[#f472b6] text-white shadow-xl shadow-[#ec4899]/50 scale-[1.02]'
+              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
           }`}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
             <circle cx="8.5" cy="8.5" r="1.5"/>
             <polyline points="21 15 16 10 5 21"/>
@@ -191,51 +191,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       {/* Tab Content */}
       {activeTab === 'search' && (
       <>
-      <div style={{ marginBottom: "32px" }}>
-        <div style={{ 
-          display: "flex", 
-          alignItems: "center", 
-          gap: "12px",
-          marginBottom: "16px" 
-        }}>
-          <div style={{
-            width: "32px",
-            height: "32px",
-            borderRadius: "8px",
-            background: "linear-gradient(135deg, #4f46e5, #818cf8)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 17L12 22L22 17" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 12L12 17L22 12" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <h3
-            style={{
-              margin: 0,
-              fontSize: "24px",
-              fontWeight: 700,
-              background: "linear-gradient(90deg, #fff, #94a3b8)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            SamAI
-          </h3>
-        </div>
-        <div
-          style={{
-            height: "1px",
-            width: "100%",
-            background: "linear-gradient(90deg, rgba(79, 70, 229, 0.5), transparent)",
-          }}
-        />
-      </div>
-
-      <div style={{ minHeight: "200px" }}>
+      <div style={{ marginBottom: "20px" }}>
         {response ? (
           outputFormat === "html" ? (
             <div
