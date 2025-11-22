@@ -120,16 +120,58 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       }}
       className="animate-slide-in"
     >
-      {/* Tab Navigation - Modern Design */}
-      <div className="flex gap-2 mb-6 p-2 bg-gradient-to-br from-[#0D0E16] to-[#1a1b2e] rounded-2xl border border-[#2E2F3E] shadow-2xl">
+      {/* Tab Navigation - Inline Styled */}
+      <div style={{
+        display: 'flex',
+        gap: '8px',
+        marginBottom: '24px',
+        padding: '12px',
+        background: 'linear-gradient(135deg, #0D0E16, #1a1b2e)',
+        borderRadius: '16px',
+        border: '1px solid #2E2F3E',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+      }}>
         {/* Search Tab */}
         <button
           onClick={() => setActiveTab('search')}
-          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
-            activeTab === 'search'
-              ? 'bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#818cf8] text-white shadow-xl shadow-[#4f46e5]/50 scale-[1.02]'
-              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
-          }`}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+            padding: '14px 20px',
+            borderRadius: '12px',
+            fontWeight: 700,
+            fontSize: '14px',
+            border: activeTab === 'search' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
+            background: activeTab === 'search' 
+              ? 'linear-gradient(90deg, #4f46e5, #6366f1, #818cf8)'
+              : 'rgba(30, 31, 46, 0.4)',
+            color: activeTab === 'search' ? 'white' : '#9ca3af',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: activeTab === 'search' 
+              ? '0 20px 25px -5px rgba(79, 70, 229, 0.5), 0 10px 10px -5px rgba(79, 70, 229, 0.3)'
+              : 'none',
+            transform: activeTab === 'search' ? 'scale(1.02)' : 'scale(1)',
+          }}
+          onMouseEnter={(e) => {
+            if (activeTab !== 'search') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
+              e.currentTarget.style.color = '#d1d5db';
+              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+              e.currentTarget.style.transform = 'scale(1.01)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (activeTab !== 'search') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
+              e.currentTarget.style.color = '#9ca3af';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"/>
@@ -141,11 +183,44 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {/* Scrape Tab */}
         <button
           onClick={() => setActiveTab('scrape')}
-          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
-            activeTab === 'scrape'
-              ? 'bg-gradient-to-r from-[#3b82f6] via-[#2563eb] to-[#60a5fa] text-white shadow-xl shadow-[#3b82f6]/50 scale-[1.02]'
-              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
-          }`}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+            padding: '14px 20px',
+            borderRadius: '12px',
+            fontWeight: 700,
+            fontSize: '14px',
+            border: activeTab === 'scrape' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
+            background: activeTab === 'scrape'
+              ? 'linear-gradient(90deg, #3b82f6, #2563eb, #60a5fa)'
+              : 'rgba(30, 31, 46, 0.4)',
+            color: activeTab === 'scrape' ? 'white' : '#9ca3af',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: activeTab === 'scrape'
+              ? '0 20px 25px -5px rgba(59, 130, 246, 0.5), 0 10px 10px -5px rgba(59, 130, 246, 0.3)'
+              : 'none',
+            transform: activeTab === 'scrape' ? 'scale(1.02)' : 'scale(1)',
+          }}
+          onMouseEnter={(e) => {
+            if (activeTab !== 'scrape') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
+              e.currentTarget.style.color = '#d1d5db';
+              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+              e.currentTarget.style.transform = 'scale(1.01)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (activeTab !== 'scrape') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
+              e.currentTarget.style.color = '#9ca3af';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -157,11 +232,44 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {/* Form Tab */}
         <button
           onClick={() => setActiveTab('form')}
-          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
-            activeTab === 'form'
-              ? 'bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#a78bfa] text-white shadow-xl shadow-[#8b5cf6]/50 scale-[1.02]'
-              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
-          }`}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+            padding: '14px 20px',
+            borderRadius: '12px',
+            fontWeight: 700,
+            fontSize: '14px',
+            border: activeTab === 'form' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
+            background: activeTab === 'form'
+              ? 'linear-gradient(90deg, #8b5cf6, #7c3aed, #a78bfa)'
+              : 'rgba(30, 31, 46, 0.4)',
+            color: activeTab === 'form' ? 'white' : '#9ca3af',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: activeTab === 'form'
+              ? '0 20px 25px -5px rgba(139, 92, 246, 0.5), 0 10px 10px -5px rgba(139, 92, 246, 0.3)'
+              : 'none',
+            transform: activeTab === 'form' ? 'scale(1.02)' : 'scale(1)',
+          }}
+          onMouseEnter={(e) => {
+            if (activeTab !== 'form') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
+              e.currentTarget.style.color = '#d1d5db';
+              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+              e.currentTarget.style.transform = 'scale(1.01)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (activeTab !== 'form') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
+              e.currentTarget.style.color = '#9ca3af';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -173,11 +281,44 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {/* Image Tab */}
         <button
           onClick={() => setActiveTab('image')}
-          className={`flex-1 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform ${
-            activeTab === 'image'
-              ? 'bg-gradient-to-r from-[#ec4899] via-[#db2777] to-[#f472b6] text-white shadow-xl shadow-[#ec4899]/50 scale-[1.02]'
-              : 'bg-[#1E1F2E]/40 text-gray-500 hover:text-gray-300 hover:bg-[#1E1F2E]/80 hover:shadow-lg hover:scale-[1.01] border border-[#2E2F3E]/30'
-          }`}
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+            padding: '14px 20px',
+            borderRadius: '12px',
+            fontWeight: 700,
+            fontSize: '14px',
+            border: activeTab === 'image' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
+            background: activeTab === 'image'
+              ? 'linear-gradient(90deg, #ec4899, #db2777, #f472b6)'
+              : 'rgba(30, 31, 46, 0.4)',
+            color: activeTab === 'image' ? 'white' : '#9ca3af',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: activeTab === 'image'
+              ? '0 20px 25px -5px rgba(236, 72, 153, 0.5), 0 10px 10px -5px rgba(236, 72, 153, 0.3)'
+              : 'none',
+            transform: activeTab === 'image' ? 'scale(1.02)' : 'scale(1)',
+          }}
+          onMouseEnter={(e) => {
+            if (activeTab !== 'image') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
+              e.currentTarget.style.color = '#d1d5db';
+              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+              e.currentTarget.style.transform = 'scale(1.01)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (activeTab !== 'image') {
+              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
+              e.currentTarget.style.color = '#9ca3af';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
+            }
+          }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
