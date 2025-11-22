@@ -39,14 +39,16 @@ export interface SearchSettingsStore {
   searchActive: boolean;
   promptStyle: PromptStyle;
   continuePreviousChat: boolean;
-  outputFormat: OutputFormat; // Add outputFormat
+  outputFormat: OutputFormat;
+  showFloatingIcon: boolean; // Add showFloatingIcon
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
   searchActive: true,
   promptStyle: "short",
   continuePreviousChat: false,
-  outputFormat: "text", // Default to text
+  outputFormat: "text",
+  showFloatingIcon: true, // Default to true
 };
 
 export const PROMPT_TEMPLATES = {
