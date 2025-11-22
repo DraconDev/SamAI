@@ -118,6 +118,10 @@ export async function addPageAssistantText(text: string) {
     texts: { ...store.texts, pageAssistantTexts },
   });
   return pageAssistantTexts;
+
+}
+
+
 export interface PageContextStore {
   content: string;
   url: string;
@@ -137,4 +141,4 @@ export const defaultPageContextStore: PageContextStore = {
 export const pageContextStore = storage.defineItem<PageContextStore>("local:pageContext", {
   fallback: defaultPageContextStore,
 });
-}
+
