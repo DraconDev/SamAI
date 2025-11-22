@@ -13,7 +13,8 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   const panelRef = useRef<HTMLDivElement>(null);
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [isScraping, setIsScraping] = useState(false);
-  const [activeTab, setActiveTab] = useState<'search' | 'scrape' | 'form' | 'image'>('search');
+  const [isSummarizing, setIsSummarizing] = useState(false);
+  const [activeTab, setActiveTab] = useState<'search' | 'scrape' | 'chat' | 'sum' | 'form' | 'image'>('search');
 
   // Close panel when clicking outside
   useEffect(() => {
@@ -97,6 +98,38 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   // Handle Image button - opens Google AI Studio
   const handleImage = () => {
     window.open('https://aistudio.google.com/prompts/new_chat?model=gemini-2.5-flash-image&utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=', '_blank');
+  };
+
+  // Handle Chat button - opens chat with page as context
+  const handleChat = async () => {
+    try {
+      const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+      if (tabs[0]?.id) {
+        const response = await browser.tabs.sendMessage(tabs[0].id, {
+          type: 'getPageContent',
+          outputFormat: outputFormat
+        }) as { content?: string };
+        
+        if (response?.content) {
+          await browser.storage.local.set({
+            pageContext: {
+              content: response.content,
+              outputFormat: outputFormat
+            }
+          });
+          await browser.tabs.create({ url: 'chat.html' });
+        }
+      }
+    } catch (error) {
+      console.error('Error opening chat:', error);
+    }
+  };
+
+  // Handle Sum button - summarize page and display in sidebar
+  const handleSummarize = async () => {
+    setIsSummarizing(true);
+    setActiveTab('sum');
+    // Note: Summary will be triggered when the Sum tab is active
   };
 
   return (
