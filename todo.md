@@ -10,10 +10,6 @@ This roadmap outlines the complete development strategy for SamAI, transforming 
 
 ---
 
-dont show am ai on image routes on google 
-
-fix the bug where if we sum a page, trying to chat with with opens a new empty chat instead of using the existing one
-
 ## 📅 Phase 1: Foundation & Core Enhancement (Weeks 1-4)
 
 ### 🔧 Technical Foundation
