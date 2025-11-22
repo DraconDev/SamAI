@@ -408,7 +408,6 @@ export default function App() {
                 type="button"
                 className="flex-1 p-3 bg-[#2E2F3E]/80 text-gray-200 font-semibold rounded-xl hover:bg-[#3E3F4E] hover:text-white hover:shadow-lg hover:shadow-[#818cf8]/20 focus:outline-none focus:ring-2 focus:ring-[#818cf8]/50 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 transform hover:scale-[0.99] active:scale-[0.97] border border-[#3E3F4E]/50"
               >
-              >
                 Summarize
               </button>
             </div>
