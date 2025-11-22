@@ -94,9 +94,9 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
     alert('Form filling feature coming soon!');
   };
 
-  // Handle Image button - placeholder for now  
+  // Handle Image button - opens Google AI Studio
   const handleImage = () => {
-    alert('Image generation options coming soon!');
+    window.open('https://aistudio.google.com/prompts/new_chat?model=gemini-2.5-flash-image&utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=', '_blank');
   };
 
   return (
@@ -123,9 +123,9 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       {/* Tab Navigation - Inline Styled */}
       <div style={{
         display: 'flex',
-        gap: '8px',
+        gap: '6px',
         marginBottom: '24px',
-        padding: '12px',
+        padding: '10px',
         background: 'linear-gradient(135deg, #0D0E16, #1a1b2e)',
         borderRadius: '16px',
         border: '1px solid #2E2F3E',
@@ -139,8 +139,8 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '10px',
-            padding: '14px 20px',
+            gap: '8px',
+            padding: '12px 16px',
             borderRadius: '12px',
             fontWeight: 700,
             fontSize: '14px',
@@ -188,8 +188,8 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '10px',
-            padding: '14px 20px',
+            gap: '8px',
+            padding: '12px 16px',
             borderRadius: '12px',
             fontWeight: 700,
             fontSize: '14px',
