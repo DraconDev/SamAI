@@ -1,10 +1,9 @@
-```typescript
+import { generateFormResponse } from "@/utils/ai/gemini";
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import { useEffect, useRef, useState } from "react";
 import browser from "webextension-polyfill";
-import { generateFormResponse } from "@/utils/ai/gemini";
 
 interface SearchPanelProps {
   response: string | null;
