@@ -12,7 +12,7 @@ This roadmap outlines the complete development strategy for SamAI, transforming 
 
 add sam popup should be closed after use 
 
-add 
+add form filling feature, the reference has an extension that does it that coudl be a good starting point
 
 ## 📅 Phase 1: Foundation & Core Enhancement (Weeks 1-4)
 
