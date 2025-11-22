@@ -410,7 +410,23 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         </div>
       )}
 
-      {/* Chat Tab Content */}\n      {activeTab === 'chat' && (\n        <div style={{ padding: '24px', textAlign: 'center' }}>\n          <div style={{\n            padding: '48px 24px',\n            background: 'rgba(30, 31, 46, 0.8)',\n            borderRadius: '16px',\n            border: '1px solid rgba(46, 47, 62, 0.6)'\n          }}>\n            <svg style={{ width: '64px', height: '64px', margin: '0 auto 24px', color: '#34d399' }} fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n              <path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth=\"2\" d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"/>\n            </svg>\n            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '12px', background: 'linear-gradient(90deg, #34d399, #10b981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>\n              Chat Opened!\n            </h3>\n            <p style={{ color: '#94a3b8', fontSize: '14px' }}>\n              A new chat tab has been opened with page context.\n            </p>\n          </div>\n        </div>\n      )}\n\n      {/* Sum Tab Content */}\n      {activeTab === 'sum' && (\n        <div style={{ padding: '24px' }}>\n          <div style={{\n            padding: '24px',\n            background: 'rgba(30, 31, 46, 0.8)',\n            borderRadius: '16px',\n            border: '1px solid rgba(46, 47, 62, 0.6)'\n          }}>\n            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '16px', background: 'linear-gradient(90deg, #fbbf24, #f59e0b)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>\n              Page Summary\n            </h3>\n            {isSummarizing ? (\n              <div style={{ textAlign: 'center', padding: '32px 0' }}>\n                <div style={{\n                  width: '48px',\n                  height: '48px',\n                  margin: '0 auto 16px',\n                  borderRadius: '50%',\n                  background: 'linear-gradient(135deg, #f59e0b, #fbbf24)',\n                  filter: 'blur(16px)',\n                  animation: 'pulse-glow 2s infinite'\n                }}></div>\n                <p style={{ color: '#94a3b8', fontSize: '14px' }}>Summarizing page...</p>\n              </div>\n            ) : (\n              <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.6' }}>\n                Page summarization feature coming soon! This will extract and summarize the optimized HTML content of the page.\n              </p>\n            )}\n          </div>\n        </div>\n      )}\n\n      {/* Form Tab Content */}
+      {/* Chat Tab Content - Coming soon placeholder */}
+      {activeTab === 'chat' && (
+        <div style={{ padding: '24px', textAlign: 'center' }}>
+          <p style={{ color: '#34d399', fontSize: '16px', fontWeight: 600 }}>Chat opened in new tab!</p>
+        </div>
+      )}
+
+      {/* Sum Tab Content - Coming soon placeholder */}
+      {activeTab === 'sum' && (
+        <div style={{ padding: '24px', textAlign: 'center' }}>
+          <p style={{ color: '#fbbf24', fontSize: '16px', fontWeight: 600 }}>
+            {isSummarizing ? 'Summarizing...' : 'Summary feature coming soon!'}
+          </p>
+        </div>
+      )}
+
+      {/* Form Tab Content */}
       {activeTab === 'form' && (
         <div className="space-y-4">
           <div className="p-6 bg-[#1E1F2E]/80 rounded-xl border border-[#2E2F3E]/60">
