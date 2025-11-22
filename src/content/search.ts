@@ -115,16 +115,40 @@ function injectStyles() {
   document.head.appendChild(styleTag);
 }
 
-export async function showSidePanel(response: string | null) {
-  // If a panel already exists, close it and exit (toggle behavior)
-  if (samaiRoot) {
-    samaiRoot.unmount();
-    samaiRoot = null;
+export async function showSidePanel(response: string | null, toggleIfOpen: boolean = false) {
+  // If toggle is requested and panel exists, close it and return
+  if (toggleIfOpen && samaiPanelContainer) {
+    if (samaiRoot) {
+      samaiRoot.unmount();
+      samaiRoot = null;
+    }
+    if (samaiPanelContainer) {
+      samaiPanelContainer.remove();
+      samaiPanelContainer = null;
+    }
+    return;
   }
-  if (samaiPanelContainer) {
-    samaiPanelContainer.remove();
-    samaiPanelContainer = null;
-    // If we just closed an existing panel, do not reopen a new one
+
+  // If panel already exists, just update the content
+  if (samaiRoot && samaiPanelContainer) {
+    const settings = await searchSettingsStore.getValue();
+    const outputFormat = settings.outputFormat;
+    samaiRoot.render(
+      React.createElement(SearchPanel, {
+        response,
+        outputFormat,
+        onClose: () => {
+          if (samaiRoot) {
+            samaiRoot.unmount();
+            samaiRoot = null;
+          }
+          if (samaiPanelContainer) {
+            samaiPanelContainer.remove();
+            samaiPanelContainer = null;
+          }
+        },
+      })
+    );
     return;
   }
 
