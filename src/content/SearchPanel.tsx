@@ -153,9 +153,10 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       }}
       className="animate-slide-in"
     >
-      {/* Tab Navigation - Inline Styled */}
+      {/* Tab Navigation - 2 Row Grid */}
       <div style={{
-        display: 'flex',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
         gap: '6px',
         marginBottom: '24px',
         padding: '10px',
@@ -164,202 +165,109 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         border: '1px solid #2E2F3E',
         boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
       }}>
-        {/* Search Tab */}
-        <button
-          onClick={() => setActiveTab('search')}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            padding: '12px 16px',
-            borderRadius: '12px',
-            fontWeight: 700,
-            fontSize: '14px',
-            border: activeTab === 'search' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
-            background: activeTab === 'search' 
-              ? 'linear-gradient(90deg, #4f46e5, #6366f1, #818cf8)'
-              : 'rgba(30, 31, 46, 0.4)',
-            color: activeTab === 'search' ? 'white' : '#9ca3af',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: activeTab === 'search' 
-              ? '0 20px 25px -5px rgba(79, 70, 229, 0.5), 0 10px 10px -5px rgba(79, 70, 229, 0.3)'
-              : 'none',
-            transform: activeTab === 'search' ? 'scale(1.02)' : 'scale(1)',
-          }}
-          onMouseEnter={(e) => {
-            if (activeTab !== 'search') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
-              e.currentTarget.style.color = '#d1d5db';
-              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
-              e.currentTarget.style.transform = 'scale(1.01)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (activeTab !== 'search') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
-              e.currentTarget.style.color = '#9ca3af';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.transform = 'scale(1)';
-            }
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.35-4.35"/>
-          </svg>
-          <span>Search</span>
-        </button>
-
-        {/* Scrape Tab */}
-        <button
-          onClick={() => setActiveTab('scrape')}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            padding: '12px 16px',
-            borderRadius: '12px',
-            fontWeight: 700,
-            fontSize: '14px',
-            border: activeTab === 'scrape' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
-            background: activeTab === 'scrape'
-              ? 'linear-gradient(90deg, #3b82f6, #2563eb, #60a5fa)'
-              : 'rgba(30, 31, 46, 0.4)',
-            color: activeTab === 'scrape' ? 'white' : '#9ca3af',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: activeTab === 'scrape'
-              ? '0 20px 25px -5px rgba(59, 130, 246, 0.5), 0 10px 10px -5px rgba(59, 130, 246, 0.3)'
-              : 'none',
-            transform: activeTab === 'scrape' ? 'scale(1.02)' : 'scale(1)',
-          }}
-          onMouseEnter={(e) => {
-            if (activeTab !== 'scrape') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
-              e.currentTarget.style.color = '#d1d5db';
-              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
-              e.currentTarget.style.transform = 'scale(1.01)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (activeTab !== 'scrape') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
-              e.currentTarget.style.color = '#9ca3af';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.transform = 'scale(1)';
-            }
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-          <span>Scrape</span>
-        </button>
-
-        {/* Form Tab */}
-        <button
-          onClick={() => setActiveTab('form')}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
-            padding: '14px 20px',
-            borderRadius: '12px',
-            fontWeight: 700,
-            fontSize: '14px',
-            border: activeTab === 'form' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
-            background: activeTab === 'form'
-              ? 'linear-gradient(90deg, #8b5cf6, #7c3aed, #a78bfa)'
-              : 'rgba(30, 31, 46, 0.4)',
-            color: activeTab === 'form' ? 'white' : '#9ca3af',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: activeTab === 'form'
-              ? '0 20px 25px -5px rgba(139, 92, 246, 0.5), 0 10px 10px -5px rgba(139, 92, 246, 0.3)'
-              : 'none',
-            transform: activeTab === 'form' ? 'scale(1.02)' : 'scale(1)',
-          }}
-          onMouseEnter={(e) => {
-            if (activeTab !== 'form') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
-              e.currentTarget.style.color = '#d1d5db';
-              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
-              e.currentTarget.style.transform = 'scale(1.01)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (activeTab !== 'form') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
-              e.currentTarget.style.color = '#9ca3af';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.transform = 'scale(1)';
-            }
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-          </svg>
-          <span>Form</span>
-        </button>
-
-        {/* Image Tab */}
-        <button
-          onClick={() => setActiveTab('image')}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
-            padding: '14px 20px',
-            borderRadius: '12px',
-            fontWeight: 700,
-            fontSize: '14px',
-            border: activeTab === 'image' ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
-            background: activeTab === 'image'
-              ? 'linear-gradient(90deg, #ec4899, #db2777, #f472b6)'
-              : 'rgba(30, 31, 46, 0.4)',
-            color: activeTab === 'image' ? 'white' : '#9ca3af',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: activeTab === 'image'
-              ? '0 20px 25px -5px rgba(236, 72, 153, 0.5), 0 10px 10px -5px rgba(236, 72, 153, 0.3)'
-              : 'none',
-            transform: activeTab === 'image' ? 'scale(1.02)' : 'scale(1)',
-          }}
-          onMouseEnter={(e) => {
-            if (activeTab !== 'image') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
-              e.currentTarget.style.color = '#d1d5db';
-              e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
-              e.currentTarget.style.transform = 'scale(1.01)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (activeTab !== 'image') {
-              e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
-              e.currentTarget.style.color = '#9ca3af';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.transform = 'scale(1)';
-            }
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
-          </svg>
-          <span>Image</span>
-        </button>
+        {/* Row 1 - Main Actions */}
+        {[
+          { id: 'search' as const, label: 'Search', gradient: 'linear-gradient(90deg, #4f46e5, #6366f1, #818cf8)', shadow: 'rgba(79, 70, 229, 0.5)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> },
+          { id: 'scrape' as const, label: 'Scrape', gradient: 'linear-gradient(90deg, #3b82f6, #2563eb, #60a5fa)', shadow: 'rgba(59, 130, 246, 0.5)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> },
+          { id: 'chat' as const, label: 'Chat', gradient: 'linear-gradient(90deg, #10b981, #059669, #34d399)', shadow: 'rgba(16, 185, 129, 0.5)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
+          { id: 'sum' as const, label: 'Sum', gradient: 'linear-gradient(90deg, #f59e0b, #d97706, #fbbf24)', shadow: 'rgba(245, 158, 11, 0.5)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg> },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => {
+              setActiveTab(tab.id);
+              if (tab.id === 'chat') handleChat();
+              if (tab.id === 'sum') handleSummarize();
+            }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              padding: '10px 12px',
+              borderRadius: '12px',
+              fontWeight: 700,
+              fontSize: '13px',
+              border: activeTab === tab.id ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
+              background: activeTab === tab.id ? tab.gradient : 'rgba(30, 31, 46, 0.4)',
+              color: activeTab === tab.id ? 'white' : '#9ca3af',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === tab.id ? `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}` : 'none',
+              transform: activeTab === tab.id ? 'scale(1.02)' : 'scale(1)',
+            }}
+            onMouseEnter={(e) => {
+              if (activeTab !== tab.id) {
+                e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
+                e.currentTarget.style.color = '#d1d5db';
+                e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+                e.currentTarget.style.transform = 'scale(1.01)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== tab.id) {
+                e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
+                e.currentTarget.style.color = '#9ca3af';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'scale(1)';
+              }
+            }}
+          >
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
+        ))}
+        
+        {/* Row 2 - Secondary Actions */}
+        {[
+          { id: 'form' as const, label: 'Form', gradient: 'linear-gradient(90deg, #8b5cf6, #7c3aed, #a78bfa)', shadow: 'rgba(139, 92, 246, 0.5)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> },
+          { id: 'image' as const, label: 'Image', gradient: 'linear-gradient(90deg, #ec4899, #db2777, #f472b6)', shadow: 'rgba(236, 72, 153, 0.5)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => {
+              if (tab.id === 'form') { handleForm(); setActiveTab(tab.id); }
+              if (tab.id === 'image') handleImage();
+            }}
+            style={{
+              gridColumn: tab.id === 'form' ? 'span 2' : 'span 2',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              padding: '10px 12px',
+              borderRadius: '12px',
+              fontWeight: 700,
+              fontSize: '13px',
+              border: activeTab === tab.id ? 'none' : '1px solid rgba(46, 47, 62, 0.3)',
+              background: activeTab === tab.id ? tab.gradient : 'rgba(30, 31, 46, 0.4)',
+              color: activeTab === tab.id ? 'white' : '#9ca3af',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === tab.id ? `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}` : 'none',
+              transform: activeTab === tab.id ? 'scale(1.02)' : 'scale(1)',
+            }}
+            onMouseEnter={(e) => {
+              if (activeTab !== tab.id) {
+                e.currentTarget.style.background = 'rgba(30, 31, 46, 0.8)';
+                e.currentTarget.style.color = '#d1d5db';
+                e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+                e.currentTarget.style.transform = 'scale(1.01)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== tab.id) {
+                e.currentTarget.style.background = 'rgba(30, 31, 46, 0.4)';
+                e.currentTarget.style.color = '#9ca3af';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'scale(1)';
+              }
+            }}
+          >
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
+        ))}
       </div>
 
       {/* Tab Content */}
