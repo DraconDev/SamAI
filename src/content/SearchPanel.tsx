@@ -1,7 +1,13 @@
+```typescript
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import browser from "webextension-polyfill";
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import { useEffect, useRef, useState } from "react";
+import { generateFormResponse } from "@/utils/ai/gemini";
 
 interface SearchPanelProps {
   response: string | null;
@@ -14,6 +20,8 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [isScraping, setIsScraping] = useState(false);
   const [isSummarizing, setIsSummarizing] = useState(false);
+  const [summary, setSummary] = useState<string>('');
+  const [summaryError, setSummaryError] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'search' | 'scrape' | 'chat' | 'sum' | 'form' | 'image'>('search');
 
   // Close panel when clicking outside
@@ -129,7 +137,42 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
   const handleSummarize = async () => {
     setIsSummarizing(true);
     setActiveTab('sum');
-    // Note: Summary will be triggered when the Sum tab is active
+    setSummaryError('');
+    setSummary('');
+    
+    try {
+      // 1. Get page content
+      const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+      if (!tabs[0]?.id) throw new Error('No active tab found');
+      
+      const response = await browser.tabs.sendMessage(tabs[0].id, {
+        type: 'getPageContent',
+        outputFormat: 'text' // Always use text for summarization
+      }) as { content?: string };
+      
+      if (!response?.content) throw new Error('No content extracted from page');
+      
+      // 2. Truncate content to reasonable size (about 6000 words)
+      const truncatedContent = response.content.slice(0, 24000);
+      
+      // 3. Call AI to generate summary
+      const prompt = `Please provide a clear and concise summary of the following web page content. Focus on the main points and key information:\n\n${truncatedContent}`;
+      
+      const summaryText = await generateFormResponse(prompt);
+      
+      if (!summaryText) {
+        throw new Error('No summary received from AI');
+      }
+      
+      setSummary(summaryText);
+      
+    } catch (error) {
+      console.error('Error summarizing page:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to summarize page';
+      setSummaryError(errorMessage);
+    } finally {
+      setIsSummarizing(false);
+    }
   };
 
   return (
