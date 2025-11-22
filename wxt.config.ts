@@ -28,6 +28,6 @@ export default defineConfig({
   },
   modules: ["@wxt-dev/module-react"],
   runner: {
-    startUrls: ["https://www.google.com"],
+    startUrls: ["https://www.google.com/search?q=test"],
   },
 });
