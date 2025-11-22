@@ -12,6 +12,7 @@ interface SearchPanelProps {
 export default function SearchPanel({ response, onClose, outputFormat }: SearchPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [isApiKeySet, setIsApiKeySet] = useState(false);
+  const [isScraping, setIsScraping] = useState(false);
 
   // Close panel when clicking outside
   useEffect(() => {
@@ -52,6 +53,51 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
     return () => unsubscribe();
   }, []);
 
+  // Handle Scrape button - extract page content and open in chat
+  const handleScrape = async () => {
+    setIsScraping(true);
+    try {
+      // Send message to content script to extract page content
+      const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+      if (tabs[0]?.id) {
+        const response = await browser.tabs.sendMessage(tabs[0].id, {
+          type: 'getPageContent',
+          outputFormat: outputFormat
+        });
+        
+        if (response?.content) {
+          // Store content in pageContextStore
+          await browser.storage.local.set({
+            pageContext: {
+              content: response.content,
+              outputFormat: outputFormat
+            }
+          });
+          
+          // Open chat page
+          await browser.tabs.create({ url: 'chat.html' });
+          
+          // Close sidebar
+          onClose();
+        }
+      }
+    } catch (error) {
+      console.error('Error scraping page:', error);
+    } finally {
+      setIsScraping(false);
+    }
+  };
+
+  // Handle Form button - placeholder for now
+  const handleForm = () => {
+    alert('Form filling feature coming soon!');
+  };
+
+  // Handle Image button - placeholder for now  
+  const handleImage = () => {
+    alert('Image generation options coming soon!');
+  };
+
   return (
     <div
       ref={panelRef}
@@ -73,6 +119,60 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
       }}
       className="animate-slide-in"
     >
+      {/* Action Button Bar */}
+      <div className="flex gap-3 mb-6 pb-4 border-b border-[#2E2F3E]/50">
+        {/* Scrape Button */}
+        <button
+          onClick={handleScrape}
+          disabled={isScraping}
+          className="flex-1 flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-[#3b82f6]/20 to-[#60a5fa]/10 border border-[#3b82f6]/30 hover:border-[#3b82f6]/50 hover:shadow-lg hover:shadow-[#3b82f6]/20 transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          <span className="text-xs font-semibold text-[#60a5fa]">
+            {isScraping ? 'Scraping...' : 'Scrape'}
+          </span>
+        </button>
+
+        {/* Form Button */}
+        <button
+          onClick={handleForm}
+          className="flex-1 flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-[#8b5cf6]/20 to-[#a78bfa]/10 border border-[#8b5cf6]/30 hover:border-[#8b5cf6]/50 hover:shadow-lg hover:shadow-[#8b5cf6]/20 transition-all duration-300 hover:scale-[1.02]"
+          style={{
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          <span className="text-xs font-semibold text-[#a78bfa]">Form</span>
+        </button>
+
+        {/* Image Button */}
+        <button
+          onClick={handleImage}
+          className="flex-1 flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-[#ec4899]/20 to-[#f472b6]/10 border border-[#ec4899]/30 hover:border-[#ec4899]/50 hover:shadow-lg hover:shadow-[#ec4899]/20 transition-all duration-300 hover:scale-[1.02]"
+          style={{
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f472b6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <span className="text-xs font-semibold text-[#f472b6]">Image</span>
+        </button>
+      </div>
+
       <div style={{ marginBottom: "32px" }}>
         <div style={{ 
           display: "flex", 
