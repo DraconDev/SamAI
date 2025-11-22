@@ -1,16 +1,16 @@
 /// <reference types="wxt/browser" />
 import { generateFormResponse } from "@/utils/ai/gemini";
-import React, { useState, useEffect } from "react";
-import {
-  addChatMessage,
-  chatStore,
-  searchSettingsStore,
-  lastUsedTextsStore,
-  addInputText,
-  addPageAssistantText,
-  pageContextStore,
-} from "@/utils/store";
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+import {
+    addChatMessage,
+    addInputText,
+    addPageAssistantText,
+    chatStore,
+    lastUsedTextsStore,
+    pageContextStore,
+    searchSettingsStore,
+} from "@/utils/store";
+import React, { useEffect, useState } from "react";
 
 interface InputInfo {
   value: string;
@@ -164,6 +164,10 @@ export default function App() {
 
       console.log("[Page Assistant] Adding messages to chat...");
       
+      // Check if we are on the same page as the previous context
+      const previousContext = await pageContextStore.getValue();
+      const isSamePage = previousContext.url === window.location.href;
+
       // Store page context for follow-up questions
       await pageContextStore.setValue({
         content: contentToAnalyze,
@@ -174,9 +178,12 @@ export default function App() {
       });
       const settings = await searchSettingsStore.getValue();
 
-      if (!settings.continuePreviousChat) {
-        console.log("[Page Assistant] Starting fresh chat...");
+      // Only clear chat if we are NOT on the same page AND continuePreviousChat is false
+      if (!settings.continuePreviousChat && !isSamePage) {
+        console.log("[Page Assistant] Starting fresh chat (new page context)...");
         await chatStore.setValue({ messages: [] });
+      } else if (isSamePage) {
+        console.log("[Page Assistant] Continuing chat (same page context)...");
       }
 
       const userMessage = {
