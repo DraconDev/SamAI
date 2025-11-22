@@ -1,12 +1,9 @@
 ```typescript
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import browser from "webextension-polyfill";
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import { useEffect, useRef, useState } from "react";
+import browser from "webextension-polyfill";
 import { generateFormResponse } from "@/utils/ai/gemini";
 
 interface SearchPanelProps {
