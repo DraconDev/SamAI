@@ -240,6 +240,63 @@ export default defineContentScript({
       window.addEventListener("load", injectFloatingIcon);
     }
 
+    // Floating Icon Logic
+    const injectFloatingIcon = async () => {
+      const settings = await searchSettingsStore.getValue();
+      const showIcon = settings.showFloatingIcon ?? true;
+
+      if (!showIcon) return;
+
+      const icon = document.createElement("div");
+      icon.id = "samai-floating-icon";
+      icon.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+      Object.assign(icon.style, {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        width: "50px",
+        height: "50px",
+        borderRadius: "50%",
+        backgroundColor: "#4f46e5",
+        boxShadow: "0 4px 15px rgba(79, 70, 229, 0.4)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        zIndex: "999999",
+        transition: "all 0.3s ease",
+        opacity: "0.9",
+      });
+
+      icon.onmouseenter = () => {
+        icon.style.transform = "scale(1.1)";
+        icon.style.opacity = "1";
+      };
+      icon.onmouseleave = () => {
+        icon.style.transform = "scale(1)";
+        icon.style.opacity = "0.9";
+      };
+
+      icon.onclick = () => {
+        showSidePanel(""); 
+      };
+
+      document.body.appendChild(icon);
+    };
+
+    // Inject icon on load
+    if (document.readyState === "complete") {
+      injectFloatingIcon();
+    } else {
+      window.addEventListener("load", injectFloatingIcon);
+    }
+
     // Handle messages from the background script
     browser.runtime.onMessage.addListener(
       async (message, sender, sendResponse) => {
