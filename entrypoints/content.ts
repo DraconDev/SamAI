@@ -219,7 +219,7 @@ export default defineContentScript({
       };
 
       icon.onclick = () => {
-        showSidePanel(""); 
+        showSidePanel("", true); // Pass true to enable toggle behavior
       };
 
       document.body.appendChild(icon);
