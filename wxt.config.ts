@@ -10,6 +10,12 @@ export default defineConfig({
     version: "1.3.349",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
+    content_scripts: [
+      {
+        matches: ["*://*.google.com/*"],
+        js: ["content-scripts/content.js"],
+      },
+    ],
     icons: {
       "16": "icon/16.png",
       "32": "icon/32.png",
