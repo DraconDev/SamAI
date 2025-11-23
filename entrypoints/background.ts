@@ -78,11 +78,6 @@ export default defineBackground(() => {
     contexts: ["all"],
   });
 
-  browser.contextMenus.create({
-    id: "samai-summarize-page",
-    title: "Summarize page",
-    contexts: ["all"],
-  });
 
   // Listen for runtime messages
   browser.runtime.onMessage.addListener(
