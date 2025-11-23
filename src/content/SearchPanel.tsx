@@ -843,35 +843,35 @@ Please provide a helpful response about the user's question specifically related
         </div>
       )}
 
-      {/* Chat Tab Content - Enhanced Bottom Positioned Chat */}
+      {/* Chat Tab Content - Fixed and Improved Styling */}
       {activeTab === "chat" && (
         <div
-          className="flex flex-col bg-gradient-to-b from-[#1a1b2e]/40 to-[#0D0E16]/80 rounded-2xl border border-[#2E2F3E]/40 backdrop-blur-xl shadow-2xl"
+          className="flex flex-col overflow-hidden border shadow-2xl bg-gradient-to-b from-slate-800/90 to-slate-900/95 rounded-2xl border-slate-700/50 backdrop-blur-xl"
           style={{
             height: 'calc(100vh - 280px)',
-            background: 'linear-gradient(180deg, rgba(26, 27, 46, 0.4) 0%, rgba(13, 14, 22, 0.8) 100%)',
+            background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
             backdropFilter: 'blur(20px)',
             boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }}
         >
           {/* Chat Header */}
-          <div className="flex items-center justify-between p-4 border-b border-[#2E2F3E]/40 bg-gradient-to-r from-[#1E1F2E]/60 to-[#2a2b3e]/60 backdrop-blur-sm rounded-t-2xl">
+          <div className="flex items-center justify-between p-4 border-b border-slate-700/40 bg-gradient-to-r from-slate-800/80 to-slate-700/80 backdrop-blur-sm">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-lg shadow-green-500/30 transform rotate-3">
+              <div className="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                 </svg>
               </div>
               <div>
-                <h3 className="text-sm font-bold text-transparent bg-gradient-to-r from-[#34d399] to-[#10b981] bg-clip-text">
+                <h3 className="text-sm font-bold text-emerald-400">
                   Page Chat Assistant
                 </h3>
-                <p className="text-xs text-gray-400">Ask questions about this page</p>
+                <p className="text-xs text-slate-400">Ask questions about this page</p>
               </div>
             </div>
             {isExtractingContent && (
-              <div className="flex items-center gap-2 text-xs text-[#34d399]">
-                <div className="w-3 h-3 border border-[#34d399]/30 border-t-[#34d399] rounded-full animate-spin"></div>
+              <div className="flex items-center gap-2 text-xs text-emerald-400">
+                <div className="w-3 h-3 border rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin"></div>
                 <span className="font-medium">Reading page...</span>
               </div>
             )}
@@ -880,18 +880,18 @@ Please provide a helpful response about the user's question specifically related
           {!isApiKeySet ? (
             <div className="flex items-center justify-center flex-1 p-6">
               <div className="text-center">
-                <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[#f59e0b] to-[#fbbf24] flex items-center justify-center shadow-xl shadow-yellow-500/30">
+                <div className="flex items-center justify-center mx-auto mb-3 shadow-xl w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-400 shadow-amber-500/30">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                     <circle cx="12" cy="12" r="3" />
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                   </svg>
                 </div>
-                <h3 className="text-base font-bold mb-2 text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text">
+                <h3 className="mb-2 text-base font-bold text-amber-400">
                   API Key Required
                 </h3>
                 <button
                   onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
-                  className="px-5 py-2.5 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white font-bold rounded-xl text-xs hover:shadow-xl hover:shadow-yellow-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold rounded-xl text-xs hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   Configure
                 </button>
@@ -900,20 +900,17 @@ Please provide a helpful response about the user's question specifically related
           ) : (
             <>
               {/* Chat Messages Container - Scrollable */}
-              <div className="flex-1 p-4 space-y-4 overflow-y-auto" style={{
-                scrollbarWidth: 'thin',
-                minHeight: 0, // Important for flex scrolling
-              }}>
+              <div className="flex-1 p-4 space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
                 {chatMessages.length === 0 ? (
                   <div className="flex items-center justify-center h-full">
                     <div className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-xl shadow-green-500/30 transform rotate-3">
+                      <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 shadow-xl rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                         </svg>
                       </div>
-                      <h4 className="text-base font-bold text-[#34d399] mb-1">Chat Ready</h4>
-                      <p className="text-xs text-gray-400">Ask questions about this page</p>
+                      <h4 className="mb-1 text-base font-bold text-emerald-400">Chat Ready</h4>
+                      <p className="text-xs text-slate-400">Ask questions about this page</p>
                     </div>
                   </div>
                 ) : (
@@ -923,10 +920,10 @@ Please provide a helpful response about the user's question specifically related
                       className={`flex animate-fade-in ${message.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       <div
-                        className={`max-w-[88%] p-4 rounded-2xl shadow-xl backdrop-blur-sm border ${
+                        className={`max-w-[85%] p-4 rounded-2xl shadow-xl backdrop-blur-sm border ${
                           message.role === "user"
-                            ? "bg-gradient-to-br from-[#10b981] to-[#34d399] text-white ml-4 border-green-500/30 shadow-green-500/20"
-                            : "bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border-[#2E2F3E]/60 text-gray-100 mr-4 shadow-black/30"
+                            ? "bg-gradient-to-br from-emerald-500 to-emerald-400 text-white ml-4 border-emerald-400/30 shadow-emerald-500/20"
+                            : "bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/60 text-slate-100 mr-4 shadow-black/30"
                         }`}
                       >
                         {message.role === "user" ? (
@@ -937,7 +934,7 @@ Please provide a helpful response about the user's question specifically related
                           </div>
                         )}
                         <div className={`text-xs mt-2 opacity-70 flex items-center gap-1 ${
-                          message.role === "user" ? "text-green-100" : "text-gray-400"
+                          message.role === "user" ? "text-emerald-100" : "text-slate-400"
                         }`}>
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="12" cy="12" r="10" />
@@ -951,14 +948,14 @@ Please provide a helpful response about the user's question specifically related
                 )}
                 {(isChatLoading || isExtractingContent) && (
                   <div className="flex justify-start animate-fade-in">
-                    <div className="bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border border-[#2E2F3E]/60 p-4 rounded-2xl mr-4 shadow-xl backdrop-blur-sm">
+                    <div className="p-4 mr-4 border shadow-xl bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/60 rounded-2xl backdrop-blur-sm">
                       <div className="flex items-center space-x-3">
                         <div className="flex space-x-1">
-                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" />
-                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" style={{ animationDelay: "0.1s" }} />
-                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" style={{ animationDelay: "0.2s" }} />
+                          <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" />
+                          <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" style={{ animationDelay: "0.1s" }} />
+                          <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" style={{ animationDelay: "0.2s" }} />
                         </div>
-                        <span className="text-xs text-[#34d399] font-medium">
+                        <span className="text-xs font-medium text-emerald-400">
                           {isExtractingContent ? "Reading page content..." : "AI is thinking..."}
                         </span>
                       </div>
@@ -969,7 +966,7 @@ Please provide a helpful response about the user's question specifically related
               </div>
 
               {/* Enhanced Chat Input - Fixed at Bottom */}
-              <div className="flex-shrink-0 p-4 border-t border-[#2E2F3E]/40 bg-gradient-to-r from-[#1E1F2E]/90 to-[#2a2b3e]/90 backdrop-blur-xl rounded-b-2xl">
+              <div className="flex-shrink-0 p-4 border-t border-slate-700/40 bg-gradient-to-r from-slate-800/95 to-slate-700/95 backdrop-blur-xl">
                 <form onSubmit={handleSendChatMessage} className="space-y-3">
                   {/* Include Page Content Checkbox */}
                   <div className="flex items-center gap-2 pb-2">
@@ -978,14 +975,14 @@ Please provide a helpful response about the user's question specifically related
                       id="includePageContent"
                       checked={includePageContent}
                       onChange={(e) => setIncludePageContent(e.target.checked)}
-                      className="w-4 h-4 rounded border-[#2E2F3E] bg-[#1E1F2E] text-[#10b981] focus:ring-2 focus:ring-[#10b981]/50 cursor-pointer"
+                      className="w-4 h-4 rounded cursor-pointer border-slate-600 bg-slate-800 text-emerald-500 focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-0 focus:ring-offset-transparent"
                       style={{
                         accentColor: '#10b981',
                       }}
                     />
                     <label
                       htmlFor="includePageContent"
-                      className="text-xs text-gray-400 transition-colors cursor-pointer select-none hover:text-gray-300"
+                      className="text-xs transition-colors cursor-pointer select-none text-slate-400 hover:text-slate-300"
                     >
                       Include page content in chat
                     </label>
@@ -998,19 +995,19 @@ Please provide a helpful response about the user's question specifically related
                         value={chatInput}
                         onChange={(e) => setChatInput(e.target.value)}
                         placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
-                        className="w-full px-4 py-3 bg-[#1E1F2E]/80 border border-[#2E2F3E]/60 rounded-xl text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#10b981]/50 focus:border-[#10b981]/50 transition-all backdrop-blur-sm"
+                        className="w-full px-4 py-3 text-sm transition-all border bg-slate-800/80 border-slate-600/60 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={isChatLoading || isExtractingContent}
                       />
                       {(isChatLoading || isExtractingContent) && (
                         <div className="absolute transform -translate-y-1/2 right-4 top-1/2">
-                          <div className="w-4 h-4 border-2 border-[#34d399]/30 border-t-[#34d399] rounded-full animate-spin"></div>
+                          <div className="w-4 h-4 border-2 rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin"></div>
                         </div>
                       )}
                     </div>
                     <button
                       type="submit"
                       disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
-                      className="px-5 py-3 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-bold rounded-xl text-sm hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg border border-green-500/30 flex items-center justify-center"
+                      className="flex items-center justify-center px-5 py-3 text-sm font-bold text-white transition-all duration-300 transform border shadow-lg bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-xl hover:shadow-xl hover:shadow-emerald-500/30 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 border-emerald-400/30"
                       style={{
                         minWidth: '48px',
                       }}
@@ -1021,9 +1018,9 @@ Please provide a helpful response about the user's question specifically related
                       </svg>
                     </button>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
+                  <div className="flex items-center justify-between text-xs text-slate-500">
                     <span>Press Enter to send</span>
-                    <span className="text-[#34d399] font-medium">
+                    <span className="font-medium text-emerald-400">
                       {outputFormat === "html" ? "📄 HTML" : "📝 Text"} mode
                     </span>
                   </div>
