@@ -973,6 +973,28 @@ Please provide a helpful response about the user's question specifically related
                 background: "linear-gradient(to right, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95))",
                 backdropFilter: "blur(24px)",
               }}>
+                <style>{`
+                  .sam-ai-chat-input::placeholder {
+                    color: rgba(148, 163, 184, 0.7) !important;
+                  }
+                  .sam-ai-chat-input:focus {
+                    border-color: #10b981 !important;
+                    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25) !important;
+                  }
+                  .sam-ai-send-button:hover:not(:disabled) {
+                    transform: scale(1.05);
+                    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.25) !important;
+                  }
+                  .sam-ai-send-button:disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
+                    background: linear-gradient(to right, #6b7280, #9ca3af) !important;
+                    border-color: rgba(107, 114, 128, 0.5) !important;
+                  }
+                  @keyframes spin {
+                    to { transform: rotate(360deg); }
+                  }
+                `}</style>
                 <form onSubmit={handleSendChatMessage} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   {/* Include Page Content Checkbox */}
                   <div style={{ display: "flex", alignItems: "center", gap: "8px", paddingBottom: "8px" }}>
@@ -1011,6 +1033,7 @@ Please provide a helpful response about the user's question specifically related
                         value={chatInput}
                         onChange={(e) => setChatInput(e.target.value)}
                         placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
+                        className="sam-ai-chat-input"
                         style={{
                           width: "100%",
                           height: "48px",
@@ -1025,14 +1048,6 @@ Please provide a helpful response about the user's question specifically related
                           transition: "all 0.2s ease-in-out",
                           boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                         }}
-                        onFocus={(e) => {
-                          e.target.style.borderColor = "#10b981";
-                          e.target.style.boxShadow = "0 0 0 4px rgba(16, 185, 129, 0.25)";
-                        }}
-                        onBlur={(e) => {
-                          e.target.style.borderColor = "rgba(71, 85, 105, 0.6)";
-                          e.target.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
-                        }}
                         disabled={isChatLoading || isExtractingContent}
                       />
                       {(isChatLoading || isExtractingContent) && (
@@ -1042,7 +1057,7 @@ Please provide a helpful response about the user's question specifically related
                           right: "12px",
                           transform: "translateY(-50%)"
                         }}>
-                          <div className="loading-spinner" style={{
+                          <div style={{
                             width: "20px",
                             height: "20px",
                             border: "2px solid rgba(16, 185, 129, 0.3)",
@@ -1050,17 +1065,13 @@ Please provide a helpful response about the user's question specifically related
                             borderRadius: "50%",
                             animation: "spin 1s linear infinite"
                           }}></div>
-                          <style>{`
-                            @keyframes spin {
-                              to { transform: rotate(360deg); }
-                            }
-                          `}</style>
                         </div>
                       )}
                     </div>
                     <button
                       type="submit"
                       disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
+                      className="sam-ai-send-button"
                       style={{
                         height: "48px",
                         padding: "0 24px",
@@ -1080,16 +1091,6 @@ Please provide a helpful response about the user's question specifically related
                         transition: "all 0.2s ease",
                         boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                         opacity: (isChatLoading || isExtractingContent || !chatInput.trim()) ? 0.7 : 1,
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!(isChatLoading || isExtractingContent || !chatInput.trim())) {
-                          e.currentTarget.style.transform = "scale(1.05)";
-                          e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(16, 185, 129, 0.25)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = "scale(1)";
-                        e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
                       }}
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
