@@ -101,9 +101,6 @@ export default function SearchPanel({
         }
 
 
-        if (result.pageContext?.content) {
-          setPageContext(result.pageContext.content);
-        }
         console.log("[SamAI Sidebar] Loaded page content from storage");
       } catch (error) {
         console.error("[SamAI Sidebar] Error loading page content:", error);
