@@ -140,7 +140,6 @@ export async function showSidePanel(
       React.createElement(SearchPanel, {
         response,
         outputFormat,
-        onSummarize: handleSummarize,
         onClose: () => {
           if (samaiRoot) {
             samaiRoot.unmount();
