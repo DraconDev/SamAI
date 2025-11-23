@@ -6,7 +6,7 @@
 - [x] Gradient buttons/loaders: src/components/ui/GradientButton.tsx, LoadingSpinner.tsx
 - [x] Types: src/content/SearchPanel/types.ts
 - [x] Components barrel: src/content/SearchPanel/components/index.ts
-- [ ] Message handlers: utils/background/handlers/, utils/content/handlers/
+- [x] Message handlers: utils/background/messageHandlers.ts, utils/content/messageHandlers.ts
 - [x] Logs: utils/logger.ts
 
 ## 🔧 Priority 2: Split Large Files
