@@ -1,11 +1,7 @@
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  vite: (ctx) => ({
-    plugins: [tailwindcss()],
-  }),
   extensionApi: "webextension-polyfill",
   manifest: {
     name: "SamAI - Smart AI Assistant",
