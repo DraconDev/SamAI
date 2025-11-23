@@ -19,6 +19,46 @@ function injectStyles() {
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Chat input styling */
+    .samai-chat-input {
+      width: 100%;
+      padding: 16px 48px 16px 16px;
+      background: rgba(13, 14, 22, 0.7);
+      border: 2px solid rgba(46, 47, 62, 0.7);
+      border-radius: 16px;
+      color: #e2e8f0;
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .samai-chat-input::placeholder {
+      color: #9ca3af;
+      font-weight: 400;
+    }
+
+    .samai-chat-input:focus {
+      border-color: #34d399;
+      box-shadow: 
+        0 0 0 3px rgba(52, 211, 153, 0.1),
+        inset 0 1px 3px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(52, 211, 153, 0.2);
+      background: rgba(13, 14, 22, 0.9);
+    }
+
+    .samai-chat-input:hover {
+      border-color: rgba(46, 47, 62, 0.9);
+      background: rgba(13, 14, 22, 0.8);
+    }
+
+    .samai-chat-input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     /* Markdown styles */
     #samai-container pre {
       background: #1a1b2e;
