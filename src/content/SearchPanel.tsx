@@ -96,11 +96,17 @@ export default function SearchPanel({
         if (result.pageOptimizedHtml) {
           setPageOptimizedHtml(result.pageOptimizedHtml as string);
         }
-        if (result.pageContext && typeof result.pageContext === 'object' && 'content' in result.pageContext) {
+        if (
+          result.pageContext &&
+          typeof result.pageContext === "object" &&
+          "content" in result.pageContext
+        ) {
           setPageContext((result.pageContext as { content: string }).content);
         }
 
-
+        if (result.pageContext?.content) {
+          setPageContext(result.pageContext.content);
+        }
         console.log("[SamAI Sidebar] Loaded page content from storage");
       } catch (error) {
         console.error("[SamAI Sidebar] Error loading page content:", error);
@@ -119,10 +125,10 @@ export default function SearchPanel({
     setIsScraping(true);
     try {
       // Send message to background script to extract page content
-      const response = await browser.runtime.sendMessage({
+      const response = (await browser.runtime.sendMessage({
         type: "extractPageContent",
         outputFormat: outputFormat,
-      }) as { content?: string } | undefined;
+      })) as { content?: string } | undefined;
 
       if (response?.content) {
         // Store content in pageContextStore
@@ -162,10 +168,10 @@ export default function SearchPanel({
   // Handle Chat button - opens chat with page as context
   const handleChat = async () => {
     try {
-      const response = await browser.runtime.sendMessage({
+      const response = (await browser.runtime.sendMessage({
         type: "extractPageContent",
         outputFormat: outputFormat,
-      }) as { content?: string } | undefined;
+      })) as { content?: string } | undefined;
 
       if (response?.content) {
         await browser.storage.local.set({
@@ -191,12 +197,15 @@ export default function SearchPanel({
 
     try {
       // Use the same approach as context popup - get content from storage first
-      let contentToAnalyze = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
+      let contentToAnalyze =
+        outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
 
       // If no content in storage, extract it directly (like content script does)
       if (!contentToAnalyze) {
-        console.log("[SamAI] No stored content found, extracting directly from page");
-        
+        console.log(
+          "[SamAI] No stored content found, extracting directly from page"
+        );
+
         // Extract content directly from the current page
         try {
           if (outputFormat === "html") {
@@ -210,7 +219,7 @@ export default function SearchPanel({
           console.error("[SamAI] Error extracting page content:", error);
           throw new Error("Failed to extract page content");
         }
-        
+
         if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
           throw new Error("No readable content found on this page.");
         }
@@ -221,7 +230,9 @@ export default function SearchPanel({
           await browser.storage.local.set({ pageBodyText: contentToAnalyze });
         } else {
           setPageOptimizedHtml(contentToAnalyze);
-          await browser.storage.local.set({ pageOptimizedHtml: contentToAnalyze });
+          await browser.storage.local.set({
+            pageOptimizedHtml: contentToAnalyze,
+          });
         }
       }
 
@@ -234,12 +245,14 @@ Content to summarize:
 ${contentToAnalyze}`;
 
       console.log("[SamAI] Calling AI for summarization...");
-      
+
       // Call AI to generate summary
       const summaryText = await generateFormResponse(prompt);
 
       if (!summaryText) {
-        throw new Error("No summary received from AI. Please check your API key configuration.");
+        throw new Error(
+          "No summary received from AI. Please check your API key configuration."
+        );
       }
 
       console.log("[SamAI] Summary generated successfully");
@@ -266,15 +279,16 @@ ${contentToAnalyze}`;
     };
 
     // Add user message
-    setChatMessages(prev => [...prev, userMessage]);
+    setChatMessages((prev) => [...prev, userMessage]);
     setChatInput("");
     setIsChatLoading(true);
 
     try {
       // Prepare the prompt with page context if available
       let fullPrompt = chatInput;
-      
-      const contentToUse = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
+
+      const contentToUse =
+        outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
       if (contentToUse) {
         fullPrompt = `${chatInput}
 
@@ -282,7 +296,7 @@ Page Content: ${contentToUse}`;
       }
 
       const response = await generateFormResponse(fullPrompt);
-      
+
       if (!response) {
         throw new Error("No response received from AI");
       }
@@ -293,7 +307,7 @@ Page Content: ${contentToUse}`;
         timestamp: new Date().toLocaleTimeString(),
       };
 
-      setChatMessages(prev => [...prev, aiMessage]);
+      setChatMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error("Error sending chat message:", error);
       const errorMessage: ChatMessage = {
@@ -301,7 +315,7 @@ Page Content: ${contentToUse}`;
         content: "Sorry, I encountered an error. Please try again.",
         timestamp: new Date().toLocaleTimeString(),
       };
-      setChatMessages(prev => [...prev, errorMessage]);
+      setChatMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsChatLoading(false);
     }
@@ -797,12 +811,25 @@ Page Content: ${contentToUse}`;
 
       {/* Chat Tab Content */}
       {activeTab === "chat" && (
-        <div style={{ height: "calc(100vh - 200px)", display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            height: "calc(100vh - 200px)",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {!isApiKeySet ? (
             <div className="flex items-center justify-center flex-1">
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#818cf8] flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2"
+                  >
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                 </div>
@@ -810,10 +837,13 @@ Page Content: ${contentToUse}`;
                   API Key Required
                 </h3>
                 <p className="mb-4 text-sm text-gray-400">
-                  Please configure your API key to start chatting about this page.
+                  Please configure your API key to start chatting about this
+                  page.
                 </p>
                 <button
-                  onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
+                  onClick={() =>
+                    browser.runtime.sendMessage({ type: "openApiKeyPage" })
+                  }
                   className="px-4 py-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
                 >
                   Configure API Key
@@ -823,21 +853,37 @@ Page Content: ${contentToUse}`;
           ) : (
             <>
               {/* Chat Messages */}
-              <div className="flex-1 pr-2 mb-4 space-y-3 overflow-y-auto" style={{ maxHeight: "400px" }}>
+              <div
+                className="flex-1 pr-2 mb-4 space-y-3 overflow-y-auto"
+                style={{ maxHeight: "400px" }}
+              >
                 {chatMessages.length === 0 ? (
                   <div className="py-8 text-center text-gray-400">
                     <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-[#10b981] to-[#34d399] flex items-center justify-center">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="2"
+                      >
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                       </svg>
                     </div>
-                    <p className="text-sm">Start a conversation about this page!</p>
+                    <p className="text-sm">
+                      Start a conversation about this page!
+                    </p>
                   </div>
                 ) : (
                   chatMessages.map((message, index) => (
                     <div
                       key={index}
-                      className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                      className={`flex ${
+                        message.role === "user"
+                          ? "justify-end"
+                          : "justify-start"
+                      }`}
                     >
                       <div
                         className={`max-w-[85%] p-3 rounded-lg ${
@@ -863,10 +909,18 @@ Page Content: ${contentToUse}`;
                       <div className="flex items-center space-x-2">
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" />
-                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
-                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                          <div
+                            className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce"
+                            style={{ animationDelay: "0.1s" }}
+                          />
+                          <div
+                            className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce"
+                            style={{ animationDelay: "0.2s" }}
+                          />
                         </div>
-                        <span className="text-xs text-gray-400">AI is thinking...</span>
+                        <span className="text-xs text-gray-400">
+                          AI is thinking...
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -893,7 +947,14 @@ Page Content: ${contentToUse}`;
                     {isChatLoading ? (
                       <div className="w-4 h-4 border-2 rounded-full border-white/30 border-t-white animate-spin" />
                     ) : (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
                       </svg>
@@ -911,7 +972,14 @@ Page Content: ${contentToUse}`;
           {isSummarizing ? (
             <div style={{ textAlign: "center" }}>
               <div className="loading-orb"></div>
-              <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600, marginTop: "16px" }}>
+              <p
+                style={{
+                  color: "#fbbf24",
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  marginTop: "16px",
+                }}
+              >
                 Summarizing page content...
               </p>
               <style>{`
@@ -940,7 +1008,13 @@ Page Content: ${contentToUse}`;
               <MarkdownRenderer content={summary} />
             </div>
           ) : (
-            <div style={{ color: "#94a3b8", fontSize: "14px", textAlign: "center" }}>
+            <div
+              style={{
+                color: "#94a3b8",
+                fontSize: "14px",
+                textAlign: "center",
+              }}
+            >
               Click the "Sum" tab to summarize this page.
             </div>
           )}
