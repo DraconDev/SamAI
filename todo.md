@@ -2,10 +2,12 @@
 
 ## 🚨 Priority 1: Fix Duplications
 - [x] `optimizeHtmlContent`: Remove dup from SearchPanel.tsx (359-388), import from utils/page-content.ts
-- [ ] Page extraction: Centralize to utils/page-content.ts hook
-- [ ] Gradient buttons/loaders: src/components/ui/GradientButton.tsx, LoadingSpinner.tsx
+- [x] Page extraction: Centralize to src/hooks/usePageContent.ts
+- [x] Gradient buttons/loaders: src/components/ui/GradientButton.tsx, LoadingSpinner.tsx
+- [x] Types: src/content/SearchPanel/types.ts
+- [x] Components barrel: src/content/SearchPanel/components/index.ts
 - [ ] Message handlers: utils/background/handlers/, utils/content/handlers/
-- [ ] Logs: utils/logger.ts
+- [x] Logs: utils/logger.ts
 
 ## 🔧 Priority 2: Split Large Files
 ### SearchPanel.tsx (1214 lines)
