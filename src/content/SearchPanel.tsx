@@ -249,39 +249,37 @@ ${contentToAnalyze}`;
     }
   };
 
-  // Helper function to extract current page content
+  // Helper function to extract current page content - ALWAYS extract fresh content
   const extractCurrentPageContent = async (): Promise<string> => {
     try {
-      // Try to get content from storage first
-      let contentToAnalyze = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
-
-      // If no content in storage, extract it directly from current page
-      if (!contentToAnalyze) {
-        console.log("[SamAI Chat] No stored content found, extracting directly from current page");
-        
-        if (outputFormat === "html") {
-          const fullHtml = document.documentElement.outerHTML;
-          contentToAnalyze = optimizeHtmlContent(fullHtml);
-        } else {
-          const content = document.body.innerText;
-          contentToAnalyze = content.trim();
-        }
-        
-        if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
-          throw new Error("No readable content found on this page.");
-        }
-
-        // Store it for future use
-        if (outputFormat === "text") {
-          setPageBodyText(contentToAnalyze);
-          await browser.storage.local.set({ pageBodyText: contentToAnalyze });
-        } else {
-          setPageOptimizedHtml(contentToAnalyze);
-          await browser.storage.local.set({ pageOptimizedHtml: contentToAnalyze });
-        }
+      console.log("[SamAI Chat] Extracting fresh content from current page...");
+      
+      let contentToAnalyze = "";
+      
+      // ALWAYS extract fresh content from the current page DOM, ignore cached content
+      if (outputFormat === "html") {
+        const fullHtml = document.documentElement.outerHTML;
+        contentToAnalyze = optimizeHtmlContent(fullHtml);
+      } else {
+        const content = document.body.innerText;
+        contentToAnalyze = content.trim();
+      }
+      
+      if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
+        throw new Error("No readable content found on this page.");
       }
 
-      console.log("[SamAI Chat] Using content length:", contentToAnalyze.length);
+      console.log("[SamAI Chat] Fresh content extracted, length:", contentToAnalyze.length);
+      
+      // Store it for future use (but we always extract fresh for chat)
+      if (outputFormat === "text") {
+        setPageBodyText(contentToAnalyze);
+        await browser.storage.local.set({ pageBodyText: contentToAnalyze });
+      } else {
+        setPageOptimizedHtml(contentToAnalyze);
+        await browser.storage.local.set({ pageOptimizedHtml: contentToAnalyze });
+      }
+
       return contentToAnalyze;
     } catch (error) {
       console.error("[SamAI Chat] Error extracting page content:", error);
@@ -307,7 +305,7 @@ ${contentToAnalyze}`;
     setIsExtractingContent(true);
 
     try {
-      // Always extract fresh page content for each chat message
+      // ALWAYS extract fresh page content for each chat message
       const currentPageContent = await extractCurrentPageContent();
       
       setIsExtractingContent(false);
@@ -315,11 +313,13 @@ ${contentToAnalyze}`;
       // Prepare the prompt with current page context
       const fullPrompt = `${chatInput}
 
-Current Page Content: ${currentPageContent}
+CURRENT PAGE CONTENT (freshly extracted from the page you're currently viewing):
+${currentPageContent}
 
-Please provide a helpful response about the user's question in relation to the current page content. If the question is about the page content, focus on that. If it's a general question, you can provide general information but also mention relevant aspects of the current page if applicable.`;
+Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page.`;
 
       console.log("[SamAI Chat] Sending prompt with fresh page context...");
+      console.log("[SamAI Chat] Page URL:", window.location.href);
       
       const response = await generateFormResponse(fullPrompt);
       
@@ -973,12 +973,8 @@ Please provide a helpful response about the user's question in relation to the c
                         value={chatInput}
                         onChange={(e) => setChatInput(e.target.value)}
                         placeholder="Ask about this page..."
-                        className="w-full p-4 pr-12 bg-[#0D0E16]/60 border border-[#2E2F3E]/60 rounded-2xl text-gray-100 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#34d399] focus:border-[#34d399] transition-all duration-300 backdrop-blur-sm shadow-inner"
+                        className="samai-chat-input"
                         disabled={isChatLoading || isExtractingContent}
-                        style={{
-                          background: 'rgba(13, 14, 22, 0.6)',
-                          border: '1px solid rgba(46, 47, 62, 0.6)',
-                        }}
                       />
                       {(isChatLoading || isExtractingContent) && (
                         <div className="absolute transform -translate-y-1/2 right-4 top-1/2">
