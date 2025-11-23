@@ -1,7 +1,7 @@
 # SamAI Todo
 
 ## 🚨 Priority 1: Fix Duplications
-- [ ] `optimizeHtmlContent`: Remove dup from SearchPanel.tsx (359-388), import from utils/page-content.ts
+- [x] `optimizeHtmlContent`: Remove dup from SearchPanel.tsx (359-388), import from utils/page-content.ts
 - [ ] Page extraction: Centralize to utils/page-content.ts hook
 - [ ] Gradient buttons/loaders: src/components/ui/GradientButton.tsx, LoadingSpinner.tsx
 - [ ] Message handlers: utils/background/handlers/, utils/content/handlers/
