@@ -1,48 +1,31 @@
 # SamAI Todo
 
-## Styling Fixes (Popup, Context-Popup, Chat)
+## 🚨 Priority 1: Fix Duplications (Quick Wins)
+- [ ] **`optimizeHtmlContent` dup**: Remove from [`src/content/SearchPanel.tsx`](src/content/SearchPanel.tsx:359-388), import `{ optimizeHtmlContent, type OutputFormat }` from `"@/utils/page-content"`. Update calls in `handleSummarize`, `extractCurrentPageContent`.
+- [ ] **Page extraction logic**: Centralize `extractCurrentPageContent`/`handleSummarize` content fetch to `utils/usePageContent.ts` hook.
+- [ ] **Gradient button styles**: Extract to `src/components/ui/GradientButton.tsx`.
+- [ ] **Loading spinners**: `src/components/ui/LoadingSpinner.tsx`.
+- [ ] **Message handling boilerplate**: utils/background/messageHandlers.ts, utils/content/messageHandlers.ts.
+- [ ] **Console logs**: utils/logger.ts.
 
-- [x] Added stylesheet links to entrypoints/\*/index.html (popup, chat, context-popup, apikey)
-- [x] Reverted wxt.config.ts to stable (no vite plugin)
-- [x] Converted inline minHeight in popup/App.tsx to Tailwind min-h-[500px]
-- [ ] Reload extension in chrome://extensions after build to verify dark gradient bg, scrollbars
-- [ ] Fix Tailwind v4 JIT (downgrade to v3 or vite plugin) for full utilities (p-6, shadow-2xl)
+## 🔧 Priority 2: Split Large Files (>200 lines)
+### src/content/SearchPanel.tsx (1214 lines)
+Follow existing plan:
+- [ ] Setup: `src/components/search/types.ts`, `components/index.ts`
+- [ ] Extract `TabNavigation.tsx` (~400 lines tabs)
+- [ ] `SearchTab.tsx` (~200 lines response/Markdown)
+- [ ] `ScrapeTab.tsx`, `ChatTab.tsx` (sub: MessagesList, InputForm), `SummaryTab.tsx`, `FormTab.tsx`, `ImageTab.tsx`
+- [ ] Main: Container + Tailwind conversion (remove inline styles)
 
-## Organize Massive src/content/SearchPanel.tsx (~1500 lines)
+### entrypoints/background.ts (354 lines)
+- [ ] Split handlers: `utils/background/handlers/search.ts`, `context.ts`, `input.ts`
+- [ ] Main: Router dispatching to handlers.
 
-- [ ] **Setup**
-  - [ ] Create src/content/SearchPanel/components/index.ts (barrel exports)
-  - [ ] Create src/content/SearchPanel/types.ts (TabId, ChatMessage, etc.)
-- [ ] **Extract TabNavigation (tabs grid, ~400 lines)**
-  - [ ] Write src/content/SearchPanel/components/TabNavigation.tsx (props: activeTab, setActiveTab, handlers, isScraping)
-  - [ ] replace_in_file SearchPanel.tsx: Replace Tab Navigation div with <TabNavigation {...props} />
-- [ ] **Extract SearchTabContent (~200 lines)**
-  - [ ] Write SearchTabContent.tsx (response, isApiKeySet, outputFormat, MarkdownRenderer, API setup, loading)
-  - [ ] Replace {activeTab === "search" && (...)}
-- [ ] **Extract ScrapeTabContent (~50 lines)**
-  - [ ] Write ScrapeTabContent.tsx (handleScrape, isScraping)
-- [ ] **Extract ChatTabContent (~600 lines)**
-  - [ ] Write ChatTabContent.tsx (all chat state/handlers)
-  - [ ] Sub-extract ChatMessagesList.tsx, ChatInputForm.tsx
-- [ ] **Extract SummaryTabContent (~100 lines)**
-  - [ ] Write SummaryTabContent.tsx (isSummarizing, summary, summaryError)
-- [ ] **Extract FormTabContent & ImageTabContent (~100 lines)**
-- [ ] **Main SearchPanel cleanup (~200 lines left)**
-  - [ ] Remove unused functions (move to utils)
-- [ ] **Tailwind Conversion**
-  - [ ] Replace all inline style={{}} with Tailwind arbitrary (w-[450px], backdrop-blur-xl, etc.)
-  - [ ] Move <style> blocks to entrypoints/style.css
-- [ ] **Test**
-  - [ ] bun run build
-  - [ ] Reload extension, test tabs/functions
+### entrypoints/content.ts (376 lines)
+- [ ] Split: `floatingIcon.ts`, `inputTracker.ts`, `messageHandlers.ts`
 
-## Full Tailwind Project Conversion
+### utils/store.ts (183 lines)
+- [ ] Split: `stores/chatStore.ts`, `searchStore.ts`, `apiKeyStore.ts`, `pageContextStore.ts`
 
-- [ ] Scan all .tsx for inline style= , convert to Tailwind
-- [ ] Update tailwind.config.js content paths
-- [ ] Downgrade Tailwind v4 -> v3 (match Ref/auto-form-filler)
-
-## Next Features
-
-- [ ] Popup styling full utilities
-- [ ] SearchPanel Tailwind
+## 🎨 Priority 3: Shared Components & Hooks
+- [ ] `
