@@ -458,9 +458,21 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
 
       {activeTab === 'sum' && (
         <div style={{ padding: '24px' }}>
-          <p style={{ color: '#fbbf24', fontSize: '16px', fontWeight: 600 }}>
-            {isSummarizing ? 'Summarizing...' : 'Summary feature coming soon!'}
-          </p>
+          <div>
+            {isSummarizing ? (
+              <p style={{ color: '#818cf8', fontWeight: 500, textAlign: 'center', padding: '40px 0' }}>
+                Summarizing...
+              </p>
+            ) : summary ? (
+              <div className="prose markdown-content prose-invert max-w-none">
+                <MarkdownRenderer content={summary} />
+              </div>
+            ) : (
+              <p style={{ color: '#94a3b8', fontSize: '16px', fontWeight: 500, textAlign: 'center', padding: '40px 0' }}>
+                Generate AI-powered page summary
+              </p>
+            )}
+          </div>
         </div>
       )}
 
