@@ -32,6 +32,11 @@ interface GetPageContentRequest extends BaseMessage {
   outputFormat: OutputFormat; // Add outputFormat
 }
 
+interface ExtractPageContentRequest extends BaseMessage {
+  type: "extractPageContent";
+  outputFormat: OutputFormat;
+}
+
 interface GetSummaryContentRequest extends BaseMessage {
   type: "getSummaryContent";
 }
@@ -53,6 +58,7 @@ type BackgroundMessage =
   | OpenApiKeyPageRequest
   | SetInputValueRequest
   | GetPageContentRequest
+  | ExtractPageContentRequest
   | PageContentResponseMessage
   | InputElementClickedMessage
   | ClearInputElementMessage; // Add new message type
@@ -146,6 +152,51 @@ export default defineBackground(() => {
               return null; // Resolve the promise with null
             }
           })(); // Call the IIFE
+        }
+
+        case "extractPageContent": {
+          console.log(
+            "[SamAI Background] Handling extractPageContent message"
+          );
+          const extractMessage = message as ExtractPageContentRequest;
+
+          // Check if sender is a valid tab
+          if (!sender.tab) {
+            console.error("[SamAI Background] No sender tab found for extractPageContent");
+            sendResponse({ error: "No sender tab found" });
+            return true;
+          }
+
+          const tabId = sender.tab.id;
+          console.log(
+            "[SamAI Background] Sending getPageContent message to tab:",
+            tabId
+          );
+
+          try {
+            // Send message to content script to extract page content
+            const response = await browser.tabs.sendMessage(tabId, {
+              type: "getPageContent",
+              outputFormat: extractMessage.outputFormat,
+            });
+
+            console.log(
+              "[SamAI Background] Received page content response:",
+              response?.content?.length || 0,
+              "characters"
+            );
+
+            sendResponse(response);
+          } catch (error) {
+            console.error(
+              "[SamAI Background] Error getting page content from content script:",
+              error
+            );
+            sendResponse({
+              error: error instanceof Error ? error.message : "Unknown error",
+            });
+          }
+          return true; // Will respond asynchronously
         }
 
         case "openApiKeyPage":
