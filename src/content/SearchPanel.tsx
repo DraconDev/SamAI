@@ -100,6 +100,7 @@ export default function SearchPanel({
           setPageContext((result.pageContext as { content: string }).content);
         }
 
+
         if (result.pageContext?.content) {
           setPageContext(result.pageContext.content);
         }
