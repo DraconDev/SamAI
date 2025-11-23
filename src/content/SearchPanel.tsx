@@ -1,4 +1,3 @@
-
 import { generateFormResponse } from "@/utils/ai/gemini";
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
@@ -891,7 +890,7 @@ Please provide a helpful response about the user's question specifically related
                   API Key Required
                 </h3>
                 <button
-                  onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
+                  onClick={() => browser.runtime.sendMessage({ type: "openApiKeyLevel" })}
                   className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-400 text-white font-bold rounded-xl text-xs hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   Configure
@@ -996,21 +995,28 @@ Please provide a helpful response about the user's question specifically related
                         value={chatInput}
                         onChange={(e) => setChatInput(e.target.value)}
                         placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
-                        className="w-full px-4 py-3 text-sm transition-all border bg-slate-800/80 border-slate-600/60 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full h-12 px-4 py-3 text-sm font-medium transition-all duration-200 ease-in-out border-2 shadow-lg bg-slate-800/90 border-slate-600/60 rounded-xl text-slate-100 placeholder-slate-400/70 focus:outline-none focus:ring-4 focus:ring-emerald-500/25 focus:border-emerald-500 hover:border-slate-500/80 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                        style={{
+                          backgroundColor: 'rgba(30, 41, 59, 0.9)',
+                          borderColor: 'rgba(71, 85, 105, 0.6)',
+                        }}
                         disabled={isChatLoading || isExtractingContent}
                       />
                       {(isChatLoading || isExtractingContent) && (
-                        <div className="absolute transform -translate-y-1/2 right-4 top-1/2">
-                          <div className="w-4 h-4 border-2 rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin"></div>
+                        <div className="absolute transform -translate-y-1/2 right-3 top-1/2">
+                          <div className="w-5 h-5 border-2 rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin"></div>
                         </div>
                       )}
                     </div>
                     <button
                       type="submit"
                       disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
-                      className="flex items-center justify-center px-5 py-3 text-sm font-bold text-white transition-all duration-300 transform border shadow-lg bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-xl hover:shadow-xl hover:shadow-emerald-500/30 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 border-emerald-400/30"
+                      className="h-12 px-6 py-3 text-sm font-bold text-white transition-all duration-200 ease-in-out transform border-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 focus:outline-none focus:ring-4 focus:ring-emerald-500/25 border-emerald-400/50 shadow-lg backdrop-blur-sm flex items-center justify-center min-w-[60px]"
                       style={{
-                        minWidth: '48px',
+                        background: (isChatLoading || isExtractingContent || !chatInput.trim()) 
+                          ? 'linear-gradient(to right, #6b7280, #9ca3af)' 
+                          : 'linear-gradient(to right, #10b981, #34d399)',
+                        borderColor: 'rgba(16, 185, 129, 0.5)',
                       }}
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
