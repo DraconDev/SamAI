@@ -69,32 +69,26 @@ export default function SearchPanel({
   const handleScrape = async () => {
     setIsScraping(true);
     try {
-      // Send message to content script to extract page content
-      const tabs = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
+      // Send message to background script to extract page content
+      const response = await browser.runtime.sendMessage({
+        type: "extractPageContent",
+        outputFormat: outputFormat,
       });
-      if (tabs[0]?.id) {
-        const response = (await browser.tabs.sendMessage(tabs[0].id, {
-          type: "getPageContent",
-          outputFormat: outputFormat,
-        })) as { content?: string };
 
-        if (response?.content) {
-          // Store content in pageContextStore
-          await browser.storage.local.set({
-            pageContext: {
-              content: response.content,
-              outputFormat: outputFormat,
-            },
-          });
+      if (response?.content) {
+        // Store content in pageContextStore
+        await browser.storage.local.set({
+          pageContext: {
+            content: response.content,
+            outputFormat: outputFormat,
+          },
+        });
 
-          // Open chat page
-          await browser.tabs.create({ url: "chat.html" });
+        // Open chat page
+        await browser.tabs.create({ url: "chat.html" });
 
-          // Close sidebar
-          onClose();
-        }
+        // Close sidebar
+        onClose();
       }
     } catch (error) {
       console.error("Error scraping page:", error);
@@ -111,7 +105,7 @@ export default function SearchPanel({
   // Handle Image button - opens Google AI Studio
   const handleImage = () => {
     window.open(
-      "https://aistudio.google.com/prompts/new_chat?model=gemini-2.5-flash-image&utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
+      "https://aistudio.google.com/prompts/new_chat?model=gemini-2.5-flash-image?utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=",
       "_blank"
     );
   };
@@ -119,25 +113,19 @@ export default function SearchPanel({
   // Handle Chat button - opens chat with page as context
   const handleChat = async () => {
     try {
-      const tabs = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
+      const response = await browser.runtime.sendMessage({
+        type: "extractPageContent",
+        outputFormat: outputFormat,
       });
-      if (tabs[0]?.id) {
-        const response = (await browser.tabs.sendMessage(tabs[0].id, {
-          type: "getPageContent",
-          outputFormat: outputFormat,
-        })) as { content?: string };
 
-        if (response?.content) {
-          await browser.storage.local.set({
-            pageContext: {
-              content: response.content,
-              outputFormat: outputFormat,
-            },
-          });
-          await browser.tabs.create({ url: "chat.html" });
-        }
+      if (response?.content) {
+        await browser.storage.local.set({
+          pageContext: {
+            content: response.content,
+            outputFormat: outputFormat,
+          },
+        });
+        await browser.tabs.create({ url: "chat.html" });
       }
     } catch (error) {
       console.error("Error opening chat:", error);
@@ -153,28 +141,23 @@ export default function SearchPanel({
     setSummary("");
 
     try {
-      // 1. Get page content
-      const tabs = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
-      if (!tabs[0]?.id) throw new Error("No active tab found");
-
-      console.log("[SamAI] Sending getPageContent message to tab:", tabs[0].id);
-      const response = (await browser.tabs.sendMessage(tabs[0].id, {
-        type: "getPageContent",
+      console.log("[SamAI] Sending extractPageContent message to background script");
+      
+      // Send message to background script to extract page content
+      const response = await browser.runtime.sendMessage({
+        type: "extractPageContent",
         outputFormat: "text", // Always use text for summarization
-      })) as { content?: string };
+      });
 
-      console.log("[SamAI] Received response:", response);
+      console.log("[SamAI] Received response from background:", response);
 
       if (!response?.content) throw new Error("No content extracted from page");
 
-      // 2. Truncate content to reasonable size (about 6000 words)
+      // Truncate content to reasonable size (about 6000 words)
       const truncatedContent = response.content.slice(0, 24000);
       console.log("[SamAI] Truncated content length:", truncatedContent.length);
 
-      // 3. Call AI to generate summary
+      // Call AI to generate summary
       const prompt = `Please provide a clear and concise summary of the following web page content. Focus on the main points and key information:\n\n${truncatedContent}`;
       console.log("[SamAI] Sending AI request...");
 
