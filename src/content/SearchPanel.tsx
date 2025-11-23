@@ -38,7 +38,7 @@ export default function SearchPanel({
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [isChatLoading, setIsChatLoading] = useState(false);
-  const [pageContext, setPageContext] = useState<string>("");
+  const [isExtractingContent, setIsExtractingContent] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -95,9 +95,6 @@ export default function SearchPanel({
         }
         if (result.pageOptimizedHtml) {
           setPageOptimizedHtml(result.pageOptimizedHtml as string);
-        }
-        if (result.pageContext && typeof result.pageContext === 'object' && 'content' in result.pageContext) {
-          setPageContext((result.pageContext as { content: string }).content);
         }
         console.log("[SamAI Sidebar] Loaded page content from storage");
       } catch (error) {
@@ -252,7 +249,47 @@ ${contentToAnalyze}`;
     }
   };
 
-  // Handle chat message sending
+  // Helper function to extract current page content
+  const extractCurrentPageContent = async (): Promise<string> => {
+    try {
+      // Try to get content from storage first
+      let contentToAnalyze = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
+
+      // If no content in storage, extract it directly from current page
+      if (!contentToAnalyze) {
+        console.log("[SamAI Chat] No stored content found, extracting directly from current page");
+        
+        if (outputFormat === "html") {
+          const fullHtml = document.documentElement.outerHTML;
+          contentToAnalyze = optimizeHtmlContent(fullHtml);
+        } else {
+          const content = document.body.innerText;
+          contentToAnalyze = content.trim();
+        }
+        
+        if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
+          throw new Error("No readable content found on this page.");
+        }
+
+        // Store it for future use
+        if (outputFormat === "text") {
+          setPageBodyText(contentToAnalyze);
+          await browser.storage.local.set({ pageBodyText: contentToAnalyze });
+        } else {
+          setPageOptimizedHtml(contentToAnalyze);
+          await browser.storage.local.set({ pageOptimizedHtml: contentToAnalyze });
+        }
+      }
+
+      console.log("[SamAI Chat] Using content length:", contentToAnalyze.length);
+      return contentToAnalyze;
+    } catch (error) {
+      console.error("[SamAI Chat] Error extracting page content:", error);
+      throw new Error("Failed to extract page content");
+    }
+  };
+
+  // Handle chat message sending with fresh page context
   const handleSendChatMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isApiKeySet || !chatInput.trim() || isChatLoading) return;
@@ -267,18 +304,23 @@ ${contentToAnalyze}`;
     setChatMessages(prev => [...prev, userMessage]);
     setChatInput("");
     setIsChatLoading(true);
+    setIsExtractingContent(true);
 
     try {
-      // Prepare the prompt with page context if available
-      let fullPrompt = chatInput;
+      // Always extract fresh page content for each chat message
+      const currentPageContent = await extractCurrentPageContent();
       
-      const contentToUse = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
-      if (contentToUse) {
-        fullPrompt = `${chatInput}
+      setIsExtractingContent(false);
+      
+      // Prepare the prompt with current page context
+      const fullPrompt = `${chatInput}
 
-Page Content: ${contentToUse}`;
-      }
+Current Page Content: ${currentPageContent}
 
+Please provide a helpful response about the user's question in relation to the current page content. If the question is about the page content, focus on that. If it's a general question, you can provide general information but also mention relevant aspects of the current page if applicable.`;
+
+      console.log("[SamAI Chat] Sending prompt with fresh page context...");
+      
       const response = await generateFormResponse(fullPrompt);
       
       if (!response) {
@@ -302,6 +344,7 @@ Page Content: ${contentToUse}`;
       setChatMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsChatLoading(false);
+      setIsExtractingContent(false);
     }
   };
 
@@ -796,46 +839,54 @@ Page Content: ${contentToUse}`;
       {/* Chat Tab Content - Enhanced Bottom Positioned Chat */}
       {activeTab === "chat" && (
         <div 
-          className="flex flex-col h-[calc(100vh-250px)] bg-gradient-to-b from-[#1a1b2e]/30 to-[#0D0E16]/50 rounded-2xl border border-[#2E2F3E]/30 backdrop-blur-sm"
+          className="flex flex-col h-[calc(100vh-280px)] bg-gradient-to-b from-[#1a1b2e]/40 to-[#0D0E16]/80 rounded-2xl border border-[#2E2F3E]/40 backdrop-blur-xl shadow-2xl"
           style={{
-            background: 'linear-gradient(180deg, rgba(26, 27, 46, 0.3) 0%, rgba(13, 14, 22, 0.5) 100%)',
-            backdropFilter: 'blur(12px)',
-            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3)',
+            background: 'linear-gradient(180deg, rgba(26, 27, 46, 0.4) 0%, rgba(13, 14, 22, 0.8) 100%)',
+            backdropFilter: 'blur(20px)',
+            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
           }}
         >
           {/* Chat Header */}
-          <div className="flex items-center gap-3 p-4 border-b border-[#2E2F3E]/30">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-lg shadow-green-500/20">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
+          <div className="flex items-center justify-between p-4 border-b border-[#2E2F3E]/40 bg-gradient-to-r from-[#1E1F2E]/60 to-[#2a2b3e]/60 backdrop-blur-sm rounded-t-2xl">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-lg shadow-green-500/30 transform rotate-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-transparent bg-gradient-to-r from-[#34d399] to-[#10b981] bg-clip-text">
+                  Page Chat Assistant
+                </h3>
+                <p className="text-xs text-gray-400">Ask questions about this page</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-bold text-transparent bg-gradient-to-r from-[#34d399] to-[#10b981] bg-clip-text">
-                Page Chat
-              </h3>
-              <p className="text-xs text-gray-400">Ask questions about this page</p>
-            </div>
+            {isExtractingContent && (
+              <div className="flex items-center gap-2 text-xs text-[#34d399]">
+                <div className="w-3 h-3 border border-[#34d399]/30 border-t-[#34d399] rounded-full animate-spin"></div>
+                <span className="font-medium">Reading page...</span>
+              </div>
+            )}
           </div>
 
           {!isApiKeySet ? (
             <div className="flex items-center justify-center flex-1 p-6">
-              <div className="text-center max-w-[80%]">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] flex items-center justify-center shadow-lg">
+              <div className="text-center max-w-[85%]">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#f59e0b] to-[#fbbf24] flex items-center justify-center shadow-xl shadow-yellow-500/30 transform -rotate-6">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                     <circle cx="12" cy="12" r="3" />
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text">
+                <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text">
                   API Key Required
                 </h3>
-                <p className="mb-4 text-sm text-gray-400">
-                  Please configure your API key to start chatting about this page.
+                <p className="mb-5 text-sm leading-relaxed text-gray-300">
+                  Configure your API key to start chatting about this page. I'll analyze the current page content and answer your questions.
                 </p>
                 <button
                   onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
-                  className="px-4 py-2 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white font-semibold rounded-lg text-sm hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                  className="px-6 py-3 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white font-bold rounded-xl text-sm hover:shadow-xl hover:shadow-yellow-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   Configure API Key
                 </button>
@@ -844,16 +895,21 @@ Page Content: ${contentToUse}`;
           ) : (
             <>
               {/* Chat Messages Container */}
-              <div className="flex-1 p-4 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+              <div className="flex-1 p-4 space-y-4 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
                 {chatMessages.length === 0 ? (
                   <div className="py-8 text-center">
-                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-[#10b981] to-[#34d399] flex items-center justify-center shadow-lg shadow-green-500/20">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-xl shadow-green-500/30 transform rotate-3">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                       </svg>
                     </div>
-                    <p className="mb-2 text-sm text-gray-400">Start a conversation about this page!</p>
-                    <p className="text-xs text-gray-500">Ask questions, request summaries, or get insights</p>
+                    <h4 className="text-sm font-bold text-[#34d399] mb-2">Ready to chat about this page!</h4>
+                    <p className="mb-2 text-sm text-gray-400">Ask me anything about the current page content.</p>
+                    <div className="space-y-1 text-xs text-gray-500">
+                      <p>• "What is this page about?"</p>
+                      <p>• "Summarize the main points"</p>
+                      <p>• "Explain this concept"</p>
+                    </div>
                   </div>
                 ) : (
                   chatMessages.map((message, index) => (
@@ -862,38 +918,44 @@ Page Content: ${contentToUse}`;
                       className={`flex animate-fade-in ${message.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       <div
-                        className={`max-w-[85%] p-3 rounded-2xl shadow-lg backdrop-blur-sm ${
+                        className={`max-w-[88%] p-4 rounded-2xl shadow-xl backdrop-blur-sm border ${
                           message.role === "user"
-                            ? "bg-gradient-to-br from-[#10b981] to-[#34d399] text-white ml-4"
-                            : "bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border border-[#2E2F3E]/50 text-gray-100 mr-4"
+                            ? "bg-gradient-to-br from-[#10b981] to-[#34d399] text-white ml-4 border-green-500/30 shadow-green-500/20"
+                            : "bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border-[#2E2F3E]/60 text-gray-100 mr-4 shadow-black/30"
                         }`}
                       >
                         {message.role === "user" ? (
-                          <div className="text-sm font-medium">{message.content}</div>
+                          <div className="text-sm font-medium leading-relaxed">{message.content}</div>
                         ) : (
-                          <div className="text-sm prose-sm prose prose-invert max-w-none">
+                          <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
                             <MarkdownRenderer content={message.content} />
                           </div>
                         )}
-                        <div className={`text-xs mt-1 opacity-70 ${
+                        <div className={`text-xs mt-2 opacity-70 flex items-center gap-1 ${
                           message.role === "user" ? "text-green-100" : "text-gray-400"
                         }`}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12,6 12,12 16,14" />
+                          </svg>
                           {message.timestamp}
                         </div>
                       </div>
                     </div>
                   ))
                 )}
-                {isChatLoading && (
+                {(isChatLoading || isExtractingContent) && (
                   <div className="flex justify-start animate-fade-in">
-                    <div className="bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border border-[#2E2F3E]/50 p-3 rounded-2xl mr-4 shadow-lg backdrop-blur-sm">
+                    <div className="bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border border-[#2E2F3E]/60 p-4 rounded-2xl mr-4 shadow-xl backdrop-blur-sm">
                       <div className="flex items-center space-x-3">
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" />
                           <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" style={{ animationDelay: "0.1s" }} />
                           <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" style={{ animationDelay: "0.2s" }} />
                         </div>
-                        <span className="text-xs text-[#34d399] font-medium">AI is thinking...</span>
+                        <span className="text-xs text-[#34d399] font-medium">
+                          {isExtractingContent ? "Reading page content..." : "AI is thinking..."}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -901,36 +963,45 @@ Page Content: ${contentToUse}`;
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Chat Input */}
-              <div className="p-4 border-t border-[#2E2F3E]/30 bg-gradient-to-r from-[#1E1F2E]/50 to-[#2a2b3e]/50 backdrop-blur-sm">
-                <form onSubmit={handleSendChatMessage} className="space-y-2">
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={chatInput}
-                      onChange={(e) => setChatInput(e.target.value)}
-                      placeholder="Ask about this page..."
-                      className="flex-1 p-3 bg-[#0D0E16]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#34d399] focus:border-[#34d399] transition-all duration-200 backdrop-blur-sm"
-                      disabled={isChatLoading}
-                      style={{
-                        background: 'rgba(13, 14, 22, 0.5)',
-                        border: '1px solid rgba(46, 47, 62, 0.5)',
-                      }}
-                    />
+              {/* Enhanced Chat Input */}
+              <div className="p-4 border-t border-[#2E2F3E]/40 bg-gradient-to-r from-[#1E1F2E]/70 to-[#2a2b3e]/70 backdrop-blur-xl">
+                <form onSubmit={handleSendChatMessage} className="space-y-3">
+                  <div className="flex gap-3">
+                    <div className="relative flex-1">
+                      <input
+                        type="text"
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        placeholder="Ask about this page..."
+                        className="w-full p-4 pr-12 bg-[#0D0E16]/60 border border-[#2E2F3E]/60 rounded-2xl text-gray-100 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#34d399] focus:border-[#34d399] transition-all duration-300 backdrop-blur-sm shadow-inner"
+                        disabled={isChatLoading || isExtractingContent}
+                        style={{
+                          background: 'rgba(13, 14, 22, 0.6)',
+                          border: '1px solid rgba(46, 47, 62, 0.6)',
+                        }}
+                      />
+                      {(isChatLoading || isExtractingContent) && (
+                        <div className="absolute transform -translate-y-1/2 right-4 top-1/2">
+                          <div className="w-4 h-4 border-2 border-[#34d399]/30 border-t-[#34d399] rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                    </div>
                     <button
                       type="submit"
-                      disabled={isChatLoading || !chatInput.trim()}
-                      className="px-4 py-3 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-semibold rounded-xl text-sm hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+                      disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
+                      className="px-6 py-4 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-bold rounded-2xl text-sm hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg border border-green-500/30"
                     >
-                      {isChatLoading ? (
-                        <div className="w-4 h-4 border-2 rounded-full border-white/30 border-t-white animate-spin" />
-                      ) : (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12 5 19 12 12 19" />
-                        </svg>
-                      )}
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
                     </button>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span>Press Enter to send</span>
+                    <span className="text-[#34d399] font-medium">
+                      {outputFormat === "html" ? "📄 HTML" : "📝 Text"} mode
+                    </span>
                   </div>
                 </form>
               </div>
