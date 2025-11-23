@@ -25,6 +25,8 @@ export default function SearchPanel({
   const [activeTab, setActiveTab] = useState<
     "search" | "scrape" | "chat" | "sum" | "form" | "image"
   >("search");
+  const [pageBodyText, setPageBodyText] = useState("");
+  const [pageOptimizedHtml, setPageOptimizedHtml] = useState("");
 
   // Close panel when clicking outside
   useEffect(() => {
@@ -65,36 +67,52 @@ export default function SearchPanel({
     return () => unsubscribe();
   }, []);
 
+  // Load page content from storage (same approach as context popup)
+  useEffect(() => {
+    const loadPageContent = async () => {
+      try {
+        const result = await browser.storage.local.get([
+          "pageBodyText",
+          "pageOptimizedHtml",
+        ]);
+        if (result.pageBodyText) {
+          setPageBodyText(result.pageBodyText as string);
+        }
+        if (result.pageOptimizedHtml) {
+          setPageOptimizedHtml(result.pageOptimizedHtml as string);
+        }
+        console.log("[SamAI Sidebar] Loaded page content from storage");
+      } catch (error) {
+        console.error("[SamAI Sidebar] Error loading page content:", error);
+      }
+    };
+    loadPageContent();
+  }, []);
+
   // Handle Scrape button - extract page content and open in chat
   const handleScrape = async () => {
     setIsScraping(true);
     try {
-      // Send message to content script to extract page content
-      const tabs = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
+      // Send message to background script to extract page content
+      const response = await browser.runtime.sendMessage({
+        type: "extractPageContent",
+        outputFormat: outputFormat,
       });
-      if (tabs[0]?.id) {
-        const response = (await browser.tabs.sendMessage(tabs[0].id, {
-          type: "getPageContent",
-          outputFormat: outputFormat,
-        })) as { content?: string };
 
-        if (response?.content) {
-          // Store content in pageContextStore
-          await browser.storage.local.set({
-            pageContext: {
-              content: response.content,
-              outputFormat: outputFormat,
-            },
-          });
+      if (response?.content) {
+        // Store content in pageContextStore
+        await browser.storage.local.set({
+          pageContext: {
+            content: response.content,
+            outputFormat: outputFormat,
+          },
+        });
 
-          // Open chat page
-          await browser.tabs.create({ url: "chat.html" });
+        // Open chat page
+        await browser.tabs.create({ url: "chat.html" });
 
-          // Close sidebar
-          onClose();
-        }
+        // Close sidebar
+        onClose();
       }
     } catch (error) {
       console.error("Error scraping page:", error);
@@ -119,32 +137,26 @@ export default function SearchPanel({
   // Handle Chat button - opens chat with page as context
   const handleChat = async () => {
     try {
-      const tabs = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
+      const response = await browser.runtime.sendMessage({
+        type: "extractPageContent",
+        outputFormat: outputFormat,
       });
-      if (tabs[0]?.id) {
-        const response = (await browser.tabs.sendMessage(tabs[0].id, {
-          type: "getPageContent",
-          outputFormat: outputFormat,
-        })) as { content?: string };
 
-        if (response?.content) {
-          await browser.storage.local.set({
-            pageContext: {
-              content: response.content,
-              outputFormat: outputFormat,
-            },
-          });
-          await browser.tabs.create({ url: "chat.html" });
-        }
+      if (response?.content) {
+        await browser.storage.local.set({
+          pageContext: {
+            content: response.content,
+            outputFormat: outputFormat,
+          },
+        });
+        await browser.tabs.create({ url: "chat.html" });
       }
     } catch (error) {
       console.error("Error opening chat:", error);
     }
   };
 
-  // Handle Sum button - summarize page and display in sidebar
+  // Handle Sum button - reuse context popup logic
   const handleSummarize = async () => {
     console.log("[SamAI] Starting summarization...");
     setIsSummarizing(true);
@@ -153,35 +165,84 @@ export default function SearchPanel({
     setSummary("");
 
     try {
-      // 1. Get page content
-      const tabs = await browser.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
-      if (!tabs[0]?.id) throw new Error("No active tab found");
+      // Use the same approach as context popup - get content from storage first
+      let contentToAnalyze = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
 
-      console.log("[SamAI] Sending getPageContent message to tab:", tabs[0].id);
-      const response = (await browser.tabs.sendMessage(tabs[0].id, {
-        type: "getPageContent",
-        outputFormat: "text", // Always use text for summarization
-      })) as { content?: string };
+      // If no content in storage, extract it directly (like content script does)
+      if (!contentToAnalyze) {
+        console.log("[SamAI] No stored content found, extracting directly from page");
+        
+        // Try to extract content directly using the same method as content script
+        const extractPageContent = (format: "text" | "html") => {
+          try {
+            if (format === "html") {
+              const fullHtml = document.documentElement.outerHTML;
+              return optimizeHtmlContent(fullHtml);
+            } else {
+              const content = document.body.innerText;
+              return content.trim();
+            }
+          } catch (error) {
+            console.error("[SamAI] Error extracting page content:", error);
+            return "";
+          }
+        };
 
-      console.log("[SamAI] Received response:", response);
+        const optimizeHtmlContent = (html: string): string => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
 
-      if (!response?.content) throw new Error("No content extracted from page");
+          // Remove script, style, and other non-content/embedding tags
+          doc
+            .querySelectorAll(
+              "script, style, noscript, link, meta, iframe, svg, canvas, audio, video, picture, source, map, area, track, embed, object"
+            )
+            .forEach((el) => el.remove());
 
-      // 2. Truncate content to reasonable size (about 6000 words)
-      const truncatedContent = response.content.slice(0, 24000);
-      console.log("[SamAI] Truncated content length:", truncatedContent.length);
+          // Remove comments
+          const comments = doc.createTreeWalker(
+            doc.documentElement,
+            NodeFilter.SHOW_COMMENT,
+            null
+          );
+          let node;
+          while ((node = comments.nextNode())) {
+            node.parentNode?.removeChild(node);
+          }
 
-      // 3. Call AI to generate summary
-      const prompt = `Please provide a clear and concise summary of the following web page content. Focus on the main points and key information:\n\n${truncatedContent}`;
-      console.log("[SamAI] Sending AI request...");
+          // Get the cleaned HTML string
+          let cleanedHtml = doc.documentElement.outerHTML;
 
-      const summaryText = await generateFormResponse(prompt);
-      console.log(
-        "[SamAI] AI response received:",
-        summaryText ? "Success" : "Failed"
+          // Collapse multiple whitespace characters into a single space
+          cleanedHtml = cleanedHtml.replace(/\s+/g, " ").trim();
+
+          return cleanedHtml;
+        };
+
+        contentToAnalyze = extractPageContent(outputFormat);
+        
+        if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
+          throw new Error("No readable content found on this page.");
+        }
+
+        // Store it for future use
+        if (outputFormat === "text") {
+          setPageBodyText(contentToAnalyze);
+          await browser.storage.local.set({ pageBodyText: contentToAnalyze });
+        } else {
+          setPageOptimizedHtml(contentToAnalyze);
+          await browser.storage.local.set({ pageOptimizedHtml: contentToAnalyze });
+        }
+      }
+
+      console.log("[SamAI] Using content length:", contentToAnalyze.length);
+
+      // Create summarization prompt (same as context popup)
+      const prompt = `summarize`;
+
+      // Call AI to generate summary (same as context popup)
+      const summaryText = await generateFormResponse(
+        `${prompt}\n\nContent: ${contentToAnalyze}`
       );
 
       if (!summaryText) {
@@ -193,7 +254,6 @@ export default function SearchPanel({
       console.error("[SamAI] Error summarizing page:", error);
       const errorMessage =
         error instanceof Error ? error.message : "Failed to summarize page";
-      console.log("[SamAI] Setting error message:", errorMessage);
       setSummaryError(errorMessage);
     } finally {
       setIsSummarizing(false);
