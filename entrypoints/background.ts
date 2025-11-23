@@ -62,10 +62,16 @@ export default defineBackground(() => {
   let sourceTabId: number | null = null;
   let contextPopupWindowId: number | null = null; // Track the context popup window
 
-  // Create context menu item
+  // Create context menu items
   browser.contextMenus.create({
     id: "samai-context-menu",
     title: "Sam",
+    contexts: ["all"],
+  });
+
+  browser.contextMenus.create({
+    id: "samai-summarize-page",
+    title: "Summarize page",
     contexts: ["all"],
   });
 
