@@ -115,6 +115,67 @@ function injectStyles() {
   document.head.appendChild(styleTag);
 }
 
+// Function to summarize the current page using existing logic
+async function summarizeCurrentPage(): Promise<string | null> {
+  try {
+    console.log("[SamAI] Starting page summarization");
+    
+    // Get page content from storage (same as context popup)
+    const result = await browser.storage.local.get([
+      "pageBodyText",
+      "pageOptimizedHtml",
+    ]);
+
+    // Get settings to determine output format
+    const settings = await searchSettingsStore.getValue();
+    const scrapeMode = settings.outputFormat || "text";
+
+    // Select content based on scrape mode (same logic as context popup)
+    let contentToAnalyze = scrapeMode === "html" ? result.pageOptimizedHtml : result.pageBodyText;
+
+    // If no content in storage, try to extract it directly
+    if (!contentToAnalyze) {
+      console.log("[SamAI] No stored content found, extracting directly");
+      
+      // Extract page content directly
+      const { extractPageContent } = await import("@/utils/page-content");
+      contentToAnalyze = extractPageContent(scrapeMode);
+      
+      if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
+        console.warn("[SamAI] No content extracted from page");
+        return "No readable content found on this page.";
+      }
+    }
+
+    console.log("[SamAI] Using content length:", contentToAnalyze.length);
+
+    // Create summarization prompt (similar to context popup logic)
+    const summarizePrompt = `summarize`;
+
+    // Send message to background script to get AI response (same as context popup)
+    const response = await browser.runtime.sendMessage({
+      type: "generateGeminiResponse",
+      prompt: `${summarizePrompt}\n\nContent: ${contentToAnalyze}`,
+    });
+
+    let aiResponseText = response as string;
+    try {
+      const parsed = JSON.parse(aiResponseText);
+      if (parsed && parsed.responseText) {
+        aiResponseText = parsed.responseText;
+      }
+    } catch (e) {
+      // If parsing fails, assume it's already plain text
+      console.log("[SamAI] Response is not JSON, using as is");
+    }
+
+    return aiResponseText || "Unable to generate summary.";
+  } catch (error) {
+    console.error("[SamAI] Error generating summary:", error);
+    return "Sorry, I encountered an error while generating the summary. Please try again.";
+  }
+}
+
 export async function showSidePanel(
   response: string | null,
   toggleIfOpen: boolean = false
@@ -132,7 +193,79 @@ export async function showSidePanel(
     return;
   }
 
-  // If panel already exists, just update the content
+  // Create the summarize handler
+  const handleSummarize = async () => {
+    console.log("[SamAI] Summarize button clicked");
+    
+    // Update the panel to show loading state
+    if (samaiRoot && samaiPanelContainer) {
+      samaiRoot.render(
+        React.createElement(SearchPanel, {
+          response: "Generating summary...",
+          onClose: () => {
+            if (samaiRoot) {
+              samaiRoot.unmount();
+              samaiRoot = null;
+            }
+            if (samaiPanelContainer) {
+              samaiPanelContainer.remove();
+              samaiPanelContainer = null;
+            }
+          },
+          onSummarize: handleSummarize,
+        })
+      );
+    }
+
+    try {
+      // Generate summary using existing logic
+      const summary = await summarizeCurrentPage();
+      
+      // Update the panel with the summary
+      if (samaiRoot && samaiPanelContainer) {
+        samaiRoot.render(
+          React.createElement(SearchPanel, {
+            response: summary,
+            onClose: () => {
+              if (samaiRoot) {
+                samaiRoot.unmount();
+                samaiRoot = null;
+              }
+              if (samaiPanelContainer) {
+                samaiPanelContainer.remove();
+                samaiPanelContainer = null;
+              }
+            },
+            onSummarize: handleSummarize,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("[SamAI] Error in summarize handler:", error);
+      
+      // Show error in the panel
+      if (samaiRoot && samaiPanelContainer) {
+        samaiRoot.render(
+          React.createElement(SearchPanel, {
+            response: "Sorry, there was an error generating the summary. Please try again.",
+            onClose: () => {
+              if (samaiRoot) {
+                samaiRoot.unmount();
+                samaiRoot = null;
+              }
+              if (samaiPanelContainer) {
+                samaiPanelContainer.remove();
+                samaiPanelContainer = null;
+              }
+            },
+            onSummarize: handleSummarize,
+          })
+        );
+      }
+    }
+  };
+
+  // If panel already exists, just update the content and add summarize handler
   if (samaiRoot && samaiPanelContainer) {
     const settings = await searchSettingsStore.getValue();
     const outputFormat = settings.outputFormat;
@@ -150,6 +283,7 @@ export async function showSidePanel(
             samaiPanelContainer = null;
           }
         },
+        onSummarize: handleSummarize,
       })
     );
     return;
@@ -172,7 +306,7 @@ export async function showSidePanel(
   const settings = await searchSettingsStore.getValue();
   const outputFormat = settings.outputFormat;
 
-  // Render the SearchPanel with a close handler
+  // Render the SearchPanel with a close handler and summarize handler
   if (samaiRoot) {
     samaiRoot.render(
       React.createElement(SearchPanel, {
@@ -189,6 +323,7 @@ export async function showSidePanel(
             samaiPanelContainer = null;
           }
         },
+        onSummarize: handleSummarize,
       })
     );
   }
