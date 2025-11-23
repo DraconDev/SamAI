@@ -268,14 +268,11 @@ export default defineContentScript({
                 getPageContentMsg.outputFormat
               );
               console.log(
-                "[SamAI Content] extractPageContent finished, sending response via new message"
+                "[SamAI Content] extractPageContent finished, length:", pageContent.length,
+                "sending to background and caller"
               );
               browser.runtime.sendMessage({
-                type: "pageContentResponse",
-                content: pageContent,
-                outputFormat: getPageContentMsg.outputFormat, // Include outputFormat in response
-              });
-            } catch (error) {
+                type: "pageContent
               console.error(
                 "[SamAI Content] Error extracting page content:",
                 error
