@@ -12,7 +12,6 @@ This roadmap outlines the complete development strategy for SamAI, transforming 
 
 ## 🚀 Immediate Tasks
 
-- [ ] Auto-close SamAI popup/side panel after use
 
 - [ ] Add form filling feature (use Ref/auto-form-filler as reference)
 
