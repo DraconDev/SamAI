@@ -43,29 +43,41 @@ function App() {
   };
 
   return (
-    <div className="p-7 w-[340px] bg-gradient-to-br from-[#1a1b2e]/98 to-[#0D0E16]/98 text-gray-100 backdrop-blur-xl border border-[#2E2F3E]/50 shadow-2xl" style={{ backdropFilter: 'blur(16px)' }}>
-      <div className="mb-8 text-center">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] shadow-lg shadow-[#4f46e5]/40">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <div className="p-6 w-[360px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100 shadow-2xl" style={{ minHeight: '500px' }}>
+      {/* Header with animated gradient */}
+      <div className="relative mb-6 text-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5]/20 via-[#818cf8]/20 to-[#4f46e5]/20 blur-3xl animate-pulse" style={{ animationDuration: '3s' }}></div>
+        <div className="relative flex items-center justify-center gap-3 mb-3">
+          <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] shadow-xl shadow-[#4f46e5]/50 transform hover:scale-110 transition-transform duration-300">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
               <path d="M2 17L12 22L22 17"/>
               <path d="M2 12L12 17L22 12"/>
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text">
+          <h1 className="text-3xl font-black text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text tracking-tight">
             Sam AI
           </h1>
         </div>
-        <div className="h-1 w-20 mx-auto bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#818cf8] rounded-full shadow-lg shadow-[#4f46e5]/30"></div>
+        <p className="text-xs font-medium tracking-wide text-gray-400">Your AI-Powered Search Assistant</p>
+        <div className="h-1 w-24 mx-auto mt-3 bg-gradient-to-r from-transparent via-[#4f46e5] to-transparent rounded-full shadow-lg shadow-[#4f46e5]/40"></div>
       </div>
 
-      <div className="space-y-5">
-        <div className="flex flex-col gap-3 p-4 bg-[#1E1F2E]/80 backdrop-blur-sm rounded-xl border border-[#2E2F3E]/60 shadow-lg">
+      <div className="space-y-4">
+        {/* Search Enhancement Card */}
+        <div className="flex flex-col gap-4 p-5 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/80 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
-            <label className="font-semibold text-gray-200 text-sm">
-              Search Enhancement
-            </label>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#4f46e5]/20 to-[#818cf8]/20 flex items-center justify-center border border-[#4f46e5]/30">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+              </div>
+              <label className="text-sm font-bold text-gray-100">
+                Search Enhancement
+              </label>
+            </div>
             <ToggleButton
               isEnabled={searchActive}
               onToggle={toggleSearch}
@@ -78,11 +90,11 @@ function App() {
           </div>
 
           {searchActive && (
-            <div className="pt-4 border-t border-[#2E2F3E]/50">
-              <label className="block mb-3 text-sm font-medium text-gray-300">
+            <div className="pt-4 border-t border-[#2E2F3E]/60">
+              <label className="block mb-3 text-xs font-bold tracking-wider text-gray-300 uppercase">
                 Response Style
               </label>
-              <div className="grid grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-3 gap-2">
                 {[
                   {
                     value: "short",
@@ -118,11 +130,11 @@ function App() {
                   });
                     }}
                     className={`group relative flex flex-col items-center p-3 rounded-xl border transition-all duration-300
-                              hover:transform hover:scale-[1.03] hover:shadow-lg
+                              hover:transform hover:scale-105 hover:shadow-xl
                               ${
                                 promptStyle === value
-                                  ? "border-[#4f46e5] bg-gradient-to-br from-[#4f46e5]/20 to-[#818cf8]/10 shadow-lg shadow-[#4f46e5]/20"
-                                  : "border-[#2E2F3E]/60 hover:border-[#4f46e5]/60 hover:bg-[#4f46e5]/5"
+                                  ? "border-[#4f46e5] bg-gradient-to-br from-[#4f46e5]/25 to-[#818cf8]/15 shadow-xl shadow-[#4f46e5]/30"
+                                  : "border-[#2E2F3E]/60 hover:border-[#4f46e5]/60 hover:bg-[#4f46e5]/10"
                               }`}
                   >
                     <span className="mb-1 text-lg transition-transform transform group-hover:scale-110">
@@ -148,36 +160,22 @@ function App() {
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-4 p-4 bg-[#1E1F2E] rounded-lg border border-[#2E2F3E]">
-          {/* New button for opening chat */}
-          <button
-            onClick={() => tabs.create({ url: "chat.html" })}
-            className="w-full p-2.5 bg-gradient-to-r from-[#3a3478] to-[#635ee7] text-white rounded-lg
-                     hover:opacity-90 focus:outline-none focus:ring-2
-                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                     transition-all duration-200 transform hover:scale-[0.98]
-                     font-medium flex items-center justify-center gap-2"
-          >
-            <span>Open SamAI Chat</span>
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
 
+        {/* Chat Settings Card */}
+        <div className="flex flex-col gap-4 p-5 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/80 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-0.5">
-              <label className="font-medium text-gray-300">
-                Continue Previous Chat
-              </label>
-              <span className="text-xs text-gray-500">
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#10b981]/20 to-[#34d399]/20 flex items-center justify-center border border-[#10b981]/30">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                </div>
+                <label className="text-sm font-bold text-gray-100">
+                  Continue Previous Chat
+                </label>
+              </div>
+              <span className="ml-8 text-xs text-gray-400">
                 Keep chat history between sessions
               </span>
             </div>
@@ -190,8 +188,8 @@ function App() {
                 searchActive,
                 promptStyle,
                 continuePreviousChat: newValue,
-                outputFormat, // Include outputFormat
-                showFloatingIcon, // Include showFloatingIcon
+                outputFormat,
+                showFloatingIcon,
               });
               }}
               ariaLabel={
@@ -203,22 +201,44 @@ function App() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 pt-4 ">
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-3 pt-2">
           <button
-            onClick={openApiKeyPage}
-            className="w-full p-2.5 bg-gradient-to-r from-[#3a3478] to-[#635ee7] text-white rounded-lg
-                     hover:opacity-90 focus:outline-none focus:ring-2
-                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                     transition-all duration-200 transform hover:scale-[0.98]
-                     font-medium flex items-center justify-center gap-2"
+            onClick={() => tabs.create({ url: "chat.html" })}
+            className="group w-full p-4 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white rounded-xl
+                     hover:shadow-xl hover:shadow-green-500/30 focus:outline-none focus:ring-2
+                     focus:ring-[#10b981] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                     transition-all duration-300 transform hover:scale-[1.02]
+                     font-bold flex items-center justify-center gap-3 border border-green-500/30"
           >
-            <span>Configure API Key</span>
             <svg
-              className="w-4 h-4"
+              className="w-5 h-5 transition-transform transform group-hover:rotate-12"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Open SamAI Chat</span>
+          </button>
+
+          <button
+            onClick={openApiKeyPage}
+            className="group w-full p-4 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl
+                     hover:shadow-xl hover:shadow-[#4f46e5]/30 focus:outline-none focus:ring-2
+                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                     transition-all duration-300 transform hover:scale-[1.02]
+                     font-bold flex items-center justify-center gap-3 border border-[#4f46e5]/30"
+          >
+            <svg
+              className="w-5 h-5 transition-transform transform group-hover:rotate-12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
             >
               <path
                 strokeLinecap="round"
@@ -226,18 +246,19 @@ function App() {
                 d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
               />
             </svg>
+            <span>Configure API Key</span>
           </button>
 
           <button
             onClick={openDonateLink}
-            className="w-full p-2.5 bg-gradient-to-r from-[#3a3478] to-[#635ee7] text-white rounded-lg
-                     hover:opacity-90 focus:outline-none focus:ring-2
-                     focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                     transition-all duration-200 transform hover:scale-[0.98]
-                     font-medium flex items-center justify-center gap-2"
+            className="group w-full p-4 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white rounded-xl
+                     hover:shadow-xl hover:shadow-yellow-500/30 focus:outline-none focus:ring-2
+                     focus:ring-[#f59e0b] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
+                     transition-all duration-300 transform hover:scale-[1.02]
+                     font-bold flex items-center justify-center gap-3 border border-yellow-500/30"
           >
+            <span className="text-xl transition-transform transform group-hover:scale-125">☕</span>
             <span>Support Development</span>
-            <span className="text-lg">☕</span>
           </button>
         </div>
       </div>
