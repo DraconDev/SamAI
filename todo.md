@@ -10,9 +10,13 @@ This roadmap outlines the complete development strategy for SamAI, transforming 
 
 ---
 
-add sam popup should be closed after use 
+## 🚀 Immediate Tasks
 
-add form filling feature, the reference has an extension that does it that coudl be a good starting point
+- [ ] Auto-close SamAI popup/side panel after use
+
+- [ ] Add form filling feature (use Ref/auto-form-filler as reference)
+
+- [x] Page summary feature (Sum tab in SearchPanel)
 
 ## 📅 Phase 1: Foundation & Core Enhancement (Weeks 1-4)
 
