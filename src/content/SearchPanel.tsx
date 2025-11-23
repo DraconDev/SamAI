@@ -97,6 +97,7 @@ export default function SearchPanel({
       const response = await browser.runtime.sendMessage({
         type: "extractPageContent",
         outputFormat: outputFormat,
+      }) as { content?: string } | undefined;
       });
 
       if (response?.content) {
