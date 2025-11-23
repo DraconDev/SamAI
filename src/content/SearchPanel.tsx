@@ -39,6 +39,7 @@ export default function SearchPanel({
   const [chatInput, setChatInput] = useState("");
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [isExtractingContent, setIsExtractingContent] = useState(false);
+  const [includePageContent, setIncludePageContent] = useState(true);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -305,21 +306,27 @@ ${contentToAnalyze}`;
     setIsExtractingContent(true);
 
     try {
-      // ALWAYS extract fresh page content for each chat message
-      const currentPageContent = await extractCurrentPageContent();
+      let fullPrompt = chatInput;
       
-      setIsExtractingContent(false);
-      
-      // Prepare the prompt with current page context
-      const fullPrompt = `${chatInput}
+      // Only extract page content if checkbox is enabled
+      if (includePageContent) {
+        setIsExtractingContent(true);
+        const currentPageContent = await extractCurrentPageContent();
+        setIsExtractingContent(false);
+        
+        // Prepare the prompt with current page context
+        fullPrompt = `${chatInput}
 
 CURRENT PAGE CONTENT (freshly extracted from the page you're currently viewing):
 ${currentPageContent}
 
 Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page.`;
 
-      console.log("[SamAI Chat] Sending prompt with fresh page context...");
-      console.log("[SamAI Chat] Page URL:", window.location.href);
+        console.log("[SamAI Chat] Sending prompt with fresh page context...");
+        console.log("[SamAI Chat] Page URL:", window.location.href);
+      } else {
+        console.log("[SamAI Chat] Sending prompt without page context");
+      }
       
       const response = await generateFormResponse(fullPrompt);
       
@@ -838,9 +845,10 @@ Please provide a helpful response about the user's question specifically related
 
       {/* Chat Tab Content - Enhanced Bottom Positioned Chat */}
       {activeTab === "chat" && (
-        <div 
-          className="flex flex-col h-[calc(100vh-280px)] bg-gradient-to-b from-[#1a1b2e]/40 to-[#0D0E16]/80 rounded-2xl border border-[#2E2F3E]/40 backdrop-blur-xl shadow-2xl"
+        <div
+          className="flex flex-col bg-gradient-to-b from-[#1a1b2e]/40 to-[#0D0E16]/80 rounded-2xl border border-[#2E2F3E]/40 backdrop-blur-xl shadow-2xl"
           style={{
+            height: 'calc(100vh - 280px)',
             background: 'linear-gradient(180deg, rgba(26, 27, 46, 0.4) 0%, rgba(13, 14, 22, 0.8) 100%)',
             backdropFilter: 'blur(20px)',
             boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
@@ -894,8 +902,11 @@ Please provide a helpful response about the user's question specifically related
             </div>
           ) : (
             <>
-              {/* Chat Messages Container */}
-              <div className="flex-1 p-4 space-y-4 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+              {/* Chat Messages Container - Scrollable */}
+              <div className="flex-1 p-4 space-y-4 overflow-y-auto" style={{
+                scrollbarWidth: 'thin',
+                minHeight: 0, // Important for flex scrolling
+              }}>
                 {chatMessages.length === 0 ? (
                   <div className="py-8 text-center">
                     <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-xl shadow-green-500/30 transform rotate-3">
@@ -963,17 +974,37 @@ Please provide a helpful response about the user's question specifically related
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Enhanced Chat Input */}
-              <div className="p-4 border-t border-[#2E2F3E]/40 bg-gradient-to-r from-[#1E1F2E]/70 to-[#2a2b3e]/70 backdrop-blur-xl">
+              {/* Enhanced Chat Input - Fixed at Bottom */}
+              <div className="flex-shrink-0 p-4 border-t border-[#2E2F3E]/40 bg-gradient-to-r from-[#1E1F2E]/90 to-[#2a2b3e]/90 backdrop-blur-xl rounded-b-2xl">
                 <form onSubmit={handleSendChatMessage} className="space-y-3">
+                  {/* Include Page Content Checkbox */}
+                  <div className="flex items-center gap-2 pb-2">
+                    <input
+                      type="checkbox"
+                      id="includePageContent"
+                      checked={includePageContent}
+                      onChange={(e) => setIncludePageContent(e.target.checked)}
+                      className="w-4 h-4 rounded border-[#2E2F3E] bg-[#1E1F2E] text-[#10b981] focus:ring-2 focus:ring-[#10b981]/50 cursor-pointer"
+                      style={{
+                        accentColor: '#10b981',
+                      }}
+                    />
+                    <label
+                      htmlFor="includePageContent"
+                      className="text-xs text-gray-400 transition-colors cursor-pointer select-none hover:text-gray-300"
+                    >
+                      Include page content in chat
+                    </label>
+                  </div>
+
                   <div className="flex gap-3">
                     <div className="relative flex-1">
                       <input
                         type="text"
                         value={chatInput}
                         onChange={(e) => setChatInput(e.target.value)}
-                        placeholder="Ask about this page..."
-                        className="samai-chat-input"
+                        placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
+                        className="w-full px-4 py-3 bg-[#1E1F2E]/80 border border-[#2E2F3E]/60 rounded-xl text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#10b981]/50 focus:border-[#10b981]/50 transition-all backdrop-blur-sm"
                         disabled={isChatLoading || isExtractingContent}
                       />
                       {(isChatLoading || isExtractingContent) && (
@@ -985,11 +1016,14 @@ Please provide a helpful response about the user's question specifically related
                     <button
                       type="submit"
                       disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
-                      className="px-6 py-4 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-bold rounded-2xl text-sm hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg border border-green-500/30"
+                      className="px-5 py-3 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-bold rounded-xl text-sm hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg border border-green-500/30 flex items-center justify-center"
+                      style={{
+                        minWidth: '48px',
+                      }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
                       </svg>
                     </button>
                   </div>
