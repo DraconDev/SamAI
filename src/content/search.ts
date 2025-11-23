@@ -115,7 +115,10 @@ function injectStyles() {
   document.head.appendChild(styleTag);
 }
 
-export async function showSidePanel(response: string | null, toggleIfOpen: boolean = false) {
+export async function showSidePanel(
+  response: string | null,
+  toggleIfOpen: boolean = false
+) {
   // If toggle is requested and panel exists, close it and return
   if (toggleIfOpen && samaiPanelContainer) {
     if (samaiRoot) {
@@ -137,7 +140,6 @@ export async function showSidePanel(response: string | null, toggleIfOpen: boole
       React.createElement(SearchPanel, {
         response,
         outputFormat,
-        onSummarize: handleSummarize,
         onClose: () => {
           if (samaiRoot) {
             samaiRoot.unmount();
