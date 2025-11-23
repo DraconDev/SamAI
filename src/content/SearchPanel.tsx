@@ -99,6 +99,7 @@ export default function SearchPanel({
         if (result.pageContext && typeof result.pageContext === 'object' && 'content' in result.pageContext) {
           setPageContext((result.pageContext as { content: string }).content);
         }
+
         if (result.pageContext?.content) {
           setPageContext(result.pageContext.content);
         }
