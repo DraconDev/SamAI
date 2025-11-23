@@ -283,7 +283,12 @@ export default defineContentScript({
               browser.runtime.sendMessage({
                 type: "pageContentResponse",
                 content: "",
-                outputFormat: getPageContentMsg.outputFormat, // Include outputFormat in response even on error
+                outputFormat: getPageContentMsg.outputFormat,
+                error: error instanceof Error ? error.message : "Unknown error",
+              });
+              sendResponse({
+                content: "",
+                outputFormat: getPageContentMsg.outputFormat,
                 error: error instanceof Error ? error.message : "Unknown error",
               });
             }
