@@ -32,6 +32,15 @@ interface GetPageContentRequest extends BaseMessage {
   outputFormat: OutputFormat; // Add outputFormat
 }
 
+interface GetSummaryContentRequest extends BaseMessage {
+  type: "getSummaryContent";
+}
+
+interface SummaryContentResponse extends BaseMessage {
+  type: "summaryContent";
+  content: string;
+}
+
 interface PageContentResponseMessage extends BaseMessage {
   type: "pageContentResponse";
   content: string;
