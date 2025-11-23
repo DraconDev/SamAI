@@ -879,24 +879,21 @@ Please provide a helpful response about the user's question specifically related
 
           {!isApiKeySet ? (
             <div className="flex items-center justify-center flex-1 p-6">
-              <div className="text-center max-w-[85%]">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#f59e0b] to-[#fbbf24] flex items-center justify-center shadow-xl shadow-yellow-500/30 transform -rotate-6">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <div className="text-center">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[#f59e0b] to-[#fbbf24] flex items-center justify-center shadow-xl shadow-yellow-500/30">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                     <circle cx="12" cy="12" r="3" />
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text">
+                <h3 className="text-base font-bold mb-2 text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text">
                   API Key Required
                 </h3>
-                <p className="mb-5 text-sm leading-relaxed text-gray-300">
-                  Configure your API key to start chatting about this page. I'll analyze the current page content and answer your questions.
-                </p>
                 <button
                   onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
-                  className="px-6 py-3 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white font-bold rounded-xl text-sm hover:shadow-xl hover:shadow-yellow-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="px-5 py-2.5 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white font-bold rounded-xl text-xs hover:shadow-xl hover:shadow-yellow-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
-                  Configure API Key
+                  Configure
                 </button>
               </div>
             </div>
@@ -908,18 +905,15 @@ Please provide a helpful response about the user's question specifically related
                 minHeight: 0, // Important for flex scrolling
               }}>
                 {chatMessages.length === 0 ? (
-                  <div className="py-8 text-center">
-                    <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-xl shadow-green-500/30 transform rotate-3">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                      </svg>
-                    </div>
-                    <h4 className="text-sm font-bold text-[#34d399] mb-2">Ready to chat about this page!</h4>
-                    <p className="mb-2 text-sm text-gray-400">Ask me anything about the current page content.</p>
-                    <div className="space-y-1 text-xs text-gray-500">
-                      <p>• "What is this page about?"</p>
-                      <p>• "Summarize the main points"</p>
-                      <p>• "Explain this concept"</p>
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-xl shadow-green-500/30 transform rotate-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                      </div>
+                      <h4 className="text-base font-bold text-[#34d399] mb-1">Chat Ready</h4>
+                      <p className="text-xs text-gray-400">Ask questions about this page</p>
                     </div>
                   </div>
                 ) : (
