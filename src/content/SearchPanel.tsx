@@ -656,7 +656,7 @@ export default function SearchPanel({
       {activeTab === "sum" && (
         <div style={{ padding: "24px" }}>
           <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600 }}>
-            {isSummarizing ? "Summarizing..." : summary || "Summary ready"}
+            {isSummarizing ? "Summarizing..." : summary}
           </p>
         </div>
       )}
