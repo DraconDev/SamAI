@@ -98,6 +98,7 @@ export default function SearchPanel({
         type: "extractPageContent",
         outputFormat: outputFormat,
       }) as { content?: string } | undefined;
+
       });
 
       if (response?.content) {
