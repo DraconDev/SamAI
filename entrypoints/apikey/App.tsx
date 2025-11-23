@@ -288,7 +288,7 @@ function App() {
 
             {/* Anthropic Section */}
             <div className={selectedProvider === "anthropic" ? "block" : "hidden"}>
-              <div className="space-y-4">
+              <div className="space-y-4 p-5 bg-[#0D0E16]/40 rounded-xl border border-[#2E2F3E]/40">
                 {renderKeyInput(
                   "Anthropic API Key",
                   anthropicKey,
@@ -305,12 +305,30 @@ function App() {
                   "claude-3-haiku-20240307",
                   "e.g., claude-3-opus-20240229"
                 )}
+                <div className="flex gap-2 text-xs">
+                  <a
+                    href="https://docs.anthropic.com/en/docs/about-claude/models"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 px-3 py-2 bg-[#f59e0b]/10 hover:bg-[#f59e0b]/20 text-[#fbbf24] rounded-lg transition-colors text-center font-medium border border-[#f59e0b]/30"
+                  >
+                    📚 Model Docs
+                  </a>
+                  <a
+                    href="https://console.anthropic.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 px-3 py-2 bg-[#f59e0b]/10 hover:bg-[#f59e0b]/20 text-[#fbbf24] rounded-lg transition-colors text-center font-medium border border-[#f59e0b]/30"
+                  >
+                    🎛️ Console
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* OpenRouter Section */}
             <div className={selectedProvider === "openrouter" ? "block" : "hidden"}>
-              <div className="space-y-4">
+              <div className="space-y-4 p-5 bg-[#0D0E16]/40 rounded-xl border border-[#2E2F3E]/40">
                 {renderKeyInput(
                   "OpenRouter API Key",
                   openrouterKey,
@@ -327,14 +345,22 @@ function App() {
                   "openai/gpt-oss-20b",
                   "Enter model ID from OpenRouter"
                 )}
-                <div className="text-right">
+                <div className="flex gap-2 text-xs">
                   <a
                     href="https://openrouter.ai/models"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-[#818cf8] hover:text-[#4f46e5] transition-colors"
+                    className="flex-1 px-3 py-2 bg-[#ec4899]/10 hover:bg-[#ec4899]/20 text-[#f472b6] rounded-lg transition-colors text-center font-medium border border-[#ec4899]/30"
                   >
-                    Browse OpenRouter Models →
+                    🔍 Browse Models
+                  </a>
+                  <a
+                    href="https://openrouter.ai/docs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 px-3 py-2 bg-[#ec4899]/10 hover:bg-[#ec4899]/20 text-[#f472b6] rounded-lg transition-colors text-center font-medium border border-[#ec4899]/30"
+                  >
+                    📚 Docs
                   </a>
                 </div>
               </div>
