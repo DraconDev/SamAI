@@ -355,37 +355,6 @@ Please provide a helpful response about the user's question specifically related
     }
   };
 
-  // Helper function to optimize HTML content
-  const optimizeHtmlContent = (html: string): string => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-
-    // Remove script, style, and other non-content/embedding tags
-    doc
-      .querySelectorAll(
-        "script, style, noscript, link, meta, iframe, svg, canvas, audio, video, picture, source, map, area, track, embed, object"
-      )
-      .forEach((el) => el.remove());
-
-    // Remove comments
-    const comments = doc.createTreeWalker(
-      doc.documentElement,
-      NodeFilter.SHOW_COMMENT,
-      null
-    );
-    let node;
-    while ((node = comments.nextNode())) {
-      node.parentNode?.removeChild(node);
-    }
-
-    // Get the cleaned HTML string
-    let cleanedHtml = doc.documentElement.outerHTML;
-
-    // Collapse multiple whitespace characters into a single space
-    cleanedHtml = cleanedHtml.replace(/\s+/g, " ").trim();
-
-    return cleanedHtml;
-  };
 
   return (
     <div
