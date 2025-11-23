@@ -271,12 +271,7 @@ export default defineContentScript({
                 "[SamAI Content] extractPageContent finished, length:", pageContent.length,
                 "sending to background and caller"
               );
-              browser.runtime.sendMessage({
-                type: "pageContent
-              console.error(
-                "[SamAI Content] Error extracting page content:",
-                error
-              );
+              browser.runtime.send
               browser.runtime.sendMessage({
                 type: "pageContentResponse",
                 content: "",
