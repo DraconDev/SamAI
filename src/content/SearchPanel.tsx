@@ -655,9 +655,19 @@ export default function SearchPanel({
 
       {activeTab === "sum" && (
         <div style={{ padding: "24px" }}>
-          <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600 }}>
-            {isSummarizing ? "Summarizing..." : summary || "Summary ready"}
-          </p>
+          {isSummarizing ? (
+            <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600 }}>
+              Summarizing...
+            </p>
+          ) : summary ? (
+            <div className="prose markdown-content prose-invert max-w-none">
+              <MarkdownRenderer content={summary} />
+            </div>
+          ) : (
+            <p style={{ color: "#94a3b8", fontSize: "16px", fontWeight: 600 }}>
+              Summary ready
+            </p>
+          )}
         </div>
       )}
 
