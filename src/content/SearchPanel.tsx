@@ -11,6 +11,12 @@ interface SearchPanelProps {
   outputFormat: OutputFormat;
 }
 
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+  timestamp: string;
+}
+
 export default function SearchPanel({
   response,
   onClose,
@@ -27,6 +33,14 @@ export default function SearchPanel({
   >("search");
   const [pageBodyText, setPageBodyText] = useState("");
   const [pageOptimizedHtml, setPageOptimizedHtml] = useState("");
+
+  // Chat-related state
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  const [pageContext, setPageContext] = useState<string>("");
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Close panel when clicking outside
   useEffect(() => {
@@ -74,12 +88,16 @@ export default function SearchPanel({
         const result = await browser.storage.local.get([
           "pageBodyText",
           "pageOptimizedHtml",
+          "pageContext",
         ]);
         if (result.pageBodyText) {
           setPageBodyText(result.pageBodyText as string);
         }
         if (result.pageOptimizedHtml) {
           setPageOptimizedHtml(result.pageOptimizedHtml as string);
+        }
+        if (result.pageContext?.content) {
+          setPageContext(result.pageContext.content);
         }
         console.log("[SamAI Sidebar] Loaded page content from storage");
       } catch (error) {
@@ -88,6 +106,11 @@ export default function SearchPanel({
     };
     loadPageContent();
   }, []);
+
+  // Scroll to bottom when chat messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
 
   // Handle Scrape button - extract page content and open in chat
   const handleScrape = async () => {
@@ -226,6 +249,59 @@ ${contentToAnalyze}`;
       setSummaryError(errorMessage);
     } finally {
       setIsSummarizing(false);
+    }
+  };
+
+  // Handle chat message sending
+  const handleSendChatMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isApiKeySet || !chatInput.trim() || isChatLoading) return;
+
+    const userMessage: ChatMessage = {
+      role: "user",
+      content: chatInput,
+      timestamp: new Date().toLocaleTimeString(),
+    };
+
+    // Add user message
+    setChatMessages(prev => [...prev, userMessage]);
+    setChatInput("");
+    setIsChatLoading(true);
+
+    try {
+      // Prepare the prompt with page context if available
+      let fullPrompt = chatInput;
+      
+      const contentToUse = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
+      if (contentToUse) {
+        fullPrompt = `${chatInput}
+
+Page Content: ${contentToUse}`;
+      }
+
+      const response = await generateFormResponse(fullPrompt);
+      
+      if (!response) {
+        throw new Error("No response received from AI");
+      }
+
+      const aiMessage: ChatMessage = {
+        role: "assistant",
+        content: response,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      setChatMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      console.error("Error sending chat message:", error);
+      const errorMessage: ChatMessage = {
+        role: "assistant",
+        content: "Sorry, I encountered an error. Please try again.",
+        timestamp: new Date().toLocaleTimeString(),
+      };
+      setChatMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsChatLoading(false);
     }
   };
 
@@ -717,12 +793,114 @@ ${contentToAnalyze}`;
         </div>
       )}
 
-      {/* Chat Tab Content - Coming soon placeholder */}
+      {/* Chat Tab Content */}
       {activeTab === "chat" && (
-        <div style={{ padding: "24px", textAlign: "center" }}>
-          <p style={{ color: "#34d399", fontSize: "16px", fontWeight: 600 }}>
-            Chat opened in new tab!
-          </p>
+        <div style={{ height: "calc(100vh - 200px)", display: "flex", flexDirection: "column" }}>
+          {!isApiKeySet ? (
+            <div className="flex items-center justify-center flex-1">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#818cf8] flex items-center justify-center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold mb-2 text-transparent bg-gradient-to-r from-[#34d399] to-[#10b981] bg-clip-text">
+                  API Key Required
+                </h3>
+                <p className="mb-4 text-sm text-gray-400">
+                  Please configure your API key to start chatting about this page.
+                </p>
+                <button
+                  onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
+                  className="px-4 py-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+                >
+                  Configure API Key
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Chat Messages */}
+              <div className="flex-1 pr-2 mb-4 space-y-3 overflow-y-auto" style={{ maxHeight: "400px" }}>
+                {chatMessages.length === 0 ? (
+                  <div className="py-8 text-center text-gray-400">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-[#10b981] to-[#34d399] flex items-center justify-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      </svg>
+                    </div>
+                    <p className="text-sm">Start a conversation about this page!</p>
+                  </div>
+                ) : (
+                  chatMessages.map((message, index) => (
+                    <div
+                      key={index}
+                      className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                    >
+                      <div
+                        className={`max-w-[85%] p-3 rounded-lg ${
+                          message.role === "user"
+                            ? "bg-gradient-to-r from-[#10b981] to-[#34d399] text-white"
+                            : "bg-[#1E1F2E] border border-[#2E2F3E] text-gray-100"
+                        }`}
+                      >
+                        {message.role === "user" ? (
+                          <div className="text-sm">{message.content}</div>
+                        ) : (
+                          <div className="text-sm prose prose-invert max-w-none">
+                            <MarkdownRenderer content={message.content} />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                )}
+                {isChatLoading && (
+                  <div className="flex justify-start">
+                    <div className="bg-[#1E1F2E] border border-[#2E2F3E] p-3 rounded-lg">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" />
+                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
+                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                        </div>
+                        <span className="text-xs text-gray-400">AI is thinking...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Chat Input */}
+              <form onSubmit={handleSendChatMessage} className="space-y-3">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    placeholder="Ask about this page..."
+                    className="flex-1 p-3 bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-lg text-gray-100 placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#10b981] focus:border-[#10b981] transition-all duration-200"
+                    disabled={isChatLoading}
+                  />
+                  <button
+                    type="submit"
+                    disabled={isChatLoading || !chatInput.trim()}
+                    className="px-4 py-3 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-semibold rounded-lg text-sm hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isChatLoading ? (
+                      <div className="w-4 h-4 border-2 rounded-full border-white/30 border-t-white animate-spin" />
+                    ) : (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       )}
 
