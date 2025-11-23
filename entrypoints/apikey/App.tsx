@@ -369,12 +369,18 @@ function App() {
 
           <button
             onClick={handleSave}
-            className="w-full p-2.5 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-lg 
-                     hover:opacity-90 focus:outline-none focus:ring-2 
+            className="w-full p-4 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl
+                     hover:shadow-xl hover:shadow-[#4f46e5]/30 focus:outline-none focus:ring-2
                      focus:ring-[#4f46e5] focus:ring-offset-2 focus:ring-offset-[#1E1F2E]
-                     transition-all duration-200 transform hover:scale-[0.98] mt-4"
+                     transition-all duration-300 transform hover:scale-[1.02] mt-6
+                     font-bold text-base border border-[#4f46e5]/30 flex items-center justify-center gap-2"
           >
-            Save Configuration
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            <span>Save Configuration</span>
           </button>
 
           {saved && (
