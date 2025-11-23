@@ -96,14 +96,9 @@ export default function SearchPanel({
         if (result.pageOptimizedHtml) {
           setPageOptimizedHtml(result.pageOptimizedHtml as string);
         }
-        if (
-          result.pageContext &&
-          typeof result.pageContext === "object" &&
-          "content" in result.pageContext
-        ) {
+        if (result.pageContext && typeof result.pageContext === 'object' && 'content' in result.pageContext) {
           setPageContext((result.pageContext as { content: string }).content);
         }
-
         console.log("[SamAI Sidebar] Loaded page content from storage");
       } catch (error) {
         console.error("[SamAI Sidebar] Error loading page content:", error);
@@ -122,10 +117,10 @@ export default function SearchPanel({
     setIsScraping(true);
     try {
       // Send message to background script to extract page content
-      const response = (await browser.runtime.sendMessage({
+      const response = await browser.runtime.sendMessage({
         type: "extractPageContent",
         outputFormat: outputFormat,
-      })) as { content?: string } | undefined;
+      }) as { content?: string } | undefined;
 
       if (response?.content) {
         // Store content in pageContextStore
@@ -165,10 +160,10 @@ export default function SearchPanel({
   // Handle Chat button - opens chat with page as context
   const handleChat = async () => {
     try {
-      const response = (await browser.runtime.sendMessage({
+      const response = await browser.runtime.sendMessage({
         type: "extractPageContent",
         outputFormat: outputFormat,
-      })) as { content?: string } | undefined;
+      }) as { content?: string } | undefined;
 
       if (response?.content) {
         await browser.storage.local.set({
@@ -194,15 +189,12 @@ export default function SearchPanel({
 
     try {
       // Use the same approach as context popup - get content from storage first
-      let contentToAnalyze =
-        outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
+      let contentToAnalyze = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
 
       // If no content in storage, extract it directly (like content script does)
       if (!contentToAnalyze) {
-        console.log(
-          "[SamAI] No stored content found, extracting directly from page"
-        );
-
+        console.log("[SamAI] No stored content found, extracting directly from page");
+        
         // Extract content directly from the current page
         try {
           if (outputFormat === "html") {
@@ -216,7 +208,7 @@ export default function SearchPanel({
           console.error("[SamAI] Error extracting page content:", error);
           throw new Error("Failed to extract page content");
         }
-
+        
         if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
           throw new Error("No readable content found on this page.");
         }
@@ -227,9 +219,7 @@ export default function SearchPanel({
           await browser.storage.local.set({ pageBodyText: contentToAnalyze });
         } else {
           setPageOptimizedHtml(contentToAnalyze);
-          await browser.storage.local.set({
-            pageOptimizedHtml: contentToAnalyze,
-          });
+          await browser.storage.local.set({ pageOptimizedHtml: contentToAnalyze });
         }
       }
 
@@ -242,14 +232,12 @@ Content to summarize:
 ${contentToAnalyze}`;
 
       console.log("[SamAI] Calling AI for summarization...");
-
+      
       // Call AI to generate summary
       const summaryText = await generateFormResponse(prompt);
 
       if (!summaryText) {
-        throw new Error(
-          "No summary received from AI. Please check your API key configuration."
-        );
+        throw new Error("No summary received from AI. Please check your API key configuration.");
       }
 
       console.log("[SamAI] Summary generated successfully");
@@ -276,16 +264,15 @@ ${contentToAnalyze}`;
     };
 
     // Add user message
-    setChatMessages((prev) => [...prev, userMessage]);
+    setChatMessages(prev => [...prev, userMessage]);
     setChatInput("");
     setIsChatLoading(true);
 
     try {
       // Prepare the prompt with page context if available
       let fullPrompt = chatInput;
-
-      const contentToUse =
-        outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
+      
+      const contentToUse = outputFormat === "html" ? pageOptimizedHtml : pageBodyText;
       if (contentToUse) {
         fullPrompt = `${chatInput}
 
@@ -293,7 +280,7 @@ Page Content: ${contentToUse}`;
       }
 
       const response = await generateFormResponse(fullPrompt);
-
+      
       if (!response) {
         throw new Error("No response received from AI");
       }
@@ -304,7 +291,7 @@ Page Content: ${contentToUse}`;
         timestamp: new Date().toLocaleTimeString(),
       };
 
-      setChatMessages((prev) => [...prev, aiMessage]);
+      setChatMessages(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error("Error sending chat message:", error);
       const errorMessage: ChatMessage = {
@@ -312,7 +299,7 @@ Page Content: ${contentToUse}`;
         content: "Sorry, I encountered an error. Please try again.",
         timestamp: new Date().toLocaleTimeString(),
       };
-      setChatMessages((prev) => [...prev, errorMessage]);
+      setChatMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsChatLoading(false);
     }
@@ -806,42 +793,49 @@ Page Content: ${contentToUse}`;
         </div>
       )}
 
-      {/* Chat Tab Content */}
+      {/* Chat Tab Content - Enhanced Bottom Positioned Chat */}
       {activeTab === "chat" && (
-        <div
+        <div 
+          className="flex flex-col h-[calc(100vh-250px)] bg-gradient-to-b from-[#1a1b2e]/30 to-[#0D0E16]/50 rounded-2xl border border-[#2E2F3E]/30 backdrop-blur-sm"
           style={{
-            height: "calc(100vh - 200px)",
-            display: "flex",
-            flexDirection: "column",
+            background: 'linear-gradient(180deg, rgba(26, 27, 46, 0.3) 0%, rgba(13, 14, 22, 0.5) 100%)',
+            backdropFilter: 'blur(12px)',
+            boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3)',
           }}
         >
+          {/* Chat Header */}
+          <div className="flex items-center gap-3 p-4 border-b border-[#2E2F3E]/30">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#10b981] to-[#34d399] flex items-center justify-center shadow-lg shadow-green-500/20">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-transparent bg-gradient-to-r from-[#34d399] to-[#10b981] bg-clip-text">
+                Page Chat
+              </h3>
+              <p className="text-xs text-gray-400">Ask questions about this page</p>
+            </div>
+          </div>
+
           {!isApiKeySet ? (
-            <div className="flex items-center justify-center flex-1">
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-r from-[#4f46e5] to-[#818cf8] flex items-center justify-center">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2"
-                  >
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <div className="flex items-center justify-center flex-1 p-6">
+              <div className="text-center max-w-[80%]">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] flex items-center justify-center shadow-lg">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-transparent bg-gradient-to-r from-[#34d399] to-[#10b981] bg-clip-text">
+                <h3 className="text-lg font-bold mb-2 text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text">
                   API Key Required
                 </h3>
                 <p className="mb-4 text-sm text-gray-400">
-                  Please configure your API key to start chatting about this
-                  page.
+                  Please configure your API key to start chatting about this page.
                 </p>
                 <button
-                  onClick={() =>
-                    browser.runtime.sendMessage({ type: "openApiKeyPage" })
-                  }
-                  className="px-4 py-2 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+                  onClick={() => browser.runtime.sendMessage({ type: "openApiKeyPage" })}
+                  className="px-4 py-2 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-white font-semibold rounded-lg text-sm hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                 >
                   Configure API Key
                 </button>
@@ -849,75 +843,57 @@ Page Content: ${contentToUse}`;
             </div>
           ) : (
             <>
-              {/* Chat Messages */}
-              <div
-                className="flex-1 pr-2 mb-4 space-y-3 overflow-y-auto"
-                style={{ maxHeight: "400px" }}
-              >
+              {/* Chat Messages Container */}
+              <div className="flex-1 p-4 space-y-3 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
                 {chatMessages.length === 0 ? (
-                  <div className="py-8 text-center text-gray-400">
-                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-[#10b981] to-[#34d399] flex items-center justify-center">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="white"
-                        strokeWidth="2"
-                      >
+                  <div className="py-8 text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-[#10b981] to-[#34d399] flex items-center justify-center shadow-lg shadow-green-500/20">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                       </svg>
                     </div>
-                    <p className="text-sm">
-                      Start a conversation about this page!
-                    </p>
+                    <p className="mb-2 text-sm text-gray-400">Start a conversation about this page!</p>
+                    <p className="text-xs text-gray-500">Ask questions, request summaries, or get insights</p>
                   </div>
                 ) : (
                   chatMessages.map((message, index) => (
                     <div
                       key={index}
-                      className={`flex ${
-                        message.role === "user"
-                          ? "justify-end"
-                          : "justify-start"
-                      }`}
+                      className={`flex animate-fade-in ${message.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       <div
-                        className={`max-w-[85%] p-3 rounded-lg ${
+                        className={`max-w-[85%] p-3 rounded-2xl shadow-lg backdrop-blur-sm ${
                           message.role === "user"
-                            ? "bg-gradient-to-r from-[#10b981] to-[#34d399] text-white"
-                            : "bg-[#1E1F2E] border border-[#2E2F3E] text-gray-100"
+                            ? "bg-gradient-to-br from-[#10b981] to-[#34d399] text-white ml-4"
+                            : "bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border border-[#2E2F3E]/50 text-gray-100 mr-4"
                         }`}
                       >
                         {message.role === "user" ? (
-                          <div className="text-sm">{message.content}</div>
+                          <div className="text-sm font-medium">{message.content}</div>
                         ) : (
-                          <div className="text-sm prose prose-invert max-w-none">
+                          <div className="text-sm prose-sm prose prose-invert max-w-none">
                             <MarkdownRenderer content={message.content} />
                           </div>
                         )}
+                        <div className={`text-xs mt-1 opacity-70 ${
+                          message.role === "user" ? "text-green-100" : "text-gray-400"
+                        }`}>
+                          {message.timestamp}
+                        </div>
                       </div>
                     </div>
                   ))
                 )}
                 {isChatLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-[#1E1F2E] border border-[#2E2F3E] p-3 rounded-lg">
-                      <div className="flex items-center space-x-2">
+                  <div className="flex justify-start animate-fade-in">
+                    <div className="bg-gradient-to-br from-[#1E1F2E] to-[#2a2b3e] border border-[#2E2F3E]/50 p-3 rounded-2xl mr-4 shadow-lg backdrop-blur-sm">
+                      <div className="flex items-center space-x-3">
                         <div className="flex space-x-1">
-                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce" />
-                          <div
-                            className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce"
-                            style={{ animationDelay: "0.1s" }}
-                          />
-                          <div
-                            className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce"
-                            style={{ animationDelay: "0.2s" }}
-                          />
+                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" />
+                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" style={{ animationDelay: "0.1s" }} />
+                          <div className="w-2 h-2 bg-[#34d399] rounded-full animate-bounce shadow-sm" style={{ animationDelay: "0.2s" }} />
                         </div>
-                        <span className="text-xs text-gray-400">
-                          AI is thinking...
-                        </span>
+                        <span className="text-xs text-[#34d399] font-medium">AI is thinking...</span>
                       </div>
                     </div>
                   </div>
@@ -926,39 +902,38 @@ Page Content: ${contentToUse}`;
               </div>
 
               {/* Chat Input */}
-              <form onSubmit={handleSendChatMessage} className="space-y-3">
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={chatInput}
-                    onChange={(e) => setChatInput(e.target.value)}
-                    placeholder="Ask about this page..."
-                    className="flex-1 p-3 bg-[#1a1b2e]/50 border border-[#2E2F3E]/50 rounded-lg text-gray-100 placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#10b981] focus:border-[#10b981] transition-all duration-200"
-                    disabled={isChatLoading}
-                  />
-                  <button
-                    type="submit"
-                    disabled={isChatLoading || !chatInput.trim()}
-                    className="px-4 py-3 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-semibold rounded-lg text-sm hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isChatLoading ? (
-                      <div className="w-4 h-4 border-2 rounded-full border-white/30 border-t-white animate-spin" />
-                    ) : (
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              </form>
+              <div className="p-4 border-t border-[#2E2F3E]/30 bg-gradient-to-r from-[#1E1F2E]/50 to-[#2a2b3e]/50 backdrop-blur-sm">
+                <form onSubmit={handleSendChatMessage} className="space-y-2">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      placeholder="Ask about this page..."
+                      className="flex-1 p-3 bg-[#0D0E16]/50 border border-[#2E2F3E]/50 rounded-xl text-gray-100 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#34d399] focus:border-[#34d399] transition-all duration-200 backdrop-blur-sm"
+                      disabled={isChatLoading}
+                      style={{
+                        background: 'rgba(13, 14, 22, 0.5)',
+                        border: '1px solid rgba(46, 47, 62, 0.5)',
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      disabled={isChatLoading || !chatInput.trim()}
+                      className="px-4 py-3 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white font-semibold rounded-xl text-sm hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+                    >
+                      {isChatLoading ? (
+                        <div className="w-4 h-4 border-2 rounded-full border-white/30 border-t-white animate-spin" />
+                      ) : (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </>
           )}
         </div>
@@ -969,14 +944,7 @@ Page Content: ${contentToUse}`;
           {isSummarizing ? (
             <div style={{ textAlign: "center" }}>
               <div className="loading-orb"></div>
-              <p
-                style={{
-                  color: "#fbbf24",
-                  fontSize: "16px",
-                  fontWeight: 600,
-                  marginTop: "16px",
-                }}
-              >
+              <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600, marginTop: "16px" }}>
                 Summarizing page content...
               </p>
               <style>{`
@@ -1005,13 +973,7 @@ Page Content: ${contentToUse}`;
               <MarkdownRenderer content={summary} />
             </div>
           ) : (
-            <div
-              style={{
-                color: "#94a3b8",
-                fontSize: "14px",
-                textAlign: "center",
-              }}
-            >
+            <div style={{ color: "#94a3b8", fontSize: "14px", textAlign: "center" }}>
               Click the "Sum" tab to summarize this page.
             </div>
           )}
