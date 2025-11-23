@@ -146,6 +146,7 @@ export default function SearchPanel({
 
   // Handle Sum button - summarize page and display in sidebar
   const handleSummarize = async () => {
+    console.log("[SamAI] Starting summarization...");
     setIsSummarizing(true);
     setActiveTab("sum");
     setSummaryError("");
@@ -159,20 +160,26 @@ export default function SearchPanel({
       });
       if (!tabs[0]?.id) throw new Error("No active tab found");
 
+      console.log("[SamAI] Sending getPageContent message to tab:", tabs[0].id);
       const response = (await browser.tabs.sendMessage(tabs[0].id, {
         type: "getPageContent",
         outputFormat: "text", // Always use text for summarization
       })) as { content?: string };
 
+      console.log("[SamAI] Received response:", response);
+
       if (!response?.content) throw new Error("No content extracted from page");
 
       // 2. Truncate content to reasonable size (about 6000 words)
       const truncatedContent = response.content.slice(0, 24000);
+      console.log("[SamAI] Truncated content length:", truncatedContent.length);
 
       // 3. Call AI to generate summary
       const prompt = `Please provide a clear and concise summary of the following web page content. Focus on the main points and key information:\n\n${truncatedContent}`;
+      console.log("[SamAI] Sending AI request...");
 
       const summaryText = await generateFormResponse(prompt);
+      console.log("[SamAI] AI response received:", summaryText ? "Success" : "Failed");
 
       if (!summaryText) {
         throw new Error("No summary received from AI");
@@ -180,9 +187,10 @@ export default function SearchPanel({
 
       setSummary(summaryText);
     } catch (error) {
-      console.error("Error summarizing page:", error);
+      console.error("[SamAI] Error summarizing page:", error);
       const errorMessage =
         error instanceof Error ? error.message : "Failed to summarize page";
+      console.log("[SamAI] Setting error message:", errorMessage);
       setSummaryError(errorMessage);
     } finally {
       setIsSummarizing(false);
@@ -316,6 +324,7 @@ export default function SearchPanel({
           <button
             key={tab.id}
             onClick={() => {
+              console.log("[SamAI] Tab clicked:", tab.id);
               setActiveTab(tab.id);
               if (tab.id === "chat") handleChat();
               if (tab.id === "sum") handleSummarize();
@@ -659,9 +668,17 @@ export default function SearchPanel({
             <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600 }}>
               Summarizing...
             </p>
+          ) : summaryError ? (
+            <div style={{ color: "#ef4444", fontSize: "14px" }}>
+              <strong>Error:</strong> {summaryError}
+            </div>
           ) : summary ? (
             <MarkdownRenderer content={summary} />
-          ) : null}
+          ) : (
+            <div style={{ color: "#94a3b8", fontSize: "14px" }}>
+              Click the "Sum" tab to summarize this page.
+            </div>
+          )}
         </div>
       )}
 
