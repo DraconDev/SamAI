@@ -966,57 +966,130 @@ Please provide a helpful response about the user's question specifically related
               </div>
 
               {/* Enhanced Chat Input - Fixed at Bottom */}
-              <div className="flex-shrink-0 p-4 border-t border-slate-700/40 bg-gradient-to-r from-slate-800/95 to-slate-700/95 backdrop-blur-xl">
-                <form onSubmit={handleSendChatMessage} className="space-y-3">
+              <div style={{
+                flexShrink: 0,
+                padding: "16px",
+                borderTop: "1px solid rgba(51, 65, 85, 0.4)",
+                background: "linear-gradient(to right, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95))",
+                backdropFilter: "blur(24px)",
+              }}>
+                <form onSubmit={handleSendChatMessage} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   {/* Include Page Content Checkbox */}
-                  <div className="flex items-center gap-2 pb-2">
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", paddingBottom: "8px" }}>
                     <input
                       type="checkbox"
                       id="includePageContent"
                       checked={includePageContent}
                       onChange={(e) => setIncludePageContent(e.target.checked)}
-                      className="w-4 h-4 rounded cursor-pointer border-slate-600 bg-slate-800 text-emerald-500 focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-0 focus:ring-offset-transparent"
                       style={{
+                        width: "16px",
+                        height: "16px",
+                        borderRadius: "4px",
+                        cursor: "pointer",
                         accentColor: '#10b981',
                       }}
                     />
                     <label
                       htmlFor="includePageContent"
-                      className="text-xs transition-colors cursor-pointer select-none text-slate-400 hover:text-slate-300"
+                      style={{
+                        fontSize: "12px",
+                        color: "#94a3b8",
+                        cursor: "pointer",
+                        userSelect: "none",
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = "#cbd5e1"}
+                      onMouseLeave={(e) => e.currentTarget.style.color = "#94a3b8"}
                     >
                       Include page content in chat
                     </label>
                   </div>
 
-                  <div className="flex gap-3">
-                    <div className="relative flex-1">
+                  <div style={{ display: "flex", gap: "12px" }}>
+                    <div style={{ position: "relative", flex: 1 }}>
                       <input
                         type="text"
                         value={chatInput}
                         onChange={(e) => setChatInput(e.target.value)}
                         placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
-                        className="w-full h-12 px-4 py-3 text-sm font-medium transition-all duration-200 ease-in-out border-2 shadow-lg bg-slate-800/90 border-slate-600/60 rounded-xl text-slate-100 placeholder-slate-400/70 focus:outline-none focus:ring-4 focus:ring-emerald-500/25 focus:border-emerald-500 hover:border-slate-500/80 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{
-                          backgroundColor: 'rgba(30, 41, 59, 0.9)',
-                          borderColor: 'rgba(71, 85, 105, 0.6)',
+                          width: "100%",
+                          height: "48px",
+                          padding: "0 16px",
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          color: "#f1f5f9",
+                          backgroundColor: "rgba(30, 41, 59, 0.9)",
+                          border: "2px solid rgba(71, 85, 105, 0.6)",
+                          borderRadius: "12px",
+                          outline: "none",
+                          transition: "all 0.2s ease-in-out",
+                          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.borderColor = "#10b981";
+                          e.target.style.boxShadow = "0 0 0 4px rgba(16, 185, 129, 0.25)";
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.borderColor = "rgba(71, 85, 105, 0.6)";
+                          e.target.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
                         }}
                         disabled={isChatLoading || isExtractingContent}
                       />
                       {(isChatLoading || isExtractingContent) && (
-                        <div className="absolute transform -translate-y-1/2 right-3 top-1/2">
-                          <div className="w-5 h-5 border-2 rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin"></div>
+                        <div style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "12px",
+                          transform: "translateY(-50%)"
+                        }}>
+                          <div className="loading-spinner" style={{
+                            width: "20px",
+                            height: "20px",
+                            border: "2px solid rgba(16, 185, 129, 0.3)",
+                            borderTopColor: "#34d399",
+                            borderRadius: "50%",
+                            animation: "spin 1s linear infinite"
+                          }}></div>
+                          <style>{`
+                            @keyframes spin {
+                              to { transform: rotate(360deg); }
+                            }
+                          `}</style>
                         </div>
                       )}
                     </div>
                     <button
                       type="submit"
                       disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
-                      className="h-12 px-6 py-3 text-sm font-bold text-white transition-all duration-200 ease-in-out transform border-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 focus:outline-none focus:ring-4 focus:ring-emerald-500/25 border-emerald-400/50 shadow-lg backdrop-blur-sm flex items-center justify-center min-w-[60px]"
                       style={{
-                        background: (isChatLoading || isExtractingContent || !chatInput.trim()) 
-                          ? 'linear-gradient(to right, #6b7280, #9ca3af)' 
+                        height: "48px",
+                        padding: "0 24px",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                        color: "white",
+                        background: (isChatLoading || isExtractingContent || !chatInput.trim())
+                          ? 'linear-gradient(to right, #6b7280, #9ca3af)'
                           : 'linear-gradient(to right, #10b981, #34d399)',
-                        borderColor: 'rgba(16, 185, 129, 0.5)',
+                        border: "2px solid rgba(16, 185, 129, 0.5)",
+                        borderRadius: "12px",
+                        cursor: (isChatLoading || isExtractingContent || !chatInput.trim()) ? "not-allowed" : "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        minWidth: "60px",
+                        transition: "all 0.2s ease",
+                        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+                        opacity: (isChatLoading || isExtractingContent || !chatInput.trim()) ? 0.7 : 1,
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!(isChatLoading || isExtractingContent || !chatInput.trim())) {
+                          e.currentTarget.style.transform = "scale(1.05)";
+                          e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(16, 185, 129, 0.25)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
+                        e.currentTarget.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
                       }}
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1025,9 +1098,9 @@ Please provide a helpful response about the user's question specifically related
                       </svg>
                     </button>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-slate-500">
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "12px", color: "#64748b" }}>
                     <span>Press Enter to send</span>
-                    <span className="font-medium text-emerald-400">
+                    <span style={{ fontWeight: 500, color: "#34d399" }}>
                       {outputFormat === "html" ? "📄 HTML" : "📝 Text"} mode
                     </span>
                   </div>
