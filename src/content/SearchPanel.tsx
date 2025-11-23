@@ -156,7 +156,7 @@ export default function SearchPanel({
     }
   };
 
-  // Handle Sum button - reuse context popup logic
+  // Handle Sum button - summarize page content
   const handleSummarize = async () => {
     console.log("[SamAI] Starting summarization...");
     setIsSummarizing(true);
@@ -172,54 +172,19 @@ export default function SearchPanel({
       if (!contentToAnalyze) {
         console.log("[SamAI] No stored content found, extracting directly from page");
         
-        // Try to extract content directly using the same method as content script
-        const extractPageContent = (format: "text" | "html") => {
-          try {
-            if (format === "html") {
-              const fullHtml = document.documentElement.outerHTML;
-              return optimizeHtmlContent(fullHtml);
-            } else {
-              const content = document.body.innerText;
-              return content.trim();
-            }
-          } catch (error) {
-            console.error("[SamAI] Error extracting page content:", error);
-            return "";
+        // Extract content directly from the current page
+        try {
+          if (outputFormat === "html") {
+            const fullHtml = document.documentElement.outerHTML;
+            contentToAnalyze = optimizeHtmlContent(fullHtml);
+          } else {
+            const content = document.body.innerText;
+            contentToAnalyze = content.trim();
           }
-        };
-
-        const optimizeHtmlContent = (html: string): string => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, "text/html");
-
-          // Remove script, style, and other non-content/embedding tags
-          doc
-            .querySelectorAll(
-              "script, style, noscript, link, meta, iframe, svg, canvas, audio, video, picture, source, map, area, track, embed, object"
-            )
-            .forEach((el) => el.remove());
-
-          // Remove comments
-          const comments = doc.createTreeWalker(
-            doc.documentElement,
-            NodeFilter.SHOW_COMMENT,
-            null
-          );
-          let node;
-          while ((node = comments.nextNode())) {
-            node.parentNode?.removeChild(node);
-          }
-
-          // Get the cleaned HTML string
-          let cleanedHtml = doc.documentElement.outerHTML;
-
-          // Collapse multiple whitespace characters into a single space
-          cleanedHtml = cleanedHtml.replace(/\s+/g, " ").trim();
-
-          return cleanedHtml;
-        };
-
-        contentToAnalyze = extractPageContent(outputFormat);
+        } catch (error) {
+          console.error("[SamAI] Error extracting page content:", error);
+          throw new Error("Failed to extract page content");
+        }
         
         if (!contentToAnalyze || contentToAnalyze.trim().length === 0) {
           throw new Error("No readable content found on this page.");
@@ -237,18 +202,22 @@ export default function SearchPanel({
 
       console.log("[SamAI] Using content length:", contentToAnalyze.length);
 
-      // Create summarization prompt (same as context popup)
-      const prompt = `summarize`;
+      // Create a proper summarization prompt
+      const prompt = `Please provide a comprehensive summary of the following content. Focus on the main points, key information, and important details. Structure your summary with clear sections and bullet points where appropriate.
 
-      // Call AI to generate summary (same as context popup)
-      const summaryText = await generateFormResponse(
-        `${prompt}\n\nContent: ${contentToAnalyze}`
-      );
+Content to summarize:
+${contentToAnalyze}`;
+
+      console.log("[SamAI] Calling AI for summarization...");
+      
+      // Call AI to generate summary
+      const summaryText = await generateFormResponse(prompt);
 
       if (!summaryText) {
-        throw new Error("No summary received from AI");
+        throw new Error("No summary received from AI. Please check your API key configuration.");
       }
 
+      console.log("[SamAI] Summary generated successfully");
       setSummary(summaryText);
     } catch (error) {
       console.error("[SamAI] Error summarizing page:", error);
@@ -258,6 +227,38 @@ export default function SearchPanel({
     } finally {
       setIsSummarizing(false);
     }
+  };
+
+  // Helper function to optimize HTML content
+  const optimizeHtmlContent = (html: string): string => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    // Remove script, style, and other non-content/embedding tags
+    doc
+      .querySelectorAll(
+        "script, style, noscript, link, meta, iframe, svg, canvas, audio, video, picture, source, map, area, track, embed, object"
+      )
+      .forEach((el) => el.remove());
+
+    // Remove comments
+    const comments = doc.createTreeWalker(
+      doc.documentElement,
+      NodeFilter.SHOW_COMMENT,
+      null
+    );
+    let node;
+    while ((node = comments.nextNode())) {
+      node.parentNode?.removeChild(node);
+    }
+
+    // Get the cleaned HTML string
+    let cleanedHtml = doc.documentElement.outerHTML;
+
+    // Collapse multiple whitespace characters into a single space
+    cleanedHtml = cleanedHtml.replace(/\s+/g, " ").trim();
+
+    return cleanedHtml;
   };
 
   return (
@@ -728,17 +729,38 @@ export default function SearchPanel({
       {activeTab === "sum" && (
         <div style={{ padding: "24px" }}>
           {isSummarizing ? (
-            <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600 }}>
-              Summarizing...
-            </p>
+            <div style={{ textAlign: "center" }}>
+              <div className="loading-orb"></div>
+              <p style={{ color: "#fbbf24", fontSize: "16px", fontWeight: 600, marginTop: "16px" }}>
+                Summarizing page content...
+              </p>
+              <style>{`
+                .loading-orb {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+                  filter: blur(10px);
+                  animation: pulse-glow 1.5s infinite;
+                  margin: 0 auto;
+                }
+                @keyframes pulse-glow {
+                  0% { transform: scale(0.8); opacity: 0.5; }
+                  50% { transform: scale(1.2); opacity: 0.8; }
+                  100% { transform: scale(0.8); opacity: 0.5; }
+                }
+              `}</style>
+            </div>
           ) : summaryError ? (
             <div style={{ color: "#ef4444", fontSize: "14px" }}>
               <strong>Error:</strong> {summaryError}
             </div>
           ) : summary ? (
-            <MarkdownRenderer content={summary} />
+            <div className="prose markdown-content prose-invert max-w-none">
+              <MarkdownRenderer content={summary} />
+            </div>
           ) : (
-            <div style={{ color: "#94a3b8", fontSize: "14px" }}>
+            <div style={{ color: "#94a3b8", fontSize: "14px", textAlign: "center" }}>
               Click the "Sum" tab to summarize this page.
             </div>
           )}
