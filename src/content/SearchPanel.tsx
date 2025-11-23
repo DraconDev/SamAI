@@ -19,6 +19,9 @@ export default function SearchPanel({
   const panelRef = useRef<HTMLDivElement>(null);
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [isScraping, setIsScraping] = useState(false);
+  const [chatMessages, setChatMessages] = useState&lt;{role: 'user' | 'assistant', content: string}[]&gt;([]);
+  const [chatInput, setChatInput] = useState('');
+  const [isChatting, setIsChatting] = useState(false);
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [summary, setSummary] = useState<string>("");
   const [summaryError, setSummaryError] = useState<string>("");
