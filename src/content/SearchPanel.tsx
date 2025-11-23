@@ -99,8 +99,6 @@ export default function SearchPanel({
         outputFormat: outputFormat,
       }) as { content?: string } | undefined;
 
-      });
-
       if (response?.content) {
         // Store content in pageContextStore
         await browser.storage.local.set({
@@ -142,7 +140,7 @@ export default function SearchPanel({
       const response = await browser.runtime.sendMessage({
         type: "extractPageContent",
         outputFormat: outputFormat,
-      });
+      }) as { content?: string } | undefined;
 
       if (response?.content) {
         await browser.storage.local.set({
