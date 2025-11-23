@@ -117,7 +117,8 @@ function injectStyles() {
 
 export async function showSidePanel(
   response: string | null,
-  toggleIfOpen: boolean = false
+  toggleIfOpen: boolean = false,
+  onSummarize?: () => void
 ) {
   // If toggle is requested and panel exists, close it and return
   if (toggleIfOpen && samaiPanelContainer) {
@@ -150,6 +151,7 @@ export async function showSidePanel(
             samaiPanelContainer = null;
           }
         },
+        onSummarize,
       })
     );
     return;
@@ -189,6 +191,7 @@ export async function showSidePanel(
             samaiPanelContainer = null;
           }
         },
+        onSummarize,
       })
     );
   }
