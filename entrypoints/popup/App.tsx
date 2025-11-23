@@ -43,7 +43,7 @@ function App() {
   };
 
   return (
-    <div className="p-6 w-[360px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100 shadow-2xl" style={{ minHeight: '500px' }}>
+    <div className="p-6 w-[360px] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100 shadow-2xl min-h-[500px]">
       {/* Header with animated gradient */}
       <div className="relative mb-6 text-center">
         <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5]/20 via-[#818cf8]/20 to-[#4f46e5]/20 blur-3xl animate-pulse" style={{ animationDuration: '3s' }}></div>
