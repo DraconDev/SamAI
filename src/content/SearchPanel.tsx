@@ -316,11 +316,11 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         {response ? (
           outputFormat === "html" ? (
             <div
-              className="optimized-html-content prose prose-invert max-w-none"
+              className="prose optimized-html-content prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: response }}
             />
           ) : (
-            <div className="markdown-content prose prose-invert max-w-none">
+            <div className="prose markdown-content prose-invert max-w-none">
               <MarkdownRenderer content={response} />
             </div>
           )
@@ -435,7 +435,7 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
             <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#60a5fa] to-[#3b82f6] bg-clip-text">
               Page Scraper
             </h3>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="mb-4 text-sm text-gray-400">
               Extract content from the current page and send it to chat for analysis.
             </p>
             <button
@@ -456,7 +456,6 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
         </div>
       )}
 
-      {/* Sum Tab Content - Coming soon placeholder */}
       {activeTab === 'sum' && (
         <div style={{ padding: '24px', textAlign: 'center' }}>
           <p style={{ color: '#fbbf24', fontSize: '16px', fontWeight: 600 }}>
@@ -472,14 +471,14 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
             <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#a78bfa] to-[#8b5cf6] bg-clip-text">
               Smart Form Filler
             </h3>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="mb-4 text-sm text-gray-400">
               AI-powered form filling feature coming soon!
             </p>
-            <div className="text-center py-8">
+            <div className="py-8 text-center">
               <svg className="w-16 h-16 mx-auto mb-4 text-[#8b5cf6]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
               </svg>
-              <p className="text-gray-500 text-sm">Feature in development</p>
+              <p className="text-sm text-gray-500">Feature in development</p>
             </div>
           </div>
         </div>
@@ -492,16 +491,16 @@ export default function SearchPanel({ response, onClose, outputFormat }: SearchP
             <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#f472b6] to-[#ec4899] bg-clip-text">
               Image Generation
             </h3>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="mb-4 text-sm text-gray-400">
               Quick access to image generation tools.
             </p>
-            <div className="text-center py-8">
+            <div className="py-8 text-center">
               <svg className="w-16 h-16 mx-auto mb-4 text-[#ec4899]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
                 <circle cx="8.5" cy="8.5" r="1.5"/>
                 <polyline points="21 15 16 10 5 21"/>
               </svg>
-              <p className="text-gray-500 text-sm">Feature in development</p>
+              <p className="text-sm text-gray-500">Feature in development</p>
             </div>
           </div>
         </div>
