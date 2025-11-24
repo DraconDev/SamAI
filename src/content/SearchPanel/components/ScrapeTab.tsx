@@ -23,7 +23,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
         <GradientButton
           onClick={onScrape}
           disabled={isScraping}
-          variant="secondary"
+          variant="success"
           loading={isScraping}
           className="w-full"
         >
