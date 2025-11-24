@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { generateFormResponse } from "@/utils/ai/gemini";
 import { apiKeyStore } from "@/utils/store";
-import { usePageContent } from "@/hooks/usePageContent";
+import { usePageContent } from "../../hooks/usePageContent";
 import { 
   TabNavigation, 
   SearchTab, 
