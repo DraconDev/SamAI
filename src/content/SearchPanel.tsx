@@ -280,6 +280,50 @@ Please provide a helpful response about the user's question specifically related
         padding: "32px",
         overflowY: "auto",
         zIndex: 2147483647,
+        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+        borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
+        color: "#e2e8f0",
+      }}
+      className="animate-slide-in"
+    >
+      <TabNavigation
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onChatClick={handleChat}
+        onSummarizeClick={handleSummarize}
+        onFormClick={handleForm}
+        onImageClick={handleImage}
+        isScraping={isScraping}
+      />
+
+      {activeTab === "search" && (
+        <SearchTab
+          response={response}
+          isApiKeySet={isApiKeySet}
+          outputFormat={outputFormat}
+        />
+      )}
+
+      {activeTab === "scrape" && (
+        <ScrapeTab
+          isScraping={isScraping}
+          onScrape={handleScrape}
+        />
+      )}
+
+      {activeTab === "chat" && (
+        <ChatTab
+          isApiKeySet={isApiKeySet}
+          isExtractingContent={isExtractingContent}
+          isChatLoading={isChatLoading}
+          chatMessages={chatMessages}
+          chatInput={chatInput}
+          includePageContent={includePageContent}
+          outputFormat={outputFormat}
+          messagesEndRef={messagesEndRef}
+          onInputChange={setChatInput}
+          onSubmit={handleSendChatMessage}
+          onIncludePageContentChange={setIncludePageContent}
           onOpenApiKey={handleOpenApiKey}
         />
       )}

@@ -1,70 +1,21 @@
+import { routeMessage, isBackgroundMessage } from "@/utils/background/messageHandlers";
 import { generateFormResponse } from "@/utils/ai/gemini";
 import type { Runtime } from "wxt/browser";
-
-// Define message types
-interface BaseMessage {
-  type: string;
-}
-
-interface GenerateGeminiResponseRequest extends BaseMessage {
-  type: "generateGeminiResponse";
-  prompt: string;
-}
-
-interface OpenApiKeyPageRequest extends BaseMessage {
-  type: "openApiKeyPage";
-}
-
-interface SetInputValueRequest extends BaseMessage {
-  type: "setInputValue";
-  value: string;
-}
-
-interface ClearInputElementMessage extends BaseMessage {
-  type: "clearInputElement";
-}
-
 import { InputElementClickedMessage } from "@/entrypoints/content"; // Import InputElementClickedMessage
 import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 
-interface GetPageContentRequest extends BaseMessage {
+interface GetPageContentRequest {
   type: "getPageContent";
   outputFormat: OutputFormat; // Add outputFormat
 }
 
-interface GetSummaryContentRequest extends BaseMessage {
+interface GetSummaryContentRequest {
   type: "getSummaryContent";
 }
 
-interface SummaryContentResponse extends BaseMessage {
+interface SummaryContentResponse {
   type: "summaryContent";
   content: string;
-}
-
-interface PageContentResponseMessage extends BaseMessage {
-  type: "pageContentResponse";
-  content: string;
-  outputFormat: OutputFormat; // Add outputFormat
-  error?: string; // Optional error message
-}
-
-type BackgroundMessage =
-  | GenerateGeminiResponseRequest
-  | OpenApiKeyPageRequest
-  | SetInputValueRequest
-  | GetPageContentRequest
-  | PageContentResponseMessage
-  | InputElementClickedMessage
-  | ClearInputElementMessage; // Add new message type
-
-// Type guard for incoming messages
-function isBackgroundMessage(message: any): message is BackgroundMessage {
-  return (
-    typeof message === "object" &&
-    message !== null &&
-    "type" in message &&
-    typeof message.type === "string"
-  );
 }
 
 export default defineBackground(() => {
@@ -97,156 +48,8 @@ export default defineBackground(() => {
         return undefined; // Explicitly return undefined for invalid structure
       }
 
-      switch (message.type) {
-        case "generateGeminiResponse": {
-          console.log(
-            "[SamAI Background] Handling generateGeminiResponse message."
-          );
-          const geminiMessage = message as GenerateGeminiResponseRequest;
-
-          // Check if sender is a valid tab
-          if (!sender.tab) {
-            console.error("[SamAI Background] No sender tab found");
-            return Promise.resolve(null); // Return a resolved promise with null
-          }
-
-          return (async () => {
-            // Return an async IIFE (Immediately Invoked Function Expression)
-            let text: string | null = null;
-            try {
-              console.log(
-                "[SamAI Background] Calling generateFormResponse with prompt:",
-                geminiMessage.prompt
-              );
-              text = await generateFormResponse(geminiMessage.prompt);
-              console.log(
-                "[SamAI Background] Response from generateFormResponse:",
-                text ? "Received text" : "Received null"
-              );
-            } catch (error: unknown) {
-              const err = error as Error;
-              console.error(
-                "[SamAI Background] Error in generateFormResponse call:",
-                {
-                  message: err.message,
-                  stack: err.stack,
-                }
-              );
-            }
-
-            if (text !== null) {
-              const responseToSend = JSON.stringify({ responseText: text });
-              console.log(
-                "[SamAI Background] Sending response to content script (via Promise.resolve):",
-                responseToSend
-              );
-              return responseToSend; // Resolve the promise with the string
-            } else {
-              console.log(
-                "[SamAI Background] Sending null to content script (via Promise.resolve)."
-              );
-              return null; // Resolve the promise with null
-            }
-          })(); // Call the IIFE
-        }
-
-        case "openApiKeyPage":
-          console.log(
-            "[SamAI Background] Received request to open API key page"
-          );
-          browser.tabs.create({ url: "apikey.html" });
-          return undefined; // Handled synchronously, no response needed
-
-        case "setInputValue": {
-          const setInputMessage = message as SetInputValueRequest; // Assert after type guard
-          if (sourceTabId) {
-            // Handle setInputValue asynchronously
-            browser.tabs
-              .sendMessage(sourceTabId, setInputMessage)
-              .then((result) => {
-                sendResponse(result);
-              })
-              .catch((error) => {
-                console.error("Error forwarding message:", error);
-                sendResponse({
-                  success: false,
-                  error: "Failed to forward message to content script",
-                });
-              });
-            return true; // Will respond asynchronously
-          } else {
-            console.warn(
-              "[SamAI Background] Received setInputValue message but sourceTabId is null"
-            );
-            sendResponse({ success: false, error: "Source tab not available" });
-            return true; // Will respond asynchronously
-          }
-        }
-
-        case "getPageContent":
-          // This message is typically handled by the content script, not the background.
-          // If it reaches here, it might be an unexpected message or a misconfiguration.
-          console.warn(
-            "[SamAI Background] Received unexpected getPageContent message in background"
-          );
-          return undefined; // Not handled synchronously
-
-        case "pageContentResponse": {
-          const pageContentMessage = message as PageContentResponseMessage;
-          console.log(
-            "[SamAI Background] Received pageContentResponse for format:",
-            pageContentMessage.outputFormat,
-            "Content length:",
-            pageContentMessage.content.length
-          );
-          if (pageContentMessage.error) {
-            console.error(
-              "[SamAI Background] Error from content script:",
-              pageContentMessage.error
-            );
-          }
-          // Store content based on its format
-          if (pageContentMessage.outputFormat === "text") {
-            await browser.storage.local.set({
-              pageBodyText:
-                pageContentMessage.content || "Unable to access page content",
-            });
-          } else if (pageContentMessage.outputFormat === "html") {
-            await browser.storage.local.set({
-              pageOptimizedHtml:
-                pageContentMessage.content || "Unable to access page content",
-            });
-          }
-          return undefined; // Handled asynchronously, no direct response to this message
-        }
-
-        case "clearInputElement":
-          console.log(
-            "[SamAI Background] Received clearInputElement message, removing inputInfo from storage."
-          );
-          await browser.storage.local.remove("inputInfo");
-          return undefined; // Handled asynchronously
-
-        case "inputElementClicked": {
-          const inputElementClickedMsg = message as InputElementClickedMessage;
-          console.log(
-            "[SamAI Background] Received inputElementClicked message:",
-            inputElementClickedMsg
-          );
-          await browser.storage.local.set({
-            inputInfo: inputElementClickedMsg.inputInfo,
-          });
-          console.log(
-            "[SamAI Background] inputInfo stored from inputElementClicked."
-          );
-          return undefined; // Handled asynchronously, no response needed
-        }
-
-        default:
-          // If message.type is a string but not one of the known types
-          console.warn("[SamAI Background] Received unknown message:", message); // Log the whole message
-          return undefined; // Explicitly return undefined for unknown message types
-      }
+      // Use the message router
+      return routeMessage(message, sender, sendResponse, sourceTabId);
     }
   );
 

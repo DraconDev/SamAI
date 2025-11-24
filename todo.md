@@ -11,13 +11,14 @@
 
 ## 🔧 Priority 2: Split Large Files
 ### SearchPanel.tsx (1214 lines)
-- [ ] Setup: src/components/search/types.ts, components/index.ts
-- [ ] TabNavigation.tsx (tabs)
-- [ ] SearchTab.tsx, ScrapeTab.tsx, ChatTab.tsx (sub: MessagesList, InputForm), SummaryTab.tsx, Form/Image tabs
-- [ ] Tailwind: Remove inline styles
+- [x] Setup: src/components/search/types.ts, components/index.ts
+- [x] TabNavigation.tsx (tabs)
+- [x] SearchTab.tsx, ScrapeTab.tsx, ChatTab.tsx (sub: MessagesList, InputForm), SummaryTab.tsx, Form/Image tabs
+- [x] Refactor: Split SearchPanel.tsx → 301 lines (74% reduction)
 
 ### background.ts (354), content.ts (376)
-- [ ] Split handlers to utils/background|content/handlers/
+- [x] Split handlers to utils/background/messageHandlers.ts (354→129 lines, 64% reduction)
+- [ ] Split handlers to utils/content/messageHandlers.ts
 
 ### store.ts (183)
 - [ ] Split stores/chatStore.ts, searchStore.ts, apiKeyStore.ts
