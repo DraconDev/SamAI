@@ -2,19 +2,6 @@ import { GradientButton } from "@/src/components/ui/GradientButton";
 import type { OutputFormat } from "@/utils/page-content";
 import React from "react";
 
-interface ScrapeTabProps {
-  isScraping: boolean;
-  scrapeMode: OutputFormat;
-  onScrapeModeChange: (mode: OutputFormat) => void;
-  scrapeInstructions: string;
-  onScrapeInstructionsChange: (instructions: string) => void;
-  scrapedContent: string | null;
-  onScrape: () => void;
-  onOpenChat: () => void;
-  onDownload: () => void;
-  onClearPreview: () => void;
-}
-
 export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   isScraping,
   scrapeMode,
