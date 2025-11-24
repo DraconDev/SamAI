@@ -1,6 +1,6 @@
 /// <reference types="wxt/browser" />
 import { generateFormResponse } from "@/utils/ai/gemini";
-import { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import {
   addChatMessage,
   addInputText,
