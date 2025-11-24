@@ -1,36 +1,9 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
+import { routeMessage, isContentScriptMessage } from "@/utils/content/messageHandlers";
 import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { extractPageContent } from "@/utils/page-content";
 import { searchSettingsStore } from "@/utils/store";
-
-// Define message types
-interface GetPageContentMessage {
-  type: "getPageContent";
-  outputFormat: OutputFormat;
-}
-
-interface GetInputInfoMessage {
-  type: "getInputInfo";
-}
-
-interface SetInputValueMessage {
-  type: "setInputValue";
-  value: string;
-}
-
-interface ShowSummaryMessage {
-  type: "showSummary";
-  summary: string;
-}
-
-// Define new message type for response
-interface PageContentResponseMessage {
-  type: "pageContentResponse";
-  content: string;
-  outputFormat: OutputFormat; // Add outputFormat
-  error?: string; // Optional error message
-}
 
 export interface InputElementClickedMessage {
   type: "inputElementClicked";
@@ -42,16 +15,6 @@ export interface InputElementClickedMessage {
     inputType: string;
   };
 }
-
-
-type ContentScriptMessage =
-  | GetPageContentMessage
-  | GetInputInfoMessage
-  | SetInputValueMessage
-  | ShowSummaryMessage
-  | PageContentResponseMessage
-  | InputElementClickedMessage // Add new type
-// Add new type
 
 export default defineContentScript({
   matches: ["http://*/*", "https://*/*"], // Exclude chrome-extension:// URLs
@@ -171,10 +134,6 @@ export default defineContentScript({
       }
     });
 
-    // The click listener for clearing input is already present, but the contextmenu listener is more direct for this specific request.
-    // Keeping the click listener for general clearing on non-input clicks.
-
-
     // Floating Icon Logic
     const injectFloatingIcon = async () => {
       const settings = await searchSettingsStore.getValue();
@@ -235,141 +194,21 @@ export default defineContentScript({
       window.addEventListener("load", injectFloatingIcon);
     }
 
-    // Handle messages from the background script
+    // Handle messages from the background script using the message router
     browser.runtime.onMessage.addListener(
       async (message, sender, sendResponse) => {
-        // Made the listener async
         console.log("[SamAI Content] Received message:", message);
 
-        // Use type guards to handle different message types
-        if (
-          typeof message !== "object" ||
-          message === null ||
-          !("type" in message)
-        ) {
+        if (!isContentScriptMessage(message)) {
           console.warn(
             "[SamAI Content] Received message with invalid structure:",
             message
           );
-          // No sendResponse here, as it's not a direct response to a specific message type
-          return; // Indicate that the message was not handled (implicitly returns undefined)
+          return;
         }
 
-        switch (message.type) {
-          case "getPageContent":
-            // Assert message type for getPageContent
-            const getPageContentMsg = message as GetPageContentMessage;
-            console.log(
-              "[SamAI Content] Handling getPageContent message with format:",
-              getPageContentMsg.outputFormat
-            );
-            try {
-              const pageContent = extractPageContent(
-                getPageContentMsg.outputFormat
-              );
-              console.log(
-                "[SamAI Content] extractPageContent finished, sending response via new message"
-              );
-              browser.runtime.sendMessage({
-                type: "pageContentResponse",
-                content: pageContent,
-                outputFormat: getPageContentMsg.outputFormat, // Include outputFormat in response
-              });
-            } catch (error) {
-              console.error(
-                "[SamAI Content] Error extracting page content:",
-                error
-              );
-              browser.runtime.sendMessage({
-                type: "pageContentResponse",
-                content: "",
-                outputFormat: getPageContentMsg.outputFormat, // Include outputFormat in response even on error
-                error: error instanceof Error ? error.message : "Unknown error",
-              });
-            }
-            return;
-
-          case "getInputInfo":
-            if (lastInputElement) {
-              console.log("[SamAI Content] Handling getInputInfo message");
-              const response = {
-                messageType: "inputInfo",
-                value: lastInputElement.value,
-                placeholder: lastInputElement.placeholder,
-                id: lastInputElement.id,
-                name: lastInputElement.name,
-                inputType:
-                  lastInputElement instanceof HTMLInputElement
-                    ? lastInputElement.type
-                    : "textarea",
-              };
-              console.log("[SamAI Content] Sending input info:", response);
-              sendResponse(response);
-            } else {
-              console.log("[SamAI Content] No input element for getInputInfo");
-              sendResponse(false);
-            }
-            return true; // Will respond asynchronously
-
-          case "setInputValue":
-            // Assert message type for setInputValue
-            const setInputMessage = message as SetInputValueMessage;
-            if (lastInputElement && typeof setInputMessage.value === "string") {
-              console.log("[SamAI Content] Handling setInputValue message");
-              try {
-                lastInputElement.value = setInputMessage.value;
-                lastInputElement.dispatchEvent(
-                  new Event("input", { bubbles: true })
-                );
-                lastInputElement.dispatchEvent(
-                  new Event("change", { bubbles: true })
-                );
-                console.log(
-                  "[SamAI Content] Updated input value:",
-                  setInputMessage.value
-                );
-                sendResponse({ success: true });
-              } catch (error: unknown) {
-                console.error(
-                  "[SamAI Content] Error setting input value:",
-                  error
-                );
-                const errorMessage =
-                  error instanceof Error ? error.message : "Unknown error";
-                sendResponse({ success: false, error: errorMessage });
-              }
-            } else {
-              console.log(
-                "[SamAI Content] Invalid setInputValue message or no input element"
-              );
-              sendResponse({
-                success: false,
-                error: "Invalid message or no input element",
-              });
-            }
-            return true; // Will respond asynchronously
-
-          case "showSummary":
-            // Assert message type for showSummary
-            const showSummaryMessage = message as ShowSummaryMessage;
-            if (typeof showSummaryMessage.summary === "string") {
-              console.log("[SamAI Content] Handling showSummary message");
-              showSidePanel(showSummaryMessage.summary);
-              sendResponse(true);
-            } else {
-              console.log("[SamAI Content] Invalid showSummary message");
-              sendResponse(false);
-            }
-            return true; // Will respond asynchronously
-
-          default:
-            console.log(
-              "[SamAI Content] Unhandled message type:",
-              message.type
-            );
-            // No sendResponse here, as it's not a direct response to a specific message type
-            return; // Indicate that the message was not handled (implicitly returns undefined)
-        }
+        // Use the message router
+        return routeMessage(message, sendResponse, lastInputElement);
       }
     );
   },

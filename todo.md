@@ -18,7 +18,7 @@
 
 ### background.ts (354), content.ts (376)
 - [x] Split handlers to utils/background/messageHandlers.ts (354→129 lines, 64% reduction)
-- [ ] Split handlers to utils/content/messageHandlers.ts
+- [x] Split handlers to utils/content/messageHandlers.ts (376→164 lines, 56% reduction)
 
 ### store.ts (183)
 - [ ] Split stores/chatStore.ts, searchStore.ts, apiKeyStore.ts
