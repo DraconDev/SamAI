@@ -37,6 +37,8 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     }
   };
 
+  const [hoveredTab, setHoveredTab] = React.useState<TabId | null>(null);
+
   const mainTabs: Tab[] = [
     {
       id: "search",
