@@ -12,7 +12,7 @@ interface ChatTabProps {
   chatInput: string;
   includePageContent: boolean;
   outputFormat: OutputFormat;
-  messagesEndRef: React.RefObject<HTMLDivElement>;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
   onInputChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   onIncludePageContentChange: (checked: boolean) => void;
