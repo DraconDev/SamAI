@@ -1,5 +1,7 @@
 import type { OutputFormat } from "@/utils/page-content";
 
+export type { OutputFormat };
+
 export type TabId = "search" | "scrape" | "chat" | "sum" | "form" | "image";
 
 export interface ChatMessage {
