@@ -1,4 +1,4 @@
-export { TabNavigation } from './TabNavigation';
+l export { TabNavigation } from './TabNavigation';
 export { SearchTab } from './SearchTab';
 export { ScrapeTab } from './ScrapeTab';
 export { ChatTab } from './ChatTab';

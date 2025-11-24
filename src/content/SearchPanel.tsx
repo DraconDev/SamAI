@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { generateFormResponse } from "@/utils/ai/gemini";
 import { apiKeyStore } from "@/utils/store";
-import { usePageContent } from "../../hooks/usePageContent";
 import { 
   TabNavigation, 
   SearchTab, 
@@ -48,7 +47,6 @@ export default function SearchPanel({
   const [isExtractingContent, setIsExtractingContent] = useState(false);
   const [includePageContent, setIncludePageContent] = useState(true);
 
-  const { extractPageContent } = usePageContent();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Close panel when clicking outside
@@ -87,6 +85,52 @@ export default function SearchPanel({
     });
     return () => unsubscribe();
   }, []);
+
+  // Helper function to extract page content (inline for now)
+  const extractPageContent = async (format: OutputFormat, fresh: boolean = false): Promise<string> => {
+    try {
+      // If not fresh, try storage first
+      if (!fresh) {
+        const result = await browser.storage.local.get([
+          'pageBodyText', 
+          'pageOptimizedHtml', 
+          'pageContext'
+        ]);
+        
+        const cached = (format === "html" ? result.pageOptimizedHtml : result.pageBodyText) as string;
+        if (cached) {
+          console.log("[SearchPanel] Using cached content:", cached.length);
+          return cached;
+        }
+      }
+
+      // Extract fresh content from DOM
+      console.log("[SearchPanel] Extracting fresh content...");
+      let content: string;
+
+      if (format === "html") {
+        const fullHtml = document.documentElement.outerHTML;
+        const { optimizeHtmlContent } = await import("@/utils/page-content");
+        content = optimizeHtmlContent(fullHtml);
+      } else {
+        content = document.body.innerText.trim();
+      }
+
+      if (!content) {
+        throw new Error("No readable content found on this page.");
+      }
+
+      // Cache the extracted content
+      const storageKey = format === "html" ? "pageOptimizedHtml" : "pageBodyText";
+      await browser.storage.local.set({ [storageKey]: content });
+      
+      console.log("[SearchPanel] Fresh content extracted:", content.length);
+      return content;
+    } catch (error) {
+      console.error("[SearchPanel] Error extracting page content:", error);
+      throw new Error("Failed to extract page content");
+    }
+  };
 
   // Handlers
   const handleScrape = async () => {
@@ -236,50 +280,6 @@ Please provide a helpful response about the user's question specifically related
         padding: "32px",
         overflowY: "auto",
         zIndex: 2147483647,
-        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-        borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
-        color: "#e2e8f0",
-      }}
-      className="animate-slide-in"
-    >
-      <TabNavigation
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        onChatClick={handleChat}
-        onSummarizeClick={handleSummarize}
-        onFormClick={handleForm}
-        onImageClick={handleImage}
-        isScraping={isScraping}
-      />
-
-      {activeTab === "search" && (
-        <SearchTab
-          response={response}
-          isApiKeySet={isApiKeySet}
-          outputFormat={outputFormat}
-        />
-      )}
-
-      {activeTab === "scrape" && (
-        <ScrapeTab
-          isScraping={isScraping}
-          onScrape={handleScrape}
-        />
-      )}
-
-      {activeTab === "chat" && (
-        <ChatTab
-          isApiKeySet={isApiKeySet}
-          isExtractingContent={isExtractingContent}
-          isChatLoading={isChatLoading}
-          chatMessages={chatMessages}
-          chatInput={chatInput}
-          includePageContent={includePageContent}
-          outputFormat={outputFormat}
-          messagesEndRef={messagesEndRef}
-          onInputChange={setChatInput}
-          onSubmit={handleSendChatMessage}
-          onIncludePageContentChange={setIncludePageContent}
           onOpenApiKey={handleOpenApiKey}
         />
       )}
