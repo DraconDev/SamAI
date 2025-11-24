@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
 import { generateFormResponse } from "@/utils/ai/gemini";
-import { apiKeyStore } from "@/utils/store";
-import { 
-  TabNavigation, 
-  SearchTab, 
-  ScrapeTab, 
-  ChatTab, 
-  SummaryTab, 
-  FormTab, 
-  ImageTab,
-  type TabId 
-} from "./SearchPanel/components";
 import type { OutputFormat } from "@/utils/page-content";
+import { apiKeyStore } from "@/utils/store";
+import React, { useRef, useState } from "react";
+import {
+  ChatTab,
+  FormTab,
+  ImageTab,
+  ScrapeTab,
+  SearchTab,
+  SummaryTab,
+  TabNavigation,
+  type TabId,
+} from "./SearchPanel/components";
 
 interface SearchPanelProps {
   response: string | null;
@@ -25,27 +25,33 @@ export default function SearchPanel({
   outputFormat,
 }: SearchPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
-  
+
   // Core state
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [activeTab, setActiveTab] = useState<TabId>("search");
-  
+
   // Tab-specific state
   const [isScraping, setIsScraping] = useState(false);
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [summary, setSummary] = useState<string>("");
   const [summaryError, setSummaryError] = useState<string>("");
-  
+
   // Chat state
-  const [chatMessages, setChatMessages] = useState<Array<{
-    role: "user" | "assistant";
-    content: string;
-    timestamp: string;
-  }>>([]);
+  const [chatMessages, setChatMessages] = useState<
+    Array<{
+      role: "user" | "assistant";
+      content: string;
+      timestamp: string;
+    }>
+  >([]);
   const [chatInput, setChatInput] = useState("");
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [isExtractingContent, setIsExtractingContent] = useState(false);
   const [includePageContent, setIncludePageContent] = useState(true);
+
+  const [scrapeMode, setScrapeMode] = useState<OutputFormat>(outputFormat);
+  const [scrapeInstructions, setScrapeInstructions] = useState("");
+  const [scrapedContent, setScrapedContent] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -87,17 +93,22 @@ export default function SearchPanel({
   }, []);
 
   // Helper function to extract page content (inline for now)
-  const extractPageContent = async (format: OutputFormat, fresh: boolean = false): Promise<string> => {
+  const extractPageContent = async (
+    format: OutputFormat,
+    fresh: boolean = false
+  ): Promise<string> => {
     try {
       // If not fresh, try storage first
       if (!fresh) {
         const result = await browser.storage.local.get([
-          'pageBodyText', 
-          'pageOptimizedHtml', 
-          'pageContext'
+          "pageBodyText",
+          "pageOptimizedHtml",
+          "pageContext",
         ]);
-        
-        const cached = (format === "html" ? result.pageOptimizedHtml : result.pageBodyText) as string;
+
+        const cached = (
+          format === "html" ? result.pageOptimizedHtml : result.pageBodyText
+        ) as string;
         if (cached) {
           console.log("[SearchPanel] Using cached content:", cached.length);
           return cached;
@@ -121,9 +132,10 @@ export default function SearchPanel({
       }
 
       // Cache the extracted content
-      const storageKey = format === "html" ? "pageOptimizedHtml" : "pageBodyText";
+      const storageKey =
+        format === "html" ? "pageOptimizedHtml" : "pageBodyText";
       await browser.storage.local.set({ [storageKey]: content });
-      
+
       console.log("[SearchPanel] Fresh content extracted:", content.length);
       return content;
     } catch (error) {
@@ -136,20 +148,44 @@ export default function SearchPanel({
   const handleScrape = async () => {
     setIsScraping(true);
     try {
-      const content = await extractPageContent(outputFormat);
-      await browser.storage.local.set({
-        pageContext: {
-          content,
-          outputFormat,
-        },
-      });
-      await browser.tabs.create({ url: "chat.html" });
-      onClose();
+      const content = await extractPageContent(scrapeMode, true);
+      setScrapedContent(content);
     } catch (error) {
       console.error("Error scraping page:", error);
     } finally {
       setIsScraping(false);
     }
+  };
+
+  const handleOpenScrapedChat = async () => {
+    if (!scrapedContent) return;
+    await browser.storage.local.set({
+      pageContext: {
+        content: scrapedContent,
+        outputFormat: scrapeMode,
+        instructions: scrapeInstructions,
+      },
+    });
+    await browser.tabs.create({ url: "chat.html" });
+    onClose();
+  };
+
+  const handleDownloadScraped = () => {
+    if (!scrapedContent) return;
+    const extension = scrapeMode === "html" ? "html" : "txt";
+    const blob = new Blob([scrapedContent], {
+      type: scrapeMode === "html" ? "text/html" : "text/plain;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `scraped-page-${new Date()
+      .toISOString()
+      .slice(0, 10)}.${extension}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const handleForm = () => {
@@ -190,14 +226,17 @@ export default function SearchPanel({
 
 Content to summarize:
 ${content}`;
-      
+
       const summaryText = await generateFormResponse(prompt);
       if (!summaryText) {
-        throw new Error("No summary received from AI. Please check your API key configuration.");
+        throw new Error(
+          "No summary received from AI. Please check your API key configuration."
+        );
       }
       setSummary(summaryText);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Failed to summarize page";
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to summarize page";
       setSummaryError(errorMessage);
     } finally {
       setIsSummarizing(false);
@@ -214,19 +253,19 @@ ${content}`;
       timestamp: new Date().toLocaleTimeString(),
     };
 
-    setChatMessages(prev => [...prev, userMessage]);
+    setChatMessages((prev) => [...prev, userMessage]);
     setChatInput("");
     setIsChatLoading(true);
     setIsExtractingContent(true);
 
     try {
       let fullPrompt = chatInput;
-      
+
       if (includePageContent) {
         setIsExtractingContent(true);
         const currentPageContent = await extractPageContent(outputFormat);
         setIsExtractingContent(false);
-        
+
         fullPrompt = `${chatInput}
 
 CURRENT PAGE CONTENT (freshly extracted from the page you're currently viewing):
@@ -234,7 +273,7 @@ ${currentPageContent}
 
 Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page.`;
       }
-      
+
       const response = await generateFormResponse(fullPrompt);
       if (!response) {
         throw new Error("No response received from AI");
@@ -246,7 +285,7 @@ Please provide a helpful response about the user's question specifically related
         timestamp: new Date().toLocaleTimeString(),
       };
 
-      setChatMessages(prev => [...prev, aiMessage]);
+      setChatMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error("Error sending chat message:", error);
       const errorMessage = {
@@ -254,7 +293,7 @@ Please provide a helpful response about the user's question specifically related
         content: "Sorry, I encountered an error. Please try again.",
         timestamp: new Date().toLocaleTimeString(),
       };
-      setChatMessages(prev => [...prev, errorMessage]);
+      setChatMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsChatLoading(false);
       setIsExtractingContent(false);
@@ -307,7 +346,15 @@ Please provide a helpful response about the user's question specifically related
       {activeTab === "scrape" && (
         <ScrapeTab
           isScraping={isScraping}
+          scrapeMode={scrapeMode}
+          onScrapeModeChange={setScrapeMode}
+          scrapeInstructions={scrapeInstructions}
+          onScrapeInstructionsChange={setScrapeInstructions}
+          scrapedContent={scrapedContent}
           onScrape={handleScrape}
+          onOpenChat={handleOpenScrapedChat}
+          onDownload={handleDownloadScraped}
+          onClearPreview={() => setScrapedContent(null)}
         />
       )}
 
@@ -336,13 +383,9 @@ Please provide a helpful response about the user's question specifically related
         />
       )}
 
-      {activeTab === "form" && (
-        <FormTab onFormClick={handleForm} />
-      )}
+      {activeTab === "form" && <FormTab onFormClick={handleForm} />}
 
-      {activeTab === "image" && (
-        <ImageTab onImageClick={handleImage} />
-      )}
+      {activeTab === "image" && <ImageTab onImageClick={handleImage} />}
     </div>
   );
 }
