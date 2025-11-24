@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { tabs } from "webextension-polyfill";
-import { ToggleButton } from "../../src/components/ToggleButton";
+import { ToggleButton } from "../src/components/ToggleButton";
 import { type OutputFormat } from "../../utils/page-content"; // Import OutputFormat
 import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 
