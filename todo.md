@@ -1,25 +1,29 @@
-# SamAI Todo - CRITICAL BUG FIXES 🚨
+# SamAI Todo - STYLING ISSUE IDENTIFIED 🎨
 
-## 🚨 URGENT: Fix Broken Entry Points
-**Issue**: Styling/functionality broken in main popup, right click menu, scrape page, open chat, configure API key, and new chat tab
+## 🚨 Root Cause Found: Tailwind CSS Processing Issue
 
-### 🔍 Root Cause Analysis
-- **Missing imports**: ToggleButton component path broken
-- **Store functions**: Possibly missing or renamed functions
-- **Component references**: Broken import paths after refactoring
+### 🔍 Problem Analysis
+- **Sidebar**: Has inline styles injected via JavaScript ✅ (working)
+- **Other entrypoints**: Use Tailwind CSS classes ❌ (broken styling)
+- **CSS files**: All main.tsx import `../style.css` with Tailwind directives
+- **Config**: wxt.config.ts has Tailwind configured
 
-### ✅ IDENTIFIED ISSUES
-1. **popup/App.tsx**: Import path broken - ToggleButton from wrong location
-2. **All entrypoints**: Need import path verification
-3. **Store functions**: Verify all used functions still exist
+### 🎯 Issue: Tailwind CSS Not Processing Classes
+The entrypoint HTML files (popup.html, chat.html, apikey.html, context-popup.html) are likely missing the processed Tailwind CSS or the CSS is not being included properly.
 
 ### 🛠️ IMMEDIATE FIXES NEEDED
-- [ ] Fix ToggleButton import in popup/App.tsx
-- [ ] Verify all store function imports
-- [ ] Check component import paths
-- [ ] Test all entry points after fixes
+- [ ] Verify Tailwind CSS is being processed in build
+- [ ] Check if CSS classes are included in built HTML files
+- [ ] Ensure Tailwind directives (@tailwind base/components/utilities) are working
+- [ ] Fix CSS import paths in entrypoint HTML files
+
+### 📋 Files to Check
+- entrypoints/popup/index.html
+- entrypoints/context-popup/index.html  
+- entrypoints/chat/index.html
+- entrypoints/apikey/index.html
 
 ---
 
-**STATUS**: 🚨 CRITICAL - Extension functionality broken
-**PRIORITY**: Fix import paths and broken functionality immediately
+**STATUS**: 🎯 IDENTIFIED - Tailwind CSS processing issue
+**PRIORITY**: Fix Tailwind CSS inclusion in entrypoint HTML files
