@@ -1,6 +1,6 @@
-import { GradientButton } from "@/src/components/ui/GradientButton";
-import type { OutputFormat } from "@/utils/page-content";
 import React from "react";
+import { GradientButton } from "@/src/components/ui/GradientButton";
+import type { OutputFormat, ScrapeTabProps } from "../types";
 
 export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   isScraping,
