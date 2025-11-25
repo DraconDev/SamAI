@@ -78,12 +78,22 @@ class SearchHighlighter {
   }
 
   public applyHighlights() {
+    console.log("[SamAI Highlighter] Starting applyHighlights", {
+      autoHighlight: this.settings.autoHighlight,
+      patternsCount: this.patterns.length,
+      patterns: this.patterns,
+      currentURL: window.location.href,
+      isSearchPage: this.isSearchResultsPage()
+    });
+
     if (!this.settings.autoHighlight || this.patterns.length === 0) {
+      console.log("[SamAI Highlighter] Skipping highlights - autoHighlight:", this.settings.autoHighlight, "patterns:", this.patterns.length);
       return;
     }
 
     // Only highlight on search results pages
     if (!this.isSearchResultsPage()) {
+      console.log("[SamAI Highlighter] Not a search results page, skipping");
       return;
     }
 
@@ -92,7 +102,9 @@ class SearchHighlighter {
 
     // Find and highlight matching elements
     const searchResults = this.getSearchResultElements();
+    console.log("[SamAI Highlighter] Found search results:", searchResults.length);
     
+    let highlightCount = 0;
     for (const element of searchResults) {
       const elementText = element.textContent?.toLowerCase() || "";
       const elementUrl = this.getElementUrl(element);
@@ -100,17 +112,25 @@ class SearchHighlighter {
       for (const pattern of this.patterns) {
         if (!pattern.enabled) continue;
         
-        const patternLower = pattern.pattern.toLowerCase();
+        const patternLower = pattern.pattern.toLowerCase().trim();
+        if (!patternLower) continue;
         
         // Check if pattern matches URL or text content
         const matchesUrl = elementUrl && elementUrl.toLowerCase().includes(patternLower);
         const matchesText = elementText.includes(patternLower);
         
+        console.log("[SamAI Highlighter] Checking pattern:", pattern.pattern, "against URL:", elementUrl, "Text match:", matchesText, "URL match:", matchesUrl);
+        
         if (matchesUrl || matchesText) {
+          console.log("[SamAI Highlighter] Highlighting element with pattern:", pattern.pattern, "color:", pattern.color);
           this.highlightElement(element, pattern.color, pattern.description);
+          highlightCount++;
+          break; // Only highlight once per element
         }
       }
     }
+    
+    console.log("[SamAI Highlighter] Finished highlighting, total highlights:", highlightCount);
   }
 
   public clearHighlights() {
