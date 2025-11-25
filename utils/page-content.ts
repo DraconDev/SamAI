@@ -1,4 +1,3 @@
-import browser from "webextension-polyfill";
 /**
  * Defines the output format for page content extraction.
  */
