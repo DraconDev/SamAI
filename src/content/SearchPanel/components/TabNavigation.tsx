@@ -266,14 +266,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
               tab={tab}
             />
           </div>
-        ))}
-        {secondaryTabs.map((tab) => (
-          <TabButton
-            key={tab.id}
-            tab={tab}
-            style={{ gridColumn: 'span 1' }}
-          />
-        ))}
+        ))}     
       </div>
     </div>
   );
