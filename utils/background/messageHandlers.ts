@@ -169,6 +169,8 @@ export async function routeMessage(
       return handleGenerateGeminiResponse(message, sender);
     case "openApiKeyPage":
       return handleOpenApiKeyPage();
+    case "openSearchSettingsPage":
+      return handleOpenSearchSettingsPage();
     case "setInputValue":
       return handleSetInputValue(message, sourceTabId, sendResponse);
     case "pageContentResponse":
