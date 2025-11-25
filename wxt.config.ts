@@ -12,8 +12,9 @@ export default defineConfig({
     host_permissions: ["<all_urls>"],
     content_scripts: [
       {
-        matches: ["*://*.google.com/*"],
+        matches: ["*://*/*"],
         js: ["content-scripts/content.js"],
+        css: ["content-scripts/content.css"]
       },
     ],
     icons: {
