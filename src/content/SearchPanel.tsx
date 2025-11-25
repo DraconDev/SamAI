@@ -247,20 +247,35 @@ ${truncatedContent}`;
     setSummary("");
 
     try {
+      console.log("[SamAI] Starting page content extraction...");
       const content = await getPageContent(outputFormat);
+      console.log("[SamAI] Page content extracted, length:", content.length);
+      
+      if (!content || content.trim().length === 0) {
+        throw new Error("No readable content found on this page. The page might be empty, protected, or not fully loaded.");
+      }
+
+      // Show a preview of the content being summarized for debugging
+      const contentPreview = content.length > 200 ? content.substring(0, 200) + "..." : content;
+      console.log("[SamAI] Content preview:", contentPreview);
+
       const prompt = `Please provide a comprehensive summary of the following content. Focus on the main points, key information, and important details. Structure your summary with clear sections and bullet points where appropriate.
 
 Content to summarize:
 ${content}`;
 
+      console.log("[SamAI] Generating AI summary...");
       const summaryText = await generateFormResponse(prompt);
-      if (!summaryText) {
+      console.log("[SamAI] AI summary generated, length:", summaryText?.length || 0);
+      
+      if (!summaryText || summaryText.trim().length === 0) {
         throw new Error(
-          "No summary received from AI. Please check your API key configuration."
+          "No summary received from AI. Please check your API key configuration and try again."
         );
       }
       setSummary(summaryText);
     } catch (error) {
+      console.error("[SamAI] Error in handleSummarize:", error);
       const errorMessage =
         error instanceof Error ? error.message : "Failed to summarize page";
       setSummaryError(errorMessage);
