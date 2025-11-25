@@ -364,20 +364,20 @@ export default function SearchSettingsPage() {
             <h3 className="mb-3 text-sm font-semibold text-gray-300">How it works:</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li className="flex items-start gap-2">
-                <span className="text-blue-400">☆</span>
-                <span><strong>Default (Blue)</strong> - General highlights for typical sites</span>
+                <div className="w-3 h-3 mt-1 bg-blue-500 rounded-full"></div>
+                <span><strong>Blue</strong> - General highlights for informational sites</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-red-400">★</span>
-                <span><strong>Important (Red)</strong> - Highlight important or trusted sites</span>
+                <div className="w-3 h-3 mt-1 bg-red-500 rounded-full"></div>
+                <span><strong>Red</strong> - Highlight important or trusted sites</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-green-400">⭐</span>
-                <span><strong>Favorite (Green)</strong> - Highlight your favorite or frequently used sites</span>
+                <div className="w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
+                <span><strong>Green</strong> - Highlight your favorite or frequently used sites</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-gray-400">X</span>
-                <span><strong>Hide button</strong> - Hide domains directly on search results</span>
+                <span className="mt-1 text-gray-400">✕</span>
+                <span><strong>Hide button</strong> - Hide domains directly from search results</span>
               </li>
             </ul>
           </div>
