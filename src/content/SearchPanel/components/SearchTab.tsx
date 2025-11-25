@@ -7,12 +7,14 @@ interface SearchTabProps {
   response: string | null;
   isApiKeySet: boolean;
   outputFormat: OutputFormat;
+  onOpenSettings?: () => void;
 }
 
 export const SearchTab: React.FC<SearchTabProps> = ({
   response,
   isApiKeySet,
   outputFormat,
+  onOpenSettings,
 }) => {
   const handleOpenApiKey = () => {
     browser.runtime.sendMessage({ type: "openApiKeyPage" });
@@ -79,6 +81,48 @@ export const SearchTab: React.FC<SearchTabProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Settings Gear Icon */}
+        {onOpenSettings && (
+          <button
+            onClick={onOpenSettings}
+            style={{
+              padding: "0.5rem",
+              borderRadius: "0.5rem",
+              background: "rgba(79, 70, 229, 0.1)",
+              border: "1px solid rgba(79, 70, 229, 0.3)",
+              color: "#818cf8",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(79, 70, 229, 0.2)";
+              e.currentTarget.style.transform = "scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(79, 70, 229, 0.1)";
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+            title="Search Settings"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v6m0 6v6M1 12h6m6 0h6M4.22 4.22l4.24 4.24m7.07 7.07l4.24 4.24m0-7.07l-4.24 4.24m-7.07 7.07l-4.24 4.24"/>
+            </svg>
+          </button>
+        )}
       </div>
 
       <div
