@@ -307,7 +307,14 @@ Please provide a helpful response about the user's question specifically related
   return (
     <div
       ref={panelRef}
-      className="flex flex-col h-full p-6 overflow-hidden animate-slide-in"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        padding: '1.5rem',
+        overflow: 'hidden',
+        animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+      }}
     >
       <TabNavigation
         activeTab={activeTab}
