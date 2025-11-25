@@ -157,8 +157,8 @@ function App() {
           )}
         </div>
 
-
-
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-3 pt-2">
           <button
             onClick={openApiKeyPage}
             className="group w-full p-4 bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl
