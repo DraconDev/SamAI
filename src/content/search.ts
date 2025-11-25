@@ -1,166 +1,10 @@
-import { searchSettingsStore } from "@/utils/store"; // Import searchSettingsStore
+import { searchSettingsStore } from "@/utils/store";
 import React from "react";
-import { createRoot, type Root } from "react-dom/client"; // Import Root type
-import SearchPanel from "@/src/content/SearchPanel"; // Import the full-featured SearchPanel
+import { createRoot, type Root } from "react-dom/client";
+import SearchPanel from "@/src/content/SearchPanel";
 
-let samaiRoot: Root | null = null; // Module-scoped root
-let samaiPanelContainer: HTMLDivElement | null = null; // Module-scoped container
-
-function injectStyles() {
-  const styleTag = document.createElement("style");
-  styleTag.id = "samai-styles";
-  styleTag.textContent = `
-    /* Reset container styles - but preserve panel layout */
-    #samai-container {
-      all: initial;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #e2e8f0;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      position: fixed !important;
-      top: 0 !important;
-      right: 0 !important;
-      width: 420px !important;
-      height: 100vh !important;
-      z-index: 2147483647 !important;
-      pointer-events: auto !important;
-    }
-
-    /* Chat input styling */
-    .samai-chat-input {
-      width: 100%;
-      padding: 16px 48px 16px 16px;
-      background: rgba(13, 14, 22, 0.7);
-      border: 2px solid rgba(46, 47, 62, 0.7);
-      border-radius: 16px;
-      color: #e2e8f0;
-      font-size: 14px;
-      font-weight: 500;
-      outline: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
-
-    .samai-chat-input::placeholder {
-      color: #9ca3af;
-      font-weight: 400;
-    }
-
-    .samai-chat-input:focus {
-      border-color: #34d399;
-      box-shadow: 
-        0 0 0 3px rgba(52, 211, 153, 0.1),
-        inset 0 1px 3px rgba(0, 0, 0, 0.3),
-        0 4px 12px rgba(52, 211, 153, 0.2);
-      background: rgba(13, 14, 22, 0.9);
-    }
-
-    .samai-chat-input:hover {
-      border-color: rgba(46, 47, 62, 0.9);
-      background: rgba(13, 14, 22, 0.8);
-    }
-
-    .samai-chat-input:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* Markdown styles */
-    #samai-container pre {
-      background: #1a1b2e;
-      border: 1px solid rgba(46, 47, 62, 0.5);
-      border-radius: 0.5rem;
-      padding: 1rem;
-      margin: 1rem 0;
-      overflow-x: auto;
-    }
-
-    #samai-container code {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.9em;
-      background: rgba(46, 47, 62, 0.5);
-      padding: 0.2em 0.4em;
-      border-radius: 0.25rem;
-    }
-
-    #samai-container p {
-      margin: 1em 0;
-      line-height: 1.7;
-    }
-
-    #samai-container h1, #samai-container h2, #samai-container h3 {
-      font-weight: 600;
-      margin: 1.5em 0 0.5em;
-      color: #e2e8f0;
-    }
-
-    #samai-container ul, #samai-container ol {
-      margin: 1em 0;
-      padding-left: 1.5em;
-      list-style-type: disc;
-    }
-
-    #samai-container ol {
-      list-style-type: decimal;
-    }
-
-    #samai-container li {
-      margin: 0.5em 0;
-    }
-
-    #samai-container a {
-      color: #818cf8;
-      text-decoration: underline;
-    }
-
-    #samai-container a:hover {
-      color: #4f46e5;
-    }
-
-    #samai-container strong {
-      color: #818cf8;
-      font-weight: 600;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
-
-    @keyframes slideOut {
-      from { transform: translateX(0); }
-      to { transform: translateX(100%); }
-    }
-
-    .animate-slide-in {
-      animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .animate-slide-out {
-      animation: slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 0.3s ease-out forwards;
-    }
-
-    .animate-spin {
-      animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-  `;
-  document.head.appendChild(styleTag);
-}
+let samaiRoot: Root | null = null;
+let samaiPanelContainer: HTMLDivElement | null = null;
 
 export async function showSidePanel(
   response: string | null,
@@ -202,15 +46,17 @@ export async function showSidePanel(
     return;
   }
 
-  // Create new panel container
+  // Create new panel container with Tailwind classes
   samaiPanelContainer = document.createElement("div");
   samaiPanelContainer.id = "samai-container";
+  samaiPanelContainer.className = `
+    fixed top-0 right-0 w-[420px] h-screen z-[2147483647] pointer-events-auto
+    font-inter text-slate-100 antialiased
+    bg-gradient-to-br from-slate-900 to-slate-800
+    backdrop-blur-xl border-l border-white/10
+    shadow-2xl overflow-hidden
+  `;
   document.body.appendChild(samaiPanelContainer);
-
-  // Inject styles if not already present
-  if (!document.querySelector("#samai-styles")) {
-    injectStyles();
-  }
 
   // Initialize React root
   samaiRoot = createRoot(samaiPanelContainer);
