@@ -15,8 +15,26 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   onClearPreview,
 }) => {
   return (
-    <div className="space-y-6 p-4 bg-gradient-to-br from-slate-900/80 via-[#1E1F2E]/70 rounded-3xl border border-blue-900/50 backdrop-blur-xl shadow-2xl">
-      <div className="p-8 bg-gradient-to-br from-[#1E1F2E]/95 to-slate-900/90 rounded-3xl border border-blue-500/20 shadow-2xl backdrop-blur-xl">
+    <div 
+      className="space-y-6"
+      style={{
+        padding: '1rem',
+        height: '100%',
+        overflowY: 'auto',
+      }}
+    >
+      <div 
+        className="p-8 bg-gradient-to-br from-[#1E1F2E]/95 to-slate-900/90 rounded-3xl border border-blue-500/20 shadow-2xl backdrop-blur-xl"
+        style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
+          border: '1px solid rgba(59, 130, 246, 0.3)',
+          borderRadius: '1rem',
+          padding: '1.5rem',
+          boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(12px)',
+          marginBottom: '1.5rem',
+        }}
+      >
         <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text">
           Page Scraper
         </h3>

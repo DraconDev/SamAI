@@ -19,29 +19,44 @@ export const SearchTab: React.FC<SearchTabProps> = ({
   };
 
   return (
-    <div style={{ height: '100%', overflowY: 'auto' }}>
-      <div style={{ marginBottom: "20px" }}>
+    <div style={{ 
+      height: '100%', 
+      overflowY: 'auto',
+      padding: '1rem',
+    }}>
+      <div style={{ 
+        marginBottom: "1.5rem",
+      }}>
         {response ? (
-          outputFormat === "html" ? (
-            <div
-              style={{
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
+            border: '1px solid rgba(79, 70, 229, 0.3)',
+            borderRadius: '1rem',
+            padding: '1.5rem',
+            boxShadow: '0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(12px)',
+          }}>
+            {outputFormat === "html" ? (
+              <div
+                style={{
+                  maxWidth: 'none',
+                  color: '#f1f5f9',
+                  lineHeight: '1.75',
+                  fontSize: '14px',
+                }}
+                dangerouslySetInnerHTML={{ __html: response }}
+              />
+            ) : (
+              <div style={{
                 maxWidth: 'none',
                 color: '#f1f5f9',
-                lineHeight: '1.7',
+                lineHeight: '1.75',
                 fontSize: '14px',
-              }}
-              dangerouslySetInnerHTML={{ __html: response }}
-            />
-          ) : (
-            <div style={{
-              maxWidth: 'none',
-              color: '#f1f5f9',
-              lineHeight: '1.7',
-              fontSize: '14px',
-            }}>
-              <MarkdownRenderer content={response} />
-            </div>
-          )
+              }}>
+                <MarkdownRenderer content={response} />
+              </div>
+            )}
+          </div>
         ) : !isApiKeySet ? (
           <div
             style={{
@@ -49,23 +64,29 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "300px",
+              minHeight: "400px",
               textAlign: "center",
-              padding: "0 20px",
+              padding: "2rem",
+              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
+              border: '1px solid rgba(79, 70, 229, 0.3)',
+              borderRadius: '1rem',
+              boxShadow: '0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(12px)',
               animation: 'samai-fade-in 0.3s ease-out',
             }}
           >
             <div
               style={{
-                width: "64px",
-                height: "64px",
-                borderRadius: "20px",
-                background: "rgba(79, 70, 229, 0.1)",
+                width: "80px",
+                height: "80px",
+                borderRadius: "1.5rem",
+                background: "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.15))",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                marginBottom: "24px",
-                border: "1px solid rgba(79, 70, 229, 0.2)",
+                marginBottom: "1.5rem",
+                border: "1px solid rgba(99, 102, 241, 0.3)",
+                boxShadow: '0 8px 20px -4px rgba(99, 102, 241, 0.3)',
               }}
             >
               <svg
@@ -140,22 +161,39 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "300px",
+              minHeight: "400px",
+              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
+              border: '1px solid rgba(79, 70, 229, 0.3)',
+              borderRadius: '1rem',
+              padding: '2rem',
+              boxShadow: '0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(12px)',
             }}
           >
             <LoadingSpinner size="lg" color="primary" />
             <div
               style={{
-                marginTop: "24px",
-                color: "#94a3b8",
-                fontWeight: 500,
-                fontSize: "14px",
+                marginTop: "1.5rem",
+                color: "#cbd5e1",
+                fontWeight: 600,
+                fontSize: "15px",
                 letterSpacing: "0.5px",
-                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                background: 'linear-gradient(135deg, #818cf8, #a5b4fc)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
               }}
             >
               Generating insights...
             </div>
+            <p style={{
+              marginTop: "0.75rem",
+              color: "#94a3b8",
+              fontSize: "13px",
+              fontWeight: 400,
+            }}>
+              Analyzing page content with AI
+            </p>
           </div>
         )}
       </div>
