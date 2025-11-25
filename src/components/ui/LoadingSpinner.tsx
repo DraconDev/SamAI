@@ -18,6 +18,7 @@ const colors = {
   success: { borderColor: 'rgba(52, 211, 153, 0.3)', borderTopColor: '#34d399' },
   warning: { borderColor: 'rgba(251, 191, 36, 0.3)', borderTopColor: '#fbbf24' },
   danger: { borderColor: 'rgba(248, 113, 113, 0.3)', borderTopColor: '#f87171' },
+  
 };
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({

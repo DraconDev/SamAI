@@ -24,11 +24,21 @@ export const SearchTab: React.FC<SearchTabProps> = ({
         {response ? (
           outputFormat === "html" ? (
             <div
-              className="prose optimized-html-content prose-invert max-w-none"
+              style={{
+                maxWidth: 'none',
+                color: '#f1f5f9',
+                lineHeight: '1.7',
+                fontSize: '14px',
+              }}
               dangerouslySetInnerHTML={{ __html: response }}
             />
           ) : (
-            <div className="prose markdown-content prose-invert max-w-none">
+            <div style={{
+              maxWidth: 'none',
+              color: '#f1f5f9',
+              lineHeight: '1.7',
+              fontSize: '14px',
+            }}>
               <MarkdownRenderer content={response} />
             </div>
           )
@@ -42,8 +52,8 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               height: "300px",
               textAlign: "center",
               padding: "0 20px",
+              animation: 'samai-fade-in 0.3s ease-out',
             }}
-            className="animate-fade-in"
           >
             <div
               style={{
@@ -130,8 +140,8 @@ export const SearchTab: React.FC<SearchTabProps> = ({
                 fontWeight: 500,
                 fontSize: "14px",
                 letterSpacing: "0.5px",
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               }}
-              className="animate-pulse"
             >
               Generating insights...
             </div>
