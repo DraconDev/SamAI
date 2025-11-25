@@ -161,45 +161,6 @@ function App() {
           )}
         </div>
 
-        {/* Chat Settings Card */}
-        <div className="flex flex-col gap-4 p-5 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/80 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#10b981]/20 to-[#34d399]/20 flex items-center justify-center border border-[#10b981]/30">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  </svg>
-                </div>
-                <label className="text-sm font-bold text-gray-100">
-                  Continue Previous Chat
-                </label>
-              </div>
-              <span className="ml-8 text-xs text-gray-400">
-                Keep chat history between sessions
-              </span>
-            </div>
-            <ToggleButton
-              isEnabled={continuePreviousChat}
-              onToggle={() => {
-                const newValue = !continuePreviousChat;
-                setContinuePreviousChat(newValue);
-                searchSettingsStore.setValue({
-                searchActive,
-                promptStyle,
-                continuePreviousChat: newValue,
-                outputFormat,
-                showFloatingIcon,
-              });
-              }}
-              ariaLabel={
-                continuePreviousChat
-                  ? "Disable chat continuation"
-                  : "Enable chat continuation"
-              }
-            />
-          </div>
-        </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-3 pt-2">
