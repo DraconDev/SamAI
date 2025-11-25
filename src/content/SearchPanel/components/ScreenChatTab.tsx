@@ -18,13 +18,24 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({ onScreenCapture })
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Check if API key is set (you can integrate this with your existing API key logic)
+  // Check if API key is set using the same system as other tabs
   React.useEffect(() => {
-    // Check if user has API keys configured
-    const apiKeySet = localStorage.getItem("samai-google-api-key") || 
-                     localStorage.getItem("samai-openai-api-key") ||
-                     localStorage.getItem("samai-anthropic-api-key");
-    setIsApiKeySet(!!apiKeySet);
+    const checkApiKey = async () => {
+      try {
+        const apiKeyData = await apiKeyStore.getValue();
+        const hasAnyApiKey = !!(
+          apiKeyData.googleApiKey ||
+          apiKeyData.openaiApiKey ||
+          apiKeyData.anthropicApiKey ||
+          apiKeyData.openrouterApiKey
+        );
+        setIsApiKeySet(hasAnyApiKey);
+      } catch (error) {
+        console.error("Error checking API keys:", error);
+        setIsApiKeySet(false);
+      }
+    };
+    checkApiKey();
   }, []);
 
   const captureScreenshot = async () => {
