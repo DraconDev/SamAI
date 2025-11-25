@@ -39,9 +39,9 @@ export const ChatTab: React.FC<ChatTabProps> = ({
   }, [chatMessages]);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden border shadow-2xl bg-gradient-to-br from-slate-800/95 via-slate-900/98 to-slate-800/95 rounded-2xl border-slate-700/60 backdrop-blur-xl">
+    <div className="flex flex-col h-full overflow-hidden border shadow-2xl bg-slate-900/95 border-slate-700/60 rounded-2xl backdrop-blur-xl">
       {/* Chat Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-gradient-to-r from-slate-800/90 via-slate-800/95 to-slate-700/90 backdrop-blur-md">
+      <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/90 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center shadow-lg w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30 ring-1 ring-emerald-400/20">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -49,7 +49,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
             </svg>
           </div>
           <div>
-            <h3 className="text-sm font-bold tracking-tight text-emerald-400">
+            <h3 className="text-sm font-bold text-emerald-400">
               Page Chat Assistant
             </h3>
             <p className="text-xs font-medium text-slate-400">Ask questions about this page</p>
@@ -58,7 +58,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         {isExtractingContent && (
           <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
             <div className="w-3 h-3 border-2 rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin" />
-            <span className="text-xs font-semibold tracking-wide text-emerald-400">Reading page...</span>
+            <span className="text-xs font-semibold text-emerald-400">Reading page...</span>
           </div>
         )}
       </div>
@@ -72,7 +72,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
             </div>
-            <h3 className="mb-3 text-lg font-bold tracking-tight text-amber-400">
+            <h3 className="mb-3 text-lg font-bold text-amber-400">
               API Key Required
             </h3>
             <p className="mb-6 text-sm leading-relaxed text-slate-400">
@@ -89,7 +89,10 @@ export const ChatTab: React.FC<ChatTabProps> = ({
       ) : (
         <>
           {/* Chat Messages Container - Scrollable */}
-          <div className="flex-1 p-4 space-y-4 overflow-y-auto transition-colors duration-200 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800/50 hover:scrollbar-thumb-slate-500">
+          <div className="flex-1 p-4 space-y-4 overflow-y-auto" style={{ 
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#475569 #1e293b'
+          }}>
             {chatMessages.length === 0 ? (
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">
@@ -98,7 +101,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                     </svg>
                   </div>
-                  <h4 className="mb-2 text-lg font-bold tracking-tight text-emerald-400">Chat Ready</h4>
+                  <h4 className="mb-2 text-lg font-bold text-emerald-400">Chat Ready</h4>
                   <p className="text-sm font-medium text-slate-400">Ask questions about this page's content</p>
                 </div>
               </div>
@@ -106,7 +109,10 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               chatMessages.map((message, index) => (
                 <div
                   key={index}
-                  className={`flex animate-in slide-in-from-bottom-2 fade-in-0 duration-300 ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                  style={{
+                    animation: `slideInFromBottom 0.3s ease-out ${index * 100}ms both`
+                  }}
                 >
                   <div
                     className={`max-w-[85%] group ${
@@ -114,9 +120,6 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                         ? "bg-gradient-to-br from-emerald-500 to-emerald-400 text-white border border-emerald-400/30 shadow-lg shadow-emerald-500/20 ml-4"
                         : "bg-gradient-to-br from-slate-800/95 to-slate-700/95 border border-slate-600/60 text-slate-100 shadow-lg shadow-black/20 mr-4"
                     } rounded-2xl backdrop-blur-sm transition-all duration-200 hover:shadow-xl`}
-                    style={{
-                      animationDelay: `${index * 100}ms`
-                    }}
                   >
                     {message.role === "user" ? (
                       <div className="p-4">
@@ -143,7 +146,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               ))
             )}
             {(isChatLoading || isExtractingContent) && (
-              <div className="flex justify-start duration-300 animate-in slide-in-from-bottom-2 fade-in-0">
+              <div className="flex justify-start" style={{ animation: 'slideInFromBottom 0.3s ease-out' }}>
                 <div className="p-4 mr-4 border shadow-lg border-slate-600/60 bg-gradient-to-br from-slate-800/95 to-slate-700/95 rounded-2xl backdrop-blur-sm">
                   <div className="flex items-center space-x-3">
                     <div className="flex space-x-1">
@@ -151,7 +154,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                       <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" style={{ animationDelay: "0.1s" }} />
                       <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" style={{ animationDelay: "0.2s" }} />
                     </div>
-                    <span className="text-xs font-semibold tracking-wide text-emerald-400">
+                    <span className="text-xs font-semibold text-emerald-400">
                       {isExtractingContent ? "Reading page content..." : "AI is thinking..."}
                     </span>
                   </div>
@@ -162,7 +165,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           </div>
 
           {/* Chat Input - Fixed at Bottom */}
-          <div className="flex-shrink-0 p-4 border-t border-slate-700/50 bg-gradient-to-r from-slate-800/95 via-slate-800/98 to-slate-700/95 backdrop-blur-md">
+          <div className="flex-shrink-0 p-4 border-t border-slate-700/50 bg-slate-800/95 backdrop-blur-md">
             <form onSubmit={onSubmit} className="flex flex-col gap-3">
               {/* Include Page Content Checkbox */}
               <div className="flex items-center gap-3">
