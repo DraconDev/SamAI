@@ -306,21 +306,12 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
                         className="w-full h-8 rounded border border-[#2E2F3E]/50"
                       />
                     </div>
-                    <div className="col-span-4">
+                    <div className="col-span-9">
                       <input
                         type="text"
-                        placeholder="Pattern (e.g., domain.com)"
+                        placeholder="Domain or pattern (e.g., wikipedia.org, github.com, *.edu)"
                         value={pattern.pattern}
                         onChange={(e) => updatePattern(pattern.id, { pattern: e.target.value })}
-                        className="w-full p-2 bg-[#0D0E16] border border-[#2E2F3E]/50 rounded text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#4f46e5]/50"
-                      />
-                    </div>
-                    <div className="col-span-4">
-                      <input
-                        type="text"
-                        placeholder="Description"
-                        value={pattern.description}
-                        onChange={(e) => updatePattern(pattern.id, { description: e.target.value })}
                         className="w-full p-2 bg-[#0D0E16] border border-[#2E2F3E]/50 rounded text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#4f46e5]/50"
                       />
                     </div>
