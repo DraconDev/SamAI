@@ -298,7 +298,7 @@ class SearchHighlighter {
       // Position buttons to the right of the result
       resultElement.style.position = "relative";
       (actions as HTMLElement).style.position = "absolute";
-      (actions as HTMLElement).style.right = "-35px";
+      (actions as HTMLElement).style.right = "-45px";
       (actions as HTMLElement).style.top = "4px";
       (actions as HTMLElement).style.zIndex = "1000";
       resultElement.appendChild(actions);
