@@ -41,7 +41,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "search",
       label: "Search",
-      gradient: "linear-gradient(90deg, #4f46e5, #6366f1, #818cf8)",
+      gradient: "from-indigo-500 to-indigo-600",
       shadow: "rgba(79, 70, 229, 0.5)",
       icon: (
         <svg
@@ -62,7 +62,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "scrape",
       label: "Scrape",
-      gradient: "linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd)",
+      gradient: "from-blue-500 to-blue-600",
       shadow: "rgba(59, 130, 246, 0.5)",
       icon: (
         <svg
@@ -83,7 +83,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "chat",
       label: "Chat",
-      gradient: "linear-gradient(90deg, #10b981, #059669, #34d399)",
+      gradient: "from-emerald-500 to-emerald-600",
       shadow: "rgba(16, 185, 129, 0.5)",
       handler: onChatClick,
       icon: (
@@ -104,7 +104,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "sum",
       label: "Sum",
-      gradient: "linear-gradient(90deg, #f59e0b, #d97706, #fbbf24)",
+      gradient: "from-amber-500 to-amber-600",
       shadow: "rgba(245, 158, 11, 0.5)",
       handler: onSummarizeClick,
       icon: (
@@ -131,7 +131,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "form",
       label: "Form",
-      gradient: "linear-gradient(90deg, #8b5cf6, #7c3aed, #a78bfa)",
+      gradient: "from-purple-500 to-purple-600",
       shadow: "rgba(139, 92, 246, 0.5)",
       handler: onFormClick,
       icon: (
@@ -153,7 +153,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "image",
       label: "Image",
-      gradient: "linear-gradient(90deg, #ec4899, #db2777, #f472b6)",
+      gradient: "from-pink-500 to-pink-600",
       shadow: "rgba(236, 72, 153, 0.5)",
       handler: onImageClick,
       icon: (
@@ -175,96 +175,53 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     },
   ];
 
-  const TabButton: React.FC<{ tab: Tab; style?: any; className?: string }> = ({
+  const TabButton: React.FC<{ tab: Tab; className?: string }> = ({
     tab,
-    style,
     className,
-  }) => (
-    <button
-      onClick={() => handleTabClick(tab)}
-      style={style}
-      className={className}
-    >
-      {tab.icon}
-      <span>{tab.label}</span>
-    </button>
-  );
+  }) => {
+    const isActive = activeTab === tab.id;
+    
+    return (
+      <button
+        onClick={() => handleTabClick(tab)}
+        className={`
+          flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer
+          ${isActive 
+            ? `bg-gradient-to-r ${tab.gradient} text-white shadow-lg transform scale-105` 
+            : 'bg-slate-800/40 text-slate-400 border border-slate-700/30 hover:bg-slate-700/50 hover:text-slate-300'
+          }
+          ${className || ''}
+        `}
+        style={isActive ? {
+          boxShadow: `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}`
+        } : {}}
+      >
+        {tab.icon}
+        <span>{tab.label}</span>
+      </button>
+    );
+  };
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: "6px",
-        marginBottom: "24px",
-        padding: "10px",
-        background: "linear-gradient(135deg, #0D0E16, #1a1b2e)",
-        borderRadius: "16px",
-        border: "1px solid #2E2F3E",
-        boxShadow:
-          "0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      }}
-    >
+    <div className="grid grid-cols-4 gap-1.5 mb-6 p-2.5 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border border-slate-700 shadow-2xl">
       {/* Row 1 - Main Actions */}
       {mainTabs.map((tab) => (
         <TabButton
           key={tab.id}
           tab={tab}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            padding: "10px 12px",
-            borderRadius: "12px",
-            fontWeight: 700,
-            fontSize: "13px",
-            border:
-              activeTab === tab.id ? "none" : "1px solid rgba(46, 47, 62, 0.3)",
-            background:
-              activeTab === tab.id ? tab.gradient : "rgba(30, 31, 46, 0.4)",
-            color: activeTab === tab.id ? "white" : "#9ca3af",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-            boxShadow:
-              activeTab === tab.id
-                ? `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}`
-                : "none",
-            transform: activeTab === tab.id ? "scale(1.02)" : "scale(1)",
-          }}
         />
       ))}
 
       {/* Row 2 - Secondary Actions */}
-      {secondaryTabs.map((tab) => (
-        <TabButton
-          key={tab.id}
-          tab={tab}
-          style={{
-            gridColumn: tab.id === "form" ? "span 2" : "span 2",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            padding: "10px 12px",
-            borderRadius: "12px",
-            fontWeight: 700,
-            fontSize: "13px",
-            border:
-              activeTab === tab.id ? "none" : "1px solid rgba(46, 47, 62, 0.3)",
-            background:
-              activeTab === tab.id ? tab.gradient : "rgba(30, 31, 46, 0.4)",
-            color: activeTab === tab.id ? "white" : "#9ca3af",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-            boxShadow:
-              activeTab === tab.id
-                ? `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}`
-                : "none",
-            transform: activeTab === tab.id ? "scale(1.02)" : "scale(1)",
-          }}
-        />
-      ))}
+      <div className="col-span-4 grid grid-cols-2 gap-1.5 mt-1.5">
+        {secondaryTabs.map((tab) => (
+          <TabButton
+            key={tab.id}
+            tab={tab}
+            className="col-span-1"
+          />
+        ))}
+      </div>
     </div>
   );
 };
