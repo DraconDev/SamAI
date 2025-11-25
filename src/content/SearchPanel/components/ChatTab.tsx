@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { MarkdownRenderer } from '@/utils/markdown';
 import { LoadingSpinner } from '@/src/components/ui/LoadingSpinner';
 import type { ChatMessage } from '../types';
@@ -95,6 +95,20 @@ export const ChatTab: React.FC<ChatTabProps> = ({
             <button
               onClick={onOpenApiKey}
               className="px-6 py-3 text-sm font-bold text-white transition-all duration-300 transform shadow-lg bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl hover:shadow-xl hover:shadow-amber-500/30 hover:scale-105 ring-1 ring-amber-400/20"
+              style={{
+                background: 'linear-gradient(135deg, #f59e0b, #fbbf24)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 8px 20px -4px rgba(245, 158, 11, 0.4), 0 4px 12px -2px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                letterSpacing: '0.025em',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                e.currentTarget.style.boxShadow = "0 12px 28px -4px rgba(245, 158, 11, 0.5), 0 6px 16px -2px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "0 8px 20px -4px rgba(245, 158, 11, 0.4), 0 4px 12px -2px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+              }}
             >
               Configure API Key
             </button>
@@ -234,11 +248,27 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                   className="h-12 px-6 font-bold text-white rounded-xl transition-all duration-200 min-w-[60px] flex items-center justify-center shadow-lg ring-1 ring-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 hover:scale-105 focus:ring-4 focus:ring-offset-2 focus:ring-offset-slate-800"
                   style={{
                     background: (isChatLoading || isExtractingContent || !chatInput.trim())
-                      ? 'linear-gradient(to right, #6b7280, #9ca3af)'
-                      : 'linear-gradient(to right, #10b981, #34d399)',
+                      ? 'linear-gradient(135deg, #6b7280, #9ca3af)'
+                      : 'linear-gradient(135deg, #10b981, #34d399)',
+                    border: (isChatLoading || isExtractingContent || !chatInput.trim())
+                      ? '1px solid rgba(107, 114, 128, 0.3)'
+                      : '1px solid rgba(255, 255, 255, 0.2)',
                     boxShadow: (isChatLoading || isExtractingContent || !chatInput.trim())
                       ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                      : '0 4px 6px -1px rgba(16, 185, 129, 0.2)',
+                      : '0 8px 20px -4px rgba(16, 185, 129, 0.4), 0 4px 12px -2px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                    letterSpacing: '0.025em',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isChatLoading && !isExtractingContent && chatInput.trim()) {
+                      e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                      e.currentTarget.style.boxShadow = "0 12px 28px -4px rgba(16, 185, 129, 0.5), 0 6px 16px -2px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isChatLoading && !isExtractingContent && chatInput.trim()) {
+                      e.currentTarget.style.transform = "translateY(0) scale(1)";
+                      e.currentTarget.style.boxShadow = "0 8px 20px -4px rgba(16, 185, 129, 0.4), 0 4px 12px -2px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                    }
                   }}
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

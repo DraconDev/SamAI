@@ -14,7 +14,7 @@ export const SummaryTab: React.FC<SummaryTabProps> = ({
   summaryError,
 }) => {
   return (
-    <div style={{ padding: "24px" }}>
+    <div style={{ padding: "24px", height: '100%', overflowY: 'auto' }}>
       {isSummarizing ? (
         <div style={{ textAlign: "center" }}>
           <LoadingSpinner size="lg" color="warning" />

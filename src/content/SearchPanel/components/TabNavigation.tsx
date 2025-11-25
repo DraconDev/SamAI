@@ -175,55 +175,95 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     },
   ];
 
+  // Gradient color mapping
+  const gradientColors: Record<string, { from: string; to: string }> = {
+    'from-indigo-500 to-indigo-600': { from: '#6366f1', to: '#4f46e5' },
+    'from-blue-500 to-blue-600': { from: '#3b82f6', to: '#2563eb' },
+    'from-emerald-500 to-emerald-600': { from: '#10b981', to: '#059669' },
+    'from-amber-500 to-amber-600': { from: '#f59e0b', to: '#d97706' },
+    'from-purple-500 to-purple-600': { from: '#a855f7', to: '#9333ea' },
+    'from-pink-500 to-pink-600': { from: '#ec4899', to: '#db2777' },
+  };
+
   const TabButton: React.FC<{ tab: Tab; className?: string }> = ({
     tab,
     className,
   }) => {
     const isActive = activeTab === tab.id;
+    const gradient = gradientColors[tab.gradient] || { from: '#6366f1', to: '#4f46e5' };
     
-    const baseButtonStyle = {
+    const baseButtonStyle: React.CSSProperties = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '0.375rem',
-      padding: '0.625rem 0.75rem',
-      borderRadius: '0.75rem',
+      gap: '0.5rem',
+      padding: '0.75rem 1rem',
+      borderRadius: '0.875rem',
       fontSize: '0.875rem',
-      fontWeight: 'bold',
-      transition: 'all 0.3s',
+      fontWeight: '600',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       cursor: 'pointer',
       border: 'none',
-      outline: 'none' as const,
+      outline: 'none',
+      position: 'relative',
+      overflow: 'hidden',
+      letterSpacing: '0.025em',
     };
 
-    const activeStyle = {
+    const activeStyle: React.CSSProperties = {
       ...baseButtonStyle,
-      background: `linear-gradient(to right, ${tab.gradient.replace('from-', '').replace(' to-', ', ').replace('-', ' ').split(',')[0]}, ${tab.gradient.split(' to-')[1]})`,
+      background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})`,
       color: 'white',
-      boxShadow: `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}`,
-      transform: 'scale(1.05)',
+      boxShadow: `0 10px 25px -5px ${tab.shadow}, 0 4px 12px -2px ${tab.shadow}, inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
+      transform: 'translateY(-1px) scale(1.02)',
+      border: `1px solid rgba(255, 255, 255, 0.2)`,
     };
 
-    const inactiveStyle = {
+    const inactiveStyle: React.CSSProperties = {
       ...baseButtonStyle,
-      background: 'rgba(30, 41, 59, 0.4)',
+      background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))',
       color: '#94a3b8',
-      border: '1px solid rgba(51, 65, 85, 0.3)',
-    };
-
-    const hoverStyle = isActive ? {} : {
-      background: 'rgba(51, 65, 85, 0.5)',
-      color: '#cbd5e1',
+      border: '1px solid rgba(51, 65, 85, 0.4)',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     };
     
     return (
       <button
         onClick={() => handleTabClick(tab)}
-        style={isActive ? activeStyle : { ...inactiveStyle, ...hoverStyle }}
+        style={isActive ? activeStyle : inactiveStyle}
         className={className}
+        onMouseEnter={(e) => {
+          if (!isActive) {
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(51, 65, 85, 0.7), rgba(30, 41, 59, 0.9))';
+            e.currentTarget.style.color = '#cbd5e1';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+            e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.6)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isActive) {
+            e.currentTarget.style.background = inactiveStyle.background as string;
+            e.currentTarget.style.color = inactiveStyle.color as string;
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = inactiveStyle.boxShadow as string;
+            e.currentTarget.style.borderColor = inactiveStyle.border as string;
+          }
+        }}
       >
-        {tab.icon}
-        <span>{tab.label}</span>
+        <span style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          filter: isActive ? 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))' : 'none'
+        }}>
+          {tab.icon}
+        </span>
+        <span style={{ 
+          textShadow: isActive ? '0 1px 2px rgba(0, 0, 0, 0.2)' : 'none'
+        }}>
+          {tab.label}
+        </span>
       </button>
     );
   };

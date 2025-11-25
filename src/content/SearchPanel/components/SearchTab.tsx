@@ -19,7 +19,7 @@ export const SearchTab: React.FC<SearchTabProps> = ({
   };
 
   return (
-    <>
+    <div style={{ height: '100%', overflowY: 'auto' }}>
       <div style={{ marginBottom: "20px" }}>
         {response ? (
           outputFormat === "html" ? (
@@ -107,16 +107,27 @@ export const SearchTab: React.FC<SearchTabProps> = ({
             <button
               onClick={handleOpenApiKey}
               style={{
-                padding: "12px 24px",
+                padding: "14px 28px",
                 fontWeight: 600,
                 color: "white",
-                background: "linear-gradient(135deg, #4f46e5, #818cf8)",
-                border: "none",
+                background: "linear-gradient(135deg, #6366f1, #818cf8)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
                 borderRadius: "12px",
                 cursor: "pointer",
-                transition: "all 0.2s ease",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                 fontSize: "14px",
-                boxShadow: "0 4px 12px rgba(79, 70, 229, 0.3)",
+                boxShadow: "0 8px 20px -4px rgba(99, 102, 241, 0.4), 0 4px 12px -2px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                letterSpacing: "0.025em",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                e.currentTarget.style.boxShadow = "0 12px 28px -4px rgba(99, 102, 241, 0.5), 0 6px 16px -2px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "0 8px 20px -4px rgba(99, 102, 241, 0.4), 0 4px 12px -2px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
               }}
             >
               Configure API Key
@@ -148,6 +159,6 @@ export const SearchTab: React.FC<SearchTabProps> = ({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
