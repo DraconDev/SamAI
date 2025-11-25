@@ -115,3 +115,5 @@ export const extractPageContentAsync = async (format: OutputFormat, fresh: boole
     console.error("[page-content] Error extracting page content:", error);
     throw error instanceof Error ? error : new Error("Failed to extract page content");
   }
+}
+  }
