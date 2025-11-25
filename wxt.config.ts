@@ -28,9 +28,6 @@ export default defineConfig({
         id: "dracsharp@gmail.com",
       },
     },
-    zip: {
-      name: "SamAI",
-    },
   },
   modules: ["@wxt-dev/module-react"],
   runner: {
