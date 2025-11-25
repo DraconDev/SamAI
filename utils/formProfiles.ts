@@ -49,25 +49,37 @@ const FORM_PROFILES_KEY = "samai_form_profiles";
 
 export class FormProfilesManager {
   /**
-   * Get all profiles
+   * Get all profiles with error handling
    */
   static async getProfiles(): Promise<FormProfile[]> {
     try {
       const data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY);
-      return data?.profiles || [];
+      if (!data || !Array.isArray(data.profiles)) {
+        console.log("[SamAI] No profiles found or invalid format");
+        return [];
+      }
+      return data.profiles;
     } catch (error) {
       console.error("[SamAI] Error getting form profiles:", error);
+      // Try to initialize storage if it doesn't exist
+      try {
+        await storage.setItem(FORM_PROFILES_KEY, { profiles: [] });
+      } catch (initError) {
+        console.error("[SamAI] Error initializing profiles storage:", initError);
+      }
       return [];
     }
   }
 
   /**
-   * Get active profile
+   * Get active profile with improved error handling
    */
   static async getActiveProfile(): Promise<FormProfile | null> {
     try {
       const data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY);
-      if (!data?.activeProfileId || !data.profiles) return null;
+      if (!data?.activeProfileId || !Array.isArray(data.profiles)) {
+        return null;
+      }
       
       return data.profiles.find((p: FormProfile) => p.id === data.activeProfileId) || null;
     } catch (error) {
