@@ -371,6 +371,49 @@ export default function SearchSettingsPage() {
             </div>
           </div>
 
+          {/* Hidden Patterns */}
+          <div className="p-6 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/50 shadow-xl">
+            <h2 className="flex items-center gap-2 mb-6 text-lg font-semibold text-gray-300">
+              <span className="text-red-500">🗑️</span>
+              Hidden Patterns
+            </h2>
+            
+            <div className="space-y-3">
+              {(() => {
+                const hiddenPatterns = patterns.filter(p => p.color === "#000000");
+                
+                if (hiddenPatterns.length === 0) {
+                  return (
+                    <div className="py-6 text-center text-gray-500">
+                      <p className="text-sm">No hidden patterns</p>
+                      <p className="text-xs">Hide domains directly from search results to manage here</p>
+                    </div>
+                  );
+                }
+                
+                return hiddenPatterns.map((pattern) => (
+                  <div key={pattern.id} className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <span className="text-red-400">✕</span>
+                        <span className="text-sm text-gray-400">Hidden domain</span>
+                      </div>
+                      <button
+                        onClick={() => removePattern(pattern.id)}
+                        className="px-3 py-1.5 text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
+                      >
+                        <span>Unhide</span>
+                      </button>
+                    </div>
+                    <div className="text-sm text-gray-300 font-mono bg-gray-800/50 p-2 rounded">
+                      {pattern.pattern}
+                    </div>
+                  </div>
+                ));
+              })()}
+            </div>
+          </div>
+
           {/* Instructions */}
           <div className="p-6 bg-[#0D0E16]/20 border border-[#2E2F3E]/30 rounded-2xl">
             <h3 className="mb-3 text-sm font-semibold text-gray-300">How it works:</h3>
