@@ -239,21 +239,24 @@ export default function SearchSettingsPage() {
               <div className="flex gap-2">
                 <button
                   onClick={() => addPattern("default")}
-                  className="px-3 py-1.5 text-xs font-medium bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-600/30 rounded-lg transition-all duration-200"
+                  className="px-3 py-1.5 text-xs font-medium bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
                 >
-                  ☆ Add Default
+                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                  Add Blue
                 </button>
                 <button
                   onClick={() => addPattern("important")}
-                  className="px-3 py-1.5 text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 rounded-lg transition-all duration-200"
+                  className="px-3 py-1.5 text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
                 >
-                  ★ Add Important
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  Add Red
                 </button>
                 <button
                   onClick={() => addPattern("favorite")}
-                  className="px-3 py-1.5 text-xs font-medium bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-600/30 rounded-lg transition-all duration-200"
+                  className="px-3 py-1.5 text-xs font-medium bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
                 >
-                  ⭐ Add Favorite
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  Add Green
                 </button>
               </div>
             </div>
