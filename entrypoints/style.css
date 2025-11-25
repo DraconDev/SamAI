@@ -64,4 +64,69 @@ html {
             0 8px 32px rgba(79, 70, 229, 0.7),
             0 0 30px rgba(79, 70, 229, 0.5);
     }
+/* Custom Scrollbar Classes for ChatTab */
+.scrollbar-thin {
+    scrollbar-width: thin;
+}
+
+.scrollbar-thumb-slate-600 {
+    scrollbar-color: #475569 #1e293b;
+}
+
+.scrollbar-track-slate-800\/50 {
+    scrollbar-color: #475569 rgba(30, 41, 59, 0.5);
+}
+
+.hover\:scrollbar-thumb-slate-500:hover {
+    scrollbar-color: #64748b #1e293b;
+}
+
+/* Webkit scrollbar variants */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar-thumb-slate-600::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+}
+
+.scrollbar-track-slate-800\/50::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+.hover\:scrollbar-thumb-slate-500:hover::-webkit-scrollbar-thumb {
+    background: #64748b;
+}
+
+/* Chat specific animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-from-bottom-2 {
+    animation: slideInFromBottom 0.3s ease-out;
+}
 }
