@@ -1,3 +1,5 @@
+import { searchSettingsStore, type SearchSettingsStore } from "./store";
+
 interface HighlightPattern {
   id: string;
   pattern: string;
