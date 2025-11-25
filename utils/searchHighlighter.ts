@@ -1,4 +1,4 @@
-import { searchSettingsStore } from "./store";
+import { searchSettingsStore, type SearchSettingsStore } from "./store";
 
 interface HighlightPattern {
   id: string;
@@ -215,6 +215,8 @@ class SearchHighlighter {
       });
     }
 
+    console.log("[SamAI Highlighter] Search result elements found:", elements.length, elements.map(el => el.tagName + '.' + el.className));
+
     return elements;
   }
 
@@ -235,47 +237,43 @@ class SearchHighlighter {
     // Cast to HTMLElement to access style property
     const htmlElement = element as HTMLElement;
     
-    // Method 1: Add background color directly to the element
+    // Add marker attribute
     element.setAttribute('data-samai-highlight-style', 'true');
     
-    // Convert opacity to hex for background color
+    // Convert hex color to RGBA with proper opacity handling
     const opacity = this.settings.highlightOpacity;
-    const hexOpacity = Math.round(opacity * 255);
-    const hexColor = hexOpacity.toString(16).padStart(2, '0');
+    const hexColor = color.replace('#', '');
     
-    htmlElement.style.backgroundColor = color + hexColor;
-    htmlElement.style.borderLeft = `4px solid ${color}`;
-    htmlElement.style.borderRadius = '4px';
-    htmlElement.style.transition = 'all 0.3s ease';
-    htmlElement.style.padding = '8px';
-    htmlElement.style.margin = '4px 0';
+    // Ensure we have valid hex color
+    if (hexColor.length === 6) {
+      const r = parseInt(hexColor.substr(0, 2), 16);
+      const g = parseInt(hexColor.substr(2, 2), 16);
+      const b = parseInt(hexColor.substr(4, 2), 16);
+      
+      htmlElement.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+      htmlElement.style.borderLeft = `4px solid ${color}`;
+      htmlElement.style.borderRadius = '4px';
+      htmlElement.style.transition = 'all 0.3s ease';
+      htmlElement.style.padding = '8px';
+      htmlElement.style.margin = '4px 0';
 
-    // Add hover effect with proper event listener management
-    const handleMouseEnter = () => {
-      const hoverOpacity = Math.min(opacity + 0.1, 1);
-      const hoverHexOpacity = Math.round(hoverOpacity * 255);
-      const hoverHexColor = hoverHexOpacity.toString(16).padStart(2, '0');
-      htmlElement.style.backgroundColor = color + hoverHexColor;
-    };
+      console.log("[SamAI Highlighter] Applied highlight with color:", `rgba(${r}, ${g}, ${b}, ${opacity})`, "border color:", color);
 
-    const handleMouseLeave = () => {
-      htmlElement.style.backgroundColor = color + hexColor;
-    };
+      // Add hover effect
+      const handleMouseEnter = () => {
+        const hoverOpacity = Math.min(opacity + 0.1, 1);
+        htmlElement.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${hoverOpacity})`;
+      };
 
-    // Store event listeners for cleanup
-    htmlElement.addEventListener('mouseenter', handleMouseEnter);
-    htmlElement.addEventListener('mouseleave', handleMouseLeave);
+      const handleMouseLeave = () => {
+        htmlElement.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+      };
 
-    // Method 2: Wrap matching text in a span (optional enhancement)
-    this.wrapMatchingText(element, color, description);
-  }
-
-  private wrapMatchingText(element: Element, color: string, description: string) {
-    // This is a more advanced feature - wrapping specific text matches
-    // For now, we'll keep it simple and just add the background styling
-    // Could be enhanced later to wrap specific text patterns
+      htmlElement.addEventListener('mouseenter', handleMouseEnter);
+      htmlElement.addEventListener('mouseleave', handleMouseLeave);
+    }
     
-    // Add a subtle tooltip-like indication
+    // Add tooltip if description exists
     if (description) {
       element.setAttribute('title', `Highlighted: ${description}`);
     }
@@ -326,4 +324,4 @@ if (typeof window !== 'undefined') {
 export { SearchHighlighter };
 
 // Export types for use in other modules
-  export type { HighlightPattern, HighlightSettings };
+export type { HighlightPattern, HighlightSettings };
