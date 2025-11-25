@@ -132,7 +132,12 @@ class SearchHighlighter {
       // Extract the domain from the URL
       let domain = "";
       try {
-        const urlObject = new URL(url);
+        let urlToParse = url;
+        // Handle relative URLs by prepending the current page's origin
+        if (url.startsWith('/') || !url.includes('://')) {
+          urlToParse = `${window.location.origin}${url}`;
+        }
+        const urlObject = new URL(urlToParse);
         domain = urlObject.hostname;
       } catch (e) {
         console.error("[SamAI Highlighter] Invalid URL:", url, e);
