@@ -1,13 +1,5 @@
 import { searchSettingsStore } from "./store";
 
-interface HighlightPattern {
-  id: string;
-  pattern: string;
-  color: string;
-  description: string;
-  enabled: boolean;
-}
-
 interface HighlightSettings {
   autoHighlight: boolean;
   highlightOpacity: number;
@@ -42,17 +34,15 @@ class SearchHighlighter {
 
   private async loadSettings() {
     try {
-      // Load patterns from localStorage
-      const savedPatterns = localStorage.getItem("samai-highlight-patterns");
-      if (savedPatterns) {
-        this.patterns = JSON.parse(savedPatterns);
-      }
+      // Load patterns from sync store
+      const patternsStore = await highlightPatternsStore.getValue();
+      this.patterns = patternsStore.patterns;
 
       // Load highlight settings from searchSettingsStore
       const searchSettings = await searchSettingsStore.getValue();
-      this.settings.autoHighlight = true;
-      this.settings.highlightOpacity = 0.3;
-      this.settings.enableHighlighting = localStorage.getItem("samai-enable-highlighting") !== "false";
+      this.settings.autoHighlight = searchSettings.autoHighlight;
+      this.settings.highlightOpacity = searchSettings.highlightOpacity;
+      this.settings.enableHighlighting = searchSettings.enableHighlighting;
     } catch (error) {
       console.error("Error loading search highlight settings:", error);
     }
