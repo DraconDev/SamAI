@@ -239,8 +239,10 @@ class SearchHighlighter {
       // Add hide button - more prominent styling
       const hideBtn = document.createElement("button");
       hideBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
-          <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M3 3L21 21"/>
         </svg>
       `;
       hideBtn.title = "Hide this domain";
