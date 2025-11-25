@@ -2,6 +2,8 @@
   "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noUnusedLocals": true, // Report errors on unused local variables.
+    "noUnusedParameters": true // Report errors on unused parameters in functions.
   }
 }
