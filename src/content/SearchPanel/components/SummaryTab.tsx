@@ -6,6 +6,7 @@ interface SummaryTabProps {
   isSummarizing: boolean;
   summary: string;
   summaryError: string;
+  onSummarize?: () => void;
 }
 
 export const SummaryTab: React.FC<SummaryTabProps> = ({
