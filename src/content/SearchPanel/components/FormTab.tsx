@@ -1,10 +1,284 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { AutoFormFiller } from '@/utils/autoFormFiller';
 
 interface FormTabProps {
   onFormClick: () => void;
 }
 
+interface FormAnalysis {
+  hasForms: boolean;
+  fieldCount: number;
+  formCount: number;
+  fields: Array<{
+    name?: string;
+    id?: string;
+    type: string;
+    label?: string;
+    placeholder?: string;
+  }>;
+}
+
+interface FillResult {
+  success: boolean;
+  error?: string;
+  filledFields: string[];
+  fieldCount: number;
+  formCount: number;
+}
+
 export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isFilling, setIsFilling] = useState(false);
+  const [instructions, setInstructions] = useState('');
+  const [formAnalysis, setFormAnalysis] = useState<FormAnalysis | null>(null);
+  const [fillResult, setFillResult] = useState<FillResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Analyze forms when component mounts
+  useEffect(() => {
+    analyzeForms();
+  }, []);
+
+  const analyzeForms = async () => {
+    setIsAnalyzing(true);
+    setError(null);
+    
+    try {
+      const analysis = await AutoFormFiller.analyzeForms();
+      setFormAnalysis(analysis);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to analyze forms');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const handleFillForms = async () => {
+    if (!instructions.trim()) {
+      setError('Please provide instructions for filling the form.');
+      return;
+    }
+
+    setIsFilling(true);
+    setError(null);
+    setFillResult(null);
+
+    try {
+      const result = await AutoFormFiller.fillForms(instructions);
+      setFillResult(result);
+      
+      if (!result.success && result.error) {
+        setError(result.error);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fill forms');
+    } finally {
+      setIsFilling(false);
+    }
+  };
+
+  const renderAnalysisResults = () => {
+    if (!formAnalysis) return null;
+
+    if (!formAnalysis.hasForms) {
+      return (
+        <div
+          style={{
+            color: "#94a3b8",
+            fontSize: "0.85rem",
+            textAlign: "center",
+            padding: "1rem",
+            background: "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+            border: "1px solid rgba(168, 85, 247, 0.3)",
+            borderRadius: "0.75rem",
+          }}
+        >
+          <p>No forms detected on this page.</p>
+          <button
+            onClick={analyzeForms}
+            style={{
+              marginTop: "0.5rem",
+              padding: "0.5rem 1rem",
+              background: "rgba(168, 85, 247, 0.2)",
+              border: "1px solid rgba(168, 85, 247, 0.4)",
+              borderRadius: "0.5rem",
+              color: "#c084fc",
+              cursor: "pointer",
+              fontSize: "0.8rem",
+            }}
+          >
+            Refresh Analysis
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        style={{
+          background: "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+          border: "1px solid rgba(168, 85, 247, 0.3)",
+          borderRadius: "0.75rem",
+          padding: "1rem",
+          marginBottom: "1rem",
+        }}
+      >
+        <h4
+          style={{
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            color: "#c084fc",
+            marginBottom: "0.75rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+        >
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Form Analysis Results
+        </h4>
+        
+        <div style={{ fontSize: "0.8rem", color: "#94a3b8", marginBottom: "0.75rem" }}>
+          <div>📋 Forms detected: {formAnalysis.formCount}</div>
+          <div>📝 Form fields: {formAnalysis.fieldCount}</div>
+        </div>
+
+        {formAnalysis.fields.length > 0 && (
+          <div style={{ maxHeight: "200px", overflowY: "auto" }}>
+            <h5 style={{ fontSize: "0.8rem", color: "#c084fc", marginBottom: "0.5rem" }}>
+              Detected Fields:
+            </h5>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              {formAnalysis.fields.slice(0, 10).map((field, index) => (
+                <div
+                  key={index}
+                  style={{
+                    padding: "0.5rem",
+                    background: "rgba(168, 85, 247, 0.1)",
+                    borderRadius: "0.375rem",
+                    fontSize: "0.75rem",
+                  }}
+                >
+                  <div style={{ color: "#e2e8f0" }}>
+                    {field.label || field.name || field.id || `Field ${index + 1}`}
+                  </div>
+                  <div style={{ color: "#94a3b8", marginTop: "0.25rem" }}>
+                    Type: {field.type}
+                    {field.placeholder && ` • Placeholder: ${field.placeholder}`}
+                  </div>
+                </div>
+              ))}
+              {formAnalysis.fields.length > 10 && (
+                <div style={{ fontSize: "0.75rem", color: "#64748b", textAlign: "center", padding: "0.5rem" }}>
+                  ... and {formAnalysis.fields.length - 10} more fields
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        <button
+          onClick={analyzeForms}
+          style={{
+            marginTop: "0.75rem",
+            padding: "0.5rem 1rem",
+            background: "rgba(168, 85, 247, 0.2)",
+            border: "1px solid rgba(168, 85, 247, 0.4)",
+            borderRadius: "0.5rem",
+            color: "#c084fc",
+            cursor: "pointer",
+            fontSize: "0.8rem",
+            width: "100%",
+          }}
+        >
+          Refresh Analysis
+        </button>
+      </div>
+    );
+  };
+
+  const renderFillResult = () => {
+    if (!fillResult) return null;
+
+    if (fillResult.success) {
+      return (
+        <div
+          style={{
+            background: "linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(45, 212, 191, 0.05))",
+            border: "1px solid rgba(16, 185, 129, 0.3)",
+            borderRadius: "0.75rem",
+            padding: "1rem",
+            marginBottom: "1rem",
+          }}
+        >
+          <h4
+            style={{
+              fontSize: "0.9rem",
+              fontWeight: 600,
+              color: "#34d399",
+              marginBottom: "0.5rem",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+          >
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            Forms Filled Successfully!
+          </h4>
+          
+          <div style={{ fontSize: "0.8rem", color: "#6ee7b7", marginBottom: "0.5rem" }}>
+            ✅ Filled {fillResult.filledFields.length} out of {fillResult.fieldCount} fields
+          </div>
+          
+          {fillResult.filledFields.length > 0 && (
+            <div style={{ fontSize: "0.75rem", color: "#a7f3d0" }}>
+              <div style={{ marginBottom: "0.25rem" }}>Filled fields:</div>
+              <div style={{ background: "rgba(16, 185, 129, 0.1)", padding: "0.5rem", borderRadius: "0.375rem" }}>
+                {fillResult.filledFields.join(', ')}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <div
+        style={{
+          background: "linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.05))",
+          border: "1px solid rgba(239, 68, 68, 0.3)",
+          borderRadius: "0.75rem",
+          padding: "1rem",
+          marginBottom: "1rem",
+        }}
+      >
+        <h4
+          style={{
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            color: "#f87171",
+            marginBottom: "0.5rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+        >
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Form Filling Failed
+        </h4>
+        <div style={{ fontSize: "0.8rem", color: "#fca5a5" }}>
+          {fillResult.error}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div
       style={{
@@ -62,10 +336,37 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
               Smart Form Filler
             </div>
             <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
-              AI-powered form filling feature
+              AI-powered automatic form filling
             </div>
           </div>
         </div>
+        {isAnalyzing && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.45rem",
+              padding: "0.3rem 0.8rem",
+              borderRadius: "999px",
+              border: "1px solid rgba(168, 85, 247, 0.35)",
+              background: "rgba(168, 85, 247, 0.12)",
+              fontSize: "0.7rem",
+              color: "#c084fc",
+            }}
+          >
+            <div
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                border: "2px solid rgba(168, 85, 247, 0.5)",
+                borderTopColor: "#a855f7",
+                animation: "samai-spin 0.6s linear infinite",
+              }}
+            />
+            Analyzing...
+          </div>
+        )}
       </div>
 
       <div
@@ -74,82 +375,130 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
           padding: "0.75rem",
           overflowY: "auto",
           minHeight: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.75rem",
         }}
       >
+        {error && (
+          <div
+            style={{
+              background: "linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(248, 113, 113, 0.05))",
+              border: "1px solid rgba(239, 68, 68, 0.3)",
+              borderRadius: "0.75rem",
+              padding: "0.75rem",
+              fontSize: "0.8rem",
+              color: "#fca5a5",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+          >
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {error}
+          </div>
+        )}
+
+        {renderFillResult()}
+
+        {/* Instructions Input */}
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "400px",
-            textAlign: "center",
             background: "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
             border: "1px solid rgba(168, 85, 247, 0.3)",
             borderRadius: "0.75rem",
-            padding: "1.5rem",
-            boxShadow: "0 8px 25px -12px rgba(168, 85, 247, 0.25)",
-            backdropFilter: "blur(8px)",
+            padding: "1rem",
           }}
         >
-          <div
+          <label
             style={{
-              width: "80px",
-              height: "80px",
-              borderRadius: "20px",
-              background: "linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.15))",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: "1.5rem",
-              border: "1px solid rgba(168, 85, 247, 0.3)",
-              boxShadow: "0 8px 20px rgba(168, 85, 247, 0.3)",
-            }}
-          >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#a855f7"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-            </svg>
-          </div>
-          <h3
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: 700,
+              display: "block",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              color: "#e2e8f0",
               marginBottom: "0.5rem",
-              background: "linear-gradient(135deg, #a855f7, #9333ea)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
             }}
           >
-            Smart Form Filler
-          </h3>
-          <p style={{ fontSize: "0.85rem", color: "#94a3b8", marginBottom: "1.5rem", maxWidth: "280px", lineHeight: "1.5" }}>
-            AI-powered form filling feature coming soon! This will automatically fill forms based on page context and user preferences.
-          </p>
-          <div
+            Fill Instructions
+          </label>
+          <textarea
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            placeholder="e.g., 'Fill out this contact form with John Doe's information', 'Use my resume data to complete this job application', 'Fill in shipping information for my order'..."
             style={{
-              padding: "0.75rem 1.25rem",
-              background: "rgba(168, 85, 247, 0.1)",
+              width: "100%",
+              minHeight: "80px",
+              padding: "0.75rem",
+              background: "rgba(15, 23, 42, 0.8)",
               border: "1px solid rgba(168, 85, 247, 0.3)",
               borderRadius: "0.5rem",
-              color: "#c084fc",
-              fontSize: "0.8rem",
-              fontWeight: 500,
+              fontSize: "0.85rem",
+              color: "#f1f5f9",
+              resize: "vertical",
+              lineHeight: "1.4",
             }}
-          >
-            🚧 Feature in development
-          </div>
+            onFocus={(e) => {
+              e.target.style.borderColor = "rgba(168, 85, 247, 0.6)";
+              e.target.style.boxShadow = "0 0 0 3px rgba(168, 85, 247, 0.2)";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = "rgba(168, 85, 247, 0.3)";
+              e.target.style.boxShadow = "none";
+            }}
+          />
         </div>
+
+        {/* Fill Button */}
+        <button
+          onClick={handleFillForms}
+          disabled={isFilling || isAnalyzing || !formAnalysis?.hasForms || !instructions.trim()}
+          style={{
+            width: "100%",
+            padding: "0.875rem 1.25rem",
+            background: isFilling || isAnalyzing || !formAnalysis?.hasForms || !instructions.trim()
+              ? "linear-gradient(135deg, rgba(71, 85, 105, 0.6), rgba(51, 65, 85, 0.6))"
+              : "linear-gradient(135deg, #a855f7, #9333ea)",
+            border: "none",
+            borderRadius: "0.75rem",
+            color: "white",
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            cursor: isFilling || isAnalyzing || !formAnalysis?.hasForms || !instructions.trim() ? "not-allowed" : "pointer",
+            transition: "all 0.3s ease",
+            boxShadow: isFilling || isAnalyzing || !formAnalysis?.hasForms || !instructions.trim()
+              ? "none"
+              : "0 8px 25px -8px rgba(168, 85, 247, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0.5rem",
+          }}
+        >
+          {isFilling ? (
+            <>
+              <div style={{
+                width: "16px",
+                height: "16px",
+                border: "2px solid rgba(255, 255, 255, 0.3)",
+                borderTop: "2px solid white",
+                borderRadius: "50%",
+                animation: "spin 1s linear infinite"
+              }} />
+              Filling Forms...
+            </>
+          ) : (
+            <>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+              Fill Forms with AI
+            </>
+          )}
+        </button>
+
+        {renderAnalysisResults()}
       </div>
     </div>
   );
