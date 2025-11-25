@@ -233,14 +233,8 @@ ${truncatedContent}`;
 
   const handleChat = async () => {
     try {
-      const content = await getPageContent(outputFormat);
-      await browser.storage.local.set({
-        pageContext: {
-          content,
-          outputFormat,
-        },
-      });
-      await browser.tabs.create({ url: "chat.html" });
+      // Switch to chat tab in the sidebar instead of opening separate chat page
+      setActiveTab("chat");
     } catch (error) {
       console.error("Error opening chat:", error);
     }
