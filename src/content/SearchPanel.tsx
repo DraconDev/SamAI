@@ -18,9 +18,6 @@ import {
 import SearchSettingsPanel from "./SearchPanel/components/SearchSettingsPanel";
 import FloatingSettingsButton from "./SearchPanel/components/FloatingSettingsButton";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
-  const [showSearchSettings, setShowSearchSettings] = useState(false);
-  const [showSearchSettings, setShowSearchSettings] = useState(false);
-import type { ScrapeResultFormat } from "./SearchPanel/types";
 
 interface SearchPanelProps {
   response: string | null;
@@ -38,6 +35,7 @@ export default function SearchPanel({
   // Core state
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [activeTab, setActiveTab] = useState<TabId>(response ? "chat" : "search");
+  const [showSearchSettings, setShowSearchSettings] = useState(false);
 
   // Tab-specific state
   const [isScraping, setIsScraping] = useState(false);
