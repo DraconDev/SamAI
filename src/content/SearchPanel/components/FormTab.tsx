@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { AutoFormFiller } from '@/utils/autoFormFiller';
 import { FormProfilesManager, type FormProfile } from '@/utils/formProfiles';
+import React, { useEffect, useState } from 'react';
 
 interface FormTabProps {
   onFormClick: () => void;
