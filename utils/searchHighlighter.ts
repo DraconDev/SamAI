@@ -1,4 +1,5 @@
-import { searchSettingsStore } from "./store";
+import type { HighlightPattern } from "./store";
+import { highlightPatternsStore, searchSettingsStore } from "./store";
 
 interface HighlightSettings {
   autoHighlight: boolean;
