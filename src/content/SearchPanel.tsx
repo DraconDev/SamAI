@@ -304,12 +304,6 @@ ${content}`;
         setIsExtractingContent(true);
         const currentPageContent = await getPageContent(outputFormat);
         setIsExtractingContent(false);
-  const handleClearScrapePreview = () => {
-    setScrapedContent(null);
-    setScrapeResult(null);
-    setScrapeError(null);
-  };
-
 
         fullPrompt = `${chatInput}
 
