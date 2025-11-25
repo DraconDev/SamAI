@@ -1,4 +1,4 @@
-import { searchSettingsStore, type SearchSettingsStore } from "./store";
+import { searchSettingsStore } from "./store";
 
 interface HighlightPattern {
   id: string;
@@ -326,4 +326,4 @@ if (typeof window !== 'undefined') {
 export { SearchHighlighter };
 
 // Export types for use in other modules
-export type { HighlightPattern, HighlightSettings };
+  export type { HighlightPattern, HighlightSettings };
