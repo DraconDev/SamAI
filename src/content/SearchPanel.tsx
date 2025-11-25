@@ -15,6 +15,9 @@ import {
   TabNavigation,
   type TabId,
 } from "./SearchPanel/components";
+import SearchSettingsPanel from "./SearchPanel/components/SearchSettingsPanel";
+import FloatingSettingsButton from "./SearchPanel/components/FloatingSettingsButton";
+import type { ScrapeResultFormat } from "./SearchPanel/types";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
 interface SearchPanelProps {
