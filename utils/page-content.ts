@@ -7,7 +7,6 @@ export type OutputFormat = "html" | "text";
 /**
  * Defines the output format for page content extraction.
  */
-export type OutputFormat = "html" | "text";
 
 /**
  * Extract visible text content or optimized HTML from a webpage
@@ -77,15 +76,20 @@ export function optimizeHtmlContent(html: string): string {
 /**
  * Async version with browser storage caching
  */
-export const extractPageContentAsync = async (format: OutputFormat, fresh: boolean = false): Promise<string> => {
+export const extractPageContentAsync = async (
+  format: OutputFormat,
+  fresh: boolean = false
+): Promise<string> => {
   try {
     if (!fresh) {
       const result = await browser.storage.local.get([
-        'pageBodyText',
-        'pageOptimizedHtml',
+        "pageBodyText",
+        "pageOptimizedHtml",
       ]);
-      
-      const cached = (format === "html" ? result.pageOptimizedHtml : result.pageBodyText) as string;
+
+      const cached = (
+        format === "html" ? result.pageOptimizedHtml : result.pageBodyText
+      ) as string;
       if (cached) {
         console.log("[page-content] Using cached content:", cached.length);
         return cached;
@@ -108,12 +112,13 @@ export const extractPageContentAsync = async (format: OutputFormat, fresh: boole
 
     const storageKey = format === "html" ? "pageOptimizedHtml" : "pageBodyText";
     await browser.storage.local.set({ [storageKey]: content });
-    
+
     console.log("[page-content] Fresh content extracted:", content.length);
     return content;
   } catch (error) {
     console.error("[page-content] Error extracting page content:", error);
-    throw error instanceof Error ? error : new Error("Failed to extract page content");
+    throw error instanceof Error
+      ? error
+      : new Error("Failed to extract page content");
   }
-}
-  }
+};
