@@ -204,7 +204,6 @@ ${truncatedContent}`;
   const handleOpenScrapedChat = async () => {
     const payload = scrapeResult ?? scrapedContent;
     if (!payload) return;
-    // Switch to chat tab in the sidebar instead of opening separate chat page
     setActiveTab("chat");
   };
 
@@ -250,7 +249,6 @@ ${truncatedContent}`;
 
   const handleChat = async () => {
     try {
-      // Switch to chat tab in the sidebar instead of opening separate chat page
       setActiveTab("chat");
     } catch (error) {
       console.error("Error opening chat:", error);
