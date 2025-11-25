@@ -646,7 +646,14 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
           <h5 style={{ fontSize: "0.8rem", color: "#e2e8f0", marginBottom: "0.5rem" }}>
             Create New Profile
           </h5>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "0.5rem",
+            width: "100%",
+            maxWidth: "100%",
+            overflow: "hidden"
+          }}>
             <input
               type="text"
               placeholder="Profile Name *"
