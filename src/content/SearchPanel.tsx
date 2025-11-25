@@ -339,6 +339,12 @@ Please provide a helpful response about the user's question specifically related
     }
   };
 
+  const handleClearScrapePreview = () => {
+    setScrapedContent(null);
+    setScrapeResult(null);
+    setScrapeError(null);
+  };
+
   const handleOpenApiKey = () => {
     browser.runtime.sendMessage({ type: "openApiKeyPage" });
   };

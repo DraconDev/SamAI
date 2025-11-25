@@ -55,7 +55,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
       <div
         className="space-y-6"
         style={{
-        padding: "0.75rem",
+        padding: "0.25rem",
           height: "100%",
           overflowY: "auto",
         }}
@@ -420,7 +420,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                   </div>
                 </div>
                 {scrapeResultFormat === "json" ? (
-                  <pre className="bg-slate-900/80 text-emerald-100 p-5 rounded-2xl text-sm overflow-x-auto border border-emerald-500/30">
+                  <pre className="p-5 overflow-x-auto text-sm border bg-slate-900/80 text-emerald-100 rounded-2xl border-emerald-500/30">
                     {scrapeResult}
                   </pre>
                 ) : (
