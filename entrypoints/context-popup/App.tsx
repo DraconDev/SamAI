@@ -190,13 +190,6 @@ export default function App() {
         backdropFilter: 'blur(20px)',
       }}
     >
-      style={{
-      className="w-[600px] h-[450px] bg-gradient-to-br from-[#1a1b2e]/95 to-[#0D0E16]/95 backdrop-blur-xl shadow-2xl text-gray-100 font-sans border border-[#2E2F3E]/50 rounded-2xl overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, rgba(26, 27, 46, 0.95) 0%, rgba(13, 14, 22, 0.95) 100%)',
-        backdropFilter: 'blur(20px)',
-      }}
-    >
       <div className="flex flex-col h-full">
         {/* Header */}
         <div className="p-6 pb-4 border-b border-[#2E2F3E]/30">
