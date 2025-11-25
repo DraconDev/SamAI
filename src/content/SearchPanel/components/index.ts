@@ -1,8 +1,9 @@
-export { TabNavigation } from './TabNavigation';
-export { SearchTab } from './SearchTab';
-export { ScrapeTab } from './ScrapeTab';
+export * from '../types';
 export { ChatTab } from './ChatTab';
-export { SummaryTab } from './SummaryTab';
 export { FormTab } from './FormTab';
 export { ImageTab } from './ImageTab';
-export * from '../types';
+export { ScrapeTab } from './ScrapeTab';
+export { ScreenChatTab } from './ScreenChatTab';
+export { SearchTab } from './SearchTab';
+export { SummaryTab } from './SummaryTab';
+export { TabNavigation } from './TabNavigation';
