@@ -222,6 +222,78 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
     }
   };
 
+  const handleStartEditProfile = (profile: FormProfile) => {
+    setEditingProfileId(profile.id);
+    setEditingProfile({
+      name: profile.name,
+      description: profile.description || '',
+      firstName: profile.data.firstName || '',
+      lastName: profile.data.lastName || '',
+      email: profile.data.email || '',
+      phone: profile.data.phone || '',
+      address: profile.data.address || '',
+      city: profile.data.city || '',
+      state: profile.data.state || '',
+      zipCode: profile.data.zipCode || '',
+      country: profile.data.country || '',
+      company: profile.data.company || '',
+      jobTitle: profile.data.jobTitle || ''
+    });
+  };
+
+  const handleCancelEditProfile = () => {
+    setEditingProfileId(null);
+    setEditingProfile({
+      name: '',
+      description: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      country: '',
+      company: '',
+      jobTitle: ''
+    });
+  };
+
+  const handleUpdateProfile = async () => {
+    if (!editingProfileId || !editingProfile.name.trim()) {
+      setError('Profile name is required');
+      return;
+    }
+
+    try {
+      const updatedProfile = {
+        name: editingProfile.name,
+        description: editingProfile.description,
+        data: {
+          firstName: editingProfile.firstName,
+          lastName: editingProfile.lastName,
+          email: editingProfile.email,
+          phone: editingProfile.phone,
+          address: editingProfile.address,
+          city: editingProfile.city,
+          state: editingProfile.state,
+          zipCode: editingProfile.zipCode,
+          country: editingProfile.country,
+          company: editingProfile.company,
+          jobTitle: editingProfile.jobTitle
+        }
+      };
+
+      await FormProfilesManager.updateProfile(editingProfileId, updatedProfile);
+      await loadProfiles();
+      
+      handleCancelEditProfile();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update profile');
+    }
+  };
+
   const renderProfileManager = () => {
     if (!showProfileManager) return null;
 
