@@ -1,3 +1,9 @@
+import browser from "webextension-polyfill";
+
+/**
+ * Defines the output format for page content extraction.
+ */
+export type OutputFormat = "html" | "text";
 /**
  * Defines the output format for page content extraction.
  */
@@ -67,3 +73,37 @@ export function optimizeHtmlContent(html: string): string {
 
   return cleanedHtml; // Return the cleaned HTML
 }
+
+export const extractPageContentAsync = async (format: OutputFormat, fresh: boolean = false): Promise<string> => {
+  try {
+    if (!fresh) {
+      const result = await browser.storage.local.get([
+        'pageBodyText',
+        'pageOptimizedHtml',
+      ]);
+      
+      const cached = (format === "html" ? result.pageOptimizedHtml : result.pageBodyText) as string;
+      if (cached) {
+        console.log("[PageContent] Using cached content:", cached.length);
+        return cached;
+      }
+    }
+
+    console.log("[PageContent] Extracting fresh content...");
+    let content: string;
+
+    if (format === "html") {
+      const fullHtml = document.documentElement.outerHTML;
+      content = optimizeHtmlContent(fullHtml);
+    } else {
+      content = document.body.innerText.trim();
+    }
+
+    if (!content) {
+      throw new Error("No readable content found on this page.");
+    }
+
+    const storageKey = format === "html" ? "pageOptimizedHtml" : "pageBodyText";
+    await browser.storage.local.set({ [storageKey]: content });
+    
+    console.log("[PageContent] Fresh content extracted:", content.length);
