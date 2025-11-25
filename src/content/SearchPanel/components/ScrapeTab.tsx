@@ -15,8 +15,8 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   onClearPreview,
 }) => {
   return (
-    <div className="space-y-4">
-      <div className="p-6 bg-[#1E1F2E]/80 rounded-xl border border-[#2E2F3E]/60">
+    <div className="space-y-6 p-4 bg-gradient-to-br from-slate-900/80 via-[#1E1F2E]/70 rounded-3xl border border-blue-900/50 backdrop-blur-xl shadow-2xl">
+      <div className="p-8 bg-gradient-to-br from-[#1E1F2E]/95 to-slate-900/90 rounded-3xl border border-blue-500/20 shadow-2xl backdrop-blur-xl">
         <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text">
           Page Scraper
         </h3>
@@ -26,8 +26,11 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
         </p>
 
         {/* Mode Selector */}
-        <div className="mb-4 p-4 bg-[#2E2F3E]/50 rounded-xl">
-          <label className="block mb-3 text-sm font-medium text-gray-300">
+        <div className="p-6 mb-6 border shadow-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 border-blue-400/20 rounded-2xl backdrop-blur-sm">
+          <label className="flex items-center block gap-2 mb-3 text-sm font-semibold text-blue-300">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
             Extraction Mode
           </label>
           <div className="flex gap-6">
@@ -59,15 +62,18 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
         </div>
 
         {/* Instructions */}
-        <div className="mb-6">
-          <label className="block mb-2 text-sm font-semibold text-gray-300">
+        <div className="mb-8">
+          <label className="flex items-center block gap-2 mb-3 text-sm font-semibold text-gray-200">
+            <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
             Instructions for Chat (Optional)
           </label>
           <textarea
             value={scrapeInstructions}
             onChange={(e) => onScrapeInstructionsChange(e.target.value)}
             placeholder="e.g., 'Summarize key points', 'Extract contact info', 'Analyze structure'..."
-            className="w-full p-4 bg-[#1E1F2E]/90 border border-[#4B5563]/60 rounded-2xl text-sm resize-vertical min-h-[100px] focus:outline-none focus:border-[#60a5fa]/70 focus:ring-2 focus:ring-[#60a5fa]/30 transition-all placeholder:text-gray-500"
+            className="w-full p-5 bg-[#1E1F2E]/95 border border-blue-500/30 rounded-3xl text-sm resize-vertical min-h-[120px] focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 shadow-xl transition-all placeholder:text-gray-400"
             rows={4}
           />
         </div>
@@ -97,28 +103,32 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
       {scrapedContent && (
         <>
           {/* Preview Section */}
-          <div className="p-6 bg-gradient-to-br from-[#3b82f6]/5 to-[#60a5fa]/5 rounded-2xl border-2 border-[#3b82f6]/30">
-            <div className="flex items-center justify-between mb-6">
-              <h4 className="text-xl font-bold bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
-                📄 Preview ({scrapedContent.length} chars)
+          <div className="p-8 border-2 shadow-2xl bg-gradient-to-br from-blue-500/8 to-blue-600/8 rounded-3xl border-blue-400/30 backdrop-blur-xl">
+            <div className="flex items-center justify-between mb-8">
+              <h4 className="flex items-center gap-3 text-2xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text">
+                📄 Preview
+                <span className="text-lg bg-blue-500/20 px-4 py-1.5 rounded-2xl text-blue-100 font-semibold border border-blue-400/30">
+                  {scrapedContent.length} chars
+                </span>
               </h4>
-              <div className="flex gap-2">
-                <button
-                  onClick={onClearPreview}
-                  className="px-3 py-1.5 text-sm font-medium text-gray-400 hover:text-gray-200 hover:bg-gray-800/50 rounded-xl transition-all duration-200"
-                >
-                  Clear
-                </button>
-              </div>
+              <button
+                onClick={onClearPreview}
+                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-white bg-slate-800/50 hover:bg-slate-700/70 backdrop-blur-sm rounded-2xl border border-slate-600/50 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Clear
+              </button>
             </div>
             <div className="max-h-[400px] overflow-auto rounded-xl border border-[#4B5563]/50 mb-6 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900/50">
               {scrapeMode === "html" ? (
                 <div
-                  className="prose prose-invert max-w-none p-6 prose-headings:text-white prose-a:text-[#60a5fa] prose-strong:font-bold"
+                  className="p-8 prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-a:text-blue-400 prose-strong:font-bold prose-code:text-blue-300 backdrop-blur-sm rounded-2xl"
                   dangerouslySetInnerHTML={{ __html: scrapedContent }}
                 />
               ) : (
-                <pre className="text-xs bg-[#0D0E16]/80 p-6 rounded-xl font-mono overflow-x-auto whitespace-pre-wrap text-gray-200">
+                <pre className="text-sm bg-gradient-to-b from-[#1E1F2E]/95 to-slate-900/90 p-8 rounded-2xl font-mono overflow-x-auto whitespace-pre-wrap text-gray-100 shadow-xl border border-slate-700/50 backdrop-blur-sm">
                   {scrapedContent}
                 </pre>
               )}
@@ -126,11 +136,11 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-2 gap-4 pt-4">
+          <div className="grid grid-cols-2 gap-6 p-6 border shadow-2xl bg-gradient-to-r from-blue-500/5 to-blue-600/5 rounded-3xl border-blue-500/20 backdrop-blur-xl">
             <GradientButton
               onClick={onOpenChat}
               variant="success"
-              className="py-4 text-lg"
+              className="h-16 py-5 text-xl font-bold shadow-2xl hover:shadow-blue-500/40"
               size="lg"
             >
               💬 Open in Chat
@@ -138,7 +148,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
             <GradientButton
               onClick={onDownload}
               variant="secondary"
-              className="py-4 text-lg"
+              className="h-16 py-5 text-xl font-bold shadow-2xl hover:shadow-blue-400/40"
               size="lg"
             >
               💾 Download
