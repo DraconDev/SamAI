@@ -44,18 +44,13 @@ export async function showSidePanel(
     `;
     document.head.appendChild(style);
   }
-export async function showSidePanel(
-  response: string | null,
-  toggleIfOpen: boolean = false
-) {
-  console.log("[SamAI Debug] showSidePanel called", { response, toggleIfOpen });
 
   // If toggle is requested and panel exists, close it and return
   if (toggleIfOpen && samaiPanelContainer) {
     console.log("[SamAI Debug] Toggling off panel");
     if (samaiRoot) {
       samaiRoot.unmount();
-      samaiRoot = null;
+      samaiRoot = null; 
     }
     if (samaiPanelContainer) {
       samaiPanelContainer.remove();
