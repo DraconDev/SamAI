@@ -72,18 +72,6 @@ Support ongoing development through:
 - [GitHub Sponsors](https://github.com/sponsors/DraconDev)
 - [Ko-fi](https://ko-fi.com/adamdracon)
 
-### ⭐ **Premium Features** (Coming Soon)
-- Advanced UI themes and customization
-- Enhanced integrations (premium APIs)
-- Cloud backup for settings and prompts
-- Priority feature requests
-
-### 🏢 **Enterprise Solutions**
-- Team collaboration features
-- Advanced analytics and reporting
-- Custom integrations and white-labeling
-- Dedicated support
-
 ## 🚀 **Getting Started**
 
 ### Prerequisites
