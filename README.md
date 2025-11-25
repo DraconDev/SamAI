@@ -66,21 +66,15 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 - **Performance Optimized**: Lightweight and fast with minimal impact
 - **Memory Efficient**: Smart caching and cleanup for optimal performance
 
+
+
+
 ## 🚀 **How SamAI Transforms Your Workflow**
 
 ### **Research & Analysis**
 1. **Smart Search**: Get AI-enhanced search results with contextual insights
 2. **Content Scraping**: Extract relevant information in your preferred format
 3. **Page Summarization**: Quickly understand lengthy articles and documents
-### 🖱️ **Intelligent Right-Click Menu**
-- **Smart Presets**: Context-aware AI prompts based on selected content
-- **Quick Actions**: Instant access to SamAI features from any webpage
-- **Smart Context Detection**: Automatically detects input types and content
-- **Text Enhancement**: Right-click to enhance selected text with AI
-- **Form Context**: Smart form filling options when right-clicking form fields
-- **Image Context**: AI analysis of right-clicked images
-- **Quick Chat**: Instant chat interface with page context
-- **Preset Management**: Create and manage context-specific automation presets
 4. **Image Analysis**: Extract insights from images and visual content
 5. **Pattern Highlighting**: Organize search results with intelligent categorization
 
