@@ -7,17 +7,17 @@ interface LoadingSpinnerProps {
 }
 
 const sizes = {
-  sm: 'w-4 h-4',
-  md: 'w-6 h-6', 
-  lg: 'w-8 h-8',
+  sm: { width: '1rem', height: '1rem' },
+  md: { width: '1.5rem', height: '1.5rem' }, 
+  lg: { width: '2rem', height: '2rem' },
 };
 
 const colors = {
-  primary: 'border-[#818cf8]/30 border-t-[#818cf8]',
-  secondary: 'border-[#60a5fa]/30 border-t-[#60a5fa]',
-  success: 'border-[#34d399]/30 border-t-[#34d399]',
-  warning: 'border-[#fbbf24]/30 border-t-[#fbbf24]',
-  danger: 'border-[#f87171]/30 border-t-[#f87171]',
+  primary: { borderColor: 'rgba(129, 140, 248, 0.3)', borderTopColor: '#818cf8' },
+  secondary: { borderColor: 'rgba(96, 165, 250, 0.3)', borderTopColor: '#60a5fa' },
+  success: { borderColor: 'rgba(52, 211, 153, 0.3)', borderTopColor: '#34d399' },
+  warning: { borderColor: 'rgba(251, 191, 36, 0.3)', borderTopColor: '#fbbf24' },
+  danger: { borderColor: 'rgba(248, 113, 113, 0.3)', borderTopColor: '#f87171' },
 };
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
@@ -27,13 +27,15 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 }) => {
   return (
     <div
-      className={`
-        ${sizes[size]} 
-        border-2 rounded-full border-solid 
-        ${colors[color]}
-        animate-spin
-        ${className}
-      `}
+      style={{
+        ...sizes[size],
+        border: '2px solid',
+        borderRadius: '50%',
+        borderStyle: 'solid',
+        ...colors[color],
+        animation: 'samai-spin 1s linear infinite',
+      }}
+      className={className}
     />
   );
 };
