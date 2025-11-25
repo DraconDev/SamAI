@@ -185,6 +185,7 @@ export default function App() {
     <div
       id="samai-context-popup-root"
       className="w-[864px] h-[780px] bg-gradient-to-br from-[#1a1b2e]/95 to-[#0D0E16]/95 backdrop-blur-xl shadow-2xl text-gray-100 font-sans border border-[#2E2F3E]/50 rounded-2xl overflow-hidden flex items-center justify-center"
+      style={{
       className="w-[720px] h-[600px] bg-gradient-to-br from-[#1a1b2e]/95 to-[#0D0E16]/95 backdrop-blur-xl shadow-2xl text-gray-100 font-sans border border-[#2E2F3E]/50 rounded-2xl overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, rgba(26, 27, 46, 0.95) 0%, rgba(13, 14, 22, 0.95) 100%)',
