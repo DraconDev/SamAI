@@ -38,6 +38,25 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
   const [profiles, setProfiles] = useState<FormProfile[]>([]);
   const [activeProfile, setActiveProfile] = useState<FormProfile | null>(null);
   const [showProfileManager, setShowProfileManager] = useState(false);
+  
+  // Profile editing states
+  const [editingProfileId, setEditingProfileId] = useState<string | null>(null);
+  const [editingProfile, setEditingProfile] = useState({
+    name: '',
+    description: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: '',
+    company: '',
+    jobTitle: ''
+  });
+  
   const [newProfile, setNewProfile] = useState({
     name: '',
     description: '',
