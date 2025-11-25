@@ -178,10 +178,6 @@ export default function App() {
 
       console.log("[Page Assistant] Adding messages to chat...");
       
-      // Check if we are on the same page as the previous context
-      const previousContext = await pageContextStore.getValue();
-      const isSamePage = previousContext.url === window.location.href;
-
       // Store page context for follow-up questions
       await pageContextStore.setValue({
         content: contentToAnalyze,
@@ -190,15 +186,6 @@ export default function App() {
         timestamp: new Date().toISOString(),
         format: scrapeMode,
       });
-      const settings = await searchSettingsStore.getValue();
-
-      // Only clear chat if we are NOT on the same page AND continuePreviousChat is false
-      if (!settings.continuePreviousChat && !isSamePage) {
-        console.log("[Page Assistant] Starting fresh chat (new page context)...");
-        await chatStore.setValue({ messages: [] });
-      } else if (isSamePage) {
-        console.log("[Page Assistant] Continuing chat (same page context)...");
-      }
 
       const userMessage = {
         role: "user" as const,
@@ -216,11 +203,13 @@ export default function App() {
       await addChatMessage(aiMessage);
       console.log("[Page Assistant] Messages added to chat");
 
-      console.log("[Page Assistant] Opening chat page...");
-      await browser.tabs.create({
-        url: "chat.html",
+      console.log("[Page Assistant] Opening sidebar...");
+      // Send message to content script to show sidebar
+      await browser.tabs.sendMessage(sourceTabId, {
+        type: "showSidebar",
+        response: response
       });
-      console.log("[Page Assistant] Chat page opened");
+      console.log("[Page Assistant] Sidebar opened");
 
       setPagePrompt("");
       console.log("[Page Assistant] Closing popup...");
