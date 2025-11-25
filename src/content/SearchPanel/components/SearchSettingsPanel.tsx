@@ -195,30 +195,62 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
               Search Behavior
             </h3>
             
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block mb-2 text-xs font-medium text-gray-400">Response Style</label>
-                <select
-                  value={promptStyle}
-                  onChange={(e) => setPromptStyle(e.target.value as any)}
-                  className="w-full p-3 bg-[#0D0E16]/50 border border-[#2E2F3E]/50 rounded-xl text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/50"
-                >
-                  <option value="short">⚡ Short - Quick & concise</option>
-                  <option value="medium">⚖️ Medium - Balanced info</option>
-                  <option value="long">📚 Long - In-depth analysis</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="block mb-2 text-xs font-medium text-gray-400">Output Format</label>
-                <select
-                  value={outputFormat}
-                  onChange={(e) => setOutputFormat(e.target.value as OutputFormat)}
-                  className="w-full p-3 bg-[#0D0E16]/50 border border-[#2E2F3E]/50 rounded-xl text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#4f46e5]/50"
-                >
-                  <option value="text">📝 Text</option>
-                  <option value="html">🌐 HTML</option>
-                </select>
+            <div className="space-y-4">
+              <label className="block mb-3 text-xs font-bold tracking-wider text-gray-300 uppercase">
+                Response Style
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  {
+                    value: "short",
+                    label: "Short",
+                    icon: "⚡",
+                    desc: "Quick & concise",
+                  },
+                  {
+                    value: "medium",
+                    label: "Medium",
+                    icon: "⚖️",
+                    desc: "Balanced info",
+                  },
+                  {
+                    value: "long",
+                    label: "Long",
+                    icon: "📚",
+                    desc: "In-depth analysis",
+                  },
+                ].map(({ value, label, icon, desc }) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setPromptStyle(value as any)}
+                    className={`group relative flex flex-col items-center p-3 rounded-xl border transition-all duration-300
+                              hover:transform hover:scale-105 hover:shadow-xl
+                              ${
+                                promptStyle === value
+                                  ? "border-[#4f46e5] bg-gradient-to-br from-[#4f46e5]/25 to-[#818cf8]/15 shadow-xl shadow-[#4f46e5]/30"
+                                  : "border-[#2E2F3E]/60 hover:border-[#4f46e5]/60 hover:bg-[#4f46e5]/10"
+                              }`}
+                  >
+                    <span className="mb-1 text-lg transition-transform transform group-hover:scale-110">
+                      {icon}
+                    </span>
+                    <span
+                      className={`text-xs font-medium mb-0.5
+                                   ${
+                                     promptStyle === value
+                                       ? "text-[#818cf8]"
+                                       : "text-gray-400 group-hover:text-[#818cf8]"
+                                   }
+                                   transition-colors`}
+                    >
+                      {label}
+                    </span>
+                    <span className="text-[10px] text-gray-500 transition-colors group-hover:text-gray-400">
+                      {desc}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
 
