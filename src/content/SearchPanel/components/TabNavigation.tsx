@@ -62,8 +62,8 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     {
       id: "scrape",
       label: "Scrape",
-      gradient: "linear-gradient(90deg, #10b981, #059669, #34d399)",
-      shadow: "rgba(16, 185, 129, 0.5)",
+      gradient: "linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd)",
+      shadow: "rgba(59, 130, 246, 0.5)",
       icon: (
         <svg
           width="16"

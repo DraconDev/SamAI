@@ -1,5 +1,5 @@
-import React from "react";
 import { GradientButton } from "@/src/components/ui/GradientButton";
+import React from "react";
 import type { OutputFormat, ScrapeTabProps } from "../types";
 
 export const ScrapeTab: React.FC<ScrapeTabProps> = ({
@@ -17,7 +17,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   return (
     <div className="space-y-4">
       <div className="p-6 bg-[#1E1F2E]/80 rounded-xl border border-[#2E2F3E]/60">
-        <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#10b981] to-[#34d399] bg-clip-text">
+        <h3 className="text-lg font-bold mb-3 text-transparent bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text">
           Page Scraper
         </h3>
         <p className="mb-4 text-sm text-gray-400">
@@ -37,9 +37,9 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                 value="text"
                 checked={scrapeMode === "text"}
                 onChange={(e) => onScrapeModeChange("text" as OutputFormat)}
-                className="w-5 h-5 text-[#10b981] bg-[#1E1F2E] border-[#4B5563]/60 rounded focus:ring-[#10b981] focus:ring-2 transition-all group-hover:border-[#34d399]/70"
+                className="w-5 h-5 text-[#3b82f6] bg-[#1E1F2E] border-[#4B5563]/60 rounded focus:ring-[#3b82f6] focus:ring-2 transition-all group-hover:border-[#60a5fa]/70"
               />
-              <span className="text-sm font-medium group-hover:text-[#34d399]">
+              <span className="text-sm font-medium group-hover:text-[#60a5fa]">
                 Plain Text
               </span>
             </label>
@@ -49,9 +49,9 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                 value="html"
                 checked={scrapeMode === "html"}
                 onChange={(e) => onScrapeModeChange("html" as OutputFormat)}
-                className="w-5 h-5 text-[#10b981] bg-[#1E1F2E] border-[#4B5563]/60 rounded focus:ring-[#10b981] focus:ring-2 transition-all group-hover:border-[#34d399]/70"
+                className="w-5 h-5 text-[#3b82f6] bg-[#1E1F2E] border-[#4B5563]/60 rounded focus:ring-[#3b82f6] focus:ring-2 transition-all group-hover:border-[#60a5fa]/70"
               />
-              <span className="text-sm font-medium group-hover:text-[#34d399]">
+              <span className="text-sm font-medium group-hover:text-[#60a5fa]">
                 HTML
               </span>
             </label>
@@ -67,7 +67,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
             value={scrapeInstructions}
             onChange={(e) => onScrapeInstructionsChange(e.target.value)}
             placeholder="e.g., 'Summarize key points', 'Extract contact info', 'Analyze structure'..."
-            className="w-full p-4 bg-[#1E1F2E]/90 border border-[#4B5563]/60 rounded-2xl text-sm resize-vertical min-h-[100px] focus:outline-none focus:border-[#34d399]/70 focus:ring-2 focus:ring-[#34d399]/30 transition-all placeholder:text-gray-500"
+            className="w-full p-4 bg-[#1E1F2E]/90 border border-[#4B5563]/60 rounded-2xl text-sm resize-vertical min-h-[100px] focus:outline-none focus:border-[#60a5fa]/70 focus:ring-2 focus:ring-[#60a5fa]/30 transition-all placeholder:text-gray-500"
             rows={4}
           />
         </div>
@@ -97,9 +97,9 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
       {scrapedContent && (
         <>
           {/* Preview Section */}
-          <div className="p-6 bg-gradient-to-br from-[#10b981]/5 to-[#34d399]/5 rounded-2xl border-2 border-[#10b981]/30">
+          <div className="p-6 bg-gradient-to-br from-[#3b82f6]/5 to-[#60a5fa]/5 rounded-2xl border-2 border-[#3b82f6]/30">
             <div className="flex items-center justify-between mb-6">
-              <h4 className="text-xl font-bold bg-gradient-to-r from-[#10b981] to-[#34d399] bg-clip-text text-transparent">
+              <h4 className="text-xl font-bold bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
                 📄 Preview ({scrapedContent.length} chars)
               </h4>
               <div className="flex gap-2">
