@@ -1,10 +1,11 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
 import { routeMessage, isContentScriptMessage } from "@/utils/content/messageHandlers";
-import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
+import type { OutputFormat } from "@/utils/page-content";
 import { extractPageContent } from "@/utils/page-content";
 import { searchSettingsStore } from "@/utils/store";
 import { SearchHighlighter } from "@/utils/searchHighlighter";
+import "../style.css";
 
 export interface InputElementClickedMessage {
   type: "inputElementClicked";
