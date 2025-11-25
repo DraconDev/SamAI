@@ -1,137 +1,189 @@
-# SamAI - Complete Search Enhancement & AI Assistant
+# SamAI - Complete Web Automation & AI Assistant
 
-SamAI is a comprehensive browser extension that transforms how you interact with search results. It combines intelligent highlighting, advanced pattern management, AI-powered search insights, and universal chat capabilities - all with real-time synchronization across your entire browsing experience.
+SamAI is a comprehensive browser extension that transforms your entire web experience. It combines intelligent search enhancement, advanced web scraping, universal chat, form automation, AI-powered content analysis, and real-time pattern management - all accessible through an elegant sidebar interface that works on every webpage.
 
-## 🌟 **Complete Feature Set**
+## 🌟 **Complete Feature Ecosystem**
+
+### 🔍 **AI-Powered Search Enhancement**
+- **Smart Search Analysis**: Get contextual AI insights about any search query
+- **Multiple Response Styles**: Instant switching between Short (⚡), Medium (⚖️), Long (📚) AI responses
+- **Rich Markdown Display**: Beautiful, formatted AI responses with syntax highlighting
+- **Cross-Tab Settings**: Search preferences sync automatically across all browser tabs
+- **Universal Integration**: Works on Google, Bing, DuckDuckGo, Yahoo, Ask.com
+
+### 🕷️ **Advanced Web Scraping System**
+- **Multi-Format Export**: Scrape content as JSON, text, CSV, or markdown
+- **Smart Content Detection**: Automatically identifies and extracts meaningful content
+- **Bulk Processing**: Scrape multiple sections of a page simultaneously
+- **Download Integration**: Download scraped content directly with formatting preservation
+- **Format Customization**: Adjust output format preferences for different use cases
+
+### 💬 **Universal Web Chat**
+- **Chat with Any Page**: Interactive AI chat interface on any webpage
+- **Smart Context Understanding**: AI comprehends page content and provides relevant responses
+- **Code-Aware Responses**: Syntax highlighting and proper formatting for code examples
+- **Cross-Tab Persistence**: Chat history and context sync across all tabs
+- **Multiple AI Providers**: Use your own API keys for OpenAI, Anthropic, or Google AI
+
+### 📄 **Intelligent Page Summarization**
+- **One-Click Summaries**: Generate comprehensive summaries of any webpage
+- **Customizable Length**: Adjust summary detail from brief to comprehensive
+- **Smart Content Focus**: AI identifies and summarizes key information
+- **Format Preservation**: Maintain original structure and important details
+
+### 📝 **Advanced Form Automation**
+- **Smart Form Analysis**: Automatically detect and analyze form structures
+- **Profile Management**: Create, save, and reuse form filling profiles
+- **Bulk Form Filling**: Fill multiple forms with consistent information
+- **Field Recognition**: AI-powered field type detection and validation
+- **Profile Import/Export**: Share and backup form profiles
+- **Auto-Fill Intelligence**: Smart default filling with intelligent field matching
+
+### 🖼️ **Image Analysis & Processing**
+- **Smart Image Recognition**: Analyze and describe images on any webpage
+- **Context Integration**: Understand images within page context
+- **Visual Search Enhancement**: AI-powered image-based search insights
+- **Format Support**: Process various image formats seamlessly
 
 ### 🎨 **Interactive Search Highlighting System**
 - **Three-Color Categories**: Mark sites as Red (Important), Green (Favorites), Blue (General)
 - **Smart Toggle Logic**: Click same color to remove, different color to switch seamlessly
 - **One-Click Hide**: Professional eye-slash icon to instantly hide unwanted domains
 - **Perfect Positioning**: Clean 55px right positioning with professional styling
-- **Visual Feedback**: Immediate highlighting with color-coded borders and backgrounds
+- **Real-Time Persistence**: Every marking saves instantly with cross-tab synchronization
 
-### 💾 **Real-Time Pattern Persistence**
-- **Instant Auto-Save**: Every marking saves immediately - no save buttons required
-- **Cross-Tab Magic**: Patterns and settings sync across all browser tabs in real-time
-- **Page Refresh Proof**: All markings survive page refreshes and browser restarts
-- **Universal Search Support**: Works seamlessly on Google, Bing, DuckDuckGo, Yahoo, Ask.com
-- **Search Engine Recognition**: Automatically detects and enhances any search results page
+### ⚡ **Power User Interface**
+- **Sidebar Panel**: Elegant floating interface on every webpage
+- **Tab Navigation**: Seamless switching between different tools
+- **Settings Management**: Comprehensive settings panel with real-time updates
+- **Export/Import**: Backup and restore all settings and patterns
+- **Professional Design**: Modern gradient interface with smooth animations
 
-### 🗂️ **Advanced Pattern Management Interface**
-- **Dedicated Settings Page**: Clean, professional interface to manage all your patterns
-- **Hidden Domains Section**: View all hidden sites with one-click unhide functionality
-- **Pattern Categories**: Visual organization with color-coded categories and icons
-- **Bulk Management**: Add, edit, and remove patterns with full control and instant updates
-- **Pattern Statistics**: See exactly how many patterns you have for each category
-- **Real-Time Updates**: All changes sync instantly across all tabs and components
+### 🔧 **Technical Excellence**
+- **Cross-Engine Compatibility**: Works perfectly on Google, Bing, DuckDuckGo, Yahoo, Ask.com
+- **Cross-Browser Support**: Full Chrome and Firefox compatibility
+- **Real-Time Sync**: Instant synchronization across all tabs and components
+- **Performance Optimized**: Lightweight and fast with minimal impact
+- **Memory Efficient**: Smart caching and cleanup for optimal performance
 
-### ⚡ **Comprehensive Power User Controls**
-- **Master Toggle**: Enable/disable all highlighting features with one switch
-- **Auto-Highlight Control**: Toggle automatic pattern application on/off
-- **Opacity Customization**: Adjustable highlight transparency from 10% to 100%
-- **Professional UI**: Modern gradient interface with smooth animations and transitions
-- **Response Style Selector**: Instant switching between Short (⚡), Medium (⚖️), Long (📚) AI responses
-- **Search Enhancement Toggle**: Turn AI-powered search insights on/off
+## 🚀 **How SamAI Transforms Your Workflow**
 
-### 🔍 **AI-Powered Search Enhancement**
-- **Smart Search Analysis**: Get contextual insights about your search queries
-- **Multiple Response Styles**: Choose from concise (⚡), balanced (⚖️), or detailed (📚) responses
-- **Rich Markdown Display**: Beautiful, readable formatting for all AI responses
-- **Cross-Tab Settings**: Search preferences automatically sync across all browser tabs
-- **Universal Integration**: Works with any search engine's results page
+### **Research & Analysis**
+1. **Smart Search**: Get AI-enhanced search results with contextual insights
+2. **Content Scraping**: Extract relevant information in your preferred format
+3. **Page Summarization**: Quickly understand lengthy articles and documents
+4. **Image Analysis**: Extract insights from images and visual content
+5. **Pattern Highlighting**: Organize search results with intelligent categorization
 
-### 💬 **Universal Web Chat**
-- **Chat with Any Page**: Interactive chat interface on any webpage content
-- **Smart Context Understanding**: AI comprehends page content and provides relevant responses
-- **Code-Aware Responses**: Syntax highlighting and proper code formatting
-- **Cross-Tab Persistence**: Chat history and settings sync across all tabs
-- **Multiple AI Providers**: Use your own API keys for OpenAI, Anthropic, or Google AI
+### **Automation & Productivity**
+1. **Form Automation**: Save time with intelligent form filling and profile management
+2. **Bulk Processing**: Handle multiple tasks simultaneously across tabs
+3. **Chat Integration**: Ask questions about any webpage content
+4. **Export Capabilities**: Download and backup your work in multiple formats
+5. **Cross-Tab Sync**: Access your settings and patterns anywhere
 
-### ✍️ **Contextual Writing Assistant**
-- **Text Enhancement**: Intelligent improvement of selected text
-- **Multiple Writing Styles**: Adapt to different writing contexts and tones
-- **Grammar & Style**: Real-time grammar checks and style suggestions
-- **Smart Context**: Understands surrounding content for better suggestions
-- **Cross-Application**: Works across all web applications and text fields
+### **Content Creation & Enhancement**
+1. **Writing Assistant**: Enhance text with AI-powered suggestions
+2. **Contextual Chat**: Get relevant information about any webpage
+3. **Code Formatting**: Proper syntax highlighting for code examples
+4. **Format Options**: Export content in JSON, CSV, markdown, or text formats
 
-### 🔐 **Privacy-First Architecture**
-- **Bring Your Own Keys (BYOK)**: Use your own AI API keys - complete vendor independence
-- **Local Processing**: All sensitive operations happen in your browser only
-- **Zero Data Collection**: No tracking, no data storage, complete privacy
-- **Open Source**: Transparent, auditable code for complete security
-- **Full Control**: You own your data, your keys, and your AI experience
+## 🛠️ **Technical Architecture**
 
-### 🌐 **Universal Compatibility**
-- **Multi-Engine Support**: Perfect integration with Google, Bing, DuckDuckGo, Yahoo, Ask.com
-- **Cross-Browser**: Full support for Chrome and Firefox
-- **Responsive Design**: Works on all screen sizes and layouts
-- **Real-Time Sync**: Instant synchronization of all settings and patterns across tabs
-- **No Installation Hassle**: Everything works out of the box with automatic setup
+### **Frontend Components**
+- **SearchTab**: AI-powered search enhancement with response style controls
+- **ScrapeTab**: Advanced web scraping with multi-format output
+- **ChatTab**: Universal web chat with context understanding
+- **SummaryTab**: Intelligent page summarization
+- **FormTab**: Advanced form analysis and automation
+- **ImageTab**: Image analysis and processing
+- **SearchSettingsPanel**: Comprehensive settings management
 
-## 🚀 **How SamAI Transforms Your Search**
+### **AI Integration**
+- **Gemini Integration**: Google AI for search enhancement and content analysis
+- **Multi-Provider Support**: OpenAI, Anthropic, and custom AI endpoints
+- **BYOK Architecture**: Use your own API keys for complete control
+- **Local Processing**: Sensitive operations happen in your browser
 
-### **Immediate Benefits**
-1. **Instant Marking**: Click color dots to highlight sites as you browse
-2. **Smart Categorization**: Organize the web with meaningful color-coded system
-3. **Hidden Domain Control**: Hide spam or unwanted sites with one click
-4. **Pattern Persistence**: Your organizational system survives everything
-5. **Cross-Device Sync**: Same patterns available on any tab or window
+### **Data Management**
+- **Cross-Tab Synchronization**: Real-time settings and pattern sync
+- **Profile Management**: Save and restore form filling configurations
+- **Export/Import**: Backup and restore all user data
+- **Local Storage**: Privacy-first data handling with no external collection
 
-### **Advanced Workflow**
-1. **Search Enhancement**: Get AI insights about your search results
-2. **Bulk Pattern Management**: Organize and edit patterns in dedicated settings
-3. **Universal Chat**: Ask questions about any webpage content
-4. **Writing Assistant**: Enhance text selection with AI assistance
-5. **Full Customization**: Control every aspect of your search enhancement
+## 🎯 **Who Benefits from SamAI**
 
-### **Power User Features**
-- **Toggle Highlighting**: Instantly disable/enable all highlighting features
-- **Opacity Control**: Adjust highlight visibility to match your preference
-- **Response Styles**: Customize AI response length and detail level
-- **Auto-Highlight**: Automatic pattern application for hands-free organization
-- **Hidden Patterns Recovery**: Easily unhide previously hidden domains
+### **Researchers & Analysts**
+- Intelligent search enhancement with AI insights
+- Advanced web scraping with multiple export formats
+- Page summarization for quick content understanding
+- Pattern highlighting for organized research
 
-## 🎯 **Why Choose SamAI**
+### **Content Creators**
+- Writing assistant with contextual AI suggestions
+- Code formatting and syntax highlighting
+- Multi-format content export capabilities
+- Universal web chat for content insights
 
-### **Complete Solution**
-SamAI isn't just another search tool - it's a comprehensive search enhancement ecosystem that handles everything from basic highlighting to advanced AI interactions.
+### **Business Professionals**
+- Form automation for repetitive tasks
+- Bulk processing across multiple tabs
+- Professional interface with export capabilities
+- Cross-platform compatibility
 
-### **True Synchronization**
-Unlike other extensions that require manual syncing, SamAI's real-time cross-tab synchronization means your patterns, settings, and preferences are always up to date everywhere.
+### **Developers & Power Users**
+- Advanced automation capabilities
+- Multi-provider AI integration
+- Real-time synchronization across tabs
+- Comprehensive settings and pattern management
 
-### **User-Controlled**
-With BYOK architecture, you maintain complete control over your AI experience, costs, and data. No vendor lock-in, no subscription fees, no data collection.
+## 📈 **Advanced Capabilities**
 
-### **Built for Power Users**
-Every feature is designed for efficiency and control - from the smart color toggle logic to the comprehensive pattern management interface.
+### **Multi-Tab Workflows**
+- Same patterns and settings available across all tabs
+- Real-time synchronization without manual saves
+- Cross-browser compatibility for seamless experience
+- Memory-efficient design for optimal performance
 
-## 📖 **Getting Started**
+### **Privacy & Security**
+- **Zero Data Collection**: No tracking or data storage
+- **Local Processing**: All sensitive operations in browser
+- **BYOK Support**: Use your own API keys
+- **Open Source**: Transparent, auditable code
 
-1. **Install SamAI** - Load the extension in your browser
-2. **Search Anything** - Go to any search engine and start browsing
-3. **Start Highlighting** - Click color dots next to search results
-4. **Manage Patterns** - Use the settings page to organize your highlights
-5. **Enhance Searches** - Enable AI insights for better search results
+### **Customization & Control**
+- **Response Style Selection**: Short, Medium, Long AI responses
+- **Export Format Options**: JSON, CSV, Text, Markdown
+- **Highlight Categories**: Red, Green, Blue with smart toggle
+- **Form Profiles**: Create, save, and reuse automation profiles
 
-## 🏆 **The SamAI Difference**
+## 🌐 **Universal Compatibility**
 
-**No other extension combines:**
-- Real-time cross-tab pattern synchronization
-- Smart highlighting with toggle logic
-- AI-powered search enhancement
-- Universal web chat capabilities
-- Advanced pattern management
-- BYOK privacy architecture
-- Professional-grade UI with complete control
+### **Search Engines**
+- Google Search with enhanced AI integration
+- Bing with intelligent result analysis
+- DuckDuckGo with privacy-focused enhancement
+- Yahoo and Ask.com with full feature support
+
+### **Websites & Applications**
+- Works on any website with full functionality
+- Automatic content detection and enhancement
+- Smart form recognition and automation
+- Universal chat interface for any page
+
+### **File Formats & Content**
+- Multiple export formats (JSON, CSV, Text, Markdown)
+- Image analysis and processing
+- Code syntax highlighting and formatting
+- Rich text and markdown rendering
 
 ---
 
 <p align="center">
-  <strong>SamAI - Your Complete Search Enhancement Solution</strong><br>
-  Highlighting • AI Enhancement • Pattern Management • Cross-Tab Sync
+  <strong>SamAI - Your Complete Web Automation & AI Assistant</strong><br>
+  Search Enhancement • Web Scraping • Universal Chat • Form Automation • Pattern Management
 </p>
 
 ---
 
-**Ready to transform your search experience?** Install SamAI and discover the power of intelligent search management!
+**Ready to transform your web experience?** SamAI provides everything you need for intelligent web automation, AI-powered search enhancement, and advanced content management - all in one comprehensive extension!
