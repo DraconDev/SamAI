@@ -109,10 +109,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               chatMessages.map((message, index) => (
                 <div
                   key={index}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                  style={{
-                    animation: `slideInFromBottom 0.3s ease-out ${index * 100}ms both`
-                  }}
+                  className={`flex animate-slide-in-from-bottom ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div
                     className={`max-w-[85%] group ${
@@ -146,7 +144,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               ))
             )}
             {(isChatLoading || isExtractingContent) && (
-              <div className="flex justify-start" style={{ animation: 'slideInFromBottom 0.3s ease-out' }}>
+              <div className="flex justify-start animate-slide-in-from-bottom">
                 <div className="p-4 mr-4 border shadow-lg border-slate-600/60 bg-gradient-to-br from-slate-800/95 to-slate-700/95 rounded-2xl backdrop-blur-sm">
                   <div className="flex items-center space-x-3">
                     <div className="flex space-x-1">
