@@ -481,6 +481,11 @@ Please provide a helpful response about the user's question specifically related
             </div>
           )}
         </div>
+          {activeTab === "screen" && (
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              <ScreenChatTab />
+            </div>
+          )}
       </div>
     </>
   );
