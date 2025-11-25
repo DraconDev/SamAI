@@ -22,11 +22,11 @@ export default defineBackground(() => {
   let sourceTabId: number | null = null;
   let contextPopupWindowId: number | null = null; // Track the context popup window
 
-  // Create context menu items
+  // Create context menu items for Input Assistant only
   browser.contextMenus.create({
-    id: "samai-context-menu",
-    title: "Sam",
-    contexts: ["all"],
+    id: "samai-input-assistant",
+    title: "Sam Input Assistant",
+    contexts: ["editable"],
   });
 
   // Listen for runtime messages
@@ -61,40 +61,7 @@ export default defineBackground(() => {
     sourceTabId = tab.id;
 
     try {
-      console.log("Content script registered in tab:", tab.id);
-
-      // Send messages to content script to get both text and HTML content
-      const getBodyTextMessage: GetPageContentRequest = {
-        type: "getPageContent",
-        outputFormat: "text",
-      };
-      browser.tabs.sendMessage(tab.id, getBodyTextMessage).catch((error) => {
-        console.error(
-          "[SamAI Background] Error sending getPageContent (text) message:",
-          error
-        );
-      });
-      console.log(
-        "[SamAI Background] Sent getPageContent (text) message to tab:",
-        tab.id
-      );
-
-      const getOptimizedHtmlMessage: GetPageContentRequest = {
-        type: "getPageContent",
-        outputFormat: "html",
-      };
-      browser.tabs
-        .sendMessage(tab.id, getOptimizedHtmlMessage)
-        .catch((error) => {
-          console.error(
-            "[SamAI Background] Error sending getPageContent (html) message:",
-            error
-          );
-        });
-      console.log(
-        "[SamAI Background] Sent getPageContent (html) message to tab:",
-        tab.id
-      );
+      console.log("Input Assistant clicked in tab:", tab.id);
 
       // Close existing popup if open
       if (contextPopupWindowId !== null) {
@@ -112,8 +79,8 @@ export default defineBackground(() => {
       const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 540,
-        height: 620,
+        width: 500,
+        height: 300,
       });
       contextPopupWindowId = popupWindow.id || null;
     } catch (error) {
@@ -134,8 +101,8 @@ export default defineBackground(() => {
       const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 540,
-        height: 620,
+        width: 500,
+        height: 300,
       });
       contextPopupWindowId = popupWindow.id || null;
     }
