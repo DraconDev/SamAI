@@ -165,12 +165,23 @@ export class FormProfilesManager {
   }
 
   /**
-   * Delete a profile
+   * Delete a profile with enhanced error handling
    */
   static async deleteProfile(id: string): Promise<boolean> {
     try {
+      if (!id || !id.trim()) {
+        throw new Error("Profile ID is required");
+      }
+
       const data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY);
-      if (!data?.profiles) return false;
+      if (!Array.isArray(data?.profiles)) {
+        throw new Error("No profiles found to delete");
+      }
+
+      const profileToDelete = data.profiles.find(p => p.id === id);
+      if (!profileToDelete) {
+        throw new Error("Profile not found");
+      }
 
       const originalLength = data.profiles.length;
       data.profiles = data.profiles.filter((p: FormProfile) => p.id !== id);
@@ -178,10 +189,17 @@ export class FormProfilesManager {
       // If we deleted the active profile, clear the activeProfileId
       if (data.activeProfileId === id) {
         data.activeProfileId = undefined;
+        console.log("[SamAI] Cleared active profile since it was deleted");
       }
 
       await storage.setItem(FORM_PROFILES_KEY, data);
-      return data.profiles.length < originalLength;
+      const wasDeleted = data.profiles.length < originalLength;
+      
+      if (wasDeleted) {
+        console.log("[SamAI] Successfully deleted profile:", profileToDelete.name);
+      }
+      
+      return wasDeleted;
     } catch (error) {
       console.error("[SamAI] Error deleting form profile:", error);
       throw error;
