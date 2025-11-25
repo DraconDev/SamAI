@@ -158,29 +158,6 @@ function App() {
         </div>
 
 
-        {/* Action Buttons */}
-        <div className="flex flex-col gap-3 pt-2">
-          <button
-            onClick={() => tabs.create({ url: "chat.html" })}
-            className="group w-full p-4 bg-gradient-to-r from-[#10b981] to-[#34d399] text-white rounded-xl
-                     hover:shadow-xl hover:shadow-green-500/30 focus:outline-none focus:ring-2
-                     focus:ring-[#10b981] focus:ring-offset-2 focus:ring-offset-[#1a1b2e]
-                     transition-all duration-300 transform hover:scale-[1.02]
-                     font-bold flex items-center justify-center gap-3 border border-green-500/30"
-          >
-            <svg
-              className="w-5 h-5 transition-transform transform group-hover:rotate-12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-            <span>Open SamAI Chat</span>
-          </button>
 
           <button
             onClick={openApiKeyPage}
