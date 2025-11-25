@@ -16,7 +16,6 @@ import {
   type TabId,
 } from "./SearchPanel/components";
 import SearchSettingsPanel from "./SearchPanel/components/SearchSettingsPanel";
-import FloatingSettingsButton from "./SearchPanel/components/FloatingSettingsButton";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
 interface SearchPanelProps {
@@ -406,6 +405,7 @@ Please provide a helpful response about the user's question specifically related
                 response={response}
                 isApiKeySet={isApiKeySet}
                 outputFormat={outputFormat}
+                onOpenSettings={() => setShowSearchSettings(true)}
               />
             </div>
           )}
@@ -473,12 +473,7 @@ Please provide a helpful response about the user's question specifically related
         </div>
       </div>
 
-      {/* Floating Settings Button */}
-      <FloatingSettingsButton 
-        onClick={() => setShowSearchSettings(true)} 
-      />
-
-      {/* Search Settings Panel */}
+      {/* Search Settings Panel - Only shows when triggered from search tab */}
       <SearchSettingsPanel
         isOpen={showSearchSettings}
         onClose={() => setShowSearchSettings(false)}
