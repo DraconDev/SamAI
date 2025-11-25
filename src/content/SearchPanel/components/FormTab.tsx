@@ -360,6 +360,20 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
                     )}
                   </div>
                   <div style={{ display: 'flex', gap: '0.25rem' }}>
+                    <button
+                      onClick={() => handleStartEditProfile(profile)}
+                      style={{
+                        padding: "0.25rem 0.5rem",
+                        background: "rgba(168, 85, 247, 0.2)",
+                        border: "1px solid rgba(168, 85, 247, 0.4)",
+                        borderRadius: "0.25rem",
+                        color: "#c084fc",
+                        cursor: "pointer",
+                        fontSize: "0.7rem",
+                      }}
+                    >
+                      Edit
+                    </button>
                     {activeProfile?.id !== profile.id && (
                       <button
                         onClick={() => handleSetActiveProfile(profile.id)}
