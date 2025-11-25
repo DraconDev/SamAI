@@ -99,18 +99,18 @@ export default function SearchSettingsPage() {
 
   const getIconForCategory = (category: HighlightPattern["category"]) => {
     switch (category) {
-      case "default": return "☆";
-      case "important": return "★";
-      case "favorite": return "⭐";
-      default: return "☆";
+      case "default": return "🔵"; // Blue
+      case "important": return "🔴"; // Red
+      case "favorite": return "🟢"; // Green
+      default: return "🔵";
     }
   };
 
   const getColorForCategory = (category: HighlightPattern["category"]) => {
     switch (category) {
-      case "default": return "#4f46e5";
-      case "important": return "#dc2626";
-      case "favorite": return "#059669";
+      case "default": return "#4f46e5"; // Blue
+      case "important": return "#dc2626"; // Red
+      case "favorite": return "#059669"; // Green
       default: return "#4f46e5";
     }
   };
