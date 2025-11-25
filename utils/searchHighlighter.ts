@@ -29,6 +29,12 @@ class SearchHighlighter {
   constructor() {
     this.loadSettings();
     this.setupMessageListener();
+    this.initImmediate();
+  }
+
+  private async initImmediate() {
+    // Process results immediately when initialized
+    setTimeout(() => this.processResults(), 1000);
   }
 
   private async loadSettings() {
@@ -41,8 +47,8 @@ class SearchHighlighter {
 
       // Load highlight settings from searchSettingsStore
       const searchSettings = await searchSettingsStore.getValue();
-      this.settings.autoHighlight = true; // Always auto-highlight when patterns exist
-      this.settings.highlightOpacity = 0.3; // Default opacity
+      this.settings.autoHighlight = true;
+      this.settings.highlightOpacity = 0.3;
     } catch (error) {
       console.error("Error loading search highlight settings:", error);
     }
@@ -55,7 +61,7 @@ class SearchHighlighter {
         
         if (typedMessage.type === "SAMAI_SEARCH_SETTINGS_UPDATED") {
           this.loadSettings().then(() => {
-            this.applyHighlights();
+            this.processResults();
           });
           return true;
         }
@@ -63,7 +69,7 @@ class SearchHighlighter {
         if (typedMessage.type === "TOGGLE_AUTO_HIGHLIGHT" && typedMessage.enabled !== undefined) {
           this.settings.autoHighlight = typedMessage.enabled;
           if (typedMessage.enabled) {
-            this.applyHighlights();
+            this.processResults();
           } else {
             this.clearHighlights();
           }
@@ -73,12 +79,12 @@ class SearchHighlighter {
         console.error("Error handling message:", error);
       }
       
-      // Return undefined for unhandled messages
+      return undefined;
     });
   }
 
-  public applyHighlights() {
-    console.log("[SamAI Highlighter] Starting applyHighlights", {
+  public processResults() {
+    console.log("[SamAI Highlighter] Starting processResults", {
       autoHighlight: this.settings.autoHighlight,
       patternsCount: this.patterns.length,
       patterns: this.patterns,
@@ -86,84 +92,211 @@ class SearchHighlighter {
       isSearchPage: this.isSearchResultsPage()
     });
 
-    if (!this.settings.autoHighlight || this.patterns.length === 0) {
-      console.log("[SamAI Highlighter] Skipping highlights - autoHighlight:", this.settings.autoHighlight, "patterns:", this.patterns.length);
-      return;
-    }
-
-    // Only highlight on search results pages
+    // Only process on search results pages
     if (!this.isSearchResultsPage()) {
       console.log("[SamAI Highlighter] Not a search results page, skipping");
       return;
     }
 
-    // Clear existing highlights first
-    this.clearHighlights();
-
-    // Find and highlight matching elements
-    const searchResults = this.getSearchResultElements();
-    console.log("[SamAI Highlighter] Found search results:", searchResults.length);
+    // Get all search result elements - try multiple selectors for different search engines
+    const results = this.getSearchResultElements();
+    console.log("[SamAI Highlighter] Found search results:", results.length);
     
-    let highlightCount = 0;
-    for (const element of searchResults) {
-      const elementText = element.textContent?.toLowerCase() || "";
-      const elementUrl = this.getElementUrl(element);
+    results.forEach((result) => {
+      const resultElement = result as HTMLElement;
       
-      for (const pattern of this.patterns) {
-        if (!pattern.enabled) continue;
-        
-        const patternLower = pattern.pattern.toLowerCase().trim();
-        if (!patternLower) continue;
-        
-        // Check if pattern matches URL or text content
-        const matchesUrl = elementUrl && elementUrl.toLowerCase().includes(patternLower);
-        const matchesText = elementText.includes(patternLower);
-        
-        console.log("[SamAI Highlighter] Checking pattern:", pattern.pattern, "against URL:", elementUrl, "Text match:", matchesText, "URL match:", matchesUrl);
-        
-        if (matchesUrl || matchesText) {
-          console.log("[SamAI Highlighter] Highlighting element with pattern:", pattern.pattern, "color:", pattern.color);
-          this.highlightElement(element, pattern.color, pattern.description);
-          highlightCount++;
-          break; // Only highlight once per element
-        }
+      // Check if this result has already been processed
+      if (resultElement.classList.contains("samai-processed-result")) {
+        return;
       }
-    }
+
+      const link = resultElement.querySelector("a[href]");
+      if (!link) return;
+
+      const url = link.getAttribute("href");
+      if (!url) return;
+
+      // Extract the domain from the URL
+      let domain = "";
+      try {
+        const urlObject = new URL(url);
+        domain = urlObject.hostname;
+      } catch (e) {
+        console.error("[SamAI Highlighter] Invalid URL:", url, e);
+        return;
+      }
+
+      console.log("[SamAI Highlighter] Processing result with URL:", url, "Domain:", domain);
+
+      // Check if action buttons already exist for this result
+      if (resultElement.querySelector(".samai-search-result-actions")) {
+        resultElement.classList.add("samai-processed-result");
+        return;
+      }
+
+      // Add action buttons container
+      const actions = document.createElement("div");
+      actions.className = "samai-search-result-actions";
+      actions.style.display = "flex";
+      actions.style.flexDirection = "column";
+      actions.style.gap = "4px";
+      actions.style.marginTop = "4px";
+
+      // Add highlight button
+      const highlightBtn = document.createElement("button");
+      highlightBtn.innerHTML = "☆";
+      highlightBtn.title = "Highlight this domain";
+      highlightBtn.style.cursor = "pointer";
+      highlightBtn.style.background = "none";
+      highlightBtn.style.border = "none";
+      highlightBtn.style.padding = "0";
+      highlightBtn.style.fontSize = "18px";
+      highlightBtn.style.color = "#666";
+      highlightBtn.style.transition = "all 0.2s";
+      
+      highlightBtn.onclick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const currentPatterns = this.patterns.slice();
+        const existingPattern = currentPatterns.find(p => 
+          p.enabled && domain.includes(p.pattern.toLowerCase())
+        );
+        
+        if (existingPattern) {
+          // Remove highlight
+          const updatedPatterns = currentPatterns.map(p => 
+            p.id === existingPattern.id ? { ...p, enabled: false } : p
+          );
+          this.updatePatterns(updatedPatterns);
+          highlightBtn.style.color = "#666";
+          highlightBtn.innerHTML = "☆";
+          console.log("[SamAI Highlighter] Removed highlight for domain:", domain);
+        } else {
+          // Add highlight with default color
+          const newPattern: HighlightPattern = {
+            id: Date.now().toString(),
+            pattern: domain,
+            color: "#4f46e5",
+            description: domain,
+            enabled: true,
+          };
+          updatedPatterns.push(newPattern);
+          this.updatePatterns(updatedPatterns);
+          highlightBtn.style.color = "#4f46e5";
+          highlightBtn.innerHTML = "★";
+          console.log("[SamAI Highlighter] Added highlight for domain:", domain);
+        }
+        
+        this.applyPatternHighlighting(resultElement, domain);
+      };
+      
+      actions.appendChild(highlightBtn);
+
+      // Add hide button
+      const hideBtn = document.createElement("button");
+      hideBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      `;
+      hideBtn.title = "Hide this domain";
+      hideBtn.style.cursor = "pointer";
+      hideBtn.style.background = "none";
+      hideBtn.style.border = "none";
+      hideBtn.style.padding = "0";
+      hideBtn.style.fontSize = "18px";
+      hideBtn.style.color = "#666";
+      
+      hideBtn.onclick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log("[SamAI Highlighter] Hiding result for domain:", domain);
+        
+        // Add to hidden patterns
+        const hiddenPattern: HighlightPattern = {
+          id: `hidden-${Date.now()}`,
+          pattern: domain,
+          color: "#000000",
+          description: `Hidden: ${domain}`,
+          enabled: true,
+        };
+        
+        const updatedPatterns = [...this.patterns, hiddenPattern];
+        this.updatePatterns(updatedPatterns);
+        
+        // Hide the element immediately
+        resultElement.style.display = "none";
+      };
+      
+      actions.appendChild(hideBtn);
+
+      // Position buttons to the right of the result
+      resultElement.style.position = "relative";
+      (actions as HTMLElement).style.position = "absolute";
+      (actions as HTMLElement).style.right = "-26px";
+      (actions as HTMLElement).style.top = "0";
+      (actions as HTMLElement).style.zIndex = "1000";
+      resultElement.appendChild(actions);
+
+      // Apply existing highlights
+      this.applyPatternHighlighting(resultElement, domain);
+
+      // Mark as processed
+      resultElement.classList.add("samai-processed-result");
+    });
+  }
+
+  private async updatePatterns(newPatterns: HighlightPattern[]) {
+    this.patterns = newPatterns;
+    localStorage.setItem("samai-highlight-patterns", JSON.stringify(newPatterns));
     
-    console.log("[SamAI Highlighter] Finished highlighting, total highlights:", highlightCount);
+    // Trigger re-processing
+    this.processResults();
+  }
+
+  private applyPatternHighlighting(element: Element, domain: string) {
+    // Remove existing highlight styles first
+    element.removeAttribute('data-samai-highlight-style');
+    const htmlElement = element as HTMLElement;
+    htmlElement.style.borderLeft = "";
+    htmlElement.style.paddingLeft = "";
+    
+    // Check if domain matches any enabled patterns
+    const matchingPattern = this.patterns.find(p => 
+      p.enabled && domain.toLowerCase().includes(p.pattern.toLowerCase())
+    );
+    
+    if (matchingPattern && matchingPattern.color !== "#000000") {
+      // Apply highlight
+      element.setAttribute('data-samai-highlight-style', 'true');
+      htmlElement.style.borderLeft = `3px solid ${matchingPattern.color}`;
+      htmlElement.style.paddingLeft = "8px";
+      
+      console.log("[SamAI Highlighter] Applied highlight for domain:", domain, "with color:", matchingPattern.color);
+    } else if (matchingPattern && matchingPattern.color === "#000000") {
+      // Hidden domain
+      htmlElement.style.display = "none";
+    }
   }
 
   public clearHighlights() {
-    // Remove all highlight elements
-    const highlights = document.querySelectorAll('[data-samai-highlight="true"]');
-    highlights.forEach(highlight => {
-      const parent = highlight.parentNode;
-      if (parent) {
-        // Move child nodes back to parent
-        while (highlight.firstChild) {
-          parent.insertBefore(highlight.firstChild, highlight);
-        }
-        // Remove the highlight wrapper
-        parent.removeChild(highlight);
-      }
-    });
-
-    // Remove background styles
-    const styledElements = document.querySelectorAll('[data-samai-highlight-style="true"]');
-    styledElements.forEach(element => {
-      const htmlElement = element as HTMLElement;
-      element.removeAttribute('data-samai-highlight-style');
-      htmlElement.style.backgroundColor = '';
-      htmlElement.style.background = '';
-      htmlElement.style.borderLeft = '';
-      htmlElement.style.borderRadius = '';
-      htmlElement.style.transition = '';
-      htmlElement.style.padding = '';
-      htmlElement.style.margin = '';
+    // Remove action buttons and highlighting from all processed results
+    const processedResults = document.querySelectorAll('.samai-processed-result');
+    processedResults.forEach(result => {
+      const htmlElement = result as HTMLElement;
+      htmlElement.removeAttribute('data-samai-highlight-style');
+      htmlElement.style.borderLeft = "";
+      htmlElement.style.paddingLeft = "";
+      htmlElement.style.display = "";
       
-      // Remove existing event listeners by cloning
-      const clone = htmlElement.cloneNode(true);
-      htmlElement.parentNode?.replaceChild(clone, htmlElement);
+      const actions = result.querySelector('.samai-search-result-actions');
+      if (actions) {
+        actions.remove();
+      }
+      
+      result.classList.remove('samai-processed-result');
     });
   }
 
@@ -174,7 +307,9 @@ class SearchHighlighter {
            url.includes('duckduckgo.com/') ||
            url.includes('yahoo.com/search') ||
            url.includes('search.yahoo.com') ||
-           url.includes('ask.com/web');
+           url.includes('ask.com/web') ||
+           url.includes('?q=') ||
+           url.includes('?query=');
   }
 
   private getSearchResultElements(): Element[] {
@@ -183,6 +318,8 @@ class SearchHighlighter {
       'div[data-ved] .g',
       'div[data-ved] .rc',
       'div[data-ved] .r',
+      '.tF2Cxc',
+      '.MjjYud',
       // Bing
       'li.b_algo',
       'div.b_algo',
@@ -215,68 +352,9 @@ class SearchHighlighter {
       });
     }
 
-    console.log("[SamAI Highlighter] Search result elements found:", elements.length, elements.map(el => el.tagName + '.' + el.className));
+    console.log("[SamAI Highlighter] Search result elements found:", elements.length);
 
     return elements;
-  }
-
-  private getElementUrl(element: Element): string | null {
-    // Try to find a URL in the element
-    const link = element.querySelector('a[href]');
-    if (link && link.getAttribute('href')) {
-      return link.getAttribute('href');
-    }
-
-    // Try to extract URL from text content
-    const text = element.textContent || '';
-    const urlMatch = text.match(/https?:\/\/[^\s]+/);
-    return urlMatch ? urlMatch[0] : null;
-  }
-
-  private highlightElement(element: Element, color: string, description: string) {
-    // Cast to HTMLElement to access style property
-    const htmlElement = element as HTMLElement;
-    
-    // Add marker attribute
-    element.setAttribute('data-samai-highlight-style', 'true');
-    
-    // Convert hex color to RGBA with proper opacity handling
-    const opacity = this.settings.highlightOpacity;
-    const hexColor = color.replace('#', '');
-    
-    // Ensure we have valid hex color
-    if (hexColor.length === 6) {
-      const r = parseInt(hexColor.substr(0, 2), 16);
-      const g = parseInt(hexColor.substr(2, 2), 16);
-      const b = parseInt(hexColor.substr(4, 2), 16);
-      
-      htmlElement.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
-      htmlElement.style.borderLeft = `4px solid ${color}`;
-      htmlElement.style.borderRadius = '4px';
-      htmlElement.style.transition = 'all 0.3s ease';
-      htmlElement.style.padding = '8px';
-      htmlElement.style.margin = '4px 0';
-
-      console.log("[SamAI Highlighter] Applied highlight with color:", `rgba(${r}, ${g}, ${b}, ${opacity})`, "border color:", color);
-
-      // Add hover effect
-      const handleMouseEnter = () => {
-        const hoverOpacity = Math.min(opacity + 0.1, 1);
-        htmlElement.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${hoverOpacity})`;
-      };
-
-      const handleMouseLeave = () => {
-        htmlElement.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
-      };
-
-      htmlElement.addEventListener('mouseenter', handleMouseEnter);
-      htmlElement.addEventListener('mouseleave', handleMouseLeave);
-    }
-    
-    // Add tooltip if description exists
-    if (description) {
-      element.setAttribute('title', `Highlighted: ${description}`);
-    }
   }
 
   public getHighlightStats() {
@@ -291,20 +369,8 @@ class SearchHighlighter {
   // Public method to manually trigger highlighting
   public refreshHighlights() {
     this.loadSettings().then(() => {
-      this.applyHighlights();
+      this.processResults();
     });
-  }
-
-  // Method to add custom pattern programmatically
-  public addPattern(pattern: Omit<HighlightPattern, 'id'>) {
-    const newPattern: HighlightPattern = {
-      ...pattern,
-      id: Date.now().toString(),
-    };
-    
-    this.patterns.push(newPattern);
-    localStorage.setItem("samai-highlight-patterns", JSON.stringify(this.patterns));
-    this.applyHighlights();
   }
 }
 
