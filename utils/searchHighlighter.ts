@@ -214,20 +214,39 @@ class SearchHighlighter {
         actions.appendChild(colorBtn);
       });
 
-      // Add hide button
+      // Add hide button - more prominent styling
       const hideBtn = document.createElement("button");
       hideBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 6L6 18M6 6l12 12"/>
         </svg>
       `;
       hideBtn.title = "Hide this domain";
       hideBtn.style.cursor = "pointer";
-      hideBtn.style.background = "none";
-      hideBtn.style.border = "none";
-      hideBtn.style.padding = "0";
-      hideBtn.style.fontSize = "18px";
-      hideBtn.style.color = "#666";
+      hideBtn.style.background = "rgba(220, 38, 38, 0.1)";
+      hideBtn.style.border = "1px solid rgba(220, 38, 38, 0.3)";
+      hideBtn.style.padding = "4px";
+      hideBtn.style.fontSize = "16px";
+      hideBtn.style.color = "#dc2626";
+      hideBtn.style.borderRadius = "6px";
+      hideBtn.style.transition = "all 0.2s";
+      hideBtn.style.width = "24px";
+      hideBtn.style.height = "24px";
+      hideBtn.style.display = "flex";
+      hideBtn.style.alignItems = "center";
+      hideBtn.style.justifyContent = "center";
+      
+      hideBtn.onmouseenter = () => {
+        hideBtn.style.background = "rgba(220, 38, 38, 0.2)";
+        hideBtn.style.borderColor = "#dc2626";
+        hideBtn.style.transform = "scale(1.1)";
+      };
+      
+      hideBtn.onmouseleave = () => {
+        hideBtn.style.background = "rgba(220, 38, 38, 0.1)";
+        hideBtn.style.borderColor = "rgba(220, 38, 38, 0.3)";
+        hideBtn.style.transform = "scale(1)";
+      };
       
       hideBtn.onclick = async (e) => {
         e.preventDefault();
