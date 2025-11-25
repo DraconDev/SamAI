@@ -180,7 +180,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "0.9rem 1rem",
+          padding: "0.75rem 1rem",
           borderBottom: "1px solid rgba(51,65,85,0.4)",
           background: "rgba(30,41,59,0.95)",
         }}
@@ -188,23 +188,23 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <div
             style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "12px",
+              width: "36px",
+              height: "36px",
+              borderRadius: "10px",
               background: "linear-gradient(135deg,#10b981,#34d399)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 10px 20px rgba(16,185,129,0.35)",
+              boxShadow: "0 8px 16px rgba(16,185,129,0.35)",
             }}
           >
             <svg
-              width="20"
-              height="20"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               stroke="white"
-              strokeWidth="2.2"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
@@ -213,11 +213,11 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           </div>
           <div>
             <div
-              style={{ fontSize: "0.95rem", fontWeight: 700, color: "#34d399" }}
+              style={{ fontSize: "0.9rem", fontWeight: 700, color: "#34d399" }}
             >
               Page Chat Assistant
             </div>
-            <div style={{ fontSize: "0.8rem", color: "#94a3b8" }}>
+            <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
               Ask focused questions about the current page
             </div>
           </div>
@@ -232,14 +232,14 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               borderRadius: "999px",
               border: "1px solid rgba(16,185,129,0.35)",
               background: "rgba(16,185,129,0.12)",
-              fontSize: "0.75rem",
+              fontSize: "0.7rem",
               color: "#6ee7b7",
             }}
           >
             <div
               style={{
-                width: "10px",
-                height: "10px",
+                width: "8px",
+                height: "8px",
                 borderRadius: "50%",
                 border: "2px solid rgba(16,185,129,0.5)",
                 borderTopColor: "#34d399",
@@ -329,7 +329,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           <div
             style={{
               flex: 1,
-              padding: "1rem",
+              padding: "0.75rem",
               overflowY: "auto",
               minHeight: 0,
             }}
@@ -364,7 +364,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
 
           <div
             style={{
-              padding: "1rem",
+              padding: "0.75rem",
               borderTop: "1px solid rgba(51,65,85,0.4)",
               background: "rgba(30,41,59,0.95)",
             }}
@@ -374,36 +374,46 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.75rem",
+                gap: "0.5rem",
               }}
             >
-              <label
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  fontSize: "0.85rem",
-                  color: "#cbd5f5",
-                  cursor: "pointer",
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={includePageContent}
-                  onChange={(e) => onIncludePageContentChange(e.target.checked)}
-                  style={{
-                    width: "16px",
-                    height: "16px",
-                    accentColor: "#10b981",
-                    cursor: "pointer",
-                  }}
-                />
-                Include page content in chat
-              </label>
               <div
                 style={{
                   display: "flex",
+                  alignItems: "center",
                   gap: "0.75rem",
+                  marginBottom: "0.25rem",
+                }}
+              >
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    fontSize: "0.8rem",
+                    color: "#cbd5f5",
+                    cursor: "pointer",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={includePageContent}
+                    onChange={(e) => onIncludePageContentChange(e.target.checked)}
+                    style={{
+                      width: "14px",
+                      height: "14px",
+                      accentColor: "#10b981",
+                      cursor: "pointer",
+                    }}
+                  />
+                  Include page content
+                </label>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.5rem",
                   alignItems: "center",
                 }}
               >
@@ -420,20 +430,21 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     disabled={isChatLoading || isExtractingContent}
                     style={{
                       width: "100%",
-                      height: "48px",
-                      borderRadius: "0.85rem",
+                      height: "44px",
+                      borderRadius: "0.75rem",
                       border: "1px solid rgba(71,85,105,0.6)",
                       background: "rgba(15,23,42,0.85)",
                       color: "#f1f5f9",
-                      padding: "0 3rem 0 1rem",
-                      fontSize: "0.95rem",
+                      padding: "0 2.75rem 0 0.875rem",
+                      fontSize: "0.9rem",
+                      transition: "all 0.2s",
                     }}
                   />
                   {(isChatLoading || isExtractingContent) && (
                     <div
                       style={{
                         position: "absolute",
-                        right: "1rem",
+                        right: "0.75rem",
                         top: "50%",
                         transform: "translateY(-50%)",
                       }}
@@ -448,27 +459,31 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     isChatLoading || isExtractingContent || !chatInput.trim()
                   }
                   style={{
-                    width: "56px",
-                    height: "48px",
-                    borderRadius: "0.85rem",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "0.75rem",
                     border: "none",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     background: chatInput.trim()
-                      ? "linear-gradient(135deg,#10b981,#34d399)"
-                      : "linear-gradient(135deg,#6b7280,#9ca3af)",
+                      ? "linear-gradient(135deg, #10b981, #34d399)"
+                      : "linear-gradient(135deg, #6b7280, #9ca3af)",
                     color: "#fff",
                     cursor: chatInput.trim() ? "pointer" : "not-allowed",
+                    transition: "all 0.2s",
+                    boxShadow: chatInput.trim()
+                      ? "0 4px 16px rgba(16, 185, 129, 0.4)"
+                      : "none",
                   }}
                 >
                   <svg
-                    width="18"
-                    height="18"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2.2"
+                    strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
@@ -476,26 +491,6 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     <polygon points="22 2 15 22 11 13 2 9 22 2" />
                   </svg>
                 </button>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "0.75rem",
-                  color: "#94a3b8",
-                }}
-              >
-                <span>Press Enter to send</span>
-                <span
-                  style={{
-                    padding: "0.2rem 0.65rem",
-                    borderRadius: "999px",
-                    border: "1px solid rgba(16,185,129,0.4)",
-                    color: "#6ee7b7",
-                  }}
-                >
-                  {outputFormat === "html" ? "📄 HTML mode" : "📝 Text mode"}
-                </span>
               </div>
             </form>
           </div>
