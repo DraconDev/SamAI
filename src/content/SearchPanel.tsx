@@ -187,15 +187,8 @@ ${truncatedContent}`;
   const handleOpenScrapedChat = async () => {
     const payload = scrapeResult ?? scrapedContent;
     if (!payload) return;
-    await browser.storage.local.set({
-      pageContext: {
-        content: payload,
-        outputFormat: scrapeResult ? "text" : scrapeMode,
-        instructions: scrapeInstructions,
-      },
-    });
-    await browser.tabs.create({ url: "chat.html" });
-    onClose();
+    // Switch to chat tab in the sidebar instead of opening separate chat page
+    setActiveTab("chat");
   };
 
   const handleDownloadScraped = () => {
