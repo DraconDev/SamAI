@@ -482,12 +482,6 @@ Please provide a helpful response about the user's question specifically related
           )}
         </div>
       </div>
-
-      {/* Search Settings Panel - Only shows when triggered from search tab */}
-      <SearchSettingsPanel
-        isOpen={showSearchSettings}
-        onClose={() => setShowSearchSettings(false)}
-      />
     </>
   );
 }
