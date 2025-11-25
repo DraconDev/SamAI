@@ -55,7 +55,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
       <div
         className="space-y-6"
         style={{
-          padding: "1rem",
+        padding: "0.75rem",
           height: "100%",
           overflowY: "auto",
         }}

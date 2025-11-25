@@ -125,7 +125,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     },
   ];
 
-  const secondaryTabs: Tab[] = [
+  mainTabs.push(
     {
       id: "form",
       label: "Form",
@@ -170,8 +170,8 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
           <polyline points="21 15 16 10 5 21" />
         </svg>
       ),
-    },
-  ];
+    }
+  );
 
   // Gradient color mapping
   const gradientColors: Record<string, { from: string; to: string }> = {
@@ -272,16 +272,16 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))",
-        gap: "0.65rem",
-        marginBottom: "1rem",
-        padding: "0.75rem",
+        gap: "0.5rem",
+        marginBottom: "0.75rem",
+        padding: "0.6rem",
         background:
-          "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
-        borderRadius: "1rem",
-        border: "1px solid rgba(51, 65, 85, 0.6)",
+          "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9))",
+        borderRadius: "0.9rem",
+        border: "1px solid rgba(51, 65, 85, 0.45)",
         boxShadow:
-          "0 18px 36px -14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
-        backdropFilter: "blur(10px)",
+          "0 14px 28px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+        backdropFilter: "blur(8px)",
       }}
     >
       {/* Row 1 - Main Actions */}
@@ -292,26 +292,6 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
         />
       ))}
 
-      {/* Row 2 - Secondary Actions */}
-      <div
-        style={{
-          gridColumn: "1 / -1",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-          gap: "0.65rem",
-          marginTop: "0.5rem",
-          paddingTop: "0.5rem",
-          borderTop: "1px solid rgba(51, 65, 85, 0.35)",
-        }}
-      >
-        {secondaryTabs.map((tab) => (
-          <div key={tab.id} style={{ gridColumn: 'span 1' }}>
-            <TabButton
-              tab={tab}
-            />
-          </div>
-        ))}     
-      </div>
     </div>
   );
 };

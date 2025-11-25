@@ -23,23 +23,26 @@ export const SearchTab: React.FC<SearchTabProps> = ({
       style={{
         height: "100%",
         overflowY: "auto",
-        padding: "0.75rem",
+        padding: "0.5rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.8rem",
       }}
     >
       <div style={{ marginBottom: "1rem" }}>
         {response ? (
-          <div
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
-              border: "1px solid rgba(79, 70, 229, 0.3)",
-              borderRadius: "1rem",
-              padding: "1.5rem",
-              boxShadow:
-                "0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-              backdropFilter: "blur(12px)",
-            }}
-          >
+           <div
+             style={{
+               background:
+                 "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.92))",
+               border: "1px solid rgba(79, 70, 229, 0.3)",
+               borderRadius: "0.9rem",
+               padding: "1rem",
+               boxShadow:
+                 "0 8px 24px -12px rgba(79, 70, 229, 0.25)",
+               backdropFilter: "blur(6px)",
+             }}
+           >
             {outputFormat === "html" ? (
               <div
                 style={{
@@ -70,15 +73,15 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "260px",
+              minHeight: "200px",
               textAlign: "center",
-              padding: "1.25rem",
+              padding: "1rem",
               background:
-                "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+                "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.92))",
               border: "1px solid rgba(79, 70, 229, 0.3)",
-              borderRadius: "1rem",
+              borderRadius: "0.9rem",
               boxShadow:
-                "0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+                "0 8px 24px -12px rgba(79, 70, 229, 0.25)",
               backdropFilter: "blur(8px)",
               animation: "samai-fade-in 0.3s ease-out",
             }}
@@ -174,15 +177,15 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "240px",
+              minHeight: "200px",
               background:
-                "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+                "linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.94))",
               border: "1px solid rgba(79, 70, 229, 0.3)",
-              borderRadius: "1rem",
-              padding: "1.25rem",
+              borderRadius: "0.9rem",
+              padding: "1rem",
               boxShadow:
-                "0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-              backdropFilter: "blur(8px)",
+                "0 8px 24px -12px rgba(79, 70, 229, 0.25)",
+              backdropFilter: "blur(6px)",
             }}
           >
             <LoadingSpinner size="lg" color="primary" />
