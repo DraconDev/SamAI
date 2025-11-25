@@ -307,8 +307,7 @@ Please provide a helpful response about the user's question specifically related
   return (
     <div
       ref={panelRef}
-      className="fixed top-0 right-0 w-[420px] h-screen bg-slate-900/95 backdrop-blur-xl shadow-2xl px-6 py-6 overflow-y-auto overflow-x-hidden z-[2147483647] font-inter text-slate-100 border-l border-white/10 animate-slide-in"
-      style={{ maxWidth: '420px' }}
+      className="flex flex-col h-full p-6 overflow-hidden animate-slide-in"
     >
       <TabNavigation
         activeTab={activeTab}
