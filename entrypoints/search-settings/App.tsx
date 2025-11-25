@@ -13,6 +13,8 @@ export default function SearchSettingsPage() {
   const [patterns, setPatterns] = useState<HighlightPattern[]>([]);
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<"short" | "medium" | "long">("short");
+  const [autoHighlight, setAutoHighlight] = useState(true);
+  const [highlightOpacity, setHighlightOpacity] = useState(0.3);
 
   useEffect(() => {
     loadSettings();
@@ -35,12 +37,37 @@ export default function SearchSettingsPage() {
     } else {
       setPatterns([]);
     }
+
+    // Load other settings from localStorage
+    try {
+      const searchActive = localStorage.getItem("samai-search-active");
+      const promptStyle = localStorage.getItem("samai-prompt-style");
+      const autoHighlight = localStorage.getItem("samai-auto-highlight");
+      const highlightOpacity = localStorage.getItem("samai-highlight-opacity");
+      
+      setSearchActive(searchActive !== null ? searchActive === "true" : true);
+      setPromptStyle((promptStyle as any) || "short");
+      setAutoHighlight(autoHighlight !== null ? autoHighlight === "true" : true);
+      setHighlightOpacity(highlightOpacity ? parseFloat(highlightOpacity) : 0.3);
+    } catch (error) {
+      console.error("Error loading search settings:", error);
+    }
   };
 
   const saveSettings = async () => {
     try {
+      // Save patterns to local storage
       localStorage.setItem("samai-highlight-patterns", JSON.stringify(patterns));
+      
+      // Save other settings
+      localStorage.setItem("samai-search-active", searchActive.toString());
+      localStorage.setItem("samai-prompt-style", promptStyle);
+      localStorage.setItem("samai-auto-highlight", autoHighlight.toString());
+      localStorage.setItem("samai-highlight-opacity", highlightOpacity.toString());
+      
+      // Trigger re-highlighting of search results
       window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
+      
       alert("Settings saved successfully!");
     } catch (error) {
       console.error("Error saving settings:", error);
@@ -89,100 +116,291 @@ export default function SearchSettingsPage() {
   };
 
   return (
-    <div className="min-w-[400px] p-8 bg-gray-900 text-gray-100 rounded-lg mx-auto">
-      <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700">
-        <h1 className="text-2xl font-bold text-white">
-          Search Enhancement Settings
-        </h1>
-      </div>
-
-      <div className="space-y-8">
-        {/* Quick Add Buttons */}
-        <div>
-          <h2 className="mb-4 text-lg font-semibold text-gray-300">
-            Quick Add Patterns
-          </h2>
-          <div className="flex gap-3">
-            <button
-              onClick={() => addPattern("default")}
-              className="px-4 py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
-            >
-              ☆ Add Default (Blue)
-            </button>
-            <button
-              onClick={() => addPattern("important")}
-              className="px-4 py-2 text-white transition-colors bg-red-600 rounded-lg hover:bg-red-700"
-            >
-              ★ Add Important (Red)
-            </button>
-            <button
-              onClick={() => addPattern("favorite")}
-              className="px-4 py-2 text-white transition-colors bg-green-600 rounded-lg hover:bg-green-700"
-            >
-              ⭐ Add Favorite (Green)
-            </button>
+    <div className="min-h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] text-gray-100">
+      <div className="max-w-4xl p-8 mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between pb-8 mb-8 border-b border-[#2E2F3E]/30">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] shadow-xl shadow-[#4f46e5]/50">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+                <circle cx="11" cy="11" r="3" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text">
+                Search Enhancement Settings
+              </h1>
+              <p className="text-sm text-gray-400">Customize your search experience</p>
+            </div>
           </div>
+          <button
+            onClick={saveSettings}
+            className="px-6 py-3 text-sm font-bold bg-gradient-to-r from-[#4f46e5] to-[#818cf8] text-white rounded-xl hover:shadow-xl hover:shadow-[#4f46e5]/30 transition-all duration-300 transform hover:scale-[1.02] border border-[#4f46e5]/30"
+          >
+            Save Settings
+          </button>
         </div>
 
-        {/* Current Patterns */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-300">
-              Active Patterns ({patterns.length})
+        <div className="space-y-8">
+          {/* Search Behavior Settings */}
+          <div className="p-6 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/50 shadow-xl">
+            <h2 className="flex items-center gap-2 mb-6 text-lg font-semibold text-gray-300">
+              <span className="text-[#4f46e5]">⚙️</span>
+              Search Behavior
             </h2>
-            <button
-              onClick={saveSettings}
-              className="px-4 py-2 text-white transition-colors bg-green-600 rounded-lg hover:bg-green-700"
-            >
-              Save Settings
-            </button>
+            
+            <div className="space-y-6">
+              <div>
+                <label className="block mb-4 text-sm font-bold tracking-wider text-gray-300 uppercase">
+                  Response Style
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    {
+                      value: "short",
+                      label: "Short",
+                      icon: "⚡",
+                      desc: "Quick & concise",
+                    },
+                    {
+                      value: "medium",
+                      label: "Medium",
+                      icon: "⚖️",
+                      desc: "Balanced info",
+                    },
+                    {
+                      value: "long",
+                      label: "Long",
+                      icon: "📚",
+                      desc: "In-depth analysis",
+                    },
+                  ].map(({ value, label, icon, desc }) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setPromptStyle(value as any)}
+                      className={`group relative flex flex-col items-center p-4 rounded-xl border transition-all duration-300
+                                hover:transform hover:scale-105 hover:shadow-xl
+                                ${
+                                  promptStyle === value
+                                    ? "border-[#4f46e5] bg-gradient-to-br from-[#4f46e5]/25 to-[#818cf8]/15 shadow-xl shadow-[#4f46e5]/30"
+                                    : "border-[#2E2F3E]/60 hover:border-[#4f46e5]/60 hover:bg-[#4f46e5]/10"
+                                }`}
+                    >
+                      <span className="mb-2 text-xl transition-transform transform group-hover:scale-110">
+                        {icon}
+                      </span>
+                      <span
+                        className={`text-sm font-medium mb-1
+                                     ${
+                                       promptStyle === value
+                                         ? "text-[#818cf8]"
+                                         : "text-gray-400 group-hover:text-[#818cf8]"
+                                     }
+                                     transition-colors`}
+                      >
+                        {label}
+                      </span>
+                      <span className="text-xs text-gray-500 transition-colors group-hover:text-gray-400">
+                        {desc}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                <div>
+                  <label className="text-sm font-medium text-gray-200">Enable Search Enhancement</label>
+                  <p className="text-xs text-gray-400">Toggle AI-powered search assistance</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={searchActive}
+                    onChange={(e) => setSearchActive(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
+                </label>
+              </div>
+            </div>
           </div>
 
-          {patterns.length === 0 ? (
-            <div className="py-8 text-center text-gray-500">
-              <p className="mb-2 text-lg">No patterns added yet</p>
-              <p className="text-sm">Use the buttons above to add highlight patterns</p>
+          {/* Highlight Patterns */}
+          <div className="p-6 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/50 shadow-xl">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-300">
+                <span className="text-[#4f46e5]">🎨</span>
+                Highlight Patterns
+              </h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => addPattern("default")}
+                  className="px-3 py-1.5 text-xs font-medium bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-600/30 rounded-lg transition-all duration-200"
+                >
+                  ☆ Add Default
+                </button>
+                <button
+                  onClick={() => addPattern("important")}
+                  className="px-3 py-1.5 text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 rounded-lg transition-all duration-200"
+                >
+                  ★ Add Important
+                </button>
+                <button
+                  onClick={() => addPattern("favorite")}
+                  className="px-3 py-1.5 text-xs font-medium bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-600/30 rounded-lg transition-all duration-200"
+                >
+                  ⭐ Add Favorite
+                </button>
+              </div>
             </div>
-          ) : (
-            <div className="space-y-3">
-              {patterns.map((pattern) => (
-                <div key={pattern.id} className="p-4 bg-gray-800 border border-gray-600 rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">{getIconForCategory(pattern.category)}</span>
-                      <span className="text-sm text-gray-400">({pattern.category})</span>
-                    </div>
-                    <button
-                      onClick={() => removePattern(pattern.id)}
-                      className="text-red-400 transition-colors hover:text-red-300"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Domain or pattern (e.g., wikipedia.org, github.com)"
-                    value={pattern.pattern}
-                    onChange={(e) => updatePattern(pattern.id, { pattern: e.target.value })}
-                    className="w-full p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
 
-        {/* Instructions */}
-        <div className="p-4 bg-gray-800 border border-gray-600 rounded-lg">
-          <h3 className="mb-2 text-sm font-semibold text-gray-300">How it works:</h3>
-          <ul className="space-y-1 text-sm text-gray-400">
-            <li>• <strong>☆ (Default)</strong> - General highlights in blue</li>
-            <li>• <strong>★ (Important)</strong> - Important sites in red</li>
-            <li>• <strong>⭐ (Favorite)</strong> - Favorite sites in green</li>
-            <li>• <strong>X button</strong> - Hide domains directly on search results</li>
-          </ul>
+            <div className="space-y-3">
+              {patterns.length === 0 ? (
+                <div className="py-8 text-center text-gray-500">
+                  <p className="mb-2 text-sm">No patterns added yet</p>
+                  <p className="text-xs">Use the buttons above to add highlight patterns</p>
+                </div>
+              ) : (
+                patterns.map((pattern) => (
+                  <div key={pattern.id} className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">{getIconForCategory(pattern.category)}</span>
+                        <span className="text-sm text-gray-400">({pattern.category})</span>
+                      </div>
+                      <button
+                        onClick={() => removePattern(pattern.id)}
+                        className="p-2 text-red-400 transition-colors rounded-lg hover:text-red-300 hover:bg-red-900/20"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="grid items-center grid-cols-12 gap-3">
+                      <div className="col-span-1">
+                        <input
+                          type="checkbox"
+                          checked={pattern.enabled}
+                          onChange={(e) => updatePattern(pattern.id, { enabled: e.target.checked })}
+                          className="w-4 h-4 text-[#4f46e5] bg-[#0D0E16] border-[#2E2F3E]/50 rounded focus:ring-[#4f46e5]/50"
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <input
+                          type="color"
+                          value={pattern.color}
+                          onChange={(e) => updatePattern(pattern.id, { color: e.target.value })}
+                          className="w-full h-8 rounded border border-[#2E2F3E]/50"
+                        />
+                      </div>
+                      <div className="col-span-9">
+                        <input
+                          type="text"
+                          placeholder="Domain or pattern (e.g., wikipedia.org, github.com)"
+                          value={pattern.pattern}
+                          onChange={(e) => updatePattern(pattern.id, { pattern: e.target.value })}
+                          className="w-full p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-[#4f46e5]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Highlight Settings */}
+          <div className="p-6 bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl border border-[#2E2F3E]/50 shadow-xl">
+            <h2 className="flex items-center gap-2 mb-6 text-lg font-semibold text-gray-300">
+              <span className="text-[#4f46e5]">🎯</span>
+              Highlight Settings
+            </h2>
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                <div>
+                  <label className="text-sm font-medium text-gray-200">Auto-highlight results</label>
+                  <p className="text-xs text-gray-400">Automatically apply highlights to search results</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={autoHighlight}
+                    onChange={(e) => setAutoHighlight(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
+                </label>
+              </div>
+
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-400">
+                  Highlight Opacity: {Math.round(highlightOpacity * 100)}%
+                </label>
+                <input
+                  type="range"
+                  min="0.1"
+                  max="1"
+                  step="0.1"
+                  value={highlightOpacity}
+                  onChange={(e) => setHighlightOpacity(parseFloat(e.target.value))}
+                  className="w-full h-2 bg-[#2E2F3E] rounded-lg appearance-none cursor-pointer slider"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="p-6 bg-[#0D0E16]/20 border border-[#2E2F3E]/30 rounded-2xl">
+            <h3 className="mb-3 text-sm font-semibold text-gray-300">How it works:</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li className="flex items-start gap-2">
+                <span className="text-blue-400">☆</span>
+                <span><strong>Default (Blue)</strong> - General highlights for typical sites</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-400">★</span>
+                <span><strong>Important (Red)</strong> - Highlight important or trusted sites</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-400">⭐</span>
+                <span><strong>Favorite (Green)</strong> - Highlight your favorite or frequently used sites</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-gray-400">X</span>
+                <span><strong>Hide button</strong> - Hide domains directly on search results</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #4f46e5;
+          cursor: pointer;
+          box-shadow: 0 0 0 1px #818cf8;
+        }
+        .slider::-moz-range-thumb {
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #4f46e5;
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 0 0 1px #818cf8;
+        }
+      `}</style>
     </div>
   );
 }
