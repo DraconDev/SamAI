@@ -1,6 +1,6 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
-import type { Runtime } from "wxt/browser";
 import type { OutputFormat } from "@/utils/page-content";
+import type { Runtime } from "wxt/browser";
 
 // Message type interfaces
 interface BaseMessage {
@@ -14,6 +14,10 @@ interface GenerateGeminiResponseRequest extends BaseMessage {
 
 interface OpenApiKeyPageRequest extends BaseMessage {
   type: "openApiKeyPage";
+}
+
+interface OpenSearchSettingsPageRequest extends BaseMessage {
+  type: "openSearchSettingsPage";
 }
 
 interface SetInputValueRequest extends BaseMessage {
