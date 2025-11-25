@@ -13,6 +13,7 @@ export const SummaryTab: React.FC<SummaryTabProps> = ({
   isSummarizing,
   summary,
   summaryError,
+  onSummarize,
 }) => {
   return (
     <div
