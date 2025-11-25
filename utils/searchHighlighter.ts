@@ -39,12 +39,10 @@ class SearchHighlighter {
         this.patterns = JSON.parse(savedPatterns);
       }
 
-      // Load other settings from browser storage
-      const response = await browser.storage.local.get(["searchSettings"]);
-      if (response.searchSettings) {
-        this.settings.autoHighlight = (response.searchSettings as any).autoHighlight ?? true;
-        this.settings.highlightOpacity = (response.searchSettings as any).highlightOpacity ?? 0.3;
-      }
+      // Load highlight settings from searchSettingsStore
+      const searchSettings = await searchSettingsStore.getValue();
+      this.settings.autoHighlight = true; // Always auto-highlight when patterns exist
+      this.settings.highlightOpacity = 0.3; // Default opacity
     } catch (error) {
       console.error("Error loading search highlight settings:", error);
     }
