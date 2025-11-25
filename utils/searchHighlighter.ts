@@ -222,6 +222,7 @@ class SearchHighlighter {
               color: colorConfig.color,
               description: `${colorConfig.name} highlight: ${domain}`,
               enabled: true,
+              category: colorConfig.name === "Red" ? "important" : colorConfig.name === "Green" ? "favorite" : "default",
             };
             const updatedPatterns = [...currentPatterns, newPattern];
             this.updatePatterns(updatedPatterns);
@@ -282,6 +283,7 @@ class SearchHighlighter {
           color: "#000000",
           description: `Hidden: ${domain}`,
           enabled: true,
+          category: "default",
         };
         
         const updatedPatterns = [...this.patterns, hiddenPattern];
