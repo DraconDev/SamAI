@@ -4,6 +4,7 @@ import { routeMessage, isContentScriptMessage } from "@/utils/content/messageHan
 import type { OutputFormat } from "@/utils/page-content"; // Import OutputFormat
 import { extractPageContent } from "@/utils/page-content";
 import { searchSettingsStore } from "@/utils/store";
+import { SearchHighlighter } from "@/utils/searchHighlighter";
 
 export interface InputElementClickedMessage {
   type: "inputElementClicked";
