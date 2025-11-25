@@ -313,7 +313,17 @@ class SearchHighlighter {
 
   private async updatePatterns(newPatterns: HighlightPattern[]) {
     this.patterns = newPatterns;
-    localStorage.setItem("samai-highlight-patterns", JSON.stringify(newPatterns));
+    
+    // Save to sync store for proper cross-tab synchronization
+    try {
+      await highlightPatternsStore.setValue({ patterns: newPatterns });
+      console.log("[SamAI Highlighter] Patterns saved to sync store:", newPatterns.length);
+      
+      // Send message to content scripts for immediate updates
+      window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
+    } catch (error) {
+      console.error("[SamAI Highlighter] Error saving patterns to sync store:", error);
+    }
     
     // Trigger re-processing
     this.processResults();
