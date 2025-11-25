@@ -1,7 +1,7 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
 import {
-  type OutputFormat,
   extractPageContentAsync as getPageContent,
+  type OutputFormat,
 } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import React, { useRef, useState } from "react";
@@ -15,7 +15,6 @@ import {
   TabNavigation,
   type TabId,
 } from "./SearchPanel/components";
-import SearchSettingsPanel from "./SearchPanel/components/SearchSettingsPanel";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
 interface SearchPanelProps {
@@ -372,6 +371,10 @@ Please provide a helpful response about the user's question specifically related
 
   const handleOpenApiKey = () => {
     browser.runtime.sendMessage({ type: "openApiKeyPage" });
+  };
+
+  const handleOpenSearchSettings = () => {
+    browser.runtime.sendMessage({ type: "openSearchSettingsPage" });
   };
 
   return (
