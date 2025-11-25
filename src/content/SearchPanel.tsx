@@ -326,7 +326,6 @@ Please provide a helpful response about the user's question specifically related
           onSummarizeClick={handleSummarize}
           onFormClick={handleForm}
           onImageClick={handleImage}
-          isScraping={isScraping}
         />
       </div>
 

@@ -18,7 +18,6 @@ interface TabNavigationProps {
   onSummarizeClick?: () => void;
   onFormClick?: () => void;
   onImageClick?: () => void;
-  isScraping?: boolean;
 }
 
 export const TabNavigation: React.FC<TabNavigationProps> = ({
@@ -28,7 +27,6 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
   onSummarizeClick,
   onFormClick,
   onImageClick,
-  isScraping = false,
 }) => {
   const handleTabClick = (tab: Tab) => {
     setActiveTab(tab.id);
@@ -273,13 +271,14 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '0.375rem',
+        gap: '0.5rem',
         marginBottom: '1.5rem',
-        padding: '0.625rem',
-        background: 'linear-gradient(to bottom right, #0f172a, #1e293b)',
+        padding: '0.75rem',
+        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
         borderRadius: '1rem',
-        border: '1px solid rgba(51, 65, 85, 1)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        border: '1px solid rgba(51, 65, 85, 0.6)',
+        boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        backdropFilter: 'blur(12px)',
       }}
     >
       {/* Row 1 - Main Actions */}
@@ -296,8 +295,10 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
           gridColumn: 'span 4',
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '0.375rem',
-          marginTop: '0.375rem',
+          gap: '0.5rem',
+          marginTop: '0.5rem',
+          paddingTop: '0.5rem',
+          borderTop: '1px solid rgba(51, 65, 85, 0.4)',
         }}
       >
         {secondaryTabs.map((tab) => (
