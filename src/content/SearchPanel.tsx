@@ -1,5 +1,8 @@
 import { generateFormResponse } from "@/utils/ai/gemini";
-import type { OutputFormat } from "@/utils/page-content";
+import {
+  type OutputFormat,
+  extractPageContentAsync as getPageContent,
+} from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import React, { useRef, useState } from "react";
 import {
@@ -92,63 +95,11 @@ export default function SearchPanel({
     return () => unsubscribe();
   }, []);
 
-  // Helper function to extract page content (inline for now)
-  const extractPageContent = async (
-    format: OutputFormat,
-    fresh: boolean = false
-  ): Promise<string> => {
-    try {
-      // If not fresh, try storage first
-      if (!fresh) {
-        const result = await browser.storage.local.get([
-          "pageBodyText",
-          "pageOptimizedHtml",
-          "pageContext",
-        ]);
-
-        const cached = (
-          format === "html" ? result.pageOptimizedHtml : result.pageBodyText
-        ) as string;
-        if (cached) {
-          console.log("[SearchPanel] Using cached content:", cached.length);
-          return cached;
-        }
-      }
-
-      // Extract fresh content from DOM
-      console.log("[SearchPanel] Extracting fresh content...");
-      let content: string;
-
-      if (format === "html") {
-        const fullHtml = document.documentElement.outerHTML;
-        const { optimizeHtmlContent } = await import("@/utils/page-content");
-        content = optimizeHtmlContent(fullHtml);
-      } else {
-        content = document.body.innerText.trim();
-      }
-
-      if (!content) {
-        throw new Error("No readable content found on this page.");
-      }
-
-      // Cache the extracted content
-      const storageKey =
-        format === "html" ? "pageOptimizedHtml" : "pageBodyText";
-      await browser.storage.local.set({ [storageKey]: content });
-
-      console.log("[SearchPanel] Fresh content extracted:", content.length);
-      return content;
-    } catch (error) {
-      console.error("[SearchPanel] Error extracting page content:", error);
-      throw new Error("Failed to extract page content");
-    }
-  };
-
   // Handlers
   const handleScrape = async () => {
     setIsScraping(true);
     try {
-      const content = await extractPageContent(scrapeMode, true);
+      const content = await getPageContent(scrapeMode, true);
       setScrapedContent(content);
     } catch (error) {
       console.error("Error scraping page:", error);
@@ -201,7 +152,7 @@ export default function SearchPanel({
 
   const handleChat = async () => {
     try {
-      const content = await extractPageContent(outputFormat);
+      const content = await getPageContent(outputFormat);
       await browser.storage.local.set({
         pageContext: {
           content,
@@ -221,7 +172,7 @@ export default function SearchPanel({
     setSummary("");
 
     try {
-      const content = await extractPageContent(outputFormat);
+      const content = await getPageContent(outputFormat);
       const prompt = `Please provide a comprehensive summary of the following content. Focus on the main points, key information, and important details. Structure your summary with clear sections and bullet points where appropriate.
 
 Content to summarize:
@@ -263,7 +214,7 @@ ${content}`;
 
       if (includePageContent) {
         setIsExtractingContent(true);
-        const currentPageContent = await extractPageContent(outputFormat);
+        const currentPageContent = await getPageContent(outputFormat);
         setIsExtractingContent(false);
 
         fullPrompt = `${chatInput}

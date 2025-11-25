@@ -16,12 +16,18 @@ export interface SearchPanelProps {
   outputFormat: OutputFormat;
 }
 
+export type ScrapeResultFormat = "markdown" | "json" | "table" | "plain";
+
 export interface ScrapeTabProps {
   isScraping: boolean;
   scrapeMode: OutputFormat;
   onScrapeModeChange: (mode: OutputFormat) => void;
   scrapeInstructions: string;
   onScrapeInstructionsChange: (instructions: string) => void;
+  scrapeResultFormat: ScrapeResultFormat;
+  onScrapeResultFormatChange: (format: ScrapeResultFormat) => void;
+  scrapeResult: string | null;
+  scrapeError: string | null;
   scrapedContent: string | null;
   onScrape: () => void;
   onOpenChat: () => void;

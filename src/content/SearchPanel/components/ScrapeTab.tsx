@@ -1,6 +1,11 @@
 import { GradientButton } from "@/src/components/ui/GradientButton";
+import { MarkdownRenderer } from "@/utils/markdown";
 import React from "react";
-import type { OutputFormat, ScrapeTabProps } from "../types";
+import type {
+  OutputFormat,
+  ScrapeResultFormat,
+  ScrapeTabProps,
+} from "../types";
 
 export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   isScraping,
@@ -8,12 +13,39 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   onScrapeModeChange,
   scrapeInstructions,
   onScrapeInstructionsChange,
+  scrapeResultFormat,
+  onScrapeResultFormatChange,
+  scrapeResult,
+  scrapeError,
   scrapedContent,
   onScrape,
   onOpenChat,
   onDownload,
   onClearPreview,
 }) => {
+  const formatOptions: Array<{ value: ScrapeResultFormat; label: string; hint: string }> = [
+    {
+      value: "markdown",
+      label: "Rich Markdown",
+      hint: "Headings, bullet points, callouts",
+    },
+    {
+      value: "json",
+      label: "Structured JSON",
+      hint: "Use when you need key/value data",
+    },
+    {
+      value: "table",
+      label: "Markdown Table",
+      hint: "Tabular insights",
+    },
+    {
+      value: "plain",
+      label: "Plain Text",
+      hint: "Simple paragraphs or bullet list",
+    },
+  ];
+
   return (
     <div 
       className="space-y-6"
@@ -117,12 +149,12 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#60a5fa' }}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            Instructions for Chat (Optional)
+            What should SamAI extract?
           </label>
           <textarea
             value={scrapeInstructions}
             onChange={(e) => onScrapeInstructionsChange(e.target.value)}
-            placeholder="e.g., 'Summarize key points', 'Extract contact info', 'Analyze structure'..."
+            placeholder="e.g., “List the pros/cons in JSON”, “Extract every event and include time + speaker”, “Summarize FAQs as bullet list”."
             style={{
               width: '100%',
               padding: '1rem',
@@ -147,10 +179,63 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
           />
         </div>
 
+        {/* Output format */}
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "0.5rem",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              color: "#e2e8f0",
+            }}
+          >
+            Desired output format
+          </label>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gap: "0.75rem",
+            }}
+          >
+            {formatOptions.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => onScrapeResultFormatChange(option.value)}
+                style={{
+                  borderRadius: "0.75rem",
+                  padding: "0.9rem",
+                  border:
+                    scrapeResultFormat === option.value
+                      ? "1px solid rgba(59, 130, 246, 0.6)"
+                      : "1px solid rgba(71, 85, 105, 0.4)",
+                  background:
+                    scrapeResultFormat === option.value
+                      ? "linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.15))"
+                      : "rgba(15, 23, 42, 0.6)",
+                  color: "#e2e8f0",
+                  textAlign: "left",
+                  transition: "all 0.2s ease",
+                  cursor: "pointer",
+                }}
+              >
+                <div style={{ fontWeight: 600, fontSize: "0.95rem" }}>
+                  {option.label}
+                </div>
+                <p style={{ fontSize: "0.8rem", color: "#94a3b8", marginTop: "0.2rem" }}>
+                  {option.hint}
+                </p>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Scrape Button */}
         <GradientButton
           onClick={onScrape}
-          disabled={isScraping}
+          disabled={isScraping || !scrapeInstructions.trim()}
           variant="success"
           loading={isScraping}
           className="w-full py-4 text-lg"
@@ -167,71 +252,111 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
             "✨ Scrape Page for Preview"
           )}
         </GradientButton>
-      </div>
-
-      {scrapedContent && (
-        <>
-          {/* Preview Section */}
-          <div 
-            className="p-8 border-2 shadow-2xl bg-gradient-to-br from-blue-500/8 to-blue-600/8 rounded-3xl border-blue-400/30 backdrop-blur-xl"
+        {scrapeError && (
+          <div
             style={{
-              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.08))',
-              border: '2px solid rgba(59, 130, 246, 0.3)',
-              borderRadius: '1rem',
-              padding: '1.5rem',
-              marginBottom: '1.5rem',
-              boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(12px)',
+              marginTop: "1rem",
+              padding: "0.9rem 1rem",
+              borderRadius: "0.75rem",
+              border: "1px solid rgba(248, 113, 113, 0.4)",
+              background: "rgba(248, 113, 113, 0.1)",
+              color: "#fecaca",
+              fontSize: "0.85rem",
             }}
           >
-            <div className="flex items-center justify-between mb-8">
-              <h4 className="flex items-center gap-3 text-2xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text">
-                📄 Preview
-                <span className="text-lg bg-blue-500/20 px-4 py-1.5 rounded-2xl text-blue-100 font-semibold border border-blue-400/30">
-                  {scrapedContent.length} chars
-                </span>
-              </h4>
-              <button
-                onClick={onClearPreview}
-                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-white bg-slate-800/50 hover:bg-slate-700/70 backdrop-blur-sm rounded-2xl border border-slate-600/50 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))',
-                  border: '1px solid rgba(71, 85, 105, 0.4)',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
-                  letterSpacing: '0.025em',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(51, 65, 85, 0.7), rgba(30, 41, 59, 0.9))';
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.3)';
-                  e.currentTarget.style.borderColor = 'rgba(100, 116, 139, 0.6)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))';
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
-                  e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.4)';
-                }}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Clear
-              </button>
+            {scrapeError}
+          </div>
+        )}
+      </div>
+
+      {(scrapedContent || scrapeResult) && (
+        <>
+          {scrapedContent && (
+            <div 
+              className="p-8 border-2 shadow-2xl bg-gradient-to-br from-blue-500/8 to-blue-600/8 rounded-3xl border-blue-400/30 backdrop-blur-xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.08))',
+                border: '2px solid rgba(59, 130, 246, 0.3)',
+                borderRadius: '1rem',
+                padding: '1.5rem',
+                marginBottom: '1.5rem',
+                boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              <div className="flex items-center justify-between mb-8">
+                <h4 className="flex items-center gap-3 text-2xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text">
+                  🧱 Source Preview
+                  <span className="text-lg bg-blue-500/20 px-4 py-1.5 rounded-2xl text-blue-100 font-semibold border border-blue-400/30">
+                    {scrapedContent.length} chars
+                  </span>
+                </h4>
+                <button
+                  onClick={onClearPreview}
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-white bg-slate-800/50 hover:bg-slate-700/70 backdrop-blur-sm rounded-2xl border border-slate-600/50 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))',
+                    border: '1px solid rgba(71, 85, 105, 0.4)',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+                    letterSpacing: '0.025em',
+                  }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Clear
+                </button>
+              </div>
+              <div className="max-h-[400px] overflow-auto rounded-xl border border-[#4B5563]/50 mb-6 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900/50">
+                {scrapeMode === "html" ? (
+                  <div
+                    className="p-8 prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-a:text-blue-400 prose-strong:font-bold prose-code:text-blue-300 backdrop-blur-sm rounded-2xl"
+                    dangerouslySetInnerHTML={{ __html: scrapedContent }}
+                  />
+                ) : (
+                  <pre className="text-sm bg-gradient-to-b from-[#1E1F2E]/95 to-slate-900/90 p-8 rounded-2xl font-mono overflow-x-auto whitespace-pre-wrap text-gray-100 shadow-xl border border-slate-700/50 backdrop-blur-sm">
+                    {scrapedContent}
+                  </pre>
+                )}
+              </div>
             </div>
-            <div className="max-h-[400px] overflow-auto rounded-xl border border-[#4B5563]/50 mb-6 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900/50">
-              {scrapeMode === "html" ? (
-                <div
-                  className="p-8 prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-a:text-blue-400 prose-strong:font-bold prose-code:text-blue-300 backdrop-blur-sm rounded-2xl"
-                  dangerouslySetInnerHTML={{ __html: scrapedContent }}
-                />
-              ) : (
-                <pre className="text-sm bg-gradient-to-b from-[#1E1F2E]/95 to-slate-900/90 p-8 rounded-2xl font-mono overflow-x-auto whitespace-pre-wrap text-gray-100 shadow-xl border border-slate-700/50 backdrop-blur-sm">
-                  {scrapedContent}
+          )}
+
+          {scrapeResult && (
+            <div
+              style={{
+                background: "linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(45, 212, 191, 0.05))",
+                border: "2px solid rgba(16, 185, 129, 0.25)",
+                borderRadius: "1rem",
+                padding: "1.5rem",
+                marginBottom: "1.5rem",
+                boxShadow: "0 10px 30px -12px rgba(16, 185, 129, 0.25)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
+                <div>
+                  <h4 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#34d399", marginBottom: "0.35rem" }}>
+                    🎯 Extraction Result
+                  </h4>
+                  <p style={{ fontSize: "0.85rem", color: "#a7f3d0" }}>
+                    Output format: {
+                      formatOptions.find((option) => option.value === scrapeResultFormat)?.label
+                    }
+                  </p>
+                </div>
+              </div>
+              {scrapeResultFormat === "json" ? (
+                <pre className="bg-slate-900/80 text-emerald-100 p-5 rounded-2xl text-sm overflow-x-auto border border-emerald-500/30">
+                  {scrapeResult}
                 </pre>
+              ) : (
+                <div className="prose prose-invert max-w-none prose-headings:text-emerald-200 prose-strong:text-emerald-100 prose-a:text-emerald-300">
+                  <MarkdownRenderer content={scrapeResult} />
+                </div>
               )}
             </div>
-          </div>
+          )}
 
           {/* Action Buttons */}
           <div 
@@ -250,6 +375,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
           >
             <GradientButton
               onClick={onOpenChat}
+              disabled={!scrapeResult && !scrapedContent}
               variant="success"
               className="h-16 py-5 text-xl font-bold shadow-2xl hover:shadow-blue-500/40"
               size="lg"
@@ -258,6 +384,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
             </GradientButton>
             <GradientButton
               onClick={onDownload}
+              disabled={!scrapeResult && !scrapedContent}
               variant="secondary"
               className="h-16 py-5 text-xl font-bold shadow-2xl hover:shadow-blue-400/40"
               size="lg"

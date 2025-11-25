@@ -55,7 +55,16 @@ export const ChatTab: React.FC<ChatTabProps> = ({
       }}
     >
       {/* Chat Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/90 backdrop-blur-md">
+      <div 
+        className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/90 backdrop-blur-md"
+        style={{
+          padding: '1rem',
+          borderBottom: '1px solid rgba(51, 65, 85, 0.5)',
+          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95))',
+          backdropFilter: 'blur(12px)',
+          boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05)',
+        }}
+      >
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center shadow-lg w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30 ring-1 ring-emerald-400/20">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -153,6 +162,34 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                         ? "bg-gradient-to-br from-emerald-500 to-emerald-400 text-white border border-emerald-400/30 shadow-lg shadow-emerald-500/20 ml-4"
                         : "bg-gradient-to-br from-slate-800/95 to-slate-700/95 border border-slate-600/60 text-slate-100 shadow-lg shadow-black/20 mr-4"
                     } rounded-2xl backdrop-blur-sm transition-all duration-200 hover:shadow-xl`}
+                    style={{
+                      maxWidth: '85%',
+                      borderRadius: '1rem',
+                      transition: 'all 0.2s',
+                      ...(message.role === "user" ? {
+                        background: 'linear-gradient(135deg, #10b981, #34d399)',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.3), 0 4px 12px -2px rgba(16, 185, 129, 0.2)',
+                      } : {
+                        background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95))',
+                        border: '1px solid rgba(71, 85, 105, 0.6)',
+                        boxShadow: '0 8px 20px -4px rgba(0, 0, 0, 0.3)',
+                      })
+                    }}
+                    onMouseEnter={(e) => {
+                      if (message.role === "user") {
+                        e.currentTarget.style.boxShadow = '0 12px 28px -4px rgba(16, 185, 129, 0.4), 0 6px 16px -2px rgba(16, 185, 129, 0.3)';
+                      } else {
+                        e.currentTarget.style.boxShadow = '0 12px 28px -4px rgba(0, 0, 0, 0.4)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (message.role === "user") {
+                        e.currentTarget.style.boxShadow = '0 8px 20px -4px rgba(16, 185, 129, 0.3), 0 4px 12px -2px rgba(16, 185, 129, 0.2)';
+                      } else {
+                        e.currentTarget.style.boxShadow = '0 8px 20px -4px rgba(0, 0, 0, 0.3)';
+                      }
+                    }}
                   >
                     {message.role === "user" ? (
                       <div className="p-4">
