@@ -5,7 +5,7 @@ export default function SearchSettingsPage() {
   const [patterns, setPatterns] = useState<HighlightPattern[]>([]);
   const [searchSettings, setSearchSettings] = useState({
     searchActive: true,
-    promptStyle: "short" as const,
+    promptStyle: "short" as "short" | "medium" | "long",
     autoHighlight: true,
     highlightOpacity: 0.3,
     enableHighlighting: true,
@@ -14,18 +14,16 @@ export default function SearchSettingsPage() {
   useEffect(() => {
     loadSettings();
     
-    // Listen for real-time updates from store
-    const unsubscribe = searchSettingsStore.subscribe((value) => {
-      setSearchSettings(value);
-    });
+    // Set up storage listeners for real-time sync
+    const handleStorageChange = () => {
+      loadSettings();
+    };
     
-    const unsubscribePatterns = highlightPatternsStore.subscribe((value) => {
-      setPatterns(value.patterns);
-    });
+    // Listen for storage changes across tabs
+    window.addEventListener('storage', handleStorageChange);
     
     return () => {
-      unsubscribe();
-      unsubscribePatterns();
+      window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
