@@ -65,10 +65,18 @@ export default function SearchPanel({
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Close panel when clicking outside
+  // Close panel when clicking outside (but not when clicking on modals)
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      
+      // Don't close if clicking on modal or settings panel
+      if (target instanceof Element) {
+        const isModal = target.closest('.samai-modal, .search-settings-panel');
+        if (isModal) return;
+      }
+      
+      if (panelRef.current && !panelRef.current.contains(target)) {
         onClose();
       }
     };
