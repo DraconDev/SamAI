@@ -82,9 +82,6 @@ export default defineBackground(() => {
         width: 720,
         height: 600,
       });
-        width: 600,
-        height: 450,
-      });
       contextPopupWindowId = popupWindow.id || null;
     } catch (error) {
       console.error("Error in background script:", error);
@@ -104,8 +101,8 @@ export default defineBackground(() => {
       const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
-        width: 600,
-        height: 450,
+        width: 720,
+        height: 600,
       });
       contextPopupWindowId = popupWindow.id || null;
     }
