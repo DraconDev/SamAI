@@ -100,6 +100,14 @@ export default function SearchPanel({
     return () => unsubscribe();
   }, []);
 
+  // Auto-trigger summary when "Sum" tab is opened
+  React.useEffect(() => {
+    if (activeTab === "sum" && !summary && !isSummarizing && !summaryError) {
+      console.log("[SamAI] Auto-triggering summary for Sum tab...");
+      handleSummarize();
+    }
+  }, [activeTab]);
+
   const SCRAPE_RESULT_PROMPTS: Record<
     ScrapeResultFormat,
     { guidance: string; extension: string }
