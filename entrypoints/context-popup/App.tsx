@@ -75,11 +75,8 @@ export default function App() {
       return '👤 Name field';
     }
     if (text.includes('phone') || text.includes('tel') || text.includes('mobile')) {
-    if (text.includes('phone') || text.includes('tel') || text.includes('mobile')) {
       return '📞 Phone number';
     }
-    if (text.includes('address') || text.includes('street')) {
-      return '📞 Phone number';
     if (text.includes('address') || text.includes('street')) {
       return '📍 Address field';
     }
