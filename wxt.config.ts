@@ -13,7 +13,7 @@ export default defineConfig({
     content_scripts: [
       {
         matches: ["*://*.google.com/*"],
-        js: ["content-scripts/content.js"],
+        js: ["entrypoints/content.js"],
       },
     ],
     icons: {
