@@ -15,6 +15,7 @@ import {
   TabNavigation,
   type TabId,
 } from "./SearchPanel/components";
+import type { ScrapeResultFormat } from "./SearchPanel/types";
 
 interface SearchPanelProps {
   response: string | null;
@@ -54,7 +55,11 @@ export default function SearchPanel({
 
   const [scrapeMode, setScrapeMode] = useState<OutputFormat>(outputFormat);
   const [scrapeInstructions, setScrapeInstructions] = useState("");
+  const [scrapeResultFormat, setScrapeResultFormat] =
+    useState<ScrapeResultFormat>("markdown");
   const [scrapedContent, setScrapedContent] = useState<string | null>(null);
+  const [scrapeResult, setScrapeResult] = useState<string | null>(null);
+  const [scrapeError, setScrapeError] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -95,25 +100,97 @@ export default function SearchPanel({
     return () => unsubscribe();
   }, []);
 
+  const SCRAPE_RESULT_PROMPTS: Record<
+    ScrapeResultFormat,
+    { guidance: string; extension: string }
+  > = {
+    markdown: {
+      guidance:
+        "Respond with well-structured GitHub-flavored Markdown using headings, bullet lists and bold labels where appropriate.",
+      extension: "md",
+    },
+    json: {
+      guidance:
+        "Respond with valid, minified JSON. Use arrays for collections and include descriptive property names. Do not include explanations outside the JSON.",
+      extension: "json",
+    },
+    table: {
+      guidance:
+        "Respond with a Markdown table. Include a header row and ensure each row is aligned with the headers. Use concise columns.",
+      extension: "md",
+    },
+    plain: {
+      guidance:
+        "Respond with clean plain text paragraphs or numbered/bullet lists. Avoid markdown decorations unless necessary for readability.",
+      extension: "txt",
+    },
+  };
+
   // Handlers
   const handleScrape = async () => {
+    if (!isApiKeySet) {
+      setScrapeError(
+        "Please configure your API key before running the scraper."
+      );
+      return;
+    }
+    if (!scrapeInstructions.trim()) {
+      setScrapeError("Describe what you'd like SamAI to extract first.");
+      return;
+    }
     setIsScraping(true);
+    setScrapeError(null);
+    setScrapeResult(null);
     try {
-      const content = await getPageContent(scrapeMode, true);
-      setScrapedContent(content);
+      const sourceContent = await getPageContent(scrapeMode, true);
+      setScrapedContent(sourceContent);
+
+      const truncatedContent =
+        sourceContent.length > 15000
+          ? `${sourceContent.slice(0, 15000)}\n[Truncated for prompt length]`
+          : sourceContent;
+
+      const formatGuidance = SCRAPE_RESULT_PROMPTS[scrapeResultFormat].guidance;
+      const contentLabel =
+        scrapeMode === "html" ? "Optimized HTML" : "Visible text content";
+
+      const prompt = `You are SamAI, an expert web scraper embedded inside the browser. 
+Follow the user's extraction request carefully and use ONLY the provided page data. 
+Format requirements: ${formatGuidance}
+
+Extraction request:
+${scrapeInstructions.trim()}
+
+${contentLabel} (freshly captured):
+${truncatedContent}`;
+
+      const extraction = await generateFormResponse(prompt);
+      if (!extraction) {
+        throw new Error(
+          "No extracted data was returned. Please refine the instructions."
+        );
+      }
+      setScrapeResult(extraction.trim());
     } catch (error) {
       console.error("Error scraping page:", error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong while scraping.";
+      setScrapeError(message);
+      setScrapeResult(null);
     } finally {
       setIsScraping(false);
     }
   };
 
   const handleOpenScrapedChat = async () => {
-    if (!scrapedContent) return;
+    const payload = scrapeResult ?? scrapedContent;
+    if (!payload) return;
     await browser.storage.local.set({
       pageContext: {
-        content: scrapedContent,
-        outputFormat: scrapeMode,
+        content: payload,
+        outputFormat: scrapeResult ? "text" : scrapeMode,
         instructions: scrapeInstructions,
       },
     });
@@ -122,10 +199,21 @@ export default function SearchPanel({
   };
 
   const handleDownloadScraped = () => {
-    if (!scrapedContent) return;
-    const extension = scrapeMode === "html" ? "html" : "txt";
-    const blob = new Blob([scrapedContent], {
-      type: scrapeMode === "html" ? "text/html" : "text/plain;charset=utf-8",
+    const payload = scrapeResult ?? scrapedContent;
+    if (!payload) return;
+    const extension = scrapeResult
+      ? SCRAPE_RESULT_PROMPTS[scrapeResultFormat].extension
+      : scrapeMode === "html"
+      ? "html"
+      : "txt";
+    const mimeType =
+      extension === "html"
+        ? "text/html"
+        : extension === "json"
+        ? "application/json"
+        : "text/plain;charset=utf-8";
+    const blob = new Blob([payload], {
+      type: mimeType,
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -216,6 +304,12 @@ ${content}`;
         setIsExtractingContent(true);
         const currentPageContent = await getPageContent(outputFormat);
         setIsExtractingContent(false);
+  const handleClearScrapePreview = () => {
+    setScrapedContent(null);
+    setScrapeResult(null);
+    setScrapeError(null);
+  };
+
 
         fullPrompt = `${chatInput}
 
@@ -305,11 +399,15 @@ Please provide a helpful response about the user's question specifically related
               onScrapeModeChange={setScrapeMode}
               scrapeInstructions={scrapeInstructions}
               onScrapeInstructionsChange={setScrapeInstructions}
+              scrapeResultFormat={scrapeResultFormat}
+              onScrapeResultFormatChange={setScrapeResultFormat}
+              scrapeResult={scrapeResult}
+              scrapeError={scrapeError}
               scrapedContent={scrapedContent}
               onScrape={handleScrape}
               onOpenChat={handleOpenScrapedChat}
               onDownload={handleDownloadScraped}
-              onClearPreview={() => setScrapedContent(null)}
+              onClearPreview={handleClearScrapePreview}
             />
           </div>
         )}
