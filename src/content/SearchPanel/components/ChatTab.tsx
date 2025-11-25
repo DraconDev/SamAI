@@ -109,16 +109,16 @@ export const ChatTab: React.FC<ChatTabProps> = ({
             style={{
               maxWidth: "85%",
               background: isUser
-                ? "linear-gradient(135deg,#10b981,#34d399)"
+                ? "linear-gradient(135deg,#3b82f6,#60a5fa)" // Changed from green to blue
                 : "linear-gradient(135deg,rgba(30,41,59,0.95), rgba(51,65,85,0.95))",
               color: isUser ? "#fff" : "#e2e8f0",
               padding: "0.85rem 1rem",
               borderRadius: "1rem",
               border: `1px solid ${
-                isUser ? "rgba(16,185,129,0.4)" : "rgba(71,85,105,0.6)"
+                isUser ? "rgba(59, 130, 246, 0.4)" : "rgba(71,85,105,0.6)"
               }`,
               boxShadow: isUser
-                ? "0 10px 22px rgba(16,185,129,0.35)"
+                ? "0 10px 22px rgba(59, 130, 246, 0.35)" // Blue shadow instead of green
                 : "0 12px 22px rgba(0,0,0,0.35)",
             }}
           >
@@ -381,7 +381,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.75rem",
+                  justifyContent: "space-between",
                   marginBottom: "0.25rem",
                 }}
               >
@@ -400,8 +400,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     checked={includePageContent}
                     onChange={(e) => onIncludePageContentChange(e.target.checked)}
                     style={{
-                      width: "14px",
-                      height: "14px",
+                      width: "16px",
+                      height: "16px",
                       accentColor: "#10b981",
                       cursor: "pointer",
                     }}
@@ -430,14 +430,23 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     disabled={isChatLoading || isExtractingContent}
                     style={{
                       width: "100%",
-                      height: "44px",
+                      height: "48px",
                       borderRadius: "0.75rem",
                       border: "1px solid rgba(71,85,105,0.6)",
-                      background: "rgba(15,23,42,0.85)",
+                      background: "rgba(15,23,42,0.9)",
                       color: "#f1f5f9",
-                      padding: "0 2.75rem 0 0.875rem",
+                      padding: "0 1rem 0 1rem",
                       fontSize: "0.9rem",
                       transition: "all 0.2s",
+                      outline: "none",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "rgba(59, 130, 246, 0.6)";
+                      e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.2)";
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "rgba(71,85,105,0.6)";
+                      e.target.style.boxShadow = "none";
                     }}
                   />
                   {(isChatLoading || isExtractingContent) && (
@@ -459,8 +468,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     isChatLoading || isExtractingContent || !chatInput.trim()
                   }
                   style={{
-                    width: "44px",
-                    height: "44px",
+                    width: "48px",
+                    height: "48px",
                     borderRadius: "0.75rem",
                     border: "none",
                     display: "flex",
