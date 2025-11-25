@@ -21,36 +21,29 @@ export default function SearchSettingsPage() {
   }, []);
 
   const loadSettings = async () => {
-    // Load highlight patterns from local storage
-    const savedPatterns = localStorage.getItem("samai-highlight-patterns");
-    if (savedPatterns) {
-      try {
+    try {
+      // Load highlight patterns from localStorage (same as SearchHighlighter)
+      const savedPatterns = localStorage.getItem("samai-highlight-patterns");
+      if (savedPatterns) {
         const parsed = JSON.parse(savedPatterns);
-        setPatterns(parsed.map((p: any) => ({ 
-          ...p, 
-          category: p.category || "default" 
+        setPatterns(parsed.map((p: any) => ({
+          ...p,
+          category: p.category || "default"
         })));
-      } catch (error) {
-        console.error("Error parsing patterns:", error);
+      } else {
         setPatterns([]);
       }
-    } else {
-      setPatterns([]);
-    }
 
-    // Load other settings from localStorage
-    try {
-      const searchActive = localStorage.getItem("samai-search-active");
-      const promptStyle = localStorage.getItem("samai-prompt-style");
-      const autoHighlight = localStorage.getItem("samai-auto-highlight");
-      const highlightOpacity = localStorage.getItem("samai-highlight-opacity");
+      // Load other settings
+      setSearchActive(localStorage.getItem("samai-search-active") !== "false");
+      setPromptStyle((localStorage.getItem("samai-prompt-style") as any) || "short");
+      setAutoHighlight(localStorage.getItem("samai-auto-highlight") !== "false");
+      setHighlightOpacity(parseFloat(localStorage.getItem("samai-highlight-opacity") || "0.3"));
       
-      setSearchActive(searchActive !== null ? searchActive === "true" : true);
-      setPromptStyle((promptStyle as any) || "short");
-      setAutoHighlight(autoHighlight !== null ? autoHighlight === "true" : true);
-      setHighlightOpacity(highlightOpacity ? parseFloat(highlightOpacity) : 0.3);
+      console.log("[Search Settings] Loaded patterns:", patterns.length);
     } catch (error) {
       console.error("Error loading search settings:", error);
+      setPatterns([]);
     }
   };
 
