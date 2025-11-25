@@ -11,6 +11,7 @@ interface HighlightPattern {
 interface HighlightSettings {
   autoHighlight: boolean;
   highlightOpacity: number;
+  enableHighlighting: boolean;
 }
 
 interface Message {
@@ -22,6 +23,7 @@ class SearchHighlighter {
   private settings: HighlightSettings = {
     autoHighlight: true,
     highlightOpacity: 0.3,
+    enableHighlighting: true,
   };
 
   private patterns: HighlightPattern[] = [];
@@ -49,6 +51,7 @@ class SearchHighlighter {
       const searchSettings = await searchSettingsStore.getValue();
       this.settings.autoHighlight = true;
       this.settings.highlightOpacity = 0.3;
+      this.settings.enableHighlighting = localStorage.getItem("samai-enable-highlighting") !== "false";
     } catch (error) {
       console.error("Error loading search highlight settings:", error);
     }
