@@ -186,13 +186,21 @@ class SearchHighlighter {
           );
           
           if (existingPattern) {
-            // Update existing pattern color
-            const updatedPatterns = currentPatterns.map(p =>
-              p.id === existingPattern.id ? { ...p, color: colorConfig.color } : p
-            );
-            this.updatePatterns(updatedPatterns);
-            colorBtn.style.background = colorConfig.bg;
-            console.log("[SamAI Highlighter] Updated highlight for domain to", colorConfig.name, ":", domain);
+            if (existingPattern.color === colorConfig.color) {
+              // Same color clicked - toggle off (remove highlight)
+              const updatedPatterns = currentPatterns.filter(p => p.id !== existingPattern.id);
+              this.updatePatterns(updatedPatterns);
+              colorBtn.style.background = "none";
+              console.log("[SamAI Highlighter] Removed highlight for domain:", domain);
+            } else {
+              // Different color - update existing pattern color
+              const updatedPatterns = currentPatterns.map(p =>
+                p.id === existingPattern.id ? { ...p, color: colorConfig.color } : p
+              );
+              this.updatePatterns(updatedPatterns);
+              colorBtn.style.background = colorConfig.bg;
+              console.log("[SamAI Highlighter] Updated highlight for domain to", colorConfig.name, ":", domain);
+            }
           } else {
             // Add new highlight pattern
             const newPattern: HighlightPattern = {
