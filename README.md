@@ -122,6 +122,7 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 1. **Smart Search**: Get AI-enhanced search results with contextual insights
 2. **Content Scraping**: Extract relevant information in your preferred format
 3. **Page Summarization**: Quickly understand lengthy articles and documents
+4. **Image Processing**: Interface ready for future image analysis capabilities
 4. **Image Analysis**: Extract insights from images and visual content
 5. **Pattern Highlighting**: Organize search results with intelligent categorization
 
