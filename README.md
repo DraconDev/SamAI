@@ -73,6 +73,15 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 #### **Sidebar Panel Interface**
 - **Floating Sidebar**: Elegant interface accessible on every webpage
 - **Multi-Tab Navigation**: Seamless switching between 6 specialized tools
+### 📸 **Screen Chat - Revolutionary Screenshot AI**
+- **Screenshot Capture**: One-click capture of your current screen
+- **Vision AI Chat**: Chat with AI about what's visible on your screen
+- **Visual Understanding**: AI can see and describe what's on your page
+- **Interactive Analysis**: Ask "Where is the search box?" and get precise answers
+- **Base64 Direct**: No upload required - send screenshots directly to AI
+- **Cross-Tab Integration**: Works seamlessly with existing chat features
+- **Privacy Focused**: Screenshots exist only during API calls
+- **Instant Setup**: Works with existing AI API keys
   - **SearchTab**: AI-powered search enhancement
   - **ScrapeTab**: Advanced web scraping with multi-format output
   - **ChatTab**: Universal web chat with context understanding
