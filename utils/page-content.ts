@@ -4,10 +4,6 @@ import browser from "webextension-polyfill";
  * Defines the output format for page content extraction.
  */
 export type OutputFormat = "html" | "text";
-/**
- * Defines the output format for page content extraction.
- */
-export type OutputFormat = "html" | "text";
 
 /**
  * Extract visible text content or optimized HTML from a webpage
