@@ -52,6 +52,9 @@ export const defaultSearchSettingsStore: SearchSettingsStore = {
   continuePreviousChat: false,
   outputFormat: "text",
   showFloatingIcon: true, // Default to true
+  autoHighlight: true,
+  highlightOpacity: 0.3,
+  enableHighlighting: true,
 };
 
 export const PROMPT_TEMPLATES = {
@@ -183,4 +186,28 @@ export const defaultPageContextStore: PageContextStore = {
 export const pageContextStore = storage.defineItem<PageContextStore>("local:pageContext", {
   fallback: defaultPageContextStore,
 });
+
+export interface HighlightPattern {
+  id: string;
+  pattern: string;
+  color: string;
+  description: string;
+  enabled: boolean;
+  category: "default" | "important" | "favorite";
+}
+
+export interface HighlightPatternsStore {
+  patterns: HighlightPattern[];
+}
+
+export const defaultHighlightPatternsStore: HighlightPatternsStore = {
+  patterns: [],
+};
+
+export const highlightPatternsStore = storage.defineItem<HighlightPatternsStore>(
+  "sync:highlightPatterns",
+  {
+    fallback: defaultHighlightPatternsStore,
+  }
+);
 
