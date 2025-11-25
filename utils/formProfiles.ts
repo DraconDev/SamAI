@@ -45,7 +45,7 @@ export interface FormProfilesStore {
   activeProfileId?: string;
 }
 
-const FORM_PROFILES_KEY = "samai_form_profiles";
+const FORM_PROFILES_KEY = "local:samai_form_profiles";
 
 export class FormProfilesManager {
   /**
