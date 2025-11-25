@@ -119,8 +119,34 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                           <div
                             className="max-w-[85%] p-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-br from-emerald-500/90 to-emerald-400/90 text-white border-emerald-400/40 shadow-emerald-500/25 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:from-emerald-500 hover:to-emerald-400 group-hover:scale-[1.02]"
                           >
-                          <div className="text-sm font-medium leading-relaxed">{message.content}</div>
-                          <div className="flex items-center justify-end gap-1 mt-2 text-xs opacity-70 text-emerald-100">
+                            <div className="text-sm font-medium leading-relaxed">{message.content}</div>
+                            <div className="flex items-center justify-end gap-1 mt-2 text-xs opacity-70 text-emerald-100">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12,6 12,12 16,14" />
+                              </svg>
+                              {message.timestamp}
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-center rounded-full shadow-md w-7 h-7 bg-slate-600/50 ring-1 ring-slate-700/50">
+                            <span className="text-xs font-bold text-slate-200">U</span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex items-start gap-3 max-w-[85%]">
+                        <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 mt-1 -ml-1 shadow-lg rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                          </svg>
+                        </div>
+                        <div
+                          className="p-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-br from-slate-800/95 to-slate-700/95 border-slate-600/70 text-slate-100 shadow-black/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:from-slate-800 hover:to-slate-700 group-hover:scale-[1.02] max-w-full"
+                        >
+                          <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
+                            <MarkdownRenderer content={message.content} />
+                          </div>
+                          <div className="flex items-center gap-1 mt-2 text-xs opacity-70 text-slate-400">
                             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <circle cx="12" cy="12" r="10" />
                               <polyline points="12,6 12,12 16,14" />
@@ -128,52 +154,9 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                             {message.timestamp}
                           </div>
                         </div>
-                        <div className="flex items-center justify-center rounded-full shadow-md w-7 h-7 bg-slate-600/50 ring-1 ring-slate-700/50">
-                          <span className="text-xs font-bold text-slate-200">U</span>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="flex items-start gap-3 max-w-[85%]">
-                      <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 mt-1 -ml-1 shadow-lg rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                        </svg>
-                      </div>
-                      <div
-                        className="p-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-br from-slate-800/95 to-slate-700/95 border-slate-600/70 text-slate-100 shadow-black/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:from-slate-800 hover:to-slate-700 group-hover:scale-[1.02] max-w-full"
-                      >
-                        <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
-                          <MarkdownRenderer content={message.content} />
-                        </div>
-                        <div className="flex items-center gap-1 mt-2 text-xs opacity-70 text-slate-400">
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12,6 12,12 16,14" />
-                          </svg>
-                          {message.timestamp}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                    {message.role === "user" ? (
-                      <div className="text-sm font-medium leading-relaxed">{message.content}</div>
-                    ) : (
-                      <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
-                        <MarkdownRenderer content={message.content} />
                       </div>
                     )}
-                    <div className={`text-xs mt-2 opacity-70 flex items-center gap-1 ${
-                      message.role === "user" ? "text-emerald-100" : "text-slate-400"
-                    }`}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12,6 12,12 16,14" />
-                      </svg>
-                      {message.timestamp}
-                    </div>
                   </div>
-                </div>
               ))
             )}
             {(isChatLoading || isExtractingContent) && (
@@ -252,15 +235,15 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 </button>
               </div>
               <div className="flex items-center justify-between pt-1 text-xs text-slate-500">
-                <span>Press Enter to send</span>
-                    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                    opacity: (isChatLoading || isExtractingContent || !chatInput.trim()) ? 0.7 : 1,
-                  }}
+                </div>
+                <button
+                  type="submit"
+                  disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
+                  className={`h-12 flex items-center justify-center min-w-[60px] px-6 text-sm font-bold text-white rounded-2xl border-2 shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-md disabled:transform-none flex-shrink-0 ${
+                    (isChatLoading || isExtractingContent || !chatInput.trim())
+                      ? 'bg-gradient-to-r from-slate-600/80 to-slate-500/80 border-slate-500/50 shadow-slate-500/25'
+                      : 'bg-gradient-to-r from-emerald-500 to-emerald-600 border-emerald-400/60 shadow-emerald-500/30 hover:shadow-emerald-500/40 hover:border-emerald-400 hover:shadow-xl'
+                  }`}
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                  </svg>
-                </button>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "12px", color: "#64748b" }}>
