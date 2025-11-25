@@ -333,78 +333,308 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
             </h5>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               {profiles.map((profile) => (
-                <div
-                  key={profile.id}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: "0.5rem",
-                    background: "rgba(168, 85, 247, 0.1)",
-                    borderRadius: "0.375rem",
-                  }}
-                >
-                  <div>
-                    <div style={{ fontSize: "0.8rem", color: "#e2e8f0" }}>
-                      {profile.name}
-                      {activeProfile?.id === profile.id && (
-                        <span style={{ color: "#34d399", marginLeft: "0.5rem", fontSize: "0.7rem" }}>
-                          (Active)
-                        </span>
+                <div key={profile.id}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: "0.5rem",
+                      background: "rgba(168, 85, 247, 0.1)",
+                      borderRadius: "0.375rem",
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "#e2e8f0" }}>
+                        {profile.name}
+                        {activeProfile?.id === profile.id && (
+                          <span style={{ color: "#34d399", marginLeft: "0.5rem", fontSize: "0.7rem" }}>
+                            (Active)
+                          </span>
+                        )}
+                      </div>
+                      {profile.description && (
+                        <div style={{ fontSize: "0.7rem", color: "#94a3b8" }}>
+                          {profile.description}
+                        </div>
                       )}
                     </div>
-                    {profile.description && (
-                      <div style={{ fontSize: "0.7rem", color: "#94a3b8" }}>
-                        {profile.description}
-                      </div>
-                    )}
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.25rem' }}>
-                    <button
-                      onClick={() => handleStartEditProfile(profile)}
-                      style={{
-                        padding: "0.25rem 0.5rem",
-                        background: "rgba(168, 85, 247, 0.2)",
-                        border: "1px solid rgba(168, 85, 247, 0.4)",
-                        borderRadius: "0.25rem",
-                        color: "#c084fc",
-                        cursor: "pointer",
-                        fontSize: "0.7rem",
-                      }}
-                    >
-                      Edit
-                    </button>
-                    {activeProfile?.id !== profile.id && (
+                    <div style={{ display: 'flex', gap: '0.25rem' }}>
                       <button
-                        onClick={() => handleSetActiveProfile(profile.id)}
+                        onClick={() => handleStartEditProfile(profile)}
                         style={{
                           padding: "0.25rem 0.5rem",
-                          background: "rgba(16, 185, 129, 0.2)",
-                          border: "1px solid rgba(16, 185, 129, 0.4)",
+                          background: "rgba(168, 85, 247, 0.2)",
+                          border: "1px solid rgba(168, 85, 247, 0.4)",
                           borderRadius: "0.25rem",
-                          color: "#34d399",
+                          color: "#c084fc",
                           cursor: "pointer",
                           fontSize: "0.7rem",
                         }}
                       >
-                        Set Active
+                        Edit
                       </button>
-                    )}
-                    <button
-                      onClick={() => handleDeleteProfile(profile.id)}
+                      {activeProfile?.id !== profile.id && (
+                        <button
+                          onClick={() => handleSetActiveProfile(profile.id)}
+                          style={{
+                            padding: "0.25rem 0.5rem",
+                            background: "rgba(16, 185, 129, 0.2)",
+                            border: "1px solid rgba(16, 185, 129, 0.4)",
+                            borderRadius: "0.25rem",
+                            color: "#34d399",
+                            cursor: "pointer",
+                            fontSize: "0.7rem",
+                          }}
+                        >
+                          Set Active
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleDeleteProfile(profile.id)}
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          background: "rgba(239, 68, 68, 0.2)",
+                          border: "1px solid rgba(239, 68, 68, 0.4)",
+                          borderRadius: "0.25rem",
+                          color: "#f87171",
+                          cursor: "pointer",
+                          fontSize: "0.7rem",
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  {editingProfileId === profile.id && (
+                    <div
                       style={{
-                        padding: "0.25rem 0.5rem",
-                        background: "rgba(239, 68, 68, 0.2)",
-                        border: "1px solid rgba(239, 68, 68, 0.4)",
-                        borderRadius: "0.25rem",
-                        color: "#f87171",
-                        cursor: "pointer",
-                        fontSize: "0.7rem",
+                        marginTop: '0.75rem',
+                        padding: '1rem',
+                        background: "rgba(30, 41, 59, 0.5)",
+                        border: "1px solid rgba(168, 85, 247, 0.2)",
+                        borderRadius: "0.5rem",
                       }}
                     >
-                      Delete
-                    </button>
-                  </div>
+                      <h6 style={{ fontSize: "0.8rem", color: "#c084fc", marginBottom: "0.75rem" }}>
+                        Edit Profile
+                      </h6>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", marginBottom: '0.75rem' }}>
+                        <input
+                          type="text"
+                          placeholder="Profile Name *"
+                          value={editingProfile.name}
+                          onChange={(e) => setEditingProfile({...editingProfile, name: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Description"
+                          value={editingProfile.description}
+                          onChange={(e) => setEditingProfile({...editingProfile, description: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="First Name"
+                          value={editingProfile.firstName}
+                          onChange={(e) => setEditingProfile({...editingProfile, firstName: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Last Name"
+                          value={editingProfile.lastName}
+                          onChange={(e) => setEditingProfile({...editingProfile, lastName: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          value={editingProfile.email}
+                          onChange={(e) => setEditingProfile({...editingProfile, email: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="tel"
+                          placeholder="Phone"
+                          value={editingProfile.phone}
+                          onChange={(e) => setEditingProfile({...editingProfile, phone: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Address"
+                          value={editingProfile.address}
+                          onChange={(e) => setEditingProfile({...editingProfile, address: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="City"
+                          value={editingProfile.city}
+                          onChange={(e) => setEditingProfile({...editingProfile, city: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="State"
+                          value={editingProfile.state}
+                          onChange={(e) => setEditingProfile({...editingProfile, state: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Zip Code"
+                          value={editingProfile.zipCode}
+                          onChange={(e) => setEditingProfile({...editingProfile, zipCode: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Country"
+                          value={editingProfile.country}
+                          onChange={(e) => setEditingProfile({...editingProfile, country: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Company"
+                          value={editingProfile.company}
+                          onChange={(e) => setEditingProfile({...editingProfile, company: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 245, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Job Title"
+                          value={editingProfile.jobTitle}
+                          onChange={(e) => setEditingProfile({...editingProfile, jobTitle: e.target.value})}
+                          style={{
+                            padding: "0.5rem",
+                            background: "rgba(15, 23, 42, 0.8)",
+                            border: "1px solid rgba(168, 85, 247, 0.3)",
+                            borderRadius: "0.375rem",
+                            fontSize: "0.8rem",
+                            color: "#f1f5f9",
+                          }}
+                        />
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button
+                          onClick={handleUpdateProfile}
+                          style={{
+                            padding: "0.5rem 1rem",
+                            background: "linear-gradient(135deg, #10b981, #059669)",
+                            border: "none",
+                            borderRadius: "0.375rem",
+                            color: "white",
+                            fontSize: "0.8rem",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Update Profile
+                        </button>
+                        <button
+                          onClick={handleCancelEditProfile}
+                          style={{
+                            padding: "0.5rem 1rem",
+                            background: "rgba(71, 85, 105, 0.6)",
+                            border: "1px solid rgba(100, 116, 139, 0.6)",
+                            borderRadius: "0.375rem",
+                            color: "#cbd5e1",
+                            fontSize: "0.8rem",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
