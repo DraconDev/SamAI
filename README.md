@@ -218,3 +218,19 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 **Ready to take control of your AI experience?** [Get Started](#getting-started) | [Support Development](#support--monetization)
+
+### 💬 **Universal Web Chat**
+- Chat with any webpage content
+- Smart context understanding
+- Code-aware responses with syntax highlighting
+
+### ✍️ **Writing Assistant**
+- Context-aware text enhancement
+- Multiple writing styles
+- Grammar and style improvements
+
+### 🔧 **Developer Tools**
+- API usage tracking and optimization
+- Custom prompt library
+- Advanced automation workflows
+- BYOK (Bring Your Own Keys) architecture
