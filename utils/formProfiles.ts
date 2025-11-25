@@ -140,26 +140,73 @@ export class FormProfilesManager {
   }
 
   /**
-   * Update an existing profile
+   * Update an existing profile with validation
    */
   static async updateProfile(id: string, updates: Partial<FormProfile>): Promise<FormProfile | null> {
     try {
+      if (!id || !id.trim()) {
+        throw new Error("Profile ID is required");
+      }
+
       const data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY);
-      if (!data?.profiles) return null;
+      if (!Array.isArray(data?.profiles)) {
+        throw new Error("No profiles found to update");
+      }
 
       const profileIndex = data.profiles.findIndex((p: FormProfile) => p.id === id);
-      if (profileIndex === -1) return null;
+      if (profileIndex === -1) {
+        throw new Error("Profile not found");
+      }
+
+      // Validate name uniqueness if name is being updated
+      if (updates.name && updates.name.trim()) {
+        const nameExists = data.profiles.some((p: FormProfile) =>
+          p.id !== id && p.name.toLowerCase() === updates.name!.toLowerCase()
+        );
+        if (nameExists) {
+          throw new Error(`A profile with the name "${updates.name}" already exists`);
+        }
+      }
 
       data.profiles[profileIndex] = {
         ...data.profiles[profileIndex],
         ...updates,
+        name: updates.name?.trim() || data.profiles[profileIndex].name,
+        description: updates.description?.trim() || data.profiles[profileIndex].description,
         updatedAt: new Date().toISOString(),
       };
 
       await storage.setItem(FORM_PROFILES_KEY, data);
+      console.log("[SamAI] Successfully updated profile:", data.profiles[profileIndex].name);
       return data.profiles[profileIndex];
     } catch (error) {
       console.error("[SamAI] Error updating form profile:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get profiles count
+   */
+  static async getProfilesCount(): Promise<number> {
+    try {
+      const profiles = await this.getProfiles();
+      return profiles.length;
+    } catch (error) {
+      console.error("[SamAI] Error getting profiles count:", error);
+      return 0;
+    }
+  }
+
+  /**
+   * Clear all profiles (for development/testing)
+   */
+  static async clearAllProfiles(): Promise<void> {
+    try {
+      await storage.setItem(FORM_PROFILES_KEY, { profiles: [] });
+      console.log("[SamAI] All profiles cleared");
+    } catch (error) {
+      console.error("[SamAI] Error clearing all profiles:", error);
       throw error;
     }
   }
