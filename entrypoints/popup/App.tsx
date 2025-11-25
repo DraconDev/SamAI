@@ -1,35 +1,13 @@
 import { useEffect, useState } from "react";
 import { tabs } from "webextension-polyfill";
-import { ToggleButton } from "../../src/components/ToggleButton";
-import type { OutputFormat } from "../../utils/page-content"; // Import OutputFormat
-import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 
 function App() {
-  const [searchActive, setSearchActive] = useState(true);
-  const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
-  const [outputFormat, setOutputFormat] = useState<OutputFormat>("text");
-  const [showFloatingIcon, setShowFloatingIcon] = useState(true);
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    searchSettingsStore.getValue().then((settings) => {
-      console.log("[SamAI Popup] Loaded settings:", settings);
-      setSearchActive(settings.searchActive);
-      setPromptStyle(settings.promptStyle);
-      setOutputFormat(settings.outputFormat);
-      setShowFloatingIcon(settings.showFloatingIcon);
-    });
+    // Extension is always active by default
+    console.log("[SamAI Popup] Extension loaded");
   }, []);
-
-  const toggleSearch = async () => {
-    const newValue = !searchActive;
-    await searchSettingsStore.setValue({
-      searchActive: newValue,
-      promptStyle,
-      outputFormat,
-      showFloatingIcon,
-    });
-    setSearchActive(newValue);
-  };
 
   const openApiKeyPage = () => {
     tabs.create({ url: "apikey.html" });
