@@ -247,9 +247,11 @@ ${truncatedContent}`;
     setSummary("");
 
     try {
-      console.log("[SamAI] Starting page content extraction...");
-      const content = await getPageContent(outputFormat);
-      console.log("[SamAI] Page content extracted, length:", content.length);
+      console.log("[SamAI] Starting fresh page content extraction for summary...");
+      // Always extract fresh content from current page for summarization
+      const content = await getPageContent(outputFormat, true);
+      console.log("[SamAI] Fresh page content extracted, length:", content.length);
+      console.log("[SamAI] Current page URL:", window.location.href);
       
       if (!content || content.trim().length === 0) {
         throw new Error("No readable content found on this page. The page might be empty, protected, or not fully loaded.");
@@ -260,6 +262,9 @@ ${truncatedContent}`;
       console.log("[SamAI] Content preview:", contentPreview);
 
       const prompt = `Please provide a comprehensive summary of the following content. Focus on the main points, key information, and important details. Structure your summary with clear sections and bullet points where appropriate.
+
+Page URL: ${window.location.href}
+Page Title: ${document.title}
 
 Content to summarize:
 ${content}`;
