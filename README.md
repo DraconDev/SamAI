@@ -1,12 +1,12 @@
-# SamAI - Complete Web Automation & AI Assistant
+# SamAI - Ultimate Web Automation & AI Assistant Platform
 
-SamAI is a comprehensive browser extension that transforms your entire web experience. It combines intelligent search enhancement, advanced web scraping, universal chat, form automation, AI-powered content analysis, and real-time pattern management - all accessible through an elegant sidebar interface that works on every webpage.
+SamAI is a comprehensive browser extension that transforms your entire web experience. It provides a complete ecosystem of AI-powered tools including search enhancement, intelligent highlighting, web scraping, universal chat, form automation, right-click assistance, context-aware presets, and advanced content management - all accessible through multiple intuitive interfaces.
 
-## 🌟 **Complete Feature Ecosystem**
+## 🌟 **Complete Platform Features**
 
 ### 🔍 **AI-Powered Search Enhancement**
 - **Smart Search Analysis**: Get contextual AI insights about any search query
-- **Multiple Response Styles**: Instant switching between Short (⚡), Medium (⚖️), Long (📚) AI responses
+- **Multiple Response Styles**: Instant switching between Short (⚡), Medium (⚖️), Long (📚) AI responses  
 - **Rich Markdown Display**: Beautiful, formatted AI responses with syntax highlighting
 - **Cross-Tab Settings**: Search preferences sync automatically across all browser tabs
 - **Universal Integration**: Works on Google, Bing, DuckDuckGo, Yahoo, Ask.com
@@ -45,6 +45,17 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 - **Visual Search Enhancement**: AI-powered image-based search insights
 - **Format Support**: Process various image formats seamlessly
 
+### 🖱️ **Intelligent Right-Click Assistant**
+- **Smart Input Assistant**: Right-click any editable field for context-aware AI assistance
+- **Context Popup Window**: Dedicated 864x780px popup interface for enhanced interaction
+- **Smart Presets**: Context-aware AI prompts based on selected content and field type
+- **Quick Actions**: Instant access to SamAI features from any webpage element
+- **Smart Context Detection**: Automatically detects input types and provides relevant options
+- **Text Enhancement**: Right-click to enhance selected text with AI suggestions
+- **Form Context**: Smart form filling options when right-clicking form fields
+- **Image Context**: AI analysis of right-clicked images with immediate insights
+- **Preset Management**: Create and manage context-specific automation presets
+
 ### 🎨 **Interactive Search Highlighting System**
 - **Three-Color Categories**: Mark sites as Red (Important), Green (Favorites), Blue (General)
 - **Smart Toggle Logic**: Click same color to remove, different color to switch seamlessly
@@ -52,22 +63,53 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 - **Perfect Positioning**: Clean 55px right positioning with professional styling
 - **Real-Time Persistence**: Every marking saves instantly with cross-tab synchronization
 
-### ⚡ **Power User Interface**
-- **Sidebar Panel**: Elegant floating interface on every webpage
-- **Tab Navigation**: Seamless switching between different tools
-- **Settings Management**: Comprehensive settings panel with real-time updates
-- **Export/Import**: Backup and restore all settings and patterns
-- **Professional Design**: Modern gradient interface with smooth animations
+### ⚡ **Comprehensive User Interface**
 
-### 🔧 **Technical Excellence**
-- **Cross-Engine Compatibility**: Works perfectly on Google, Bing, DuckDuckGo, Yahoo, Ask.com
-- **Cross-Browser Support**: Full Chrome and Firefox compatibility
+#### **Sidebar Panel Interface**
+- **Floating Sidebar**: Elegant interface accessible on every webpage
+- **Multi-Tab Navigation**: Seamless switching between 6 specialized tools
+  - **SearchTab**: AI-powered search enhancement
+  - **ScrapeTab**: Advanced web scraping with multi-format output
+  - **ChatTab**: Universal web chat with context understanding
+  - **SummaryTab**: Intelligent page summarization
+  - **FormTab**: Advanced form analysis and automation
+  - **ImageTab**: Image analysis and processing
+- **Responsive Design**: Adapts to any screen size and layout
+- **Professional Styling**: Modern gradient interface with smooth animations
+
+#### **Context Menu Integration**
+- **Right-Click Access**: Instant access to features from any webpage element
+- **Smart Context Detection**: Automatically provides relevant options based on content
+- **Popup Window**: Dedicated context assistant with enhanced functionality
+
+#### **Settings Management**
+- **Search Settings Panel**: Comprehensive settings interface with real-time updates
+- **Export/Import**: Backup and restore all settings, patterns, and profiles
+- **Real-Time Sync**: All changes synchronized across tabs instantly
+- **Pattern Management**: Visual organization of highlight patterns and categories
+
+### 🛠️ **Technical Excellence**
+
+#### **Multi-Interface Architecture**
+- **Content Scripts**: Google search enhancement and highlighting
+- **Background Script**: Context menu handling and inter-component communication
+- **Multiple Entry Points**: 
+  - Main popup for quick access
+  - Context popup for right-click assistance  
+  - Search settings page for comprehensive management
+  - API key management for provider configuration
+
+#### **Cross-Platform Compatibility**
+- **Search Engines**: Google, Bing, DuckDuckGo, Yahoo, Ask.com
+- **Browsers**: Chrome (Manifest V3) and Firefox support
 - **Real-Time Sync**: Instant synchronization across all tabs and components
-- **Performance Optimized**: Lightweight and fast with minimal impact
-- **Memory Efficient**: Smart caching and cleanup for optimal performance
+- **Performance Optimized**: Lightweight design with minimal resource impact
 
-
-
+#### **Data Management**
+- **Cross-Tab Synchronization**: Real-time settings and pattern sync
+- **Profile Management**: Save and restore form filling configurations
+- **Export/Import**: Backup and restore all user data in multiple formats
+- **Local Storage**: Privacy-first data handling with no external collection
 
 ## 🚀 **How SamAI Transforms Your Workflow**
 
@@ -80,39 +122,17 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 
 ### **Automation & Productivity**
 1. **Form Automation**: Save time with intelligent form filling and profile management
-2. **Bulk Processing**: Handle multiple tasks simultaneously across tabs
-3. **Chat Integration**: Ask questions about any webpage content
-4. **Export Capabilities**: Download and backup your work in multiple formats
-5. **Cross-Tab Sync**: Access your settings and patterns anywhere
+2. **Right-Click Assistance**: Get AI help directly on any webpage element
+3. **Bulk Processing**: Handle multiple tasks simultaneously across tabs
+4. **Chat Integration**: Ask questions about any webpage content
+5. **Export Capabilities**: Download and backup your work in multiple formats
 
 ### **Content Creation & Enhancement**
 1. **Writing Assistant**: Enhance text with AI-powered suggestions
 2. **Contextual Chat**: Get relevant information about any webpage
 3. **Code Formatting**: Proper syntax highlighting for code examples
 4. **Format Options**: Export content in JSON, CSV, markdown, or text formats
-
-## 🛠️ **Technical Architecture**
-
-### **Frontend Components**
-- **SearchTab**: AI-powered search enhancement with response style controls
-- **ScrapeTab**: Advanced web scraping with multi-format output
-- **ChatTab**: Universal web chat with context understanding
-- **SummaryTab**: Intelligent page summarization
-- **FormTab**: Advanced form analysis and automation
-- **ImageTab**: Image analysis and processing
-- **SearchSettingsPanel**: Comprehensive settings management
-
-### **AI Integration**
-- **Gemini Integration**: Google AI for search enhancement and content analysis
-- **Multi-Provider Support**: OpenAI, Anthropic, and custom AI endpoints
-- **BYOK Architecture**: Use your own API keys for complete control
-- **Local Processing**: Sensitive operations happen in your browser
-
-### **Data Management**
-- **Cross-Tab Synchronization**: Real-time settings and pattern sync
-- **Profile Management**: Save and restore form filling configurations
-- **Export/Import**: Backup and restore all user data
-- **Local Storage**: Privacy-first data handling with no external collection
+5. **Smart Presets**: Context-aware automation for common tasks
 
 ## 🎯 **Who Benefits from SamAI**
 
@@ -121,37 +141,41 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 - Advanced web scraping with multiple export formats
 - Page summarization for quick content understanding
 - Pattern highlighting for organized research
+- Right-click context assistance for enhanced productivity
 
 ### **Content Creators**
 - Writing assistant with contextual AI suggestions
 - Code formatting and syntax highlighting
 - Multi-format content export capabilities
 - Universal web chat for content insights
+- Smart presets for common content tasks
 
 ### **Business Professionals**
 - Form automation for repetitive tasks
+- Right-click assistance for quick AI help
 - Bulk processing across multiple tabs
 - Professional interface with export capabilities
-- Cross-platform compatibility
+- Cross-platform compatibility for team collaboration
 
 ### **Developers & Power Users**
-- Advanced automation capabilities
-- Multi-provider AI integration
+- Advanced automation capabilities with multiple interfaces
+- Multi-provider AI integration with BYOK support
 - Real-time synchronization across tabs
 - Comprehensive settings and pattern management
+- Context menu integration for seamless workflow
 
 ## 📈 **Advanced Capabilities**
 
-### **Multi-Tab Workflows**
-- Same patterns and settings available across all tabs
-- Real-time synchronization without manual saves
-- Cross-browser compatibility for seamless experience
-- Memory-efficient design for optimal performance
+### **Multi-Interface Workflows**
+- **Sidebar Access**: Full feature set through floating sidebar panel
+- **Context Menu**: Right-click anywhere for immediate AI assistance
+- **Popup Windows**: Dedicated interfaces for enhanced interaction
+- **Cross-Tab Sync**: Same capabilities available across all browser tabs
 
 ### **Privacy & Security**
 - **Zero Data Collection**: No tracking or data storage
 - **Local Processing**: All sensitive operations in browser
-- **BYOK Support**: Use your own API keys
+- **BYOK Support**: Use your own API keys for complete control
 - **Open Source**: Transparent, auditable code
 
 ### **Customization & Control**
@@ -159,34 +183,37 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 - **Export Format Options**: JSON, CSV, Text, Markdown
 - **Highlight Categories**: Red, Green, Blue with smart toggle
 - **Form Profiles**: Create, save, and reuse automation profiles
+- **Smart Presets**: Context-aware automation for different content types
 
 ## 🌐 **Universal Compatibility**
 
-### **Search Engines**
+### **Search Engines & Websites**
 - Google Search with enhanced AI integration
 - Bing with intelligent result analysis
 - DuckDuckGo with privacy-focused enhancement
 - Yahoo and Ask.com with full feature support
+- Works on any website with complete functionality
 
-### **Websites & Applications**
-- Works on any website with full functionality
-- Automatic content detection and enhancement
-- Smart form recognition and automation
-- Universal chat interface for any page
-
-### **File Formats & Content**
+### **Content Types & Formats**
 - Multiple export formats (JSON, CSV, Text, Markdown)
-- Image analysis and processing
+- Image analysis and processing across all formats
 - Code syntax highlighting and formatting
 - Rich text and markdown rendering
+- Form field automation across all input types
+
+### **Browser Integration**
+- Native context menu integration
+- Tab synchronization across all windows
+- Background script for seamless operation
+- Content script injection for enhanced functionality
 
 ---
 
 <p align="center">
-  <strong>SamAI - Your Complete Web Automation & AI Assistant</strong><br>
-  Search Enhancement • Web Scraping • Universal Chat • Form Automation • Pattern Management
+  <strong>SamAI - Your Ultimate Web Automation & AI Assistant Platform</strong><br>
+  Search Enhancement • Web Scraping • Universal Chat • Form Automation • Pattern Management • Right-Click Assistant
 </p>
 
 ---
 
-**Ready to transform your web experience?** SamAI provides everything you need for intelligent web automation, AI-powered search enhancement, and advanced content management - all in one comprehensive extension!
+**Ready to transform your web experience?** SamAI provides a complete ecosystem of AI-powered tools, automation capabilities, and intelligent assistance - accessible through sidebar panels, context menus, and dedicated interfaces - all synchronized across your entire browsing experience!
