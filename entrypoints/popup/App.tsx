@@ -7,18 +7,16 @@ import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 function App() {
   const [searchActive, setSearchActive] = useState(true);
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
-  const [continuePreviousChat, setContinuePreviousChat] = useState(true);
-  const [outputFormat, setOutputFormat] = useState<OutputFormat>("text"); // Add outputFormat state
-  const [showFloatingIcon, setShowFloatingIcon] = useState(true); // Add showFloatingIcon state
+  const [outputFormat, setOutputFormat] = useState<OutputFormat>("text");
+  const [showFloatingIcon, setShowFloatingIcon] = useState(true);
 
   useEffect(() => {
     searchSettingsStore.getValue().then((settings) => {
-      console.log("[SamAI Popup] Loaded settings:", settings); // Debug log
+      console.log("[SamAI Popup] Loaded settings:", settings);
       setSearchActive(settings.searchActive);
       setPromptStyle(settings.promptStyle);
-      setContinuePreviousChat(settings.continuePreviousChat);
-      setOutputFormat(settings.outputFormat); // Load outputFormat
-      setShowFloatingIcon(settings.showFloatingIcon); // Load showFloatingIcon
+      setOutputFormat(settings.outputFormat);
+      setShowFloatingIcon(settings.showFloatingIcon);
     });
   }, []);
 
@@ -27,9 +25,8 @@ function App() {
     await searchSettingsStore.setValue({
       searchActive: newValue,
       promptStyle,
-      continuePreviousChat,
-      outputFormat, // Include outputFormat
-      showFloatingIcon, // Include showFloatingIcon
+      outputFormat,
+      showFloatingIcon,
     });
     setSearchActive(newValue);
   };
