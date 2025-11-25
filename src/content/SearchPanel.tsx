@@ -228,7 +228,7 @@ ${truncatedContent}`;
   };
 
   const handleForm = () => {
-    alert("Form filling feature coming soon!");
+    setActiveTab("form");
   };
 
   const handleImage = () => {
