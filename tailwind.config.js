@@ -12,6 +12,7 @@ export default {
         'fade-in': 'fadeIn 0.3s ease-out',
         'slide-in': 'slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         'slide-out': 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        'slide-in-from-bottom': 'slideInFromBottom 0.3s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -25,7 +26,14 @@ export default {
         slideOut: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(100%)' }
+        },
+        slideInFromBottom: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
         }
+      },
+      fontFamily: {
+        'inter': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },
