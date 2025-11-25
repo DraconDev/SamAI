@@ -5,7 +5,7 @@ import type { OutputFormat } from "@/utils/page-content";
 import { extractPageContent } from "@/utils/page-content";
 import { searchSettingsStore } from "@/utils/store";
 import { SearchHighlighter } from "@/utils/searchHighlighter";
-import "../style.css";
+import "./style.css";
 
 export interface InputElementClickedMessage {
   type: "inputElementClicked";
