@@ -81,7 +81,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                 type="radio"
                 value="text"
                 checked={scrapeMode === "text"}
-                onChange={(e) => onScrapeModeChange("text" as OutputFormat)}
+                onChange={() => onScrapeModeChange("text" as OutputFormat)}
                 className="w-5 h-5 text-[#3b82f6] bg-[#1E1F2E] border-[#4B5563]/60 rounded focus:ring-[#3b82f6] focus:ring-2 transition-all group-hover:border-[#60a5fa]/70"
               />
               <span className="text-sm font-medium group-hover:text-[#60a5fa]">
@@ -93,7 +93,7 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                 type="radio"
                 value="html"
                 checked={scrapeMode === "html"}
-                onChange={(e) => onScrapeModeChange("html" as OutputFormat)}
+                onChange={() => onScrapeModeChange("html" as OutputFormat)}
                 className="w-5 h-5 text-[#3b82f6] bg-[#1E1F2E] border-[#4B5563]/60 rounded focus:ring-[#3b82f6] focus:ring-2 transition-all group-hover:border-[#60a5fa]/70"
               />
               <span className="text-sm font-medium group-hover:text-[#60a5fa]">
@@ -234,7 +234,20 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-2 gap-6 p-6 border shadow-2xl bg-gradient-to-r from-blue-500/5 to-blue-600/5 rounded-3xl border-blue-500/20 backdrop-blur-xl">
+          <div 
+            className="grid grid-cols-2 gap-6 p-6 border shadow-2xl bg-gradient-to-r from-blue-500/5 to-blue-600/5 rounded-3xl border-blue-500/20 backdrop-blur-xl"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '1rem',
+              padding: '1.25rem',
+              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05))',
+              border: '1px solid rgba(59, 130, 246, 0.2)',
+              borderRadius: '1rem',
+              boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.15)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
             <GradientButton
               onClick={onOpenChat}
               variant="success"
