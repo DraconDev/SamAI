@@ -12,6 +12,44 @@ export async function showSidePanel(
 ) {
   console.log("[SamAI Debug] showSidePanel called", { response, toggleIfOpen });
 
+  // Inject CSS animations if not already present
+  if (!document.getElementById('samai-animations')) {
+    const style = document.createElement('style');
+    style.id = 'samai-animations';
+    style.textContent = `
+      @keyframes samai-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes samai-fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes samai-slide-in {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+export async function showSidePanel(
+  response: string | null,
+  toggleIfOpen: boolean = false
+) {
+  console.log("[SamAI Debug] showSidePanel called", { response, toggleIfOpen });
+
   // If toggle is requested and panel exists, close it and return
   if (toggleIfOpen && samaiPanelContainer) {
     console.log("[SamAI Debug] Toggling off panel");
