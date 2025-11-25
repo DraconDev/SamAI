@@ -181,20 +181,46 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
   }) => {
     const isActive = activeTab === tab.id;
     
+    const baseButtonStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.375rem',
+      padding: '0.625rem 0.75rem',
+      borderRadius: '0.75rem',
+      fontSize: '0.875rem',
+      fontWeight: 'bold',
+      transition: 'all 0.3s',
+      cursor: 'pointer',
+      border: 'none',
+      outline: 'none' as const,
+    };
+
+    const activeStyle = {
+      ...baseButtonStyle,
+      background: `linear-gradient(to right, ${tab.gradient.replace('from-', '').replace(' to-', ', ').replace('-', ' ').split(',')[0]}, ${tab.gradient.split(' to-')[1]})`,
+      color: 'white',
+      boxShadow: `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}`,
+      transform: 'scale(1.05)',
+    };
+
+    const inactiveStyle = {
+      ...baseButtonStyle,
+      background: 'rgba(30, 41, 59, 0.4)',
+      color: '#94a3b8',
+      border: '1px solid rgba(51, 65, 85, 0.3)',
+    };
+
+    const hoverStyle = isActive ? {} : {
+      background: 'rgba(51, 65, 85, 0.5)',
+      color: '#cbd5e1',
+    };
+    
     return (
       <button
         onClick={() => handleTabClick(tab)}
-        className={`
-          flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer
-          ${isActive 
-            ? `bg-gradient-to-r ${tab.gradient} text-white shadow-lg transform scale-105` 
-            : 'bg-slate-800/40 text-slate-400 border border-slate-700/30 hover:bg-slate-700/50 hover:text-slate-300'
-          }
-          ${className || ''}
-        `}
-        style={isActive ? {
-          boxShadow: `0 20px 25px -5px ${tab.shadow}, 0 10px 10px -5px ${tab.shadow}`
-        } : {}}
+        style={isActive ? activeStyle : { ...inactiveStyle, ...hoverStyle }}
+        className={className}
       >
         {tab.icon}
         <span>{tab.label}</span>
@@ -203,7 +229,19 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-4 gap-1.5 mb-6 p-2.5 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border border-slate-700 shadow-2xl">
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: '0.375rem',
+        marginBottom: '1.5rem',
+        padding: '0.625rem',
+        background: 'linear-gradient(to bottom right, #0f172a, #1e293b)',
+        borderRadius: '1rem',
+        border: '1px solid rgba(51, 65, 85, 1)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+      }}
+    >
       {/* Row 1 - Main Actions */}
       {mainTabs.map((tab) => (
         <TabButton
@@ -213,12 +251,20 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
       ))}
 
       {/* Row 2 - Secondary Actions */}
-      <div className="col-span-4 grid grid-cols-2 gap-1.5 mt-1.5">
+      <div
+        style={{
+          gridColumn: 'span 4',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '0.375rem',
+          marginTop: '0.375rem',
+        }}
+      >
         {secondaryTabs.map((tab) => (
           <TabButton
             key={tab.id}
             tab={tab}
-            className="col-span-1"
+            style={{ gridColumn: 'span 1' }}
           />
         ))}
       </div>
