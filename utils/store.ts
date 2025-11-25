@@ -211,6 +211,3 @@ export const highlightPatternsStore = storage.defineItem<HighlightPatternsStore>
   }
 );
 
-// Re-export HighlightPattern for use in other files
-export type { HighlightPattern };
-
