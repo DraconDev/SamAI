@@ -59,6 +59,7 @@ export default function SearchSettingsPage() {
       localStorage.setItem("samai-prompt-style", promptStyle);
       localStorage.setItem("samai-auto-highlight", autoHighlight.toString());
       localStorage.setItem("samai-highlight-opacity", highlightOpacity.toString());
+      localStorage.setItem("samai-enable-highlighting", enableHighlighting.toString());
       
       // Trigger re-highlighting of search results
       window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
@@ -321,6 +322,22 @@ export default function SearchSettingsPage() {
             </h2>
             
             <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                <div>
+                  <label className="text-sm font-medium text-gray-200">Enable Highlighting</label>
+                  <p className="text-xs text-gray-400">Show highlight buttons and controls</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={enableHighlighting}
+                    onChange={(e) => setEnableHighlighting(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
+                </label>
+              </div>
+
               <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
                 <div>
                   <label className="text-sm font-medium text-gray-200">Auto-highlight results</label>
