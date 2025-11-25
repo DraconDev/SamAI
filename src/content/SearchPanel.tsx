@@ -368,108 +368,121 @@ Please provide a helpful response about the user's question specifically related
   };
 
   return (
-    <div
-      ref={panelRef}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-        maxHeight: '100vh',
-        padding: '0.25rem',
-        overflow: 'hidden',
-        boxSizing: 'border-box',
-        animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-      }}
-    >
-      <div style={{ flexShrink: 0, marginBottom: '0.5rem' }}>
-        <TabNavigation
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          onChatClick={handleChat}
-          onSummarizeClick={handleSummarize}
-          onFormClick={handleForm}
-          onImageClick={handleImage}
-        />
-      </div>
-
-      <div style={{ 
-        flex: 1, 
-        overflow: 'hidden', 
-        display: 'flex', 
-        flexDirection: 'column',
-        minHeight: 0
-      }}>
-        {activeTab === "search" && (
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <SearchTab
-              response={response}
-              isApiKeySet={isApiKeySet}
-              outputFormat={outputFormat}
-            />
-          </div>
-        )}
-
-        {activeTab === "scrape" && (
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <ScrapeTab
-              isScraping={isScraping}
-              scrapeMode={scrapeMode}
-              onScrapeModeChange={setScrapeMode}
-              scrapeInstructions={scrapeInstructions}
-              onScrapeInstructionsChange={setScrapeInstructions}
-              scrapeResultFormat={scrapeResultFormat}
-              onScrapeResultFormatChange={setScrapeResultFormat}
-              scrapeResult={scrapeResult}
-              scrapeError={scrapeError}
-              scrapedContent={scrapedContent}
-              onScrape={handleScrape}
-              onOpenChat={handleOpenScrapedChat}
-              onDownload={handleDownloadScraped}
-              onClearPreview={handleClearScrapePreview}
-            />
-          </div>
-        )}
-
-        {activeTab === "chat" && (
-          <ChatTab
-            isApiKeySet={isApiKeySet}
-            isExtractingContent={isExtractingContent}
-            isChatLoading={isChatLoading}
-            chatMessages={chatMessages}
-            chatInput={chatInput}
-            includePageContent={includePageContent}
-            outputFormat={outputFormat}
-            messagesEndRef={messagesEndRef}
-            onInputChange={setChatInput}
-            onSubmit={handleSendChatMessage}
-            onIncludePageContentChange={setIncludePageContent}
-            onOpenApiKey={handleOpenApiKey}
+    <>
+      <div
+        ref={panelRef}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          maxHeight: '100vh',
+          padding: '0.25rem',
+          overflow: 'hidden',
+          boxSizing: 'border-box',
+          animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}
+      >
+        <div style={{ flexShrink: 0, marginBottom: '0.5rem' }}>
+          <TabNavigation
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            onChatClick={handleChat}
+            onSummarizeClick={handleSummarize}
+            onFormClick={handleForm}
+            onImageClick={handleImage}
           />
-        )}
+        </div>
 
-        {activeTab === "sum" && (
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <SummaryTab
-              isSummarizing={isSummarizing}
-              summary={summary}
-              summaryError={summaryError}
-              onSummarize={handleSummarize}
+        <div style={{ 
+          flex: 1, 
+          overflow: 'hidden', 
+          display: 'flex', 
+          flexDirection: 'column',
+          minHeight: 0
+        }}>
+          {activeTab === "search" && (
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              <SearchTab
+                response={response}
+                isApiKeySet={isApiKeySet}
+                outputFormat={outputFormat}
+              />
+            </div>
+          )}
+
+          {activeTab === "scrape" && (
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              <ScrapeTab
+                isScraping={isScraping}
+                scrapeMode={scrapeMode}
+                onScrapeModeChange={setScrapeMode}
+                scrapeInstructions={scrapeInstructions}
+                onScrapeInstructionsChange={setScrapeInstructions}
+                scrapeResultFormat={scrapeResultFormat}
+                onScrapeResultFormatChange={setScrapeResultFormat}
+                scrapeResult={scrapeResult}
+                scrapeError={scrapeError}
+                scrapedContent={scrapedContent}
+                onScrape={handleScrape}
+                onOpenChat={handleOpenScrapedChat}
+                onDownload={handleDownloadScraped}
+                onClearPreview={handleClearScrapePreview}
+              />
+            </div>
+          )}
+
+          {activeTab === "chat" && (
+            <ChatTab
+              isApiKeySet={isApiKeySet}
+              isExtractingContent={isExtractingContent}
+              isChatLoading={isChatLoading}
+              chatMessages={chatMessages}
+              chatInput={chatInput}
+              includePageContent={includePageContent}
+              outputFormat={outputFormat}
+              messagesEndRef={messagesEndRef}
+              onInputChange={setChatInput}
+              onSubmit={handleSendChatMessage}
+              onIncludePageContentChange={setIncludePageContent}
+              onOpenApiKey={handleOpenApiKey}
             />
-          </div>
-        )}
+          )}
 
-        {activeTab === "form" && (
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <FormTab onFormClick={handleForm} />
-          </div>
-        )}
+          {activeTab === "sum" && (
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              <SummaryTab
+                isSummarizing={isSummarizing}
+                summary={summary}
+                summaryError={summaryError}
+                onSummarize={handleSummarize}
+              />
+            </div>
+          )}
 
-        {activeTab === "image" && (
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <ImageTab onImageClick={handleImage} />
-          </div>
-        )}
+          {activeTab === "form" && (
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              <FormTab onFormClick={handleForm} />
+            </div>
+          )}
+
+          {activeTab === "image" && (
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+              <ImageTab onImageClick={handleImage} />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* Floating Settings Button */}
+      <FloatingSettingsButton 
+        onClick={() => setShowSearchSettings(true)} 
+      />
+
+      {/* Search Settings Panel */}
+      <SearchSettingsPanel
+        isOpen={showSearchSettings}
+        onClose={() => setShowSearchSettings(false)}
+      />
+    </>
   );
 }
