@@ -78,6 +78,16 @@ class SearchHighlighter {
           }
           return true;
         }
+
+        if (typedMessage.type === "TOGGLE_ENABLE_HIGHLIGHTING" && typedMessage.enabled !== undefined) {
+          this.settings.enableHighlighting = typedMessage.enabled;
+          if (!typedMessage.enabled) {
+            this.clearHighlights();
+          } else {
+            this.processResults();
+          }
+          return true;
+        }
       } catch (error) {
         console.error("Error handling message:", error);
       }
@@ -89,6 +99,7 @@ class SearchHighlighter {
   public processResults() {
     console.log("[SamAI Highlighter] Starting processResults", {
       autoHighlight: this.settings.autoHighlight,
+      enableHighlighting: this.settings.enableHighlighting,
       patternsCount: this.patterns.length,
       patterns: this.patterns,
       currentURL: window.location.href,
@@ -98,6 +109,13 @@ class SearchHighlighter {
     // Only process on search results pages
     if (!this.isSearchResultsPage()) {
       console.log("[SamAI Highlighter] Not a search results page, skipping");
+      return;
+    }
+
+    // If highlighting is disabled, clear any existing highlights and return
+    if (!this.settings.enableHighlighting) {
+      console.log("[SamAI Highlighter] Highlighting disabled, clearing highlights");
+      this.clearHighlights();
       return;
     }
 
