@@ -1,125 +1,137 @@
-# SamAI - Smart Search Highlighting & AI Assistant
+# SamAI - Complete Search Enhancement & AI Assistant
 
-SamAI is a powerful browser extension that enhances your search experience with intelligent highlighting, real-time pattern management, and AI-powered search insights. Built with power users in mind, it provides complete control over how you interact with search results.
+SamAI is a comprehensive browser extension that transforms how you interact with search results. It combines intelligent highlighting, advanced pattern management, AI-powered search insights, and universal chat capabilities - all with real-time synchronization across your entire browsing experience.
 
-## ✨ **What Makes SamAI Special**
+## 🌟 **Complete Feature Set**
 
-### 🎨 **Interactive Search Highlighting**
-- **Three-Color System**: Mark sites as Red (Important), Green (Favorites), or Blue (General)
-- **Smart Toggle**: Click the same color to remove highlighting, different color to switch
-- **One-Click Hide**: Professional eye-slash icon to hide unwanted domains instantly
-- **Perfect Positioning**: Buttons positioned 55px right with clean, modern design
+### 🎨 **Interactive Search Highlighting System**
+- **Three-Color Categories**: Mark sites as Red (Important), Green (Favorites), Blue (General)
+- **Smart Toggle Logic**: Click same color to remove, different color to switch seamlessly
+- **One-Click Hide**: Professional eye-slash icon to instantly hide unwanted domains
+- **Perfect Positioning**: Clean 55px right positioning with professional styling
+- **Visual Feedback**: Immediate highlighting with color-coded borders and backgrounds
 
-### 💾 **Real-Time Persistence**
-- **Automatic Saving**: All markings save instantly - no save buttons needed
-- **Cross-Tab Sync**: Patterns and settings sync across all browser tabs automatically
-- **Page Refresh Safe**: Your markings survive page refreshes and browser restarts
-- **Universal Compatibility**: Works on Google, Bing, DuckDuckGo, Yahoo, Ask.com
+### 💾 **Real-Time Pattern Persistence**
+- **Instant Auto-Save**: Every marking saves immediately - no save buttons required
+- **Cross-Tab Magic**: Patterns and settings sync across all browser tabs in real-time
+- **Page Refresh Proof**: All markings survive page refreshes and browser restarts
+- **Universal Search Support**: Works seamlessly on Google, Bing, DuckDuckGo, Yahoo, Ask.com
+- **Search Engine Recognition**: Automatically detects and enhances any search results page
 
-### 🗂️ **Advanced Pattern Management**
-- **Search Settings Page**: Dedicated interface to manage all your patterns
-- **Hidden Domains Section**: View and unhide previously hidden sites
-- **Bulk Editing**: Add, edit, and remove patterns with full control
-- **Visual Organization**: Patterns categorized with icons and color indicators
+### 🗂️ **Advanced Pattern Management Interface**
+- **Dedicated Settings Page**: Clean, professional interface to manage all your patterns
+- **Hidden Domains Section**: View all hidden sites with one-click unhide functionality
+- **Pattern Categories**: Visual organization with color-coded categories and icons
+- **Bulk Management**: Add, edit, and remove patterns with full control and instant updates
+- **Pattern Statistics**: See exactly how many patterns you have for each category
+- **Real-Time Updates**: All changes sync instantly across all tabs and components
 
-### ⚡ **Power User Controls**
-- **Toggle Highlighting**: Enable/disable all highlighting features instantly
-- **Auto-Highlight**: Automatic pattern application to search results
-- **Opacity Control**: Adjustable transparency (10-100%) for highlights
-- **Professional UI**: Clean gradient interface with intuitive controls
+### ⚡ **Comprehensive Power User Controls**
+- **Master Toggle**: Enable/disable all highlighting features with one switch
+- **Auto-Highlight Control**: Toggle automatic pattern application on/off
+- **Opacity Customization**: Adjustable highlight transparency from 10% to 100%
+- **Professional UI**: Modern gradient interface with smooth animations and transitions
+- **Response Style Selector**: Instant switching between Short (⚡), Medium (⚖️), Long (📚) AI responses
+- **Search Enhancement Toggle**: Turn AI-powered search insights on/off
 
-### 🔍 **Smart Search Enhancement**
-- **AI-Powered Analysis**: Get contextual insights about search results
-- **Multiple Response Styles**: Short (⚡), Medium (⚖️), Long (📚) responses
-- **Rich Formatting**: Beautiful markdown formatting for better readability
-- **Cross-Tab Settings**: Search preferences sync across all tabs
+### 🔍 **AI-Powered Search Enhancement**
+- **Smart Search Analysis**: Get contextual insights about your search queries
+- **Multiple Response Styles**: Choose from concise (⚡), balanced (⚖️), or detailed (📚) responses
+- **Rich Markdown Display**: Beautiful, readable formatting for all AI responses
+- **Cross-Tab Settings**: Search preferences automatically sync across all browser tabs
+- **Universal Integration**: Works with any search engine's results page
 
-### 🔐 **Privacy & Control**
-- **BYOK Architecture**: Use your own API keys - no vendor lock-in
-- **Local Processing**: All sensitive operations happen in your browser
-- **No Data Collection**: We don't store or access your conversations
-- **Open Source**: Transparent, auditable code
+### 💬 **Universal Web Chat**
+- **Chat with Any Page**: Interactive chat interface on any webpage content
+- **Smart Context Understanding**: AI comprehends page content and provides relevant responses
+- **Code-Aware Responses**: Syntax highlighting and proper code formatting
+- **Cross-Tab Persistence**: Chat history and settings sync across all tabs
+- **Multiple AI Providers**: Use your own API keys for OpenAI, Anthropic, or Google AI
 
-## 🚀 **Quick Start**
+### ✍️ **Contextual Writing Assistant**
+- **Text Enhancement**: Intelligent improvement of selected text
+- **Multiple Writing Styles**: Adapt to different writing contexts and tones
+- **Grammar & Style**: Real-time grammar checks and style suggestions
+- **Smart Context**: Understands surrounding content for better suggestions
+- **Cross-Application**: Works across all web applications and text fields
 
-### **Installation**
-1. Download the extension files
-2. Load unpacked extension in Chrome/Firefox
-3. Open any search engine and start highlighting!
+### 🔐 **Privacy-First Architecture**
+- **Bring Your Own Keys (BYOK)**: Use your own AI API keys - complete vendor independence
+- **Local Processing**: All sensitive operations happen in your browser only
+- **Zero Data Collection**: No tracking, no data storage, complete privacy
+- **Open Source**: Transparent, auditable code for complete security
+- **Full Control**: You own your data, your keys, and your AI experience
 
-### **Basic Usage**
-1. **Highlight Sites**: Click color dots next to search results
-2. **Hide Domains**: Use eye-slash icon to hide unwanted sites
-3. **Manage Patterns**: Open search settings to organize your patterns
-4. **Toggle Features**: Use settings to enable/disable highlighting
+### 🌐 **Universal Compatibility**
+- **Multi-Engine Support**: Perfect integration with Google, Bing, DuckDuckGo, Yahoo, Ask.com
+- **Cross-Browser**: Full support for Chrome and Firefox
+- **Responsive Design**: Works on all screen sizes and layouts
+- **Real-Time Sync**: Instant synchronization of all settings and patterns across tabs
+- **No Installation Hassle**: Everything works out of the box with automatic setup
 
-## 🎯 **How It Works**
+## 🚀 **How SamAI Transforms Your Search**
 
-### **Color System**
-- 🔴 **Red**: Important or trusted sites
-- 🟢 **Green**: Favorites or frequently used sites  
-- 🔵 **Blue**: General informational sites
+### **Immediate Benefits**
+1. **Instant Marking**: Click color dots to highlight sites as you browse
+2. **Smart Categorization**: Organize the web with meaningful color-coded system
+3. **Hidden Domain Control**: Hide spam or unwanted sites with one click
+4. **Pattern Persistence**: Your organizational system survives everything
+5. **Cross-Device Sync**: Same patterns available on any tab or window
 
-### **Smart Interactions**
-- **Click Red → Green**: Changes existing red highlighting to green
-- **Click Green → Green**: Removes green highlighting entirely
-- **Click Eye Icon**: Hides the domain (appears in Hidden Patterns section)
+### **Advanced Workflow**
+1. **Search Enhancement**: Get AI insights about your search results
+2. **Bulk Pattern Management**: Organize and edit patterns in dedicated settings
+3. **Universal Chat**: Ask questions about any webpage content
+4. **Writing Assistant**: Enhance text selection with AI assistance
+5. **Full Customization**: Control every aspect of your search enhancement
 
-### **Settings Management**
-- **Real-Time Sync**: All changes save automatically
-- **Cross-Tab Updates**: Settings and patterns update instantly across tabs
-- **Persistent Storage**: Everything survives browser restarts
+### **Power User Features**
+- **Toggle Highlighting**: Instantly disable/enable all highlighting features
+- **Opacity Control**: Adjust highlight visibility to match your preference
+- **Response Styles**: Customize AI response length and detail level
+- **Auto-Highlight**: Automatic pattern application for hands-free organization
+- **Hidden Patterns Recovery**: Easily unhide previously hidden domains
 
-## 🛠️ **Technical Details**
+## 🎯 **Why Choose SamAI**
 
-### **Architecture**
-- **Frontend**: React 19, TypeScript, Tailwind CSS
-- **Extension**: WXT (Web Extension Tools)
-- **Storage**: Browser extension sync storage APIs
-- **AI Integration**: Direct API connections (BYOK)
+### **Complete Solution**
+SamAI isn't just another search tool - it's a comprehensive search enhancement ecosystem that handles everything from basic highlighting to advanced AI interactions.
 
-### **Browser Support**
-- ✅ Chrome (Manifest V3)
-- ✅ Firefox
-- ✅ Cross-tab synchronization
-- ✅ Real-time pattern sync
+### **True Synchronization**
+Unlike other extensions that require manual syncing, SamAI's real-time cross-tab synchronization means your patterns, settings, and preferences are always up to date everywhere.
 
-### **Search Engine Support**
-- ✅ Google Search
-- ✅ Bing
-- ✅ DuckDuckGo
-- ✅ Yahoo
-- ✅ Ask.com
-- ✅ Works with any search page (?q= or ?query=)
+### **User-Controlled**
+With BYOK architecture, you maintain complete control over your AI experience, costs, and data. No vendor lock-in, no subscription fees, no data collection.
 
-## 🔧 **Built With**
+### **Built for Power Users**
+Every feature is designed for efficiency and control - from the smart color toggle logic to the comprehensive pattern management interface.
 
-- **React 19** - Modern UI framework
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **WXT** - Web extension development
-- **Browser Storage APIs** - Persistent data management
+## 📖 **Getting Started**
 
-## 🎨 **Design Philosophy**
+1. **Install SamAI** - Load the extension in your browser
+2. **Search Anything** - Go to any search engine and start browsing
+3. **Start Highlighting** - Click color dots next to search results
+4. **Manage Patterns** - Use the settings page to organize your highlights
+5. **Enhance Searches** - Enable AI insights for better search results
 
-SamAI is built for users who want:
-- **Speed**: Instant highlighting without delays
-- **Control**: Complete ownership of your patterns and settings
-- **Simplicity**: Clean, intuitive interface without clutter
-- **Reliability**: Features that work consistently across all sites
-- **Privacy**: No data collection, local processing only
+## 🏆 **The SamAI Difference**
 
-## 📝 **License**
-
-MIT License - Free for personal and commercial use.
+**No other extension combines:**
+- Real-time cross-tab pattern synchronization
+- Smart highlighting with toggle logic
+- AI-powered search enhancement
+- Universal web chat capabilities
+- Advanced pattern management
+- BYOK privacy architecture
+- Professional-grade UI with complete control
 
 ---
 
 <p align="center">
-  <strong>SamAI - Smart Search, Your Way</strong><br>
-  Built for power users who want control over their search experience
+  <strong>SamAI - Your Complete Search Enhancement Solution</strong><br>
+  Highlighting • AI Enhancement • Pattern Management • Cross-Tab Sync
 </p>
 
 ---
 
-**Ready to enhance your search experience?** Install SamAI and start marking sites the smart way!
+**Ready to transform your search experience?** Install SamAI and discover the power of intelligent search management!
