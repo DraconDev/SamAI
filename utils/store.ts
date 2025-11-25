@@ -41,6 +41,9 @@ export interface SearchSettingsStore {
   continuePreviousChat?: boolean;
   outputFormat: OutputFormat;
   showFloatingIcon: boolean;
+  autoHighlight: boolean;
+  highlightOpacity: number;
+  enableHighlighting: boolean;
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
