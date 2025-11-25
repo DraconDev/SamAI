@@ -32,7 +32,7 @@ export default function SearchPanel({
 
   // Core state
   const [isApiKeySet, setIsApiKeySet] = useState(false);
-  const [activeTab, setActiveTab] = useState<TabId>("search");
+  const [activeTab, setActiveTab] = useState<TabId>(response ? "search" : "chat");
 
   // Tab-specific state
   const [isScraping, setIsScraping] = useState(false);
