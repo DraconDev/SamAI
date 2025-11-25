@@ -121,9 +121,8 @@ function App() {
                       searchSettingsStore.setValue({
                     searchActive,
                     promptStyle: newStyle,
-                    continuePreviousChat,
-                    outputFormat, // Include outputFormat
-                    showFloatingIcon, // Include showFloatingIcon
+                    outputFormat,
+                    showFloatingIcon,
                   });
                     }}
                     className={`group relative flex flex-col items-center p-3 rounded-xl border transition-all duration-300
