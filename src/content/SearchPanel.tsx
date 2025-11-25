@@ -363,7 +363,7 @@ Please provide a helpful response about the user's question specifically related
         animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
     >
-      <div style={{ flexShrink: 0, marginBottom: '1rem' }}>
+      <div style={{ flexShrink: 0, marginBottom: '0.5rem' }}>
         <TabNavigation
           activeTab={activeTab}
           setActiveTab={setActiveTab}
