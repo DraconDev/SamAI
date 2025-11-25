@@ -17,6 +17,7 @@ interface HighlightSettings {
 interface Message {
   type: string;
   enabled?: boolean;
+  enableHighlighting?: boolean;
 }
 
 class SearchHighlighter {
