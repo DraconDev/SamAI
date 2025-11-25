@@ -184,7 +184,7 @@ export default function SearchPanel({
       .slice(0, 10)}.${extension}`;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    document.removeChild(a);
     URL.revokeObjectURL(url);
   };
 
@@ -307,23 +307,7 @@ Please provide a helpful response about the user's question specifically related
   return (
     <div
       ref={panelRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        right: 0,
-        width: "450px",
-        height: "100vh",
-        background: "rgba(26, 27, 46, 0.95)",
-        backdropFilter: "blur(12px)",
-        boxShadow: "-10px 0 30px rgba(0,0,0,0.5)",
-        padding: "32px",
-        overflowY: "auto",
-        zIndex: 2147483647,
-        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-        borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
-        color: "#e2e8f0",
-      }}
-      className="animate-slide-in"
+      className="fixed top-0 right-0 w-[450px] h-screen bg-slate-900/95 backdrop-blur-xl shadow-2xl p-8 overflow-y-auto z-[2147483647] font-inter text-slate-100 border-l border-white/10 animate-slide-in"
     >
       <TabNavigation
         activeTab={activeTab}
