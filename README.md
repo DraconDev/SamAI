@@ -1,224 +1,125 @@
-# SamAI - The Power User's BYOK AI Assistant
+# SamAI - Smart Search Highlighting & AI Assistant
 
-SamAI is a privacy-first browser extension that empowers users with full control over their AI experience. Unlike other AI assistants that lock you into their ecosystem, SamAI lets you **Bring Your Own Keys** - connecting directly to your preferred AI providers (OpenAI, Anthropic, Google) for maximum flexibility, privacy, and cost control.
+SamAI is a powerful browser extension that enhances your search experience with intelligent highlighting, real-time pattern management, and AI-powered search insights. Built with power users in mind, it provides complete control over how you interact with search results.
 
-## ✨ Why SamAI?
+## ✨ **What Makes SamAI Special**
 
-### 🔑 **Bring Your Own Keys (BYOK)**
-- **Full Control**: Use your own API keys from any AI provider
-- **Cost Transparency**: Pay only for what you use, directly to providers
-- **Privacy First**: No data collection, no vendor lock-in
-- **Global Access**: Works in regions where direct API access is restricted
+### 🎨 **Interactive Search Highlighting**
+- **Three-Color System**: Mark sites as Red (Important), Green (Favorites), or Blue (General)
+- **Smart Toggle**: Click the same color to remove highlighting, different color to switch
+- **One-Click Hide**: Professional eye-slash icon to hide unwanted domains instantly
+- **Perfect Positioning**: Buttons positioned 55px right with clean, modern design
 
-### 🎯 **Power User Features**
-- **Smart Search Enhancement**: AI-powered Google search insights
-- **Universal Web Chat**: Chat with any webpage content
-- **Contextual Writing Assistant**: Intelligent text enhancement
-- **Multi-Provider Support**: Switch between GPT-4, Claude, Gemini seamlessly
-- **Advanced Integrations**: Deep GitHub, Notion, Slack connectivity
+### 💾 **Real-Time Persistence**
+- **Automatic Saving**: All markings save instantly - no save buttons needed
+- **Cross-Tab Sync**: Patterns and settings sync across all browser tabs automatically
+- **Page Refresh Safe**: Your markings survive page refreshes and browser restarts
+- **Universal Compatibility**: Works on Google, Bing, DuckDuckGo, Yahoo, Ask.com
 
-### 🚀 **Community-Driven Development**
-- **Open Roadmap**: Community-voted feature development
-- **Transparent Development**: GitHub-based project management
-- **User-Generated Content**: Shared prompts and custom integrations
-
-## 🏆 **Current Features**
-
-### 🔍 **Smart Search Enhancement**
-- **AI-powered search analysis** with contextual insights and summaries
-- **Rich markdown formatting** for beautiful, readable results
-- **Multiple response styles** (Short/Medium/Long) with instant switching
-- **Cross-tab synchronization** - settings sync automatically across all browser tabs
-
-### 🎨 **Interactive Search Highlighting System**
-- **Three-Color Highlighting**: Red (Important), Green (Favorites), Blue (General)
-- **Smart Color Toggle**: Click same color to remove, different color to switch
-- **Real-time Marking**: Highlight sites directly from search results
-- **Persistent Patterns**: All markings save automatically and persist across page refreshes
-- **Cross-tab Sync**: Markings appear instantly in all tabs and search settings
-
-### 🗑️ **Advanced Pattern Management**
-- **Hidden Domains**: Hide unwanted sites with one click using professional eye-slash icon
-- **Hidden Patterns Section**: View and unhide domains in dedicated settings area
-- **Bulk Management**: Add/edit/remove highlight patterns with full control
-- **Pattern Categories**: Organized by type (default/important/favorite) with visual indicators
+### 🗂️ **Advanced Pattern Management**
+- **Search Settings Page**: Dedicated interface to manage all your patterns
+- **Hidden Domains Section**: View and unhide previously hidden sites
+- **Bulk Editing**: Add, edit, and remove patterns with full control
+- **Visual Organization**: Patterns categorized with icons and color indicators
 
 ### ⚡ **Power User Controls**
 - **Toggle Highlighting**: Enable/disable all highlighting features instantly
-- **Auto-highlight**: Automatic pattern application to search results
-- **Opacity Control**: Adjustable highlight transparency (10-100%)
-- **Professional UI**: Clean, modern interface with gradient styling
+- **Auto-Highlight**: Automatic pattern application to search results
+- **Opacity Control**: Adjustable transparency (10-100%) for highlights
+- **Professional UI**: Clean gradient interface with intuitive controls
 
-### 🔧 **Universal Compatibility**
-- **Multi-Engine Support**: Google, Bing, DuckDuckGo, Yahoo, Ask.com
-- **Cross-browser**: Chrome and Firefox compatible
-- **Real-time Sync**: Settings and patterns sync across all tabs instantly
-- **No Save Button**: All changes happen automatically and persist forever
+### 🔍 **Smart Search Enhancement**
+- **AI-Powered Analysis**: Get contextual insights about search results
+- **Multiple Response Styles**: Short (⚡), Medium (⚖️), Long (📚) responses
+- **Rich Formatting**: Beautiful markdown formatting for better readability
+- **Cross-Tab Settings**: Search preferences sync across all tabs
 
-## 🎯 **Target Audience**
+### 🔐 **Privacy & Control**
+- **BYOK Architecture**: Use your own API keys - no vendor lock-in
+- **Local Processing**: All sensitive operations happen in your browser
+- **No Data Collection**: We don't store or access your conversations
+- **Open Source**: Transparent, auditable code
 
-SamAI is built for:
-- **Developers** who want AI assistance without vendor lock-in
-- **Privacy-Conscious Users** who control their own data
-- **Power Users** seeking advanced AI integrations
-- **Teams** needing collaborative AI workflows
+## 🚀 **Quick Start**
 
-## 💰 **Support & Monetization**
+### **Installation**
+1. Download the extension files
+2. Load unpacked extension in Chrome/Firefox
+3. Open any search engine and start highlighting!
 
-SamAI is free and open-source, but your support helps us build better features:
+### **Basic Usage**
+1. **Highlight Sites**: Click color dots next to search results
+2. **Hide Domains**: Use eye-slash icon to hide unwanted sites
+3. **Manage Patterns**: Open search settings to organize your patterns
+4. **Toggle Features**: Use settings to enable/disable highlighting
 
-### 💝 **Donations**
-Support ongoing development through:
-- [GitHub Sponsors](https://github.com/sponsors/DraconDev)
-- [Ko-fi](https://ko-fi.com/adamdracon)
+## 🎯 **How It Works**
 
-## 🚀 **Getting Started**
+### **Color System**
+- 🔴 **Red**: Important or trusted sites
+- 🟢 **Green**: Favorites or frequently used sites  
+- 🔵 **Blue**: General informational sites
 
-### Prerequisites
-- Chrome or Firefox browser
-- API keys from your preferred AI provider(s):
-  - [OpenAI API Key](https://platform.openai.com/api-keys)
-  - [Anthropic API Key](https://console.anthropic.com/)
-  - [Google AI API Key](https://aistudio.google.com/app/apikey)
+### **Smart Interactions**
+- **Click Red → Green**: Changes existing red highlighting to green
+- **Click Green → Green**: Removes green highlighting entirely
+- **Click Eye Icon**: Hides the domain (appears in Hidden Patterns section)
 
-### Installation
+### **Settings Management**
+- **Real-Time Sync**: All changes save automatically
+- **Cross-Tab Updates**: Settings and patterns update instantly across tabs
+- **Persistent Storage**: Everything survives browser restarts
 
-1. **Download from Store**
-   - [Chrome Web Store](https://chrome.google.com/webstore) (Coming Soon)
-   - [Firefox Add-ons](https://addons.mozilla.org) (Coming Soon)
+## 🛠️ **Technical Details**
 
-2. **Manual Installation**
-   ```bash
-   # Clone the repository
-   git clone https://github.com/DraconDev/SamAI.git
-   cd SamAI
-
-   # Install dependencies
-   bun install
-
-   # Development build
-   bun dev
-
-   # Production build
-   bun build
-   bun zip
-   ```
-
-3. **Setup API Keys**
-   - Open SamAI settings
-   - Add your API keys for desired providers
-   - Configure your preferences
-
-## 🛠️ **Tech Stack**
-
+### **Architecture**
 - **Frontend**: React 19, TypeScript, Tailwind CSS
 - **Extension**: WXT (Web Extension Tools)
-- **AI Integration**: Direct API connections (OpenAI, Anthropic, Google)
-- **Storage**: Browser extension storage APIs
-- **Build**: Bun, Vite
+- **Storage**: Browser extension sync storage APIs
+- **AI Integration**: Direct API connections (BYOK)
 
-## 🔐 **Privacy & Security**
+### **Browser Support**
+- ✅ Chrome (Manifest V3)
+- ✅ Firefox
+- ✅ Cross-tab synchronization
+- ✅ Real-time pattern sync
 
-### **Your Data, Your Control**
-- **Zero Data Collection**: We don't store or access your conversations
-- **Direct API Connections**: Your keys never touch our servers
-- **Local Processing**: All sensitive operations happen in your browser
-- **Open Source**: Transparent code you can audit
+### **Search Engine Support**
+- ✅ Google Search
+- ✅ Bing
+- ✅ DuckDuckGo
+- ✅ Yahoo
+- ✅ Ask.com
+- ✅ Works with any search page (?q= or ?query=)
 
-### **Security Features**
-- Secure API key storage using browser encryption
-- No third-party tracking or analytics
-- Regular security audits and updates
+## 🔧 **Built With**
 
-## 🗺️ **Roadmap**
+- **React 19** - Modern UI framework
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **WXT** - Web extension development
+- **Browser Storage APIs** - Persistent data management
 
-### **Phase 1: Core Enhancement** ✅
-- [x] Multi-provider API key management
-- [x] Enhanced search integration
-- [x] Basic writing assistance
-- [ ] Improved error handling and retry logic
+## 🎨 **Design Philosophy**
 
-### **Phase 2: Power User Features** 🔄
-- [ ] Advanced integrations (GitHub, Notion, Slack)
-- [ ] Custom prompt library and sharing
-- [ ] API usage tracking and optimization
-- [ ] Keyboard shortcuts and customization
-
-### **Phase 3: Community & Enterprise** 📅
-- [ ] Team collaboration features
-- [ ] Community prompt marketplace
-- [ ] Enterprise white-labeling
-- [ ] Advanced analytics dashboard
-
-## 🤝 **Contributing**
-
-We welcome contributions! SamAI is community-driven and transparent.
-
-### **Ways to Contribute**
-- **Code**: Submit pull requests for new features or bug fixes
-- **Ideas**: Share feature requests and feedback
-- **Testing**: Help test new features and report issues
-- **Documentation**: Improve docs and tutorials
-- **Community**: Help other users in discussions
-
-### **Development Setup**
-```bash
-# Fork and clone
-git clone https://github.com/DraconDev/SamAI.git
-
-# Install dependencies
-bun install
-
-# Start development
-bun dev
-
-# Run tests
-bun test
-
-# Build for production
-bun build
-```
-
-## 📊 **Community & Support**
-
-- **GitHub Issues**: Bug reports and feature requests
-- **GitHub Discussions**: General discussion and support
-- **Discord**: Real-time community chat (Coming Soon)
-- **Documentation**: [docs.sam-ai.dev](https://docs.sam-ai.dev) (Coming Soon)
+SamAI is built for users who want:
+- **Speed**: Instant highlighting without delays
+- **Control**: Complete ownership of your patterns and settings
+- **Simplicity**: Clean, intuitive interface without clutter
+- **Reliability**: Features that work consistently across all sites
+- **Privacy**: No data collection, local processing only
 
 ## 📝 **License**
 
-MIT License - see [LICENSE](LICENSE) for details.
-
-## 🙏 **Acknowledgments**
-
-- Built with [WXT](https://wxt.dev) framework
-- Inspired by the power user community's needs
-- Thanks to all contributors and supporters
+MIT License - Free for personal and commercial use.
 
 ---
 
 <p align="center">
-  <strong>SamAI - AI Power, User Control</strong><br>
-  Made with ❤️ by the SamAI community
+  <strong>SamAI - Smart Search, Your Way</strong><br>
+  Built for power users who want control over their search experience
 </p>
 
 ---
 
-**Ready to take control of your AI experience?** [Get Started](#getting-started) | [Support Development](#support--monetization)
-
-### 💬 **Universal Web Chat**
-- Chat with any webpage content
-- Smart context understanding
-- Code-aware responses with syntax highlighting
-
-### ✍️ **Writing Assistant**
-- Context-aware text enhancement
-- Multiple writing styles
-- Grammar and style improvements
-
-### 🔧 **Developer Tools**
-- API usage tracking and optimization
-- Custom prompt library
-- Advanced automation workflows
-- BYOK (Bring Your Own Keys) architecture
+**Ready to enhance your search experience?** Install SamAI and start marking sites the smart way!
