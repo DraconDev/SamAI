@@ -47,6 +47,17 @@ export default defineContentScript({
         initializeGoogleSearch();
       }, 500);
     } else {
+    } else {
+      console.log("[SamAI] Not initializing - conditions not met");
+    }
+
+    // Initialize search highlighting for all search pages
+    if (this.isSearchPage()) {
+      console.log("[SamAI] Initializing search highlighter");
+      setTimeout(() => {
+        new SearchHighlighter();
+      }, 1000);
+    }
       console.log("[SamAI] Not initializing - conditions not met");
     }
 
