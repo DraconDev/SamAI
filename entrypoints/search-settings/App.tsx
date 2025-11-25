@@ -381,26 +381,7 @@ export default function SearchSettingsPage() {
         </div>
       </div>
 
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: #4f46e5;
-          cursor: pointer;
-          box-shadow: 0 0 0 1px #818cf8;
-        }
-        .slider::-moz-range-thumb {
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: #4f46e5;
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 0 0 1px #818cf8;
-        }
-      `}</style>
+      {/* CSS for slider styling is in index.html */}
     </div>
   );
 }
