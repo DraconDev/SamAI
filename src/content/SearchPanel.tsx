@@ -437,6 +437,7 @@ Please provide a helpful response about the user's question specifically related
               isSummarizing={isSummarizing}
               summary={summary}
               summaryError={summaryError}
+              onSummarize={handleSummarize}
             />
           </div>
         )}
