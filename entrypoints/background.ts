@@ -79,6 +79,8 @@ export default defineBackground(() => {
       const popupWindow = await browser.windows.create({
         url: browser.runtime.getURL("/context-popup.html"),
         type: "popup",
+        width: 720,
+        height: 600,
         width: 600,
         height: 450,
       });
