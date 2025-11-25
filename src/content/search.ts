@@ -10,8 +10,11 @@ export async function showSidePanel(
   response: string | null,
   toggleIfOpen: boolean = false
 ) {
+  console.log("[SamAI Debug] showSidePanel called", { response, toggleIfOpen });
+
   // If toggle is requested and panel exists, close it and return
   if (toggleIfOpen && samaiPanelContainer) {
+    console.log("[SamAI Debug] Toggling off panel");
     if (samaiRoot) {
       samaiRoot.unmount();
       samaiRoot = null;
@@ -25,6 +28,7 @@ export async function showSidePanel(
 
   // If panel already exists, just update the content
   if (samaiRoot && samaiPanelContainer) {
+    console.log("[SamAI Debug] Panel exists, updating content");
     const settings = await searchSettingsStore.getValue();
     const outputFormat = settings.outputFormat;
     samaiRoot.render(
@@ -46,6 +50,7 @@ export async function showSidePanel(
     return;
   }
 
+  console.log("[SamAI Debug] Creating new panel");
   // Create new panel container with Tailwind classes
   samaiPanelContainer = document.createElement("div");
   samaiPanelContainer.id = "samai-container";
@@ -56,10 +61,19 @@ export async function showSidePanel(
     backdrop-blur-xl border-l border-white/10
     shadow-2xl
   `;
+  
+  // Add debug element to test Tailwind
+  const debugElement = document.createElement("div");
+  debugElement.className = "p-4 mb-4 text-white bg-red-500";
+  debugElement.textContent = "DEBUG: Tailwind Test - If you see red background, Tailwind is working!";
+  samaiPanelContainer.appendChild(debugElement);
+  
   document.body.appendChild(samaiPanelContainer);
+  console.log("[SamAI Debug] Panel container created and appended");
 
   // Initialize React root
   samaiRoot = createRoot(samaiPanelContainer);
+  console.log("[SamAI Debug] React root initialized");
 
   // Get current output format from store
   const settings = await searchSettingsStore.getValue();
@@ -67,11 +81,13 @@ export async function showSidePanel(
 
   // Render the SearchPanel with a close handler
   if (samaiRoot) {
+    console.log("[SamAI Debug] Rendering SearchPanel...");
     samaiRoot.render(
       React.createElement(SearchPanel, {
         response,
         outputFormat,
         onClose: () => {
+          console.log("[SamAI Debug] Panel close callback triggered");
           // Cleanup React root and container
           if (samaiRoot) {
             samaiRoot.unmount();
@@ -84,5 +100,6 @@ export async function showSidePanel(
         },
       })
     );
+    console.log("[SamAI Debug] SearchPanel rendered");
   }
 }
