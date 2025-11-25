@@ -157,7 +157,7 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center search-settings-panel bg-black/50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm search-settings-panel">
       <div className="w-[600px] max-h-[80vh] bg-gradient-to-br from-[#1a1b2e] to-[#0D0E16] border border-[#2E2F3E]/50 rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-[#2E2F3E]/30">
