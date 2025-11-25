@@ -22,16 +22,34 @@ export default defineContentScript({
   main() {
     let lastInputElement: HTMLInputElement | HTMLTextAreaElement | null = null;
 
+    // Function to check if current page is a search page
+    const isSearchPage = (): boolean => {
+      const url = window.location.href.toLowerCase();
+      const searchEngines = [
+        'google.com/search',
+        'bing.com/search', 
+        'duckduckgo.com/',
+        'yahoo.com/search',
+        'search.yahoo.com',
+        'ask.com/web'
+      ];
+      
+      return searchEngines.some(engine => url.includes(engine)) ||
+             url.includes('/search') ||
+             (url.includes('?q=') || url.includes('?query='));
+    };
+
     // Debug logging for Google search initialization
     console.log("[SamAI] Content script loaded", {
       hostname: window.location.hostname,
       pathname: window.location.pathname,
       search: window.location.search,
+      isSearchPage: isSearchPage(),
     });
     console.log(
       "[SamAI] document.body.innerText length on load:",
       document.body.innerText.length
-    ); // NEW LOG
+    );
 
     // Initialize Google search functionality if we're on a search page with a query
     if (
@@ -46,19 +64,14 @@ export default defineContentScript({
         console.log("[SamAI] Running delayed initialization");
         initializeGoogleSearch();
       }, 500);
-    } else {
-    } else {
-      console.log("[SamAI] Not initializing - conditions not met");
     }
 
     // Initialize search highlighting for all search pages
-    if (this.isSearchPage()) {
+    if (isSearchPage()) {
       console.log("[SamAI] Initializing search highlighter");
       setTimeout(() => {
         new SearchHighlighter();
       }, 1000);
-    }
-      console.log("[SamAI] Not initializing - conditions not met");
     }
 
     // Track input element on right clicks and send info to background script
