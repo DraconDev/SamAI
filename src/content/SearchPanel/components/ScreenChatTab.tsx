@@ -120,8 +120,8 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({ onScreenCapture })
     // Implementation depends on your AI provider setup
     // Here's a generic example - you'll need to adapt this based on your existing AI integration
     
-    const apiKey = localStorage.getItem("samai-google-api-key");
-    if (!apiKey) throw new Error("No API key found");
+    const apiKeyData = await apiKeyStore.getValue();
+    if (!apiKeyData.googleApiKey) throw new Error("No Google AI API key found");
 
     const requestBody = {
       contents: [{
@@ -137,7 +137,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({ onScreenCapture })
       }]
     };
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKeyData.googleApiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
