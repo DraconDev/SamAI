@@ -181,7 +181,7 @@ class SearchHighlighter {
             description: domain,
             enabled: true,
           };
-          updatedPatterns.push(newPattern);
+          const updatedPatterns = [...currentPatterns, newPattern];
           this.updatePatterns(updatedPatterns);
           highlightBtn.style.color = "#4f46e5";
           highlightBtn.innerHTML = "★";
