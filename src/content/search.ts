@@ -10,13 +10,20 @@ function injectStyles() {
   const styleTag = document.createElement("style");
   styleTag.id = "samai-styles";
   styleTag.textContent = `
-    /* Reset container styles */
+    /* Reset container styles - but preserve panel layout */
     #samai-container {
       all: initial;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: #e2e8f0;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      position: fixed !important;
+      top: 0 !important;
+      right: 0 !important;
+      width: 420px !important;
+      height: 100vh !important;
+      z-index: 2147483647 !important;
+      pointer-events: auto !important;
     }
 
     /* Chat input styling */
