@@ -15,6 +15,7 @@ export default function SearchSettingsPage() {
   const [promptStyle, setPromptStyle] = useState<"short" | "medium" | "long">("short");
   const [autoHighlight, setAutoHighlight] = useState(true);
   const [highlightOpacity, setHighlightOpacity] = useState(0.3);
+  const [enableHighlighting, setEnableHighlighting] = useState(true);
 
   useEffect(() => {
     loadSettings();
@@ -39,6 +40,7 @@ export default function SearchSettingsPage() {
       setPromptStyle((localStorage.getItem("samai-prompt-style") as any) || "short");
       setAutoHighlight(localStorage.getItem("samai-auto-highlight") !== "false");
       setHighlightOpacity(parseFloat(localStorage.getItem("samai-highlight-opacity") || "0.3"));
+      setEnableHighlighting(localStorage.getItem("samai-enable-highlighting") !== "false");
       
       console.log("[Search Settings] Loaded patterns:", patterns.length);
     } catch (error) {
