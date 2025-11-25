@@ -33,7 +33,6 @@ export default function SearchPanel({
   // Core state
   const [isApiKeySet, setIsApiKeySet] = useState(false);
   const [activeTab, setActiveTab] = useState<TabId>(response ? "chat" : "search");
-  const [showSearchSettings, setShowSearchSettings] = useState(false);
 
   // Tab-specific state
   const [isScraping, setIsScraping] = useState(false);
@@ -416,7 +415,7 @@ Please provide a helpful response about the user's question specifically related
                 response={response}
                 isApiKeySet={isApiKeySet}
                 outputFormat={outputFormat}
-                onOpenSettings={() => setShowSearchSettings(true)}
+                onOpenSettings={handleOpenSearchSettings}
               />
             </div>
           )}
