@@ -54,7 +54,7 @@ export async function showSidePanel(
     font-inter text-slate-100 antialiased
     bg-gradient-to-br from-slate-900 to-slate-800
     backdrop-blur-xl border-l border-white/10
-    shadow-2xl overflow-hidden
+    shadow-2xl
   `;
   document.body.appendChild(samaiPanelContainer);
 
