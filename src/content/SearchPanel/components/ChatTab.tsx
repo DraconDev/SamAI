@@ -111,32 +111,32 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               chatMessages.map((message, index) => (
                 <div
                   key={index}
-                  className={`flex animate-fade-in ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                  className={`flex animate-fade-in group ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div
-                    className={`max-w-[85%] p-4 rounded-2xl shadow-xl backdrop-blur-sm border ${
-                      message.role === "user"
-                        ? "bg-gradient-to-br from-emerald-500 to-emerald-400 text-white ml-4 border-emerald-400/30 shadow-emerald-500/20"
-                        : "bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/60 text-slate-100 mr-4 shadow-black/30"
-                    }`}
-                  >
-                    {message.role === "user" ? (
-                      <div className="text-sm font-medium leading-relaxed">{message.content}</div>
-                    ) : (
-                      <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
-                        <MarkdownRenderer content={message.content} />
+                  {message.role === "user" ? (
+                    <>
+                      <div className="flex flex-col items-end gap-2 w-full max-w-[85%]">
+                        <div
+                          className="max-w-[85%] p-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-br from-emerald-500/90 to-emerald-400/90 text-white border-emerald-400/40 shadow-emerald-500/25 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:from-emerald-500 hover:to-emerald-400 group-hover:scale-[1.02]"
+                        >
+                          <div className="text-sm font-medium leading-relaxed">{message.content}</div>
+                          <div className="flex items-center justify-end gap-1 mt-2 text-xs opacity-70 text-emerald-100">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="10" />
+                              <polyline points="12,6 12,12 16,14" />
+                            </svg>
+                            {message.timestamp}
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center rounded-full shadow-md w-7 h-7 bg-slate-600/50 ring-1 ring-slate-700/50">
+                          <span className="text-xs font-bold text-slate-200">U</span>
+                        </div>
                       </div>
-                    )}
-                    <div className={`text-xs mt-2 opacity-70 flex items-center gap-1 ${
-                      message.role === "user" ? "text-emerald-100" : "text-slate-400"
-                    }`}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12,6 12,12 16,14" />
-                      </svg>
-                      {message.timestamp}
-                    </div>
-                  </div>
+                    </>
+                  ) : (
+                    <div className="flex items-start gap-3 max-w-[85%]">
+                      <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 mt-1 -ml-1 shadow-lg rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 </div>
               ))
             )}
