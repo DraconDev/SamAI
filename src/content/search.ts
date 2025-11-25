@@ -51,22 +51,32 @@ export async function showSidePanel(
   }
 
   console.log("[SamAI Debug] Creating new panel");
-  // Create new panel container with Tailwind classes
+  
+  // Create new panel container with inline styles (no Tailwind dependency)
   samaiPanelContainer = document.createElement("div");
   samaiPanelContainer.id = "samai-container";
-  samaiPanelContainer.className = `
-    fixed top-0 right-0 w-[420px] h-screen z-[2147483647] pointer-events-auto
-    font-inter text-slate-100 antialiased
-    bg-gradient-to-br from-slate-900 to-slate-800
-    backdrop-blur-xl border-l border-white/10
-    shadow-2xl
-  `;
   
-  // Add debug element to test Tailwind
-  const debugElement = document.createElement("div");
-  debugElement.className = "p-4 mb-4 text-white bg-red-500";
-  debugElement.textContent = "DEBUG: Tailwind Test - If you see red background, Tailwind is working!";
-  samaiPanelContainer.appendChild(debugElement);
+  // Apply inline styles to ensure the panel is visible
+  Object.assign(samaiPanelContainer.style, {
+    position: "fixed",
+    top: "0px",
+    right: "0px",
+    width: "420px",
+    height: "100vh",
+    zIndex: "2147483647",
+    pointerEvents: "auto",
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    color: "#f1f5f9",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+    background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+    backdropFilter: "blur(24px)",
+    borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
+    boxShadow: "-10px 0 40px rgba(0, 0, 0, 0.5)",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column"
+  });
   
   document.body.appendChild(samaiPanelContainer);
   console.log("[SamAI Debug] Panel container created and appended");
