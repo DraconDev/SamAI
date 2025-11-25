@@ -6,6 +6,7 @@ import { searchSettingsStore, type PromptStyle } from "../../utils/store";
 
 function App() {
   const [searchActive, setSearchActive] = useState(true);
+            <div className="flex flex-col gap-3 pt-2">
   const [promptStyle, setPromptStyle] = useState<PromptStyle>("short");
   const [outputFormat, setOutputFormat] = useState<OutputFormat>("text");
   const [showFloatingIcon, setShowFloatingIcon] = useState(true);
