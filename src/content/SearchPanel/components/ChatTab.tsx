@@ -137,12 +137,53 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     <div className="flex items-start gap-3 max-w-[85%]">
                       <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 mt-1 -ml-1 shadow-lg rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                      </div>
+                      <div
+                        className="p-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-br from-slate-800/95 to-slate-700/95 border-slate-600/70 text-slate-100 shadow-black/40 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:from-slate-800 hover:to-slate-700 group-hover:scale-[1.02] max-w-full"
+                      >
+                        <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
+                          <MarkdownRenderer content={message.content} />
+                        </div>
+                        <div className="flex items-center gap-1 mt-2 text-xs opacity-70 text-slate-400">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12,6 12,12 16,14" />
+                          </svg>
+                          {message.timestamp}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                    {message.role === "user" ? (
+                      <div className="text-sm font-medium leading-relaxed">{message.content}</div>
+                    ) : (
+                      <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
+                        <MarkdownRenderer content={message.content} />
+                      </div>
+                    )}
+                    <div className={`text-xs mt-2 opacity-70 flex items-center gap-1 ${
+                      message.role === "user" ? "text-emerald-100" : "text-slate-400"
+                    }`}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12,6 12,12 16,14" />
+                      </svg>
+                      {message.timestamp}
+                    </div>
+                  </div>
                 </div>
               ))
             )}
             {(isChatLoading || isExtractingContent) && (
-              <div className="flex justify-start animate-fade-in">
-                <div className="p-4 mr-4 border shadow-xl bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/60 rounded-2xl backdrop-blur-sm">
+              <div className="flex items-start gap-3 animate-fade-in">
+                <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 mt-1 -ml-1 shadow-lg rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                </div>
+                <div className="max-w-full p-4 border shadow-xl rounded-2xl backdrop-blur-sm bg-gradient-to-br from-slate-800/95 to-slate-700/95 border-slate-600/70 shadow-black/40">
                   <div className="flex items-center space-x-3">
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" />
@@ -160,75 +201,37 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           </div>
 
           {/* Chat Input - Fixed at Bottom */}
-          <div
-            style={{
-              flexShrink: 0,
-              padding: "16px",
-              borderTop: "1px solid rgba(51, 65, 85, 0.4)",
-              background: "linear-gradient(to right, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95))",
-              backdropFilter: "blur(24px)",
-            }}
-          >
-            <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div className="flex-shrink-0 p-4 border-t border-slate-700/50 bg-gradient-to-r from-slate-800/95 via-slate-800/90 to-slate-900/95 backdrop-blur-xl rounded-b-2xl">
+            <form onSubmit={onSubmit} className="flex flex-col gap-3">
               {/* Include Page Content Checkbox */}
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", paddingBottom: "8px" }}>
+              <div className="flex items-center gap-2 pt-1 pb-2">
                 <input
                   type="checkbox"
                   id="includePageContent"
                   checked={includePageContent}
                   onChange={(e) => onIncludePageContentChange(e.target.checked)}
-                  style={{
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    accentColor: '#10b981',
-                  }}
+                  className="w-4 h-4 transition-all duration-200 border-2 rounded shadow-sm cursor-pointer border-slate-600/70 bg-slate-800/50 text-emerald-500 focus:ring-2 focus:ring-emerald-400/50 focus:border-emerald-400 accent-emerald-500 hover:shadow-md"
                 />
                 <label
                   htmlFor="includePageContent"
-                  style={{
-                    fontSize: "12px",
-                    color: "#94a3b8",
-                    cursor: "pointer",
-                    userSelect: "none",
-                  }}
+                  className="text-xs transition-colors cursor-pointer select-none text-slate-400 hover:text-slate-300"
                 >
                   Include page content in chat
                 </label>
               </div>
 
-              <div style={{ display: "flex", gap: "12px" }}>
-                <div style={{ position: "relative", flex: 1 }}>
+              <div className="flex gap-3">
+                <div className="relative flex-1">
                   <input
                     type="text"
                     value={chatInput}
                     onChange={(e) => onInputChange(e.target.value)}
                     placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
-                    className="sam-ai-chat-input"
-                    style={{
-                      width: "100%",
-                      height: "48px",
-                      padding: "0 16px",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      color: "#f1f5f9",
-                      backgroundColor: "rgba(30, 41, 59, 0.9)",
-                      border: "2px solid rgba(71, 85, 105, 0.6)",
-                      borderRadius: "12px",
-                      outline: "none",
-                      transition: "all 0.2s ease-in-out",
-                      boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                    }}
+                    className="w-full h-12 px-4 py-2 text-sm font-medium transition-all duration-300 border-2 shadow-lg outline-none sam-ai-chat-input text-slate-100 placeholder-slate-500 bg-slate-800/90 border-slate-600/60 rounded-2xl hover:shadow-xl hover:border-slate-500/80 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-500/20 focus:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-md"
                     disabled={isChatLoading || isExtractingContent}
                   />
                   {(isChatLoading || isExtractingContent) && (
-                    <div style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "12px",
-                      transform: "translateY(-50%)"
-                    }}>
+                    <div className="absolute -translate-y-1/2 top-1/2 right-4">
                       <LoadingSpinner size="sm" color="success" />
                     </div>
                   )}
@@ -236,23 +239,20 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 <button
                   type="submit"
                   disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
-                  style={{
-                    height: "48px",
-                    padding: "0 24px",
-                    fontSize: "14px",
-                    fontWeight: 700,
-                    color: "white",
-                    background: (isChatLoading || isExtractingContent || !chatInput.trim())
-                      ? 'linear-gradient(to right, #6b7280, #9ca3af)'
-                      : 'linear-gradient(to right, #10b981, #34d399)',
-                    border: "2px solid rgba(16, 185, 129, 0.5)",
-                    borderRadius: "12px",
-                    cursor: (isChatLoading || isExtractingContent || !chatInput.trim()) ? "not-allowed" : "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minWidth: "60px",
-                    transition: "all 0.2s ease",
+                  className={`h-12 flex items-center justify-center min-w-[60px] px-6 text-sm font-bold text-white rounded-2xl border-2 shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-md disabled:transform-none flex-shrink-0 ${
+                    (isChatLoading || isExtractingContent || !chatInput.trim())
+                      ? 'bg-gradient-to-r from-slate-600/80 to-slate-500/80 border-slate-500/50 shadow-slate-500/25'
+                      : 'bg-gradient-to-r from-emerald-500 to-emerald-600 border-emerald-400/60 shadow-emerald-500/30 hover:shadow-emerald-500/40 hover:border-emerald-400 hover:shadow-xl'
+                  }`}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </button>
+              </div>
+              <div className="flex items-center justify-between pt-1 text-xs text-slate-500">
+                <span>Press Enter to send</span>
                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                     opacity: (isChatLoading || isExtractingContent || !chatInput.trim()) ? 0.7 : 1,
                   }}
@@ -264,15 +264,3 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 </button>
               </div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "12px", color: "#64748b" }}>
-                <span>Press Enter to send</span>
-                <span style={{ fontWeight: 500, color: "#34d399" }}>
-                  {outputFormat === "html" ? "📄 HTML" : "📝 Text"} mode
-                </span>
-              </div>
-            </form>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
