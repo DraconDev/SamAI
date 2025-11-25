@@ -181,6 +181,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     'from-amber-500 to-amber-600': { from: '#f59e0b', to: '#d97706' },
     'from-purple-500 to-purple-600': { from: '#a855f7', to: '#9333ea' },
     'from-pink-500 to-pink-600': { from: '#ec4899', to: '#db2777' },
+    'from-green-500 to-green-600': { from: '#22c55e', to: '#16a34a' },
   };
 
   const TabButton: React.FC<{ tab: Tab; className?: string }> = ({
