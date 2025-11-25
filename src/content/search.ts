@@ -96,6 +96,7 @@ export async function showSidePanel(
     right: "0px",
     width: "420px",
     height: "100vh",
+    maxHeight: "100vh",
     zIndex: "2147483647",
     pointerEvents: "auto",
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
@@ -108,7 +109,8 @@ export async function showSidePanel(
     boxShadow: "-10px 0 40px rgba(0, 0, 0, 0.5)",
     overflow: "hidden",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    boxSizing: "border-box"
   });
   
   document.body.appendChild(samaiPanelContainer);

@@ -39,7 +39,21 @@ export const ChatTab: React.FC<ChatTabProps> = ({
   }, [chatMessages]);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden border shadow-2xl bg-slate-900/95 border-slate-700/60 rounded-2xl backdrop-blur-xl">
+    <div 
+      className="flex flex-col h-full overflow-hidden border shadow-2xl bg-slate-900/95 border-slate-700/60 rounded-2xl backdrop-blur-xl"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        maxHeight: '100%',
+        overflow: 'hidden',
+        border: '1px solid rgba(51, 65, 85, 0.6)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        background: 'rgba(15, 23, 42, 0.95)',
+        borderRadius: '1rem',
+        backdropFilter: 'blur(20px)',
+      }}
+    >
       {/* Chat Header */}
       <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/90 backdrop-blur-md">
         <div className="flex items-center gap-3">
@@ -89,10 +103,17 @@ export const ChatTab: React.FC<ChatTabProps> = ({
       ) : (
         <>
           {/* Chat Messages Container - Scrollable */}
-          <div className="flex-1 p-4 space-y-4 overflow-y-auto" style={{ 
-            scrollbarWidth: 'thin',
-            scrollbarColor: '#475569 #1e293b'
-          }}>
+          <div 
+            className="flex-1 p-4 space-y-4 overflow-y-auto" 
+            style={{ 
+              flex: 1,
+              padding: '1rem',
+              overflowY: 'auto',
+              minHeight: 0,
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#475569 #1e293b'
+            }}
+          >
             {chatMessages.length === 0 ? (
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">

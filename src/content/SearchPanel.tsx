@@ -310,73 +310,99 @@ Please provide a helpful response about the user's question specifically related
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
+        height: '100vh',
+        maxHeight: '100vh',
         padding: '1.5rem',
         overflow: 'hidden',
+        boxSizing: 'border-box',
         animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
     >
-      <TabNavigation
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        onChatClick={handleChat}
-        onSummarizeClick={handleSummarize}
-        onFormClick={handleForm}
-        onImageClick={handleImage}
-        isScraping={isScraping}
-      />
-
-      {activeTab === "search" && (
-        <SearchTab
-          response={response}
-          isApiKeySet={isApiKeySet}
-          outputFormat={outputFormat}
-        />
-      )}
-
-      {activeTab === "scrape" && (
-        <ScrapeTab
+      <div style={{ flexShrink: 0, marginBottom: '1rem' }}>
+        <TabNavigation
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          onChatClick={handleChat}
+          onSummarizeClick={handleSummarize}
+          onFormClick={handleForm}
+          onImageClick={handleImage}
           isScraping={isScraping}
-          scrapeMode={scrapeMode}
-          onScrapeModeChange={setScrapeMode}
-          scrapeInstructions={scrapeInstructions}
-          onScrapeInstructionsChange={setScrapeInstructions}
-          scrapedContent={scrapedContent}
-          onScrape={handleScrape}
-          onOpenChat={handleOpenScrapedChat}
-          onDownload={handleDownloadScraped}
-          onClearPreview={() => setScrapedContent(null)}
         />
-      )}
+      </div>
 
-      {activeTab === "chat" && (
-        <ChatTab
-          isApiKeySet={isApiKeySet}
-          isExtractingContent={isExtractingContent}
-          isChatLoading={isChatLoading}
-          chatMessages={chatMessages}
-          chatInput={chatInput}
-          includePageContent={includePageContent}
-          outputFormat={outputFormat}
-          messagesEndRef={messagesEndRef}
-          onInputChange={setChatInput}
-          onSubmit={handleSendChatMessage}
-          onIncludePageContentChange={setIncludePageContent}
-          onOpenApiKey={handleOpenApiKey}
-        />
-      )}
+      <div style={{ 
+        flex: 1, 
+        overflow: 'hidden', 
+        display: 'flex', 
+        flexDirection: 'column',
+        minHeight: 0
+      }}>
+        {activeTab === "search" && (
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <SearchTab
+              response={response}
+              isApiKeySet={isApiKeySet}
+              outputFormat={outputFormat}
+            />
+          </div>
+        )}
 
-      {activeTab === "sum" && (
-        <SummaryTab
-          isSummarizing={isSummarizing}
-          summary={summary}
-          summaryError={summaryError}
-        />
-      )}
+        {activeTab === "scrape" && (
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <ScrapeTab
+              isScraping={isScraping}
+              scrapeMode={scrapeMode}
+              onScrapeModeChange={setScrapeMode}
+              scrapeInstructions={scrapeInstructions}
+              onScrapeInstructionsChange={setScrapeInstructions}
+              scrapedContent={scrapedContent}
+              onScrape={handleScrape}
+              onOpenChat={handleOpenScrapedChat}
+              onDownload={handleDownloadScraped}
+              onClearPreview={() => setScrapedContent(null)}
+            />
+          </div>
+        )}
 
-      {activeTab === "form" && <FormTab onFormClick={handleForm} />}
+        {activeTab === "chat" && (
+          <ChatTab
+            isApiKeySet={isApiKeySet}
+            isExtractingContent={isExtractingContent}
+            isChatLoading={isChatLoading}
+            chatMessages={chatMessages}
+            chatInput={chatInput}
+            includePageContent={includePageContent}
+            outputFormat={outputFormat}
+            messagesEndRef={messagesEndRef}
+            onInputChange={setChatInput}
+            onSubmit={handleSendChatMessage}
+            onIncludePageContentChange={setIncludePageContent}
+            onOpenApiKey={handleOpenApiKey}
+          />
+        )}
 
-      {activeTab === "image" && <ImageTab onImageClick={handleImage} />}
+        {activeTab === "sum" && (
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <SummaryTab
+              isSummarizing={isSummarizing}
+              summary={summary}
+              summaryError={summaryError}
+            />
+          </div>
+        )}
+
+        {activeTab === "form" && (
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <FormTab onFormClick={handleForm} />
+          </div>
+        )}
+
+        {activeTab === "image" && (
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <ImageTab onImageClick={handleImage} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
