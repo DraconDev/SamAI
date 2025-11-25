@@ -45,7 +45,7 @@ export interface FormProfilesStore {
   activeProfileId?: string;
 }
 
-const FORM_PROFILES_KEY = "samai_form_profiles";
+const FORM_PROFILES_KEY = "sync:samai_form_profiles";
 
 export class FormProfilesManager {
   /**
@@ -89,22 +89,49 @@ export class FormProfilesManager {
   }
 
   /**
-   * Create a new profile
+   * Create a new profile with enhanced validation
    */
   static async createProfile(profile: Omit<FormProfile, "id" | "createdAt" | "updatedAt">): Promise<FormProfile> {
     try {
+      // Validate profile data
+      if (!profile.name || !profile.name.trim()) {
+        throw new Error("Profile name is required");
+      }
+
       const newProfile: FormProfile = {
         ...profile,
+        name: profile.name.trim(),
+        description: profile.description?.trim() || "",
+        data: profile.data || {},
         id: `profile_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
 
-      const data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY) || { profiles: [] };
-      data.profiles = data.profiles || [];
+      // Get existing data with safe fallback
+      let data: FormProfilesStore;
+      try {
+        data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY) || { profiles: [] };
+      } catch (storageError) {
+        console.warn("[SamAI] Storage not available, initializing new store", storageError);
+        data = { profiles: [] };
+      }
+
+      // Ensure profiles array exists
+      if (!Array.isArray(data.profiles)) {
+        data.profiles = [];
+      }
+
+      // Check for duplicate names
+      const existingProfile = data.profiles.find(p => p.name.toLowerCase() === newProfile.name.toLowerCase());
+      if (existingProfile) {
+        throw new Error(`A profile with the name "${newProfile.name}" already exists`);
+      }
+
       data.profiles.push(newProfile);
 
       await storage.setItem(FORM_PROFILES_KEY, data);
+      console.log("[SamAI] Successfully created profile:", newProfile.name);
       return newProfile;
     } catch (error) {
       console.error("[SamAI] Error creating form profile:", error);
