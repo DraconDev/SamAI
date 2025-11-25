@@ -54,19 +54,23 @@ export const FormTab: React.FC<FormTabProps> = ({ onFormClick }) => {
     jobTitle: ''
   });
 
-  // Load profiles on component mount
+  // Load profiles on component mount with error handling
   useEffect(() => {
     loadProfiles();
   }, []);
 
   const loadProfiles = async () => {
     try {
+      console.log('[SamAI] Loading profiles...');
       const allProfiles = await FormProfilesManager.getProfiles();
       const active = await FormProfilesManager.getActiveProfile();
+      
+      console.log(`[SamAI] Loaded ${allProfiles.length} profiles, active: ${active?.name || 'none'}`);
       setProfiles(allProfiles);
       setActiveProfile(active);
     } catch (err) {
-      console.error('Error loading profiles:', err);
+      console.error('[SamAI] Error loading profiles:', err);
+      setError('Failed to load profiles. Please try refreshing the page.');
     }
   };
 
