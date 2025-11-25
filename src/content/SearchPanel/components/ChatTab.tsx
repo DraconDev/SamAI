@@ -111,7 +111,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               overflowY: 'auto',
               minHeight: 0,
               scrollbarWidth: 'thin',
-              scrollbarColor: '#475569 #1e293b'
+              scrollbarColor: '#475569 #1e293b',
             }}
           >
             {chatMessages.length === 0 ? (
@@ -184,7 +184,16 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           </div>
 
           {/* Chat Input - Fixed at Bottom */}
-          <div className="flex-shrink-0 p-4 border-t border-slate-700/50 bg-slate-800/95 backdrop-blur-md">
+          <div 
+            className="flex-shrink-0 p-4 border-t border-slate-700/50 bg-slate-800/95 backdrop-blur-md"
+            style={{
+              flexShrink: 0,
+              padding: '1rem',
+              borderTop: '1px solid rgba(51, 65, 85, 0.5)',
+              background: 'rgba(30, 41, 59, 0.95)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
             <form onSubmit={onSubmit} className="flex flex-col gap-3">
               {/* Include Page Content Checkbox */}
               <div className="flex items-center gap-3">

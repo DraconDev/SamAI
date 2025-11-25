@@ -12,7 +12,7 @@ export async function showSidePanel(
 ) {
   console.log("[SamAI Debug] showSidePanel called", { response, toggleIfOpen });
 
-  // Inject CSS animations if not already present
+  // Inject CSS animations and styles if not already present
   if (!document.getElementById('samai-animations')) {
     const style = document.createElement('style');
     style.id = 'samai-animations';
@@ -40,6 +40,23 @@ export async function showSidePanel(
           transform: translateX(0);
           opacity: 1;
         }
+      }
+      #samai-container * {
+        box-sizing: border-box;
+      }
+      #samai-container ::-webkit-scrollbar {
+        width: 6px;
+      }
+      #samai-container ::-webkit-scrollbar-track {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 3px;
+      }
+      #samai-container ::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 3px;
+      }
+      #samai-container ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
       }
     `;
     document.head.appendChild(style);
