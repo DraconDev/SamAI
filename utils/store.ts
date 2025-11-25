@@ -38,9 +38,9 @@ import { type OutputFormat } from "./page-content"; // Import OutputFormat
 export interface SearchSettingsStore {
   searchActive: boolean;
   promptStyle: PromptStyle;
-  continuePreviousChat: boolean;
+  continuePreviousChat?: boolean;
   outputFormat: OutputFormat;
-  showFloatingIcon: boolean; // Add showFloatingIcon
+  showFloatingIcon: boolean;
 }
 
 export const defaultSearchSettingsStore: SearchSettingsStore = {
