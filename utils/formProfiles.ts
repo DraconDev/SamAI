@@ -207,18 +207,29 @@ export class FormProfilesManager {
   }
 
   /**
-   * Set active profile
+   * Set active profile with validation
    */
   static async setActiveProfile(id: string): Promise<boolean> {
     try {
+      if (!id || !id.trim()) {
+        throw new Error("Profile ID is required");
+      }
+
       const data = await storage.getItem<FormProfilesStore>(FORM_PROFILES_KEY);
-      if (!data?.profiles) return false;
+      if (!Array.isArray(data?.profiles)) {
+        throw new Error("No profiles found");
+      }
 
       const profileExists = data.profiles.some((p: FormProfile) => p.id === id);
-      if (!profileExists) return false;
+      if (!profileExists) {
+        throw new Error("Profile not found");
+      }
 
       data.activeProfileId = id;
       await storage.setItem(FORM_PROFILES_KEY, data);
+      
+      const profile = data.profiles.find(p => p.id === id);
+      console.log("[SamAI] Set active profile to:", profile?.name || id);
       return true;
     } catch (error) {
       console.error("[SamAI] Error setting active form profile:", error);
