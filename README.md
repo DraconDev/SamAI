@@ -24,25 +24,36 @@ SamAI is a privacy-first browser extension that empowers users with full control
 
 ## 🏆 **Current Features**
 
-### 🔍 Smart Search Enhancement
-- AI analysis of Google search results
-- Contextual insights and summaries
-- Rich markdown formatting
+### 🔍 **Smart Search Enhancement**
+- **AI-powered search analysis** with contextual insights and summaries
+- **Rich markdown formatting** for beautiful, readable results
+- **Multiple response styles** (Short/Medium/Long) with instant switching
+- **Cross-tab synchronization** - settings sync automatically across all browser tabs
 
-### 💬 Universal Web Chat
-- Chat with any webpage content
-- Smart context understanding
-- Code-aware responses with syntax highlighting
+### 🎨 **Interactive Search Highlighting System**
+- **Three-Color Highlighting**: Red (Important), Green (Favorites), Blue (General)
+- **Smart Color Toggle**: Click same color to remove, different color to switch
+- **Real-time Marking**: Highlight sites directly from search results
+- **Persistent Patterns**: All markings save automatically and persist across page refreshes
+- **Cross-tab Sync**: Markings appear instantly in all tabs and search settings
 
-### ✍️ Writing Assistant
-- Context-aware text enhancement
-- Multiple writing styles
-- Grammar and style improvements
+### 🗑️ **Advanced Pattern Management**
+- **Hidden Domains**: Hide unwanted sites with one click using professional eye-slash icon
+- **Hidden Patterns Section**: View and unhide domains in dedicated settings area
+- **Bulk Management**: Add/edit/remove highlight patterns with full control
+- **Pattern Categories**: Organized by type (default/important/favorite) with visual indicators
 
-### 🔧 Developer Tools
-- API usage tracking and optimization
-- Custom prompt library
-- Advanced automation workflows
+### ⚡ **Power User Controls**
+- **Toggle Highlighting**: Enable/disable all highlighting features instantly
+- **Auto-highlight**: Automatic pattern application to search results
+- **Opacity Control**: Adjustable highlight transparency (10-100%)
+- **Professional UI**: Clean, modern interface with gradient styling
+
+### 🔧 **Universal Compatibility**
+- **Multi-Engine Support**: Google, Bing, DuckDuckGo, Yahoo, Ask.com
+- **Cross-browser**: Chrome and Firefox compatible
+- **Real-time Sync**: Settings and patterns sync across all tabs instantly
+- **No Save Button**: All changes happen automatically and persist forever
 
 ## 🎯 **Target Audience**
 
