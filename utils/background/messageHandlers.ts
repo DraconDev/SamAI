@@ -49,6 +49,7 @@ interface InputElementClickedMessage extends BaseMessage {
 export type BackgroundMessage =
   | GenerateGeminiResponseRequest
   | OpenApiKeyPageRequest
+  | OpenSearchSettingsPageRequest
   | SetInputValueRequest
   | GetPageContentRequest
   | PageContentResponseMessage
@@ -98,6 +99,11 @@ export const handleGenerateGeminiResponse = async (
 
 export const handleOpenApiKeyPage = async (): Promise<undefined> => {
   browser.tabs.create({ url: "apikey.html" });
+  return undefined;
+};
+
+export const handleOpenSearchSettingsPage = async (): Promise<undefined> => {
+  browser.tabs.create({ url: "search-settings.html" });
   return undefined;
 };
 
