@@ -23,7 +23,11 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   onDownload,
   onClearPreview,
 }) => {
-  const formatOptions: Array<{ value: ScrapeResultFormat; label: string; hint: string }> = [
+  const formatOptions: Array<{
+    value: ScrapeResultFormat;
+    label: string;
+    hint: string;
+  }> = [
     {
       value: "markdown",
       label: "Rich Markdown",
@@ -47,63 +51,80 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   ];
 
   return (
-    <div 
+    <div
       className="space-y-6"
       style={{
-        padding: '1rem',
-        height: '100%',
-        overflowY: 'auto',
+        padding: "1rem",
+        height: "100%",
+        overflowY: "auto",
       }}
     >
-      <div 
+      <div
         className="p-8 bg-gradient-to-br from-[#1E1F2E]/95 to-slate-900/90 rounded-3xl border border-blue-500/20 shadow-2xl backdrop-blur-xl"
         style={{
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
-          border: '1px solid rgba(59, 130, 246, 0.3)',
-          borderRadius: '1rem',
-          padding: '1.5rem',
-          boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-          backdropFilter: 'blur(12px)',
-          marginBottom: '1.5rem',
+          background:
+            "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+          border: "1px solid rgba(59, 130, 246, 0.3)",
+          borderRadius: "1rem",
+          padding: "1.5rem",
+          boxShadow:
+            "0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+          backdropFilter: "blur(12px)",
+          marginBottom: "1.5rem",
         }}
       >
-        <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{
-            fontSize: '1.25rem',
-            fontWeight: 700,
-            marginBottom: '0.5rem',
-            background: 'linear-gradient(135deg, #3b82f6, #60a5fa)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
+        <div style={{ marginBottom: "1.5rem" }}>
+          <h3
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: 700,
+              marginBottom: "0.5rem",
+              background: "linear-gradient(135deg, #3b82f6, #60a5fa)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
             Page Scraper
           </h3>
-          <p style={{
-            fontSize: '0.875rem',
-            color: '#94a3b8',
-            lineHeight: '1.5',
-          }}>
-            Select extraction mode, add optional instructions, scrape for preview,
-            then download or open in chat.
+          <p
+            style={{
+              fontSize: "0.875rem",
+              color: "#94a3b8",
+              lineHeight: "1.5",
+            }}
+          >
+            Select extraction mode, add optional instructions, scrape for
+            preview, then download or open in chat.
           </p>
         </div>
 
         {/* Mode Selector */}
-        <div 
+        <div
           className="p-6 mb-6 border shadow-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 border-blue-400/20 rounded-2xl backdrop-blur-sm"
           style={{
-            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.1))',
-            border: '1px solid rgba(59, 130, 246, 0.2)',
-            borderRadius: '1rem',
-            padding: '1.25rem',
-            marginBottom: '1.5rem',
-            boxShadow: '0 4px 12px rgba(59, 130, 246, 0.1)',
+            background:
+              "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.1))",
+            border: "1px solid rgba(59, 130, 246, 0.2)",
+            borderRadius: "1rem",
+            padding: "1.25rem",
+            marginBottom: "1.5rem",
+            boxShadow: "0 4px 12px rgba(59, 130, 246, 0.1)",
           }}
         >
           <label className="flex items-center gap-2 mb-3 text-sm font-semibold text-blue-300">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
             </svg>
             Extraction Mode
           </label>
@@ -136,18 +157,32 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
         </div>
 
         {/* Instructions */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            marginBottom: '0.75rem',
-            fontSize: '0.875rem',
-            fontWeight: 600,
-            color: '#e2e8f0',
-          }}>
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#60a5fa' }}>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        <div style={{ marginBottom: "1.5rem" }}>
+          <label
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              marginBottom: "0.75rem",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              color: "#e2e8f0",
+            }}
+          >
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              style={{ color: "#60a5fa" }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              />
             </svg>
             What should SamAI extract?
           </label>
@@ -156,31 +191,31 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
             onChange={(e) => onScrapeInstructionsChange(e.target.value)}
             placeholder="e.g., “List the pros/cons in JSON”, “Extract every event and include time + speaker”, “Summarize FAQs as bullet list”."
             style={{
-              width: '100%',
-              padding: '1rem',
-              background: 'rgba(15, 23, 42, 0.8)',
-              border: '1px solid rgba(59, 130, 246, 0.3)',
-              borderRadius: '0.75rem',
-              fontSize: '0.875rem',
-              resize: 'vertical',
-              minHeight: '120px',
-              color: '#f1f5f9',
-              transition: 'all 0.2s',
+              width: "100%",
+              padding: "1rem",
+              background: "rgba(15, 23, 42, 0.8)",
+              border: "1px solid rgba(59, 130, 246, 0.3)",
+              borderRadius: "0.75rem",
+              fontSize: "0.875rem",
+              resize: "vertical",
+              minHeight: "120px",
+              color: "#f1f5f9",
+              transition: "all 0.2s",
             }}
             onFocus={(e) => {
-              e.target.style.borderColor = 'rgba(96, 165, 250, 0.6)';
-              e.target.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.2)';
+              e.target.style.borderColor = "rgba(96, 165, 250, 0.6)";
+              e.target.style.boxShadow = "0 0 0 4px rgba(59, 130, 246, 0.2)";
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = 'rgba(59, 130, 246, 0.3)';
-              e.target.style.boxShadow = 'none';
+              e.target.style.borderColor = "rgba(59, 130, 246, 0.3)";
+              e.target.style.boxShadow = "none";
             }}
             rows={4}
           />
         </div>
 
         {/* Output format */}
-        <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ marginBottom: "1.5rem" }}>
           <label
             style={{
               display: "block",
@@ -224,7 +259,13 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                 <div style={{ fontWeight: 600, fontSize: "0.95rem" }}>
                   {option.label}
                 </div>
-                <p style={{ fontSize: "0.8rem", color: "#94a3b8", marginTop: "0.2rem" }}>
+                <p
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "#94a3b8",
+                    marginTop: "0.2rem",
+                  }}
+                >
                   {option.hint}
                 </p>
               </button>
@@ -272,16 +313,18 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
       {(scrapedContent || scrapeResult) && (
         <>
           {scrapedContent && (
-            <div 
+            <div
               className="p-8 border-2 shadow-2xl bg-gradient-to-br from-blue-500/8 to-blue-600/8 rounded-3xl border-blue-400/30 backdrop-blur-xl"
               style={{
-                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.08))',
-                border: '2px solid rgba(59, 130, 246, 0.3)',
-                borderRadius: '1rem',
-                padding: '1.5rem',
-                marginBottom: '1.5rem',
-                boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(12px)',
+                background:
+                  "linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.08))",
+                border: "2px solid rgba(59, 130, 246, 0.3)",
+                borderRadius: "1rem",
+                padding: "1.5rem",
+                marginBottom: "1.5rem",
+                boxShadow:
+                  "0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+                backdropFilter: "blur(12px)",
               }}
             >
               <div className="flex items-center justify-between mb-8">
@@ -295,14 +338,25 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                   onClick={onClearPreview}
                   className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-gray-300 hover:text-white bg-slate-800/50 hover:bg-slate-700/70 backdrop-blur-sm rounded-2xl border border-slate-600/50 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))',
-                    border: '1px solid rgba(71, 85, 105, 0.4)',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
-                    letterSpacing: '0.025em',
+                    background:
+                      "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))",
+                    border: "1px solid rgba(71, 85, 105, 0.4)",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                    letterSpacing: "0.025em",
                   }}
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                   Clear
                 </button>
@@ -325,7 +379,8 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
           {scrapeResult && (
             <div
               style={{
-                background: "linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(45, 212, 191, 0.05))",
+                background:
+                  "linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(45, 212, 191, 0.05))",
                 border: "2px solid rgba(16, 185, 129, 0.25)",
                 borderRadius: "1rem",
                 padding: "1.5rem",
@@ -334,14 +389,31 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
                 backdropFilter: "blur(12px)",
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "1.25rem",
+                }}
+              >
                 <div>
-                  <h4 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#34d399", marginBottom: "0.35rem" }}>
+                  <h4
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: 700,
+                      color: "#34d399",
+                      marginBottom: "0.35rem",
+                    }}
+                  >
                     🎯 Extraction Result
                   </h4>
                   <p style={{ fontSize: "0.85rem", color: "#a7f3d0" }}>
-                    Output format: {
-                      formatOptions.find((option) => option.value === scrapeResultFormat)?.label
+                    Output format:{" "}
+                    {
+                      formatOptions.find(
+                        (option) => option.value === scrapeResultFormat
+                      )?.label
                     }
                   </p>
                 </div>
@@ -359,18 +431,19 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
           )}
 
           {/* Action Buttons */}
-          <div 
+          <div
             className="grid grid-cols-2 gap-6 p-6 border shadow-2xl bg-gradient-to-r from-blue-500/5 to-blue-600/5 rounded-3xl border-blue-500/20 backdrop-blur-xl"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '1rem',
-              padding: '1.25rem',
-              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05))',
-              border: '1px solid rgba(59, 130, 246, 0.2)',
-              borderRadius: '1rem',
-              boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.15)',
-              backdropFilter: 'blur(12px)',
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "1rem",
+              padding: "1.25rem",
+              background:
+                "linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05))",
+              border: "1px solid rgba(59, 130, 246, 0.2)",
+              borderRadius: "1rem",
+              boxShadow: "0 10px 30px -10px rgba(59, 130, 246, 0.15)",
+              backdropFilter: "blur(12px)",
             }}
           >
             <GradientButton
