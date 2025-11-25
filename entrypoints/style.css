@@ -112,6 +112,21 @@ html {
         transform: translateY(0);
     }
 }
+/* Panel slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
