@@ -266,6 +266,28 @@ export const SummaryTab: React.FC<SummaryTabProps> = ({
             <p style={{ fontSize: "0.8rem", color: "#94a3b8" }}>
               Click the "Sum" tab to generate a summary of this page
             </p>
+            {onSummarize && (
+              <button
+                onClick={onSummarize}
+                disabled={isSummarizing}
+                style={{
+                  marginTop: "1rem",
+                  padding: "0.75rem 1.5rem",
+                  background: "linear-gradient(135deg, #f59e0b, #fbbf24)",
+                  border: "none",
+                  borderRadius: "0.5rem",
+                  color: "white",
+                  fontSize: "0.9rem",
+                  fontWeight: 600,
+                  cursor: isSummarizing ? "not-allowed" : "pointer",
+                  opacity: isSummarizing ? 0.6 : 1,
+                  transition: "all 0.2s",
+                  boxShadow: "0 4px 12px rgba(245, 158, 11, 0.3)",
+                }}
+              >
+                {isSummarizing ? "Summarizing..." : "Start Summary"}
+              </button>
+            )}
           </div>
         )}
       </div>
