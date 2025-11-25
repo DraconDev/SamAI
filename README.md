@@ -39,6 +39,11 @@ SamAI is a comprehensive browser extension that transforms your entire web exper
 - **Profile Import/Export**: Share and backup form profiles
 - **Auto-Fill Intelligence**: Smart default filling with intelligent field matching
 
+### 🖼️ **Image Processing (Placeholder)**
+- **Image Generation Interface**: UI ready for AI-powered image creation tools
+- **Development Status**: Currently a placeholder with "Feature in development" status
+- **Planned Functionality**: Will include image analysis and visual search enhancement
+- **Future Integration**: Ready for integration with existing AI providers for image tasks
 ### 🖼️ **Image Analysis & Processing**
 - **Smart Image Recognition**: Analyze and describe images on any webpage
 - **Context Integration**: Understand images within page context
