@@ -331,7 +331,11 @@ export default function SearchSettingsPage() {
                   <input
                     type="checkbox"
                     checked={enableHighlighting}
-                    onChange={(e) => setEnableHighlighting(e.target.checked)}
+                    onChange={(e) => {
+                      setEnableHighlighting(e.target.checked);
+                      // Send message to update content script
+                      window.postMessage({ type: "TOGGLE_ENABLE_HIGHLIGHTING", enabled: e.target.checked }, "*");
+                    }}
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
@@ -405,7 +409,7 @@ export default function SearchSettingsPage() {
                         <span>Unhide</span>
                       </button>
                     </div>
-                    <div className="text-sm text-gray-300 font-mono bg-gray-800/50 p-2 rounded">
+                    <div className="p-2 font-mono text-sm text-gray-300 rounded bg-gray-800/50">
                       {pattern.pattern}
                     </div>
                   </div>
