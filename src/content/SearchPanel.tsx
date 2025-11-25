@@ -13,7 +13,7 @@ import {
   SearchTab,
   SummaryTab,
   TabNavigation,
-  type TabId,
+  type TabId
 } from "./SearchPanel/components";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
