@@ -357,7 +357,7 @@ Please provide a helpful response about the user's question specifically related
         flexDirection: 'column',
         height: '100vh',
         maxHeight: '100vh',
-        padding: '1.5rem',
+        padding: '1rem',
         overflow: 'hidden',
         boxSizing: 'border-box',
         animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'

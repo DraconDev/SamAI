@@ -1,7 +1,7 @@
-import React from 'react';
-import { MarkdownRenderer } from '@/utils/markdown';
-import type { OutputFormat } from '@/utils/page-content';
-import { LoadingSpinner } from '@/src/components/ui/LoadingSpinner';
+import { LoadingSpinner } from "@/src/components/ui/LoadingSpinner";
+import { MarkdownRenderer } from "@/utils/markdown";
+import type { OutputFormat } from "@/utils/page-content";
+import React from "react";
 
 interface SearchTabProps {
   response: string | null;
@@ -19,40 +19,46 @@ export const SearchTab: React.FC<SearchTabProps> = ({
   };
 
   return (
-    <div style={{ 
-      height: '100%', 
-      overflowY: 'auto',
-      padding: '1rem',
-    }}>
-      <div style={{ 
-        marginBottom: "1.5rem",
-      }}>
+    <div
+      style={{
+        height: "100%",
+        overflowY: "auto",
+        padding: "0.75rem",
+      }}
+    >
+      <div style={{ marginBottom: "1rem" }}>
         {response ? (
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
-            border: '1px solid rgba(79, 70, 229, 0.3)',
-            borderRadius: '1rem',
-            padding: '1.5rem',
-            boxShadow: '0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(12px)',
-          }}>
+          <div
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+              border: "1px solid rgba(79, 70, 229, 0.3)",
+              borderRadius: "1rem",
+              padding: "1.5rem",
+              boxShadow:
+                "0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+              backdropFilter: "blur(12px)",
+            }}
+          >
             {outputFormat === "html" ? (
               <div
                 style={{
-                  maxWidth: 'none',
-                  color: '#f1f5f9',
-                  lineHeight: '1.75',
-                  fontSize: '14px',
+                  maxWidth: "none",
+                  color: "#f1f5f9",
+                  lineHeight: "1.75",
+                  fontSize: "14px",
                 }}
                 dangerouslySetInnerHTML={{ __html: response }}
               />
             ) : (
-              <div style={{
-                maxWidth: 'none',
-                color: '#f1f5f9',
-                lineHeight: '1.75',
-                fontSize: '14px',
-              }}>
+              <div
+                style={{
+                  maxWidth: "none",
+                  color: "#f1f5f9",
+                  lineHeight: "1.75",
+                  fontSize: "14px",
+                }}
+              >
                 <MarkdownRenderer content={response} />
               </div>
             )}
@@ -64,15 +70,17 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "400px",
+              minHeight: "260px",
               textAlign: "center",
-              padding: "2rem",
-              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
-              border: '1px solid rgba(79, 70, 229, 0.3)',
-              borderRadius: '1rem',
-              boxShadow: '0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(12px)',
-              animation: 'samai-fade-in 0.3s ease-out',
+              padding: "1.25rem",
+              background:
+                "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+              border: "1px solid rgba(79, 70, 229, 0.3)",
+              borderRadius: "1rem",
+              boxShadow:
+                "0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+              backdropFilter: "blur(8px)",
+              animation: "samai-fade-in 0.3s ease-out",
             }}
           >
             <div
@@ -80,13 +88,14 @@ export const SearchTab: React.FC<SearchTabProps> = ({
                 width: "80px",
                 height: "80px",
                 borderRadius: "1.5rem",
-                background: "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.15))",
+                background:
+                  "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.15))",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: "1.5rem",
                 border: "1px solid rgba(99, 102, 241, 0.3)",
-                boxShadow: '0 8px 20px -4px rgba(99, 102, 241, 0.3)',
+                boxShadow: "0 8px 20px -4px rgba(99, 102, 241, 0.3)",
               }}
             >
               <svg
@@ -137,18 +146,22 @@ export const SearchTab: React.FC<SearchTabProps> = ({
                 cursor: "pointer",
                 transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                 fontSize: "14px",
-                boxShadow: "0 8px 20px -4px rgba(99, 102, 241, 0.4), 0 4px 12px -2px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                boxShadow:
+                  "0 8px 20px -4px rgba(99, 102, 241, 0.4), 0 4px 12px -2px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
                 letterSpacing: "0.025em",
                 position: "relative",
                 overflow: "hidden",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 12px 28px -4px rgba(99, 102, 241, 0.5), 0 6px 16px -2px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
+                e.currentTarget.style.transform =
+                  "translateY(-2px) scale(1.02)";
+                e.currentTarget.style.boxShadow =
+                  "0 12px 28px -4px rgba(99, 102, 241, 0.5), 0 6px 16px -2px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "0 8px 20px -4px rgba(99, 102, 241, 0.4), 0 4px 12px -2px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 20px -4px rgba(99, 102, 241, 0.4), 0 4px 12px -2px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
               }}
             >
               Configure API Key
@@ -161,13 +174,15 @@ export const SearchTab: React.FC<SearchTabProps> = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "400px",
-              background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
-              border: '1px solid rgba(79, 70, 229, 0.3)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(12px)',
+              minHeight: "240px",
+              background:
+                "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+              border: "1px solid rgba(79, 70, 229, 0.3)",
+              borderRadius: "1rem",
+              padding: "1.25rem",
+              boxShadow:
+                "0 10px 30px -10px rgba(79, 70, 229, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+              backdropFilter: "blur(8px)",
             }}
           >
             <LoadingSpinner size="lg" color="primary" />
@@ -178,20 +193,22 @@ export const SearchTab: React.FC<SearchTabProps> = ({
                 fontWeight: 600,
                 fontSize: "15px",
                 letterSpacing: "0.5px",
-                background: 'linear-gradient(135deg, #818cf8, #a5b4fc)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                background: "linear-gradient(135deg, #818cf8, #a5b4fc)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               Generating insights...
             </div>
-            <p style={{
-              marginTop: "0.75rem",
-              color: "#94a3b8",
-              fontSize: "13px",
-              fontWeight: 400,
-            }}>
+            <p
+              style={{
+                marginTop: "0.75rem",
+                color: "#94a3b8",
+                fontSize: "13px",
+                fontWeight: 400,
+              }}
+            >
               Analyzing page content with AI
             </p>
           </div>

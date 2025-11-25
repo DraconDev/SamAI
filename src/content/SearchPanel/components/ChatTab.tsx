@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { MarkdownRenderer } from '@/utils/markdown';
-import { LoadingSpinner } from '@/src/components/ui/LoadingSpinner';
-import type { ChatMessage } from '../types';
-import type { OutputFormat } from '@/utils/page-content';
+import { LoadingSpinner } from "@/src/components/ui/LoadingSpinner";
+import { MarkdownRenderer } from "@/utils/markdown";
+import type { OutputFormat } from "@/utils/page-content";
+import React, { useEffect } from "react";
+import type { ChatMessage } from "../types";
 
 interface ChatTabProps {
   isApiKeySet: boolean;
@@ -33,291 +33,467 @@ export const ChatTab: React.FC<ChatTabProps> = ({
   onIncludePageContentChange,
   onOpenApiKey,
 }) => {
-  // Scroll to bottom when chat messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
 
+  const renderMessages = () => {
+    if (chatMessages.length === 0) {
+      return (
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#94a3b8",
+            textAlign: "center",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "20px",
+                background: "rgba(16,185,129,0.15)",
+                border: "1px solid rgba(16,185,129,0.3)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 1rem",
+              }}
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#34d399"
+                strokeWidth="2.2"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <div
+              style={{
+                fontSize: "1rem",
+                fontWeight: 600,
+                marginBottom: "0.35rem",
+                color: "#e2e8f0",
+              }}
+            >
+              Chat is ready
+            </div>
+            <p style={{ fontSize: "0.85rem" }}>
+              Ask anything about the page and SamAI will respond with
+              context-aware answers.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return chatMessages.map((message, index) => {
+      const isUser = message.role === "user";
+      return (
+        <div
+          key={`${message.timestamp}-${index}`}
+          style={{
+            display: "flex",
+            justifyContent: isUser ? "flex-end" : "flex-start",
+            marginBottom: "0.75rem",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "85%",
+              background: isUser
+                ? "linear-gradient(135deg,#10b981,#34d399)"
+                : "linear-gradient(135deg,rgba(30,41,59,0.95), rgba(51,65,85,0.95))",
+              color: isUser ? "#fff" : "#e2e8f0",
+              padding: "0.85rem 1rem",
+              borderRadius: "1rem",
+              border: `1px solid ${
+                isUser ? "rgba(16,185,129,0.4)" : "rgba(71,85,105,0.6)"
+              }`,
+              boxShadow: isUser
+                ? "0 10px 22px rgba(16,185,129,0.35)"
+                : "0 12px 22px rgba(0,0,0,0.35)",
+            }}
+          >
+            {isUser ? (
+              <div style={{ fontSize: "0.95rem", lineHeight: 1.5 }}>
+                {message.content}
+              </div>
+            ) : (
+              <div style={{ fontSize: "0.95rem", lineHeight: 1.6 }}>
+                <MarkdownRenderer content={message.content} />
+              </div>
+            )}
+            <div
+              style={{
+                marginTop: "0.5rem",
+                fontSize: "0.75rem",
+                color: isUser
+                  ? "rgba(255,255,255,0.8)"
+                  : "rgba(148,163,184,0.9)",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.35rem",
+              }}
+            >
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12,6 12,12 16,14" />
+              </svg>
+              {message.timestamp}
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
-    <div 
-      className="flex flex-col h-full overflow-hidden border shadow-2xl bg-slate-900/95 border-slate-700/60 rounded-2xl backdrop-blur-xl"
+    <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        maxHeight: '100%',
-        overflow: 'hidden',
-        border: '1px solid rgba(51, 65, 85, 0.6)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-        background: 'rgba(15, 23, 42, 0.95)',
-        borderRadius: '1rem',
-        backdropFilter: 'blur(20px)',
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        border: "1px solid rgba(51, 65, 85, 0.6)",
+        borderRadius: "1rem",
+        background: "rgba(15, 23, 42, 0.95)",
+        boxShadow: "0 24px 45px -18px rgba(0,0,0,0.65)",
+        overflow: "hidden",
       }}
     >
-      {/* Chat Header */}
-      <div 
-        className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/90 backdrop-blur-md"
+      <div
         style={{
-          padding: '1rem',
-          borderBottom: '1px solid rgba(51, 65, 85, 0.5)',
-          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95))',
-          backdropFilter: 'blur(12px)',
-          boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05)',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0.9rem 1rem",
+          borderBottom: "1px solid rgba(51,65,85,0.4)",
+          background: "rgba(30,41,59,0.95)",
         }}
       >
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center shadow-lg w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30 ring-1 ring-emerald-400/20">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "12px",
+              background: "linear-gradient(135deg,#10b981,#34d399)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 10px 20px rgba(16,185,129,0.35)",
+            }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </div>
           <div>
-            <h3 className="text-sm font-bold text-emerald-400">
+            <div
+              style={{ fontSize: "0.95rem", fontWeight: 700, color: "#34d399" }}
+            >
               Page Chat Assistant
-            </h3>
-            <p className="text-xs font-medium text-slate-400">Ask questions about this page</p>
+            </div>
+            <div style={{ fontSize: "0.8rem", color: "#94a3b8" }}>
+              Ask focused questions about the current page
+            </div>
           </div>
         </div>
         {isExtractingContent && (
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">
-            <div className="w-3 h-3 border-2 rounded-full border-emerald-400/30 border-t-emerald-400 animate-spin" />
-            <span className="text-xs font-semibold text-emerald-400">Reading page...</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.45rem",
+              padding: "0.3rem 0.8rem",
+              borderRadius: "999px",
+              border: "1px solid rgba(16,185,129,0.35)",
+              background: "rgba(16,185,129,0.12)",
+              fontSize: "0.75rem",
+              color: "#6ee7b7",
+            }}
+          >
+            <div
+              style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "50%",
+                border: "2px solid rgba(16,185,129,0.5)",
+                borderTopColor: "#34d399",
+                animation: "samai-spin 0.6s linear infinite",
+              }}
+            />
+            Reading page…
           </div>
         )}
       </div>
 
       {!isApiKeySet ? (
-        <div className="flex items-center justify-center flex-1 p-8">
-          <div className="max-w-sm text-center">
-            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 shadow-xl rounded-2xl bg-gradient-to-br from-amber-500 to-amber-400 shadow-amber-500/30 ring-1 ring-amber-400/20">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "2rem",
+            textAlign: "center",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                width: "70px",
+                height: "70px",
+                margin: "0 auto 1rem",
+                borderRadius: "18px",
+                background: "linear-gradient(135deg,#f59e0b,#fbbf24)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 14px 26px rgba(245,158,11,0.35)",
+              }}
+            >
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2.2"
+              >
                 <circle cx="12" cy="12" r="3" />
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
             </div>
-            <h3 className="mb-3 text-lg font-bold text-amber-400">
-              API Key Required
-            </h3>
-            <p className="mb-6 text-sm leading-relaxed text-slate-400">
-              Configure your Gemini API key to start chatting with the page content.
+            <div
+              style={{
+                fontSize: "1rem",
+                fontWeight: 700,
+                color: "#fcd34d",
+                marginBottom: "0.5rem",
+              }}
+            >
+              API key required
+            </div>
+            <p
+              style={{
+                fontSize: "0.9rem",
+                color: "#cbd5f5",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Configure your Gemini API key to start chatting with page context.
             </p>
             <button
               onClick={onOpenApiKey}
-              className="px-6 py-3 text-sm font-bold text-white transition-all duration-300 transform shadow-lg bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl hover:shadow-xl hover:shadow-amber-500/30 hover:scale-105 ring-1 ring-amber-400/20"
               style={{
-                background: 'linear-gradient(135deg, #f59e0b, #fbbf24)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                boxShadow: '0 8px 20px -4px rgba(245, 158, 11, 0.4), 0 4px 12px -2px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                letterSpacing: '0.025em',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 12px 28px -4px rgba(245, 158, 11, 0.5), 0 6px 16px -2px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "0 8px 20px -4px rgba(245, 158, 11, 0.4), 0 4px 12px -2px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                padding: "0.8rem 1.6rem",
+                borderRadius: "0.85rem",
+                background: "linear-gradient(135deg,#f59e0b,#fbbf24)",
+                border: "none",
+                color: "white",
+                fontWeight: 700,
+                cursor: "pointer",
+                boxShadow: "0 12px 24px rgba(245,158,11,0.35)",
               }}
             >
-              Configure API Key
+              Configure API key
             </button>
           </div>
         </div>
       ) : (
         <>
-          {/* Chat Messages Container - Scrollable */}
-          <div 
-            className="flex-1 p-4 space-y-4 overflow-y-auto" 
-            style={{ 
+          <div
+            style={{
               flex: 1,
-              padding: '1rem',
-              overflowY: 'auto',
+              padding: "1rem",
+              overflowY: "auto",
               minHeight: 0,
-              scrollbarWidth: 'thin',
-              scrollbarColor: '#475569 #1e293b',
             }}
           >
-            {chatMessages.length === 0 ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-20 h-20 mx-auto mb-6 shadow-xl rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-400 shadow-emerald-500/30 ring-1 ring-emerald-400/20">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                    </svg>
-                  </div>
-                  <h4 className="mb-2 text-lg font-bold text-emerald-400">Chat Ready</h4>
-                  <p className="text-sm font-medium text-slate-400">Ask questions about this page's content</p>
-                </div>
-              </div>
-            ) : (
-              chatMessages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex animate-slide-in-from-bottom ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div
-                    className={`max-w-[85%] group ${
-                      message.role === "user"
-                        ? "bg-gradient-to-br from-emerald-500 to-emerald-400 text-white border border-emerald-400/30 shadow-lg shadow-emerald-500/20 ml-4"
-                        : "bg-gradient-to-br from-slate-800/95 to-slate-700/95 border border-slate-600/60 text-slate-100 shadow-lg shadow-black/20 mr-4"
-                    } rounded-2xl backdrop-blur-sm transition-all duration-200 hover:shadow-xl`}
-                    style={{
-                      maxWidth: '85%',
-                      borderRadius: '1rem',
-                      transition: 'all 0.2s',
-                      ...(message.role === "user" ? {
-                        background: 'linear-gradient(135deg, #10b981, #34d399)',
-                        border: '1px solid rgba(16, 185, 129, 0.3)',
-                        boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.3), 0 4px 12px -2px rgba(16, 185, 129, 0.2)',
-                      } : {
-                        background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95))',
-                        border: '1px solid rgba(71, 85, 105, 0.6)',
-                        boxShadow: '0 8px 20px -4px rgba(0, 0, 0, 0.3)',
-                      })
-                    }}
-                    onMouseEnter={(e) => {
-                      if (message.role === "user") {
-                        e.currentTarget.style.boxShadow = '0 12px 28px -4px rgba(16, 185, 129, 0.4), 0 6px 16px -2px rgba(16, 185, 129, 0.3)';
-                      } else {
-                        e.currentTarget.style.boxShadow = '0 12px 28px -4px rgba(0, 0, 0, 0.4)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (message.role === "user") {
-                        e.currentTarget.style.boxShadow = '0 8px 20px -4px rgba(16, 185, 129, 0.3), 0 4px 12px -2px rgba(16, 185, 129, 0.2)';
-                      } else {
-                        e.currentTarget.style.boxShadow = '0 8px 20px -4px rgba(0, 0, 0, 0.3)';
-                      }
-                    }}
-                  >
-                    {message.role === "user" ? (
-                      <div className="p-4">
-                        <div className="text-sm font-medium leading-relaxed">{message.content}</div>
-                      </div>
-                    ) : (
-                      <div className="p-4">
-                        <div className="text-sm leading-relaxed prose-sm prose prose-invert max-w-none">
-                          <MarkdownRenderer content={message.content} />
-                        </div>
-                      </div>
-                    )}
-                    <div className={`px-4 pb-3 text-xs mt-1 flex items-center gap-1.5 ${
-                      message.role === "user" ? "text-emerald-100/80" : "text-slate-400/80"
-                    }`}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="opacity-60">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12,6 12,12 16,14" />
-                      </svg>
-                      <span className="font-medium">{message.timestamp}</span>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
+            {renderMessages()}
             {(isChatLoading || isExtractingContent) && (
-              <div className="flex justify-start animate-slide-in-from-bottom">
-                <div className="p-4 mr-4 border shadow-lg border-slate-600/60 bg-gradient-to-br from-slate-800/95 to-slate-700/95 rounded-2xl backdrop-blur-sm">
-                  <div className="flex items-center space-x-3">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" />
-                      <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" style={{ animationDelay: "0.1s" }} />
-                      <div className="w-2 h-2 rounded-full shadow-sm bg-emerald-400 animate-bounce" style={{ animationDelay: "0.2s" }} />
-                    </div>
-                    <span className="text-xs font-semibold text-emerald-400">
-                      {isExtractingContent ? "Reading page content..." : "AI is thinking..."}
-                    </span>
-                  </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  marginTop: "0.5rem",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "0.75rem 1rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(71,85,105,0.5)",
+                    background: "rgba(30,41,59,0.85)",
+                    color: "#34d399",
+                    fontSize: "0.85rem",
+                  }}
+                >
+                  {isExtractingContent
+                    ? "Reading page content…"
+                    : "AI is thinking…"}
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Chat Input - Fixed at Bottom */}
-          <div 
-            className="flex-shrink-0 p-4 border-t border-slate-700/50 bg-slate-800/95 backdrop-blur-md"
+          <div
             style={{
-              flexShrink: 0,
-              padding: '1rem',
-              borderTop: '1px solid rgba(51, 65, 85, 0.5)',
-              background: 'rgba(30, 41, 59, 0.95)',
-              backdropFilter: 'blur(12px)',
+              padding: "1rem",
+              borderTop: "1px solid rgba(51,65,85,0.4)",
+              background: "rgba(30,41,59,0.95)",
             }}
           >
-            <form onSubmit={onSubmit} className="flex flex-col gap-3">
-              {/* Include Page Content Checkbox */}
-              <div className="flex items-center gap-3">
+            <form
+              onSubmit={onSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.75rem",
+              }}
+            >
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontSize: "0.85rem",
+                  color: "#cbd5f5",
+                  cursor: "pointer",
+                }}
+              >
                 <input
                   type="checkbox"
-                  id="includePageContent"
                   checked={includePageContent}
                   onChange={(e) => onIncludePageContentChange(e.target.checked)}
-                  className="w-4 h-4 transition-all duration-200 border-2 rounded cursor-pointer border-slate-600 bg-slate-700/50 text-emerald-500 focus:ring-emerald-500 focus:ring-2 focus:ring-offset-0 focus:ring-offset-slate-800 focus:border-emerald-500"
+                  style={{
+                    width: "16px",
+                    height: "16px",
+                    accentColor: "#10b981",
+                    cursor: "pointer",
+                  }}
                 />
-                <label
-                  htmlFor="includePageContent"
-                  className="text-sm font-medium cursor-pointer select-none text-slate-300"
-                >
-                  Include page content in chat
-                </label>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="relative flex-1">
+                Include page content in chat
+              </label>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.75rem",
+                  alignItems: "center",
+                }}
+              >
+                <div style={{ flex: 1, position: "relative" }}>
                   <input
                     type="text"
                     value={chatInput}
                     onChange={(e) => onInputChange(e.target.value)}
-                    placeholder={includePageContent ? "Ask about this page..." : "Ask anything..."}
-                    className="w-full h-12 px-4 pr-12 text-sm font-medium transition-all duration-200 border-2 outline-none text-slate-100 bg-slate-800/80 border-slate-600/60 rounded-xl placeholder-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 hover:border-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder={
+                      includePageContent
+                        ? "Ask about this page…"
+                        : "Ask anything…"
+                    }
                     disabled={isChatLoading || isExtractingContent}
+                    style={{
+                      width: "100%",
+                      height: "48px",
+                      borderRadius: "0.85rem",
+                      border: "1px solid rgba(71,85,105,0.6)",
+                      background: "rgba(15,23,42,0.85)",
+                      color: "#f1f5f9",
+                      padding: "0 3rem 0 1rem",
+                      fontSize: "0.95rem",
+                    }}
                   />
                   {(isChatLoading || isExtractingContent) && (
-                    <div className="absolute transform -translate-y-1/2 right-4 top-1/2">
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: "1rem",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                      }}
+                    >
                       <LoadingSpinner size="sm" color="success" />
                     </div>
                   )}
                 </div>
                 <button
                   type="submit"
-                  disabled={isChatLoading || isExtractingContent || !chatInput.trim()}
-                  className="h-12 px-6 font-bold text-white rounded-xl transition-all duration-200 min-w-[60px] flex items-center justify-center shadow-lg ring-1 ring-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 hover:scale-105 focus:ring-4 focus:ring-offset-2 focus:ring-offset-slate-800"
+                  disabled={
+                    isChatLoading || isExtractingContent || !chatInput.trim()
+                  }
                   style={{
-                    background: (isChatLoading || isExtractingContent || !chatInput.trim())
-                      ? 'linear-gradient(135deg, #6b7280, #9ca3af)'
-                      : 'linear-gradient(135deg, #10b981, #34d399)',
-                    border: (isChatLoading || isExtractingContent || !chatInput.trim())
-                      ? '1px solid rgba(107, 114, 128, 0.3)'
-                      : '1px solid rgba(255, 255, 255, 0.2)',
-                    boxShadow: (isChatLoading || isExtractingContent || !chatInput.trim())
-                      ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                      : '0 8px 20px -4px rgba(16, 185, 129, 0.4), 0 4px 12px -2px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                    letterSpacing: '0.025em',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isChatLoading && !isExtractingContent && chatInput.trim()) {
-                      e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
-                      e.currentTarget.style.boxShadow = "0 12px 28px -4px rgba(16, 185, 129, 0.5), 0 6px 16px -2px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isChatLoading && !isExtractingContent && chatInput.trim()) {
-                      e.currentTarget.style.transform = "translateY(0) scale(1)";
-                      e.currentTarget.style.boxShadow = "0 8px 20px -4px rgba(16, 185, 129, 0.4), 0 4px 12px -2px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-                    }
+                    width: "56px",
+                    height: "48px",
+                    borderRadius: "0.85rem",
+                    border: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: chatInput.trim()
+                      ? "linear-gradient(135deg,#10b981,#34d399)"
+                      : "linear-gradient(135deg,#6b7280,#9ca3af)",
+                    color: "#fff",
+                    cursor: chatInput.trim() ? "pointer" : "not-allowed",
                   }}
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <line x1="22" y1="2" x2="11" y2="13" />
                     <polygon points="22 2 15 22 11 13 2 9 22 2" />
                   </svg>
                 </button>
               </div>
-              
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-medium text-slate-400">Press Enter to send</span>
-                <span className="px-2 py-1 font-semibold border rounded-full text-emerald-400 bg-emerald-500/10 border-emerald-500/20">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "0.75rem",
+                  color: "#94a3b8",
+                }}
+              >
+                <span>Press Enter to send</span>
+                <span
+                  style={{
+                    padding: "0.2rem 0.65rem",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(16,185,129,0.4)",
+                    color: "#6ee7b7",
+                  }}
+                >
                   {outputFormat === "html" ? "📄 HTML mode" : "📝 Text mode"}
                 </span>
               </div>

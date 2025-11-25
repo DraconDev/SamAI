@@ -191,21 +191,22 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     const gradient = gradientColors[tab.gradient] || { from: '#6366f1', to: '#4f46e5' };
     
     const baseButtonStyle: React.CSSProperties = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '0.5rem',
-      padding: '0.75rem 1rem',
-      borderRadius: '0.875rem',
-      fontSize: '0.875rem',
-      fontWeight: '600',
-      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      cursor: 'pointer',
-      border: 'none',
-      outline: 'none',
-      position: 'relative',
-      overflow: 'hidden',
-      letterSpacing: '0.025em',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.65rem",
+      padding: "0.95rem 1.25rem",
+      borderRadius: "1rem",
+      fontSize: "0.95rem",
+      fontWeight: 700,
+      transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+      cursor: "pointer",
+      border: "none",
+      outline: "none",
+      position: "relative",
+      overflow: "hidden",
+      letterSpacing: "0.03em",
+      minHeight: "3.25rem",
     };
 
     const activeStyle: React.CSSProperties = {
@@ -269,16 +270,18 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '0.5rem',
-        marginBottom: '1.5rem',
-        padding: '0.75rem',
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
-        borderRadius: '1rem',
-        border: '1px solid rgba(51, 65, 85, 0.6)',
-        boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-        backdropFilter: 'blur(12px)',
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))",
+        gap: "0.65rem",
+        marginBottom: "1rem",
+        padding: "0.75rem",
+        background:
+          "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
+        borderRadius: "1rem",
+        border: "1px solid rgba(51, 65, 85, 0.6)",
+        boxShadow:
+          "0 18px 36px -14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+        backdropFilter: "blur(10px)",
       }}
     >
       {/* Row 1 - Main Actions */}
@@ -292,13 +295,13 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
       {/* Row 2 - Secondary Actions */}
       <div
         style={{
-          gridColumn: 'span 4',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '0.5rem',
-          marginTop: '0.5rem',
-          paddingTop: '0.5rem',
-          borderTop: '1px solid rgba(51, 65, 85, 0.4)',
+          gridColumn: "1 / -1",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+          gap: "0.65rem",
+          marginTop: "0.5rem",
+          paddingTop: "0.5rem",
+          borderTop: "1px solid rgba(51, 65, 85, 0.35)",
         }}
       >
         {secondaryTabs.map((tab) => (
