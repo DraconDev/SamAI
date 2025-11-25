@@ -67,11 +67,3 @@ export function optimizeHtmlContent(html: string): string {
 
   return cleanedHtml; // Return the cleaned HTML
 }
-
-
-/**
- * Async version with optional caching via browser.storage.local
- */
-export async function extractPageContentAsync(
-  outputFormat: OutputFormat,
-  fresh: boolean
