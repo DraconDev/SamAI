@@ -24,15 +24,11 @@ export interface HomeData {
   currentFolderId?: string;
 }
 
-type TabId = "home" | "search" | "scrape" | "chat" | "sum" | "form" | "image";
-
 interface HomeTabProps {
-  onClose: () => void;
-  setActiveTab: (tab: TabId) => void;
-  onChatClick: () => void;
+  // Home tab is self-contained, no props needed
 }
 
-const HomeTab: React.FC<HomeTabProps> = ({ setActiveTab, onChatClick }) => {
+const HomeTab: React.FC<HomeTabProps> = () => {
   const [homeData, setHomeData] = useState<HomeData>({
     icons: [],
     folders: [],
