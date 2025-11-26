@@ -5,7 +5,7 @@ import { apiKeyStore } from "@/utils/store";
 import React, { useEffect, useState } from "react";
 import type { ChatMessage } from "../types";
 
-type ChatSource = "none" | "page" | "html" | "screen";
+type ChatSource = "none" | "page" | "html" | "screen" | "video";
 
 interface ChatTabProps {
   isApiKeySet: boolean;
