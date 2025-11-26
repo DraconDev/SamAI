@@ -316,7 +316,11 @@ ${content}`;
     }
   };
 
-  const handleSendChatMessage = async (e: React.FormEvent) => {
+  const handleSendChatMessage = async (
+    e: React.FormEvent,
+    source?: ChatSource,
+    enhancedContext?: string
+  ) => {
     e.preventDefault();
     if (!isApiKeySet || !chatInput.trim() || isChatLoading) return;
 
@@ -332,19 +336,29 @@ ${content}`;
     setIsExtractingContent(true);
 
     try {
-      let fullPrompt = chatInput;
+      let fullPrompt = enhancedContext || chatInput;
 
-      if (includePageContent) {
+      // Extract fresh content based on source selection
+      if (source === "page" || source === "html") {
         setIsExtractingContent(true);
-        const currentPageContent = await getPageContent(outputFormat);
+        const currentPageContent = await getPageContent(
+          source === "html" ? "html" : "visible"
+        );
         setIsExtractingContent(false);
 
         fullPrompt = `${chatInput}
 
-CURRENT PAGE CONTENT (freshly extracted from the page you're currently viewing):
+CURRENT PAGE CONTENT (freshly extracted from the ${
+          source === "html" ? "HTML structure" : "visible text"
+        } of the page you're currently viewing):
 ${currentPageContent}
 
-Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page.`;
+Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page: ${
+          window.location.href
+        }`;
+      } else if (source === "none") {
+        // Just use the raw question without page context
+        fullPrompt = chatInput;
       }
 
       const response = await generateFormResponse(fullPrompt);
