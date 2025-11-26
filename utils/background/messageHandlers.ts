@@ -185,7 +185,7 @@ export const handleCaptureScreenshot = async (
     }
 
     // Capture screenshot of the current tab
-    const screenshot = await browser.tabs.captureVisibleTab(null, {
+    const screenshot = await browser.tabs.captureVisibleTab(undefined, {
       format: "png",
       quality: 100,
     });
