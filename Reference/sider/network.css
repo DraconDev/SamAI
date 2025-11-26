@@ -1,0 +1,1 @@
+.qt{animation:Xt 3s linear infinite;transform:rotate(30deg);top:-40px;width:16px;height:120px;background-color:#fff;filter:blur(16px)}@keyframes Xt{0%{transform:translate(-125%) rotate(30deg);left:0%}20%{transform:translate(100%) rotate(30deg);left:100%}to{transform:translate(100%) rotate(30deg);left:100%}}

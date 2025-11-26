@@ -1,0 +1,1 @@
+(function(){setInterval(()=>{Array.from(document?.querySelectorAll("ytcp-comment-button")).forEach(t=>{let n=t.data;n&&t.setAttribute("data-ytb-url",n.navigationEndpoint?.urlEndpoint?.url)})},2e3)})();

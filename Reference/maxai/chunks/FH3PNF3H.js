@@ -1,0 +1,1 @@
+import{a as t}from"./ZPJNXK6I.js";import{c as r}from"./RVPFLFJI.js";import{a as h}from"./4B6UFNBQ.js";import{f as c}from"./GAV6HCJA.js";var m=c(h());var p=s=>{let{shadowRootElement:o,colorSchema:n}=s||{},e=t(n),a=(0,m.useMemo)(()=>r({colorMode:e,popupContainer:o}),[o,e]);return{isDarkMode:e==="dark",customTheme:a}};export{p as a};

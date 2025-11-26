@@ -1,0 +1,3489 @@
+{
+  "about-author": "Uuri autori kohta",
+  "account": "Konto",
+  "add": "Lisama",
+  "addons": "Lisandmoodulid",
+  "addPrompt": "Lisa küsimus",
+  "addPrompts": "Lisa viip",
+  "addTools": "Lisa tööriistad",
+  "advanced": "Täpsem",
+  "agentPanel": {
+    "agentDesc": "{{name}} saab teie brauserit juhtida, et ülesandeid täita. See funktsioon on veel varajases eelvaate etapis ja võib esineda vigu. Saate selle igal ajal peatada.",
+    "agentIsOperating": "{{name}} haldab seda lehte",
+    "browserAgent": "Brauser {{name}}",
+    "chatPlaceholder": "Millega saab {{name}} aidata?",
+    "creditCostTip": "{{name}} on arvutusmahukas toode ja vastavad Elite Credits arvestatakse maha vastavalt tegelikule tarbimisele.",
+    "previewVersion": "Uurimise eelvaade",
+    "stopAgent": "Peata {{name}}",
+    "toolAction": {
+      "click": "Klõpsa",
+      "extractPageText": "Ekstrakti lehe tekst",
+      "findItem": "Leia: \"{{text}}\"",
+      "formInput": "Määra sisendiks \"{{text}}\"",
+      "navigate": "Liigu aadressile {{url}}",
+      "pressKey": "Vajuta klahvi: {{text}}",
+      "readPage": "Loe lehte",
+      "scroll": "Kerige",
+      "takeScreenshot": "Tee ekraanipilt",
+      "typeText": "Sisesta tekst: \"{{text}}\"",
+      "waitTime": "Oota {{time}} sekundit"
+    }
+  },
+  "aiResCompare": "Tehisintellekti vastuste võrdlus",
+  "AISlides": "AI Slides",
+  "aiSlidesPromoteTip": "Ühe klõpsuga esitluskvaliteediga PPT-d",
+  "aiSlidesPromoteTip2": "Tee see PPT vapustavaks",
+  "aiWebBuilderPromoteTip": "Teisenda see {{ARTIFACT}} kohe veebisaidiks",
+  "all": "Kõik",
+  "allFeatures": "Kõik funktsioonid",
+  "allSettings": "Kõik seaded",
+  "alwaysDisplay": "Kuva alati",
+  "analyzed": "Analüüsitud",
+  "analyzing": "Analüüsimine...",
+  "analyzingFailed": "Analüüsimine ebaõnnestus",
+  "analyzingIntent": "Kavatsuse analüüsimine",
+  "answering": "Vastates",
+  "appearance": "Välimus",
+  "archive": "arhiiv",
+  "archiveTpl": "Arhiivige see mall",
+  "artifactDemos": [
+    {
+      "title": "Loo virtuaalne ksülofon",
+      "value": "Loo HTML-põhine ksülofon värviliste klahvidega {{ARTIFACT}}-is. Paku visuaalset tagasisidet löödud klahvidele ja genereeri lihtsaid, realistlikke helisid Web Audio API abil sagedusparameetrite põhjal. Lisa põhijuhised."
+    },
+    {
+      "title": "Loo toidu söömise emotikonimäng",
+      "value": "Loo lihtne HTML-põhine mäng, mis sarnaneb mänguga Catch the Candy, {{ARTIFACT}}-is. Mängija juhib ekraani allosas asuvat emotikoni, liigutades seda kiiresti vasakule ja paremale, et püüda ja süüa ülalt langevaid toiduaineid (nt 🍓, 🍔, 🍎), vältides samal ajal pomme (💣). Iga kord, kui mängija püüab toidu emotikoni, muutub tema emotikon väljendusrikkamaks positiivseks näoks (nt 🤩, 😆, 😋), et näidata edu. Kui mängija kogemata püüab pommi, näitab emotikon esmalt plahvatust (💥) ja seejärel muutub uimaseks näoks (😵‍💫)."
+    },
+    {
+      "title": "Loo nutitelefonide saadetiste diagramm",
+      "value": "Kasuta Reacti, et luua ilus joongraafik {{ARTIFACT}}-is järgmise tabeli põhjal.\n------\n\nNutitelefonide saadetised suurimate brändide kaupa viimase kümnendi jooksul (miljardites)\n\n| Aasta | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+    }
+  ],
+  "artifactError": {
+    "solution1": "<a>Värskenda eelvaadet</a>",
+    "solution2": "Saada veateade vestlusesse abi saamiseks. <a>Saada veateade</a>",
+    "title": "Sa võid proovida järgmisi valikuid:"
+  },
+  "artifactNarrow": "Taasta vaikimisi laius",
+  "artifactPublished": "Artefakt avaldatud",
+  "artifactPublishTip1": "Kui avaldate selle artefakti, loome avaliku URL-i, et kõik saaksid sellele juurde pääseda. Teie vestlus jääb privaatseks ja saate jagamise igal ajal lõpetada.",
+  "artifactPublishTip2": "See artefakt on avalikkusele kättesaadav. Kõik saavad sellele jagatud lingi kaudu juurde pääseda.",
+  "artifactRemixContent": "Uurime selle {{ARTIFACT}} mõningaid variatsioone. Kas saate soovitada 3 viisi selle remiximiseks ja oodata minu vastust?",
+  "artifactsBetaTip": "Nautige Artifacts (Pro) tasuta beetaversiooni ajal—ärge jätke seda kasutamata!",
+  "artifactUnpublishedTip": "Kui te lõpetate avaldamise, ei saa teised enam artefaktile jagatud lingi kaudu juurde pääseda.",
+  "artifactWide": "Laienda täislaiusele",
+  "ask": "Küsi",
+  "attention": "Märkus",
+  "audio-meeting-minutes": "Koosoleku protokoll",
+  "audio-summarize": "Kokkuvõte",
+  "audio-to-text": "Heli tekstiks",
+  "audioExtractedText": "Helist ekstraheeritud tekst",
+  "audioTranscript": "Heli transkript",
+  "auto": "Auto",
+  "autoToText": "Automaatne tekstiks",
+  "back": "Tagasi",
+  "basic": "Põhiline",
+  "bestForChat": "Parim vestluseks",
+  "betterAnswer": "Saavuta paremaid tulemusi {{MODEL_NAME}} abil",
+  "bigSale": "Allahindlus",
+  "bigSaleRest": "Allahindlus",
+  "bilingualTranslation": {
+    "done": "Valmis",
+    "goToSetting": "Mine seadistustesse",
+    "originLangClose": "Kahekeelsed subtiitrid ei tööta korralikult, sest Netflixi subtiitrid on välja lülitatud. Vali subtiitrite keel ja värskenda lehte",
+    "refreshBtn": "Värskenda",
+    "refreshPage": "Midagi läks kahekeelsete subtiitritega valesti. Proovi lehte värskendada",
+    "setLangPreferDesc": "Parima kakskeelse kogemuse saamiseks vali keeled, mida tõenäoliselt vaatad, et saada täpseid subtiitreid ja tõlkeid.",
+    "setLangPreferTitle": "Määra keele-eelistused",
+    "switchTitle": "Kuva kakskeelne juhtimine YouTube'is & Netflixis",
+    "targetLang": "Sihtkeel",
+    "title": "Subtiitrite tõlge",
+    "youtubeRefreshTips": "Kakskeelseid subtiitreid ei tuvastatud. Palun värskendage lehte ja laadige subtiitrid uuesti."
+  },
+  "browseFiles": "Sirvitud {{NUM}} faili",
+  "browseFiles1": "Sirvitud 1 fail",
+  "browsingFiles": "Failide sirvimine",
+  "building": "Ehitan...",
+  "buyBooster": "Osta võimenduspakk ",
+  "cancel": "Tühista",
+  "change": "Muuda",
+  "changeLogPage": {
+    "learnToUse": "Õppige kasutama",
+    "logContents": {
+      "4_22_0": "Sider on valmis sinu avalikke X (Twitteri) postitusi naljatlema ja kiitma! Luba end naerutada, andmeid ei säilitata. Mäng alaku ja jaga rõõmu oma sõpradega!",
+      "5_12_0": "Minge vestluse juhtnuppude juurde, et seada oma eelistused. Säästke aega ja nautige isikupärasemat tehisintellekti kogemust, ilma et peaksite iga kord oma eelistusi kordama.",
+      "5_14_0": "Grok 4, xAI lipulaev mudel, pakub magistritaseme arutlemist, täiustatud kodeerimist ja matemaatikat ning mõistab pilte nagu teksti—võimas tööriist igaks analüütiliseks või loominguliseks ülesandeks.",
+      "5_19_0": "Anthropic'i uusim ja seni kõige võimsam mudel. See pakub parimat klassi kodeerimist ja ületab Opus 4.1 nii arutlusvõime kui ka valdkonnateadmiste poolest rahanduses, õiguses ja meditsiinis.",
+      "5_21_0": "Tutvu gpt-5-chat-latest'iga, uusima GPT-5 Chat mudeliga, mida kasutatakse ChatGPT-s. Naudi kiiremaid ja loomulikumaid vastuseid igapäevastes vestlustes, kirjutamises ja ideede uurimisel.",
+      "5_23_0": "Google'i kõige intelligentsem mudel. Selle tipptasemel põhjendus pakub kasulikumaid, paremini vormindatud ja lühemaid vastuseid, muutes selle ideaalseks partneriks, et aidata teil õppida, luua ja planeerida."
+    },
+    "logs": {
+      "1_0_1": [
+        "Täiustage kokkuvõtte funktsiooni Youtube'i lehel",
+        "Parandage mõned kopeerimise/kleepimise ja printimisega seotud vead"
+      ],
+      "1_0_10": [
+        "Toetage nüüd 50+ keelt!"
+      ],
+      "1_0_11": [
+        "Juurdepääs toimingutele kiiresti hüpikakna kaudu külgriba avamata.",
+        "Lisage täiendavate keelte tugi.",
+        "Tõlkefunktsiooni kasutamisel säilitage kasutaja keele-eelistus.",
+        "Lahendage otseteede konfliktid sellistel platvormidel nagu GitHub ja teised."
+      ],
+      "1_0_12": [
+        "Laienduse seadete sünkroonimine arvutites",
+        "Juurdepääs oma viipadele erinevatest sülearvutitest",
+        "Salvestage vestlused edaspidiseks kasutamiseks",
+        "Jagage vestlusi lingi kaudu"
+      ],
+      "1_0_13": [
+        "Pärast küsimuste esitamist jätkake vestlust",
+        "Plus kasutajate jaoks vahetage GPT-4 ja GPT-3.5 vahel",
+        "Juurdepääs vestluse ajaloole hõlpsalt juurde ja otsige seda"
+      ],
+      "1_0_2": [
+        "Lisa stopp-nupp, et peatada vastuse genereerimine",
+        "Ahendamiskoha muutmise nupp"
+      ],
+      "1_0_3": [
+        "CMD/Ctrl + Enter, et teha kiiret \"Esita\"",
+        "Võimalus peita paneel otsingutulemuste lehel",
+        "Külgriba peitmiseks toetage ESC-d",
+        "Tugi võtab pika artikli kokku"
+      ],
+      "1_0_4": [
+        "Tellige ripploendis olevad viipaüksused ümber",
+        "Arhiveerige üksused, mida te ei kasuta",
+        "Toetage vastust 50+ keeles"
+      ],
+      "1_0_5": [
+        "Pidage meeles külgriba ikooni asukoht",
+        "Täiustage kiirklahve",
+        "Salvestage viipade mallid otse külgribalt"
+      ],
+      "1_0_6": [
+        "Täiustage kokkuvõtte funktsiooni Youtube'i lehel"
+      ],
+      "1_0_7": [
+        "Pidage meeles viimati kasutatud viipa",
+        "Optimeerige chatGPT paneeli asukohta otsingulehtedel",
+        "Lisage küljeriba ikooni vasakule küljele paigutamiseks",
+        "Optimeerige pakendi suurus",
+        "Lisage tume režiim",
+        "Toetage oma API URL-i puhverserverit"
+      ],
+      "1_0_8": [
+        "Toetage GPT-4 Plus kasutajatele! Kontrolli seadete lehte!"
+      ],
+      "1_1_0": [
+        "Täielik vestlus <b>uuel vahekaardil</b>!",
+        "ChatGPT, <b>Bing</b>, <b>Bard</b> koos!",
+        "Veaparandused"
+      ],
+      "2_0_0": [
+        "Toetage <b>GPT-4 </b>kõikidele kasutajatele!",
+        "Kutsu sõpru ja saa <b>GPT-4</b> krediite mõlemale!",
+        "Veaparandused ja muud UX-i täiustused"
+      ],
+      "2_1_0": [
+        "Kiirotsingu otsetee",
+        "Muutke kiirotsingu akna suurust",
+        "Veaparandused ja muud UX-i täiustused"
+      ],
+      "2_2_0": [
+        "Koostage mis tahes sõnum",
+        "Vasta meilile, säutsu, kommenteeri jne"
+      ],
+      "2_3_0": [
+        "Sirvimise ja pistikprogrammide tugi Plussi kasutajatele!",
+        "ChatGPT Interneti-juurdepääsuga kõigile!"
+      ],
+      "2_4_0": [
+        "<b>Nutikas veebijuurdepääs</b>: teie päringu põhjal otsustab Al, kas tal on vaja veebile juurdepääsu.",
+        "Stabiilsuse parandamine"
+      ],
+      "2_5_0": [
+        "YouTube'i kokkuvõte! Vaadake 1-tunnist YouTube'i videot 1 minutiga",
+        "Võrrelge inimeste ja tehisintellekti vastuseid küsimuste ja vastuste saitidel, nagu Quora, StackOverflow ja Zhihu"
+      ],
+      "2_6_0": [
+        "Sider toetab fikseeritud külgriba – saate vestelda kõigi vahekaartide vahel ilma sisu kattumata <br /> (saadaval Chrome 114 või uuemates versioonides)"
+      ],
+      "2_7_0": [
+        "Joonistage tekstist pilt",
+        "Joonistage võrdluspildist pilt"
+      ],
+      "2_8_0": [
+        "Lugemisassistent: kasutage veebilehtede lugemise ajal tehisintellekti kiireks mõistmiseks",
+        "Kirjutamisassistent: looge kiiresti sisu veebisisestuskastis oleva AI abil"
+      ],
+      "2_9_0": [
+        {
+          "features": [
+            "Kontekstimenüü lugemine",
+            "Kontekstimenüü kirjutamine"
+          ],
+          "title": "Täiustatud viipade haldur"
+        },
+        {
+          "features": [
+            "Eemaldage piltidelt taust",
+            "Eemaldage piltidelt tekst"
+          ],
+          "title": "AI pildiredaktor"
+        }
+      ],
+      "3_0_0": [
+        {
+          "features": [
+            "<b>Rohkem vestlusroboteid</b>: nüüd toetab Claude-instant, Claude 2!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Grupivestlus</b>: võrrelge vastuseid vestlusrobotites!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Mainimine</b>: kasutage '@', et mainida ja suhelda vestlusrobotiga!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kiirviip</b>: sisestage lihtsalt \"/\" ja minge!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Lihtne disain</b>: muutke kujundus lihtsaks ja hõlpsasti navigeeritavaks"
+          ]
+        }
+      ],
+      "3_1_0": [
+        {
+          "features": [
+            "Lisaks ChatGPT-le ja Claude'ile toetab Sider nüüd ka Bardi!"
+          ],
+          "title": "Rohkem bot!"
+        },
+        {
+          "features": [
+            "Tuvastage üle 10 suurema keele",
+            "Tuvastage inglise keeles käsitsi kirjutatud",
+            "Tuvastage tekstis <b>matemaatika võrrandid</b>"
+          ],
+          "title": "OCR: eraldage mis tahes pildist tekst ja saatke see ChatGPT-sse"
+        },
+        {
+          "features": [
+            "Asendage kogu taust",
+            "Eemalda valitud ala"
+          ],
+          "title": "Täiustage maalikunstnikku"
+        }
+      ],
+      "3_2_0": [
+        {
+          "features": [
+            "Suurepärane uudis! Meie uuendatud hinnakujundus annab teile veelgi rohkem juurdepääsu GPT-4 ja Claude 2 krediitidele.",
+            "Kui olete juba premium-kasutaja, viiakse teid automaatselt üle. Lisaks on meil kõigile võimsatele kasutajatele uus pakett Piiramatu!"
+          ],
+          "title": "Uus hinnaplaan 5x rohkem GPT-4 krediite"
+        }
+      ],
+      "3_3_0": [
+        {
+          "features": [
+            "Ekstraktige pildilt tekst",
+            "Esitage pildi kohta küsimusi",
+            "3 võimalust pildi saatmiseks teenusesse {{SIDERVISION}} <div><ol><li>Tehke ekraanipilt</li><li>Pildi pukseerimine vestlusaknasse</li><li>Laadi pilt üles </li> li></ol></div>"
+          ],
+          "title": "{{SIDERVISION}} – ChatGPT külgriba koos Visioniga"
+        },
+        {
+          "features": [
+            "Ekstraktige pildilt tekst"
+          ]
+        },
+        {
+          "features": [
+            "Ekstraktige pildilt tekst"
+          ]
+        }
+      ],
+      "3_4_0": [
+        {
+          "features": [
+            "Kontrollige grammatikavigu",
+            "Parandage grammatikavead",
+            "Parandage kirjutamist grammatikast kaugemale"
+          ],
+          "title": "Sideri grammatika vidin"
+        }
+      ],
+      "3_5_0": [
+        {
+          "features": [
+            "{{4+VISION}}",
+            "1-klõps, et vastata samale küsimusele erinevate robotitega"
+          ],
+          "title": "{{SIDERVISION}} sai targemaks"
+        }
+      ],
+      "3_6_0": [
+        {
+          "features": [
+            "Kohandage oma tõlget spetsiaalses tõlkevidinas",
+            "Paranda ChatGPT vastuseid Google'is, Bingis, Baidus jne"
+          ],
+          "title": "Tõlkevidin"
+        }
+      ],
+      "4_0_0": [
+        {
+          "features": [
+            "Toetage GPT-4 Turbot ja GPT-3.5 Turbot",
+            "Tõlgi kogu veebileht",
+            "Vestluse veebileht külgribal",
+            "Vestelge PDF-i külgribal"
+          ],
+          "title": "GPT-4 Turbo ja vestluse veebileht!"
+        }
+      ],
+      "4_10_0": [
+        {
+          "features": [
+            "<b>Suurenenud kiirus:</b> Saage vastuseid 2x kiiremini kui GPT-4"
+          ]
+        },
+        {
+          "features": [
+            "<b>Parem nägemine:</b> Oluliselt parem pilditõlgendus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Rohkem keeli:</b> Rohkem keeli, parem kvaliteet ja kiirem jõudlus"
+          ]
+        }
+      ],
+      "4_11_0": [
+        {
+          "features": [
+            "<b>Mitu veebilehte:</b> Loe korraga mitut veebilehte või dokumenti"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kriitilise lugemise tööriistad:</b> Selgita võtmekontseptsioone, Tuvasta eeldused, Tõsta esile väljavõtted, Õpi autori kohta ja palju muud."
+          ]
+        },
+        {
+          "features": [
+            "<b>{{SIDERFUSION}}:</b> Valib dünaamiliselt parima kiire mudeli (GPT-3.5, Claude 3 Haiku, Gemini 1.5 Flash või Llama 3) teie konkreetse ülesande jaoks."
+          ]
+        }
+      ],
+      "4_12_0": [
+        {
+          "features": [
+            "<b>Claude 3.5 Sonneti tugi:</b> Anthropic'u uusim mudel, millel on 2x Claude 3 Opus'e kiirus ja kõrgem intelligentsus, parandab oluliselt arutlus-, teadmiste-, kodeerimis- ja visuaalseid ülesandeid."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude 3 Opus'e pensionile minek:</b> asendatud täiustatud Claude 3.5 Sonnet'iga."
+          ]
+        },
+        {
+          "features": [
+            "<b>Kutsu ja teeni:</b> Kutsu oma sõpru, et teenida tasuta päringuid ja proovida uusimat mudelit juba täna!"
+          ]
+        }
+      ],
+      "4_13_0": [
+        {
+          "features": [
+            "<b>Looduslikud AI hääled</b>: Nautige 9 loomulikult kõlavat AI häält mitmes keeles."
+          ]
+        },
+        {
+          "features": [
+            "<b>Kuula kõikjal</b>: Valige mis tahes tekst veebilehel, et seda valjusti kuulda."
+          ]
+        },
+        {
+          "features": [
+            "<b>Külgriba tugi</b>: Kuulake hõlpsalt AI loodud sisu külgriba vidinatest."
+          ]
+        }
+      ],
+      "4_16_0": [
+        {
+          "features": [
+            "<b>Kiirem, ülim jõudlus:</b> Muudab igapäevased ülesanded sujuvamaks ja tõhusamaks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Parendatud matemaatika ja kodeerimine:</b> Tagab täpse jõudluse tehniliste ülesannete jaoks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uuendus GPT-3.5-lt:</b> GPT-4o mini asendab GPT-3.5 parema jõudlusega."
+          ]
+        }
+      ],
+      "4_17_0": [
+        {
+          "features": [
+            "<b>Videokokkuvõtted</b>: Tehisintellekti loodud jutustused säästavad teie aega, tuues kiiresti esile olulised videopunktid."
+          ]
+        },
+        {
+          "features": [
+            "<b>Loomulik jutustus</b>: Realistlikud tehisintellekti hääled parandavad teie vaatamiskogemust."
+          ]
+        },
+        {
+          "features": [
+            "<b>Mitmekeelne tugi</b>: Saate hõlpsasti aru videotest, ületades keelebarjäärid."
+          ]
+        }
+      ],
+      "4_18_0": [
+        {
+          "features": [
+            "<b>Mitmed formaadid</b>: Jaga oma vestlust lingi või pildina."
+          ]
+        },
+        {
+          "features": [
+            "<b>Paindlik valik</b>: Vali ja jaga kogu vestlust või ainult osa sellest."
+          ]
+        },
+        {
+          "features": [
+            "<b>Lihtne kontroll</b>: Tühista jagatud lingid igal ajal."
+          ]
+        }
+      ],
+      "4_19_0": [
+        {
+          "features": [
+            "<b>Reaalajas eelvaade:</b> Eelvaade ja suhtlemine AI-ga loodud veebilehtede, dokumentide ja diagrammidega reaalajas."
+          ]
+        },
+        {
+          "features": [
+            "<b>Sujuv iteratsioon:</b> Iteratsioon loodud artefaktide üle vestluse kaudu."
+          ]
+        }
+      ],
+      "4_1_0": [
+        {
+          "features": [
+            "{{SIDERVISION}} toiteallikaks on GPT-4V",
+            "Parem piltide mõistmine",
+            "Saate kiiresti aru meili kavatsustest",
+            "Valige erinevate toonide ja isiksuste hulgast",
+            "Valige hõlpsalt vastusesoovitused"
+          ],
+          "title": "GPT-4V(ision) eelvaade! & AI vastus Gmailile"
+        }
+      ],
+      "4_20_0": [
+        {
+          "features": [
+            "<b>Mitme mudeli tõlge</b>: Kasuta korraga mitut mudelit täpsemate tõlgete jaoks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Mitmekülgsed tõlke ümberkirjutused</b>: Kirjuta tõlked ümber erinevateks olukordadeks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Kakskeelsed subtiitrid</b>: Vaata YouTube'i subtiitreid mõlemas keeles samaaegselt."
+          ]
+        }
+      ],
+      "4_23_0": [
+        {
+          "features": [
+            "<b>o1-preview</b>: Tegeleb keerukate ülesannetega ja lahendab raskemaid probleeme kui varasemad mudelid teaduses, kodeerimises ja matemaatikas. Maksumus on 15 täiustatud krediiti sõnumi kohta."
+          ]
+        },
+        {
+          "features": [
+            "<b>o1-mini</b>: Kiirem mudel, mis on eriti tõhus kodeerimisel. Ideaalne keskendunud põhjendamiseks ilma laialdaste teadmisteta. Maksumus on 3 täiustatud krediiti sõnumi kohta."
+          ]
+        },
+        {
+          "features": [
+            "<b>Märkus</b>: On olemas kiiruse piirangud."
+          ]
+        }
+      ],
+      "4_24_0": [
+        {
+          "features": [
+            "<b>Gemini 1.5 Pro</b>: Võimendatud arutlusvõime täiustatud matemaatika ja visuaalsete oskustega."
+          ]
+        },
+        {
+          "features": [
+            "<b>Gemini 1.5 Flash</b>: 2x kiirem, 3x madalam latentsus, parem visuaalides ja kodeerimises."
+          ]
+        }
+      ],
+      "4_25_0": [
+        {
+          "features": [
+            "<b>Viimistletud disain</b>: Kaasaegne visuaal, puhtam paigutus lihtsama kasutamise ja keskendumise jaoks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kinnitatavad käsud</b>: Kinnita sageli kasutatavad käsud kiireks juurdepääsuks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Laiendatavad tabelid</b>: Vaata suuri andmeid uues aknas parema loetavuse tagamiseks"
+          ]
+        }
+      ],
+      "4_26_0": [
+        {
+          "features": [
+            "<b>Chain of Thought Põhjendus</b>: Jaotab keerulised ülesanded samm-sammult nutikamaks probleemide lahendamiseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Sügavamad Arusaamad</b>: Pakub läbimõeldud vastuseid keerulistele küsimustele"
+          ]
+        },
+        {
+          "features": [
+            "<b>Töötab Kõigi Mudelitega</b>: Saadaval sujuvalt kõigis mudelites"
+          ]
+        }
+      ],
+      "4_27_0": [
+        {
+          "features": [
+            "<b>Lihtsustatud kasutajaliides</b>: Puhas, intuitiivsem liides sujuvamaks kasutuskogemuseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Täiustatud tõlge</b>: Edastab seotud sõnade tähendusi kontekstuaalse täpsusega"
+          ]
+        },
+        {
+          "features": [
+            "<b>Artefaktide avaldamine ja jagamine</b>: Jagage oma artefakte hõlpsalt avalikult linkide kaudu"
+          ]
+        }
+      ],
+      "4_28_0": [
+        {
+          "features": [
+            "<b>Claude 3.5 Haiku</b>: Pakub jõudlust, mis ületab Claude 3 Opus'e, olles suurepärane kodeerimises, tööriistade kasutamises ja arutlemises"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kohanda fondi suurust</b>: Nüüd saate muuta sõnumi fondi suurust"
+          ]
+        },
+        {
+          "features": [
+            "<b>Lihtsustatud kasutajaliides</b>: Puhas ja intuitiivne valikute kasutajaliides lihtsaks isikupärastamiseks"
+          ]
+        }
+      ],
+      "4_29_0": [
+        {
+          "features": [
+            "<b>Sõnumite redigeerimine</b>: Redigeeri saadetud sõnumeid lihtsalt ja saada uuesti uute vastuste saamiseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kõrvuti võrdlus</b>: Vaata vastuseid mitmest mudelist täisekraanil"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kohandatud käskude ikoon</b>: Määrake kohandatud käskudele ikoonid selgema organiseerimise jaoks"
+          ]
+        }
+      ],
+      "4_2_0": [
+        {
+          "features": [
+            "<b>Värskendatud liides:</b> Puhtam ja lihtsamini navigeeritav"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kokkupandav navigeerimisriba:</b> Tagab keskendunud vestluskogemuse, hoides samal ajal olulised funktsioonid hõlpsasti kättesaadavad"
+          ]
+        },
+        {
+          "features": [
+            "<b>Külgriba GPT-de juurdepääs:</b> ChatGPT Plus kasutajate jaoks on otsene juurdepääs GPT-dele nüüd saadaval külgribal veebirakenduse režiimis"
+          ]
+        }
+      ],
+      "4_30_0": [
+        {
+          "features": [
+            "<b>GPT-4o (2024-11-20)</b>: Täiustatud loomuliku kirjutamise võimekus ja parem failihaldus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ainult tõlke kuvamine</b>: Lehe tõlge toetab nüüd ainult tõlgitud sisu vaatamist"
+          ]
+        },
+        {
+          "features": [
+            "<b>Paremad YouTube'i subtiitrid</b>: Nautige kõrgema kvaliteediga kakskeelseid subtiitrite tõlkeid"
+          ]
+        }
+      ],
+      "4_31_0": [
+        {
+          "features": [
+            "<b>Tööriistade Nav</b>: Juurdepääs AI tööriistadele piltide, PDFide ja videote jaoks navigeerimisribalt"
+          ]
+        },
+        {
+          "features": [
+            "<b>Sisendi Tõlge</b>: Kolmekordne tühik sisendteksti tõlkimiseks (luba valikutes)"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kiirkoopia</b>: Kopeeri tekst koheselt kontekstimenüü abil"
+          ]
+        }
+      ],
+      "4_32_0": [
+        {
+          "features": [
+            "<b>Heli tekstiks</b>: Laadi üles MP3, WAV, M4A või MPGA fail, et genereerida transkripte"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vaata ja kuula</b>: Loe transkripte, kuulates heli"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kokkuvõte kergusega</b>: Loo kiireid kokkuvõtteid ühe klõpsuga"
+          ]
+        }
+      ],
+      "4_33_0": [
+        {
+          "features": [
+            "<b>OpenAI o1</b>: Kiirem kui ‘o1-preview’, suurepärane keeruliste mitmeetapiliste ülesannete puhul täpsema täpsusega"
+          ]
+        },
+        {
+          "features": [
+            "<b>Videote kokkuvõtted ilma subtiitriteta</b>: Saate YouTube'i videote transkriptsioonid ja kokkuvõtted ilma subtiitriteta"
+          ]
+        },
+        {
+          "features": [
+            "<b>Veebisisu kokkuvõte</b>: Parandatud platvormide jaoks nagu Reddit ja Twitter"
+          ]
+        }
+      ],
+      "4_34_0": [
+        {
+          "features": [
+            "<b>Al vastus Gmailis</b>: Toetab tõlkimist ja Al mudeli valikut paremaks suhtlemiseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Artefaktid</b>: Ekspordi vooskeemid piltidena lihtsaks jagamiseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tõlkimine</b>: Al sõnastik täpseks sõnade ja fraaside tõlkimiseks"
+          ]
+        }
+      ],
+      "4_35_0": [
+        {
+          "features": [
+            "<b>Kiired eelvaated</b>: Lohista linke, et vaadata sisu ilma uusi vahekaarte avamata"
+          ]
+        },
+        {
+          "features": [
+            "<b>Targad kokkuvõtted</b>: Saa lehtedest olulised teadmised kiirelt kätte"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tõhus sirvimine</b>: Püsi keskendunud vähemate klikkide ja segajateta"
+          ]
+        }
+      ],
+      "4_36_0": [
+        {
+          "features": [
+            "<b>Salvesta veebilehed ja esiletõstmised</b>: Salvesta väärtuslik veebisisu Wisebase'i (AI teadmistebaas) ühe klõpsuga"
+          ]
+        },
+        {
+          "features": [
+            "<b>Al Postkast</b>: Lase Al-il oma sisu automaatselt kategoriseerida"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vestle mitme failiga</b>: Saa koheselt vastuseid oma kogutud failidest"
+          ]
+        }
+      ],
+      "4_37_0": [
+        {
+          "features": [
+            "<b>DeepSeek-R1</b>: Vastab OpenAI-o1 jõudlusele"
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3</b>: Paistab silma keerulise mõtlemise, matemaatika ja kodeerimise ülesannetes"
+          ]
+        },
+        {
+          "features": [
+            "<b>AI Tõlkija Veebilehele</b>: Pakub loomulikke ja täpseid tõlkeid"
+          ]
+        }
+      ],
+      "4_38_0": [
+        {
+          "features": [
+            "2x kiirem kui Gemini 1.5 Pro"
+          ]
+        },
+        {
+          "features": [
+            "Annab kohesed, professionaalsed tulemused"
+          ]
+        },
+        {
+          "features": [
+            "Täiustatud teksti, koodi mõistmise ja põhjendamise võimekused"
+          ]
+        }
+      ],
+      "4_39_0": [
+        {
+          "features": [
+            "<b>Võimas arutlusvõime</b>: vastab OpenAI o1 võimetele matemaatikas, teaduses ja kodeerimises"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kiirem kui o1-mini</b>: optimeeritud kiiremaks ja sujuvamaks vastamiseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Usaldusväärsemad vastused</b>: pakub suuremat täpsust ja selgemat arutlusvõimet"
+          ]
+        }
+      ],
+      "4_3_0": [
+        {
+          "features": [
+            "Sukeldu kaasahaaravasse täisekraani vaatesse"
+          ]
+        },
+        {
+          "features": [
+            "Naudi kõiki küljeriba funktsioone nüüd täisekraanil"
+          ]
+        },
+        {
+          "features": [
+            "Vaheta sujuvalt režiimide vahel parima kogemuse saavutamiseks"
+          ]
+        }
+      ],
+      "4_40_0": [
+        {
+          "features": [
+            "<b>Täiustatud kodeerimine</b>: Suurepärane keerukate kodeerimisülesannete täitmisel erakordse jõudlusega"
+          ]
+        },
+        {
+          "features": [
+            "<b>Parandatud päringute käsitlemine</b>: Mõistab ja vastab tõhusalt keerukatele päringutele"
+          ]
+        }
+      ],
+      "4_41_0": [
+        {
+          "features": [
+            "<b>Häälkäsklus</b>: Sisestage teksti kiiresti kõne abil, et saavutada käed-vabad tõhusus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uus AI mudel</b>: DeepSeek-R1-70B on nüüd saadaval"
+          ]
+        }
+      ],
+      "4_42_0": [
+        {
+          "features": [
+            "<b>Kahesuunalised subtiitrid</b>: Paranda oma vaatamiskogemust ja tõsta keeleõppe taset"
+          ]
+        },
+        {
+          "features": [
+            "<b>API võti</b>: Toetab API võtmeid DeepSeekile, OpenAlile ja muule"
+          ]
+        }
+      ],
+      "4_43_0": [
+        {
+          "features": [
+            "<b>{{CLAUDE37}}</b>: Samm-sammuline mõtlemine paremaks soorituseks matemaatikas, füüsikas, kodeerimises ja paljudes muudes ülesannetes"
+          ]
+        },
+        {
+          "features": [
+            "<b>API Key Support</b>: Ühildub Claude'i ja Ollama API võtmetega"
+          ]
+        }
+      ],
+      "4_44_0": [
+        {
+          "features": [
+            "<b>Omadused</b>: Rikkalikum teadmiste baas, parem vastavus kasutaja kavatsustele ja suurem emotsionaalne intelligentsus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ideaalne</b>: Kirjutamise, programmeerimise täiustamiseks ja reaalse maailma väljakutsete lahendamiseks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Märkus</b>: 30 edasijõudnud krediiti/päring. Piiratud 1 kasutuskorraga/24 tunni jooksul/kasutaja kohta kvoodipiirangute tõttu"
+          ]
+        }
+      ],
+      "4_45_0": [
+        {
+          "features": [
+            "<b>Rohkem ruumi ja keskendumist</b>: Suurem liides muudab pikkade sõnumite lugemise ja koodi vaatamise lihtsamaks, vähendades samal ajal tähelepanu hajutamist paremaks keskendumiseks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Sujuv sünkroonimine</b>: Vestlused jäävad sünkroonituks veebi ja laienduse vahel, võimaldades lihtsat vahetust veebilehe ja külgriba vaadete vahel."
+          ]
+        }
+      ],
+      "4_4_0": [
+        {
+          "features": [
+            "<b>Uus täiustatud andmeanalüüsi tööriist:</b> Koodi tõlgendaja tõhusaks andmetöötluseks ja keerukateks arvutusteks"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uus maalritööriist:</b> Loo pilte otse vestluses"
+          ]
+        },
+        {
+          "features": [
+            "<b>Täiustatud kontekstimenüü:</b> Kasuta GPT-4 kontekstimenüüs."
+          ]
+        }
+      ],
+      "4_5_0": [
+        {
+          "features": [
+            "<b>Otsinguagenti vidin:</b> Kogege tulevikuotsingut AI automatiseerimisega"
+          ]
+        },
+        {
+          "features": [
+            "<b>Veebilehe tõlkimine:</b> Rohkem lugejasõbralikke tõlke kuvamisstiile"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uus seadistus:</b> Avab kõrvalpaneeli, taastades automaatselt viimase vestluse"
+          ]
+        }
+      ],
+      "4_6_0": [
+        {
+          "features": [
+            "<b>Claude 3 Opus:</b> Väidab, et tal on \"inimesele lähedased\" võimed ja ta suudab GPT-4 võita."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude 3 Sonnet:</b> Tasakaalustab intelligentsust ja kiirust, ideaalne teabe hankimiseks või müügi automatiseerimiseks."
+          ]
+        }
+      ],
+      "4_7_0": [
+        {
+          "features": [
+            "Vestluse kokkuvõte: saate olulised punktid YouTube'i videote jaoks vestluse aknas 'Loe seda lehte'."
+          ]
+        },
+        {
+          "features": [
+            "Lihtne subtiitrite eraldamine: saate YouTube'ist sügavamate teadmiste saamiseks ühe klõpsuga subtiitreid."
+          ]
+        },
+        {
+          "features": [
+            "Claude 3 Haiku: nüüd saadaval, et rikastada teie vestluskogemust."
+          ]
+        }
+      ],
+      "4_8_0": [
+        {
+          "features": [
+            "<b>Uus mudel:</b> Toetab nüüd Gemini 1.5 Pro"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uued AI pilditööriistad:</b> Pääse AI funktsioonidele ligi, liikudes ükskõik millise pildi kohale"
+          ]
+        }
+      ],
+      "4_9_0": [
+        {
+          "features": [
+            "<b>Uus mudel:</b> Toeta kohe Llama 3"
+          ]
+        }
+      ],
+      "5_0_0": [
+        {
+          "features": [
+            "<b>Nutikas allikate avastamine</b>: Tehisintellekt jäljendab inimesi, skaneerib kiiresti üle 100 saidi, valib parimad teie jaoks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automaatne esiletõstmine ja märkmed</b>: Tehisintellekt tõstab esile teemaga seotud teabe, koostab märkmeid inspiratsiooniks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Aruannete automaatne genereerimine</b>: Saage süvaaruanded viidatud allikatega minutitega."
+          ]
+        },
+        {
+          "features": [
+            "<b>Wisebase salvestab kõik</b>: Tehisintellekti aruanded, veebileiud, vestlused ja palju muud—salvestatud, et uurida igal ajal."
+          ]
+        }
+      ],
+      "5_10_0": [
+        {
+          "features": [
+            "Laadi vestlusesse üles helifailid, et saada transkriptsioone koos kõneleja tuvastamisega. See võimaldab tehisintellektil vestlusi paremini mõista ja pakkuda asjakohasemaid vastuseid. Ideaalne koosolekute, intervjuude ja muu jaoks."
+          ]
+        }
+      ],
+      "5_13_0": [
+        {
+          "features": [
+            "<b>Mõttekaardid</b>: Korralda oma mõtted lihtsalt ja tee loogika hetkega selgeks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Põhislaidid</b>: Esitle ideid kiiresti tõhusaks aruandluseks ja jagamiseks."
+          ]
+        }
+      ],
+      "5_15_0": [
+        {
+          "features": [
+            "<b>Ühe klõpsuga jäädvustamine</b>: Salvesta koosolekud, häälemärkmed ja ekraanid koheselt."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automaatne transkriptsioon</b>: Muuda salvestused otsitavateks dokumentideks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Tark vestlus</b>: Saa kokkuvõtteid, tegevusüksusi ja vastuseid oma sisust."
+          ]
+        }
+      ],
+      "5_16_0": [
+        {
+          "features": [
+            "<b>Targem koodiabi</b>: Käsitleb keerulisi projekte, kirjutab puhtamat koodi, silub kiiremini."
+          ]
+        },
+        {
+          "features": [
+            "<b>Parem kirjutamispartner</b>: Muudab sõnumid selgemaks ja kaasahaaravamaks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Parendatud tervisevastused</b>: Täpsemad, läbimõeldumad ja usaldusväärsemad."
+          ]
+        }
+      ],
+      "5_17_0": [
+        {
+          "features": [
+            "<b>REC märge, automaatselt täiustatud</b>: Salvesta ja tee kiireid märkmeid, kui AI transkribeerib. Sinu märkmed ja transkriptsioonid on ühendatud selgeks, struktureeritud REC märkeks."
+          ]
+        },
+        {
+          "features": [
+            "<b>Tasuta transkriptsioon</b>: Iga salvestus transkribeeritakse automaatselt tekstiks, et midagi ei jääks märkamata."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nano Banana</b>: Pilditööriist Chat'i juhtnuppudes toetab nüüd Nano Banana."
+          ]
+        }
+      ],
+      "5_18_0": [
+        {
+          "features": [
+            "<b>Uurimistöö minutitega</b>: Otsi allikate vahel, võrdle perspektiive ja saa struktureeritud aruandeid viidetega"
+          ]
+        },
+        {
+          "features": [
+            "<b>Eliitkrediidid</b>: Uus krediidiühik AI agendi funktsioonide jaoks nagu Sügav Uurimistöö ja AI Slides"
+          ]
+        },
+        {
+          "features": [
+            "<b>Lihtsam mudeliloend</b>: Vali mudel korra; kasuta Think lülitit, et lubada või keelata põhjendamine"
+          ]
+        }
+      ],
+      "5_1_0": [
+        {
+          "features": [
+            "<b>Mõtle (R1) režiim</b>: DeepSeek-R1 mõtlemist saab nüüd kasutada üldiste mudelitega paremate vastuste saamiseks. Maksab 1 täiustatud krediit kasutuse kohta."
+          ]
+        },
+        {
+          "features": [
+            "<b>Täiustatud otsing</b>: Leia kõige asjakohasemad allikad parema täpsusega."
+          ]
+        },
+        {
+          "features": [
+            "<b>Salvesta märkmetena</b>: Salvesta AI vastused märkmetena Wisebase'is hilisemaks kasutamiseks."
+          ]
+        }
+      ],
+      "5_20_0": [
+        {
+          "features": [
+            "<b>Tegutse veebilehtedel</b>: Juhenda tehisintellekti ülesandeid täitma otse oma praeguses brauseris — eraldi „agendibrauserit” pole vaja."
+          ]
+        },
+        {
+          "features": [
+            "<b>Piiratud väljalase</b>: See versioon võib olla aeglane või ebajärjekindel. Juurdepääs on praegu piiratud ainult Ultra kasutajatele kõrgete kulude tõttu."
+          ]
+        }
+      ],
+      "5_22_0": [
+        {
+          "features": [
+            "Nutikam, loomulikum: kõlab inimlikumalt ja järgib juhiseid paremini kui GPT‑5"
+          ]
+        },
+        {
+          "features": [
+            "Mõtleb täpsemalt: pakub kiiremaid vastuseid lihtsate ülesannete jaoks ja sügavamat arutlust keerukate jaoks"
+          ]
+        }
+      ],
+      "5_2_0": [
+        {
+          "features": [
+            "<b>Auhindade Keskus</b>: Teenige tasuta krediite, uurides Sideri funktsioone."
+          ]
+        },
+        {
+          "features": [
+            "<b>Täiustatud lehekülje tõlge</b>: AI tõlge kasutades GPT, Claude või Gemini. Tõlgi uuesti konkreetseid osi tõlgitud lehekülgedest."
+          ]
+        }
+      ],
+      "5_3_0": [
+        {
+          "features": [
+            "<b>Gemini 2.5 Pro</b>: Paistab silma kodeerimises, teaduses ja matemaatikas täiustatud põhjendamise ja kontekstitundlikkusega."
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3-0324</b>: Pakub kiireid, usaldusväärseid vastuseid ja paremat tuge matemaatika ja kodeerimise jaoks."
+          ]
+        }
+      ],
+      "5_4_0": [
+        {
+          "features": [
+            "<b>Tärnita Vestlusi</b>: Märgi olulised vestlused, et neid hiljem hõlpsasti leida."
+          ]
+        },
+        {
+          "features": [
+            "<b>Ekspordi Vestlusi</b>: Salvesta ja jaga vestlusi TXT-failidena lihtsalt."
+          ]
+        }
+      ],
+      "5_5_0": [
+        {
+          "features": [
+            "<b>GPT-4.1</b>: Lahendab keerulisi probleeme ja reaalmaailma kodeerimist parema täpsusega, asendades GPT-4o."
+          ]
+        },
+        {
+          "features": [
+            "<b>GPT-4.1 Mini</b>: Paistab silma pildituvastuses ja pakub kiiremaid vastuseid."
+          ]
+        }
+      ],
+      "5_6_0": [
+        {
+          "features": [
+            "<b>o3</b>: Võimas mudel keeruliste probleemide lahendamiseks matemaatikas, kodeerimises, teaduses ja tehnilises kirjutamises. Asendab o1."
+          ]
+        },
+        {
+          "features": [
+            "<b>o4-mini</b>: Ideaalne kiireks arutlemiseks, kodeerimiseks ja visuaalseteks ülesanneteks. Asendab o3-mini."
+          ]
+        }
+      ],
+      "5_7_0": [
+        {
+          "features": [
+            "<b>Toetab GPT-Image-1</b>: Looge kvaliteetseid, professionaalseid pilte või redigeerige olemasolevaid, kasutades lihtsaid kirjeldusi ja OpenAI uusimat pildigeneratsiooni mudelit."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uued pildikvaliteedi valikud</b>: Valige vestluse juhtnuppudes madala, keskmise või kõrge kvaliteedi vahel - krediidi maksumus varieerub vastavalt valikule."
+          ]
+        }
+      ],
+      "5_8_0": [
+        {
+          "features": [
+            "<b>Täiustatud võimalused</b>: Loo pilte GPT Image 1-ga, vaata artefakte eraldi paneelil"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kahese mudeli võrdlus</b>: Kõrvuti vaade näitab, kuidas erinevad mudelid vastavad samale küsimusele reaalajas (ainult veebis)"
+          ]
+        }
+      ],
+      "5_9_0": [
+        {
+          "features": [
+            "<b>Claude Opus 4</b>: Anthropicu kõige võimsam mudel, millel on ületamatud kodeerimis- ja keeruliste probleemide lahendamise võimed."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude Sonnet 4</b>: Täiustatud põhjendus- ja kodeerimisvõimed, asendades Sonnet 3.7."
+          ]
+        }
+      ]
+    },
+    "logTitles": {
+      "4_10_0": "OpenAI GPT-4o on nüüd kohal!",
+      "4_11_0": "Sügav lugeja, et parandada oma kriitilise lugemise oskusi!",
+      "4_12_0": "",
+      "4_13_0": "Tutvustame AI valjult lugemist: Teie isiklikku audioassistent",
+      "4_16_0": "Tutvustame GPT-4o mini",
+      "4_17_0": "Tutvustame YouTube'i videokokkuvõtteid",
+      "4_18_0": "Vestluse jagamine on nüüd saadaval!",
+      "4_19_0": "{{ARTIFACTS}}: Reaalajas, interaktiivsed sisublokid",
+      "4_1_0": "",
+      "4_20_0": "Tõlkefunktsioonide uuendus",
+      "4_22_0": "Demon vs Angel: Röntgen sinu X-isiksusele",
+      "4_23_0": "OpenAI o1-preview ja o1-mini on nüüd saadaval!",
+      "4_24_0": "Gemini mudelid muutusid just targemaks ja kiiremaks!",
+      "4_25_0": "Värske välimus paremaks kogemuseks",
+      "4_26_0": "Tutvustame Mõtterežiimi (Eksperimentaalne)",
+      "4_27_0": "Parendatud kontekstimenüü ja artefaktid",
+      "4_28_0": "Claude 3.5 Haiku & Täiustatud valikud",
+      "4_29_0": "Tõhustatud vestluskogemus",
+      "4_2_0": "Tõhusam kasutajaliidese ja külgriba GPT-de juurdepääs",
+      "4_30_0": "Uuendatud GPT-4o, lehe tõlge ja YouTube'i subtiitrid",
+      "4_31_0": "Tööriistade Nav, Sisendi Tõlge, Kiirkoopia",
+      "4_32_0": "Helifailide tugi vestluses",
+      "4_33_0": "O1 ja video kokkuvõtete uuendused",
+      "4_34_0": "Gmail Al vastus, Artefaktid ja Tõlke täiustused",
+      "4_35_0": "Linkide eelvaade: Sirvi targemini",
+      "4_36_0": "Kogu teadmisi Wisebase'iga",
+      "4_37_0": "DeepSeek-R1 & V3, AI Tõlkija",
+      "4_38_0": "Tutvustame Gemini 2.0 Flashi",
+      "4_39_0": "OpenAI o3-mini nüüd saadaval!",
+      "4_3_0": "Maksimeeri oma kogemus täisekraani režiimis!",
+      "4_40_0": "Gemini 2.0 Pro on nüüd saadaval!",
+      "4_41_0": "Häälkäsklus & DeepSeek-R1-70B",
+      "4_42_0": "Kahesuunaline subtiitrite tugi Netflixile",
+      "4_43_0": "Tutvustame {{CLAUDE37}}",
+      "4_44_0": "GPT-4.5 on kohal!",
+      "4_45_0": "Veebivestlus on nüüd reaalajas!",
+      "4_4_0": "Kõik tööriistad vestluses ja GPT-4 kontekstimenüüs",
+      "4_5_0": "",
+      "4_6_0": "Toetage nüüd Claude 3 perekonda!",
+      "4_7_0": "Videokokkuvõte vestluses, subtiitrite eraldamine, Claude 3 Haiku! 🚀",
+      "4_8_0": "Gemini 1.5 Pro - Nüüd saadaval!",
+      "4_9_0": "Llama 3 nüüd! Meta tipptasemel avatud lähtekoodiga LLM-i järgmine põlvkond.",
+      "5_0_0": "Tutvuge Sider 5.0-ga: Süvauuringud lihtsaks. Nutikas ja automatiseeritud.",
+      "5_10_0": "Heli tekstiks koos kõneleja tuvastamisega",
+      "5_12_0": "Kohandatud juhised on nüüd saadaval",
+      "5_13_0": "Artiklid toetavad nüüd mõttekaarte ja slaide",
+      "5_14_0": "Grok 4 on kohal!",
+      "5_15_0": "Salvesta. Salvesta. Meisterda.",
+      "5_16_0": "GPT-5 on kohal!",
+      "5_17_0": "REC märge & Nano Banana",
+      "5_18_0": "Sügav Uurimistöö & Eliitkrediidid",
+      "5_19_0": "Tutvustame Claude Sonnet 4.5",
+      "5_1_0": "Nutikam mõtlemine, otsimine ja salvestamine",
+      "5_20_0": "Tutvustame Browser Agenti (uuringu eelvaade)",
+      "5_21_0": "GPT-5 sai just värskenduse",
+      "5_22_0": "GPT-5.1 on kohal",
+      "5_23_0": "Gemini 3 Pro on kohal!",
+      "5_2_0": "Preemiakeskus ja täiustatud lehekülje tõlge",
+      "5_3_0": "Gemini 2.5 Pro & Uuendatud DeepSeek V3 Nüüd Saadaval",
+      "5_4_0": "Tärnita ja Ekspordi Oma Vestlusi",
+      "5_5_0": "Tutvustame GPT-4.1 ja GPT-4.1 Mini",
+      "5_6_0": "OpenAI o3 & o4-mini nüüd saadaval",
+      "5_7_0": "Loo ja redigeeri pilte vestluses GPT-Image-1-ga",
+      "5_8_0": "Täisleheline veebivestlus täiustatud",
+      "5_9_0": "Claude Opus 4 ja Claude Sonnet 4 nüüd saadaval"
+    },
+    "newInVersion": "Mis on uut versioonis {{versionId}}",
+    "rate5Star": "<b>Kas teile meeldib meie laiendus?</b> Hinda meid veebipoes viie tärniga, et aidata meil kasvada",
+    "tryRecordNote": "Proovi REC märget"
+  },
+  "changeSpeed": "Muuda kiirust",
+  "ChangeTone": "Muuda tooni",
+  "changeVoice": "Muuda häält",
+  "chatWithPDF": "Vestelge PDF-iga",
+  "check": "Kontrollima",
+  "checkOutNow": "Vaata kohe!",
+  "clear": "Selge",
+  "clickPreview": "Klõpsa eelvaateks",
+  "clickToAsk": "Küsimiseks klõpsake",
+  "clickToTry": "Klõpsake, et proovida seda funktsiooni",
+  "clickView": "Klõpsa, et vaadata",
+  "close": "Sulge",
+  "code": "Kood",
+  "code&preview": "Kood ja eelvaade",
+  "collapse": "Ahenda külgriba",
+  "collapseNav": "Ahenda navigeerimisriba",
+  "compareWith": "Võrdle {{NAME}}-ga",
+  "confirm": "Kinnita",
+  "console": "Konsool",
+  "constructionDesc": "Tutvustage ennast, et saada paremaid ja isikupärasemaid vastuseid",
+  "constructionForm": {
+    "additional_info": {
+      "descritionList": [
+        "Püüan õppida hispaania keelt.",
+        "Olen kirglik fotograafia ja reisimise vastu.",
+        "Suur ulmeraamatute ja -filmide fänn."
+      ],
+      "descritionTitle": "Võite jagada asju nagu:",
+      "label": "Kas on midagi muud, mis aitaks mul teid paremini tundma õppida?",
+      "placeholder": "Huvid, väärtused või eelistused, mida meeles pidada"
+    },
+    "desired_ai_traits": {
+      "descritionList": [
+        "Kasutage juhuslikku, sõbralikku tooni.",
+        "Olge otsekohene ja minge otse asja juurde.",
+        "Vaielda minu ideedele vastu ja esitada järelküsimusi."
+      ],
+      "descritionTitle": "Võite mulle öelda, et teeksin asju nagu:",
+      "label": "Milline AI kaaslane sobiks teile kõige paremini?",
+      "placeholder": "Suhtlusstiil või isiksuseomadused"
+    },
+    "nickname": {
+      "label": "Kuidas peaksin teid kutsuma?",
+      "placeholder": "Hüüdnimi"
+    },
+    "occupation": {
+      "label": "Millega tegelete?",
+      "placeholder": "Teie töö"
+    }
+  },
+  "contactUs": "Võta meiega ühendust",
+  "contextMenu": {
+    "chatSelection": "Vestle valitud tekstiga",
+    "highlightSelection": "Tõsta valitud tekst esile",
+    "imageTools": "{{AI}} pilditööriistad",
+    "openFullPageChat": "Ava täisekraani vestlus",
+    "revertSavePage": "Eemalda {{WISEBASE}}-ist",
+    "revertTranslatePage": "Näita algteksti",
+    "savePage": "Salvesta leht {{WISEBASE}}-i",
+    "summarizePage": "Kokkuvõte leheküljest",
+    "translatePage": "Tõlgi keelde {{lang}}"
+  },
+  "continue": "Jätka",
+  "contrast-analysis": "Analüüsi kontraste",
+  "conversationTip": "See vestlus loodi {{CHATPROVIDER}} režiimis. Jätkamiseks vaheta režiimi või alusta uut vestlust praeguses režiimis.",
+  "copied": "Kopeeritud",
+  "copy": "Kopeeri",
+  "copyAsMarkdown": "Kopeeri Markdownina",
+  "copyAsSheet": "Kopeeri tabelina",
+  "createAccount": "Loo konto",
+  "createAccountTip": "Registreeru, et saada iga päev <a>{{NUM}} tasuta</a> krediiti",
+  "createImageTip": "Tasud kehtivad pildi kohta vastavalt valitud mudelile.",
+  "creatingImage": "Pildi loomine",
+  "creatingImageFailed": "Pildi loomine ebaõnnestus",
+  "credit": "Krediit",
+  "credits": "Krediidid",
+  "current": "Praegune",
+  "currentRecordedSpeakers": "Praegused salvestatud kõnelejad",
+  "currentTpl": "Praegune mall:",
+  "customInstructions": "Kohandatud juhised",
+  "customPrompt": "Kohandatud viip",
+  "dataAnalysisTip": "See tööriist käivitub ainult kasutamisel, maha arvestatakse 1 Advanced Credit.",
+  "deepReadTools": "Süvendatud lugemise tööriistad",
+  "deepResearch": "Sügav uurimine",
+  "deepResearchBlockTip": "Sügav uurimine võtab eeldatavalt 5–20 minutit. Saate jätkata teiste funktsioonide kasutamist.",
+  "deepResearchFileModalCancelText": "Jätka ilma failideta",
+  "deepResearchFileModalContent": "Sügav uurimine ei toeta faile. Failide üleslaadimiseks väljuge sügavast uurimisest või jätkake ilma failideta.",
+  "deepResearchFileModalOkText": "Välju uurimisest ja laadi fail üles",
+  "deepResearchFileModalTitle": "Faili ei saa üles laadida",
+  "deepResearchFileTip": "Sügav uurimine ei toeta faile. Jätkamiseks eemaldage failid või jätkake vestlust.",
+  "deepResearchInputHint": "Mida soovite uurida?",
+  "deepResearchNormalTip": "Iga kasutus maksab 20 Eliit krediiti",
+  "deepResearchTip": "Mine kaugemale——sügavuti analüüs koos Deep Researchiga",
+  "delete": "Kustuta",
+  "deleteAll": "Kustuta kõik",
+  "delteTpl": "Kustuta see mall",
+  "describeImage": "Kirjelda seda pilti",
+  "describleImage": "Kirjelda",
+  "detected": "Tuvastatud",
+  "disable": "Keela",
+  "Distinguish": "Erista",
+  "distinguishDesc": "3 edasijõudnud krediiti / 10 minutit",
+  "DitinguishSpeakers": "Kas eristada kõnelejaid?",
+  "done": "Valmis",
+  "download": "Laadi alla",
+  "downloadPng": "Laadi alla PNG",
+  "downloadTypeFile": "Laadi alla {{type}} fail",
+  "dropMsg": "Lohista siia, et saata Siderile",
+  "earnFree": "Teeni tasuta krediite",
+  "edgePasteBug": "Edge'i brauserivea tõttu ei saa kiirklahvide abil kleepida. Kleepimiseks paremklõpsake.",
+  "edit": "Muuda",
+  "editTitle": "Muuda pealkirja",
+  "editTpl": "Muutke seda malli",
+  "elite": "Eliit",
+  "emailEnhance": {
+    "emailAssistant": "E-posti assistent",
+    "emailAssistantDesc": "Kui Sider on sisse lülitatud, aitab see meilidele kiiresti vastata.",
+    "hideTranslation": "Peida tõlge",
+    "inputPlaceholder": "Öelge siderile, kuidas soovite vastata...",
+    "intent": "Saatja kavatsus",
+    "orgLang": "E-kirja keel",
+    "quickAIReply": "AI vastus",
+    "replyInputPlaceholder": "Mida soovite vastata?",
+    "resultsTitle": "Vastuse mustand",
+    "showTranslation": "Näita tõlget",
+    "translateEmail": "Tõlgi e-kiri",
+    "tryAgain": "Proovi uuesti",
+    "voice": {
+      "applicant": "Taotleja",
+      "casual": "Juhuslik",
+      "colleague": "Kolleeg",
+      "confident": "enesekindel",
+      "customer-service-staff": "Klienditeenindajad",
+      "direct": "otsene",
+      "emailLength": "Meili pikkus",
+      "empathetic": "empaatiline",
+      "enthusiastic": "Kirglik",
+      "formal": "Ametlik",
+      "formality": "Formaalsus",
+      "friendly": "sõbralik",
+      "human-resources": "Inimressursid",
+      "informational": "informatiivne",
+      "leader": "Juht",
+      "long": "Pikk",
+      "medium": "Keskmine",
+      "neutral": "Neutraalne",
+      "personable": "Kallis",
+      "project-manager": "Projektijuht",
+      "sales-representative": "Müügiesindaja",
+      "short": "Lühike",
+      "subordinate": "Alluv",
+      "tone": "Toon",
+      "witty": "kaval",
+      "yourRole": "Sinu roll"
+    },
+    "voiceSettings": "Tooni seadistus",
+    "wayToReply": "Vastuse ideed"
+  },
+  "enable": "Aktiveeri",
+  "enable&continue": "Luba ja jätka",
+  "enterText": "Sisesta tekst",
+  "errorOccurred": "Ilmnes viga",
+  "everyThing": "Kõik",
+  "example": "Näide",
+  "exit": "Välju",
+  "expand": "Laienda",
+  "expandNav": "Laienda navigeerimisriba",
+  "experimental": "Varajane juurdepääs",
+  "experimentalDesc": "Maksvad kasutajad saavad varajase juurdepääsu eksklusiivsetele, tipptasemel tööriistadele ja eksperimentaalsetele funktsioonidele, mis ei ole saadaval mitte-tellijatele.",
+  "explain": "Selgita",
+  "explainSection": "Kas saaksid mulle seda osa üksikasjalikumalt selgitada?",
+  "export": "Ekspordi",
+  "exportXmind": "Ekspordi .xmind fail",
+  "extra": "Lisa",
+  "extracted": "Heli ekstraheeritud",
+  "extractingText": "Teksti ekstraheerimine",
+  "extractingTextFailed": "Teksti ekstraheerimine ebaõnnestus",
+  "ExtractText": "Eralda tekst",
+  "faceError": "Viimases {{ARTIFACT}}-is ilmnes see viga, palun parandage see.",
+  "fact-check": "Faktikontroll",
+  "feedback": "Tagasiside",
+  "fetched": "Toodud {{QUERY}}",
+  "fetchFailed": "Päringu {{QUERY}} toomine ebaõnnestus.",
+  "fetching": "Päringu {{QUERY}} toomine...",
+  "fileInputHint": "Esita küsimusi selle faili kohta",
+  "finish": "Lõpeta",
+  "fit": "Sobita ekraanile",
+  "fiveStarRate": {
+    "enjoy": "😘 Kas teile meeldib see laiendus?",
+    "enjoyNo": "Ei, tagasiside",
+    "enjoyYes": "Jah, 5-tärni hinnang!",
+    "feedbackThx": "Täname tagasiside eest.",
+    "feedbackTip": "🥹 Palun öelge meile oma rahulolematuse põhjus.",
+    "rate": "Hinda meid viie tärniga"
+  },
+  "free": "Tasuta",
+  "freeTrial": {
+    "cancelTip": "Tühista igal ajal",
+    "panelBtn": "Alusta tasuta prooviperioodi",
+    "panelList": [
+      "Vestle vabalt GPT-4 ja Claude 3-ga",
+      "Vestle mis tahes PDF-i, pildi ja lingiga",
+      "Kokkuvõte veebilehtedest ja YouTube'i videotest"
+    ],
+    "panelTitle": "3 päeva piiramatu plaani tasuta prooviperiood"
+  },
+  "fullPageChat": "Terve lehekülje vestlus",
+  "fullscreen": "Täisekraan",
+  "fullscreenBookmarkTip": "Klõpsa tärni ikoonil, et lisada täisekraanil vestlus järjehoidjatesse, et sellele järgmisel korral hõlpsasti juurde pääseda!",
+  "fullScreenChat": "Täisekraanivestlus",
+  "gamify": "Mängusta",
+  "gamifyDoc": "Mängusta dokument",
+  "gamifyPage": "Mängusta see leht",
+  "gamifyPageDesc": "Loo mängustatud, interaktiivsed vaated praegusest veebilehest paremaks mõistmiseks.",
+  "gamifyTip": "Õpi mängides: avasta kontseptsioone interaktiivsete demode kaudu",
+  "genBy": "Loodud {{MODEL_NAME}} poolt",
+  "general": "Üldine konfiguratsioon",
+  "generating": "Tekitamine",
+  "generatingImageTip": "Hoidke vestlus avatuna, kuni pilt on valmis",
+  "generatingReport": "Aruande genereerimine...",
+  "generatingTranscript": "Transkripti genereerimine",
+  "getAIAnswer": "Hangi AI vastus",
+  "getAnotherKey": "Hangi teine võti",
+  "getItNow": "Seda kohe saama",
+  "getKeyPage": {
+    "addKey": "Lisa võti",
+    "apiKeyInputPlaceholder": "Sisestage oma API võti",
+    "checkConnectionBtn": "Kontrolli",
+    "checkConnectionDesc": "Kontrolli, kas sinu API võti ja puhverserver (kui kasutatakse) on kehtivad.",
+    "checkConnectionTitle": "Kontrolli ühendust",
+    "connectionFailed": "Ühendus ebaõnnestus. Kontrolli oma API võtit ja puhverserveri seadeid.",
+    "connectionSuccess": "Ühendus edukas",
+    "customKey": "Kohandatud API võti",
+    "deleteModelTip": "Kas kustutada see mudel?",
+    "modelCount": "{{count}} mudelit saadaval",
+    "modelList": "Mudeliloend",
+    "noKeyWarn": "API võtit ei leitud. Lisa võti, et jätkata, või lülitu {{APP_NAME}} kasutamisele.",
+    "proxyUrlTitle": "API puhverserveri URL (valikuline)",
+    "proxyUrlTitleRequired": "API puhverserveri URL",
+    "setup": "Seadista",
+    "step1": "1. samm: hankige API võti",
+    "step1-1": "<i>Logige sisse oma OpenAI kontole</i> Kui teil pole kontot, registreeruge <b>SIIN</b>",
+    "step1-2": "Külastage OpenAI API võtme lehte",
+    "step1-3": "Looge uus salajane võti ja kopeerige see järgmiselt",
+    "step2": "2. samm: kleepige API võti allolevasse kasti",
+    "step2-tips": "Ära muretse. Teie API-võtit kasutatakse ainult kohapeal ChatGPT laiendis. API kasutamine on stabiilsem kui otse ChatGPT kasutamine.",
+    "step3": "3. samm: kontrollige oma krediiti <i>siin</i>",
+    "stepTitle": "Kuidas saada API-võtit.",
+    "useSider": "Kasuta {{APP_NAME}}",
+    "welcome": "Tere tulemast rakendusse {{APP_NAME}}! Siin on teie teekond alustamiseks:"
+  },
+  "getMore": "saa rohkem",
+  "googleSearchPage": {
+    "claude3Advantages": [
+      "Sama võimas kui GPT-4",
+      "Loomulikumad vastused",
+      "Võimsad põhjendusvõimed"
+    ],
+    "gpt4Advantages": [
+      "Hangi paremaid vastuseid",
+      "Mitmekesisemad teadmised",
+      "Tugevam arusaamine"
+    ]
+  },
+  "goPremium": "uuendage lisatasule",
+  "goPremiumGetMore": "minge üle premium-le, et saada rohkem",
+  "gotIt": "Sain aru",
+  "guideVideos": {
+    "chat": {
+      "ai-bot": "Mitme-boti vestlus",
+      "data-analysis": "Täpsem andmeanalüüs",
+      "painter": "Piltide genereerimine",
+      "prompts": "Kohandatud käsklused",
+      "web-access": "Veebipääs"
+    },
+    "chatpdf": {
+      "chatpdf": "Vestlus PDFiga"
+    },
+    "email": {
+      "reply": "Genereeri e-kirja vastuseid"
+    },
+    "grammar": {
+      "context": "Grammatikakontroll kontekstimenüüs",
+      "widget": "Grammatikakontroll külgribal"
+    },
+    "ocr": {
+      "ocr": "Eralda tekst ja võrrandid"
+    },
+    "painter": {
+      "bg-remove": "Eemalda taust",
+      "bg-replace": "Asenda taust",
+      "eraser": "Eemalda pintsliga ala",
+      "image": "Genereeri pilte",
+      "text-remove": "Eemalda tekst",
+      "upscale": "Suurenda pilte"
+    },
+    "summary": {
+      "doc": "Üles laaditud dokumendid",
+      "page": "Veebileht kiirmenüü kaudu",
+      "page2": "Veebileht vestluse kaudu",
+      "youtube": "YouTube videod"
+    },
+    "translation": {
+      "in-chat": "Vestluses valitud tekst",
+      "in-chat2": "Vestluses trükitud tekst",
+      "input": "Lehel trükitud tekst",
+      "page": "Terve veebileht",
+      "selected": "Valitud tekst kontekstimenüüs",
+      "widget": "Valitud tekst külgribal"
+    },
+    "write": {
+      "context": "Paranda valitud tekst",
+      "input": "Muuda sisendeid",
+      "widget": "Koosta nõudmisel"
+    }
+  },
+  "guideVideoTitle": {
+    "chat": "Vestlus",
+    "chatpdf": "ChatPDF",
+    "email": "E-kirja vastus",
+    "grammar": "Grammatika",
+    "ocr": "OCR",
+    "painter": "Kunstnik",
+    "summary": "Kokkuvõte",
+    "translation": "Tõlgi",
+    "write": "Kirjuta"
+  },
+  "helpCenter": "Abikeskus",
+  "hi": "Tere,",
+  "hide": "Peida",
+  "hideImage": "Peida pilt",
+  "highlight-excerpts": "Tõsta esile katkendid",
+  "highlightType": {
+    "comprehensive-coverage": "Põhjalik katvus",
+    "key-sentences": "Olulised laused",
+    "memorable-quotes": "Meeldejäävad tsitaadid",
+    "structural-importance": "Struktuurne tähtsus"
+  },
+  "historyGroups": {
+    "earlier": "Varem",
+    "thisMonth": "See kuu",
+    "thisWeek": "See nädal",
+    "today": "Täna"
+  },
+  "howToUse": "Vaata, kuidas kasutada",
+  "icon": "Ikoon",
+  "identify-assumptions": "Tuvasta eeldused",
+  "image": "Pilt",
+  "imageInputHint": "Esitage selle pildi kohta küsimusi",
+  "imageQuality": {
+    "high": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Kõrge)"
+    },
+    "low": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Madal)"
+    },
+    "medium": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Keskmine)"
+    },
+    "nano_banana": {
+      "desc": "Gemini 2.5 Flash Image Preview",
+      "label": "Nano Banana"
+    },
+    "nano_banana_pro": {
+      "desc": "Gemini 3 Pro Image Preview",
+      "label": "Nano Banana Pro"
+    }
+  },
+  "imageQuoteTipContent": "Pildi kohta uuesti küsimiseks tsiteerige seda.",
+  "imageQuoteTipTitle": "Küsi pilti uuesti? Peate pilti tsiteerima",
+  "imageRetryTip": "Ilmnes viga. Palun proovi uuesti.",
+  "imageToolbar": {
+    "AITools": "AI Tööriistad",
+    "chatWithImage": "Vestlus pildiga",
+    "erase": "Piirkonna kustutamine",
+    "extractText": "Eemalda tekst",
+    "imageTools": "Pilditööriistad",
+    "inpaint": "Osaline uuesti joonistamine",
+    "removeBackground": "Tausta eemaldamine",
+    "removeText": "Teksti eemaldamine",
+    "replaceBackground": "Tausta asendamine",
+    "upscale": "Pildikvaliteedi parandamine",
+    "variation": "Loo variatsioone"
+  },
+  "imageTranslateInto": "Tõlgi pildil olev tekst keelde {{lang}}",
+  "inputTranslation": {
+    "mainSwitchDesc": "Tõlgi ja asenda tekst sisendkastis mis tahes veebilehel",
+    "mainSwitchTitle": "Tõlgi sisendtekst päästikuklahviga",
+    "model": "Tõlkemudel",
+    "neverTransSites": "Ära kunagi tõlgi nendel saitidel",
+    "spaceKey": "Tühikuklahv",
+    "title": "Sisendi tõlge",
+    "triggerKeyDesc": "Tõlkimiseks vajutage päästikuklahvi 3 korda kiiresti, tühistamiseks kasutage {{key}}",
+    "triggerKeyTitle": "Päästikuklahv"
+  },
+  "insert": "Sisestage",
+  "invite": "Kutsu",
+  "inviteFriendTip": "<a>Kutsu sõpru</a>, et saada lisakrediite",
+  "inviteYourFriends": "Kutsu sõpru",
+  "issueType": "Probleemi tüüp",
+  "joinDiscord": "Liitu meie Discordi kogukonnaga",
+  "key-concepts": "Selgita põhimõisteid",
+  "keyboardShortcuts": "Klaviatuuri otseteed",
+  "keypoints": "Võtmepunktid",
+  "language": "Keel",
+  "learnMore": "Lisateave",
+  "letsTryItNow": "Proovime kohe!",
+  "listen": "Kuulake",
+  "llmStatus": {
+    "thinking": "Mõtlemine..."
+  },
+  "Loading": "Laadimine",
+  "loadMessageFailed": "Sõnumite laadimine ebaõnnestus",
+  "login": {
+    "apple": "Jätka Apple'iga",
+    "google": "Jätka Google'iga",
+    "microsoft": "Jätka Microsoftiga",
+    "phone": "Jätka telefoniga"
+  },
+  "loginTip": "Ei ole kontot? <a>Loo konto</a>",
+  "loginTipSiderMode": "Funktsiooni kasutamiseks Sider režiimis logige sisse.",
+  "loginToClaimRewards": "Preemiate saamiseks Sider režiimis logige sisse.",
+  "loginToUnlockFeature": "Logi sisse, et avada rohkem funktsioone.",
+  "loginToUse": "Logi sisse, et alustada Sideri kasutamist.",
+  "logout": "Logi välja",
+  "longAnswerFullScreenTip": "Tunned end kitsikuses? Mine täisekraanile",
+  "longText": "Pikk tekst",
+  "manage": "Halda",
+  "mathSolver": "Matemaatika lahendaja",
+  "mathSolverTip": "Salvesta Minu Küsimuste Pankadesse",
+  "maximize": "Maksimeeri",
+  "mentionBot": "Maini mudelit",
+  "mentionGPTs": "Maini GPT-sid",
+  "mindmap": {
+    "catalogOrganization": "Kataloogi korraldus",
+    "fishbone": "Kalaluud",
+    "logicalStructure": "Loogiline struktuur",
+    "logicalStructureLeft": "Loogiline struktuur vasakul",
+    "mindMap": "Mõttekaart",
+    "organizationStructure": "Organisatsiooni struktuur",
+    "timeline": "Ajajoon"
+  },
+  "minimize": "Minimeeri",
+  "mobileChatHistoryAd": {
+    "btn": "Hangi rakendus",
+    "title": "Sünkrooni vestlused seadmete vahel"
+  },
+  "model": "Mudel",
+  "modelCountTip": {
+    "gpt-3.5": "Maksumus <m>1 põhi krediit</m>.",
+    "gpt-3.5-n_one": "Maksumus <m>{{count}} põhikrediit</m>.",
+    "gpt-3.5-n_other": "Maksumus <m>{{count}} põhikrediiti</m>.",
+    "gpt-4": "Maksumus <m>1 täiustatud krediit</m>.",
+    "gpt-4-2": "Maksumus <m>2 täiustatud krediiti</m>.",
+    "gpt-4-n_one": "Maksumus <m>{{count}} täiustatud krediit</m>.",
+    "gpt-4-n_other": "Maksumus <m>{{count}} täiustatud krediiti</m>."
+  },
+  "modelDesc": {
+    "bard": "Google'i mudel (PaLM 2) täidab hästi arenenud arutlusülesandeid.",
+    "claude-3-haiku": "Anthropic kõige kompaktsem mudel, mille eesmärk on peaaegu kohene reageerimine ja sujuvad tehisintellekti kogemused, mis jäljendavad inimlikke suhtlusi",
+    "claude-3-opus": "Anthropic'i võimsaim mudel, mis pakub tipptasemel jõudlust väga keerukate ülesannete korral ning näitab sujuvust ja inimlikku arusaamist.",
+    "claude-3-sonnet": "Anthropic'i kõige tasakaalustatum mudel intelligentsuse ja kiiruse vahel, ideaalne laia valiku ülesannete jaoks.",
+    "claude-3.5-sonnet": "Anthropic'u uusim mudel, mis on kaks korda kiirem kui Claude 3 Opus ja intelligentsem, oluliselt parem arutlemises, teadmistes, kodeerimises ja visuaalsetes ülesannetes.",
+    "claude-instant": "Anthropic põhimudel, madal latentsusaeg ja suur läbilaskevõime.",
+    "claude2": "Anthropicu oma klassi parim pakkumismudel, suurepärane jõudlus keerukat arutluskäiku nõudvate ülesannete puhul.",
+    "gemini-1.5-flash": "Google'i kerge mudel, optimeeritud kiiruse ja efektiivsuse jaoks.",
+    "gemini-1.5-pro": "Google'i parim mudel üldiseks soorituseks laias ülesannete valikus.",
+    "gemini-pro": "Google'i kõige tasakaalustatum mudel, ühendades ideaalselt võimekuse ja efektiivsuse.",
+    "gpt-3.5": "Väga kiire, sobib enamiku igapäevaste toimingute jaoks.",
+    "gpt-4": "Kõige võimekam mudel, sobib kõige paremini keerukate ülesannete jaoks, mis nõuavad täiustatud arutluskäiku.",
+    "gpt-4o": "OpenAI parim mudel, parim keerukate ülesannete jaoks, säilitades samal ajal kvaliteedi.",
+    "gpt-4o-mini": "OpenAI uusim mudel, pakub kiiret ja ülimat jõudlust vestluses, kodeerimises ja mõtlemisülesannetes igapäevaseks kasutamiseks.",
+    "gpt-5": "OpenAI viimane mudel, parim keerukate ülesannete jaoks säilitades kvaliteedi.",
+    "llama-3": "Meta viimane mudel, parim keerukate ülesannete jaoks säilitades kvaliteeti.",
+    "sider": "{{SIDER}} valib dünaamiliselt GPT-4o mini, Claude 3 Haiku, Gemini 1.5 Flash või Llama 3 optimaalseks vastuseks vastavalt olukorrale."
+  },
+  "modelUpdateFailed": "Mudeli värskendamine ebaõnnestus",
+  "modelUpdateSuccess": "Mudeli värskendamine õnnestus",
+  "more": "Rohkem",
+  "moreFeature": "Rohkem funktsioone!",
+  "morePrompts": "Rohkem viipasid",
+  "moreQueries": "Rohkem krediite!",
+  "moreQuery": "Rohkem krediite",
+  "msg": {
+    "askOriginalModel": "Originaal {{MODELNAME}}",
+    "basicCreditLimit": "Põhikrediidid on otsas",
+    "basicCreditLimitDesc": "Olete kasutanud kõik oma põhikrediidid. Uuendage oma plaani või kutsuge sõpru, et saada rohkem krediite.",
+    "cantBeTranscribed": "Selle video kokkuvõtmine autoriõiguste piirangute tõttu pole võimalik. Palun proovige teist.",
+    "changeSaved": "Muudatused salvestatud",
+    "chatgptTabGuardRefreshingTips": "Midagi läks ChatGPT-ga valesti. Ühenduse taastamine, palun oodake...",
+    "chatgptTabGuardRefreshingTips1": "Midagi läks ChatGPT-ga valesti.",
+    "chatgptTabGuardRefreshingTips2": "Ühenduse taastamine, palun oodake...",
+    "chatgptTabGuardSetupSuccessTips": "Parandatud, proovige uuesti",
+    "chatgptTabGuardTips": "Hoidke see vahekaart avatuna, nüüd saate naasta rakendusse {{APP_NAME}}",
+    "checkInvitation": "Kontrollige kutsete kirjeid",
+    "deletePromptWarn": "Kas soovite selle viipa kustutada?",
+    "dontRemindAgain": "Ära küsi minult enam",
+    "dragImgTips": "Klõpsa üleslaadimiseks või lohista pilt siia",
+    "dragTips": "Klõpsa failide üleslaadimiseks või lohista neid siia",
+    "emailRequired": "E-post on kohustuslik.",
+    "enterAPIKey": "Sisestage oma OpenAI API võti",
+    "enterEmail": "Sisestage e-posti aadress, et saada värskendusi probleemi kohta.",
+    "errChatGPTAuth": "Palun <m>klõpsake lingil, et logida sisse </m>oma ChatGPT veebilehele ja me aitame teil selle kinnitada. Seejärel saate seda külgribal kasutada.",
+    "errChatGPTAuthTipTitle": "Proovi:",
+    "errChatGPTFailToFetch": "ChatGPT-lt ei õnnestunud vastust saada.",
+    "errGeminiPro": "{{GEMINI}} viga, palun proovige hiljem uuesti.",
+    "errOpenaiFailToFetch": "OpenAI-lt teie API võtme kaudu vastust ei saa.",
+    "errOpenAIFilter": "Vastus filtreeriti, kuna käsk käivitas OpenAI sisuhalduspoliitika. Palun muutke oma käsku ja proovige uuesti.",
+    "error1139_1": "Tänan, et kasutate piiramatuid plaane! Saate endiselt kasutada täiustatud tehisintellekti mudeleid. Kuid olete jõudnud ajutise kiiruspiiranguni. <a>Siin on põhjus, miks on kiiruspiirang ja kuidas me püüame teid aidata</a>. Palun <mx>LUGEGE SEDA</mx>.",
+    "error1139_1_2": "Tänan, et kasutate piiramatuid plaane! Saate endiselt kasutada täiustatud tehisintellekti mudeleid. Kuid olete jõudnud ajutise kiiruspiiranguni ja kasutanud ära kõik lisatäiendatud päringud. Siin on <a>põhjus, miks on kiiruspiirang ja kuidas me püüame teid aidata</a>. Palun <mx>LUGEGE SEDA</mx>.",
+    "error1139_1_3": "Tänan, et kasutate piiramatuid plaane! Saate endiselt kasutada täiustatud tehisintellekti mudeleid. Kuid olete jõudnud ajutise kiiruspiiranguni ja kasutanud ära kõik kingitud täiustatud päringud. Siin on <a>põhjus, miks on kiiruspiirang ja kuidas me püüame teid aidata</a>. Palun <mx>LUGEGE SEDA</mx>.",
+    "error1139_2": "Et mitte katkestada teie praegust tööd, oleme andnud teile kingitusena mõned lisatäiendatud päringud, et avada praegune kiiruspiirang. <b>Pärast kõigi nende lisatäiendatud päringute kasutamist on teil kiiruspiirang</b>.",
+    "error1139_3": "Praegune kiiruspiirang on ({{timesToUse}} korda / {{periodTime}} tundi) täiustatud päringutele. Võime seda kohandada vastavalt meie võimekusele. Kas vajate rohkem kohe? Proovige kiirendipakki!",
+    "error1139_4": "Oleme andnud teile kingitusena 50 lisatäiendatud päringut, et avada praegune kiiruspiirang. <b>Pärast kõigi nende lisatäiendatud krediitide kasutamist on teil kiiruspiirang.</b>",
+    "errorFileType": "Failivormingut ei toetata",
+    "errorOutputLimit": "Pikkuse piirang on saavutatud. Pikema vastuse saamiseks uuenda.",
+    "errServiceUnavailable": "Openai server on hõivatud, proovige hiljem uuesti või lülituge Sider API-le ja kasutage OpenAI katkestuse ajal {{model}}.",
+    "errSiderAdminKickout": "Teid on välja visatud, palun logige uuesti sisse",
+    "errSiderAdvancedTextLimit": "Olete jõudnud täiendava krediidi limiidini. Praegu on piirang {{count}} sõnumit iga 60 minuti kohta. Teise võimalusena võite kasutada põhikrediiti ja naasta hiljem.",
+    "errSiderApiHighLoad": "OpenAI server on praegu hõivatud. Palun proovi hiljem uuesti.",
+    "errSiderApiImageLimit": "Oled kasutanud kõik põhikrediidid, palun uuenda, et jätkata selle funktsiooni kasutamist.",
+    "errSiderApiImgLimitPremiumUltra": "Olete jõudnud põhi krediitide maksimaalse arvuni. Palun oodake järgmist taastamist, et jätkata kasutamist.",
+    "errSiderApiLimitDevice": "Kasutamiseks logige sisse.",
+    "errSiderApiLimitLogin": "Olete täna kõik tasuta krediidid ära kasutanud. Uuenda või kutsu sõpru rohkemateks krediitideks või oota homse krediidi taastumist.",
+    "errSiderApiLimitPremium": "Selle kuu põhikrediit on kasutatud. Lülitu Täiendavale Krediidile, oota järgmise kuu lähtestamist (tellimuse kuupäev) või uuenda rohkemateks võimalusteks.",
+    "errSiderApiLimitPremiumDiscount": "Olete kõik oma krediidid ära kasutanud. Uuenda kohe piiramatu krediidi saamiseks <b>$1</b> soodustusega.",
+    "errSiderApiOcrLimit": "Olete kõik oma põhi krediidid ära kasutanud. Palun uuenda, et jätkata selle funktsiooni kasutamist.",
+    "errSiderApiSummaryVideoLimit": "Olete kõik oma krediidid ära kasutanud. Palun uuenda või kutsu sõpru, et saada rohkem.",
+    "errSiderApiTrialFeatLimit": "Oled jõudnud premium-funktsiooni prooviperioodi piirini. Kõigi funktsioonide avamiseks uuenda oma paketti.",
+    "errSiderAudioAdvancedLimit": "Sul on vaja rohkem Täiendavaid Krediite. Iga 10 minutit (või vähem) heli maksab 1 Täiendava Krediidi. Uuenda või kutsu sõpru, et saada rohkem!",
+    "errSiderBasicTextLimit": "Olete jõudnud põhikrediidi limiidini. Praegu on piirang {{count}} sõnumit iga 60 minuti kohta. Teise võimalusena võite kasutada täiendavat krediiti ja naasta hiljem.",
+    "errSiderChatDeepResearchFailed": "Praegu on raskusi teie uurimisaruande genereerimisega. Palun proovige uuesti.",
+    "errSiderCreditFreqLimit": "Olete saavutanud praeguse kasutuslimiidi. See limiit tagab kõigi kasutajate õiglase kasutamise. Palun proovige uuesti {{count}} minuti pärast.",
+    "errSiderCreditUsageLimit": "Kasutuslimiit saavutatud",
+    "errSiderDataAnalysisCredit": "See vastus vajab andmeanalüüsi (1 edasijõudnud krediit). Sul on edasijõudnud krediidid otsas, seega uuenda või kutsu sõpru, et saada rohkem!",
+    "errSiderDeviceBinded": "Kasutamiseks logige sisse.",
+    "errSiderDeviceLimitLogout": "Teid on välja logitud, kuna seadme limiit on saavutatud. Saate uuesti sisse logida ja see logib välja teie konto kõige varasema aktiivse seadme.",
+    "errSiderEliteCreditLimitElite": "Olete kasutanud kõik Eliit krediidid — proovige uuesti pärast krediidilimiidi lähtestamise kuupäeva. Kohese abi saamiseks võtke ühendust meie tugitiimiga.",
+    "errSiderEliteCreditLimitNotElite": "Teil on Eliit krediidid otsas — palun uuendage oma Sider liikmesust.",
+    "errSiderGPT45RateLimit": "Olete jõudnud oma igapäevase GPT-4.5 limiidini. OpenAI kvoodipiirangute tõttu on kasutamine piiratud 1 korraga kasutaja kohta päevas. Palun proovige uuesti 24 tunni pärast või lülituge teisele saadaval olevale mudelile, et jätkata.",
+    "errSiderGPT4HighLoad": "OpenAI server on praegu hõivatud. Palun proovi hiljem uuesti.",
+    "errSiderGPT4LimitDevice": "Palun <b>logi sisse</b> esmalt ja <amb>kutsu oma sõpru</amb> või <ta>uuenda premiumiks</ta>, et saada rohkem täiustatud krediiti.",
+    "errSiderGPT4LimitLogin": "Uuenda või kutsu sõpru, et avada rohkem täiustatud krediite põhjalikumate vastuste saamiseks.",
+    "errSiderGPT4LimitPremium": "Oled kasutanud kõik oma igakuised Advanced Credits. Suurenda oma paketti, et saada suurem igakuine limiit, või osta Advanced Credits kiirendipakett koheseks kasutamiseks!",
+    "errSiderGPT4LimitPremiumDiscount": "Teie selle kuu täiustatud krediidid on ära kasutatud. Uuenda kohe piiramatu krediidi saamiseks <b>$1</b> soodustusega või oota järgmist kuud (tellimuse kuupäev).",
+    "errSiderHighTrafficError": "Suure liikluse tõttu proovige hiljem uuesti või minge kiiremaks juurdepääsuks üle premium-kontole.",
+    "errSiderHighTrafficTip": "Kaaluge stabiilse juurdepääsu tagamiseks ja meie arengu toetamiseks <a>lisatasu kontole üleminekut</a>.",
+    "errSiderLoginExpired": "Teie sisselogimine on aegunud, palun logige uuesti sisse",
+    "errSiderNeedLogin": "Kasutamiseks logige sisse.",
+    "errSiderO1Limit1": "OpenAI o1 mudel on suure nõudlusega ja on saavutanud oma kvoodipiiri. Ära muretse, sa saad ka tasuta esitada OpenAI o1 küsimusi meie kogukonna juhitud KKK veebisaidil: <a>ask.sider.ai</a>",
+    "errSiderOpenaiFault": "Openai server on hõivatud. Lülituge OpenAI katkestuse ajal mudelile {{model}}.",
+    "errSiderOpusLimit": "Oled jõudnud oma päevase limiidini Claude Opus 4 jaoks. Antropici kvoodipiirangute tõttu on kasutamine piiratud 1 korraga kasutaja kohta päevas. Palun proovi uuesti 24 tunni pärast või lülitu teisele saadaval olevale mudelile, et jätkata.",
+    "errSiderOpusTLimit": "Oled jõudnud oma päevase limiidini Claude Opus 4 Think jaoks. Antropici kvoodipiirangute tõttu on kasutamine piiratud 1 korraga kasutaja kohta päevas. Palun proovi uuesti 24 tunni pärast või lülitu teisele saadaval olevale mudelile, et jätkata.",
+    "errSiderPremiumRequired": "See funktsioon on saadaval ainult premium-kasutajatele. Selle funktsiooni avamiseks uuendage kohe.",
+    "errSiderProcessing": "Ainult üks sõnum korraga. Enne uue sõnumi saatmist laske mis tahes muul vastusel lõpule jõuda või oodake veidi.",
+    "errSiderThinkingModelCredit": "Pole piisavalt täiustatud krediite \"Mõtlemisrežiimi\" jaoks. Palun keelake see režiim või uuendage/kutsuge sõpru lisakrediitide saamiseks.",
+    "errSiderTimeout": "Päring aegus. Palun proovi uuesti.",
+    "errSiderTranslateApiLimitPremium": "Selle kuu põhikrediit on kasutatud. Palun oota järgmise kuu lähtestamist (tellimuse kuupäev) või uuenda rohkemateks võimalusteks.",
+    "errSiderUltraVipRequired": "See funktsioon on saadaval ainult Ultra paketis. Palun uuendage Ultra paketile, et seda kasutada.",
+    "errSiderUnlimitedLimit": "Olete jõudnud ajutise piirini ({{timesToUse}} korda / {{periodTime}} tund) Advanced Credits'i kasutamisel. Püüame teile rohkem krediiti saada. Uued krediidid on saadaval kell {{resetTime}}. Vajate rohkem kohe? Proovige booster pack'i!",
+    "errSiderUserBanned": "Teie konto on peatatud tuvastatud ebatavalise tegevuse tõttu (nt reeglite rikkumine või konto jagamine). Kui teil on küsimusi, saatke meile e-kiri aadressil care@sider.ai koos oma konto andmetega.",
+    "errTrySiderAPI": "Kontrollige oma <a>kohandatud API seadeid</a>.",
+    "errTrySiderAPI2": "<a>Lülituge Siderile</a> usaldusväärse juurdepääsu saamiseks (see alustab uut vestlust).",
+    "errTrySiderAPI2NonChat": "<a>Vaheta Sideri peale</a> usaldusväärse ligipääsu jaoks.",
+    "errTrySiderAPI3": "<a>Võtke ühendust toega</a> abi saamiseks.",
+    "failToPlay": "Esitamine ebaõnnestus",
+    "featureBrowserLimit": "See leht ei toeta brauserilaiendusi. Piiratud lehtede hulka kuuluvad tavaliselt uued vahelehed, veebipood, teised laiendused ja seaded (chrome:// URL-id). Palun proovige tavalist lehte.",
+    "featureLimit": "Funktsioonide piirang",
+    "featureLimitTip": "Uuendage Claude'i ja Bardi kasutamiseks.",
+    "featureUnavailableOnPage": "Ei saa sellel lehel töötada",
+    "fetchFailed": "Pilti ei õnnestunud taastada. Saate selle alla laadida ja käsitsi üles laadida.",
+    "fileLimit": "Selle faili töötlemiseks palun lubage täiustatud andmeanalüüsi tööriist. See maksab 1 täiustatud krediit kasutuse kohta. Kas soovite selle lubada ja jätkata?",
+    "fileLimitFree": "Teie üleslaaditud fail vajab töötlemiseks täiustatud andmeanalüüsi. Selle funktsiooni avamiseks uuendage kohe.",
+    "fileSizeLimit": "Fail on liiga suur",
+    "fileSizeLimitTip": "Fail ületab 100MB üleslaadimise piiri. Palun vähenda faili suurust ja proovi uuesti.",
+    "fileSizeTip": "Maksimaalne suurus: 100MB iga faili kohta. Kuni 5 faili.",
+    "fiveStart": "Andke meile 5 tärni",
+    "functionCallError": "Vabandust, praegune mudel kohtas vastuse genereerimisel sisemist viga. Palun vahetage mudelit ja proovige uuesti.",
+    "getApiKeyGuide": "Selle toimimiseks vajate OpenAI API võtit. API võtme hankimiseks järgige meie juhendit.",
+    "getMoreGPT4": "Hangi rohkem täiustatud krediiti",
+    "goToSignIn": "Mine sisse logima",
+    "imageSizeLimit": "Pildipiirang",
+    "imageSizeLimitTip": "Veenduge, et pilt oleks väiksem kui 10 MB ja selle laius või kõrgus ei ületa 4096 pikslit, seejärel proovige uuesti.",
+    "invalidApiKey": "API-võti on kehtetu, hankige teine.",
+    "invitedRewardObtained": "Auhinnad saadud!",
+    "invitedWelcome": "Tere tulemast! GPT krediidid on teie kontole lisatud!",
+    "inviteEarn": "Teeni <mx>{{num}} krediiti</mx> endale ja oma sõpradele. <b>Mida rohkem viitad, seda rohkem teenid</b>.",
+    "inviteFriendJoin_one": "{{count}} sõber liitus",
+    "inviteFriendJoin_other": "{{count}} sõpra liitus",
+    "inviteStep1": "Kutsuge oma sõpru kutselingi abil",
+    "inviteStep2": "Teie sõbrad registreeruvad",
+    "inviteStep3": "Nad installivad laienduse ja sisselogimise. Auhinnad teenitud!",
+    "inviteTitle": "Kutsed ja auhinnad",
+    "iosDownload": "Laadi alla iOS / Android rakendus",
+    "keepConversationTip": "Iga kord, kui avad Sideri, algab uus vestlus. Eelmise vestluse jätkamiseks kohanda <a>seadeid</a>.",
+    "localFileAccessRequiredBtn": "Mine laienduse seadistustesse",
+    "localFileAccessRequiredDesc": "Laienduse kasutamiseks kohalike failidega minge laienduse seadistustesse ja lülitage sisse \"<b>Luba juurdepääs failide URL-idele</b>\".",
+    "localFileAccessRequiredTitle": "Faili juurdepääs on vajalik",
+    "loginAndCloudflareCheck": "Stabiilse juurdepääsu saamiseks lülituge <a>külgriba API-le</a> VÕI logige sisse ja läbige Cloudflare'i kontroll aadressil <i>chat.openai.com</i>",
+    "maxFileSize": "Maksimaalne faili suurus on {{size}}",
+    "maxSize": "Maksimaalne suurus: {{num}}",
+    "modelError": "Server on hõivatud. Palun proovige hiljem uuesti või vahetage mudelit.",
+    "nameYourPrompt": "Nimetage oma viipa",
+    "nameYourTitle": "Nimetage oma vestlus",
+    "noSubtitleMsg": "Videol puuduvad subtiitrid ja seda ei saa kokku võtta.",
+    "noSubtitleTitle": "Kokkuvõtte jaoks on vajalikud subtiitrid",
+    "notSupportFile": "Toetamata failivorming",
+    "notSupportLiveVideo": "Reaalajas video kokkuvõte ei ole praegu toetatud.",
+    "notValidEmail": "ei ole kehtiv email",
+    "onlyOneRequest": "Aktiivne päring käimas",
+    "onlyOneRequestDesc": "Teie kontol on aktiivne päring - korraga saab teha ainult ühe päringu. Palun proovige hiljem uuesti.",
+    "openLastConversationCancel": "Sain aru",
+    "openLastConversationContent": "Nüüd saame seada, kas küljepaan taastab iga kord viimase vestluse, kui see käivitatakse.",
+    "openLastConversationOk": "Mine seadetesse",
+    "openLastConversationTitle": "Ava viimane vestlus?",
+    "promptNameRequired": "Nõutav nimi.",
+    "promptTplRequired": "Vajalik on kiire sisu.",
+    "quotaModelContent": "Teie GPT-4/Claude-2 päringute limiit on saavutatud. Uuenda Premium plaanile, et saada rohkem juurdepääsu, või kutsu sõpru tasuta lisakrediitide saamiseks.",
+    "reEnableInSettings": "Saate selle uuesti lubada menüüs <a>Seaded</a>",
+    "restorePromptWarn": "Kas soovite selle viipamalli taastada?",
+    "searchNotFound": "Tulemusi ei leitud",
+    "selectModel": "Valige sobiv mudel",
+    "signinAward": "Logi sisse, et saada iga päev {{num}} <span>TASUTA</span> krediiti",
+    "signinAward2": "Krediidid on kasutatud sisse logimata kasutajale. Saate sisse logida, et saada <b>{{num}} tasuta krediiti päevas</b>.",
+    "signinAward3": "Logi sisse, et saada rohkem krediite päevas",
+    "signinAward4": "Alustage maagilist AI teekonda oma brauseriga ja saate iga päev {{num}} <span>TASUTA</span> krediiti",
+    "signinFeature": "Palun logi sisse, et seda funktsiooni kasutada",
+    "signInRequired": "Sisselogimine Nõutav",
+    "signinTips": "Viipade ja seadete sünkroonimiseks logige sisse",
+    "somethingWrong": "Midagi läks valesti. Palun proovige hiljem uuesti.",
+    "somethingWrong2": "Midagi läks valesti.",
+    "supportedFileFormat": "Toetatud failivormingud on {{formats}}",
+    "switchBarTip": "Navigeerimisriba kinnitamiseks laiendage külgpaneeli.",
+    "switchRequired": "Kas vahetada {{APP_NAME}} vastu?",
+    "switchToSiderApiToContinue": "See funktsioon toetab praegu ainult rakenduse {{APP_NAME}} API režiimi. Jätkamiseks <a>lülituge rakendusele {{APP_NAME}} API</a>.",
+    "switchToSiderDesc": "Selle funktsiooni kasutamiseks palun vaheta oma AI ligipääsu meetodiks {{APP_NAME}}.",
+    "thankForFeedback": "Aitäh. Vorm esitati edukalt. Võtame teiega peagi ühendust.",
+    "titleRequired": "Pealkiri on kohustuslik.",
+    "ttsChangeVoiceTip": "Krediitide mahaarvamise teade",
+    "ttsChangeVoiceTipDesc": "Teisele häälele üleminek vähendab krediite uuesti. Kas olete kindel, et soovite jätkata?",
+    "ttsCharacterLimit": "Tähemärkide limiit saavutatud",
+    "ttsCharacterLimitDesc": "AI lugemisel ette on {{count}} tähemärgi piirang. Palun valige lühem tekst või kasutage tasuta häält.",
+    "ttsCharacterLimitDesc2": "See sõnum on AI häälte jaoks liiga pikk, et ette lugeda. Saate kasutada tasuta häält.",
+    "ttsChooseVoice": "Vali hääl",
+    "ttsChooseVoiceLater": "Saate seda hiljem muuta.",
+    "ttsCreditLimit": "Ebapiisavad põhikrediidid",
+    "ttsCreditLimitDesc": "Teil pole selle hääle jaoks piisavalt põhikrediite. Palun uuendage oma plaani või kasutage tasuta häält.",
+    "unreadableMsg": "Sellelt lehelt ei leia põhisisu. Proovige teist lehte.",
+    "unreadableTitle": "Peamine sisu puudub",
+    "updateExtTips": "Palun uuenda oma Sideri laiendust, et seda funktsiooni kasutada",
+    "upgradeSupport": "Meie toetamiseks minge üle premium-paketile",
+    "upgradeSupport2": "Täiendage rohkemate funktsioonide saamiseks",
+    "uploadFailed": "\"{{FILENAME}}\" üleslaadimine ebaõnnestus.",
+    "useUpUpgrade": "Teie krediidid on ära kasutatud, palun uuenda, et saada rohkem krediiti.",
+    "videoTooLang": "Video on liiga pikk (maksimaalselt 10 tundi). Palun valige lühem video.",
+    "writeSomething": "Palun kirjuta midagi."
+  },
+  "multiFileChat": "Mitmefaililine vestlus {{WISEBASE}}-is",
+  "myAccount": "Minu konto",
+  "myChats": "Minu vestlused",
+  "myHighlights": "Minu esiletõstmised",
+  "newFeature": "Uus funktsioon!",
+  "newPlan": "Uus plaan",
+  "next": "Järgmine",
+  "NoFiles": "Selles vestluses pole hiljutisi faile",
+  "noReasoningModelTip": "Laiendatud mõtlemine DeepSeek R1 kaudu. Maksab 1 lisakrediit/päring.",
+  "notDistinguish": "Ära erista",
+  "notDistinguishDesc": "1 edasijõudnud krediit / 10 minutit",
+  "notNotifyAgain": "Ära teavita enam",
+  "notNow": "Mitte praegu",
+  "ocrEmptyMsg": "Kahjuks ma ei leia sellelt pildilt teksti.",
+  "OCRPanel": {
+    "aiOCRTips": "AI OCR võib teha vigu",
+    "dragImgTips": "Klõpsa, et üles laadida või lohista pilt siia, et teksti välja võtta",
+    "noText": "Teksti ei tuvastatud",
+    "ocrCost": "Iga {{name}} maksab {{num}} põhi krediiti",
+    "ocrTips": "Ekstraktige pildilt tekst, numbrid ja võrrandid"
+  },
+  "ok": "Okei",
+  "openAnswerCompare": "Kõrvuti võrdlus",
+  "openSidebar": "Ava külgriba",
+  "openTabs": "Vali avatud vahelehtedelt",
+  "optimizeWith": "Optimeeri koos {{NAME}}-ga",
+  "optionPage": {
+    "activateContextMenu": "Ava kiire küsimine",
+    "addASite": "Lisa sait",
+    "addNewTplForSearch": "Lisage uus viipamall",
+    "addNewTplForSidebar": "Lisage uus viipamall",
+    "apiFreeGuide": "API-võtme hankimiseks järgige juhiseid.",
+    "apiKeyGpt4Tip": "Laiendus toetab GPT-4, kui sisestate GPT-4 API-võtme.",
+    "apiKeyGuideTip": "Klõpsa [Set up], et lisada API võti.",
+    "apiKeyLocally": "Teie API võti salvestatakse kohalikult teie brauserisse ja seda ei saadeta kunagi mujale. <b>Märkus:</b> Mõned funktsioonid on tehnilistel põhjustel piiratud {{APP_NAME}} režiimiga.",
+    "apiKeyProvider": "Ametlik OpenAI API on stabiilsem ja tasud põhinevad kasutusel.",
+    "apiKeyProviderTip": "(API võtmega arendajatele)",
+    "apiKeyTip1": "Teie tasuta OpenAI API võti võib olla aegunud. Palun <a>kontrollige siin API-võtme aegumise olekut.</a>",
+    "apiKeyTip2": "Kui kasutate tasuta OpenAI API-võtit, ei pruugi juurdepääs ChatGPT-le suure nõudluse korral olla stabiilne.",
+    "autoQuoteSelectedText": "Valitud teksti automaatne tsiteerimine sisendkastis",
+    "autoQuoteSelectedTextTip": "Kui sisse lülitatud, ilmub valitud tekst automaatselt sisendkasti kiireteks toiminguteks",
+    "customModelName": "Kasuta kohandatud mudeli nime",
+    "defaultSpeed": "Vaikimisi kiirus",
+    "defaultVoice": "Vaikimisi hääl",
+    "disabledSites": "Keelatud saitidel",
+    "displayLanguage": "Kuvakeel",
+    "displayMode": "Kuvarežiim",
+    "displaySearchRes": "Kuva ChatGPT vastus otsingutulemuste lehtede kõrval",
+    "displayWhenSelect": "Kuvatakse, kui tekst on valitud",
+    "easiestWayUse": "Lihtsaim viis rakenduse {{APP_NAME}} kasutamiseks",
+    "editSearchTplPlaceholder": "{{keywords}} sisus asendatakse automaatselt teie otsingusõnadega",
+    "editSearchTplTip": "kasutage otsingu märksõnade viitamiseks {{keywords}}",
+    "editSidebarTplTip": "Kleebi või sisesta sisu siia",
+    "feedbackTypes": {
+      "bug": {
+        "detail": {
+          "label": "Probleemi üksikasjad",
+          "tip": "Kirjeldage üksikasjalikult, mis läks valesti, milliseid toiminguid tegite ja milliseid veateateid saite."
+        },
+        "name": "Probleemiaruanne",
+        "title": {
+          "label": "Probleemi kokkuvõte",
+          "tip": "Andke meile mõne sõnaga teada, mis valesti läks."
+        }
+      },
+      "fr": {
+        "detail": {
+          "label": "Kirjeldus",
+          "tip": "Esitage soovitud uue funktsiooni üksikasjalik kirjeldus."
+        },
+        "name": "Funktsiooni taotlus",
+        "title": {
+          "label": "Pealkiri",
+          "tip": "Mida teie taotlus puudutab?"
+        }
+      }
+    },
+    "fontSizeAutoTip": "Automaatne kohandamine vastavalt külgriba laiusele",
+    "fontSizeOptions": {
+      "large": "Suur",
+      "regular": "Tavaline"
+    },
+    "fontSizeTip": "Ainult sõnumi tekstile",
+    "fontSizeTitle": "Sõnumi fondi suurus",
+    "GPT4Desc": "Peate olema oma ChatGPT kontole veebisaidil sisse logitud. Stabiilsus võib olla ebajärjekindel nii Plus kasutajatele kui ka tasuta kasutajatele OpenAI piirangute tõttu.",
+    "hideThinkingAfterFinish": "Kokkuvõtte mõtlemine pärast lõpetamist",
+    "hideThinkingAfterFinishTip": "Kokkuvõtte mõtteblokk pärast mõtlemise lõpetamist",
+    "howToAccess": "Kuidas pääseda juurde ChatGPT-le ja kasutada seda kõikjal",
+    "howToAccessTip": "Veendumaks, et tehisintellekt on kõigile juurdepääsetav, pakume 3 võimalust ChatGPT-le juurde pääseda ja seda kõikjal kasutada.",
+    "importantReminders": "Olulised meeldetuletused",
+    "invalidShortcutTip": "Sisalda {{key1}}, {{key2}} või {{key3}}",
+    "launchSidebar": "Ava külgriba",
+    "linkToSetting": "Muuda küljepaneeli asukohta brauseri seadetes",
+    "loginFirst": "Palun logige esmalt sisse.",
+    "loginFirstTip": "Logige sisse, et alustada Sideri kasutamist ja saada iga päev tasuta krediiti.",
+    "messageStreamEffect": "Sõnumivoogude efekt",
+    "messageStreamEffectOptions": {
+      "classic": "Klassikaline",
+      "fadeIn": "Hajumine"
+    },
+    "messageStreamEffectTip": "Voogefekt sissetulevate vestlussõnumite reaalajas kuvamiseks",
+    "noSiteAdded": "Saite pole lisatud",
+    "openNewChat": "Alusta uut vestlust",
+    "ownURL": "Kasuta minu enda URL-i",
+    "promptManage": {
+      "checkPrompt": "Kontrollige Viip",
+      "deletePromptWarn": "Kas kustutada see viip?",
+      "editPrompt": "Redigeeri viipa",
+      "hideFromList": "Peida nimekirjast",
+      "howToExample": "Kasutage pealkirju, peatükke ja alajaotisi sisaldava ülevaate loomiseks järgmisi teemasid või märksõnu.\nVäljutage see Markdowni vormingus. Andke mulle ainult väljund ja mitte midagi muud. Kontuur peaks olema {{lang}} keeles.\nTeemad või märksõnad: {{content}}",
+      "howToVar1": "Seda muutujat saate kasutada sisendi või valitud sisu esitamiseks. Kui viip seda muutujat ei sisalda, suletakse sisend või valitud sisu kolmekordsete jutumärkidega ja asetatakse viiba lõppu.",
+      "howToVar2": "Saate kasutada seda muutujat, et esindada keelt, mida soovite väljundi jaoks kasutada, lähtudes sätetes määratud vaikekeelest.",
+      "howToVarTitle": "Milliseid muutujaid saab viipasse kaasata?",
+      "howToWritePrompt": "Kuidas kirjutada käsku",
+      "newPrompt": "Uus viip",
+      "noPrompts": "Siin pole küsimusi",
+      "promptTabChatDesc": "Nimekirjas 'Näita nimekirjas' olevad küsimused ilmuvad {{name}} funktsioonis.",
+      "promptTabReadDesc": "Nimekirjas 'Näita nimekirjas' olevad küsimused ilmuvad {{name}} lehe tekstis.",
+      "promptTabWriteDesc": "Nimekirjas 'Näita nimekirjas' olevad küsimused ilmuvad {{name}} sisendkastides.",
+      "showInList": "Näita nimekirjas"
+    },
+    "promptTplForSearch": "Viipamall Google'i ja muude otsingumootorite jaoks",
+    "providerAPIKeyDesc": "Ideaalne neile, kellel on API võti: stabiilne, kasutuspõhine hinnakujundus",
+    "providerPartTitle": "Tehisintellekti ligipääs",
+    "providerSiderDesc": "Toetatud juhtivate mudelite ametlike API-de poolt, kiire ja usaldusväärne",
+    "providerSiderTip": "{{APP_NAME}} annab sulle kiire ja usaldusväärse juurdepääsu juhtivatele AI mudelitele OpenAI, DeepSeek, Anthropic, Google ja teistelt—kõik ametlike API-de kaudu ühel platvormil. Ava uusimad AI uuendused oma käeulatuses!",
+    "providerWebappDesc": "Võib olla ebastabiilne OpenAI poliitikamuudatuste tõttu",
+    "providerWebappTip": "Kogemus võib külastajate ja sisse loginud kasutajate vahel varieeruda OpenAI piirangute tõttu.",
+    "quickAction": {
+      "customPromptMenu": "Halda {{name}} jaoks mõeldud viipasid",
+      "desc": "{{name}} pakub kiireid toiminguid valitud teksti jaoks veebilehel (lugemine) või sisendkastis (kirjutamine).",
+      "displayOnSelect": "kui tekst on valitud",
+      "displayOnShortcut": "kui tekst on valitud ja vajutatakse {{key}}",
+      "mainSwitchTitle": "Näita {{name}}"
+    },
+    "recommend4all": "(Soovitatav kõigile)",
+    "recommended": "Soovitatud",
+    "restoreDefault": "Taasta vaikeseaded",
+    "scrollingBehavior": "Pikkade vastuste kerimiskäitumine",
+    "sendingMsgBehavior": "Käitumine pärast sõnumi saatmist vestluses",
+    "sendingMsgBehaviorOptions": {
+      "bottom": "Kerige automaatselt vastuse lõpuni",
+      "messageTop": "Peatage kerimine, kui vastus jõuab tippu"
+    },
+    "sendMessage": "Saada sõnum",
+    "serviceProvider": "Teenusepakkuja",
+    "shortcutInUseTip": "Juba kasutusel, proovi teist",
+    "showSelectedTextDesc": "Näita automaatselt valitud teksti tsitaadina sisestusväljal kiirete toimingute jaoks koos vihjetega",
+    "showSelectedTextTip": "Kui eelistad mitte valitud teksti automaatselt kuvada, lülita see välja <a>külgriba seadetes</a>.",
+    "showSelectedTextTitle": "Kuva valitud tekst automaatselt sisestusväljal",
+    "sidebarDisplayOption": "Külgriba kuvarežiim",
+    "sidebarDisplayOptions": {
+      "expand": "Laienev",
+      "overlay": "Ülekate"
+    },
+    "sidebarDisplayOptionTip": "Valige, kuidas külgriba lehel kuvatakse",
+    "sidebarIcon": "Külgriba ikoon",
+    "sidebarIconAccess": "Juurdepääs külgribale ikooni kaudu, mis asub lehe alumises paremas nurgas. Üles ja alla liigutamiseks saate seda lohistada",
+    "sidebarLeftOrRight": "Asetage külgriba vasakule või paremale küljele",
+    "sidebarLocation": "Külgriba asukoht",
+    "sidebarOnStartup": "Kui küljeriba avatakse",
+    "sidebarOnStartupAutoTip": "Kui vestlus avatakse uuesti 10 minuti jooksul, jätkub see; kui pärast 10 minutit, algab uus vestlus",
+    "sidebarOnStartupOptions": {
+      "auto": "Automaatne jätkamine või taaskäivitamine",
+      "last": "Jätka alati viimast vestlust",
+      "new": "Alusta alati uut vestlust"
+    },
+    "sidebarOnStartupTip": "Konfigureeri vestlusliidese kuvamisrežiim külgriba avamisel",
+    "sidebarProvider": "Külgriba kasutab stabiilse juurdepääsu tagamiseks ChatGPT Premium API-t.",
+    "sidebarProviderGoPremium": "Pakume {{num}} tasuta päevakrediiti, et tagada AI kättesaadavus kõigile. <a>Uuenda premiumiks</a>, et suurendada oma päevakrediidi limiiti ja toetada meie missiooni <b>pakkuda universaalset AI-d kõigile</b>.",
+    "sidepanelLeftOrRight": "Paiguta küljepaneel vasakule või paremale poole. Küljepaneel on saadaval ainult Google Chrome'i versioonist 114 või uuemast.",
+    "sidepanelLocation": "Küljepaneeli asukoht",
+    "sidepanelPosition": "Külgpaneeli asukoht",
+    "sidepanelPositionTip": "Chrome 114 või uuemal saab muuta ainult brauseri seadetes",
+    "siderIcon": "{{APP_NAME}} ikoon",
+    "siderIconDisplay": "Näita alati {{APP_NAME}} ikooni lehel",
+    "siderIconDisplayTip": "Kui sisse lülitatud, ilmub {{APP_NAME}} ikoon paremasse alumisse nurka ja seda saab lohistada",
+    "translatePage": "Tõlgi leht",
+    "webappGPT4": "(ChatGPT Plus kasutajad saavad seda proovida)",
+    "webappReminder1": "Jääge oma kontole sisse logituks.",
+    "webappReminder2": "See teenus võib olla ebastabiilne OpenAI poliitikamuudatuste tõttu. Kiireks ja stabiilseks jõudluseks soovitame kasutada {{APP_NAME}}.",
+    "webappTip1": "Kui olete ChatGPT Plusi kasutaja, on teil nüüd võimalus valida GPT-4. OpenAI võib aga piirata päevas saadetavate sõnumite arvu.",
+    "webappTip2": "<m>Kinnitage vahekaart ChatGPT</m> ja jääge ChatGPT veebisaidile sisse logituks. See ei pruugi aga stabiilsust tagada. Kui teil tekib probleeme, külastage <v>ChatGPT veebisaiti </v> ja värskendage lehte.",
+    "webAssistant": {
+      "code": {
+        "desc": "Kui sisse lülitatud, saab {{APP_NAME}} aidata teil veebilehel olevaid koode selgitada",
+        "title": "Koodiabi"
+      },
+      "image": {
+        "desc": "Kui see on sisse lülitatud, saate kiiresti ligi pääseda AI pilditööriistadele, liikudes hiirega üle mis tahes pildi",
+        "title": "Pildi Abiline"
+      },
+      "linkPreview": {
+        "autoSummarize": "Automaatne kokkuvõte",
+        "collapse": "Ahenda",
+        "guideTipDesc": "Lohista linki, et seda eelvaadata ilma lehelt lahkumata. Keela see <link>seadetes</link>, kui pole vaja.",
+        "guideTipTitle": "Eelvaata linke tõhusalt",
+        "openInNewTab": "Ava uues vahekaardis",
+        "pageLoadFailed": "Lehe laadimine ebaõnnestus",
+        "summarizeNotSupported": "See leht ei toeta kokkuvõtete tegemist.",
+        "viewSummary": "Vaata kokkuvõtet"
+      },
+      "qa": {
+        "desc": "Kui see on sisse lülitatud, saab {{APP_NAME}} Quora, StackOverflow ja muudel kvaliteedikontrolli saitidel küsimusele vastata",
+        "title": "Küsimuste ja vastuste assistent"
+      },
+      "video": {
+        "BilingualDesc": "<b>Kakskeelsed subtiitrid</b>: Kui see on lubatud, kuvab {{APP_NAME}} automaatselt YouTube'i videoid vaadates subtiitrid",
+        "SummaryDesc": "<b>Video kokkuvõte</b>: Kui see on lubatud, saab {{APP_NAME}} aidata teil YouTube'i videoid kokku võtta",
+        "title": "YouTube Assistent"
+      }
+    },
+    "webAsstAISitesDesc": "Näita \"Võrdle\" nuppu lehel {{url}}",
+    "webAsstAISitesTitle": "Võrdle mudeleid ChatGPT-s",
+    "webAsstCodeDesc": "Kuva Koodi Selgitamise nupp koodiplokil",
+    "webAsstCodeTitle": "Koodi jaoks",
+    "webAsstEmailDesc": "Kuva AI vastuse nupp Gmailis",
+    "webAsstEmailTitle": "E-posti jaoks",
+    "webAsstImageDesc": "Kuva AI tööriistad pildi kohal hõljumisel",
+    "webAsstImageTitle": "Piltide jaoks",
+    "webAsstInputBoxDesc": "Näita sisendkastis punktikooni, et kirjutamist täiustada",
+    "webAsstInputBoxTitle": "Sisendkast",
+    "webAsstLinkPreviewDesc": "Kuva lingi eelvaate aken, kui lohistad linki.",
+    "webAsstLinkpreviewExampleLink": "See on turvaline link, proovi seda lohistada, et näha eelvaate akent",
+    "webAsstLinkPreviewTitle": "Lingieelvaadete jaoks",
+    "webAsstQADesc": "Kuva Vastuse nupp KKK saitidel",
+    "webAsstQATitle": "Küsimuste ja vastuste saitide jaoks",
+    "webAsstRecordShortCutSitesDesc": "Kuva Kiire Salvestuse paneel Google'i kohtumisel ja Teamsis",
+    "webAsstRecordShortCutSitesTitle": "Kohtumiste jaoks",
+    "webAsstSearchDesc": "Kuva AI vastus otsingutulemustega koos",
+    "webAsstSearchTitle": "Otsingu jaoks",
+    "webAsstTranslationSitesDesc": "Kuva nupp \"Võrdle\" Google Translate'is",
+    "webAsstTranslationSitesTitle": "Võrdle mudeleid Google Translate'is",
+    "webAsstVideoBilingualDesc": "Kuva kakskeelne juhtimine YouTube'is",
+    "webAsstVideoSummaryDesc": "Kuva kokkuvõtte paneel YouTube'is",
+    "webAsstYoutubeTitle": "YouTube'i jaoks",
+    "whenSidebarReopens": "Kui külgriba uuesti avaneb",
+    "whenToAsk": "Millal küsida ChatGPT-d",
+    "wrongSiteTip": "Vigane URL: Kontrollige URL-i ja proovige uuesti."
+  },
+  "options": {
+    "shortcut": {
+      "tips": "Sisestage otsetee"
+    },
+    "sidebarLocation": {
+      "left": "vasak pool",
+      "right": "parem pool"
+    },
+    "sidebarMode": {
+      "inpage": "Lehesisene külgriba",
+      "sidepanel": "Fikseeritud külgriba"
+    },
+    "sidebarModeTip": {
+      "inpage": "Vahekaartide vahetamisel ei jää Sider ekraanile; peate uuel lehel külgriba uuesti avama.",
+      "sidepanel": "Vahekaartide vahetamisel jääb Sider alati brauseri paremale küljele fikseerituks."
+    },
+    "sidebarPromptTpl": {
+      "explain": {
+        "template": "Selgitage järgmist sisu:",
+        "title": "Seletama"
+      },
+      "explain-codes": {
+        "template": "Selgitage järgmisi koode:",
+        "title": "Selgitage koode"
+      },
+      "translate": {
+        "template": "Tõlgi järgmine sisu {{lang}} keelde:",
+        "title": "Tõlgi"
+      }
+    },
+    "theme": {
+      "auto": "automaatne",
+      "dark": "tume režiim",
+      "light": "helge režiim"
+    },
+    "title": "Valikud",
+    "triggerMode": {
+      "always": {
+        "desc": "Alati",
+        "title": "Alati"
+      },
+      "manually": {
+        "desc": "Kui vastuse nuppu vajutatakse",
+        "title": "Käsitsi"
+      },
+      "questionMark": {
+        "desc": "Kui päring lõpeb küsimärgiga",
+        "title": "Küsimärk"
+      }
+    }
+  },
+  "OR": "VÕI",
+  "orTakeAction": "Või tehke muid toiminguid:",
+  "otherModels": "Muud mudelid",
+  "pageTranslation": {
+    "aiTranslator2": "AI Tõlkija",
+    "aiTranslatorFunDesc1": "Tabab nii kavatsust kui ka tooni, minnes sügavamale kui sõna-sõnaline tõlge",
+    "aiTranslatorFunDesc2": "Tõlgi selguse ja täpsusega, tagades, et ükski detail ei läheks kaduma",
+    "aiTranslatorFunTitle1": "Konteksti Mõistmine",
+    "aiTranslatorFunTitle2": "Täpsus Tõlkimisel",
+    "autoDetect": "Automaatne tuvastus",
+    "autoTrans": "Automaatne tõlge",
+    "autoTrans2": "Tõlgi veebilehed automaatselt",
+    "autoTrans2Desc": "Kui väljas, klõpsa tõlkimise nupul või kasuta kiirklahvi",
+    "demoText": "ChatGPT on loodud Transformeri abil, mis on süvaõppemudel loomuliku keele töötlemiseks, sisaldades enesetähelepanu ja ettepoole suunatud närvivõrke.",
+    "displayMode": "Kuvarežiim",
+    "displayModes": [
+      "Kakskeelne",
+      "Ainult tõlge"
+    ],
+    "displayStyle": "Kuvastiil",
+    "displayStyleDesc": "Ainult tõlgete jaoks kakskeelses võrdlusrežiimis",
+    "displayStyles": [
+      "Puudub",
+      "Allakriipsutus",
+      "Nõrgendus"
+    ],
+    "free": "Tasuta",
+    "neverTransSite": "Ära kunagi tõlgi seda saiti",
+    "neverTransSites": "Ära kunagi tõlgi neid saite",
+    "newAITranslationTip": "Tehisintellekti lehekülje tõlge on nüüd saadaval! Klõpsake siin, et see seadistada.",
+    "pageTranslation": "Tõlgi see leht",
+    "reTrans": "Tõlgi uuesti",
+    "showOriginal": "Näita algset teksti",
+    "source": "Lähtekeel",
+    "target": "Sihtkeel",
+    "title": "Lehekülje tõlge",
+    "transAgain": "Tõlgi uuesti",
+    "translateService": "Tõlketeenus",
+    "translateServiceTip": "AI tõlkimine maksab põhikrediite vastavalt sisu pikkusele.",
+    "transSettings": "Tõlke seaded"
+  },
+  "painterOnBoardingTip": "Klõpsa siia AI pildi loomiseks ja redigeerimiseks",
+  "pasteSelection": "Kleebi valik",
+  "pasteTextPage": "Kleebi tekst lehelt",
+  "pause": "Paus",
+  "pdfOnBoardingTip": "Klõpsa siia ChatPDF-ile",
+  "personalization": "Isikupärastamine",
+  "phoneNumber": "Telefoninumber",
+  "pin": "pin kinni",
+  "pinExt": "Pin pikendus",
+  "planNames": {
+    "basic": "Põhiplaan",
+    "free": "Tasuta plaan",
+    "pro": "Pro plaan",
+    "starter": "Algaja plaan",
+    "ultra": "Piiramatu plaan"
+  },
+  "play": "Esita",
+  "popupPage": {
+    "chatNow": "Räägime nüüd",
+    "desc": "Praegune leht on ainulaadne leht ja külgriba funktsioon pole saadaval. Vestlemiseks võite aga avada terve lehe!",
+    "thank": "Täname teid laienduse {{APP_NAME}} kasutamise eest!"
+  },
+  "poweredByGPTImage": "Toetab GPT-image-1",
+  "prev": "Eelmine",
+  "preview": "Eelvaade",
+  "pricePerDay": "Vähem kui {{num}} päevas",
+  "pricePerMonth": "{{price}}/kuu",
+  "producthuntPromote": {
+    "ios1Banner1": "Hääleta ChitChat - ChatGPT iOS rakenduse poolt 🎉",
+    "ios1Banner2": "Paneme asjad hooga käima! 😄",
+    "ios1ModalDesc": "• Hankige vastuseid ChatGPT 3.5 ja 4 kaudu\n• Botidest koosnev tugimeeskond abistab teid ühes kohas\n  • Muutke oma PDF vestlusrotiks",
+    "ios1ModalTitle": "✨ Uus ChitChat iOS-i rakenduses",
+    "sidebar2Banner1": "Hääletage meie poolt saidil <b>Tootejaht</b> KOHE, et sõna levitada.",
+    "sidebar2ModalDesc": "• Vestluse vahekaart\n  • Kiire otsing kiirete päringute jaoks\n  • Konto viipade sünkroonimiseks\n  • Salvestage ja jagage vestlusi\n  • Toetage rohkem keeli\n  • Toetage GPT-4",
+    "sidebar2ModalTitle": "✨ Külgriba 2.0 kokkuvõte",
+    "voteBtn": "Hääletage tootejahti"
+  },
+  "productivity": "Tootlikkus",
+  "promotePreset": {
+    "anni2025Countdown": "Suur Müük: <b>{{time}} Jäänud</b>",
+    "blackFridayCountdown": "Must Reede: <b>{{time}} jäänud</b>",
+    "halloweenCardDesc": "Ava õudsed säästud",
+    "halloweenCardDesc2": "Naudi {{price}} SOODUSTUST",
+    "halloweenCardTitle": "Halloweeni allahindlus",
+    "halloweenCardTitle2": "Nõua Halloweeni maiust",
+    "halloweenCountdown": "Õudne pakkumine: <b>{{time}} jäänud</b>",
+    "halloweenCountdown2": "{{price}} SOODUSTUS: <b>{{time}} jäänud</b>",
+    "macContent": "Meil on hea meel teatada, et Sider on nüüd Maci kasutajatele saadaval! Nautige sujuvat ja tõhusat kogemust, mis on kohandatud ainult Maci jaoks, koos kõigi võimsate funktsioonidega, mis teile meeldivad meie veebiversioonist.",
+    "macContent2": "{{APP_NAME}} on nüüd saadaval Maci jaoks!",
+    "macDownload": "Lae alla nüüd!",
+    "macTitle": "{{APP_NAME}} Macile",
+    "phContent": "Võtke hetk, et toetada meid hääletusega <i>Product Hunt</i>is—see on kiire, lihtne ja aitab meid palju!",
+    "phContent2": "Andke meile <b>Tootejahis</b> hääl",
+    "phFeatures1": "<b>ChatGPT vidinad</b>: kirjutage, eraldage piltidelt teksti, kontrollige grammatikat ja tõlkige – kõik ühes kohas.",
+    "phFeatures2": "<b>Sider Vision</b>: vestelge piltidest GPT-4 Visioniga, viies tehisintellekti vestluse järgmisele tasemele.",
+    "phFeatures3": "<b>Grupi AI vestlus</b>: suhelge ChatGPT, GPT-4, Claude'i ja Bardiga ühes murrangulises grupivestluses.",
+    "phFeatures4": "<b>Me oleme kõik kõrvad</b>: teie tagasiside kujundab Siderit – jagage oma mõtteid, me kuulame!",
+    "phTitle": "Kas teile meeldib meie laiendus?",
+    "phTitle2": "Käivitasime saidil <i>Product Hunt</i> Sider 3.X versioonid.",
+    "phVote": "Hääleta nüüd!",
+    "phVote2": "Hääletage <i>Tootejahi</i> üle",
+    "phVoteTips": "<b>Tänane hääl on võtmetähtsusega</b> – toetage meid kohe!",
+    "xmasCountdown": "Aasta Lõpu Müük: <b>{{time}} Jäänud</b>"
+  },
+  "prompt": "Küsimus",
+  "promptContent": "Kiire sisu",
+  "PromptManage": "Käsu haldamine",
+  "promptManage": "Kiire juht",
+  "promptName": "Küsi nimi",
+  "prompts": "Küsimused",
+  "publish": "Avalda",
+  "publishArtifact": "Avalda artefakt",
+  "published": "Avaldatud",
+  "publishing": "Avaldamine",
+  "queryNames": {
+    "advanced": "Täiustatud",
+    "fast": "Põhi",
+    "image": "Pilt",
+    "reader": "Lugeja"
+  },
+  "quickAction": "Kontekstimenüü",
+  "quickActions": {
+    "askAI": "Küsi {{name}}",
+    "continueImproving": "Jätkake täiustamist",
+    "defaultPlaceholder": "Küsige rakenduselt {{APP_NAME}} midagi",
+    "defaultPlaceholder2": "Küsige rakenduselt {{APP_NAME}} ülaltoodud sisuga",
+    "dictExample": "Näide:",
+    "disableGlobal": "Keela kõigil saitidel",
+    "disableOnce": "Peida järgmise külastuseni",
+    "disableSite": "Keela sellel saidil",
+    "managePrompts": "Halda käsklusi",
+    "pressToClose": "Sulgemiseks vajutage {{name}}",
+    "requireSignin": "Sisselogimine Nõutav",
+    "siginHint": "Selle funktsiooni kasutamiseks logige sisse."
+  },
+  "quiz": "Viktoriin",
+  "quotaInfo": {
+    "allPlans": "Vaata kõiki plaane",
+    "chatActionTranslate": "Tõlgi keelde {{lang}}",
+    "chatFileLink": "Faili/Lingi vestlus",
+    "chatPDF": "PDF/Lingi vestlus",
+    "creditRuleTip": "Mahaarvame krediite vastavalt mudelile, funktsioonidele ja konteksti pikkusele, mida kasutate. Täielike üksikasjade saamiseks külastage <a>Abikeskust</a>.",
+    "creditRuleTitle": "Krediidi mahaarvamise reeglid",
+    "dailyCreditTip": "Taastamisreegel kehtib ainult plaanikrediitidele, mitte lisakrediitidele.",
+    "dataAnalysis": "Täiustatud andmeanalüüs",
+    "enjoyUnlimitedCredits": "Nautige piiramatuid krediite",
+    "enjoyUnlimitedCreditsDesc": "Kasutage maksimaalselt GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro ja palju muud.",
+    "extraCreditTip": "Need on lisakrediidid ühekordseks kasutamiseks.",
+    "extractText": "AI teksti ekstraheerimine",
+    "inviteFriends": "<a>Kutsu sõpru</a>, et saada rohkem krediite",
+    "mobilePlan": "Mobiilipakett",
+    "off": "{{num}} soodustus",
+    "pocketPlanTips": "Pocket'i krediiti saab kasutada ainult mobiilis. Naudi tasuta krediiti ka lauaarvutis.",
+    "pocketUpgrade": "Uuenda, et avada rohkem võimalusi",
+    "premiumTrial": "Proovi premium funktsioone tasuta",
+    "premiumTrialTip": "Prooviperiood annab teile piiratud juurdepääsu premium funktsioonidele, mis on saadaval ainult tasulistele liikmetele. Pange tähele, et iga kasutus maksab siiski krediite.",
+    "readAloud": "AI valjult lugemine",
+    "resetDate": "Taastumise kuupäev",
+    "resetsDaily": "Taastub iga päev",
+    "shortVideo": "AI Video Lühendaja",
+    "tryForFree": "Proovi tasuta",
+    "tryReadAloudForFree": "Proovi lugemist ette tasuta",
+    "unlockAllFeats": "Ava kõik funktsioonid",
+    "unlockAllFeats2": "Ava täielik juurdepääs",
+    "unlockAllFeatsDesc": "Oled jõudnud premium-funktsioonide prooviperioodi piirini. Kõigi funktsioonide avamiseks uuenda oma paketti.",
+    "unlockAllFeatsDesc2": "Saad piiramatu vestluse, veebipääsu, andmeanalüüsi, pildigeneratsiooni, YouTube'i kokkuvõtted, faili/lingi vestluse, teksti eraldamise ja palju muud",
+    "unlockFeats": "Ava kõik premium funktsioonid",
+    "unlockToUse": "Ava piiramatu kasutus",
+    "upgradeFor": "Uuenda vaid {{price}}/kuus",
+    "usedCredits": "{{count}} krediiti kasutatud",
+    "usedCredits_one": "{{count}} krediit kasutatud",
+    "usedCredits_other": "{{count}} krediiti kasutatud",
+    "vipInviteFriends": "Kas naudid {{APP_NAME}}? <a>Kutsu oma sõpru!</a>",
+    "webAccess": "Veebipääs",
+    "youtubeSummary": "YouTube kokkuvõte"
+  },
+  "quote": "Tsiteeri",
+  "quoteText": "Tsitaadi tekst",
+  "readAloud": "Loe valjusti",
+  "reading": "Lugemine",
+  "readingwriting": "Lugemine ja kirjutamine",
+  "readPage": "Lugege seda lehte",
+  "reasoningModelTip": "Põhjendus on juba praegusesse mudelisse sisse ehitatud",
+  "reasoningModelTip2": "Luba keerulistele küsimustele laiendatud mõtlemine. Maksab umbes 2x krediiti.",
+  "recentFiles": "Viimased failid",
+  "recognizing": "Äratundmine",
+  "recordPanel": {
+    "alertContinue": "Jätka salvestamist",
+    "alertStop": "Lõpeta salvestamine",
+    "allNotes": "Kõik märkmed",
+    "audio": "Audio",
+    "camera": "Ainult kaamera",
+    "cameraDisableTip": "Kaamera pole vahekaardi salvestamise ajal saadaval",
+    "cameraPermission": {
+      "deniedDesc": "Palun luba kaamera juurdepääs, et kasutada kaamera salvestust.",
+      "grantedDesc": "Nüüd võid selle vahekaardi sulgeda ja alustada salvestamist külgribal.",
+      "noBrowserPremission": "Süsteem keeldus loast",
+      "noBrowserPremissionTip": "Süsteem on keelanud kaamera juurdepääsu praegusele brauserile. Palun mine süsteemi seadistustesse, et muuta lube.",
+      "noCamera": "Kaamera puudub",
+      "noCameraTip": "Vabandust, saadaval kaamerat ei leitud.",
+      "noIconDesc": "Värskenda lehte, seejärel klõpsa aadressiribal ikoonil {{iconImage}} ja vali \"Alati luba...\".",
+      "noIconTitle": "Kui sa ei näe kaamera ikooni",
+      "noPopupDesc": "Klõpsa aadressiribal kaamera ikoonil {{iconImage}}, vali \"Alati luba...\" ja klõpsa \"Valmis\".",
+      "title": "Kaamera lubade juhend",
+      "withPopupDesc": "Klõpsa \"Luba saidi külastamise ajal\", et kaamerat salvestada."
+    },
+    "cameraPrepare": "Kaamera ettevalmistamine...",
+    "cameraTipOff": "Lülita kaamera välja",
+    "cameraTipOn": "Lülita kaamera sisse",
+    "cancelConfigContent": "Tühistamine põhjustab praeguse salvestuse kaotamise.",
+    "cancelConfigTitle": "Kinnita salvestamise tühistamine?",
+    "cancelRecording": "Tühista salvestamine",
+    "cancelRecordWarn": "Kinnita salvestuse tühistamine",
+    "cancelRecordWarnContent": "Tühistamine kustutab praeguse salvestuse ja märkmed.",
+    "captureScreenshot": "Tee ekraanipilt",
+    "closePermanently": "Sulge alatiseks",
+    "closeThisTime": "Sulge seekord",
+    "continueRecord": "Jätka ilma mikrofonita",
+    "countdown": "Tagasiloendus",
+    "countdownTip": "Salvestamine algab",
+    "ctrlBar": "Juhtimisriba",
+    "deleteNoteWarn": "Kas kustutada see märge?",
+    "desktop": "Töölaud",
+    "don'tShow": "Ära seda enam näita",
+    "liveTips": "Tee märkmeid ja salvesta samaaegselt, et jäädvustada olulist teavet.",
+    "micMissContent": "Teie häält ei salvestata selles sessioonis. Kuidas soovite jätkata?",
+    "micMissContent1": "Sinu häält ei salvestata. Kas soovid selle sisse lülitada?",
+    "micMissTitle": "Mikrofon on VÄLJAS",
+    "micTipOff": "Lülita mikrofon välja",
+    "micTipOn": "Lülita mikrofon sisse",
+    "missInputTip": "Enne märkme loomist lubage ekraanisalvestus või lülitage sisse mikrofon.",
+    "new": "Uus",
+    "newRecordNote": "Uus REC märge",
+    "noDevice": "Ühtegi seadet ei leitud",
+    "NoSoundAlertContent": "Palun klõpsake siia, et kontrollida, kas teie mikrofon on sisse lülitatud.",
+    "NoSoundAlertTitle": "Heli ei tuvastatud",
+    "noteContentPlaceholder": "Sisestage võtmetähtsusega teave ja Sider aitab teil seda korraldada.",
+    "noteGuideContent": "Sina võtad võtmekohad, Sider genereerib täielikud märkmed.",
+    "noteListCreateWisebase": "Lisa {{WISEBASE_APP_NAME}}",
+    "noteListEmpty": "Alustamiseks vajuta +",
+    "noteListError": "Märkmete laadimine ebaõnnestus",
+    "noteListMove": "Liiguta",
+    "noteListTitle": "Minu märkmed",
+    "noteTitlePlaceholder": "Pealkirjata",
+    "paused": "Pausil",
+    "pausedAlertTitle": "Salvestamine pausil",
+    "proceed": "Jah, jätka",
+    "quicklyRecord": "Kiire salvestamine",
+    "recordScreen": "Salvesta ekraan",
+    "resolution": "Resolutsioon",
+    "setting": "Seaded",
+    "showCutGuide": "Sa saad määrata kiirklahvi <num>siin</num>",
+    "startRecording": "Alusta salvestamist",
+    "storageAlertContent": "Ebapiisav salvestusruum. Palun vabasta ruumi, et jätkata salvestamist, või lõpeta praegune salvestus.",
+    "storageAlertStart": "Ebapiisav salvestusruum. Jätkamiseks vabastage ruumi.",
+    "tab": "Vahekaart",
+    "tabAudioOnly": "Salvesta ainult vahekaardi heli",
+    "tabAudioOnlyShow": "Ainult vahekaardi heli",
+    "tabSound": "Vahekaardi heli",
+    "tabVideoAudio": "Salvesta vahekaardi ekraan + heli",
+    "tabVideoAudioShow": "Ekraan + heli",
+    "tabVideoOnly": "Salvesta vahekaardi ainult ekraan",
+    "tabVideoOnlyShow": "Ainult vahekaardi ekraan",
+    "timeLimitAlertContent": "Salvestus on jõudnud {{alertNumber}}-tunnise piirini",
+    "title": "Salvestamine",
+    "title1": "Salvestusmärkus",
+    "transcript": "Transkript",
+    "turnAndProceed": "Lülita mikrofon sisse ja jätka",
+    "turnOnMic": "Lülita mikrofon sisse",
+    "uploadingList": {
+      "connection": "Üleslaadimine jätkub, kui ühendus taastub.",
+      "delete": "Tühista ja kustuta",
+      "failed": "Üleslaadimine ebaõnnestus",
+      "networkTip": "Internetiühendus puudub.",
+      "save": "Salvesta kohalikku",
+      "title": "Sünkroonimise staatus",
+      "uploaded": "Üles laaditud"
+    },
+    "uploadTimedOut": "Üleslaadimine aegus",
+    "uploadTimedOutTip": "Üleslaadimine katkestati võrguühenduse probleemi tõttu. See jätkub automaatselt, kui ühendus taastub, või võid esmalt salvestatud faili oma seadmesse alla laadida.",
+    "video": "Video",
+    "voice": "Ainult hääl"
+  },
+  "refresh": "Värskenda",
+  "refreshing": "Värskendamine",
+  "refreshModel": "Värskenda mudeleid",
+  "related-academic-research": "Vaata seotud artikleid",
+  "related-news": "Leia seotud uudiseid",
+  "related-videos": "Vaata seotud videoid",
+  "remixArtifact": "Remiksi artefakt",
+  "remove": "Eemalda",
+  "renameAll": "Nimeta ümber kõik",
+  "renameOnce": "Nimeta ümber üks kord",
+  "repair": "Paranda",
+  "repairing": "Parandamine",
+  "replace": "Asenda",
+  "replay": "Korda",
+  "researching": "Uurimine",
+  "researchProgress": "Uurimise edenemine",
+  "reselect": "Vali uuesti",
+  "reset": "Lähtesta",
+  "resetTime": "Lähtestage <a>3. augustil 2023</a>",
+  "restoreTpl": "Taasta see mall",
+  "result": "Tulemus",
+  "resume": "Jätka",
+  "retry": "Proovi uuesti",
+  "rewrite": "Kirjuta ümber",
+  "roast": {
+    "analyzing": "Analüüsib...",
+    "boast": "🥰 Kiitlema",
+    "roast": "😜 Praad",
+    "roastX1": "🔥 Keegi just narris sind, vaata järgi",
+    "roastX2": "Narri seda tüüpi!"
+  },
+  "save": "Salvestage see",
+  "saved": "Salvestatud",
+  "screenshot": "Ekraanipilt",
+  "search": "Otsi",
+  "searched3": "Otsitud 3 saidilt",
+  "searchedFor": "Otsis:",
+  "searchedN": "Otsitud {{NUM}} saidilt",
+  "searchEnhance": {
+    "adContent": "Targem kui GPT-4? Claude 3 on siin! Kutsu sõbrad ja proovi seda tasuta!",
+    "getStarted": "Alusta kohe",
+    "noLoginAdContent": "Vabasta AI võimsus: Otsi, Loe, Kirjuta, Tõlgi Kiiremini & Nutikamalt!",
+    "noLoginBtn": "Liitu 4M+ rahuloleva kasutajaga!",
+    "relatedQuestion": "Seotud küsimused:"
+  },
+  "searchFailed": "Otsing ebaõnnestus",
+  "searching": "Otsing: {{QUERY}}",
+  "searchingFor": "Otsin:",
+  "searchPage": "Otsi leht",
+  "searchTip": "Otsi vajadusel veebist",
+  "searchTool": {
+    "braveTrouble": "Kas ikka ei tööta? Jälgi aadressi {{url}}",
+    "cloudflareCheck": "OpenAI nõuab aeg-ajalt turvakontrolli läbimist. Kui see jätkub, muutke tehisintellekti pakkuja <i>laiendusvalikutes</i> OpenAI API-ks.",
+    "failedResponse": "ChatGPT vastuse laadimine ebaõnnestus:",
+    "fiveStart": "Kas teile meeldib see laiendus? Andke meile 5-tärniline hinnang poes {{store}}",
+    "loginAndCloudflareCheck": "Palun logige sisse ja läbige Cloudflare'i kontroll aadressil {{web}}",
+    "questionMark": "Käivitage ChatGPT, lisades päringu järele küsimärgi",
+    "waitResponse": "ChatGPT vastuse ootamine...",
+    "whenToAskTips": "Iga otsing tarbib ühe põhi krediidi. Klõpsake siin, et määrata, millal küsida ChatGPT-d."
+  },
+  "seeMoreHelp": "Vaata lisaks <a>Abikeskuses</a>",
+  "select": "Vali",
+  "selectedTextInputHint": "Esita küsimusi valitud teksti kohta",
+  "selectGenerationModel": "Vali generatsioonimudel",
+  "selectPrompt": "Vali küsimus",
+  "send": "Saada",
+  "sendShortcut": "Saada otsetee",
+  "sendToChat": "Saada vestlusse",
+  "settingApiKey": "API võtme määramine",
+  "settings": "Seaded",
+  "setupPage": {
+    "activeUser": "AKTIIVSED KASUTAJAD",
+    "endBottom": "Vajad abi või on ettepanekuid?",
+    "endBottom2": "Me hindame sinu tagasisidet! <a>Anna tagasisidet</a>, et aidata meil sinu kogemust parandada.",
+    "endTip": "Nüüd saad sirvida mis tahes veebilehte või sukelduda meie Abikeskusesse, et rohkem teada saada.",
+    "endTitle": "{{APP_NAME}} on valmis sind aitama!",
+    "explore": "Uurime {{FEATURE_NAME}} funktsiooni",
+    "favorites": "Chrome'i kõige populaarsem laiendus",
+    "fiveStarRate": "5-tärni hinnangud",
+    "learnMore": "Uuri lähemalt {{APP_NAME}} kohta",
+    "loginSuccess": "Sisselogimine õnnestus",
+    "loginWith": "Logi sisse kasutajaga {{name}}",
+    "next": "Edasi",
+    "pinClickTip": "Rakenduse {{icon}} kinnitamiseks klõpsake {{APP_NAME}}",
+    "pinClickTip2": "Kinnita {{APP_NAME}} kiireks juurdepääsuks",
+    "pinClickTip3": "Klõpsa {{icon}} ikoonil üleval paremal",
+    "pinTips": "<b>Kinnitage {{APP_NAME}}</b>, lihtsam juurdepääs!",
+    "privacy": "Jätkates nõustute <a>Privaatsuspoliitikaga</a> & <b>Kasutustingimustega</b>.",
+    "privacyPart1": "Jätkates nõustute",
+    "privacyPart2": "<a>Privaatsuspoliitikaga</a> & <b>Kasutustingimustega</b>",
+    "spamMsg": "Teie andmed ei leki välja ega tule rämpsposti.",
+    "startUsing": "Alusta {{APP_NAME}} kasutamist",
+    "tryOut": "proovi",
+    "userCount": "4M+",
+    "welcome": "Tere tulemast rakendusse {{APP_NAME}}!"
+  },
+  "share": "Jaga",
+  "shareChat": {
+    "5starRatings": "<num>50K</num> 5-tärni hinnangut",
+    "activeUsers": "<num>5M+</num> aktiivset kasutajat",
+    "AIContentWarning": "Tehisintellekti loodud sisu ei pruugi alati olla autentne",
+    "copyIamge": "Kopeeri pilt",
+    "copyLink": "Kopeeri link",
+    "downloadImage": "Laadi pilt alla",
+    "exportAs": "Ekspordi kui",
+    "generateImage": "Genereeri pilt",
+    "generateLink": "Genereeri link",
+    "linkCopied": "Link kopeeritud",
+    "linkGenerated": "Link genereeritud",
+    "qrcodeTip": "Skaneeri, et saada {{APP_NAME}}!",
+    "selectAll": "Vali kõik",
+    "shareOn": "Jaga",
+    "slogan": "Teie AI assistent",
+    "socialMediaImageCopiedTip": "Pilt on kopeeritud ja valmis kleepimiseks."
+  },
+  "shortcut": "Kiirklahvid",
+  "shortPlanNames": {
+    "basic": "Põhiline",
+    "free": "Tasuta",
+    "pocket": "Pocket",
+    "pro": "Pro",
+    "starter": "Algaja",
+    "ultra": "Piiramatu"
+  },
+  "show": "Näita",
+  "showImage": "Näita pilti",
+  "showMore": "Näita rohkem",
+  "showSearchPanel": "Kuva otsingupaneel",
+  "showTpl": "Näita seda malli",
+  "sidebar": "Külgriba",
+  "sidebarChatPanel": {
+    "addImage": "Lisage pilt",
+    "answerFrom": "Vastus alates",
+    "answerWithoutSearching": "Küsige originaalset <b>Boti</b>",
+    "autoCloseBanner": "Peatub automaatselt pärast tegevusetust",
+    "autoCloseTips": "Otsinguassistent peatub, kui te ei klõpsa kaardil ühtegi nuppu 30 otsingu jooksul. Saate selle igal ajal uuesti aktiveerida, klõpsates nuppu.",
+    "capabilities": "Võimed",
+    "chatActionTranslate": "Tõlgi {{lang}} keelde",
+    "chatControls": "Vestluse juhtnupud",
+    "chatHistory": "Vestluse ajalugu",
+    "chatWithVideo": "Vestlus videoga",
+    "compareAnsWith": "Võrdle vastust",
+    "compareWeb": "Võrrelge vastust veebist",
+    "compareWithXXX": "Küsi <b>Botilt</b>",
+    "continueInChat": "Jätkake vestluses",
+    "deleteConfirmContent": "Seda toimingut ei saa tagasi võtta.",
+    "deleteConfirmTitle": "Kas kustutada see vestlus?",
+    "experimental": "See funktsioon on endiselt arenemas ja võib muutuda, seega palun jaga oma mõtteid.",
+    "feedback": "Tagasiside",
+    "improveWithBoth": "Korraldage Google'i vastused GPT-4 abil",
+    "improveWithSearch": "Hankige Google'ilt veebist vastus",
+    "improveWithXXX": "Hankige <b>Botilt</b> targem vastus",
+    "improveWithXXX2": "Hankige põhjalik vastus <b>Botilt</b>",
+    "inputPlaceholder": "Küsi mida iganes, @ mudelid, / käsud",
+    "newChat": "Uus vestlus",
+    "noChatHistory": "Ajalugu puudub.",
+    "noSearchHistory": "Tulemusi ei leitud",
+    "ocrTextTip": "{{name}} Tulemus",
+    "readDoc": "Loe dokumente",
+    "readDocFail": "Dokumentide lugemine ebaõnnestus",
+    "readingDoc": "Dokumentide lugemine",
+    "replyLanguage": "Vastuse keel",
+    "screenshot": "Ekraanipilt",
+    "search": "Otsing",
+    "searchHistory": "Otsingu ajalugu",
+    "send": "Saada",
+    "share": "Jaga",
+    "siderUploadFile": "Laadi üles faile PDF, DOC, XLSX, CSV, JPG, JSON ja muudes formaatides, kuni 6 faili korraga, kuni 100MB faili kohta.",
+    "signinToAsk": "Logige sisse, et küsida mudelilt {{MODEL_NAME}}",
+    "smarterAnsWith": "Saage targem vastus",
+    "switchAndContinue": "Lülitu ja jätka",
+    "textSelectedSystemMsg": "Mida soovite tekstiga teha?",
+    "textSelectedTip": "Tekst teie valikust",
+    "translateTip": "Tõlgi tulemus",
+    "upload": "Laadi üles",
+    "uploadFile": "Failide üleslaadimine",
+    "uploadTip": {
+      "format": "Veebileht, PDF, DOC, XLSX, CSV, JPG, JSON, MP3, WAV, M4A, MPGA ja rohkem",
+      "formatTitle": "Tugi:",
+      "limit": "Kuni 6 faili, igaüks 100MB",
+      "limitTitle": "Piirang:"
+    },
+    "userStopTip": "Kasutaja tühistas taotluse.",
+    "webAccessModalContent": "ChatGPT andmed ei ole reaalajas. {{APP_NAME}} ühendab ChatGPT intelligentsuse reaalajas veebiteabega, võimaldades GPT-l reaalajas teabega seotud küsimusi tõhusamalt käsitleda. Selle funktsiooni saamiseks uuendage ja ärge muretsege enam aegunud teabe pärast!",
+    "webAccessModalTitle": "{{APP_NAME}} võimaldab nii ChatGPT-3.5 kui ka GPT-4 juurdepääsu veebile!",
+    "welcomeMsg": "Kuidas saan teid täna aidata?",
+    "welcomeQues": [
+      {
+        "ques": "Kirjuta Shakespeare'i stiilis sonett nutitelefonidest",
+        "title": ""
+      },
+      {
+        "ques": "Paku välja 10 loomingulist Halloweeni kostüümi lastele",
+        "title": ""
+      },
+      {
+        "ques": "Koosta algaja teekaart isikliku rahanduse õppimiseks",
+        "title": ""
+      },
+      {
+        "ques": "Selgita 10-aastasele lapsele, miks taevas on sinine",
+        "title": ""
+      }
+    ],
+    "welcomeSystemMsg": "Tere! Kuidas saan teid täna aidata?",
+    "writeHistory": "Kirjutamise ajalugu"
+  },
+  "sidebarComposePanel": {
+    "addToSite": "Lisa saidile",
+    "addToSiteTip": "Viige hiirekursor soovitud sisestuskasti ja klõpsake sisestamiseks '{{name}}'",
+    "ads": "Turundusreklaamid",
+    "AIWriter": "Tehisintellekti kirjutaja",
+    "alsoWriteTips": "Kirjutamine kõrvuti Al-iga",
+    "basic": "põhiline",
+    "blog": "Blogipostitus",
+    "casual": "Juhuslik",
+    "comment": "Kommenteeri",
+    "compose": "Koosta",
+    "continueOptimizeTips": "Jätkake täiustamist ja parendamist koos AI-ga",
+    "email": "Meil",
+    "enthusiastic": "Entusiastlik",
+    "essay": "Essee",
+    "formal": "Ametlik",
+    "format": "Vorming",
+    "formatExists": "Formaat on juba olemas",
+    "funny": "Naljakas",
+    "generate": "Loo mustand",
+    "history": "Ajalugu",
+    "idea": "Idee",
+    "informational": "Informatiivne",
+    "insertToSite": "Sisesta tulemus veebilehe sisendkasti",
+    "length": "Pikkus",
+    "long": "Pikk",
+    "medium": "Keskmine",
+    "message": "Sõnum",
+    "outline": "Kontuur",
+    "paragraph": "Lõik",
+    "professional": "Professionaalne",
+    "regenerate": "Regenereerida",
+    "reply": "Vasta",
+    "replyPlaceholder1": "Sisesta algne tekst, millele soovid vastata",
+    "replyPlaceholder2": "Kirjelda oma vastuse üldist ideed",
+    "short": "Lühike",
+    "style": "Stiil",
+    "submitShortcut": "Mustandi loomiseks vajutage {{shortcut}}",
+    "tone": "Toon",
+    "twitter": "Twitter",
+    "write": "Kirjuta",
+    "writePlaceholder": "Sisesta teema, millest soovid kirjutada"
+  },
+  "sidebarGrammarPanel": {
+    "accept": "Nõustu",
+    "checkFailed": "Kontroll ebaõnnestus",
+    "checking": "Kontrollimine",
+    "checkNoError": "Vigu ei ole",
+    "fixError": "Paranda kõik ({{errorCount}})",
+    "ignore": "Ignoreeri",
+    "improve": "Paranda",
+    "inputPlaceholder": "Toetatud on ainult inglise keel. Kleepige või tippige tekst, et kontrollida.",
+    "reasonForChanges": "Muudatuste põhjus"
+  },
+  "sidebarPanel": {
+    "addToStarred": "Lisa tärnidega",
+    "agentTabLabel": "Agent",
+    "askTabLabel": "Küsi",
+    "chatTabLabel": "Vestlus",
+    "composeTabLabel": "Kirjutage",
+    "deleteAllConfirmTitle": "Kustuta kõik",
+    "downloadLabel": "Laadi alla töölaua/mobiilirakendus",
+    "extraQuota": "Lisakvoot",
+    "freePlan": "Tasuta plaan",
+    "grammarTabLabel": "Grammatika",
+    "includeStarred": "Kaasa tärnidega",
+    "inputPlaceholder1": "Sisestage viip või valige menüüst",
+    "inputPlaceholder2": "Kleebi või sisesta sisu siia",
+    "inputPlaceholderCodes": "Kleepige või sisestage koodid siia",
+    "inputPlaceholderQA": "Kleebi või sisesta küsimus siia",
+    "moreTabLabel": "Rohkem",
+    "ocrTabLabel": "OCR",
+    "painterLabel": "Maalikunstnik",
+    "premiumPlan": "Premium-pakett",
+    "pressToSubmit": "Esitamiseks vajutage {{key}}",
+    "recordTabLabel": "REC Märkmed",
+    "regenerate": "Regenereerige reaktsioon",
+    "removeFromStarred": "Eemalda tärnidega",
+    "replacePrompt": "Asendage viip",
+    "saveNewPrompt": "Salvestage uue viipana",
+    "searchTabLabel": "Otsi",
+    "starred": "Tärnidega",
+    "startNewLine": "Uue rea alustamiseks vajutage {{shortcut}}",
+    "stopGenerating": "Lõpetage genereerimine",
+    "submitOption": "Esita valik",
+    "toolsTabLabel": "Tööriistad",
+    "translateTabLabel": "Tõlgi"
+  },
+  "sidebarSearchPanel": {
+    "answer": "Vastus",
+    "currentVisit": "Praegune külastus",
+    "defaultSearchSuggesiton": "Millal on parim aeg Pariisi külastamiseks?",
+    "feedback": {
+      "stepAnswer": "Genereeri vastus",
+      "stepSearch": "Teosta otsing",
+      "stepUnderstand": "Mõista küsimusi",
+      "tipTotal": "Kokku {{count}} krediiti"
+    },
+    "followUpQuestion": "Järelküsimus...",
+    "history": "Ajalugu",
+    "newSearch": "Uus otsing",
+    "relatedSearches": "Seotud otsingud",
+    "searchAll": "Otsi kõigest",
+    "searchFrom": "Otsi",
+    "searchFromAll": "Otsi kogu internetist",
+    "searchFromSite": "Otsi {{domain}} saidilt",
+    "searchHistory": "Otsingu ajalugu",
+    "searching": "Otsimine",
+    "searchPlaceholder": "Sisesta teave, mida soovid otsida",
+    "searchProgress": {
+      "analyzeSearchResult": "Analüüsi otsingutulemusi",
+      "analyzing": "Analüüsimine",
+      "competed": "Valmis",
+      "generateAnswer": "Genereeri vastus",
+      "generatingAnswer": "Vastuse genereerimine",
+      "organizing": "Organiseerimine",
+      "searchCancelled": "Otsing tühistatud",
+      "searchCompleted": "Otsing lõpetatud",
+      "searching": "Otsimine",
+      "searchInWeb": "Otsi veebist"
+    },
+    "searchRange": "Otsinguala",
+    "sources": "Allikad",
+    "stoppedSearch": "Oled selle otsingu peatanud.",
+    "suggestions": "Soovitused",
+    "title": "Otsi",
+    "viewAll": "Vaata kõiki"
+  },
+  "sidebarTranslatePanel": {
+    "auto-detect": "Automaatne tuvastus",
+    "currentPage": "Praegune leht",
+    "customization": {
+      "Complexity": "Keerukus",
+      "ComplexityOpt": {
+        "Expert": "Asjatundja",
+        "Layman": "Võhik",
+        "Standard": "Standard"
+      },
+      "defaultPreferences": "Vaikimisi eelistused",
+      "Length": "Pikkus",
+      "LengthOpt": {
+        "Brief": "Lühidalt",
+        "Concise": "Kokkuvõtlik",
+        "Expanded": "Laiendatud",
+        "Standard": "Standard"
+      },
+      "Style": "Stiil",
+      "StyleOpt": {
+        "CreativeAdaptation": "Loominguline kohanemine",
+        "DynamicEquivalence": "Dünaamiline ekvivalentsus",
+        "Literal": "Sõnasõnaline"
+      },
+      "title": "Tõlke eelistused",
+      "Tone": "Toon",
+      "ToneOpt": {
+        "Authoritative": "Autoriteetne",
+        "Casual": "Juhuslik",
+        "Empathetic": "Empaatiline",
+        "Formal": "Ametlik",
+        "Neutral": "Neutraalne"
+      }
+    },
+    "errTooManyChar": "{{num}}/{{total}}: Sisend ületab tähemärkide piiri.",
+    "errWrongTargetLang": "Sama allika- ja sihtkeel. Kontrollige oma valikut.",
+    "extraTransTips": "Sa saad ka tõlkida:",
+    "inputTranslateAdBtn": "Seadista see kohe",
+    "inputTranslateAdText": "Tõlgi tekst sisendkastis koheselt mis tahes veebilehel!",
+    "placeholde": "Sisesta või kleebi tekst siia...",
+    "seeDict": "Vaata sõnastikku",
+    "upgradeForLongChar": "Uuenda kohe, et avada pikem sisestus ({{num}} tähemärki)."
+  },
+  "sidepanel": {
+    "benefit1": "Teie Sideri külgriba <b>ei kao kunagi</b>, kui navigeerite uuele lehele.",
+    "benefit2": "Saate vestelda kõigi vahekaartide vahel ilma <b>sisu kattumiseta</b>.",
+    "benefit3": "Saadaval ainult <b>Google Chrome 114 või uuemas versioonis</b>",
+    "micPermission": {
+      "deniedDesc": "Palun lubage mikrofoni juurdepääs, et kasutada häälkäsklusi.",
+      "deniedTitle": "Juurdepääs pole antud",
+      "grantedDesc": "Nüüd võite selle vahelehe sulgeda ja alustada rääkimist külgribal.",
+      "grantedTitle": "Juurdepääs edukalt antud",
+      "noIconDesc": "Värskendage lehte, seejärel klõpsake aadressiribal ikooni {{iconImage}} ja valige \"Alati lubada...\".",
+      "noIconTitle": "Kui te ei näe mikrofoni ikooni",
+      "noPopupDesc": "Klõpsake aadressiribal mikrofoni ikooni {{iconImage}}, valige \"Alati lubada...\" ja klõpsake \"Valmis\".",
+      "noPopupTitle": "Kui hüpikakent ei ilmu",
+      "tips": "💡 Näpunäide: Vältige seadmete valimist, mille nimedes on \"virtuaalne\", et vältida salvestusvigu.",
+      "title": "Mikrofoni lubade juhend",
+      "withPopupDesc": "Klõpsake \"Luba saidi külastamise ajal\", et lubada kõnest tekstiks funktsioon.",
+      "withPopupTitle": "Kui näete hüpikakent"
+    },
+    "tip": "Nõuanne. Parema kasutuskogemuse saamiseks reguleerige külgpaneeli laiust sobivalt.",
+    "title": "Sider toetab fikseeritud külgriba",
+    "voiceInput": "Häälkäsklus",
+    "voiceInputError": {
+      "deviceNotFound": "Vabandust, saadaval olevat mikrofoni ei tuvastatud.",
+      "deviceNotFoundTitle": "Mikrofon puudub",
+      "rateLimit": "Olete jõudnud selle funktsiooni kasutamise piirini. Palun proovige uuesti tunni aja pärast.",
+      "rateLimitTitle": "Kasutuspiirang ületatud",
+      "systemPermission": "Süsteem on keelanud mikrofoni juurdepääsu praegusele brauserile. Palun minge süsteemi seadistustesse, et muuta lubasid.",
+      "systemPermissionTitle": "Süsteem keelas loa",
+      "timeLimit": "Salvestuslimiit on saavutatud. Palun transkribeerige praegune salvestus esmalt.",
+      "tooShort": "Salvestus on liiga lühike, et seda ära tunda",
+      "transcriptionFailed": "Transkriptsiooni ajal tekkis viga. Palun proovige uuesti.",
+      "transcriptionFailedTitle": "Transkriptsioon ebaõnnestus"
+    }
+  },
+  "sidepanelPinGuide": {
+    "desc": "Lisa {{APP_NAME}} oma tööriistaribale kiireks ligipääsuks",
+    "title": "Klõpsa \"{{icon}}\""
+  },
+  "sidepanelTip": "Külgpaneeli ots",
+  "signin": "Logi sisse",
+  "signinNow": "Logi sisse nüüd",
+  "signupTip": "Kas sul on juba konto? <a>Logi sisse</a>",
+  "skip": "Vahele jätma",
+  "smarterWith": "Saada targem vastus {{NAME}}-lt",
+  "Speaker": "Kõneisik",
+  "speechVoice": "Kõne hääl",
+  "startingResearch": "Uurimise alustamine...",
+  "stop": "Peatus",
+  "submit": "Esita",
+  "subscribe": "Telli",
+  "success": "Edu",
+  "suggestTools": {
+    "tips": {
+      "create_image": "Tahad pilte luua? Uuenda, et avada AI pilditööriistad.",
+      "search": "Vajad reaalajas vastuseid? Uuenda, et saada juurdepääs veebipõhisele otsingule."
+    }
+  },
+  "summarize": "Tehke kokkuvõte",
+  "summarizeFailed": "Kokkuvõtte tegemine ebaõnnestus",
+  "summarizePage": "Tehke selle lehe kokkuvõte",
+  "summarizing": "Kokkuvõtteid tehes",
+  "summary": "Kokkuvõte",
+  "superAdvanced": "Super arenenud",
+  "switch": "Lülita",
+  "switchAndContinue": "Vaheta režiimi",
+  "switchModel": "Vaheta mudelit",
+  "switchToSidepanel": "Lülita küljepaneelile",
+  "switchToSider": "Lülituge rakenduse {{APP_NAME}} API-le",
+  "switchToXXX": "Lülitu mudelile {{model}}",
+  "switchVoice": "Vaheta häält",
+  "table": "Tabel",
+  "takeAScreenshot": "Tee ekraanipilt",
+  "taskCenter": {
+    "advanceTask": "Edasijõudnud ülesanded",
+    "beginnerGuide": "Algaja juhend",
+    "chatDemoText": "Millega sa saad aidata?",
+    "claim": "Nõua",
+    "claimed": "Nõutud",
+    "claimNow": "Nõua kohe",
+    "claimRewards": "Mine Preemiakeskusesse, et oma preemiaid nõuda.",
+    "clickChatSetting": "Klõpsa {{button}}, et pääseda vestluse seadetele",
+    "clickGoOptions": "Klõpsa {{button}}, et vaadata {{name}} valikuid",
+    "clickReadPage": "Klõpsa {{button}}, et veebilehte lugeda ja sõnum saata",
+    "clickSavePage": "Klõpsa {{button}}, et lehekülge salvestada",
+    "clickSend": "Klõpsa {{button}}, et sõnum saata",
+    "clickSummaryVideo": "Klõpsa sellele nupule, et videot kokku võtta",
+    "clickTranslatePage": "Klõpsa {{button}}, et lehekülge tõlkida",
+    "clickTryDemo": "Klõpsa {{button}}, et vaadata ja proovida demot",
+    "clickUploadImg": "Klõpsa {{button}}, et pilti üles laadida ja sõnum saata",
+    "completedTasks": "Lõpetatud ülesanded",
+    "completeTaskTo": "Täida ülesandeid, et <a>teenida krediite</a>",
+    "countdownTip": "<b>{{price}} MAHA:</b> {{time}} jäänud",
+    "expireIn": "Aegub {{time}} pärast",
+    "exploreCenter": "Uuri {{name}}",
+    "getAdvancedCredits": "Saa {{count}} edasijõudnud krediiti",
+    "getAdvancedCredits_one": "Saa {{count}} edasijõudnud krediit",
+    "getAdvancedCredits_other": "Saa {{count}} edasijõudnud krediiti",
+    "getBasicCredits": "Saa {{count}} põhikrediiti",
+    "getExtraAdvancedCredits": "Saa {{count}} lisataseme krediiti",
+    "goYoutube": "Mine YouTube'i",
+    "gretNews": "Suurepärased uudised!",
+    "iconEntryTip": "Siit leiad {{name}}.",
+    "inviteFriend": "Kutsu sõpru",
+    "name": "Preemiakeskus",
+    "progress": "Edenemine",
+    "selectText": "Vali tekst, et seda proovida!",
+    "selectText2": "Luba {{name}} teksti valimiseks",
+    "siderMode": "Kas lülitada Sideri režiimile?",
+    "siderModeDesc": "Ülesanded tuleb täita Sideri režiimis, kas soovid lülituda?",
+    "start": "Alusta",
+    "starterTask": "Algaja ülesanded",
+    "taskCompleted": "Ülesanne lõpetatud!",
+    "tasks": {
+      "chat": "Saada sõnum vestluses",
+      "chatImg": "Vestle pildiga",
+      "contextMenu": "Selgita sõna {{name}} kaudu",
+      "options": "Uuri {{APP_NAME}} valikuid 5 sekundi jooksul",
+      "pageTranslate": "Tõlgi lehekülg {{APP_NAME}} ikooni kaudu",
+      "prompt": "Proovi {{APP_NAME}} eelseadistatud käsku",
+      "readPage": "Loe lehekülge vestluses",
+      "webAccess": "Proovi otsingu demo",
+      "wisebase": "Salvesta lehekülg {{name}}",
+      "youtubeSummary": "Kokkuvõte YouTube'i videost"
+    },
+    "trunOn": "Lülita sisse",
+    "typePrompt": "Sisesta {{key}}, et valida käsk ja sõnum saata",
+    "unlimitedPlan": "Piiramatu plaan (aastane)",
+    "unlockDiscount": "Oled avanud üllatusallahindluse.",
+    "useNow": "Kasuta kohe",
+    "watchYoutube": "Vaata õpetusi, uuendusi ja palju muud meie YouTube'i kanalil!",
+    "youtubeSummaryDisabled": "YouTube'i kokkuvõte on keelatud",
+    "youtubeSummaryDisabledDesc": "Luba see jätkamiseks. Kas soovid selle nüüd sisse lülitada?"
+  },
+  "template": "malli",
+  "textExtracted": "Tekst ekstraheeritud",
+  "textFromGrammar": "Tekst grammatikast",
+  "textFromOCR": "Tekst OCR-ist",
+  "textFromSearch": "Tekst otsingumootorilt",
+  "textFromSelect": "Tekst teie valikust",
+  "textFromTranslate": "Tõlketekst",
+  "textFromWrite": "Tekst kirjutamisest",
+  "theme": "Teema",
+  "think": "Mõtle ({{NAME}})",
+  "thinkOnly": "Mõtle",
+  "thoughtProgress": "Mõtteprotsess",
+  "timeUnit": {
+    "day": "Päev",
+    "day_one": "Päev",
+    "day_other": "Päeva",
+    "hour": "Tund",
+    "hour_one": "Tund",
+    "hour_other": "Tundi",
+    "minute": "Minut",
+    "minute_one": "Minut",
+    "minute_other": "Minutit",
+    "second": "Sekund",
+    "second_one": "Sekund",
+    "second_other": "Sekundit"
+  },
+  "toolMoveTip": "Vestlustööriistal on uus kodu! Siit pääsete ligi kõigile vestluse juhtnuppudele.",
+  "Tools": {
+    "desc": {
+      "artifacts": [
+        {
+          "desc": "Muuda ideed käegakatsutavateks tulemusteks, koheselt!",
+          "title": "Tõhustatud tootlikkus"
+        },
+        {
+          "desc": "Visualiseeri koheselt AI-ga loodud veebilehti, dokumente ja graafikuid.",
+          "title": "Reaalajas eelvaade"
+        },
+        {
+          "desc": "Täienda artefakte pingutuseta loomuliku vestluse kaudu.",
+          "title": "Sujuv iteratsioon"
+        }
+      ],
+      "create_image": [
+        {
+          "desc": "Muuda kirjeldused koheselt kõrgekvaliteedilisteks.",
+          "title": "Sütita Loovus"
+        },
+        {
+          "desc": "Paranda oma projekte kohandatud visuaalidega.",
+          "title": "Paranda Sisu"
+        }
+      ],
+      "custom_instruction": [
+        {
+          "desc": "Saage AI vastuseid, mis sobivad teie ainulaadse stiili ja eelistustega.",
+          "title": "Kohandatud just teile"
+        },
+        {
+          "desc": "Enam ei pea ennast kordama. Me mäletame, kuidas teile meeldib suhelda.",
+          "title": "Säästke aega, iga kord"
+        }
+      ],
+      "data_analysis": [
+        {
+          "desc": "Analüüsi ja visualiseeri andmeid lihtsalt, et leida selgeid.",
+          "title": "Saad Arusaamu"
+        },
+        {
+          "desc": "Täpsusta, tõlgenda ja käivita koodi efektiivseks probleemide lahendamiseks.",
+          "title": "Koodi Nutikamalt"
+        },
+        {
+          "desc": "Lahenda keerulisi matemaatikaülesandeid kerguse ja täpsusega.",
+          "title": "Paista Silma Matemaatikas"
+        }
+      ],
+      "deep_research": [
+        {
+          "desc": "Genereerige automaatselt uurimisplaan ja jagage peamised küsimused",
+          "title": "Planeeri esmalt"
+        },
+        {
+          "desc": "Otsige saitide vahel, võrrelge vaatenurki ja filtreerige müra",
+          "title": "Allikateülene tõendusmaterjal"
+        },
+        {
+          "desc": "Iga väide sisaldab viiteid; eksportige struktureeritud aruanne ühe klõpsuga",
+          "title": "Jälgitavad järeldused"
+        }
+      ],
+      "search": [
+        {
+          "desc": "Pääse juurde veebis olevale ajakohasele teabele.",
+          "title": "Püsi Uuendatud"
+        },
+        {
+          "desc": "Saad täpsemaid ja asjakohasemaid vastuseid.",
+          "title": "Täpsusta Täpsust"
+        }
+      ],
+      "text_to_image": [
+        {
+          "desc": "Muuda kirjeldused koheselt kvaliteetseks.",
+          "title": "Ärgita Loomingulisust"
+        },
+        {
+          "desc": "Tõhusta oma projekte kohandatud visuaalidega.",
+          "title": "Tõhusta Sisu"
+        }
+      ],
+      "thinking_mode": [
+        {
+          "desc": "Valitse keerulisi väljakutseid mitmeastmelise mõtlemisega!",
+          "title": "Täpsem probleemide lahendamine"
+        },
+        {
+          "desc": "Saada süvitsi minevaid teadmisi kriitiliste otsuste tegemiseks koheselt.",
+          "title": "Kohustuslik analüüs"
+        },
+        {
+          "desc": "Täiusta lahendusi vaevata juhendatud mõtlemise abil.",
+          "title": "Intelligentne iteratsioon"
+        }
+      ]
+    },
+    "title": {
+      "artifacts": "Lukusta lahti {{ARTIFACTS}}",
+      "create_image": "Lukusta Pildi Genereerimine lahti",
+      "custom_instruction": "Avage isikupärastatud AI",
+      "data_analysis": "Andmeanalüüsi avamine",
+      "deep_research": "Ava sügav uurimine",
+      "search": "Võrgupääsu avamine",
+      "text_to_image": "Ava pildi loomine",
+      "thinking_mode": "Ava Mõtterežiim"
+    }
+  },
+  "tools": {
+    "artifacts": {
+      "demos": [
+        {
+          "title": "Loo virtuaalne ksülofon",
+          "value": "Loo HTML-põhine ksülofon värviliste klahvidega {{ARTIFACT}} sees. Anna visuaalset tagasisidet löödud klahvide kohta ja genereeri lihtsaid, realistlikke helisid Web Audio API abil sagedusparameetrite põhjal. Lisa põhijuhised."
+        },
+        {
+          "title": "Loo toitu sööva emojiga mäng",
+          "value": "Loo lihtne HTML-põhine mäng, mis sarnaneb Catch the Candy'le, {{ARTIFACT}} sees. Mängija juhib emojit ekraani allosas, liigutades seda kiiresti vasakule ja paremale, et püüda ja süüa toiduesemeid (nt 🍓, 🍔, 🍎), mis langevad ülevalt, vältides pomme (💣). Iga kord, kui mängija püüab toidu emojit, muutub nende emoji üha rõõmsamaks väljendiks (nt 🤩, 😆, 😋), et näidata edu. Kui mängija kogemata püüab pommi, näitab emoji esmalt plahvatust (💥) ja seejärel muutub uimasemaks väljendiks (😵‍💫)."
+        },
+        {
+          "title": "Loo nutitelefoni saatmisdiagramm",
+          "value": "Kasutage Reacti, et luua kaunis joondiagramm {{ARTIFACT}} sees, mis põhineb järgmisel tabelil.\n------\n\nNutitelefonide saatmine peamistelt brändidelt viimase kümnendi jooksul (miljardites)\n\n| Aasta | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+        }
+      ],
+      "desc": "Looge ja esitage sisu, nagu veebilehed või vooskeemid, uues aknas lihtsalt. Suurendage tootlikkust reaalajas suhtluse ja keskendunud tööruumiga.",
+      "name": "Artefaktid"
+    },
+    "create_image": {
+      "desc": "Loo kõrgekvaliteedilisi pilte lihtsalt kirjeldades, mida soovid. Genereeri uusi pilte tekstikirjelduste abil või muuda ja redigeeri olemasolevaid pilte tekstiliste juhistega. Meie tööriist toob sinu ideed koheselt ellu.",
+      "name": "Pilt"
+    },
+    "data_analysis": {
+      "demos": [
+        {
+          "title": "Loe failist andmeid ja loo sektordiagramm, mis näitab erinevate kulueelarvete proportsioone.",
+          "value": "Loe failist andmeid ja loo sektordiagramm, mis näitab erinevate kulueelarvete proportsioone."
+        }
+      ],
+      "desc": "Käivitage Python kood reaalajas edasijõudnud matemaatika, statistika, masinõppe ja andmetöötluse jaoks, lihtsustades ülesandeid erinevates formaatides.",
+      "name": "Andmeanalüüs"
+    },
+    "search": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Millised on praegu Ameerika Ühendriikide kinodes kõige kõrgemalt hinnatud filmid?"
+        },
+        {
+          "title": "",
+          "value": "Millised aktsiad kogesid täna märkimisväärset tõusu?"
+        },
+        {
+          "title": "",
+          "value": "Mis on täna välja antud kõige tähelepanuväärsem uus elektrooniline toode?"
+        }
+      ],
+      "desc": "Juurdepääs reaalajas teadmistele, mis ületavad eelnevalt treenitud teadmiste piire. Sügava mitmeallikalise analüüsi kaudu pakub see funktsioon täpseid tõlgendusi praegustest sündmustest, turusuundumustest ja uutest arengutest — võimaldades paremaid otsuseid meie kiiresti muutuvas maailmas.",
+      "name": "Otsi"
+    },
+    "text_to_image": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Kujunda futuristlik lendav auto disain."
+        },
+        {
+          "title": "",
+          "value": "Joonista kuldne retriiver, kes jookseb rohul."
+        },
+        {
+          "title": "",
+          "value": "Kujuta eakat naist, kes rahulikult kohvi joob."
+        }
+      ],
+      "desc": "Kirjeldage lihtsalt, mida te silmas peate, ja looge koheselt kvaliteetseid pilte. Kujundusoskusi pole vaja – ainult teie kujutlusvõimet.",
+      "name": "Loo pilt"
+    },
+    "thinking_mode": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Mõtle: 9.11 või 9.8, kumb on suurem"
+        },
+        {
+          "title": "",
+          "value": "Mõtle ja kirjuta funktsioon, mis modelleerib 'Kuue astme eraldatuse' teooriat. Arvestades sotsiaalvõrgustikku graafina, leia lühim tee kahe inimese vahel."
+        }
+      ],
+      "desc": "Tugevda mis tahes vestlusmudelit DeepSeek R1 võimsa põhjendusvõimekusega. Kui see on lubatud, saab teie valitud mudel R1 täiustatud mõttekäigu töötlemise, pakkudes täpsemaid, loogilisemaid ja arusaadavamaid vastuseid keerukatele päringutele. Maksab 1 lisatasu krediit päringu kohta.",
+      "name": "Mõtle"
+    }
+  },
+  "toolsTitle": "Tööriistad",
+  "toolsUpgradeContent": {
+    "content1": "Aktiveeri vestlusvahendid, et avada võimsad võimalused.",
+    "content2": [
+      "Uuri maailmavõrku sujuvalt.",
+      "Muuda oma ideed silmapaistvateks visuaalideks.",
+      "Süvene andmetesse ekspertanalüüsi abil."
+    ]
+  },
+  "toolsUpgradeTitle": "Tõsta oma vestluskogemus uuele tasemele!",
+  "toSlides": "Veebist slaidideks",
+  "toSlidesDesc": "Muuda mis tahes veebileht ühe klikiga kasutusvalmis esitluseks.",
+  "total": "kokku",
+  "transcriptFailed": "Transkripti genereerimine ebaõnnestus",
+  "transcriptGenerated": "Transkript genereeritud",
+  "transcriptReady": "Transkript valmis",
+  "translate": "Tõlgi",
+  "translateBackInto": "Tõlgi tagasi keelde: {{lang}}",
+  "translateInto": "Tõlgi keelde: {{lang}}",
+  "trial": "Prooviperiood",
+  "troubleshooting": "Veaotsing",
+  "tryArtifact": "Proovi {{ARTIFACTS}}",
+  "tryArtifactNow": "Proovige {{ARTIFACTS}} kohe",
+  "tryDemo": "Proovi demo",
+  "tryItNow": "Proovi kohe",
+  "tryNow": "Proovi näiteid",
+  "tryWisebaseTip": "Proovi kõrvuti failivestlust",
+  "tryWisebaseTip2": "Puhas lugemine ja vestlus {{WISEBASE}}-is",
+  "tryWisebaseTip3": "Rohkem faile? Jätka {{WISEBASE}}-is",
+  "ttsDemo": "Näidis",
+  "tweetit": "Jälgi meid {{X}}-is",
+  "unarchive": "dearhiveerida",
+  "unlimited": "Piiramatu",
+  "unlimitedCredits": "Piiramatu krediit",
+  "unlock": "Ava",
+  "unlockFeatMsg": "Oled jõudnud oma plaani piirini. Uuenda nüüd, et avada kõik funktsioonid!",
+  "unpin": "vabastage",
+  "unpublish": "Eemalda avaldamine",
+  "unpublishArtifact": "Eemalda artefakti avaldamine",
+  "unrecognizedSpeaker": "Tundmatu kõneleja",
+  "updateNow": "Uuenda kohe",
+  "updateSuccess": "Uuendamine õnnestus",
+  "upgrade": "Uuendage",
+  "upgradeContent": {
+    "reader": {
+      "free": "Olete oma tasuta kvoodi limiidi täis. Uuendage suurema kvoodi saamiseks ja avage täiustatud funktsioonid.",
+      "pro": "Olete saavutanud selle kuu kvoodipiirangu. Täiendage täiendava kvoodi saamiseks.",
+      "ultra": "Olete saavutanud selle kuu kvoodipiirangu. Soovituste esitamiseks võtke meiega ühendust aadressil <a>care@sider.ai</a>."
+    }
+  },
+  "upgradeModal": {
+    "advancedModelUpgrade": "Täiustatud mudelid nõuavad uuendamist — avamiseks uuenda",
+    "allVoices": "Kõik hääled",
+    "claude35SonnetDesc": "Claude 3.5 Sonnet on Anthropic'u uusim mudel, mis on kaks korda kiirem kui Claude 3 Opus ja intelligentsem, oluliselt parem arutlemises, teadmistes, kodeerimises ja visuaalsetes ülesannetes.",
+    "claude3OpusDesc": "Claude 3 Opus on edasijõudnud AI keerukate ülesannete lahendamiseks märkimisväärse efektiivsusega.",
+    "claude3SonnetDesc": "Claude 3 Sonnet on täpne ja nüansirikas keelemudel.",
+    "desc": "Rohkem krediite ja rohkem funktsioone",
+    "fullFeatures": "Täielikud funktsioonid",
+    "fullFeaturesDesc": "Ligipääs AI-otsingule, Mõtterežiimile ja Artifacts keerukate ülesannete ja uurimistöö jaoks.",
+    "getAllTTSVoices": "Avage kõik hääled",
+    "getAllTTSVoicesDesc": "See hääl on eksklusiivne premium kasutajatele. Uuendage kohe, et pääseda ligi kõigile häältele.",
+    "getAllTTSVoicesDesc2": "Oled jõudnud premium-häälte prooviperioodi piirini. Uuenda kohe, et saada piiramatu juurdepääs 9 loomuliku kõlaga AI häälele või kasuta tasuta häält.",
+    "getWebAccess": "Uuendage, et saada veebist vastus",
+    "gpt4Desc": "GPT-4o on märkimisväärselt targem ja võib aidata teil saada loogilisemaid ja täpsemaid vastuseid.",
+    "higherLimits": "Suuremad piirangud",
+    "higherLimitsDesc": "Tehke pikemaid ja põhjalikumaid töid hõlpsalt.",
+    "hitLimitUpgrade": "Oled jõudnud oma plaani piirini",
+    "instantAccess": "Kohene juurdepääs",
+    "instantAccessDesc": "Uuendage, et saada rohkem krediiti ja jätkata oma tööd kohe.",
+    "instantRefill": "Kohene täiendamine",
+    "instantRefillDesc": "Uuendage kohe ja saage krediiti koheselt — pole vaja oodata.",
+    "off": "Allahindlus!",
+    "outOfCreditsUpgrade": "Krediidid on otsas. Jätkamiseks uuenda paketti",
+    "powerfulModels": "Võimsad mudelid",
+    "powerfulModelsDesc": "Avage GPT-5, Claude ja teised kiiremate ja täpsemate vastuste saamiseks.",
+    "smarterReasoning": "Targem arutlemine",
+    "smarterReasoningDesc": "Kasuta Mõtlemisrežiimi ja pika konteksti analüüsi.",
+    "stableResults": "Stabiilsed tulemused",
+    "stableResultsDesc": "Rohkem krediite, kiirem ja ühtlane väljund.",
+    "stayUninterrupted": "Jätkake katkestusteta",
+    "stayUninterruptedDesc": "Jätkake vestlemist või uurimistööd — kogu kontekst ja ajalugu jäävad puutumatuks.",
+    "tryAllVoices": "Proovi julgelt kõiki hääli",
+    "unlockModels": "Ava mudelid",
+    "unlockModelsDesc": "Saavuta juurdepääs <list>GPT-5, Claude Sonnet ja Gemini 2.5 Pro</list>.",
+    "upgradeToUseXXX": "Täiendage <b>bot</b> kasutamiseks",
+    "videoSummaryDesc": "Olete jõudnud oma tasuta kasutuslimiidini. Sellele funktsioonile juurdepääsu jätkamiseks kaaluge lisatasu liikmelisusele üleminekut.",
+    "videoSummay": "Uuenda, et kasutada video kokkuvõtet",
+    "webAccessDesc": "Sider hangib Google'ilt vastused teie küsimustele ning kasutab AI-d lühidalt korrastamiseks ja kokkuvõtete tegemiseks."
+  },
+  "upgradeNow": "Uuenda nüüd",
+  "upgradeoff": "Uuenda {{NUM}}% soodsamalt",
+  "upgradeTitle": {
+    "reader": {
+      "free": "Avastage väljaspool piire!",
+      "pro": "Kvoodi piirang on täis",
+      "ultra": "Kvoodi piirang on täis"
+    }
+  },
+  "upgradeUnlock": "Uuenda kohe, et avada!",
+  "uploadImage": "Laadige üles pilt",
+  "uploadLocal": "Laadi oma arvutist üles",
+  "upTo6file": "Laadi üles kuni 6 faili",
+  "used": "Kasutatud",
+  "usedIn": "Kasutatakse",
+  "useFreeVoice": "Kasuta tasuta häält",
+  "using": "Kasutades",
+  "version": "Versioon",
+  "videoTutorial": "Vaata üksikasju",
+  "vote": "hääletada",
+  "watchDemoVideo": "Vaata demo videot",
+  "webAccess": "Veebijuurdepääs",
+  "webApp": "Veebirakendus",
+  "webAssistant": "Veebiassistent",
+  "webEnhance": {
+    "askQuestionBtn": "Vasta",
+    "bilingual": "Kahekeelne",
+    "createShortenVideo": "Loo lühike video",
+    "displayTranslation": "Kuva tõlge",
+    "expandAll": "Laienda kõiki",
+    "freeLimitTips": "Teie tasuta prooviperiood on ammendatud. Video kokkuvõtte funktsiooni kasutamise jätkamiseks minge kohe üle uuemale versioonile.",
+    "fullScreen": "Täisekraan",
+    "generatedBy": "Loodud {{name}} poolt",
+    "hideHighlights": "Peida esiletõsteid",
+    "hideSubtitles": "Peida subtiitreid",
+    "keyMomentsClickExpand": "Klõpsa laiendamiseks",
+    "keyMomentsCollapse": "Kokku varjutama",
+    "loginToAsk": "Logi sisse, et küsida",
+    "needLoginBilibiliTips": "Video kokkuvõtte tegemiseks logi sisse oma Bilibili kontole ja laadi leht uuesti",
+    "nextHighlight": "Järgmine esiletõste",
+    "noQuestionTip": "Rakendusel {{APP_NAME}} ei õnnestu lehel probleemi tuvastada.",
+    "noSubtitleTips": "Kokkuvõtte tegemine on hetkel saadaval ainult subtiitritega videote jaoks.",
+    "originalSubtitles": "Algupärased subtiitrid",
+    "playbackSpeed": "Taasesituse kiirus",
+    "previousHighlight": "Eelmine esiletõste",
+    "responseLanguage": "Vastuse keel",
+    "shareToComment": "Jaga, et kommenteerida",
+    "shortenVideoTips": "Muuda see video kokkuvõtlikuks videoks, mis hõlmab peamisi punkte!",
+    "showHighlights": "Näita esiletõsteid",
+    "shownotes": "Tähtsündmused",
+    "showSubtitles": "Näita subtiitreid",
+    "smartPlay": "Video ülevaade",
+    "smartPlayBtnTips": "Vaata lühikest videot, mis aitab sul kiiresti olulisemaid hetki tabada ja aega säästa.",
+    "smartPlayCost": "Maksumus 1 kiire tekstipäring ja 1 lugejapäring, häälkõne arveldatakse vastavalt kasutusele",
+    "smartPlayOnlyCost": "häälkõne arveldatakse vastavalt kasutusele",
+    "smartPlayPlaybackEnded": "Tipphetkede taasesitus lõppes",
+    "smartPlayReturnToCurrentProgress": "Naase praeguse edenemise juurde",
+    "smartPlaySwitchVoiceBtn": "Jah, vaheta hääl",
+    "smartPlaySwitchVoiceCancel": "Ei, tühista",
+    "smartPlaySwitchVoiceContent": "Teisele häälele üleminek arvestab krediite uuesti kogu video skripti pikkuse alusel. Video jätkub praegusest positsioonist. Kas soovite jätkata?",
+    "smartPlaySwtichVoiceTitle": "Krediitide mahaarvamise teade",
+    "subtitle": "Alapealkiri",
+    "subtitleFailed": "Subtiitrid ei laaditud",
+    "subtitles": "Subtiitrid",
+    "summary": "Kokkuvõte",
+    "targetLanguage": "Sihtkeel",
+    "transcribing": "Transkribeerimine",
+    "videoSummaryBtn": "Tee video kokkuvõte",
+    "videoSummaryCost": "Maksumus 1 põhi krediit ja 1 lugeja päring",
+    "videoSummaryMakeFullBtn": "Koosta täielik kokkuvõte",
+    "videoSummaryText": "Video kokkuvõte",
+    "videoTooLang": "Kokkuvõtte tegemiseks peavad videod olema lühemad kui 10 tundi.",
+    "whisperCostText": "Sellel videol puuduvad välised subtiitrid ja see vajab kokkuvõtte tegemiseks transkribeerimist. (1 edasijõudnud krediit/10 minutit või vähem)"
+  },
+  "webStore": "Veebipood",
+  "welcome": "Tere tulemast",
+  "whatNew": "Uued funktsioonid",
+  "whatsnewInvite": "Kutsu proovima tasuta",
+  "wisebase": {
+    "addCollection": "Lisa {{name}}",
+    "createAndSave": "Loo ja Salvesta",
+    "createFirstWisebaseDefaultName": "Minu {{WISEBASE_APP_NAME}}",
+    "createFirstWisebaseDesc": "{{WISEBASE_APP_NAME}} on Sideri tehisintellekti teadmistebaas. Saate hõlpsasti hallata, vaadata ja esitada küsimusi oma kogutud sisu kohta Sideri veebisaidil.",
+    "createFirstWisebasePlaceholder": "Sisestage {{WISEBASE_APP_NAME}} nimi",
+    "createFirstWisebaseTitle": "Tere tulemast looma oma esimest {{WISEBASE_APP_NAME}}",
+    "editSavedPage": "Muuda salvestatud lehte",
+    "editSavedVideo": "Muuda salvestatud videot",
+    "errNameExists": "Nimi on juba olemas",
+    "failedToDelete": "Kustutamine ebaõnnestus",
+    "failedToSave": "Salvestamine ebaõnnestus",
+    "highlight": "Esiletõstmine",
+    "HighlightInvalid": "Esiletõstmised puuduvad",
+    "HighlightInvalidDesc": "Seoses muudatustega sellel veebilehel ei ole sinu esiletõstmised enam nähtavad. Sa saad neid siiski vaadata oma <a>{{name}}</a>.",
+    "inbox": "AI Postkast",
+    "myWisebase": "Minu {{name}}",
+    "name": "Wisebase",
+    "pageRemoved": "Leht kustutatud",
+    "pageSaved": "Leht salvestatud",
+    "removePage": "Kustuta leht?",
+    "removePageDesc": "See kustutab lehe koos selle esiletõstmistega.",
+    "savedTo": "Salvestatud asukohta: {{name}}",
+    "saveLoading": "Salvestamine...",
+    "saveNote": "Salvesta märkmena",
+    "savePage": "Salvesta leht",
+    "saveTo": "Salvesta {{name}}",
+    "saveVideo": "Salvesta video",
+    "saveVideoTo": "Salvesta video rakendusse {{WISEBASE_APP_NAME}}",
+    "saving": "Salvestamine",
+    "unableToHighlight": "Seda valikut ei saa esile tõsta",
+    "unhighlight": "Eemalda esiletõstmine",
+    "view": "Vaata",
+    "viewInSite": "Vaata saidil",
+    "viewPageNoteTip": "Klõpsake siin, et vaadata oma salvestatud lehti ja märkmeid.",
+    "vistMyWisebase": "Ava {{name}}"
+  },
+  "writing": "Kirjutamine",
+  "xmasSale": "Jõulu müük",
+  "yearlyPlan": "Aastane plaan",
+  "you": "Sina",
+  "yourEmailAddress": "Sinu emaili aadress",
+  "zoomIn": "Suumi sisse",
+  "zoomOut": "Suumi välja"
+}

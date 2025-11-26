@@ -1,0 +1,3489 @@
+{
+  "about-author": "Uzzināt par autoru",
+  "account": "Konts",
+  "add": "Pievienot",
+  "addons": "Papildinājumi",
+  "addPrompt": "Pievienot uzaicinājumu",
+  "addPrompts": "Pievienot uzvedni",
+  "addTools": "Pievienot rīkus",
+  "advanced": "Paplašināts",
+  "agentPanel": {
+    "agentDesc": "{{name}} var kontrolēt jūsu pārlūku, lai veiktu uzdevumus. Šī funkcija joprojām ir agrīnajā priekšskatījuma stadijā, un var rasties kļūdas. Jūs varat to jebkurā laikā apturēt.",
+    "agentIsOperating": "{{name}} darbojas šajā lapā",
+    "browserAgent": "Pārlūks {{name}}",
+    "chatPlaceholder": "Ar ko {{name}} var palīdzēt?",
+    "creditCostTip": "{{name}} ir aprēķinu intensīvs produkts, un atbilstošie Elite kredīti tiks atskaitīti, pamatojoties uz faktisko patēriņu.",
+    "previewVersion": "Pētījuma priekšskatījums",
+    "stopAgent": "Apturēt {{name}}",
+    "toolAction": {
+      "click": "Noklikšķināt",
+      "extractPageText": "Izvilkt lapas tekstu",
+      "findItem": "Atrast: \"{{text}}\"",
+      "formInput": "Iestatīt ievadi uz \"{{text}}\"",
+      "navigate": "Pāriet uz {{url}}",
+      "pressKey": "Nospiediet taustiņu: {{text}}",
+      "readPage": "Lasīt lapu",
+      "scroll": "Ritināt",
+      "takeScreenshot": "Uzņemt ekrānuzņēmumu",
+      "typeText": "Rakstīt tekstu: \"{{text}}\"",
+      "waitTime": "Gaidīt {{time}} sekundes"
+    }
+  },
+  "aiResCompare": "AI atbilžu salīdzinājums",
+  "AISlides": "AI Slides",
+  "aiSlidesPromoteTip": "Vienu klikšķi līdz prezentācijas līmeņa PPT",
+  "aiSlidesPromoteTip2": "Padariet šo PPT satriecošu",
+  "aiWebBuilderPromoteTip": "Pārvērtiet šo {{ARTIFACT}} par tīmekļa vietni tūlīt",
+  "all": "Visi",
+  "allFeatures": "Visas funkcijas",
+  "allSettings": "Visi iestatījumi",
+  "alwaysDisplay": "Vienmēr rādīt",
+  "analyzed": "Analizēts",
+  "analyzing": "Analizē...",
+  "analyzingFailed": "Analīze neizdevās",
+  "analyzingIntent": "Analizē nodomu",
+  "answering": "Atbildot",
+  "appearance": "Izskats",
+  "archive": "arhīvs",
+  "archiveTpl": "Arhivējiet šo veidni",
+  "artifactDemos": [
+    {
+      "title": "Izveidot virtuālu ksilofonu",
+      "value": "Izveidojiet HTML bāzētu ksilofonu ar krāsainām taustiņiem {{ARTIFACT}}. Nodrošiniet vizuālu atgriezenisko saiti par nospiestajiem taustiņiem un ģenerējiet vienkāršas, reālistiskas skaņas, izmantojot Web Audio API, pamatojoties uz frekvences parametriem. Iekļaujiet pamata instrukcijas."
+    },
+    {
+      "title": "Izveidot ēdienu ēšanas emocijzīmju spēli",
+      "value": "Izveidojiet vienkāršu HTML bāzētu spēli, līdzīgu Catch the Candy, {{ARTIFACT}}. Spēlētājs kontrolē emocijzīmi ekrāna apakšā, ātri pārvietojot to pa kreisi un pa labi, lai noķertu un apēstu pārtikas vienības (piemēram, 🍓, 🍔, 🍎), kas krīt no augšas, izvairoties no bumbām (💣). Katru reizi, kad spēlētājs noķer pārtikas emocijzīmi, viņa emocijzīme mainīsies uz izteiktāku pozitīvu izteiksmi (piemēram, 🤩, 😆, 😋), lai norādītu uz panākumiem. Ja spēlētājs nejauši noķer bumbu, emocijzīme vispirms parādīs sprādzienu (💥) un pēc tam mainīsies uz reibuma izteiksmi (😵‍💫)."
+    },
+    {
+      "title": "Izveidot viedtālruņu piegādes diagrammu",
+      "value": "Izmantojiet React, lai izveidotu skaistu līniju diagrammu {{ARTIFACT}}, pamatojoties uz šādu tabulu.\n------\n\nViedtālruņu piegādes pēc lielākajiem zīmoliem pēdējā desmitgadē (miljardos)\n\n| Gads | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+    }
+  ],
+  "artifactError": {
+    "solution1": "<a>Atsvaidzināt priekšskatījumu</a>",
+    "solution2": "Nosūtiet kļūdas ziņojumu tērzēšanā, lai saņemtu palīdzību. <a>Nosūtīt kļūdas ziņojumu</a>",
+    "title": "Varat izmēģināt šādas iespējas:"
+  },
+  "artifactNarrow": "Atjaunot noklusējuma platumu",
+  "artifactPublished": "Artefakts publicēts",
+  "artifactPublishTip1": "Kad jūs publicēsiet šo artefaktu, mēs izveidosim publisku URL, lai ikviens varētu tam piekļūt. Jūsu tērzēšana paliks privāta, un jūs jebkurā laikā varat pārtraukt koplietošanu.",
+  "artifactPublishTip2": "Šis artefakts ir pieejams publikai. Ikviens var tam piekļūt ar kopīgoto saiti.",
+  "artifactRemixContent": "Izpētīsim dažas šī {{ARTIFACT}} variācijas. Vai varat ieteikt 3 veidus, kā to pārveidot, un gaidīt manu atbildi?",
+  "artifactsBetaTip": "Izbaudiet Artifacts (Pro) bez maksas beta versijas laikā—nepalaidiet garām!",
+  "artifactUnpublishedTip": "Kad jūs pārtrauksiet publicēšanu, citi vairs nevarēs piekļūt artefaktam, izmantojot kopīgoto saiti.",
+  "artifactWide": "Izvērst līdz pilnam platumam",
+  "ask": "Jautājiet",
+  "attention": "Paziņojums",
+  "audio-meeting-minutes": "Sanāksmes protokols",
+  "audio-summarize": "Kopsavilkums",
+  "audio-to-text": "Audio uz tekstu",
+  "audioExtractedText": "Audio iegūts teksts",
+  "audioTranscript": "Audio transkripts",
+  "auto": "Auto",
+  "autoToText": "Automātiski uz tekstu",
+  "back": "Atpakaļ",
+  "basic": "Pamata",
+  "bestForChat": "Vislabākais sarunām",
+  "betterAnswer": "Iegūstiet labākus rezultātus ar {{MODEL_NAME}}",
+  "bigSale": "Izpārdošana",
+  "bigSaleRest": "Izpārdošana",
+  "bilingualTranslation": {
+    "done": "Pabeigts",
+    "goToSetting": "Doties uz iestatījumiem",
+    "originLangClose": "Divvalodu subtitri nedarbojas pareizi, jo Netflix subtitri ir izslēgti. Izvēlieties subtitru valodu un atsvaidziniet lapu",
+    "refreshBtn": "Atsvaidzināt",
+    "refreshPage": "Radās problēma ar divvalodu subtitriem. Mēģiniet atsvaidzināt lapu",
+    "setLangPreferDesc": "Lai nodrošinātu vislabāko divvalodu pieredzi, izvēlieties valodas, kuras, visticamāk, skatīsieties, lai iegūtu precīzus subtitrus un tulkojumus.",
+    "setLangPreferTitle": "Iestatīt valodas preferences",
+    "switchTitle": "Rādīt divvalodu vadību YouTube & Netflix",
+    "targetLang": "Mērķa valoda",
+    "title": "Subtitru tulkošana",
+    "youtubeRefreshTips": "Divvalodu subtitri nav konstatēti. Lūdzu, atsvaidziniet lapu un ielādējiet subtitrus no jauna."
+  },
+  "browseFiles": "Pārlūkoti {{NUM}} faili",
+  "browseFiles1": "Pārlūkots 1 fails",
+  "browsingFiles": "Pārlūkot failus",
+  "building": "Veido...",
+  "buyBooster": "Pirkt pastiprinātāju komplektu ",
+  "cancel": "Atcelt",
+  "change": "Mainīt",
+  "changeLogPage": {
+    "learnToUse": "Uzziniet, kā lietot",
+    "logContents": {
+      "4_22_0": "Sider ir gatavs izsmiet un lielīties ar taviem publiskajiem X (Twitter) ierakstiem! Piesakies smiekliem, dati netiek saglabāti. Spēle sākas un dalies priekā ar draugiem!",
+      "5_12_0": "Dodieties uz tērzēšanas vadīklām, lai iestatītu savas preferences. Ietaupiet laiku un izbaudiet personalizētāku mākslīgā intelekta pieredzi, katru reizi neatkārtojot savas preferences.",
+      "5_14_0": "Grok 4, xAI vadošais modelis, piedāvā augstskolas līmeņa loģisko domāšanu, uzlabotu programmēšanu un matemātiku, un saprot attēlus kā tekstu—spēcīgs rīks jebkuram analītiskam vai radošam uzdevumam.",
+      "5_19_0": "Anthropic jaunākais un jaudīgākais modelis līdz šim. Tas nodrošina labāko kodēšanu savā klasē un pārspēj Opus 4.1 gan loģiskajā domāšanā, gan zināšanās par finansēm, tieslietām un medicīnu.",
+      "5_21_0": "Iepazīstieties ar gpt-5-chat-latest, jaunāko GPT-5 Chat modeli, kas tiek izmantots ChatGPT. Izbaudiet ātrākas un dabiskākas atbildes ikdienas sarunām, rakstīšanai un ideju izpētei.",
+      "5_23_0": "Google visinteliģentākais modelis. Tā modernākā loģika nodrošina noderīgākas, labāk formatētas un kodolīgākas atbildes, padarot to par ideālu partneri, lai palīdzētu jums mācīties, veidot un plānot."
+    },
+    "logs": {
+      "1_0_1": [
+        "Uzlabojiet kopsavilkuma funkciju Youtube lapā",
+        "Izlabojiet dažas kļūdas, kas saistītas ar kopēšanu/ielīmēšanu un drukāšanu"
+      ],
+      "1_0_10": [
+        "Atbalstiet vairāk nekā 50 valodas tūlīt!"
+      ],
+      "1_0_11": [
+        "Ātri piekļūstiet darbībām, izmantojot uznirstošo logu, neatverot sānjoslu.",
+        "Pievienojiet atbalstu papildu valodām.",
+        "Izmantojot tulkošanas funkciju, saglabājiet lietotāja valodas preferences.",
+        "Atrisiniet saīsņu konfliktus tādās platformās kā GitHub un citās."
+      ],
+      "1_0_12": [
+        "Sinhronizējiet paplašinājumu iestatījumus dažādos datoros",
+        "Piekļūstiet uzvednēm no dažādiem klēpjdatoriem",
+        "Saglabājiet tērzēšanu turpmākai lietošanai",
+        "Kopīgojiet tērzēšanu, izmantojot saiti"
+      ],
+      "1_0_13": [
+        "Pēc jautājumu uzdošanas turpiniet tērzēšanu",
+        "Plus lietotājiem pārslēdzieties starp GPT-4 un GPT-3.5",
+        "Viegli piekļūstiet un meklējiet tērzēšanas vēsturi"
+      ],
+      "1_0_2": [
+        "Pievienot apturēšanas pogu, lai pārtrauktu atbildes ģenerēšanu",
+        "Mainiet sabrukšanas vietu"
+      ],
+      "1_0_3": [
+        "CMD/Ctrl + Enter, lai ātri veiktu “Iesniegt”",
+        "Iespēja paslēpt paneli meklēšanas rezultātu lapā",
+        "Atbalstiet ESC, lai paslēptu sānjoslu",
+        "Atbalsta kopsavilkums garš raksts"
+      ],
+      "1_0_4": [
+        "Pārkārtojiet uzvednes vienumus nolaižamajā sarakstā",
+        "Arhivējiet uzvednes vienumus, kurus neizmantosit",
+        "Atbalstiet atbildi vairāk nekā 50 valodās"
+      ],
+      "1_0_5": [
+        "Atcerieties sānjoslas ikonas atrašanās vietu",
+        "Uzlabojiet īsinājumtaustiņus",
+        "Saglabājiet uzvedņu veidnes tieši no sānjoslas"
+      ],
+      "1_0_6": [
+        "Uzlabojiet kopsavilkuma funkciju Youtube lapā"
+      ],
+      "1_0_7": [
+        "Atcerieties pēdējo reizi izmantoto uzvedni",
+        "Optimizējiet chatGPT paneļa pozīciju meklēšanas lapās",
+        "Pievienojiet opciju, lai sānjoslas ikonu ievietotu lapas kreisajā pusē",
+        "Optimizējiet iepakojuma izmēru",
+        "Pievienojiet tumšo režīmu",
+        "Atbalstiet savu API URL starpniekserveri"
+      ],
+      "1_0_8": [
+        "Atbalstiet GPT-4 Plus lietotājiem! Pārbaudiet iestatījumu lapu!"
+      ],
+      "1_1_0": [
+        "Pilna tērzēšana <b>jaunajā cilnē</b>!",
+        "ChatGPT, <b>Bing</b>, <b>Bard</b> kopā!",
+        "Kļūdu labojumi"
+      ],
+      "2_0_0": [
+        "Atbalstiet <b>GPT-4 </b> visiem lietotājiem!",
+        "Aiciniet draugus un iegūstiet <b>GPT-4</b> kredītus jums abiem!",
+        "Kļūdu labojumi un citi UX uzlabojumi"
+      ],
+      "2_1_0": [
+        "Ātrās uzmeklēšanas saīsne",
+        "Mainiet ātrās uzmeklēšanas loga izmērus",
+        "Kļūdu labojumi un citi UX uzlabojumi"
+      ],
+      "2_2_0": [
+        "Izveidojiet jebkuru ziņojumu",
+        "Atbildēt uz e-pastu, čivināt, komentēt utt"
+      ],
+      "2_3_0": [
+        "Atbalstiet pārlūkošanu un spraudņus Plus lietotājiem!",
+        "ChatGPT ar piekļuvi internetam ikvienam!"
+      ],
+      "2_4_0": [
+        "<b>Viedā tīmekļa piekļuve</b>: pamatojoties uz jūsu vaicājumu, Al izlems, vai tai ir nepieciešams piekļūt tīmeklim.",
+        "Stabilitātes uzlabošana"
+      ],
+      "2_5_0": [
+        "YouTube kopsavilkums! Noskatieties 1 stundu ilgu YouTube videoklipu 1 minūtē",
+        "Salīdziniet cilvēku un AI sniegtās atbildes jautājumu un atbilžu vietnēs, piemēram, Quora, StackOverflow un Zhihu"
+      ],
+      "2_6_0": [
+        "Sider atbalsta fiksēto sānjoslu — varat tērzēt starp visām cilnēm, nepārklājot saturu <br /> (pieejams pārlūkā Chrome 114 vai jaunākā versijā)"
+      ],
+      "2_7_0": [
+        "Zīmējiet attēlu no teksta",
+        "Zīmējiet attēlu no atsauces attēla"
+      ],
+      "2_8_0": [
+        "Lasīšanas palīgs: izmantojiet AI, lai ātri saprastu, lasot tīmekļa lapas",
+        "Rakstīšanas palīgs: ātri ģenerējiet saturu, izmantojot AI tīmekļa ievades lodziņā"
+      ],
+      "2_9_0": [
+        {
+          "features": [
+            "Lasīšanas konteksta izvēlne",
+            "Rakstīšanas konteksta izvēlne"
+          ],
+          "title": "Uzlabots uzvedņu pārvaldnieks"
+        },
+        {
+          "features": [
+            "Noņemiet fonu no jebkura attēla",
+            "Noņemiet tekstu no jebkura attēla"
+          ],
+          "title": "AI attēlu redaktors"
+        }
+      ],
+      "3_0_0": [
+        {
+          "features": [
+            "<b>Vairāk tērzēšanas robotu</b>: tagad atbalsta Claude-instant, Claude 2!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Grupas tērzēšana</b>: salīdziniet atbildes visos tērzēšanas robotos!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Pieminēt</b>: izmantojiet \"@\", lai bez piepūles pieminētu un mijiedarbotos ar jebkuru tērzēšanas robotu sarunā!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ātrā uzvedne</b>: vienkārši ierakstiet “/” un aiziet!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vienkāršs dizains</b>: padariet dizainu vienkāršu un viegli pārskatāmu"
+          ]
+        }
+      ],
+      "3_1_0": [
+        {
+          "features": [
+            "Papildus ChatGPT un Klodam Sider tagad atbalsta arī Bardu!"
+          ],
+          "title": "Vairāk botu!"
+        },
+        {
+          "features": [
+            "Atpazīstiet 10+ galvenās valodas",
+            "Atpazīt ar roku rakstītu angļu valodā",
+            "Atpazīstiet tekstā <b>matemātiskos vienādojumus</b>"
+          ],
+          "title": "OCR: izņemiet tekstu no jebkura attēla un nosūtiet to uz ChatGPT"
+        },
+        {
+          "features": [
+            "Nomainiet visu fonu",
+            "Noņemt atlasīto apgabalu"
+          ],
+          "title": "Uzlabojiet gleznotāju"
+        }
+      ],
+      "3_2_0": [
+        {
+          "features": [
+            "Lieliskas ziņas! Mūsu atjauninātā cenu politika tagad sniedz jums vēl vairāk piekļuves GPT-4 un Claude 2 kredītiem.",
+            "Ja jau esat premium klases lietotājs, jūs tiksit automātiski jaunināts. Turklāt mums ir jauns “Neierobežots” plāns visiem pieredzējušiem lietotājiem!"
+          ],
+          "title": "Jauns cenu plāns ar 5x vairāk GPT-4 kredītiem"
+        }
+      ],
+      "3_3_0": [
+        {
+          "features": [
+            "Izvilkt tekstu no attēla",
+            "Uzdodiet jebkuru jautājumu par attēlu",
+            "3 veidi, kā nosūtīt attēlu uz {{SIDERVISION}} <div><ol><li>Uzņemiet ekrānuzņēmumu</li><li>velciet un nometiet attēlu uz tērzēšanas logu</li><li>augšupielādējiet attēlu </li></ol></div>"
+          ],
+          "title": "{{SIDERVISION}} — ChatGPT sānjosla ar Vision"
+        },
+        {
+          "features": [
+            "Izvilkt tekstu no attēla"
+          ]
+        },
+        {
+          "features": [
+            "Izvilkt tekstu no attēla"
+          ]
+        }
+      ],
+      "3_4_0": [
+        {
+          "features": [
+            "Pārbaudiet gramatikas kļūdas",
+            "Labojiet gramatikas kļūdas",
+            "Uzlabojiet rakstīšanu ārpus gramatikas"
+          ],
+          "title": "Sider gramatikas logrīks"
+        }
+      ],
+      "3_5_0": [
+        {
+          "features": [
+            "{{4+VISION}}",
+            "1 klikšķis, lai atbildētu uz vienu un to pašu jautājumu ar dažādiem robotiem"
+          ],
+          "title": "{{SIDERVISION}} kļuva gudrāks"
+        }
+      ],
+      "3_6_0": [
+        {
+          "features": [
+            "Pielāgojiet savu tulkojumu īpašā tulkošanas logrīkā",
+            "Uzlabojiet ChatGPT atbildes Google, Bing, Baidu utt."
+          ],
+          "title": "Tulkošanas logrīks"
+        }
+      ],
+      "4_0_0": [
+        {
+          "features": [
+            "Atbalstiet GPT-4 Turbo un GPT-3.5 Turbo",
+            "Tulkot visu tīmekļa lapu",
+            "Tērzēšanas tīmekļa lapa sānjoslā",
+            "Tērzējiet PDF failu sānjoslā"
+          ],
+          "title": "GPT-4 Turbo un Chat tīmekļa lapa!"
+        }
+      ],
+      "4_10_0": [
+        {
+          "features": [
+            "<b>Palielināts ātrums:</b> Saņemiet atbildes 2x ātrāk nekā GPT-4"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota redze:</b> Ievērojami uzlabota attēlu izpratne"
+          ]
+        },
+        {
+          "features": [
+            "<b>Paplašinātas valodas:</b> Vairāk valodu, labāka kvalitāte un ātrāka veiktspēja"
+          ]
+        }
+      ],
+      "4_11_0": [
+        {
+          "features": [
+            "<b>Vairākas tīmekļa lapas:</b> Lasiet vairākas tīmekļa lapas vai dokumentus vienlaikus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kritiskās lasīšanas rīki:</b> Precizējiet galvenos jēdzienus, identificējiet pieņēmumus, izcelt fragmentus, uzziniet par autoru un daudz ko citu."
+          ]
+        },
+        {
+          "features": [
+            "<b>{{SIDERFUSION}}:</b> Dinamiski izvēlas labāko ātro modeli (GPT-3.5, Claude 3 Haiku, Gemini 1.5 Flash vai Llama 3) jūsu konkrētajam uzdevumam."
+          ]
+        }
+      ],
+      "4_12_0": [
+        {
+          "features": [
+            "<b>Atbalsts Claude 3.5 Sonnet:</b> Anthropic jaunākais modelis, ar 2x lielāku ātrumu nekā Claude 3 Opus un augstāku inteliģenci, būtiski uzlabo loģisko domāšanu, zināšanas, programmēšanu un vizuālos uzdevumus."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude 3 Opus pensionēšana:</b> aizstāts ar uzlaboto Claude 3.5 Sonnet."
+          ]
+        },
+        {
+          "features": [
+            "<b>Aiciniet un nopelniet:</b> Aiciniet savus draugus, lai nopelnītu bezmaksas vaicājumus un izmēģinātu jaunāko modeli jau šodien!"
+          ]
+        }
+      ],
+      "4_13_0": [
+        {
+          "features": [
+            "<b>Dabiskas AI balsis</b>: Izbaudiet 9 dabiskas skanēšanas AI balsis vairākās valodās."
+          ]
+        },
+        {
+          "features": [
+            "<b>Klausieties jebkur</b>: Izvēlieties jebkuru tekstu tīmekļa lapā, lai to lasītu skaļi."
+          ]
+        },
+        {
+          "features": [
+            "<b>Sānjoslas atbalsts</b>: Viegli klausieties AI ģenerētu saturu no sānjoslas logrīkiem."
+          ]
+        }
+      ],
+      "4_16_0": [
+        {
+          "features": [
+            "<b>Ātrāka, augstākās klases veiktspēja:</b> Padara ikdienas uzdevumus vienmērīgākus un efektīvākus."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota matemātika un kodēšana:</b> Nodrošina precīzu veiktspēju tehniskajiem uzdevumiem."
+          ]
+        },
+        {
+          "features": [
+            "<b>Jauninājums no GPT-3.5:</b> GPT-4o mini aizstāj GPT-3.5 ar labāku veiktspēju."
+          ]
+        }
+      ],
+      "4_17_0": [
+        {
+          "features": [
+            "<b>Video izcelumi</b>: Mākslīgā intelekta ģenerēts stāstījums ietaupa jūsu laiku, ātri izceļot galvenos video punktus."
+          ]
+        },
+        {
+          "features": [
+            "<b>Dabisks stāstījums</b>: Reālistiskas mākslīgā intelekta balsis uzlabo jūsu skatīšanās pieredzi."
+          ]
+        },
+        {
+          "features": [
+            "<b>Daudzvalodu atbalsts</b>: Viegli saprotiet video pāri valodu barjerām."
+          ]
+        }
+      ],
+      "4_18_0": [
+        {
+          "features": [
+            "<b>Dažādi formāti</b>: Koplietojiet savu čatu kā saiti vai attēlu."
+          ]
+        },
+        {
+          "features": [
+            "<b>Elastīga izvēle</b>: Izvēlieties un koplietojiet visu sarunu vai tikai tās daļu."
+          ]
+        },
+        {
+          "features": [
+            "<b>Viegla kontrole</b>: Atsauciet koplietotās saites jebkurā laikā."
+          ]
+        }
+      ],
+      "4_19_0": [
+        {
+          "features": [
+            "<b>Dzīvais priekšskatījums:</b> Priekšskatiet un mijiedarbojieties ar AI ģenerētām tīmekļa lapām, dokumentiem un diagrammām reāllaikā."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nepārtraukta iterācija:</b> Iterējiet ģenerētos artefaktus, izmantojot tērzēšanu."
+          ]
+        }
+      ],
+      "4_1_0": [
+        {
+          "features": [
+            "{{SIDERVISION}} darbina GPT-4V",
+            "Labāka attēlu izpratne",
+            "Ātri uztveriet e-pasta nodomus",
+            "Izvēlieties no dažādiem toņiem un personībām",
+            "Bez piepūles izvēlieties atbilžu ieteikumus"
+          ],
+          "title": "GPT-4V(ision) priekšskatījums! & AI atbilde pakalpojumam Gmail"
+        }
+      ],
+      "4_20_0": [
+        {
+          "features": [
+            "<b>Daudzmodeļu tulkošana</b>: Izmantojiet vairākus modeļus vienlaikus, lai iegūtu precīzākus tulkojumus."
+          ]
+        },
+        {
+          "features": [
+            "<b>Daudzpusīgi tulkojumu pārraksti</b>: Pārrakstiet tulkojumus dažādiem scenārijiem."
+          ]
+        },
+        {
+          "features": [
+            "<b>Divvalodu subtitri</b>: Skatiet YouTube subtitrus abās valodās vienlaikus."
+          ]
+        }
+      ],
+      "4_23_0": [
+        {
+          "features": [
+            "<b>o1-preview</b>: Risinā sarežģītus uzdevumus un atrisina grūtākas problēmas zinātnē, programmēšanā un matemātikā nekā iepriekšējie modeļi. Maksā 15 uzlabotus kredītus par ziņojumu."
+          ]
+        },
+        {
+          "features": [
+            "<b>o1-mini</b>: Ātrāks modelis, kas īpaši efektīvs programmēšanā. Ideāli piemērots fokusētai loģiskai domāšanai bez plašām zināšanām. Maksā 3 uzlabotus kredītus par ziņojumu."
+          ]
+        },
+        {
+          "features": [
+            "<b>Piezīme</b>: Ir ātruma ierobežojumi."
+          ]
+        }
+      ],
+      "4_24_0": [
+        {
+          "features": [
+            "<b>Gemini 1.5 Pro</b>: Uzlabota loģiskā domāšana ar uzlabotām matemātikas un vizuālajām prasmēm."
+          ]
+        },
+        {
+          "features": [
+            "<b>Gemini 1.5 Flash</b>: 2x ātrāks, 3x zemāka aizture, labāks vizuālajā un programmēšanā."
+          ]
+        }
+      ],
+      "4_25_0": [
+        {
+          "features": [
+            "<b>Uzlabots dizains</b>: Moderns vizuālais noformējums, tīrāks izkārtojums ērtākai lietošanai un koncentrēšanai"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ātrā piespraušana</b>: Piespraudiet bieži izmantotās komandas ātrai piekļuvei"
+          ]
+        },
+        {
+          "features": [
+            "<b>Paplašināmas tabulas</b>: Skatiet lielus datus jaunā logā, lai uzlabotu lasāmību"
+          ]
+        }
+      ],
+      "4_26_0": [
+        {
+          "features": [
+            "<b>Doma ķēdes loģika</b>: Sadaliet sarežģītus uzdevumus pa soļiem gudrākai problēmu risināšanai"
+          ]
+        },
+        {
+          "features": [
+            "<b>Dziļāki ieskati</b>: Sniedz pārdomātas atbildes, lai risinātu sarežģītus jautājumus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Darbojas ar visiem modeļiem</b>: Pieejams bez problēmām visos modeļos"
+          ]
+        }
+      ],
+      "4_27_0": [
+        {
+          "features": [
+            "<b>Vienkāršots lietotāja interfeiss</b>: Tīrāks, intuitīvāks interfeiss vienmērīgākai pieredzei"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota tulkošana</b>: Nodrošina saistīto vārdu nozīmes ar kontekstuālu precizitāti"
+          ]
+        },
+        {
+          "features": [
+            "<b>Publicēt un kopīgot artefaktus</b>: Viegli kopīgojiet savus artefaktus publiski, izmantojot saites"
+          ]
+        }
+      ],
+      "4_28_0": [
+        {
+          "features": [
+            "<b>Claude 3.5 Haiku</b>: Nodrošina veiktspēju, kas pārsniedz Claude 3 Opus, izceļoties kodēšanā, rīku izmantošanā un loģiskajā domāšanā"
+          ]
+        },
+        {
+          "features": [
+            "<b>Pielāgot fonta izmēru</b>: Tagad jūs varat mainīt ziņojuma fonta izmēru"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vienkāršots lietotāja interfeiss</b>: Tīrāks, intuitīvāks opciju lietotāja interfeiss vieglai personalizācijai"
+          ]
+        }
+      ],
+      "4_29_0": [
+        {
+          "features": [
+            "<b>Ziņojumu rediģēšana</b>: Viegli rediģējiet nosūtītos ziņojumus un nosūtiet tos atkārtoti, lai saņemtu jaunas atbildes"
+          ]
+        },
+        {
+          "features": [
+            "<b>Salīdzinājums blakus</b>: Skatiet atbildes no vairākiem modeļiem pilnekrāna režīmā"
+          ]
+        },
+        {
+          "features": [
+            "<b>Pielāgotu uzvedņu ikona</b>: Piešķiriet ikonas pielāgotām uzvednēm, lai nodrošinātu skaidrāku organizāciju"
+          ]
+        }
+      ],
+      "4_2_0": [
+        {
+          "features": [
+            "<b>Atsvaidzināts interfeiss:</b> Tīrāks un vieglāk orientējams"
+          ]
+        },
+        {
+          "features": [
+            "<b>Saliekama navigācijas josla:</b> Nodrošina mērķtiecīgu tērzēšanas pieredzi, vienlaikus saglabājot būtiskas funkcijas viegli sasniedzamā vietā"
+          ]
+        },
+        {
+          "features": [
+            "<b>Sānjoslas GPT piekļuve:</b> ChatGPT Plus lietotājiem tieša piekļuve GPT tagad ir pieejama sānjoslā tīmekļa lietotņu režīmā"
+          ]
+        }
+      ],
+      "4_30_0": [
+        {
+          "features": [
+            "<b>GPT-4o (2024-11-20)</b>: Uzlabotas dabiskās rakstīšanas iespējas un uzlabota failu apstrāde"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tikai tulkojuma attēlojums</b>: Lapu tulkošana tagad atbalsta tikai tulkotā satura skatīšanu"
+          ]
+        },
+        {
+          "features": [
+            "<b>Labāki YouTube subtitri</b>: Izbaudiet augstākas kvalitātes divvalodu subtitru tulkojumus"
+          ]
+        }
+      ],
+      "4_31_0": [
+        {
+          "features": [
+            "<b>Rīki Nav</b>: Piekļūstiet AI rīkiem attēliem, PDF un video no navigācijas joslas"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ievades tulkošana</b>: Trīskāršs atstarpe, lai tulkotu ievades tekstu (iespējot Opcijās)"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ātrā kopēšana</b>: Kopējiet tekstu uzreiz ar konteksta izvēlni"
+          ]
+        }
+      ],
+      "4_32_0": [
+        {
+          "features": [
+            "<b>Audio uz tekstu</b>: Augšupielādējiet MP3, WAV, M4A vai MPGA failu, lai ģenerētu transkriptus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Skatīties un klausīties</b>: Lasiet transkriptus, klausoties audio"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kopsavilkums ar vieglumu</b>: Izveidojiet ātrus kopsavilkumus ar vienu klikšķi"
+          ]
+        }
+      ],
+      "4_33_0": [
+        {
+          "features": [
+            "<b>OpenAI o1</b>: Ātrāks nekā ‘o1-preview’, izceļas sarežģītos daudzpakāpju uzdevumos ar uzlabotu precizitāti"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kopsavilkums video bez subtitriem</b>: Iegūstiet transkripcijas un kopsavilkumus YouTube video bez subtitriem"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tīmekļa satura kopsavilkums</b>: Uzlabots tādām platformām kā Reddit un Twitter"
+          ]
+        }
+      ],
+      "4_34_0": [
+        {
+          "features": [
+            "<b>Al atbildes Gmail</b>: Atbalsts tulkošanai un Al modeļa izvēlei labākai saziņai"
+          ]
+        },
+        {
+          "features": [
+            "<b>Artefakti</b>: Eksportēt plūsmas diagrammas kā attēlus ērtai koplietošanai"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tulkot</b>: Al vārdnīca precīzai vārdu un frāžu tulkošanai"
+          ]
+        }
+      ],
+      "4_35_0": [
+        {
+          "features": [
+            "<b>Momentālie priekšskatījumi</b>: Velciet saites, lai skatītu saturu, neatverot jaunas cilnes"
+          ]
+        },
+        {
+          "features": [
+            "<b>Gudrie kopsavilkumi</b>: Iegūstiet galvenos ieskatus no lapām uzreiz"
+          ]
+        },
+        {
+          "features": [
+            "<b>Efektīva pārlūkošana</b>: Palieciet koncentrēti ar mazāk klikšķiem un mazāk traucējumiem"
+          ]
+        }
+      ],
+      "4_36_0": [
+        {
+          "features": [
+            "<b>Saglabāt tīmekļa lapas un izcēlumus</b>: Saglabājiet vērtīgu tīmekļa saturu Wisebase (Al zināšanu bāzē) ar vienu klikšķi"
+          ]
+        },
+        {
+          "features": [
+            "<b>Al Inbox</b>: Ļaujiet Al automātiski kategorizēt jūsu saturu"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tērzēšana ar vairākiem failiem</b>: Saņemiet tūlītējas atbildes no savāktajiem failiem"
+          ]
+        }
+      ],
+      "4_37_0": [
+        {
+          "features": [
+            "<b>DeepSeek-R1</b>: Atbilst OpenAI-o1 veiktspējai"
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3</b>: Izceļas sarežģītā loģikā, matemātikā un kodēšanas uzdevumos"
+          ]
+        },
+        {
+          "features": [
+            "<b>AI Tulkotājs tīmekļa lapām</b>: Nodrošina dabiskus un precīzus tulkojumus"
+          ]
+        }
+      ],
+      "4_38_0": [
+        {
+          "features": [
+            "2x ātrāks nekā Gemini 1.5 Pro"
+          ]
+        },
+        {
+          "features": [
+            "Nodrošina tūlītējus, profesionāla līmeņa rezultātus"
+          ]
+        },
+        {
+          "features": [
+            "Uzlabotas teksta, koda izpratnes un loģiskās domāšanas spējas"
+          ]
+        }
+      ],
+      "4_39_0": [
+        {
+          "features": [
+            "<b>Spēcīga argumentācija</b>: Atbilst OpenAI o1 spējām matemātikā, zinātnē un programmēšanā"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ātrāks nekā o1-mini</b>: Optimizēts ātrākām un plūstošākām atbildēm"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzticamākas atbildes</b>: Nodrošina lielāku precizitāti un skaidrāku argumentāciju"
+          ]
+        }
+      ],
+      "4_3_0": [
+        {
+          "features": [
+            "Iegrimstiet aizraujošā, pilnekrāna skatā"
+          ]
+        },
+        {
+          "features": [
+            "Izbaudiet visas sānjoslas funkcijas, tagad pilnekrāna režīmā"
+          ]
+        },
+        {
+          "features": [
+            "Nepārtraukti pārslēdzieties starp režīmiem, lai izbaudītu abas pasaules priekšrocības"
+          ]
+        }
+      ],
+      "4_40_0": [
+        {
+          "features": [
+            "<b>Uzlabota kodēšana</b>: Izceļas sarežģītos kodēšanas uzdevumos ar izcilu veiktspēju"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota uzdevumu apstrāde</b>: Efektīvi saprot un reaģē uz sarežģītiem uzdevumiem"
+          ]
+        }
+      ],
+      "4_41_0": [
+        {
+          "features": [
+            "<b>Balss ievade</b>: Ātri ievadiet tekstu, izmantojot runu, lai nodrošinātu brīvroku efektivitāti"
+          ]
+        },
+        {
+          "features": [
+            "<b>Jauns AI modelis</b>: DeepSeek-R1-70B tagad ir pieejams"
+          ]
+        }
+      ],
+      "4_42_0": [
+        {
+          "features": [
+            "<b>Divvalodu subtitri</b>: Uzlabojiet skatīšanās pieredzi un veiciniet valodu apguvi"
+          ]
+        },
+        {
+          "features": [
+            "<b>API atslēga</b>: Atbalsts API atslēgām DeepSeek, OpenAl un citiem"
+          ]
+        }
+      ],
+      "4_43_0": [
+        {
+          "features": [
+            "<b>{{CLAUDE37}}</b>: Pakāpeniska domāšana labākai veiktspējai matemātikā, fizikā, programmēšanā un daudzos citos uzdevumos"
+          ]
+        },
+        {
+          "features": [
+            "<b>API Key Support</b>: Savietojams ar Claude un Ollama API atslēgām"
+          ]
+        }
+      ],
+      "4_44_0": [
+        {
+          "features": [
+            "<b>Piedāvā</b>: Bagātīgāka zināšanu bāze, labāka saskaņošana ar lietotāja nodomiem un lielāka emocionālā inteliģence"
+          ]
+        },
+        {
+          "features": [
+            "<b>Lieliski piemērots</b>: Rakstīšanas, programmēšanas uzlabošanai un reālu problēmu risināšanai"
+          ]
+        },
+        {
+          "features": [
+            "<b>Piezīme</b>: 30 uzlaboti kredīti/vaicājums. Ierobežots līdz 1 lietošanai/24 stundās/lietoājam sakarā ar kvotu ierobežojumiem"
+          ]
+        }
+      ],
+      "4_45_0": [
+        {
+          "features": [
+            "<b>Vairāk vietas un fokusa</b>: Lielāka saskarne atvieglo garu ziņojumu lasīšanu un koda skatīšanu, vienlaikus samazinot traucējumus labākam fokusam."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nepārtraukta sinhronizācija</b>: Tērzēšanas paliek sinhronizētas tīmeklī un paplašinājumā, ļaujot viegli pārslēgties starp tīmekļa lapas un sānu joslas skatījumiem."
+          ]
+        }
+      ],
+      "4_4_0": [
+        {
+          "features": [
+            "<b>Jauns uzlabots datu analīzes rīks:</b> Koda interpretators efektīvai datu apstrādei un sarežģītiem aprēķiniem"
+          ]
+        },
+        {
+          "features": [
+            "<b>Jauns gleznotāja rīks:</b> Izveidojiet attēlus uzreiz čatā"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota konteksta izvēlne:</b> Izmantojiet GPT-4 konteksta izvēlnē."
+          ]
+        }
+      ],
+      "4_5_0": [
+        {
+          "features": [
+            "<b>Meklēšanas aģenta logrīks:</b> Izbaudi nākotnes meklēšanu ar AI automatizāciju"
+          ]
+        },
+        {
+          "features": [
+            "<b>Tulkot tīmekļa lapu:</b> Vairāk lasītājam draudzīgu tulkojumu displeja stili"
+          ]
+        },
+        {
+          "features": [
+            "<b>Jauna iestatījums:</b> Automātiski atsākt pēdējo čatu, atverot sānjoslu"
+          ]
+        }
+      ],
+      "4_6_0": [
+        {
+          "features": [
+            "<b>Claude 3 Opus:</b> Apgalvo, ka tam ir \"gandrīz cilvēka\" spējas un tas var uzvarēt GPT-4."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude 3 Sonnet:</b> Līdzsvaro intelektu un ātrumu, ideāli piemērots informācijas iegūšanai vai pārdošanas automatizēšanai."
+          ]
+        }
+      ],
+      "4_7_0": [
+        {
+          "features": [
+            "Čata kopsavilkums: Saņemiet galvenos punktus no YouTube video ar 'Lasiet šo lapu' čata logā."
+          ]
+        },
+        {
+          "features": [
+            "Viegla subtitru izgūšana: Iegūstiet subtitrus ar vienu klikšķi YouTube, lai iegūtu dziļāku izpratni."
+          ]
+        },
+        {
+          "features": [
+            "Claude 3 Haiku: Tagad pieejams, lai bagātinātu jūsu čata pieredzi."
+          ]
+        }
+      ],
+      "4_8_0": [
+        {
+          "features": [
+            "<b>Jauns Modelis:</b> Atbalsta Gemini 1.5 Pro tagad"
+          ]
+        },
+        {
+          "features": [
+            "<b>Jauni AI Attēlu Rīki:</b> Piekļūstiet AI funkcijām, novietojot kursoru virs jebkura attēla"
+          ]
+        }
+      ],
+      "4_9_0": [
+        {
+          "features": [
+            "<b>Jauns modelis:</b> Atbalstīt Llama 3 tagad"
+          ]
+        }
+      ],
+      "5_0_0": [
+        {
+          "features": [
+            "<b>Gudra avotu atklāšana</b>: AI atdarina cilvēkus, automātiski skenē vairāk nekā 100 vietnes ātri, izvēlas labākos jums."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automātiski izcelt un piezīmes</b>: AI izceļ ar tēmu saistītu informāciju, veido piezīmes iedvesmai."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automātiski ģenerēt pārskatus</b>: Saņemiet dziļus pārskatus ar atsaucēm minūtēs."
+          ]
+        },
+        {
+          "features": [
+            "<b>Wisebase saglabā visu</b>: AI pārskati, tīmekļa atradumi, tērzēšanas un vairāk - saglabāti, lai izpētītu jebkurā laikā."
+          ]
+        }
+      ],
+      "5_10_0": [
+        {
+          "features": [
+            "Augšupielādējiet audio failus tērzēšanā, lai iegūtu transkripcijas ar runātāju identifikāciju. Tas ļauj AI labāk izprast sarunas un sniegt atbilstošākas atbildes. Ideāli piemērots sapulcēm, intervijām un citiem gadījumiem."
+          ]
+        }
+      ],
+      "5_13_0": [
+        {
+          "features": [
+            "<b>Prāta kartes</b>: Viegli organizējiet savas domas un padariet loģiku skaidru uzreiz."
+          ]
+        },
+        {
+          "features": [
+            "<b>Pamata slaidi</b>: Ātri prezentējiet idejas efektīvai atskaišu sagatavošanai un koplietošanai."
+          ]
+        }
+      ],
+      "5_15_0": [
+        {
+          "features": [
+            "<b>Viena klikšķa uztveršana</b>: Ierakstiet sapulces, balss piezīmes un ekrānus uzreiz."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automātiskā transkripcija</b>: Pārvērtiet ierakstus meklējamos dokumentos."
+          ]
+        },
+        {
+          "features": [
+            "<b>Gudrā tērzēšana</b>: Saņemiet kopsavilkumus, darbības punktus un atbildes no sava satura."
+          ]
+        }
+      ],
+      "5_16_0": [
+        {
+          "features": [
+            "<b>Gudrāka kodēšanas palīdzība</b>: Apstrādā sarežģītus projektus, raksta tīrāku kodu, atkļūdo ātrāk."
+          ]
+        },
+        {
+          "features": [
+            "<b>Labāks rakstīšanas partneris</b>: Padara ziņojumus skaidrākus un saistošākus."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabotas veselības atbildes</b>: Precīzākas, pārdomātākas un uzticamākas."
+          ]
+        }
+      ],
+      "5_17_0": [
+        {
+          "features": [
+            "<b>REC piezīme, automātiski uzlabota</b>: Ierakstiet un ātri pierakstiet piezīmes, kamēr AI tās transkribē. Jūsu piezīmes un transkripti tiek apvienoti skaidrā, strukturētā REC piezīmē."
+          ]
+        },
+        {
+          "features": [
+            "<b>Bezmaksas transkripcija</b>: Katrs ieraksts tiek automātiski transkribēts tekstā, lai nekas netiktu palaists garām."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nano Banana</b>: Attēlu rīks tērzēšanas vadībā tagad atbalsta Nano Banana."
+          ]
+        }
+      ],
+      "5_18_0": [
+        {
+          "features": [
+            "<b>Izpēte minūtēs</b>: Meklējiet dažādos avotos, salīdziniet perspektīvas un iegūstiet strukturētus ziņojumus ar atsaucēm"
+          ]
+        },
+        {
+          "features": [
+            "<b>Elite Credits</b>: Jauna kredīta vienība AI aģenta funkcijām, piemēram, Padziļināta izpēte un AI Slides"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vienkāršāks modeļu saraksts</b>: Izvēlieties modeli vienreiz; izmantojiet Think pārslēgu, lai iespējotu vai atspējotu loģisko domāšanu"
+          ]
+        }
+      ],
+      "5_1_0": [
+        {
+          "features": [
+            "<b>Domā (R1) režīms</b>: DeepSeek-R1 domāšanu tagad var izmantot ar vispārējiem modeļiem, lai iegūtu labākas atbildes. Izmaksas 1 uzlabots kredīts par lietošanu."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota meklēšana</b>: Atrodiet visatbilstošākos avotus ar uzlabotu precizitāti."
+          ]
+        },
+        {
+          "features": [
+            "<b>Saglabāt kā piezīmes</b>: Saglabājiet AI atbildes kā piezīmes Wisebase vēlākai izmantošanai."
+          ]
+        }
+      ],
+      "5_20_0": [
+        {
+          "features": [
+            "<b>Rīkojieties tīmekļa lapās</b>: Instruējiet AI veikt uzdevumus jūsu pašreizējā pārlūkprogrammā — nav nepieciešama atsevišķa “aģenta pārlūkprogramma”."
+          ]
+        },
+        {
+          "features": [
+            "<b>Ierobežota izvēršana</b>: Šī versija var būt lēna vai nekonsekventa. Piekļuve pašlaik ir ierobežota Ultra lietotājiem augsto izmaksu dēļ."
+          ]
+        }
+      ],
+      "5_22_0": [
+        {
+          "features": [
+            "Gudrāks, Dabiskāks: Izklausās cilvēciskāk un labāk seko instrukcijām nekā GPT‑5"
+          ]
+        },
+        {
+          "features": [
+            "Domā Precīzāk: Sniedz ātrākas atbildes vienkāršiem uzdevumiem un dziļāku loģiku sarežģītākiem"
+          ]
+        }
+      ],
+      "5_2_0": [
+        {
+          "features": [
+            "<b>Atlīdzību centrs</b>: Iegūstiet bezmaksas kredītus, izpētot Sider funkcijas."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uzlabota lapas tulkošana</b>: AI tulkošana, izmantojot GPT, Claude vai Gemini. Pārtulkot konkrētas tulkotās lapas daļas."
+          ]
+        }
+      ],
+      "5_3_0": [
+        {
+          "features": [
+            "<b>Gemini 2.5 Pro</b>: Izceļas kodēšanā, zinātnē un matemātikā ar uzlabotu loģisko domāšanu un konteksta izpratni."
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3-0324</b>: Nodrošina ātras, uzticamas atbildes un uzlabotu atbalstu matemātikai un kodēšanai."
+          ]
+        }
+      ],
+      "5_4_0": [
+        {
+          "features": [
+            "<b>Atzīmēt tērzēšanas</b>: Atzīmējiet svarīgas tērzēšanas, lai vēlāk tās būtu viegli pieejamas."
+          ]
+        },
+        {
+          "features": [
+            "<b>Eksportēt tērzēšanas</b>: Saglabājiet un dalieties ar tērzēšanām kā TXT failiem bez piepūles."
+          ]
+        }
+      ],
+      "5_5_0": [
+        {
+          "features": [
+            "<b>GPT-4.1</b>: Risinā sarežģītas problēmas un reālās pasaules kodēšanu ar uzlabotu precizitāti, aizstājot GPT-4o."
+          ]
+        },
+        {
+          "features": [
+            "<b>GPT-4.1 Mini</b>: Izceļas attēlu izpratnē un nodrošina ātrākas atbildes."
+          ]
+        }
+      ],
+      "5_6_0": [
+        {
+          "features": [
+            "<b>o3</b>: Spēcīgs modelis sarežģītu problēmu risināšanai matemātikā, programmēšanā, zinātnē un tehniskajā rakstībā. Aizstāj o1."
+          ]
+        },
+        {
+          "features": [
+            "<b>o4-mini</b>: Ideāli piemērots ātrai loģiskai domāšanai, programmēšanai un vizuāliem uzdevumiem. Aizstāj o3-mini."
+          ]
+        }
+      ],
+      "5_7_0": [
+        {
+          "features": [
+            "<b>Darbina GPT-Image-1</b>: Izveidojiet augstas kvalitātes, profesionālus attēlus vai rediģējiet esošos, izmantojot vienkāršus aprakstus un OpenAI jaunāko attēlu ģenerēšanas modeli."
+          ]
+        },
+        {
+          "features": [
+            "<b>Jaunas attēla kvalitātes iespējas</b>: Izvēlieties no Zemas, Vidējas vai Augstas kvalitātes Čata vadības iestatījumos—kredītu izmaksas atšķiras atkarībā no izvēles."
+          ]
+        }
+      ],
+      "5_8_0": [
+        {
+          "features": [
+            "<b>Uzlabotas iespējas</b>: Izveidojiet attēlus ar GPT Image 1, skatiet artefaktus atsevišķā panelī"
+          ]
+        },
+        {
+          "features": [
+            "<b>Divu modeļu salīdzinājums</b>: Blakus skats parāda, kā dažādi modeļi reaģē uz vienu un to pašu jautājumu reāllaikā (tikai tīmeklī)"
+          ]
+        }
+      ],
+      "5_9_0": [
+        {
+          "features": [
+            "<b>Claude Opus 4</b>: Anthropic visjaudīgākais modelis ar nepārspētām kodēšanas un sarežģītu problēmu risināšanas spējām."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude Sonnet 4</b>: Uzlabotas loģikas un kodēšanas spējas, aizstājot Sonnet 3.7."
+          ]
+        }
+      ]
+    },
+    "logTitles": {
+      "4_10_0": "OpenAI GPT-4o ir klāt!",
+      "4_11_0": "Dziļais lasītājs, lai uzlabotu jūsu kritiskās lasīšanas prasmes!",
+      "4_12_0": "",
+      "4_13_0": "Iepazīstinām ar AI Lasīšanu Skaļi: Jūsu personīgais audio asistents",
+      "4_16_0": "Iepazīstinām ar GPT-4o mini",
+      "4_17_0": "Iepazīstinām ar Watch Highlights priekš YouTube",
+      "4_18_0": "Čata koplietošana ir pieejama!",
+      "4_19_0": "{{ARTIFACTS}}: Reāllaika, interaktīvi satura bloki",
+      "4_1_0": "",
+      "4_20_0": "Tulkotāja funkciju jauninājums",
+      "4_22_0": "Dēmons pret Eņģeli: Rentgena staru tavā X-personībā",
+      "4_23_0": "OpenAI o1-preview & o1-mini ir pieejami tagad!",
+      "4_24_0": "Gemini modeļi kļuva gudrāki un ātrāki!",
+      "4_25_0": "Jauns izskats labākai pieredzei",
+      "4_26_0": "Iepazīstinām ar Domāšanas režīmu (Eksperimentāls)",
+      "4_27_0": "Uzlabota konteksta izvēlne un artefakti",
+      "4_28_0": "Claude 3.5 Haiku un uzlabotas opcijas",
+      "4_29_0": "Uzlabota tērzēšanas pieredze",
+      "4_2_0": "Efektīvāka piekļuve lietotāja saskarnei un sānjoslas GPT",
+      "4_30_0": "Atjaunināts GPT-4o, lapu tulkošana un YouTube subtitri",
+      "4_31_0": "Rīki Nav, Ievades tulkošana, Ātrā kopēšana",
+      "4_32_0": "Atbalsts audio failiem tērzēšanā",
+      "4_33_0": "O1 un video kopsavilkuma uzlabojumi",
+      "4_34_0": "Gmail Al atbildes, artefakti un tulkošanas uzlabojumi",
+      "4_35_0": "Priekšskatīt saites: Pārlūkojiet gudrāk",
+      "4_36_0": "Vāciet zināšanas ar Wisebase",
+      "4_37_0": "DeepSeek-R1 & V3, AI Tulkotājs",
+      "4_38_0": "Iepazīstinām ar Gemini 2.0 Flash",
+      "4_39_0": "OpenAI o3-mini tagad pieejams!",
+      "4_3_0": "Maksimizējiet savu pieredzi ar pilnekrāna režīmu!",
+      "4_40_0": "Gemini 2.0 Pro tagad ir pieejams!",
+      "4_41_0": "Balss ievade un DeepSeek-R1-70B",
+      "4_42_0": "Divvalodu subtitru atbalsts Netflix",
+      "4_43_0": "Iepazīstinām ar {{CLAUDE37}}",
+      "4_44_0": "GPT-4.5 ir klāt!",
+      "4_45_0": "Tīmekļa tērzēšana tagad tiešsaistē!",
+      "4_4_0": "Visas rīki čatā un GPT-4 konteksta izvēlnē",
+      "4_5_0": "",
+      "4_6_0": "Atbalsti Claude 3 ģimeni tagad!",
+      "4_7_0": "Tiešsaistes čata video kopsavilkums, subtitru izgūšana, Claude 3 Haiku! 🚀",
+      "4_8_0": "Gemini 1.5 Pro - Tagad Pieejams!",
+      "4_9_0": "Llama 3 tagad! Meta jaunākās paaudzes augsto tehnoloģiju atvērtā koda LLM.",
+      "5_0_0": "Iepazīstieties ar Sider 5.0: Dziļā izpēte kļūst vienkārša. Gudra un automatizēta.",
+      "5_10_0": "Audio uz tekstu ar runātāja identifikāciju",
+      "5_12_0": "Pielāgotas instrukcijas tagad pieejamas",
+      "5_13_0": "Artefakti tagad atbalsta prāta kartes un slaidus",
+      "5_14_0": "Grok 4 ir klāt!",
+      "5_15_0": "Ierakstīt. Saglabāt. Apgūt.",
+      "5_16_0": "GPT-5 ir klāt!",
+      "5_17_0": "REC piezīme un Nano Banana",
+      "5_18_0": "Padziļināta izpēte un Elite Credits",
+      "5_19_0": "Iepazīstinām ar Claude Sonnet 4.5",
+      "5_1_0": "Gudrāka domāšana, meklēšana un taupīšana",
+      "5_20_0": "Iepazīstinām ar pārlūkprogrammas aģentu (pētniecības priekšskatījums)",
+      "5_21_0": "GPT-5 tikko saņēma atjauninājumu",
+      "5_22_0": "GPT-5.1 ir klāt",
+      "5_23_0": "Gemini 3 Pro ir klāt!",
+      "5_2_0": "Atlīdzību centrs un uzlabota lapas tulkošana",
+      "5_3_0": "Gemini 2.5 Pro un atjauninātais DeepSeek V3 tagad pieejami",
+      "5_4_0": "Atzīmējiet un eksportējiet savas tērzēšanas",
+      "5_5_0": "Iepazīstinām ar GPT-4.1 un GPT-4.1 Mini",
+      "5_6_0": "OpenAI o3 & o4-mini tagad pieejami",
+      "5_7_0": "Izveidojiet un rediģējiet attēlus tērzēšanā ar GPT-Image-1",
+      "5_8_0": "Pilnas lapas tīmekļa čats uzlabots",
+      "5_9_0": "Claude Opus 4 un Claude Sonnet 4 tagad pieejami"
+    },
+    "newInVersion": "Kas jauns versijā {{versionId}}",
+    "rate5Star": "<b>Vai jums patīk mūsu paplašinājums?</b> Lūdzu, novērtējiet mūs ar piecām zvaigznēm interneta veikalā, lai palīdzētu mums augt",
+    "tryRecordNote": "Izmēģiniet REC piezīmi"
+  },
+  "changeSpeed": "Mainīt ātrumu",
+  "ChangeTone": "Mainīt toni",
+  "changeVoice": "Mainīt balsi",
+  "chatWithPDF": "Tērzējiet ar PDF",
+  "check": "Pārbaudiet",
+  "checkOutNow": "Apskatīt tagad!",
+  "clear": "Skaidrs",
+  "clickPreview": "Noklikšķiniet, lai priekšskatītu",
+  "clickToAsk": "Noklikšķiniet, lai jautātu",
+  "clickToTry": "Noklikšķiniet, lai izmēģinātu šo funkciju",
+  "clickView": "Noklikšķiniet, lai skatītu",
+  "close": "Aizvērt",
+  "code": "Kods",
+  "code&preview": "Kods un priekšskatījums",
+  "collapse": "Sakļaut sānjoslu",
+  "collapseNav": "Sakļaut navigācijas joslu",
+  "compareWith": "Salīdzināt ar {{NAME}}",
+  "confirm": "Apstiprināt",
+  "console": "Konsoles",
+  "constructionDesc": "Iepazīstiniet sevi, lai saņemtu labākas, personalizētākas atbildes",
+  "constructionForm": {
+    "additional_info": {
+      "descritionList": [
+        "Es mēģinu mācīties spāņu valodu.",
+        "Es aizraujos ar fotografēšanu un ceļošanu.",
+        "Liels zinātniskās fantastikas grāmatu un filmu fans."
+      ],
+      "descritionTitle": "Jūs varat dalīties ar tādām lietām kā:",
+      "label": "Vai ir vēl kas, kas palīdzētu man jūs labāk iepazīt?",
+      "placeholder": "Intereses, vērtības vai preferences, kas jāņem vērā"
+    },
+    "desired_ai_traits": {
+      "descritionList": [
+        "Izmantojiet neformālu, draudzīgu toni.",
+        "Esiet tiešs un ejiet tieši pie lietas.",
+        "Izaiciniet manas idejas un uzdodiet papildjautājumus."
+      ],
+      "descritionTitle": "Jūs varat man teikt, lai daru tādas lietas kā:",
+      "label": "Kāds AI pavadonis jums vislabāk derētu?",
+      "placeholder": "Komunikācijas stils vai personības iezīmes"
+    },
+    "nickname": {
+      "label": "Kā man jūs saukt?",
+      "placeholder": "Iesauka"
+    },
+    "occupation": {
+      "label": "Ko jūs darāt?",
+      "placeholder": "Jūsu darbs"
+    }
+  },
+  "contactUs": "Sazinies ar mums",
+  "contextMenu": {
+    "chatSelection": "Tērzēt ar izvēlēto tekstu",
+    "highlightSelection": "Izcelt izvēlēto tekstu",
+    "imageTools": "{{AI}} attēlu rīki",
+    "openFullPageChat": "Atvērt pilnekrāna tērzēšanu",
+    "revertSavePage": "Noņemt no {{WISEBASE}}",
+    "revertTranslatePage": "Rādīt oriģinālo tekstu",
+    "savePage": "Saglabāt lapu {{WISEBASE}}",
+    "summarizePage": "Kopsavilkt lapu",
+    "translatePage": "Tulkot uz {{lang}}"
+  },
+  "continue": "Turpināt",
+  "contrast-analysis": "Analizēt kontrastus",
+  "conversationTip": "Šī tērzēšana tika izveidota {{CHATPROVIDER}} režīmā. Pārslēdziet režīmu, lai turpinātu, vai sāciet jaunu tērzēšanu pašreizējā režīmā.",
+  "copied": "Kopēts",
+  "copy": "Kopēt",
+  "copyAsMarkdown": "Kopēt kā Markdown",
+  "copyAsSheet": "Kopēt kā izklājlapu",
+  "createAccount": "Izveidot kontu",
+  "createAccountTip": "Reģistrējieties, lai katru dienu saņemtu <a>{{NUM}} bezmaksas</a> kredītus",
+  "createImageTip": "Maksa tiek piemērota par katru attēlu, pamatojoties uz izvēlēto modeli.",
+  "creatingImage": "Attēla izveide",
+  "creatingImageFailed": "Attēla izveide neizdevās",
+  "credit": "Kredīts",
+  "credits": "Kredīti",
+  "current": "Pašreizējais",
+  "currentRecordedSpeakers": "Pašreizējie ierakstītie runātāji",
+  "currentTpl": "Pašreizējā veidne:",
+  "customInstructions": "Pielāgotas instrukcijas",
+  "customPrompt": "Pielāgota uzvedne",
+  "dataAnalysisTip": "Šis rīks tiek aktivizēts tikai tad, kad to izmanto, atskaitot 1 Advanced Credit.",
+  "deepReadTools": "Padziļinātas lasīšanas rīki",
+  "deepResearch": "Dziļais pētījums",
+  "deepResearchBlockTip": "Dziļais pētījums var aizņemt 5–20 minūtes. Jūs varat turpināt izmantot citas funkcijas.",
+  "deepResearchFileModalCancelText": "Turpināt bez failiem",
+  "deepResearchFileModalContent": "Dziļais pētījums neatbalsta failus. Iziet no Dziļā pētījuma, lai augšupielādētu failus, vai turpināt bez failiem.",
+  "deepResearchFileModalOkText": "Iziet no pētījuma un augšupielādēt failu",
+  "deepResearchFileModalTitle": "Nevar augšupielādēt failu",
+  "deepResearchFileTip": "Dziļais pētījums neatbalsta failus. Noņemiet failus, lai turpinātu, vai turpiniet tērzēt.",
+  "deepResearchInputHint": "Ko jūs vēlētos pētīt?",
+  "deepResearchNormalTip": "Katrs lietojums maksā 20 Elite kredītus",
+  "deepResearchTip": "Dodieties tālāk——padziļināta analīze ar Deep Research",
+  "delete": "Dzēst",
+  "deleteAll": "Dzēst visu",
+  "delteTpl": "Dzēst šo veidni",
+  "describeImage": "Aprakstiet šo attēlu",
+  "describleImage": "Aprakstīt",
+  "detected": "Noteikts",
+  "disable": "Atspējot",
+  "Distinguish": "Atšķirt",
+  "distinguishDesc": "3 papildu kredīti / 10 minūtes",
+  "DitinguishSpeakers": "Atšķirt runātājus?",
+  "done": "Gatavs",
+  "download": "Lejupielādēt",
+  "downloadPng": "Lejupielādēt PNG",
+  "downloadTypeFile": "Lejupielādēt {{type}} failu",
+  "dropMsg": "Nometiet šeit, lai nosūtītu uz Sider",
+  "earnFree": "Nopelniet bezmaksas kredītus",
+  "edgePasteBug": "Edge pārlūkprogrammas kļūdas dēļ nevar ielīmēt, izmantojot īsinājumtaustiņus. Lūdzu, ar peles labo pogu noklikšķiniet, lai ielīmētu.",
+  "edit": "Rediģēt",
+  "editTitle": "Rediģēt virsrakstu",
+  "editTpl": "Rediģēt šo veidni",
+  "elite": "Elite",
+  "emailEnhance": {
+    "emailAssistant": "E-pasta palīgs",
+    "emailAssistantDesc": "Kad tas ir ieslēgts, Sider var palīdzēt ātri atbildēt uz e-pastiem.",
+    "hideTranslation": "Slēpt tulkojumu",
+    "inputPlaceholder": "Pastāstiet Sider, kā vēlaties atbildēt...",
+    "intent": "Sūtītāja nodoms",
+    "orgLang": "E-pasta valoda",
+    "quickAIReply": "AI atbilde",
+    "replyInputPlaceholder": "Ko jūs vēlētos atbildēt?",
+    "resultsTitle": "Atbildes melnraksts",
+    "showTranslation": "Rādīt tulkojumu",
+    "translateEmail": "Tulkot e-pastu",
+    "tryAgain": "Mēģini vēlreiz",
+    "voice": {
+      "applicant": "Pieteikuma iesniedzējs",
+      "casual": "Ikdienišks",
+      "colleague": "Kolēģe",
+      "confident": "pārliecināts",
+      "customer-service-staff": "Klientu apkalpošanas darbinieki",
+      "direct": "tiešā veidā",
+      "emailLength": "E-pasta garums",
+      "empathetic": "empātisks",
+      "enthusiastic": "Kaislīgs",
+      "formal": "Formāls",
+      "formality": "Formalitāte",
+      "friendly": "draudzīgs",
+      "human-resources": "Cilvēku resursi",
+      "informational": "informatīvs",
+      "leader": "Vadītājs",
+      "long": "Gari",
+      "medium": "Vidēja",
+      "neutral": "Neitrāls",
+      "personable": "dārgs",
+      "project-manager": "Projektu menedžeris",
+      "sales-representative": "Tirdzniecības pārstāvis",
+      "short": "Īss",
+      "subordinate": "Padotais",
+      "tone": "Tonis",
+      "witty": "gudrs",
+      "yourRole": "Tava loma"
+    },
+    "voiceSettings": "Toņa iestatījums",
+    "wayToReply": "Atbildes idejas"
+  },
+  "enable": "Iespējot",
+  "enable&continue": "Iespējot un turpināt",
+  "enterText": "Ievadiet tekstu",
+  "errorOccurred": "Radās kļūda",
+  "everyThing": "Viss",
+  "example": "Piemērs",
+  "exit": "Iziet",
+  "expand": "Izvērst",
+  "expandNav": "Izvērst navigācijas joslu",
+  "experimental": "Agrīna piekļuve",
+  "experimentalDesc": "Maksas lietotāji iegūst agrīnu piekļuvi ekskluzīviem, moderniem rīkiem un eksperimentālām funkcijām, kas nav pieejamas neabonentiem.",
+  "explain": "Izskaidrot",
+  "explainSection": "Vai varat man sīkāk izskaidrot šo sadaļu?",
+  "export": "Eksportēt",
+  "exportXmind": "Eksportēt .xmind failu",
+  "extra": "papildus",
+  "extracted": "Audio iegūts",
+  "extractingText": "Teksta iegūšana",
+  "extractingTextFailed": "Neizdevās iegūt tekstu",
+  "ExtractText": "Izgūt tekstu",
+  "faceError": "Sastapās ar šo kļūdu jaunākajā {{ARTIFACT}}, lūdzu, izlabojiet to.",
+  "fact-check": "Faktu pārbaude",
+  "feedback": "Atsauksmes",
+  "fetched": "Iegūts {{QUERY}}",
+  "fetchFailed": "Neizdevās iegūt {{QUERY}}.",
+  "fetching": "Iegūst {{QUERY}}...",
+  "fileInputHint": "Uzdot jautājumus par šo failu",
+  "finish": "Pabeigt",
+  "fit": "Pielāgot ekrānam",
+  "fiveStarRate": {
+    "enjoy": "😘 Vai jums patīk šis paplašinājums?",
+    "enjoyNo": "Nē, atsauksmes",
+    "enjoyYes": "Jā, 5 zvaigžņu vērtējums!",
+    "feedbackThx": "Paldies par jūsu atsauksmi.",
+    "feedbackTip": "🥹 Lūdzu, pastāstiet mums savas neapmierinātības iemeslu.",
+    "rate": "Novērtējiet mūs ar piecām zvaigznēm"
+  },
+  "free": "Bezmaksas",
+  "freeTrial": {
+    "cancelTip": "Atcelt jebkurā laikā",
+    "panelBtn": "Sākt bezmaksas izmēģinājumu",
+    "panelList": [
+      "Brīvi tērzējiet ar GPT-4 un Claude 3",
+      "Tērzējiet ar jebkuru PDF, attēlu un saiti",
+      "Kopsavilkums tīmekļa lapām un YouTube video"
+    ],
+    "panelTitle": "3 dienu neierobežots plāns bezmaksas izmēģinājums"
+  },
+  "fullPageChat": "Pilnas lapas tērzēšana",
+  "fullscreen": "Pilnekrāna režīms",
+  "fullscreenBookmarkTip": "Noklikšķiniet uz zvaigznes ikonas, lai pievienotu pilnekrāna tērzēšanu grāmatzīmēm, lai nākamreiz būtu vieglāk piekļūt!",
+  "fullScreenChat": "Pilnekrāna Čats",
+  "gamify": "Spēļot",
+  "gamifyDoc": "Spēļot dokumentu",
+  "gamifyPage": "Spēļot šo lapu",
+  "gamifyPageDesc": "Izveidojiet spēļotas, interaktīvas pašreizējās tīmekļa lapas skatījumus labākai izpratnei.",
+  "gamifyTip": "Mācīties spēlējot: Atklājiet koncepcijas, izmantojot interaktīvas demonstrācijas",
+  "genBy": "Ģenerēts ar {{MODEL_NAME}}",
+  "general": "Vispārējā konfigurācija",
+  "generating": "Ģenerēšana",
+  "generatingImageTip": "Paturiet tērzēšanu atvērtu, līdz attēls ir gatavs",
+  "generatingReport": "Ģenerē ziņojumu...",
+  "generatingTranscript": "Transkripta ģenerēšana",
+  "getAIAnswer": "Saņemt AI atbildi",
+  "getAnotherKey": "Iegūstiet citu atslēgu",
+  "getItNow": "Iegūstiet to tūlīt",
+  "getKeyPage": {
+    "addKey": "Pievienot atslēgu",
+    "apiKeyInputPlaceholder": "Ievadiet savu API atslēgu",
+    "checkConnectionBtn": "Pārbaudīt",
+    "checkConnectionDesc": "Pārbaudiet, vai jūsu API atslēga un starpniekserveris (ja tiek izmantots) ir derīgi.",
+    "checkConnectionTitle": "Pārbaudīt savienojumu",
+    "connectionFailed": "Savienojums neizdevās. Pārbaudiet savu API atslēgu un starpniekservera iestatījumus.",
+    "connectionSuccess": "Savienojums veiksmīgs",
+    "customKey": "Pielāgota API atslēga",
+    "deleteModelTip": "Dzēst šo modeli?",
+    "modelCount": "Pieejami {{count}} modeļi",
+    "modelList": "Modeļu saraksts",
+    "noKeyWarn": "API atslēga nav atrasta. Pievienojiet atslēgu, lai turpinātu, vai pārslēdzieties uz {{APP_NAME}} izmantošanu.",
+    "proxyUrlTitle": "API starpniekservera URL (pēc izvēles)",
+    "proxyUrlTitleRequired": "API starpniekservera URL",
+    "setup": "Iestatīt",
+    "step1": "1. darbība: iegūstiet API atslēgu",
+    "step1-1": "<i>Piesakieties savā OpenAI kontā</i> Ja jums nav konta, reģistrējieties <b>ŠEIT</b>",
+    "step1-2": "Apmeklējiet OpenAI API atslēgas lapu",
+    "step1-3": "Izveidojiet jaunu slepeno atslēgu un kopējiet to, kā norādīts tālāk",
+    "step2": "2. darbība. Ielīmējiet API atslēgu tālāk esošajā lodziņā",
+    "step2-tips": "Neuztraucieties. Jūsu API atslēga tiek izmantota tikai lokāli paplašinājumā ChatGPT. API izmantošana ir stabilāka nekā tieša ChatGPT izmantošana.",
+    "step3": "3. darbība: pārbaudiet savus kredītus <i>šeit</i>",
+    "stepTitle": "Kā iegūt API atslēgu.",
+    "useSider": "Izmantot {{APP_NAME}}",
+    "welcome": "Laipni lūdzam lietotnē {{APP_NAME}}! Lūk, jāsāk jūsu ceļojums:"
+  },
+  "getMore": "iegūt vairāk",
+  "googleSearchPage": {
+    "claude3Advantages": [
+      "Tikpat jaudīgs kā GPT-4",
+      "Dabiskākas atbildes",
+      "Jaudīgas loģiskās spējas"
+    ],
+    "gpt4Advantages": [
+      "Saņemt labākas atbildes",
+      "Daudzveidīgākas zināšanas",
+      "Spēcīgāka izpratne"
+    ]
+  },
+  "goPremium": "jaunināt uz premium",
+  "goPremiumGetMore": "jauniniet uz premium, lai iegūtu vairāk",
+  "gotIt": "Sapratu",
+  "guideVideos": {
+    "chat": {
+      "ai-bot": "Multi-bot čats",
+      "data-analysis": "Izvērstā datu analīze",
+      "painter": "Attēlu ģenerēšana",
+      "prompts": "Pielāgoti uzdevumi",
+      "web-access": "Tīmekļa piekļuve"
+    },
+    "chatpdf": {
+      "chatpdf": "Čats ar PDF"
+    },
+    "email": {
+      "reply": "Ģenerēt e-pasta atbildes"
+    },
+    "grammar": {
+      "context": "Gramatikas pārbaude caur konteksta izvēlni",
+      "widget": "Gramatikas pārbaude caur sānjoslu"
+    },
+    "ocr": {
+      "ocr": "Izgūt tekstu un vienādojumus"
+    },
+    "painter": {
+      "bg-remove": "Noņemt fonu",
+      "bg-replace": "Aizstāt fonu",
+      "eraser": "Noņemt izsvītroto laukumu",
+      "image": "Ģenerēt attēlus",
+      "text-remove": "Noņemt tekstu",
+      "upscale": "Palielināt attēlus"
+    },
+    "summary": {
+      "doc": "Augšupielādētie dokumenti",
+      "page": "Tīmekļa lapa caur ātro izvēlni",
+      "page2": "Tīmekļa lapa caur čatu",
+      "youtube": "YouTube video"
+    },
+    "translation": {
+      "in-chat": "Izvēlētais teksts čatā",
+      "in-chat2": "Ierakstītais teksts čatā",
+      "input": "Ierakstītais teksts lapā",
+      "page": "Pilna tīmekļa lapa",
+      "selected": "Izvēlētais teksts caur konteksta izvēlni",
+      "widget": "Izvēlētais teksts caur sānjoslu"
+    },
+    "write": {
+      "context": "Uzlabot izvēlēto tekstu",
+      "input": "Pārrakstīt ievades",
+      "widget": "Sastādīt pēc pieprasījuma"
+    }
+  },
+  "guideVideoTitle": {
+    "chat": "Čats",
+    "chatpdf": "ChatPDF",
+    "email": "E-pasta atbilde",
+    "grammar": "Gramatika",
+    "ocr": "OCR",
+    "painter": "Krāsotājs",
+    "summary": "Kopsavilkums",
+    "translation": "Tulkot",
+    "write": "Rakstīt"
+  },
+  "helpCenter": "Palīdzības centrs",
+  "hi": "Sveiki,",
+  "hide": "Slēpt",
+  "hideImage": "Slēpt attēlu",
+  "highlight-excerpts": "Izcelt fragmentus",
+  "highlightType": {
+    "comprehensive-coverage": "Visaptverošs pārklājums",
+    "key-sentences": "Galvenie teikumi",
+    "memorable-quotes": "Atmiņā paliekoši citāti",
+    "structural-importance": "Strukturālā nozīme"
+  },
+  "historyGroups": {
+    "earlier": "Agrāk",
+    "thisMonth": "Šomēnes",
+    "thisWeek": "Šonedēļ",
+    "today": "Šodien"
+  },
+  "howToUse": "Skatiet, kā izmantot",
+  "icon": "Ikona",
+  "identify-assumptions": "Identificēt pieņēmumus",
+  "image": "Attēls",
+  "imageInputHint": "Uzdodiet jautājumus par šo attēlu",
+  "imageQuality": {
+    "high": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Augsts)"
+    },
+    "low": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Zems)"
+    },
+    "medium": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Vidējs)"
+    },
+    "nano_banana": {
+      "desc": "Gemini 2.5 Flash Image Preview",
+      "label": "Nano Banana"
+    },
+    "nano_banana_pro": {
+      "desc": "Gemini 3 Pro Image Preview",
+      "label": "Nano Banana Pro"
+    }
+  },
+  "imageQuoteTipContent": "Lai vēlreiz jautātu par attēlu, vienkārši citējiet to.",
+  "imageQuoteTipTitle": "Vēlreiz jautāt attēlam? Jums ir jācitē attēls",
+  "imageRetryTip": "Radās kļūda. Lūdzu, mēģiniet vēlreiz.",
+  "imageToolbar": {
+    "AITools": "MI Rīki",
+    "chatWithImage": "Saruna ar attēlu",
+    "erase": "Reģiona dzēšana",
+    "extractText": "Izgūt tekstu",
+    "imageTools": "Attēlu rīki",
+    "inpaint": "Lokāla pārzīmēšana",
+    "removeBackground": "Fona noņemšana",
+    "removeText": "Teksta noņemšana",
+    "replaceBackground": "Fona nomaiņa",
+    "upscale": "Attēla kvalitātes uzlabošana",
+    "variation": "Izveidot variācijas"
+  },
+  "imageTranslateInto": "Tulkot tekstu attēlā uz {{lang}}",
+  "inputTranslation": {
+    "mainSwitchDesc": "Tulkojiet un aizstājiet tekstu ievades lodziņā jebkurā tīmekļa lapā",
+    "mainSwitchTitle": "Tulkojiet ievades tekstu ar aktivizēšanas taustiņu",
+    "model": "Tulkošanas modelis",
+    "neverTransSites": "Nekad netulkot šajās vietnēs",
+    "spaceKey": "Atstarpes taustiņš",
+    "title": "Ievades tulkojums",
+    "triggerKeyDesc": "Nospiediet aktivizēšanas taustiņu 3 reizes ātri, lai tulkotu, atceliet ar {{key}}",
+    "triggerKeyTitle": "Aktivizēšanas taustiņš"
+  },
+  "insert": "Ievietot",
+  "invite": "Uzaicināt",
+  "inviteFriendTip": "<a>Aiciniet draugus</a>, lai iegūtu papildu kredītus",
+  "inviteYourFriends": "Uzaicināt draugus",
+  "issueType": "Problēmas veids",
+  "joinDiscord": "Pievienojies mūsu Discord kopienai",
+  "key-concepts": "Precizēt galvenos jēdzienus",
+  "keyboardShortcuts": "Tastatūras īsceļi",
+  "keypoints": "Galvenie punkti",
+  "language": "Valoda",
+  "learnMore": "Uzzināt vairāk",
+  "letsTryItNow": "Izmēģināsim to tagad!",
+  "listen": "Klausies",
+  "llmStatus": {
+    "thinking": "Domā..."
+  },
+  "Loading": "Ielādē",
+  "loadMessageFailed": "Ziņojumu ielāde neizdevās",
+  "login": {
+    "apple": "Turpināt ar Apple",
+    "google": "Turpināt ar Google",
+    "microsoft": "Turpināt ar Microsoft",
+    "phone": "Turpināt ar tālruni"
+  },
+  "loginTip": "Vēl nav konta? <a>Izveidot kontu</a>",
+  "loginTipSiderMode": "Piesakieties, lai izmantotu šo funkciju Sider režīmā.",
+  "loginToClaimRewards": "Piesakieties, lai pieprasītu savas balvas Sider režīmā.",
+  "loginToUnlockFeature": "Piesakieties, lai atbloķētu vairāk funkciju.",
+  "loginToUse": "Piesakieties, lai sāktu izmantot Sider.",
+  "logout": "Izrakstīties",
+  "longAnswerFullScreenTip": "Jūtaties saspiests? Pārejiet uz pilnekrāna režīmu",
+  "longText": "Garš teksts",
+  "manage": "Pārvaldīt",
+  "mathSolver": "Matemātikas risinātājs",
+  "mathSolverTip": "Saglabāt manās jautājumu bankās",
+  "maximize": "Maksimizēt",
+  "mentionBot": "Pieminēt modeli",
+  "mentionGPTs": "Minēt GPT",
+  "mindmap": {
+    "catalogOrganization": "Katalogu organizācija",
+    "fishbone": "Zivs kauls",
+    "logicalStructure": "Loģiskā struktūra",
+    "logicalStructureLeft": "Loģiskā struktūra pa kreisi",
+    "mindMap": "Prāta karte",
+    "organizationStructure": "Organizācijas struktūra",
+    "timeline": "Laika skala"
+  },
+  "minimize": "Minimizēt",
+  "mobileChatHistoryAd": {
+    "btn": "Iegūt lietotni",
+    "title": "Sinhronizēt tērzēšanas sarunas starp ierīcēm"
+  },
+  "model": "Modelis",
+  "modelCountTip": {
+    "gpt-3.5": "Izmaksas <m>1 pamata kredīts</m>.",
+    "gpt-3.5-n_one": "Izmaksas <m>{{count}} pamata kredīts</m>.",
+    "gpt-3.5-n_other": "Izmaksas <m>{{count}} pamata kredīti</m>.",
+    "gpt-4": "Izmaksas <m>1 uzlabots kredīts</m>.",
+    "gpt-4-2": "Izmaksas <m>2 uzlaboti kredīti</m>.",
+    "gpt-4-n_one": "Izmaksas <m>{{count}} uzlabots kredīts</m>.",
+    "gpt-4-n_other": "Izmaksas <m>{{count}} uzlaboti kredīti</m>."
+  },
+  "modelDesc": {
+    "bard": "Google modelis (PaLM 2) labi veic progresīvus argumentācijas uzdevumus.",
+    "claude-3-haiku": "Antropiskais viskompaktākais modelis, izstrādāts ātrai reakcijai un nevainojamai AI pieredzei, kas imitē cilvēka mijiedarbību",
+    "claude-3-opus": "Antropiskais spēcīgākais modelis, kas nodrošina jaunākās tehnoloģijas veiktspēju sarežģītos uzdevumos un demonstrē plūdumu un cilvēka līdzīgu sapratni.",
+    "claude-3-sonnet": "Antropiskais vislabāk līdzsvarotais modelis starp intelektu un ātrumu, ideāli piemērots plašam uzdevumu spektram.",
+    "claude-3.5-sonnet": "Anthropic jaunākais modelis, kas nodrošina divreiz lielāku ātrumu nekā Claude 3 Opus un augstāku inteliģenci, būtiski uzlabojot loģisko domāšanu, zināšanas, programmēšanu un vizuālos uzdevumus.",
+    "claude-instant": "Pamatmodelis no Anthropic, zems latentums, liela caurlaidspēja.",
+    "claude2": "Labākais savā klasē piedāvājuma modelis no Anthropic, izcila veiktspēja uzdevumos, kuriem nepieciešama sarežģīta argumentācija.",
+    "gemini-1.5-flash": "Google vieglais modelis, optimizēts ātrumam un efektivitātei.",
+    "gemini-1.5-pro": "Google labākais modelis vispārējai veiktspējai plašā uzdevumu klāstā.",
+    "gemini-pro": "Google līdzsvarotākais modelis, perfekti apvienojot spējas ar efektivitāti.",
+    "gpt-3.5": "Ļoti ātrs, lieliski piemērots lielākajai daļai ikdienas uzdevumu.",
+    "gpt-4": "Vispiemērotākais modelis, kas vislabāk piemērots sarežģītiem uzdevumiem, kuriem nepieciešama uzlabota argumentācija.",
+    "gpt-4o": "OpenAI labākais modelis, vislabāk piemērots sarežģītiem uzdevumiem, saglabājot kvalitāti.",
+    "gpt-4o-mini": "OpenAI jaunākais modelis, piedāvā ātru, augstākās klases veiktspēju čatā, kodēšanā un loģikas uzdevumos ikdienas lietošanai.",
+    "gpt-5": "OpenAI jaunākais modelis, vispiemērotākais sarežģītiem uzdevumiem, saglabājot kvalitāti.",
+    "llama-3": "Meta jaunākais modelis, vislabāk piemērots sarežģītiem uzdevumiem, saglabājot kvalitāti.",
+    "sider": "{{SIDER}} dinamiski izvēlas GPT-4o mini, Claude 3 Haiku, Gemini 1.5 Flash vai Llama 3, lai nodrošinātu optimālas atbildes atkarībā no situācijas."
+  },
+  "modelUpdateFailed": "Modeļa atjaunināšana neizdevās",
+  "modelUpdateSuccess": "Modelis ir veiksmīgi atjaunināts",
+  "more": "Vairāk",
+  "moreFeature": "Vairāk funkciju!",
+  "morePrompts": "Vairāk uzvedņu",
+  "moreQueries": "Vairāk kredītu!",
+  "moreQuery": "Vairāk kredītu",
+  "msg": {
+    "askOriginalModel": "Oriģināls {{MODELNAME}}",
+    "basicCreditLimit": "Nav pamata kredītu",
+    "basicCreditLimitDesc": "Jūs esat iztērējis visus pamata kredītus. Jauniniet savu plānu vai uzaiciniet draugus, lai iegūtu vairāk kredītu.",
+    "cantBeTranscribed": "Šo video nevar apkopot autortiesību ierobežojumu dēļ. Lūdzu, mēģiniet citu.",
+    "changeSaved": "Izmaiņas saglabātas",
+    "chatgptTabGuardRefreshingTips": "Ar ChatGPT radās problēma. Notiek savienojuma atjaunošana, lūdzu, uzgaidiet...",
+    "chatgptTabGuardRefreshingTips1": "Ar ChatGPT radās problēma.",
+    "chatgptTabGuardRefreshingTips2": "Notiek savienojuma atjaunošana, lūdzu, uzgaidiet...",
+    "chatgptTabGuardSetupSuccessTips": "Fiksēts, lūdzu, mēģiniet vēlreiz",
+    "chatgptTabGuardTips": "Lūdzu, turiet šo cilni atvērtu, tagad varat atgriezties lietotnē {{APP_NAME}}",
+    "checkInvitation": "Pārbaudiet ielūgumu ierakstus",
+    "deletePromptWarn": "Vai vēlaties dzēst šo uzvedni?",
+    "dontRemindAgain": "Nejautāt man atkal",
+    "dragImgTips": "Noklikšķiniet, lai augšupielādētu, vai velciet attēlu šeit",
+    "dragTips": "Klikšķiniet, lai augšupielādētu vai nometiet failus šeit",
+    "emailRequired": "Nepieciešams e-pasts.",
+    "enterAPIKey": "Lūdzu, ievadiet savu OpenAI API atslēgu",
+    "enterEmail": "Ievadiet e-pasta adresi, lai saņemtu atjauninājumus par problēmu.",
+    "errChatGPTAuth": "Lūdzu, <m>noklikšķiniet uz saites, lai pieteiktos </m> savā ChatGPT tīmekļa lapā, un mēs palīdzēsim jums to piespraust. Pēc tam varat to izmantot sānjoslā.",
+    "errChatGPTAuthTipTitle": "Pamēģiniet:",
+    "errChatGPTFailToFetch": "Neizdevās saņemt atbildi no ChatGPT.",
+    "errGeminiPro": "{{GEMINI}} kļūda, lūdzu, mēģiniet vēlreiz vēlāk.",
+    "errOpenaiFailToFetch": "Neizdevās saņemt atbildi no OpenAI, izmantojot API atslēgu.",
+    "errOpenAIFilter": "Atbilde tika filtrēta, jo uzvedne izraisīja OpenAI satura pārvaldības politiku. Lūdzu, modificējiet savu uzvedni un mēģiniet vēlreiz.",
+    "error1139_1": "Paldies, ka izmantojat neierobežotus plānus! Jūs joprojām varat turpināt izmantot uzlabotus AI modeļus. Tomēr jūs esat sasniedzis pagaidu ātruma ierobežojumu. <a>Šeit ir iemesls, kāpēc pastāv ātruma ierobežojums un kā mēs cenšamies jums palīdzēt</a>. Lūdzu, <mx>IZLASIET TO</mx>.",
+    "error1139_1_2": "Paldies, ka izmantojat neierobežotus plānus! Jūs joprojām varat turpināt izmantot uzlabotus AI modeļus. Tomēr jūs esat sasniedzis pagaidu ātruma ierobežojumu un izmantojis visas papildu uzlabotās vaicājumus. Šeit ir <a>iemesls, kāpēc pastāv ātruma ierobežojums un kā mēs cenšamies jums palīdzēt</a>. Lūdzu, <mx>IZLASIET TO</mx>.",
+    "error1139_1_3": "Paldies, ka izmantojat neierobežotus plānus! Jūs joprojām varat turpināt izmantot uzlabotus AI modeļus. Tomēr jūs esat sasniedzis pagaidu ātruma ierobežojumu un izmantojis visas dāvanu uzlabotās vaicājumus. Šeit ir <a>iemesls, kāpēc pastāv ātruma ierobežojums un kā mēs cenšamies jums palīdzēt</a>. Lūdzu, <mx>IZLASIET TO</mx>.",
+    "error1139_2": "Lai netraucētu jūsu pašreizējo darbu, mēs esam piešķīruši jums dažus papildu uzlabotos vaicājumus kā dāvanu, lai atbloķētu pašreizējo ātruma ierobežojumu. <b>Pēc tam, kad būsiet izmantojis visus šos papildu uzlabotos vaicājumus, jums būs ātruma ierobežojums</b>.",
+    "error1139_3": "Pašreizējais ātruma ierobežojums ir ({{timesToUse}} reizes / {{periodTime}} stundas) uz uzlabotajiem vaicājumiem. Mēs varam to pielāgot atbilstoši mūsu kapacitātēm. Vai nepieciešams vairāk tagad? Izmēģiniet pastiprinātāja paku!",
+    "error1139_4": "Mēs esam piešķīruši jums papildu 50 uzlabotos vaicājumus kā dāvanu, lai atbloķētu pašreizējo ātruma ierobežojumu. <b>Pēc tam, kad būsiet izmantojis visus šos papildu uzlabotos kredītus, jums būs ātruma ierobežojums.</b>",
+    "errorFileType": "Neatbalstīts faila formāts",
+    "errorOutputLimit": "Sasniegts garuma ierobežojums. Jauniniet, lai iegūtu garāku atbildi.",
+    "errServiceUnavailable": "Openai serveris ir aizņemts. Lūdzu, vēlāk mēģiniet vēlreiz vai pārslēdzieties uz Sider API un izmantojiet {{model}} OpenAI darbības pārtraukuma laikā.",
+    "errSiderAdminKickout": "Jūs esat izslēgts, lūdzu, piesakieties vēlreiz",
+    "errSiderAdvancedTextLimit": "Jūs esat sasniedzis uzlabotā kredīta ātruma ierobežojumu. Pašlaik ir ierobežojums {{count}} ziņojumiem ik pēc 60 minūtēm. Alternatīvi, jūs varat izmantot pamata kredītu un atgriezties vēlāk.",
+    "errSiderApiHighLoad": "OpenAI serveris pašlaik ir aizņemts. Lūdzu, pamēģiniet vēlreiz vēlāk.",
+    "errSiderApiImageLimit": "Jūs esat iztērējis visus pamata kredītus, lūdzu, veiciet jauninājumu, lai turpinātu izmantot šo funkciju.",
+    "errSiderApiImgLimitPremiumUltra": "Jūs esat sasniedzis maksimālo pamata kredītu skaitu. Lūdzu, gaidiet nākamo atjaunošanu, lai turpinātu lietot.",
+    "errSiderApiLimitDevice": "Lūdzu, piesakieties, lai izmantotu.",
+    "errSiderApiLimitLogin": "Jūs esat izmantojis visus bezmaksas kredītus šodien. Jauniniet vai aiciniet draugus, lai iegūtu vairāk, vai gaidiet līdz rītdienas kredītu atjaunošanai.",
+    "errSiderApiLimitPremium": "Jūsu pamata kredīts šim mēnesim ir iztērēts. Pārslēdzieties uz uzlaboto kredītu, gaidiet nākamo mēnesi (abonēšanas datumu) vai veiciet jauninājumu, lai iegūtu vairāk.",
+    "errSiderApiLimitPremiumDiscount": "Jūs esat iztērējis visus savus kredītus. Jauniniet tagad, lai iegūtu neierobežotus kredītus ar <b>$1</b> ATLAIDI.",
+    "errSiderApiOcrLimit": "Jūs esat iztērējis visus savus pamata kredītus. Lūdzu, jauniniet, lai turpinātu piekļūt šai funkcijai.",
+    "errSiderApiSummaryVideoLimit": "Jūs esat iztērējis visus savus kredītus. Lūdzu, jauniniet vai aiciniet draugus, lai iegūtu vairāk.",
+    "errSiderApiTrialFeatLimit": "Jūs esat sasniedzis izmēģinājuma limitu premium funkcijai. Jauniniet, lai atbloķētu visas funkcijas.",
+    "errSiderAudioAdvancedLimit": "Jums ir nepieciešami vairāk uzlaboti kredīti. Katras 10 minūtes (vai mazāk) audio izmaksā 1 uzlabotu kredītu. Jauniniet vai uzaiciniet draugus, lai iegūtu vairāk!",
+    "errSiderBasicTextLimit": "Jūs esat sasniedzis pamata kredīta ātruma ierobežojumu. Pašlaik ir ierobežojums {{count}} ziņojumiem ik pēc 60 minūtēm. Alternatīvi, jūs varat izmantot uzlaboto kredītu un atgriezties vēlāk.",
+    "errSiderChatDeepResearchFailed": "Pašlaik mums ir grūtības ģenerēt jūsu pētījuma ziņojumu. Lūdzu, mēģiniet vēlreiz.",
+    "errSiderCreditFreqLimit": "Jūs esat sasniedzis pašreizējo izmantošanas limitu. Šis limits nodrošina godīgu izmantošanu visiem lietotājiem. Lūdzu, mēģiniet vēlreiz pēc {{count}} minūtēm.",
+    "errSiderCreditUsageLimit": "Izmantošanas limits sasniegts",
+    "errSiderDataAnalysisCredit": "Šai atbildei nepieciešama datu analīze (1 uzlabots kredīts). Jums ir beigušies uzlabotie kredīti, tāpēc jauniniet vai uzaiciniet draugus, lai iegūtu vairāk!",
+    "errSiderDeviceBinded": "Lūdzu, piesakieties, lai izmantotu.",
+    "errSiderDeviceLimitLogout": "Jūs esat izrakstīts sakarā ar ierīces limita sasniegšanu. Jūs varat pieteikties vēlreiz, un tas izrakstīs agrāko aktīvo ierīci jūsu kontā.",
+    "errSiderEliteCreditLimitElite": "Jūs esat izmantojis visus Elite kredītus — lūdzu, mēģiniet vēlreiz pēc kredītu atiestatīšanas datuma. Lai saņemtu tūlītēju palīdzību, lūdzu, sazinieties ar mūsu atbalsta komandu.",
+    "errSiderEliteCreditLimitNotElite": "Jums ir beigušies Elite kredīti — lūdzu, uzlabojiet savu Sider dalību.",
+    "errSiderGPT45RateLimit": "Jūs esat sasniedzis savu dienas limitu GPT-4.5. Sakarā ar OpenAI kvotu ierobežojumiem, lietošana ir ierobežota līdz 1 reizei dienā katram lietotājam. Lūdzu, mēģiniet vēlreiz pēc 24 stundām vai pārslēdzieties uz citu pieejamo modeli, lai turpinātu.",
+    "errSiderGPT4HighLoad": "OpenAI serveris pašlaik ir aizņemts. Lūdzu, pamēģiniet vēlreiz vēlāk.",
+    "errSiderGPT4LimitDevice": "Lūdzu, <b>pierakstieties</b> vispirms, un <amb>aiciniet savus draugus</amb> vai <ta>jauniniet uz Premium</ta>, lai iegūtu vairāk uzlabotu kredītu.",
+    "errSiderGPT4LimitLogin": "Jauniniet vai aiciniet draugus, lai atbloķētu vairāk uzlabotu kredītu un iegūtu vairāk ieskatu.",
+    "errSiderGPT4LimitPremium": "Jūs esat iztērējis visus savus mēneša Advanced Credits. Jauniniet savu plānu, lai iegūtu lielāku mēneša kvotu, vai iegādājieties Advanced Credits pastiprinātāju tūlītējai lietošanai!",
+    "errSiderGPT4LimitPremiumDiscount": "Jūsu uzlabotie kredīti šim mēnesim ir iztērēti. Jauniniet tagad, lai iegūtu neierobežotus kredītus ar <b>$1</b> ATLAIDI, vai gaidiet nākamā mēneša atjaunošanu (abonēšanas datumu).",
+    "errSiderHighTrafficError": "Lielās trafika dēļ, lūdzu, vēlāk mēģiniet vēlreiz vai jauniniet uz premium kontu, lai piekļūtu ātrāk.",
+    "errSiderHighTrafficTip": "Lūdzu, apsveriet iespēju <a>jaunināt uz premium kontu</a>, lai nodrošinātu stabilu piekļuvi un atbalstītu mūsu attīstību.",
+    "errSiderLoginExpired": "Jūsu sesija ir beigusies, lūdzu, piesakieties vēlreiz",
+    "errSiderNeedLogin": "Lūdzu, piesakieties, lai izmantotu.",
+    "errSiderO1Limit1": "OpenAI o1 modelis ir ļoti pieprasīts un ir sasniedzis savu kvotas limitu. Neuztraucieties, jūs varat arī uzdot jautājumus OpenAI o1 bez maksas mūsu kopienas vadītajā jautājumu un atbilžu vietnē: <a>ask.sider.ai</a>",
+    "errSiderOpenaiFault": "Openai serveris ir aizņemts. OpenAI darbības pārtraukuma laikā, lūdzu, pārslēdzieties uz {{model}}.",
+    "errSiderOpusLimit": "Jūs esat sasniedzis savu dienas limitu Claude Opus 4. Sakarā ar Anthropic kvotu ierobežojumiem, lietošana ir ierobežota līdz 1 reizei vienam lietotājam dienā. Lūdzu, mēģiniet vēlreiz pēc 24 stundām vai pārslēdzieties uz citu pieejamo modeli, lai turpinātu.",
+    "errSiderOpusTLimit": "Jūs esat sasniedzis savu dienas limitu Claude Opus 4 Think. Sakarā ar Anthropic kvotu ierobežojumiem, lietošana ir ierobežota līdz 1 reizei vienam lietotājam dienā. Lūdzu, mēģiniet vēlreiz pēc 24 stundām vai pārslēdzieties uz citu pieejamo modeli, lai turpinātu.",
+    "errSiderPremiumRequired": "Šī funkcija ir pieejama tikai premium lietotājiem. Jauniniet tūlīt, lai atbloķētu šo funkcionalitāti.",
+    "errSiderProcessing": "Tikai viena ziņa vienlaikus. Pirms cita ziņojuma nosūtīšanas, lūdzu, ļaujiet jebkurai citai atbildei pabeigt vai uzgaidiet.",
+    "errSiderThinkingModelCredit": "Nepietiekami uzlaboti kredīti \"Domāšanas režīmam\". Lūdzu, atspējojiet šo režīmu vai jauniniet/pievienojiet draugus, lai iegūtu papildu kredītus.",
+    "errSiderTimeout": "Pieprasījuma noildze. Lūdzu mēģiniet vēlreiz.",
+    "errSiderTranslateApiLimitPremium": "Jūsu pamata kredīts šim mēnesim ir iztērēts. Lūdzu, gaidiet nākamo mēnesi (abonēšanas datumu) vai veiciet jauninājumu, lai iegūtu vairāk.",
+    "errSiderUltraVipRequired": "Šī funkcija ir pieejama tikai Ultra plānā. Lūdzu, jauniniet uz Ultra, lai to izmantotu.",
+    "errSiderUnlimitedLimit": "Jūs esat sasniedzis pagaidu limitu ({{timesToUse}} reizes / {{periodTime}} stunda) uz Advanced Credits. Mēs cenšamies iegūt vairāk kredītu jums. Jauni kredīti būs pieejami {{resetTime}}. Vai nepieciešams vairāk tagad? Izmēģiniet booster pack!",
+    "errSiderUserBanned": "Jūsu konts ir apturēts, jo tika konstatēta neparasta darbība (piemēram, noteikumu pārkāpumi vai konta koplietošana). Ja jums ir kādi jautājumi, lūdzu, rakstiet mums uz e-pastu care@sider.ai ar sava konta informāciju.",
+    "errTrySiderAPI": "Pārbaudiet savus <a>pielāgotos API iestatījumus</a>.",
+    "errTrySiderAPI2": "<a>Pārslēdzieties uz Sider</a> uzticamai piekļuvei (tas sāks jaunu sarunu).",
+    "errTrySiderAPI2NonChat": "<a>Pārslēdzieties uz Sider</a> uzticamai piekļuvei.",
+    "errTrySiderAPI3": "<a>Sazinieties ar atbalsta dienestu</a> palīdzībai.",
+    "failToPlay": "Neizdevās atskaņot",
+    "featureBrowserLimit": "Šī lapa neatbalsta pārlūkprogrammas paplašinājumus. Ierobežotās lapas parasti ietver jaunas cilnes, tīmekļa veikalu, citus paplašinājumus un iestatījumus (chrome:// URL). Lūdzu, mēģiniet izmantot parastu lapu.",
+    "featureLimit": "Funkciju ierobežojums",
+    "featureLimitTip": "Lūdzu, jauniniet, lai izmantotu Claude and Bard.",
+    "featureUnavailableOnPage": "Nevar palaist šajā lapā",
+    "fetchFailed": "Attēlu nevarēja iegūt. Jūs varat to lejupielādēt un augšupielādēt manuāli.",
+    "fileLimit": "Lai apstrādātu šo failu, lūdzu, iespējojiet uzlaboto datu analīzes rīku. Tas maksā 1 uzlabotu kredītu par katru lietošanu. Vai vēlaties to iespējot un turpināt?",
+    "fileLimitFree": "Jūsu augšupielādētajam failam ir nepieciešama uzlabota datu analīze apstrādei. Jauniniet tūlīt, lai atbloķētu šo funkciju.",
+    "fileSizeLimit": "Fails ir pārāk liels",
+    "fileSizeLimitTip": "Fails pārsniedz 100MB augšupielādes limitu. Lūdzu, samaziniet faila izmēru un mēģiniet vēlreiz.",
+    "fileSizeTip": "Maksimālais izmērs: 100MB katram. Līdz 5 failiem.",
+    "fiveStart": "Piešķiriet mums 5 zvaigžņu",
+    "functionCallError": "Atvainojiet, pašreizējais modelis sastapās ar iekšēju kļūdu, ģenerējot atbildi. Lūdzu, pārslēdzieties uz citu modeli un mēģiniet vēlreiz.",
+    "getApiKeyGuide": "Lai tā darbotos, nepieciešama OpenAI API atslēga. Izpildiet mūsu ceļvedi, lai iegūtu API atslēgu.",
+    "getMoreGPT4": "Iegūstiet vairāk uzlabotu kredītu",
+    "goToSignIn": "Iet, lai pieteiktos",
+    "imageSizeLimit": "Attēla ierobežojums",
+    "imageSizeLimitTip": "Lūdzu, pārliecinieties, ka attēls ir mazāks par 10 MB un tā platums vai augstums nepārsniedz 4096 pikseļus, un pēc tam mēģiniet vēlreiz.",
+    "invalidApiKey": "API atslēga nav derīga, lūdzu, iegūstiet citu.",
+    "invitedRewardObtained": "Balvas iegūtas!",
+    "invitedWelcome": "Laipni lūdzam! GPT kredīti ir pievienoti jūsu kontam!",
+    "inviteEarn": "Nopelniet <mx>{{num}} kredītus</mx> sev un saviem draugiem. <b>Jo vairāk jūs aicināt, jo vairāk jūs nopelnāt</b>.",
+    "inviteFriendJoin_one": "{{count}} draugs pievienojās",
+    "inviteFriendJoin_other": "{{count}} draugi pievienojās",
+    "inviteStep1": "Iesakiet savus draugus, izmantojot uzaicinājuma saiti",
+    "inviteStep2": "Jūsu draugi pierakstās",
+    "inviteStep3": "Viņi instalē paplašinājumu un pieteikšanos. Nopelnītās balvas!",
+    "inviteTitle": "Ielūgumi un balvas",
+    "iosDownload": "Lejupielādēt iOS / Android lietotni",
+    "keepConversationTip": "Katru reizi, kad atverat Sider, sākas jauna tērzēšana. Lai turpinātu pēdējo tērzēšanu, pielāgojiet <a>iestatījumus</a>.",
+    "localFileAccessRequiredBtn": "Dodieties uz paplašinājuma iestatījumiem",
+    "localFileAccessRequiredDesc": "Lai izmantotu paplašinājumu ar vietējiem failiem, lūdzu, dodieties uz paplašinājuma iestatījumiem un ieslēdziet \"<b>Atļaut piekļuvi failu URL</b>\".",
+    "localFileAccessRequiredTitle": "Nepieciešama piekļuve failiem",
+    "loginAndCloudflareCheck": "Pārslēdzieties uz <a>sānjoslas API</a>, lai iegūtu stabilu piekļuvi VAI pieteiktos un izietu Cloudflare pārbaudi vietnē <i>chat.openai.com</i>.",
+    "maxFileSize": "Maksimālais faila lielums ir {{size}}",
+    "maxSize": "Maksimālais izmērs: {{num}}",
+    "modelError": "Serveris ir aizņemts. Lūdzu, mēģiniet vēlreiz vēlāk vai pārslēdzieties uz citu modeli.",
+    "nameYourPrompt": "Nosauciet uzvedni",
+    "nameYourTitle": "Nosauciet sarunu",
+    "noSubtitleMsg": "Video nav subtitru un to nevar kopsavilkumā apkopot.",
+    "noSubtitleTitle": "Kopsavilkumam nepieciešami subtitri",
+    "notSupportFile": "Neatbalstīts faila formāts",
+    "notSupportLiveVideo": "Tiešraides video kopsavilkums šobrīd nav atbalstīts.",
+    "notValidEmail": "nav derīgs e-pasts",
+    "onlyOneRequest": "Aktīvs pieprasījums procesā",
+    "onlyOneRequestDesc": "Jūsu kontā ir aktīvs pieprasījums - vienlaikus var būt tikai viens pieprasījums. Lūdzu, mēģiniet vēlāk.",
+    "openLastConversationCancel": "Sapratu",
+    "openLastConversationContent": "Tagad mēs varam iestatīt, vai sānjosla atjaunos pēdējo sarunu katru reizi, kad tā tiek palaista.",
+    "openLastConversationOk": "Iet uz Iestatījumi",
+    "openLastConversationTitle": "Atvērt pēdējo sarunu?",
+    "promptNameRequired": "Nepieciešams uzvednes nosaukums.",
+    "promptTplRequired": "Nepieciešams tūlītējs saturs.",
+    "quotaModelContent": "Jūsu GPT-4/Claude-2 pieprasījumu limits ir sasniegts. Jauniniet uz Premium plānu, lai iegūtu vairāk piekļuves, vai aiciniet draugus, lai iegūtu bezmaksas papildu kredītus.",
+    "reEnableInSettings": "Varat atkārtoti iespējot sadaļā <a>Iestatījumi</a>",
+    "restorePromptWarn": "Vai vēlaties atjaunot šo uzvednes veidni?",
+    "searchNotFound": "Rezultāti nav atrasti",
+    "selectModel": "Lūdzu, atlasiet derīgu modeli",
+    "signinAward": "Pierakstieties, lai saņemtu {{num}} <span>BEZMAKSAS</span> kredītus dienā",
+    "signinAward2": "Kredīti ir iztērēti nelietotājam. Jūs varat pierakstīties, lai saņemtu <b>{{num}} bezmaksas kredītus dienā</b>.",
+    "signinAward3": "Pierakstieties, lai saņemtu vairāk kredītu dienā",
+    "signinAward4": "Sāciet burvīgu AI ceļojumu ar savu pārlūkprogrammu un saņemiet {{num}} <span>BEZMAKSAS</span> kredītus katru dienu",
+    "signinFeature": "Lūdzu, pierakstieties, lai piekļūtu šai funkcijai",
+    "signInRequired": "Pieteikšanās Nepieciešama",
+    "signinTips": "Piesakieties, lai sinhronizētu uzvednes un iestatījumus",
+    "somethingWrong": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz vēlāk.",
+    "somethingWrong2": "Kaut kas nogāja greizi.",
+    "supportedFileFormat": "Atbalstītie failu formāti ir {{formats}}",
+    "switchBarTip": "Paplašiniet sānu paneli, lai piespraustu navigācijas joslu.",
+    "switchRequired": "Pārslēgties uz {{APP_NAME}}?",
+    "switchToSiderApiToContinue": "Šī funkcija pašlaik atbalsta tikai {{APP_NAME}} API režīmu. Lai turpinātu, lūdzu, <a>pārslēdzieties uz {{APP_NAME}} API</a>.",
+    "switchToSiderDesc": "Lai izmantotu šo funkciju, lūdzu, pārslēdziet savu AI piekļuves metodi uz {{APP_NAME}}.",
+    "thankForFeedback": "Paldies. Veidlapa tika veiksmīgi iesniegta. Mēs ar jums sazināsimies tuvākajā laikā.",
+    "titleRequired": "Nosaukums ir nepieciešams.",
+    "ttsChangeVoiceTip": "Kredītu atskaitīšanas paziņojums",
+    "ttsChangeVoiceTipDesc": "Pārslēdzoties uz citu balsi, kredīti tiks atskaitīti vēlreiz. Vai tiešām vēlaties turpināt?",
+    "ttsCharacterLimit": "Sasniegts rakstzīmju limits",
+    "ttsCharacterLimitDesc": "AI Lasīt skaļi ir {{count}} rakstzīmju ierobežojums. Lūdzu, izvēlieties īsāku tekstu vai izmantojiet bezmaksas balsi.",
+    "ttsCharacterLimitDesc2": "Šis ziņojums ir pārāk garš, lai AI balsis to lasītu. Tā vietā varat izmantot bezmaksas balsi.",
+    "ttsChooseVoice": "Izvēlieties balsi",
+    "ttsChooseVoiceLater": "To var mainīt vēlāk.",
+    "ttsCreditLimit": "Nepietiekami pamata kredīti",
+    "ttsCreditLimitDesc": "Jums nav pietiekami daudz pamata kredītu šai balsij. Lūdzu, jauniniet savu plānu vai izmantojiet bezmaksas balsi.",
+    "unreadableMsg": "Šajā lapā nevar atrast galveno saturu. Lūdzu, izmēģiniet citu lapu.",
+    "unreadableTitle": "Trūkst galvenā satura",
+    "updateExtTips": "Lūdzu, atjauniniet savu Sider paplašinājumu, lai izmantotu šo funkciju",
+    "upgradeSupport": "Jauniniet uz premium plānu, lai mūs atbalstītu",
+    "upgradeSupport2": "Jauniniet, lai iegūtu vairāk funkcijas",
+    "uploadFailed": "\"{{FILENAME}}\" augšupielāde neizdevās.",
+    "useUpUpgrade": "Jūsu kredīti ir iztērēti, lūdzu, jauniniet, lai iegūtu vairāk kredītu.",
+    "videoTooLang": "Video ir pārāk garš (maksimāli 10 stundas). Lūdzu, izvēlieties īsāku video.",
+    "writeSomething": "Lūdzu, uzrakstiet kaut ko."
+  },
+  "multiFileChat": "Vairāku failu tērzēšana {{WISEBASE}}",
+  "myAccount": "Mans Konts",
+  "myChats": "Mani tērzēšanas ziņojumi",
+  "myHighlights": "Mani izcēlumi",
+  "newFeature": "Jauna funkcija!",
+  "newPlan": "Jauns plāns",
+  "next": "Nākamais",
+  "NoFiles": "Šajā tērzēšanas sarunā nav jaunāko failu",
+  "noReasoningModelTip": "Paplašināta domāšana caur DeepSeek R1. Izmaksā 1 papildu uzlabotu kredītu/vaicājumu.",
+  "notDistinguish": "Neatšķirt",
+  "notDistinguishDesc": "1 papildu kredīts / 10 minūtes",
+  "notNotifyAgain": "Vairs nepaziņot",
+  "notNow": "Ne tagad",
+  "ocrEmptyMsg": "Atvainojiet, es nevaru atrast tekstu šajā attēlā.",
+  "OCRPanel": {
+    "aiOCRTips": "AI OCR var kļūdīties",
+    "dragImgTips": "Noklikšķiniet, lai augšupielādētu vai nometiet attēlu šeit, lai iegūtu tekstu",
+    "noText": "Teksts nav atpazīts",
+    "ocrCost": "Katrs {{name}} maksās {{num}} pamata kredītu",
+    "ocrTips": "Izņemiet tekstu, skaitļus un vienādojumus no attēla"
+  },
+  "ok": "labi",
+  "openAnswerCompare": "Salīdzinājums blakus",
+  "openSidebar": "Atveriet sānjoslu",
+  "openTabs": "Izvēlēties no atvērtajām cilnēm",
+  "optimizeWith": "Optimizējiet ar {{NAME}}",
+  "optionPage": {
+    "activateContextMenu": "Atvērt ātro jautājumu",
+    "addASite": "Pievienot vietni",
+    "addNewTplForSearch": "Pievienojiet jaunu uzvednes veidni",
+    "addNewTplForSidebar": "Pievienojiet jaunu uzvednes veidni",
+    "apiFreeGuide": "Izpildiet ceļvedi, lai iegūtu API atslēgu.",
+    "apiKeyGpt4Tip": "Paplašinājums atbalsta GPT-4, ja ievadāt GPT-4 API atslēgu.",
+    "apiKeyGuideTip": "Noklikšķiniet uz [Set up], lai pievienotu API atslēgu.",
+    "apiKeyLocally": "Jūsu API atslēga tiek glabāta lokāli jūsu pārlūkprogrammā un nekad netiek sūtīta citur. <b>Piezīme:</b> Dažas funkcijas tehnisku iemeslu dēļ ir ierobežotas līdz {{APP_NAME}} režīmam.",
+    "apiKeyProvider": "Oficiālā OpenAI API ir stabilāka, un maksa ir atkarīga no lietojuma.",
+    "apiKeyProviderTip": "(Izstrādātājiem ar API atslēgu)",
+    "apiKeyTip1": "Iespējams, jūsu bezmaksas OpenAI API atslēgas derīguma termiņš ir beidzies. Lūdzu, <a>šeit pārbaudiet API atslēgas derīguma termiņa statusu.</a>",
+    "apiKeyTip2": "Ja izmantojat bezmaksas OpenAI API atslēgu, piekļuve ChatGPT var nebūt stabila, ja tā ir ļoti pieprasīta.",
+    "autoQuoteSelectedText": "Automātiski citēt atlasīto tekstu ievades lodziņā",
+    "autoQuoteSelectedTextTip": "Kad ieslēgts, izvēlētais teksts automātiski parādās ievades lodziņā ātrai darbībai",
+    "customModelName": "Izmantojiet pielāgotu modela nosaukumu",
+    "defaultSpeed": "Noklusējuma ātrums",
+    "defaultVoice": "Noklusējuma balss",
+    "disabledSites": "Atspējots vietnēs",
+    "displayLanguage": "Displeja valoda",
+    "displayMode": "Displeja režīms",
+    "displaySearchRes": "Rādīt ChatGPT atbildi līdzās meklēšanas rezultātu lapām",
+    "displayWhenSelect": "Parādīt, kad ir atlasīts teksts",
+    "easiestWayUse": "Vienkāršākais veids, kā izmantot lietotni {{APP_NAME}}",
+    "editSearchTplPlaceholder": "{{keywords}} uzvednes saturā tiks automātiski aizstāti ar jūsu meklēšanas atslēgvārdiem",
+    "editSearchTplTip": "izmantojiet {{keywords}}, lai atsauktos uz meklēšanas atslēgvārdiem",
+    "editSidebarTplTip": "Ielīmējiet vai ievadiet saturu šeit",
+    "feedbackTypes": {
+      "bug": {
+        "detail": {
+          "label": "Sīkāka informācija par problēmu",
+          "tip": "Lūdzu, detalizēti aprakstiet, kas nogāja greizi, kādas darbības veicat, un saņemtos kļūdu ziņojumus."
+        },
+        "name": "Problēmas ziņojums",
+        "title": {
+          "label": "Problēmas kopsavilkums",
+          "tip": "Dažos vārdos pastāstiet mums, kas nogāja greizi."
+        }
+      },
+      "fr": {
+        "detail": {
+          "label": "Apraksts",
+          "tip": "Lūdzu, sniedziet detalizētu jaunās funkcijas aprakstu."
+        },
+        "name": "Funkcijas pieprasījums",
+        "title": {
+          "label": "Nosaukums",
+          "tip": "Par ko ir jūsu pieprasījums?"
+        }
+      }
+    },
+    "fontSizeAutoTip": "Automātiski pielāgot atbilstoši sānu joslas platumam",
+    "fontSizeOptions": {
+      "large": "Liels",
+      "regular": "Parasts"
+    },
+    "fontSizeTip": "Tikai ziņojuma tekstam",
+    "fontSizeTitle": "Fonta izmērs ziņojumam",
+    "GPT4Desc": "Jums jāpaliek pieteiktam savā ChatGPT kontā tīmekļa vietnē. Stabilitāte var būt nekonsekventa gan Plus lietotājiem, gan bezmaksas lietotājiem OpenAI ierobežojumu dēļ.",
+    "hideThinkingAfterFinish": "Sakļaut domāšanu pēc pabeigšanas",
+    "hideThinkingAfterFinishTip": "Sakļaut domāšanas bloku pēc domāšanas pabeigšanas",
+    "howToAccess": "Kā piekļūt ChatGPT un izmantot to jebkur",
+    "howToAccessTip": "Lai nodrošinātu, ka AI ir pieejams ikvienam, mēs piedāvājam 3 veidus, kā piekļūt ChatGPT un izmantot to jebkur.",
+    "importantReminders": "Svarīgi atgādinājumi",
+    "invalidShortcutTip": "Iekļaut {{key1}}, {{key2}}, vai {{key3}}",
+    "launchSidebar": "Atvērt sānjoslu",
+    "linkToSetting": "Mainīt sānjoslas atrašanās vietu pārlūka iestatījumos",
+    "loginFirst": "Lūdzu, vispirms piesakieties.",
+    "loginFirstTip": "Piesakieties, lai sāktu izmantot Sider un saņemtu bezmaksas kredītus katru dienu.",
+    "messageStreamEffect": "Ziņojumu straumes efekts",
+    "messageStreamEffectOptions": {
+      "classic": "Klasisks",
+      "fadeIn": "Izbalināt"
+    },
+    "messageStreamEffectTip": "Straumes efekts, lai tiešraidē parādītu ienākošos tērzēšanas ziņojumus, tiklīdz tie pienāk",
+    "noSiteAdded": "Nav pievienotas vietnes",
+    "openNewChat": "Sākt jaunu sarunu",
+    "ownURL": "Izmantojiet savu URL",
+    "promptManage": {
+      "checkPrompt": "Atzīmējiet uzvedni",
+      "deletePromptWarn": "Dzēst šo uzvedni?",
+      "editPrompt": "Rediģēt uzvedni",
+      "hideFromList": "Slēpt no saraksta",
+      "howToExample": "Lūdzu, izmantojiet tālāk norādītās tēmas vai atslēgvārdus, lai ģenerētu izklāstu, kas ietver nosaukumus, nodaļas un apakšsadaļas.\nIzvadiet to Markdown formātā. Dodiet man tikai rezultātu un neko citu. Konstrukcijai ir jābūt {{lang}} valodā.\nTēmas vai atslēgvārdi: {{content}}",
+      "howToVar1": "Varat izmantot šo mainīgo, lai attēlotu ievadi vai atlasīto saturu. Ja uzvednē šis mainīgais nav iekļauts, ievade vai atlasītais saturs tiks ievietots trīskāršās pēdiņās un atrodas uzvednes pašās beigās.",
+      "howToVar2": "Varat izmantot šo mainīgo, lai attēlotu valodu, kuru vēlaties izmantot izvadei, pamatojoties uz iestatījumos iestatīto noklusējuma valodu.",
+      "howToVarTitle": "Kādus mainīgos var iekļaut uzvednē?",
+      "howToWritePrompt": "Kā uzrakstīt uzvedni",
+      "newPrompt": "Jauna uzvedne",
+      "noPrompts": "Šeit nav uzaicinājumu",
+      "promptTabChatDesc": "Uzvednes sadaļā 'Rādīt sarakstā' parādās {{name}} funkcijā.",
+      "promptTabReadDesc": "Uzvednes sadaļā 'Rādīt sarakstā' parādās {{name}} lapas tekstam.",
+      "promptTabWriteDesc": "Uzvednes sadaļā 'Rādīt sarakstā' parādās {{name}} ievades laukiem.",
+      "showInList": "Rādīt sarakstā"
+    },
+    "promptTplForSearch": "Uzvednes veidne Google un citām meklētājprogrammām",
+    "providerAPIKeyDesc": "Ideāli piemērots tiem, kam ir API atslēga: stabila, uz lietošanu balstīta cenu noteikšana",
+    "providerPartTitle": "AI piekļuve",
+    "providerSiderDesc": "Darbojas ar vadošo modeļu oficiālajiem API, ātrs un uzticams",
+    "providerSiderTip": "{{APP_NAME}} nodrošina ātru un uzticamu piekļuvi vadošajiem AI modeļiem no OpenAI, DeepSeek, Anthropic, Google un citiem—viss caur oficiālajiem API vienā platformā. Atklājiet jaunākos AI jauninājumus tieši pie rokas!",
+    "providerWebappDesc": "Var būt nestabils OpenAI politikas izmaiņu dēļ",
+    "providerWebappTip": "Pieredze var atšķirties apmeklētājiem un pieslēgtajiem lietotājiem OpenAI ierobežojumu dēļ.",
+    "quickAction": {
+      "customPromptMenu": "Pārvaldīt uzvednes priekš {{name}}",
+      "desc": "{{name}} nodrošina ātras darbības izvēlētajam tekstam tīmekļa lapā (lasīšana) vai ievades lodziņā (rakstīšana).",
+      "displayOnSelect": "kad teksts ir izvēlēts",
+      "displayOnShortcut": "kad teksts ir izvēlēts un nospiests {{key}}",
+      "mainSwitchTitle": "Rādīt {{name}}"
+    },
+    "recommend4all": "(Ieteicams visiem)",
+    "recommended": "Ieteicams",
+    "restoreDefault": "Atjaunot noklusējumus",
+    "scrollingBehavior": "Ritināšanas uzvedība garām atbildēm",
+    "sendingMsgBehavior": "Uzvedība pēc ziņas nosūtīšanas čatā",
+    "sendingMsgBehaviorOptions": {
+      "bottom": "Automātiski ritināt līdz atbildes beigām",
+      "messageTop": "Pauzēt ritināšanu, kad atbilde sasniedz augšu"
+    },
+    "sendMessage": "Nosūtīt ziņojumu",
+    "serviceProvider": "Pakalpojumu sniedzējs",
+    "shortcutInUseTip": "Jau tiek izmantots, mēģiniet citu",
+    "showSelectedTextDesc": "Automātiski parādīt izvēlēto tekstu kā citātu ievades laukā ātrām darbībām ar norādēm",
+    "showSelectedTextTip": "Ja nevēlaties automātiski parādīt izvēlēto tekstu, izslēdziet to <a>sānu joslas iestatījumos</a>.",
+    "showSelectedTextTitle": "Automātiski Rādīt Izvēlēto Tekstu Ievades Laukā",
+    "sidebarDisplayOption": "Sānjoslas displeja režīms",
+    "sidebarDisplayOptions": {
+      "expand": "Paplašinot",
+      "overlay": "Pārklājums"
+    },
+    "sidebarDisplayOptionTip": "Izvēlieties, kā lapā tiek parādīta sānjosla",
+    "sidebarIcon": "Sānjoslas ikona",
+    "sidebarIconAccess": "Piekļūstiet sānjoslai, izmantojot ikonu, kas atrodas lapas apakšējā labajā stūrī. Varat vilkt, lai to pārvietotu uz augšu un uz leju",
+    "sidebarLeftOrRight": "Novietojiet sānjoslu kreisajā vai labajā pusē",
+    "sidebarLocation": "Sānjoslas atrašanās vieta",
+    "sidebarOnStartup": "Atverot sānjoslu",
+    "sidebarOnStartupAutoTip": "Ja tiek atvērts atkārtoti 10 minūšu laikā, tērzēšana atsākas; ja pēc 10 minūtēm, sākas jauna tērzēšana",
+    "sidebarOnStartupOptions": {
+      "auto": "Automātiska atsākšana vai restartēšana",
+      "last": "Vienmēr atsākt pēdējo čatu",
+      "new": "Vienmēr sākt jaunu čatu"
+    },
+    "sidebarOnStartupTip": "Konfigurējiet tērzēšanas saskarnes displeja režīmu, atverot Sānjoslu",
+    "sidebarProvider": "Sānjoslā tiek izmantota ChatGPT Premium API, lai nodrošinātu stabilu piekļuvi.",
+    "sidebarProviderGoPremium": "Mēs piedāvājam {{num}} bezmaksas ikdienas kredītus, lai nodrošinātu AI pieejamību visiem. <a>Jauniniet uz Premium</a>, lai palielinātu savu ikdienas kredītu limitu un atbalstītu mūsu misiju <b>nodrošināt Universālu AI visiem</b>.",
+    "sidepanelLeftOrRight": "Novietojiet sānu paneli kreisajā vai labajā pusē. Sānu panelis ir pieejams tikai Google Chrome 114 vai jaunākā versijā.",
+    "sidepanelLocation": "Sānjoslas atrašanās vieta",
+    "sidepanelPosition": "Sānu paneļa pozīcija",
+    "sidepanelPositionTip": "Chrome 114 vai jaunākai versijai var mainīt tikai pārlūkprogrammas iestatījumos",
+    "siderIcon": "{{APP_NAME}} ikona",
+    "siderIconDisplay": "Vienmēr rādīt {{APP_NAME}} ikonu lapā",
+    "siderIconDisplayTip": "Kad ieslēgts, {{APP_NAME}} ikona parādās apakšējā labajā stūrī un to var vilkt",
+    "translatePage": "Tulkot lapu",
+    "webappGPT4": "(ChatGPT Plus lietotāji to var izmēģināt)",
+    "webappReminder1": "Palieciet pieslēdzies savam kontam.",
+    "webappReminder2": "Šis pakalpojums var būt nestabils OpenAI politikas izmaiņu dēļ. Lai nodrošinātu ātru un stabilu darbību, iesakām izmantot {{APP_NAME}}.",
+    "webappTip1": "Ja esat ChatGPT Plus lietotājs, tagad jums ir iespēja izvēlēties GPT-4. Tomēr OpenAI var ierobežot dienā nosūtīto ziņojumu skaitu.",
+    "webappTip2": "Lūdzu, <m>piespraudiet cilni ChatGPT</m> un palieciet pieteicies ChatGPT vietnē. Tomēr tas var negarantēt stabilitāti. Ja rodas problēmas, apmeklējiet <v>ChatGPT vietni </v> un atsvaidziniet lapu.",
+    "webAssistant": {
+      "code": {
+        "desc": "Ieslēdzot, {{APP_NAME}} var palīdzēt skaidrot kodu tīmekļa lapā",
+        "title": "Koda palīgs"
+      },
+      "image": {
+        "desc": "Ieslēdzot, jūs varat ātri piekļūt AI attēlu rīkiem, novietojot kursoru virs jebkura attēla",
+        "title": "Attēlu palīgs"
+      },
+      "linkPreview": {
+        "autoSummarize": "Automātiskais kopsavilkums",
+        "collapse": "Sakļaut",
+        "guideTipDesc": "Velciet saiti, lai to priekšskatītu, neatstājot lapu. Atspējojiet <link>iestatījumos</link>, ja tas nav nepieciešams.",
+        "guideTipTitle": "Efektīvi priekšskatiet saites",
+        "openInNewTab": "Atvērt jaunā cilnē",
+        "pageLoadFailed": "Lapas ielāde neizdevās",
+        "summarizeNotSupported": "Šī lapa neatbalsta kopsavilkumu veidošanu.",
+        "viewSummary": "Skatīt kopsavilkumu"
+      },
+      "qa": {
+        "desc": "Kad tas ir ieslēgts, {{APP_NAME}} var atbildēt uz jautājumu Quora, StackOverflow un citās kvalitātes nodrošināšanas vietnēs",
+        "title": "Jautājumu un atbilžu palīgs"
+      },
+      "video": {
+        "BilingualDesc": "<b>Divvalodu subtitri</b>: Kad iespējots, {{APP_NAME}} automātiski parādīsies, skatoties YouTube videoklipus",
+        "SummaryDesc": "<b>Video kopsavilkums</b>: Kad iespējots, {{APP_NAME}} var palīdzēt jums apkopot YouTube videoklipus",
+        "title": "YouTube asistents"
+      }
+    },
+    "webAsstAISitesDesc": "Rādīt \"Salīdzināt ar\" pogu vietnē {{url}}",
+    "webAsstAISitesTitle": "Salīdziniet modeļus vietnē ChatGPT",
+    "webAsstCodeDesc": "Rādīt Paskaidrot kodu pogu uz koda bloka",
+    "webAsstCodeTitle": "Kodam",
+    "webAsstEmailDesc": "Rādīt AI Atbildēt pogu Gmail",
+    "webAsstEmailTitle": "E-pastam",
+    "webAsstImageDesc": "Rādīt AI rīkus, uzbraucot ar peli uz attēla",
+    "webAsstImageTitle": "Attēliem",
+    "webAsstInputBoxDesc": "Rādīt punktu ikonu ievades laukā, lai uzlabotu rakstīšanu",
+    "webAsstInputBoxTitle": "Ievades lauks",
+    "webAsstLinkPreviewDesc": "Rādīt saites priekšskatījuma logu, kad velkat saiti.",
+    "webAsstLinkpreviewExampleLink": "Šī ir droša saite, mēģiniet to pavilkt, lai redzētu priekšskatījuma logu",
+    "webAsstLinkPreviewTitle": "Saites priekšskatījumiem",
+    "webAsstQADesc": "Rādīt Atbildes pogu jautājumu un atbilžu vietnēs",
+    "webAsstQATitle": "Jautājumu un atbilžu vietnēm",
+    "webAsstRecordShortCutSitesDesc": "Rādīt ātrās ierakstīšanas paneli Google sapulcē un Teams",
+    "webAsstRecordShortCutSitesTitle": "Sapulcēm",
+    "webAsstSearchDesc": "Rādīt AI atbildi līdzās meklēšanas rezultātiem",
+    "webAsstSearchTitle": "Meklēšanai",
+    "webAsstTranslationSitesDesc": "Rādīt \"Salīdzināt ar\" pogu Google tulkotājā",
+    "webAsstTranslationSitesTitle": "Salīdzināt modeļus Google tulkotājā",
+    "webAsstVideoBilingualDesc": "Rādīt divvalodu vadību vietnē YouTube",
+    "webAsstVideoSummaryDesc": "Rādīt kopsavilkuma paneli vietnē YouTube",
+    "webAsstYoutubeTitle": "YouTube",
+    "whenSidebarReopens": "Kad sānu josla atkal tiek atvērta",
+    "whenToAsk": "Kad jautāt ChatGPT",
+    "wrongSiteTip": "Nederīgs URL: Pārbaudiet URL un mēģiniet vēlreiz."
+  },
+  "options": {
+    "shortcut": {
+      "tips": "Ievadiet saīsni"
+    },
+    "sidebarLocation": {
+      "left": "kreisā puse",
+      "right": "labā puse"
+    },
+    "sidebarMode": {
+      "inpage": "Lapā ievietotā sānjosla",
+      "sidepanel": "Fiksēta sānjosla"
+    },
+    "sidebarModeTip": {
+      "inpage": "Pārslēdzot cilnes, Sider nepaliks displejā; jums ir atkārtoti jāatver sānjosla jaunajā lapā.",
+      "sidepanel": "Pārslēdzot cilnes, Sider vienmēr paliks fiksēts pārlūkprogrammas labajā pusē."
+    },
+    "sidebarPromptTpl": {
+      "explain": {
+        "template": "Izskaidrojiet šādu saturu:",
+        "title": "Paskaidrojiet"
+      },
+      "explain-codes": {
+        "template": "Izskaidrojiet šādus kodus:",
+        "title": "Izskaidrojiet kodus"
+      },
+      "translate": {
+        "template": "Tulkojiet šo saturu {{lang}} valodā:",
+        "title": "Tulkot"
+      }
+    },
+    "theme": {
+      "auto": "automātiski",
+      "dark": "tumšais režīms",
+      "light": "gaišais režīms"
+    },
+    "title": "Opcijas",
+    "triggerMode": {
+      "always": {
+        "desc": "Vienmēr",
+        "title": "Vienmēr"
+      },
+      "manually": {
+        "desc": "Kad tiek noklikšķināts uz atbildes pogas",
+        "title": "Manuāli"
+      },
+      "questionMark": {
+        "desc": "Kad jautājums beidzas ar jautājuma zīmi",
+        "title": "Jautājuma zīme"
+      }
+    }
+  },
+  "OR": "VAI",
+  "orTakeAction": "Vai arī veiciet citas darbības:",
+  "otherModels": "Citi modeļi",
+  "pageTranslation": {
+    "aiTranslator2": "AI Tulkotājs",
+    "aiTranslatorFunDesc1": "Ietver gan nodomu, gan toni, sniedzot dziļāku izpratni nekā vārds-vārda tulkojums",
+    "aiTranslatorFunDesc2": "Tulkojiet ar skaidrību un precizitāti, nodrošinot, ka netiek zaudētas detaļas",
+    "aiTranslatorFunTitle1": "Konteksta izpratne",
+    "aiTranslatorFunTitle2": "Precīzs tulkojums",
+    "autoDetect": "Automātiskā noteikšana",
+    "autoTrans": "Automātiska tulkošana",
+    "autoTrans2": "Automātiski tulkot tīmekļa lapas",
+    "autoTrans2Desc": "Kad izslēgts, noklikšķiniet uz tulkošanas pogas vai izmantojiet īsinājumtaustiņu",
+    "demoText": "ChatGPT darbina Transformer, dziļās mācīšanās modelis, kas paredzēts dabiskās valodas apstrādei, ar pašuzmanību un padeves neironu tīkliem.",
+    "displayMode": "Displeja režīms",
+    "displayModes": [
+      "Divvalodu",
+      "Tikai tulkojums"
+    ],
+    "displayStyle": "Displeja stils",
+    "displayStyleDesc": "Tikai tulkojumiem divvalodu salīdzināšanas režīmā",
+    "displayStyles": [
+      "Nav",
+      "Pasvītrojums",
+      "Novājināts"
+    ],
+    "free": "Bezmaksas",
+    "neverTransSite": "Nekad netulkot šo vietni",
+    "neverTransSites": "Nekad netulkot šīs vietnes",
+    "newAITranslationTip": "AI lapas tulkošana tagad ir pieejama! Noklikšķiniet šeit, lai to iestatītu.",
+    "pageTranslation": "Tulkot šo lapu",
+    "reTrans": "Pārtulkot vēlreiz",
+    "showOriginal": "Rādīt oriģinālo tekstu",
+    "source": "Avota valoda",
+    "target": "Mērķa valoda",
+    "title": "Lapas tulkojums",
+    "transAgain": "Tulkot vēlreiz",
+    "translateService": "Tulkošanas pakalpojums",
+    "translateServiceTip": "AI tulkošana izmaksā pamata kredītus, pamatojoties uz satura garumu.",
+    "transSettings": "Tulkošanas iestatījumi"
+  },
+  "painterOnBoardingTip": "Noklikšķiniet šeit, lai veiktu AI attēlu izveidi un rediģēšanu",
+  "pasteSelection": "Ielīmēt atlasi",
+  "pasteTextPage": "Ielīmējiet tekstu no lapas",
+  "pause": "Pauze",
+  "pdfOnBoardingTip": "Noklikšķiniet šeit, lai izmantotu ChatPDF",
+  "personalization": "Personalizācija",
+  "phoneNumber": "Telefona numurs",
+  "pin": "piespraust",
+  "pinExt": "Piespraudes paplašinājums",
+  "planNames": {
+    "basic": "Pamatplāns",
+    "free": "Bezmaksas plāns",
+    "pro": "Pro plāns",
+    "starter": "Sākuma plāns",
+    "ultra": "Neierobežots plāns"
+  },
+  "play": "Atskaņot",
+  "popupPage": {
+    "chatNow": "Tērzējiet tūlīt",
+    "desc": "Pašreizējā lapa ir unikāla lapa, un sānjoslas funkcija nav pieejama. Tomēr tērzēšanai varat atvērt visu lapu!",
+    "thank": "Paldies, ka izmantojat paplašinājumu {{APP_NAME}}!"
+  },
+  "poweredByGPTImage": "Darbojas ar GPT-image-1",
+  "prev": "Iepriekšējais",
+  "preview": "Priekšskatījums",
+  "pricePerDay": "Mazāk nekā {{num}} dienā",
+  "pricePerMonth": "{{price}}/mēn.",
+  "producthuntPromote": {
+    "ios1Banner1": "Balsojiet par ChitChat - ChatGPT iOS lietotni 🎉",
+    "ios1Banner2": "Sāksim lietas ar blīkšķi! 😄",
+    "ios1ModalDesc": "• Saņemiet atbildes no ChatGPT 3.5 un 4\n• Botu atbalsta komanda jums palīdz vienuviet\n  • Pārvērtiet savu PDF par tērzēšanas robotu",
+    "ios1ModalTitle": "✨ Jaunums ChitChat iOS lietotnē",
+    "sidebar2Banner1": "Balsojiet par mums pakalpojumā <b>Produktu medības</b> TŪLĪT, lai izplatītu vārdu.",
+    "sidebar2ModalDesc": "• Tērzēšanas cilne\n  • Ātra meklēšana ātriem vaicājumiem\n  • Konts uzvedņu sinhronizēšanai\n  • Saglabājiet un kopīgojiet tērzēšanas sarunas\n  • Atbalstiet vairāk valodu\n  • Atbalsts GPT-4",
+    "sidebar2ModalTitle": "✨ Sānjoslas 2.0 kopsavilkums",
+    "voteBtn": "Balsojiet par produktu medībām"
+  },
+  "productivity": "Produktivitāte",
+  "promotePreset": {
+    "anni2025Countdown": "Lielā izpārdošana: <b>Atlikušais laiks {{time}}</b>",
+    "blackFridayCountdown": "Melnā piektdiena: <b>Atlicis {{time}}</b>",
+    "halloweenCardDesc": "Atbloķējiet baisās ietaupījumus",
+    "halloweenCardDesc2": "Izbaudiet {{price}} ATLAIDI",
+    "halloweenCardTitle": "Helovīna atlaide",
+    "halloweenCardTitle2": "Pieprasiet Helovīna gardumu",
+    "halloweenCountdown": "Baisais piedāvājums: <b>{{time}} atlicis</b>",
+    "halloweenCountdown2": "{{price}} ATLAIDE: <b>{{time}} atlicis</b>",
+    "macContent": "Ar prieku paziņojam, ka Sider tagad ir pieejams Mac lietotājiem! Izbaudiet nevainojamu un efektīvu pieredzi, kas pielāgota tikai operētājsistēmai Mac, kā arī visas jaudīgās funkcijas, kas jums patīk no mūsu tīmekļa versijas.",
+    "macContent2": "{{APP_NAME}} tagad ir pieejama operētājsistēmai Mac!",
+    "macDownload": "Lejuplādēt tagad!",
+    "macTitle": "{{APP_NAME}} operētājsistēmai Mac",
+    "phContent": "Veltiet brīdi, lai atbalstītu mūs ar balsi <i>Product Hunt</i>—tas ir ātri, vienkārši un ļoti palīdz!",
+    "phContent2": "Balsojiet par mums vietnē <b>Produktu medības</b>",
+    "phFeatures1": "<b>ChatGPT logrīki</b>: rakstiet, izvelciet tekstu no attēliem, pārbaudiet gramatiku un tulkojiet — tas viss vienuviet.",
+    "phFeatures2": "<b>Sider Vision</b>: tērzējiet par attēliem, izmantojot GPT-4 Vision, paceļot AI sarunu jaunā līmenī.",
+    "phFeatures3": "<b>Grupas AI tērzēšana</b>: sazinieties ar ChatGPT, GPT-4, Claude un Bard vienā revolucionārā grupas tērzēšanā.",
+    "phFeatures4": "<b>Mēs visi esam ausis</b>: jūsu atsauksmes veido Sider — dalieties savās domās, mēs uzklausām!",
+    "phTitle": "Vai jums patīk izmantot mūsu paplašinājumu?",
+    "phTitle2": "Mēs izlaidām Sider 3.X versijas vietnē <i>Produktu medības</i>.",
+    "phVote": "Balso tūlīt!",
+    "phVote2": "Balsojiet par <i>Produktu medībām</i>",
+    "phVoteTips": "<b>Šodienas balsojums ir galvenais</b> — atbalstiet mūs tūlīt!",
+    "xmasCountdown": "Gada beigu izpārdošana: <b>Atlicis {{time}}</b>"
+  },
+  "prompt": "Uzaicinājums",
+  "promptContent": "Uzvednes saturs",
+  "PromptManage": "Uzvedņu Pārvaldība",
+  "promptManage": "Uzvednes vadītājs",
+  "promptName": "Uzvednes nosaukums",
+  "prompts": "Uzvednes",
+  "publish": "Publicēt",
+  "publishArtifact": "Publicēt artefaktu",
+  "published": "Publicēts",
+  "publishing": "Publicēšana",
+  "queryNames": {
+    "advanced": "Uzlabots",
+    "fast": "Pamata",
+    "image": "Attēls",
+    "reader": "Lasītājs"
+  },
+  "quickAction": "Konteksta izvēlne",
+  "quickActions": {
+    "askAI": "Jautāt {{name}}",
+    "continueImproving": "Turpiniet uzlabot",
+    "defaultPlaceholder": "Jautājiet lietotnei {{APP_NAME}} jebko",
+    "defaultPlaceholder2": "Jautājiet lietotnei {{APP_NAME}}, izmantojot iepriekš minēto saturu",
+    "dictExample": "Piemērs:",
+    "disableGlobal": "Atspējot visās vietnēs",
+    "disableOnce": "Slēpt līdz nākamajam apmeklējumam",
+    "disableSite": "Atspējot šajā vietnē",
+    "managePrompts": "Pārvaldīt uzdevumus",
+    "pressToClose": "Lai aizvērtu, nospiediet {{name}}",
+    "requireSignin": "Pieteikšanās Nepieciešama",
+    "siginHint": "Lūdzu, piesakieties, lai piekļūtu šai funkcijai."
+  },
+  "quiz": "Viktorīna",
+  "quotaInfo": {
+    "allPlans": "Skatīt visus plānus",
+    "chatActionTranslate": "Tulkot uz {{lang}}",
+    "chatFileLink": "Failu/Saites čats",
+    "chatPDF": "PDF/Saites tērzēšana",
+    "creditRuleTip": "Mēs atskaitām kredītus, pamatojoties uz izmantoto modeli, funkcijām un konteksta garumu. Lai iegūtu pilnu informāciju, apmeklējiet <a>Palīdzības centru</a>.",
+    "creditRuleTitle": "Kredītu atskaitīšanas noteikumi",
+    "dailyCreditTip": "Atjaunošanas noteikums attiecas tikai uz plāna kredītiem, nevis papildu kredītiem.",
+    "dataAnalysis": "Uzlabota datu analīze",
+    "enjoyUnlimitedCredits": "Izbaudiet neierobežotus kredītus",
+    "enjoyUnlimitedCreditsDesc": "Izmantojiet GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro un daudz ko citu.",
+    "extraCreditTip": "Šie ir papildu kredīti vienreizējai lietošanai.",
+    "extractText": "AI teksta izvilkšana",
+    "inviteFriends": "<a>Aiciniet draugus</a>, lai iegūtu vairāk kredītu",
+    "mobilePlan": "Mobilais plāns",
+    "off": "{{num}} atlaide",
+    "pocketPlanTips": "Pocket kredītus var izmantot tikai mobilajā ierīcē. Izmantojiet dažus bezmaksas kredītus darbvirsmā.",
+    "pocketUpgrade": "Jauniniet, lai atbloķētu vairāk",
+    "premiumTrial": "Izmēģiniet Premium funkcijas bez maksas",
+    "premiumTrialTip": "Izmēģinājums sniedz jums ierobežotu piekļuvi Premium funkcijām, kas ir ekskluzīvas maksas lietotājiem. Lūdzu, ņemiet vērā, ka katra izmantošana joprojām maksās kredītus.",
+    "readAloud": "AI Lasīšana Skaļi",
+    "resetDate": "Atjaunošanas datums",
+    "resetsDaily": "Atjaunojas katru dienu",
+    "shortVideo": "AI video saīsinātājs",
+    "tryForFree": "Izmēģiniet bez maksas",
+    "tryReadAloudForFree": "Izmēģiniet Lasīt skaļi bez maksas",
+    "unlockAllFeats": "Atbloķēt visas funkcijas",
+    "unlockAllFeats2": "Atbloķēt pilnu piekļuvi",
+    "unlockAllFeatsDesc": "Jūs esat sasniedzis izmēģinājuma limitu premium funkcijām. Jauniniet, lai atbloķētu visas funkcijas.",
+    "unlockAllFeatsDesc2": "Iegūstiet neierobežotas tērzēšanas, piekļuvi tīmeklim, datu analīzi, attēlu ģenerēšanu, YouTube kopsavilkumus, failu/saite tērzēšanu, teksta iegūšanu un daudz ko citu",
+    "unlockFeats": "Atbloķēt visas Premium funkcijas",
+    "unlockToUse": "Atbloķēt neierobežotu lietošanu",
+    "upgradeFor": "Jauniniet tikai par {{price}}/mēn",
+    "usedCredits": "Izmantoti {{count}} kredīti",
+    "usedCredits_one": "{{count}} kredīts izmantots",
+    "usedCredits_other": "{{count}} kredīti izmantoti",
+    "vipInviteFriends": "Izbaudiet {{APP_NAME}}? <a>Aiciniet savus draugus!</a>",
+    "webAccess": "Tīmekļa piekļuve",
+    "youtubeSummary": "YouTube kopsavilkums"
+  },
+  "quote": "Citāts",
+  "quoteText": "Citāta teksts",
+  "readAloud": "Lasīt skaļi",
+  "reading": "Lasīšana",
+  "readingwriting": "Lasīšana un rakstīšana",
+  "readPage": "Izlasi šo lapu",
+  "reasoningModelTip": "Loģiskā domāšana jau iekļauta pašreizējā modelī",
+  "reasoningModelTip2": "Iespējot paplašinātu domāšanu sarežģītiem jautājumiem. Izmaksā apmēram 2x kredītus.",
+  "recentFiles": "Jaunākie faili",
+  "recognizing": "Atzīstot",
+  "recordPanel": {
+    "alertContinue": "Turpināt ierakstīšanu",
+    "alertStop": "Pabeigt ierakstīšanu",
+    "allNotes": "Visas piezīmes",
+    "audio": "Audio",
+    "camera": "Tikai kamera",
+    "cameraDisableTip": "Kamera nav pieejama cilnes ierakstīšanas laikā",
+    "cameraPermission": {
+      "deniedDesc": "Lūdzu, iespējojiet kameras piekļuvi, lai izmantotu kameras ierakstu.",
+      "grantedDesc": "Tagad varat aizvērt šo cilni un sākt ierakstīšanu sānu joslā.",
+      "noBrowserPremission": "Sistēma atteica atļauju",
+      "noBrowserPremissionTip": "Sistēma ir atteikusi kameras piekļuvi pašreizējam pārlūkam. Lūdzu, dodieties uz sistēmas iestatījumiem, lai mainītu atļaujas.",
+      "noCamera": "Nav kameras",
+      "noCameraTip": "Atvainojiet, nav pieejama neviena kamera.",
+      "noIconDesc": "Atsvaidziniet lapu, pēc tam noklikšķiniet uz {{iconImage}} ikonas adreses joslā un izvēlieties \"Vienmēr atļaut...\".",
+      "noIconTitle": "Ja neredzat kameras ikonu",
+      "noPopupDesc": "Noklikšķiniet uz kameras ikonas {{iconImage}} adreses joslā, izvēlieties \"Vienmēr atļaut...\" un noklikšķiniet uz \"Gatavs\".",
+      "title": "Kameras atļaujas ceļvedis",
+      "withPopupDesc": "Noklikšķiniet uz \"Atļaut, kamēr apmeklējat vietni\", lai ierakstītu ar kameru."
+    },
+    "cameraPrepare": "Gatavoju kameru...",
+    "cameraTipOff": "Izslēgt kameru",
+    "cameraTipOn": "Ieslēgt kameru",
+    "cancelConfigContent": "Atcelšana radīs pašreizējā ieraksta zaudēšanu.",
+    "cancelConfigTitle": "Apstiprināt ierakstīšanas atcelšanu?",
+    "cancelRecording": "Atcelt ierakstīšanu",
+    "cancelRecordWarn": "Apstiprināt ieraksta atcelšanu",
+    "cancelRecordWarnContent": "Atcelšana izdzēsīs pašreizējo ierakstu un piezīmes.",
+    "captureScreenshot": "Uzņemt ekrānuzņēmumu",
+    "closePermanently": "Aizvērt uz visiem laikiem",
+    "closeThisTime": "Aizvērt šoreiz",
+    "continueRecord": "Turpināt bez mikrofona",
+    "countdown": "Atpakaļskaitīšana",
+    "countdownTip": "Ieraksts sāksies pēc",
+    "ctrlBar": "Vadības josla",
+    "deleteNoteWarn": "Dzēst šo piezīmi?",
+    "desktop": "Darbvirsma",
+    "don'tShow": "Nerādīt šo atkal",
+    "liveTips": "Veiciet piezīmes un ierakstiet vienlaicīgi, lai uztvertu galveno informāciju.",
+    "micMissContent": "Jūsu balss šajā sesijā netiks ierakstīta. Kā vēlaties turpināt?",
+    "micMissContent1": "Jūsu balss netiks ierakstīta. Vai vēlaties to ieslēgt?",
+    "micMissTitle": "Mikrofons ir IZSLĒGTS",
+    "micTipOff": "Izslēgt mikrofonu",
+    "micTipOn": "Ieslēgt mikrofonu",
+    "missInputTip": "Lūdzu, iespējojiet ekrāna ierakstīšanu vai ieslēdziet mikrofonu pirms piezīmes izveides.",
+    "new": "Jauns",
+    "newRecordNote": "Jauna REC piezīme",
+    "noDevice": "Nav atrasta neviena ierīce",
+    "NoSoundAlertContent": "Lūdzu, noklikšķiniet šeit, lai pārbaudītu, vai jūsu mikrofons ir ieslēgts.",
+    "NoSoundAlertTitle": "Skaņa netika konstatēta",
+    "noteContentPlaceholder": "Ievadiet galveno informāciju, un Sider palīdzēs to sakārtot.",
+    "noteGuideContent": "Jūs pierakstāt galvenos punktus, Sider ģenerē pilnas piezīmes.",
+    "noteListCreateWisebase": "Pievienot {{WISEBASE_APP_NAME}}",
+    "noteListEmpty": "Nospiediet +, lai sāktu",
+    "noteListError": "Neizdevās ielādēt piezīmes",
+    "noteListMove": "Pārvietot uz",
+    "noteListTitle": "Manas piezīmes",
+    "noteTitlePlaceholder": "Bez nosaukuma",
+    "paused": "Pauzēts",
+    "pausedAlertTitle": "Ierakstīšana pauzēta",
+    "proceed": "Jā, turpināt",
+    "quicklyRecord": "Ātri ierakstīt",
+    "recordScreen": "Ekrāna ierakstīšana",
+    "resolution": "Izšķirtspēja",
+    "setting": "Iestatījumi",
+    "showCutGuide": "Jūs varat iestatīt īsinājumtaustiņu <num>šeit</num>",
+    "startRecording": "Sākt ierakstīšanu",
+    "storageAlertContent": "Nepietiekama atmiņas vieta. Lūdzu, atbrīvojiet vietu, lai turpinātu ierakstīšanu, vai pabeidziet pašreizējo ierakstu.",
+    "storageAlertStart": "Nepietiekama atmiņas vieta. Lūdzu, atbrīvojiet vietu, lai turpinātu ierakstīšanu.",
+    "tab": "Cilne",
+    "tabAudioOnly": "Ierakstīt tikai cilnes audio",
+    "tabAudioOnlyShow": "Tikai cilnes audio",
+    "tabSound": "Cilnes skaņa",
+    "tabVideoAudio": "Ierakstīt cilnes ekrānu + audio",
+    "tabVideoAudioShow": "Ekrāns + audio",
+    "tabVideoOnly": "Ierakstīt cilni tikai ekrāns",
+    "tabVideoOnlyShow": "Tikai cilnes ekrāns",
+    "timeLimitAlertContent": "Ieraksts ir sasniedzis {{alertNumber}} stundu limitu",
+    "title": "Ierakstīt",
+    "title1": "Ieraksta piezīmes",
+    "transcript": "Transkripts",
+    "turnAndProceed": "Ieslēgt mikrofonu un turpināt",
+    "turnOnMic": "Ieslēgt mikrofonu",
+    "uploadingList": {
+      "connection": "Augšupielāde atsāksies, kad tiks atjaunots savienojums.",
+      "delete": "Atcelt un dzēst",
+      "failed": "Augšupielāde neizdevās",
+      "networkTip": "Nav interneta savienojuma.",
+      "save": "Saglabāt lokāli",
+      "title": "Sinhronizācijas statuss",
+      "uploaded": "Augšupielādēts"
+    },
+    "uploadTimedOut": "Augšupielāde beidzās ar laika pārsniegumu",
+    "uploadTimedOutTip": "Augšupielāde tika pārtraukta tīkla problēmas dēļ. Tā automātiski atsāksies, kad savienojums tiks atjaunots, vai arī jūs varat vispirms lejupielādēt ierakstīto failu savā ierīcē.",
+    "video": "Video",
+    "voice": "Tikai balss"
+  },
+  "refresh": "atjaunot",
+  "refreshing": "Atjaunošana",
+  "refreshModel": "Atjaunot modeļus",
+  "related-academic-research": "Skatīt saistītos rakstus",
+  "related-news": "Atrast saistītās ziņas",
+  "related-videos": "Skatīties saistītos video",
+  "remixArtifact": "Remiksēt artefaktu",
+  "remove": "Noņemt",
+  "renameAll": "Pārdēvēt visus",
+  "renameOnce": "Pārdēvēt vienu reizi",
+  "repair": "Remonts",
+  "repairing": "Remontēšana",
+  "replace": "Aizvietot",
+  "replay": "Atkārtot",
+  "researching": "Pēta",
+  "researchProgress": "Pētījuma progress",
+  "reselect": "Pārvēlēt",
+  "reset": "Atiestatīt",
+  "resetTime": "Atiestatīts <a>2023. gada 3. augustā</a>",
+  "restoreTpl": "Atjaunojiet šo veidni",
+  "result": "Rezultāts",
+  "resume": "Atsākt",
+  "retry": "Mēģināt vēlreiz",
+  "rewrite": "Pārrakstīt",
+  "roast": {
+    "analyzing": "Analizē...",
+    "boast": "🥰 Lielīšanās",
+    "roast": "😜 Apvainojums",
+    "roastX1": "🔥 Kāds tikko tevi ķircināja, apskati",
+    "roastX2": "Izsmej šo puisi!"
+  },
+  "save": "Saglabājiet to",
+  "saved": "Saglabāts",
+  "screenshot": "Ekrānuzņēmums",
+  "search": "Meklēt",
+  "searched3": "Meklēts 3 vietnēs",
+  "searchedFor": "Meklēja:",
+  "searchedN": "Meklētas {{NUM}} vietnes",
+  "searchEnhance": {
+    "adContent": "Viedāks par GPT-4? Klods 3 ir šeit! Aicini draugus un izmēģini to bez maksas!",
+    "getStarted": "Sāc tagad",
+    "noLoginAdContent": "Atslēdz AI Jaudu: Meklēt, Lasīt, Rakstīt, Tulkot Ātrāk & Gudrāk!",
+    "noLoginBtn": "Pievienojies 4M+ Apmierinātiem Lietotājiem!",
+    "relatedQuestion": "Saistītie jautājumi:"
+  },
+  "searchFailed": "Meklēšana neizdevās",
+  "searching": "Meklē: {{QUERY}}",
+  "searchingFor": "Meklē:",
+  "searchPage": "Meklēšanas lapa",
+  "searchTip": "Meklēt tīmeklī, ja nepieciešams",
+  "searchTool": {
+    "braveTrouble": "Joprojām nedarbojas? Sekot vietnei {{url}}",
+    "cloudflareCheck": "OpenAI ik pa laikam pieprasa iziet drošības pārbaudi. Ja tas turpinās, mainiet AI nodrošinātāju uz OpenAI API sadaļā <i>paplašināšanas opcijas</i>.",
+    "failedResponse": "Neizdevās ielādēt atbildi no ChatGPT:",
+    "fiveStart": "Vai jums patīk šis paplašinājums? Piešķiriet mums 5 zvaigžņu vērtējumu veikalā {{store}}",
+    "loginAndCloudflareCheck": "Lūdzu, piesakieties un iziet Cloudflare pārbaudi vietnē {{web}}",
+    "questionMark": "Aktivizējiet ChatGPT, pēc vaicājuma pievienojot jautājuma zīmi",
+    "waitResponse": "Gaida ChatGPT atbildi...",
+    "whenToAskTips": "Katrs meklējums patērē vienu pamata kredītu. Noklikšķiniet šeit, lai iestatītu, kad jautāt ChatGPT."
+  },
+  "seeMoreHelp": "Uzziniet vairāk <a>Palīdzības centrā</a>",
+  "select": "Izvēlēties",
+  "selectedTextInputHint": "Uzdot jautājumus par izvēlēto tekstu",
+  "selectGenerationModel": "Izvēlieties ģenerēšanas modeli",
+  "selectPrompt": "Izvēlieties uzaicinājumu",
+  "send": "Sūtīt",
+  "sendShortcut": "Sūtīt saīsni",
+  "sendToChat": "Nosūtīt uz čatu",
+  "settingApiKey": "API atslēgas iestatīšana",
+  "settings": "Iestatījumi",
+  "setupPage": {
+    "activeUser": "Active Users",
+    "endBottom": "Vajadzīga palīdzība vai ir ieteikumi?",
+    "endBottom2": "Mēs novērtējam jūsu ieguldījumu! <a>Sniedziet atsauksmes</a>, lai palīdzētu mums uzlabot jūsu pieredzi.",
+    "endTip": "Tagad jūs varat pārlūkot jebkuru tīmekļa lapu vai iedziļināties mūsu Palīdzības centrā, lai uzzinātu vairāk.",
+    "endTitle": "{{APP_NAME}} ir gatavs jums palīdzēt!",
+    "explore": "Izpētīsim {{FEATURE_NAME}} funkciju",
+    "favorites": "Chrome vispopulārākais paplašinājums",
+    "fiveStarRate": "5 zvaigžņu vērtējumi",
+    "learnMore": "Uzzināt vairāk par {{APP_NAME}}",
+    "loginSuccess": "Pieteikšanās veiksmīga",
+    "loginWith": "Piesakieties ar {{name}}",
+    "next": "Nākamais",
+    "pinClickTip": "Noklikšķiniet uz {{icon}}, lai piespraustu lietotni {{APP_NAME}}",
+    "pinClickTip2": "Piespraust {{APP_NAME}} ātrai piekļuvei",
+    "pinClickTip3": "Noklikšķiniet uz {{icon}} ikonas augšējā labajā stūrī",
+    "pinTips": "<b>Piespraust {{APP_NAME}}</b>, vieglāk piekļūt!",
+    "privacy": "Turpinot, jūs piekrītat <a>Privātuma politikai</a> un <b>Lietošanas noteikumiem</b>.",
+    "privacyPart1": "Turpinot, jūs piekrītat",
+    "privacyPart2": "<a>Privātuma politikai</a> un <b>Lietošanas noteikumiem</b>",
+    "spamMsg": "Jūsu dati netiks noplūdināti un nebūs nekādu nevēlamu ziņu.",
+    "startUsing": "Sākt lietot {{APP_NAME}}",
+    "tryOut": "izmēģini",
+    "userCount": "4M+",
+    "welcome": "Laipni lūdzam lietotnē {{APP_NAME}}!"
+  },
+  "share": "Dalīties",
+  "shareChat": {
+    "5starRatings": "<num>50K</num> 5 zvaigžņu vērtējumi",
+    "activeUsers": "<num>5 milj.+</num> aktīvi lietotāji",
+    "AIContentWarning": "Ar mākslīgo intelektu ģenerēts saturs ne vienmēr var būt autentisks",
+    "copyIamge": "Kopēt attēlu",
+    "copyLink": "Kopēt saiti",
+    "downloadImage": "Lejupielādēt attēlu",
+    "exportAs": "Eksportēt kā",
+    "generateImage": "Ģenerēt attēlu",
+    "generateLink": "Ģenerēt saiti",
+    "linkCopied": "Saite nokopēta",
+    "linkGenerated": "Saite ģenerēta",
+    "qrcodeTip": "Skenējiet, lai iegūtu {{APP_NAME}}!",
+    "selectAll": "Izvēlēties visu",
+    "shareOn": "Kopīgot",
+    "slogan": "Jūsu AI asistents",
+    "socialMediaImageCopiedTip": "Attēls nokopēts un gatavs ielīmēšanai."
+  },
+  "shortcut": "Īsinājumtaustiņi",
+  "shortPlanNames": {
+    "basic": "Pamata",
+    "free": "Bezmaksas",
+    "pocket": "Pocket",
+    "pro": "Pro",
+    "starter": "Sākuma",
+    "ultra": "Neierobežots"
+  },
+  "show": "Rādīt",
+  "showImage": "Rādīt attēlu",
+  "showMore": "Parādīt vairāk",
+  "showSearchPanel": "Rādīt meklēšanas paneli",
+  "showTpl": "Rādīt šo veidni",
+  "sidebar": "Sānjosla",
+  "sidebarChatPanel": {
+    "addImage": "Pievienojiet attēlu",
+    "answerFrom": "Atbilde no",
+    "answerWithoutSearching": "Jautājiet <b>oriģinālajam Botam</b>",
+    "autoCloseBanner": "Automātiski pauzē pēc neaktivitātes",
+    "autoCloseTips": "Meklēšanas asistents pauzēs, ja 30 meklēšanas laikā neklikšķināsiet uz nevienas pogas kartītē. Jūs varat to jebkurā laikā atkal aktivizēt, noklikšķinot uz pogas.",
+    "capabilities": "Iespējas",
+    "chatActionTranslate": "Tulkot šādā valodā: {{lang}}",
+    "chatControls": "Čata vadība",
+    "chatHistory": "Čata vēsture",
+    "chatWithVideo": "Tērzēšana ar video",
+    "compareAnsWith": "Salīdzināt atbildi ar",
+    "compareWeb": "Salīdziniet atbildi no tīmekļa",
+    "compareWithXXX": "Jautāt <b>Botam</b>",
+    "continueInChat": "Turpināt tērzēšanā",
+    "deleteConfirmContent": "Šo darbību nevar atsaukt.",
+    "deleteConfirmTitle": "Vai dzēst šo sarunu?",
+    "experimental": "Šī funkcija joprojām attīstās un var mainīties, tāpēc, lūdzu, dalieties ar savām domām.",
+    "feedback": "Atsauksmes",
+    "improveWithBoth": "Kārtojiet Google atbildes, izmantojot GPT-4",
+    "improveWithSearch": "Saņemiet tīmekļa atbildi no Google",
+    "improveWithXXX": "Saņemiet gudrāku atbildi no <b>Bot</b>",
+    "improveWithXXX2": "Saņemiet izsmeļošu atbildi no <b>Bot</b>",
+    "inputPlaceholder": "Jautājiet jebko, @ modeļi, / uzvednes",
+    "newChat": "Jauna čata saruna",
+    "noChatHistory": "Vēl nav vēstures.",
+    "noSearchHistory": "Rezultāti nav atrasti",
+    "ocrTextTip": "{{name}} Rezultāts",
+    "readDoc": "Lasīt dokumentus",
+    "readDocFail": "Dokumentu lasīšana neizdevās",
+    "readingDoc": "Dokumentu lasīšana",
+    "replyLanguage": "Atbildes valoda",
+    "screenshot": "Ekrānuzņēmums",
+    "search": "Meklēt",
+    "searchHistory": "Meklēšanas vēsture",
+    "send": "Sūtīt",
+    "share": "Dalīties",
+    "siderUploadFile": "Augšupielādējiet failus PDF, DOC, XLSX, CSV, JPG, JSON un citos formātos, līdz 6 failiem vienlaikus, līdz 100MB vienam failam.",
+    "signinToAsk": "Piesakieties, lai jautātu {{MODEL_NAME}}",
+    "smarterAnsWith": "Saņemiet gudrāku atbildi no",
+    "switchAndContinue": "Pārslēgties un turpināt",
+    "textSelectedSystemMsg": "Ko jūs vēlētos darīt ar tekstu?",
+    "textSelectedTip": "Teksts no jūsu atlases",
+    "translateTip": "Tulkot rezultātu",
+    "upload": "Augšupielādēt",
+    "uploadFile": "Augšupielādēt failus",
+    "uploadTip": {
+      "format": "Tīmekļa lapa, PDF, DOC, XLSX, CSV, JPG, JSON, MP3, WAV, M4A, MPGA un vairāk",
+      "formatTitle": "Atbalsts:",
+      "limit": "Līdz 6 failiem, katrs līdz 100MB",
+      "limitTitle": "Limits:"
+    },
+    "userStopTip": "Lietotājs atcēla pieprasījumu.",
+    "webAccessModalContent": "ChatGPT dati nav reāllaika dati. {{APP_NAME}} apvieno ChatGPT inteliģenci ar reāllaika tīmekļa informāciju, ļaujot GPT efektīvāk apstrādāt ar informāciju saistītus jautājumus reāllaikā. Jauniniet, lai iegūtu šo funkciju, un vairs neuztraucieties par novecojušu informāciju!",
+    "webAccessModalTitle": "Lietotne {{APP_NAME}} ļauj piekļūt tīmeklim gan ChatGPT-3.5, gan GPT-4!",
+    "welcomeMsg": "Kā es varu jums palīdzēt šodien?",
+    "welcomeQues": [
+      {
+        "ques": "Uzrakstiet Šekspīra stilā sonetu par viedtālruņiem",
+        "title": ""
+      },
+      {
+        "ques": "Iesakiet 10 radošus Helovīna kostīmus bērniem",
+        "title": ""
+      },
+      {
+        "ques": "Izklāstiet iesācēja ceļvedi personīgo finanšu apguvei",
+        "title": ""
+      },
+      {
+        "ques": "Paskaidrojiet 10 gadus vecam bērnam, kāpēc debesis ir zilas",
+        "title": ""
+      }
+    ],
+    "welcomeSystemMsg": "Sveiki! Kā es varu jums palīdzēt šodien?",
+    "writeHistory": "Rakstīšanas vēsture"
+  },
+  "sidebarComposePanel": {
+    "addToSite": "Pievienot vietnei",
+    "addToSiteTip": "Novietojiet peles kursoru vajadzīgajā ievades lodziņā un noklikšķiniet uz '{{name}}', lai ievietotu",
+    "ads": "Mārketinga reklāmas",
+    "AIWriter": "AI rakstītājs",
+    "alsoWriteTips": "Rakstīšana blakus ar Al",
+    "basic": "pamata",
+    "blog": "Emuāra ieraksts",
+    "casual": "Ikdienišks",
+    "comment": "komentēt",
+    "compose": "Rakstīt",
+    "continueOptimizeTips": "Turpiniet pilnveidot un uzlabot kopā ar AI",
+    "email": "E-pasts",
+    "enthusiastic": "Entuziasma pilns",
+    "essay": "Eseja",
+    "formal": "Formāls",
+    "format": "Formāts",
+    "formatExists": "Formāts jau pastāv",
+    "funny": "Smieklīgi",
+    "generate": "Ģenerēt melnrakstu",
+    "history": "Vēsture",
+    "idea": "Ideja",
+    "informational": "Informatīvs",
+    "insertToSite": "Ievietot rezultātu tīmekļa lapas ievades laukā",
+    "length": "Garums",
+    "long": "Gari",
+    "medium": "Vidēja",
+    "message": "Ziņojums",
+    "outline": "Kontūra",
+    "paragraph": "Paragrāfs",
+    "professional": "Profesionāls",
+    "regenerate": "Atjaunot",
+    "reply": "Atbildēt",
+    "replyPlaceholder1": "Ievadiet oriģinālo tekstu, uz kuru vēlaties atbildēt",
+    "replyPlaceholder2": "Aprakstiet jūsu atbildes vispārējo ideju",
+    "short": "Īss",
+    "style": "Stils",
+    "submitShortcut": "Nospiediet {{shortcut}}, lai ģenerētu melnrakstu",
+    "tone": "Tonis",
+    "twitter": "Twitter",
+    "write": "Rakstīt",
+    "writePlaceholder": "Ievadiet tēmu, par kuru vēlaties rakstīt"
+  },
+  "sidebarGrammarPanel": {
+    "accept": "Pieņemt",
+    "checkFailed": "Pārbaude neizdevās",
+    "checking": "Pārbauda",
+    "checkNoError": "Nav kļūdu",
+    "fixError": "Labot visu ({{errorCount}})",
+    "ignore": "Ignorēt",
+    "improve": "Uzlabot",
+    "inputPlaceholder": "Atbalstīts ir tikai angļu valoda. Ielīmējiet vai ierakstiet tekstu, lai pārbaudītu.",
+    "reasonForChanges": "Izmaiņu iemesls"
+  },
+  "sidebarPanel": {
+    "addToStarred": "Pievienot pie Izlases",
+    "agentTabLabel": "Agent",
+    "askTabLabel": "Jautājiet",
+    "chatTabLabel": "Tērzēšana",
+    "composeTabLabel": "Rakstiet",
+    "deleteAllConfirmTitle": "Dzēst visu",
+    "downloadLabel": "Lejupielādēt galddatora/mobilās lietotnes",
+    "extraQuota": "Papildu kvota",
+    "freePlan": "Bezmaksas plāns",
+    "grammarTabLabel": "Gramatika",
+    "includeStarred": "Iekļaut Izlasē",
+    "inputPlaceholder1": "Ievadiet uzvedni vai izvēlieties no izvēlnes",
+    "inputPlaceholder2": "Ielīmējiet vai ievadiet saturu šeit",
+    "inputPlaceholderCodes": "Šeit ielīmējiet vai ievadiet kodus",
+    "inputPlaceholderQA": "Ielīmējiet vai ievadiet jautājumu šeit",
+    "moreTabLabel": "Vairāk",
+    "ocrTabLabel": "OCR",
+    "painterLabel": "Gleznotājs",
+    "premiumPlan": "Premium plāns",
+    "pressToSubmit": "Lai iesniegtu, nospiediet {{key}}",
+    "recordTabLabel": "REC piezīmes",
+    "regenerate": "Atjaunot reakciju",
+    "removeFromStarred": "Noņemt no Izlases",
+    "replacePrompt": "Nomainiet uzvedni",
+    "saveNewPrompt": "Saglabāt kā jaunu uzvedni",
+    "searchTabLabel": "Meklēt",
+    "starred": "Izlase",
+    "startNewLine": "Nospiediet {{shortcut}}, lai sāktu jaunu rindiņu",
+    "stopGenerating": "Beidziet ģenerēt",
+    "submitOption": "Iesniegt opciju",
+    "toolsTabLabel": "Rīki",
+    "translateTabLabel": "Tulkot"
+  },
+  "sidebarSearchPanel": {
+    "answer": "Atbilde",
+    "currentVisit": "Pašreizējā apmeklēšana",
+    "defaultSearchSuggesiton": "Kur ir labākais laiks apmeklēt Parīzi?",
+    "feedback": {
+      "stepAnswer": "Ģenerēt atbildi",
+      "stepSearch": "Veikt meklēšanu",
+      "stepUnderstand": "Saprotiet jautājumus",
+      "tipTotal": "Kopā {{count}} kredīti"
+    },
+    "followUpQuestion": "Papildu jautājums...",
+    "history": "Vēsture",
+    "newSearch": "Jauna meklēšana",
+    "relatedSearches": "Saistītās meklēšanas",
+    "searchAll": "Meklēt visur",
+    "searchFrom": "Meklēt no",
+    "searchFromAll": "Meklēt no visa interneta",
+    "searchFromSite": "Meklēt no vietnes {{domain}}",
+    "searchHistory": "Meklēšanas vēsture",
+    "searching": "Meklēšana",
+    "searchPlaceholder": "Ievadiet informāciju, kuru vēlaties meklēt",
+    "searchProgress": {
+      "analyzeSearchResult": "Analizēt meklēšanas rezultātus",
+      "analyzing": "Analizēšana",
+      "competed": "Pabeigts",
+      "generateAnswer": "Ģenerēt atbildi",
+      "generatingAnswer": "Atbildes ģenerēšana",
+      "organizing": "Organizēšana",
+      "searchCancelled": "Meklēšana atcelta",
+      "searchCompleted": "Meklēšana pabeigta",
+      "searching": "Meklēšana",
+      "searchInWeb": "Meklēt tīmeklī"
+    },
+    "searchRange": "Meklēšanas diapazons",
+    "sources": "Avoti",
+    "stoppedSearch": "Jūs esat pārtraucis šo meklēšanu.",
+    "suggestions": "Ieteikumi",
+    "title": "Meklēt",
+    "viewAll": "Skatīt visu"
+  },
+  "sidebarTranslatePanel": {
+    "auto-detect": "Automātiskā noteikšana",
+    "currentPage": "Pašreizējā lapa",
+    "customization": {
+      "Complexity": "Sarežģītība",
+      "ComplexityOpt": {
+        "Expert": "Eksperts",
+        "Layman": "lajs",
+        "Standard": "Standarta"
+      },
+      "defaultPreferences": "Noklusējuma iestatījumi",
+      "Length": "Garums",
+      "LengthOpt": {
+        "Brief": "Īsumā",
+        "Concise": "Īsi",
+        "Expanded": "Izvērsts",
+        "Standard": "Standarta"
+      },
+      "Style": "Stils",
+      "StyleOpt": {
+        "CreativeAdaptation": "Radošā adaptācija",
+        "DynamicEquivalence": "Dinamiskā ekvivalence",
+        "Literal": "Burtiski"
+      },
+      "title": "Tulkotāja iestatījumi",
+      "Tone": "Tonis",
+      "ToneOpt": {
+        "Authoritative": "Autoritatīvs",
+        "Casual": "Ikdienišks",
+        "Empathetic": "Empātisks",
+        "Formal": "Formāls",
+        "Neutral": "Neitrāls"
+      }
+    },
+    "errTooManyChar": "{{num}}/{{total}}: Ievade pārsniedz rakstzīmju limitu.",
+    "errWrongTargetLang": "Tā pati avota un mērķa valoda. Pārbaudiet savu izvēli.",
+    "extraTransTips": "Jūs varat arī tulkot:",
+    "inputTranslateAdBtn": "Iestatiet to tagad",
+    "inputTranslateAdText": "Tūlītēji tulkojiet tekstu ievades lodziņā jebkurā tīmekļa lapā!",
+    "placeholde": "Ierakstiet vai ielīmējiet tekstu šeit...",
+    "seeDict": "Skatīt vārdnīcu",
+    "upgradeForLongChar": "Jauniniet tagad, lai atbloķētu garāku ievadi ({{num}} rakstzīmes)."
+  },
+  "sidepanel": {
+    "benefit1": "Sider sānjosla <b>nekad nepazudīs</b>, ja pāriesit uz jaunu lapu.",
+    "benefit2": "Varat tērzēt starp visām cilnēm, <b>nepārklājot saturu</b>.",
+    "benefit3": "Pieejams tikai pārlūkprogrammā <b>Google Chrome 114 vai jaunākā versijā</b>",
+    "micPermission": {
+      "deniedDesc": "Lūdzu, aktivizējiet mikrofona piekļuvi, lai izmantotu balss ievadi.",
+      "deniedTitle": "Piekļuve nav piešķirta",
+      "grantedDesc": "Tagad varat aizvērt šo cilni un sākt runāt sānu joslā.",
+      "grantedTitle": "Piekļuve veiksmīgi piešķirta",
+      "noIconDesc": "Atsvaidziniet lapu, pēc tam noklikšķiniet uz {{iconImage}} ikonas adreses joslā un izvēlieties \"Vienmēr atļaut...\".",
+      "noIconTitle": "Ja neredzat mikrofona ikonu",
+      "noPopupDesc": "Noklikšķiniet uz mikrofona ikonas {{iconImage}} adreses joslā, izvēlieties \"Vienmēr atļaut...\" un noklikšķiniet uz \"Gatavs\".",
+      "noPopupTitle": "Ja nav uznirstošā loga",
+      "tips": "💡 Padoms: Izvairieties no ierīču izvēles ar \"virtuāls\" nosaukumā, lai novērstu ierakstīšanas kļūmes.",
+      "title": "Mikrofona atļauju ceļvedis",
+      "withPopupDesc": "Noklikšķiniet uz \"Atļaut, kamēr apmeklējat vietni\", lai aktivizētu runas-teksta funkciju.",
+      "withPopupTitle": "Ja redzat uznirstošo logu"
+    },
+    "tip": "Padoms. Lai iegūtu labāku pieredzi, atbilstoši pielāgojiet sānu paneļa platumu.",
+    "title": "Sider atbalsta fiksēto sānjoslu",
+    "voiceInput": "Balss ievade",
+    "voiceInputError": {
+      "deviceNotFound": "Atvainojiet, nav pieejams mikrofons.",
+      "deviceNotFoundTitle": "Nav mikrofona",
+      "rateLimit": "Jūs esat sasniedzis šīs funkcijas izmantošanas biežuma limitu. Lūdzu, mēģiniet vēlreiz pēc stundas.",
+      "rateLimitTitle": "Pārsniegts pieprasījumu limits",
+      "systemPermission": "Sistēma ir atteikusi mikrofona piekļuvi pašreizējam pārlūkam. Lūdzu, dodieties uz sistēmas iestatījumiem, lai mainītu atļaujas.",
+      "systemPermissionTitle": "Sistēma atteica atļauju",
+      "timeLimit": "Sasniegts ieraksta limits. Vispirms pārrakstiet pašreizējo ierakstu.",
+      "tooShort": "Ieraksts ir pārāk īss, lai to atpazītu",
+      "transcriptionFailed": "Radās kļūda pārrakstīšanas laikā. Lūdzu, mēģiniet vēlreiz.",
+      "transcriptionFailedTitle": "Pārrakstīšana neizdevās"
+    }
+  },
+  "sidepanelPinGuide": {
+    "desc": "Pievienojiet {{APP_NAME}} savai rīkjoslai ātrai piekļuvei",
+    "title": "Noklikšķiniet uz \"{{icon}}\""
+  },
+  "sidepanelTip": "Sidepanel padoms",
+  "signin": "Pieslēgties",
+  "signinNow": "Piesakieties tūlīt",
+  "signupTip": "Jau ir konts? <a>Pieteikties</a>",
+  "skip": "Izlaist",
+  "smarterWith": "Saņemiet gudrāku atbildi no {{NAME}}",
+  "Speaker": "Preses pārstāvis",
+  "speechVoice": "Balss runa",
+  "startingResearch": "Sāk pētījumu...",
+  "stop": "Stop",
+  "submit": "Iesniegt",
+  "subscribe": "Abonēt",
+  "success": "Panākumi",
+  "suggestTools": {
+    "tips": {
+      "create_image": "Vēlaties izveidot attēlus? Jauniniet, lai atbloķētu AI attēlu rīkus.",
+      "search": "Nepieciešamas atbildes reāllaikā? Jauniniet, lai piekļūtu tīmekļa meklēšanai."
+    }
+  },
+  "summarize": "Apkopojiet",
+  "summarizeFailed": "Kopsavilkums neizdevās",
+  "summarizePage": "Apkopojiet šo lapu",
+  "summarizing": "Apkopojot",
+  "summary": "Kopsavilkums",
+  "superAdvanced": "Super attīstīts",
+  "switch": "Pārslēgt",
+  "switchAndContinue": "Pārslēgt režīmu",
+  "switchModel": "Pārslēgt modeli",
+  "switchToSidepanel": "Pārslēgties uz sānjoslu",
+  "switchToSider": "Pārslēdzieties uz {{APP_NAME}} API",
+  "switchToXXX": "Pārslēgties uz {{model}}",
+  "switchVoice": "Pārslēgt balsi",
+  "table": "Tabula",
+  "takeAScreenshot": "Uzņemt ekrānuzņēmumu",
+  "taskCenter": {
+    "advanceTask": "Uzlabotie uzdevumi",
+    "beginnerGuide": "Iesācēju ceļvedis",
+    "chatDemoText": "Ar ko varat palīdzēt?",
+    "claim": "Pieprasīt",
+    "claimed": "Pieprasīts",
+    "claimNow": "Pieprasīt tagad",
+    "claimRewards": "Dodieties uz Atlīdzību centru, lai pieprasītu savas atlīdzības.",
+    "clickChatSetting": "Noklikšķiniet uz {{button}}, lai piekļūtu čata iestatījumiem",
+    "clickGoOptions": "Noklikšķiniet uz {{button}}, lai skatītu {{name}} opcijas",
+    "clickReadPage": "Noklikšķiniet uz {{button}}, lai lasītu tīmekļa lapu un nosūtītu ziņu",
+    "clickSavePage": "Noklikšķiniet uz {{button}}, lai saglabātu lapu",
+    "clickSend": "Noklikšķiniet uz {{button}}, lai nosūtītu ziņu",
+    "clickSummaryVideo": "Noklikšķiniet uz šīs pogas, lai kopsavilkotu video",
+    "clickTranslatePage": "Noklikšķiniet uz {{button}}, lai tulkotu lapu",
+    "clickTryDemo": "Noklikšķiniet uz {{button}}, lai skatītu un izmēģinātu demonstrāciju",
+    "clickUploadImg": "Noklikšķiniet uz {{button}}, lai augšupielādētu attēlu un nosūtītu ziņu",
+    "completedTasks": "Pabeigtie uzdevumi",
+    "completeTaskTo": "Pabeidziet uzdevumus, lai <a>iegūtu kredītus</a>",
+    "countdownTip": "<b>{{price}} ATLAIDE:</b> {{time}} palicis",
+    "expireIn": "Beidzas pēc {{time}}",
+    "exploreCenter": "Izpētīt {{name}}",
+    "getAdvancedCredits": "Iegūstiet {{count}} uzlabotus kredītus",
+    "getAdvancedCredits_one": "Iegūstiet {{count}} uzlabotu kredītu",
+    "getAdvancedCredits_other": "Iegūstiet {{count}} uzlabotus kredītus",
+    "getBasicCredits": "Iegūstiet {{count}} pamata kredītus",
+    "getExtraAdvancedCredits": "Iegūstiet {{count}} papildu uzlabotus kredītus",
+    "goYoutube": "Doties uz YouTube",
+    "gretNews": "Lieliskas ziņas!",
+    "iconEntryTip": "Šeit varat atrast {{name}}.",
+    "inviteFriend": "Aicināt draugus",
+    "name": "Atlīdzību centrs",
+    "progress": "Progresija",
+    "selectText": "Izvēlieties kādu tekstu, lai to izmēģinātu!",
+    "selectText2": "Iespējojiet {{name}}, lai izvēlētos tekstu",
+    "siderMode": "Pārslēgties uz Sider režīmu?",
+    "siderModeDesc": "Uzdevumi jāveic Sider režīmā, vai vēlaties pārslēgties?",
+    "start": "Sākt",
+    "starterTask": "Sākuma uzdevumi",
+    "taskCompleted": "Uzdevums pabeigts!",
+    "tasks": {
+      "chat": "Nosūtīt ziņu Čatā",
+      "chatImg": "Čatot ar attēlu",
+      "contextMenu": "Paskaidrojiet vārdu, izmantojot {{name}}",
+      "options": "Izpētiet {{APP_NAME}} opcijas 5 sekundes",
+      "pageTranslate": "Tulkot lapu, izmantojot {{APP_NAME}} ikonu",
+      "prompt": "Izmēģiniet {{APP_NAME}} iepriekšiestatīto uzvedni",
+      "readPage": "Lasīt lapu Čatā",
+      "webAccess": "Izmēģiniet meklēšanas demonstrāciju",
+      "wisebase": "Saglabāt lapu uz {{name}}",
+      "youtubeSummary": "Kopsavilkums par YouTube video"
+    },
+    "trunOn": "Ieslēgt",
+    "typePrompt": "Ierakstiet {{key}}, lai izvēlētos uzvedni un nosūtītu ziņu",
+    "unlimitedPlan": "Neierobežots plāns (Gada)",
+    "unlockDiscount": "Jūs esat atbloķējis pārsteiguma atlaidi.",
+    "useNow": "Izmantot tagad",
+    "watchYoutube": "Skatieties pamācības, atjauninājumus un vairāk mūsu YouTube kanālā!",
+    "youtubeSummaryDisabled": "YouTube kopsavilkums atspējots",
+    "youtubeSummaryDisabledDesc": "Iespējojiet to, lai turpinātu. Ieslēgt to tagad?"
+  },
+  "template": "veidne",
+  "textExtracted": "Teksts iegūts",
+  "textFromGrammar": "Teksts no gramatikas",
+  "textFromOCR": "Teksts no OCR",
+  "textFromSearch": "Teksts no meklēšanas aģenta",
+  "textFromSelect": "Teksts no jūsu izvēles",
+  "textFromTranslate": "Teksts no tulkojuma",
+  "textFromWrite": "Teksts no rakstīšanas",
+  "theme": "Tēma",
+  "think": "Domā ({{NAME}})",
+  "thinkOnly": "Domāt",
+  "thoughtProgress": "Domāšanas process",
+  "timeUnit": {
+    "day": "Diena",
+    "day_one": "Diena",
+    "day_other": "Dienas",
+    "hour": "Stunda",
+    "hour_one": "Stunda",
+    "hour_other": "Stundas",
+    "minute": "Minūte",
+    "minute_one": "Minūte",
+    "minute_other": "Minūtes",
+    "second": "Sekunde",
+    "second_one": "Sekunde",
+    "second_other": "Sekundes"
+  },
+  "toolMoveTip": "Čata rīkam ir jauna mājvieta! Šeit varat piekļūt visiem čata vadības elementiem.",
+  "Tools": {
+    "desc": {
+      "artifacts": [
+        {
+          "desc": "Pārvērtiet idejas taustāmos rezultātos, uzreiz!",
+          "title": "Uzlabota produktivitāte"
+        },
+        {
+          "desc": "Uzreiz vizualizējiet AI ģenerētas tīmekļa lapas, dokumentus un diagrammas.",
+          "title": "Reāllaika priekšskatījums"
+        },
+        {
+          "desc": "Pielāgojiet artefaktus bez piepūles, izmantojot dabisku sarunu.",
+          "title": "Vienmērīga iterācija"
+        }
+      ],
+      "create_image": [
+        {
+          "desc": "Uzreiz pārvērtiet aprakstus augstas kvalitātes attēlos.",
+          "title": "Iedvesmojiet radošumu"
+        },
+        {
+          "desc": "Uzlabojiet savus projektus ar pielāgotiem vizuāliem attēliem.",
+          "title": "Uzlabojiet saturu"
+        }
+      ],
+      "custom_instruction": [
+        {
+          "desc": "Saņemiet AI atbildes, kas atbilst jūsu unikālajam stilam un vēlmēm.",
+          "title": "Pielāgots tieši jums"
+        },
+        {
+          "desc": "Vairs nav nepieciešams atkārtoties. Mēs atcerēsimies, kā jums patīk mijiedarboties.",
+          "title": "Ietaupiet laiku, katru reizi"
+        }
+      ],
+      "data_analysis": [
+        {
+          "desc": "Viegli analizēt un vizualizēt datus, lai atrastu skaidru.",
+          "title": "Iegūt ieskatus"
+        },
+        {
+          "desc": "Attīrīt, interpretēt un izpildīt kodu efektīvai problēmu risināšanai.",
+          "title": "Programmēt gudrāk"
+        },
+        {
+          "desc": "Atrisināt sarežģītas matemātikas problēmas viegli un precīzi.",
+          "title": "Izcilt matemātikā"
+        }
+      ],
+      "deep_research": [
+        {
+          "desc": "Automātiski ģenerēt pētījuma plānu un sadalīt galvenos jautājumus",
+          "title": "Vispirms plāns"
+        },
+        {
+          "desc": "Meklēt dažādās vietnēs, salīdzināt viedokļus un filtrēt troksni",
+          "title": "Krusta avotu pierādījumi"
+        },
+        {
+          "desc": "Katrs apgalvojums ietver atsauces; eksportējiet strukturētu ziņojumu ar vienu klikšķi",
+          "title": "Izsekojami secinājumi"
+        }
+      ],
+      "search": [
+        {
+          "desc": "Piekļūstiet aktuālākajai informācijai tīmeklī.",
+          "title": "Sekot līdzi jaunumiem"
+        },
+        {
+          "desc": "Iegūstiet precīzākas un atbilstošākas atbildes.",
+          "title": "Uzlabot precizitāti"
+        }
+      ],
+      "text_to_image": [
+        {
+          "desc": "Neilgi pārvērst aprakstus augstas kvalitātes.",
+          "title": "Veicināt radošumu"
+        },
+        {
+          "desc": "Uzlabojiet savus projektus ar pielāgotiem vizuāliem.",
+          "title": "Uzlabot saturu"
+        }
+      ],
+      "thinking_mode": [
+        {
+          "desc": "Iegūstiet prasmes risināt sarežģītas problēmas ar vairāku soļu domāšanu!",
+          "title": "Uzlabota problēmu risināšana"
+        },
+        {
+          "desc": "Iegūstiet dziļas atziņas kritiskiem lēmumiem nekavējoties.",
+          "title": "Visaptveroša analīze"
+        },
+        {
+          "desc": "Uzlabojiet risinājumus bez piepūles, izmantojot vadītu domāšanu.",
+          "title": "Inteliģenta iterācija"
+        }
+      ]
+    },
+    "title": {
+      "artifacts": "Atslēgt {{ARTIFACTS}}",
+      "create_image": "Atbloķēt attēla ģenerēšanu",
+      "custom_instruction": "Atbloķējiet personalizētu AI",
+      "data_analysis": "Atbloķēt datu analīzi",
+      "deep_research": "Atbloķēt Dziļo pētījumu",
+      "search": "Atbloķēt tīmekļa piekļuvi",
+      "text_to_image": "Atbloķēt attēla ģenerēšanu",
+      "thinking_mode": "Atbloķējiet Domāšanas režīmu"
+    }
+  },
+  "tools": {
+    "artifacts": {
+      "demos": [
+        {
+          "title": "Izveidot virtuālo ksilofonu",
+          "value": "Izveidot HTML balstītu ksilofonu ar krāsainām taustiņām iekš {{ARTIFACT}}. Nodrošināt vizuālu atgriezenisko saiti par nosistajiem taustiņiem un ģenerēt vienkāršas, reālistiskas skaņas, izmantojot Web Audio API, pamatojoties uz frekvences parametriem. Iekļaut pamata instrukcijas."
+        },
+        {
+          "title": "Izveidot ēdiena ēšanas emocijzīmju spēli",
+          "value": "Izveidot vienkāršu HTML balstītu spēli, līdzīgu Catch the Candy, iekš {{ARTIFACT}}. Spēlētājs kontrolē emocijzīmi apakšā ekrānā, ātri pārvietojot to pa kreisi un pa labi, lai noķertu un apēstu pārtikas objektus (piemēram, 🍓, 🍔, 🍎), kas krīt no augšas, vienlaikus izvairoties no bumbām (💣). Katru reizi, kad spēlētājs noķer pārtikas emocijzīmi, viņa emocijzīme mainīsies uz izteiktāku pozitīvu izteiksmi (piemēram, 🤩, 😆, 😋), lai norādītu uz panākumiem. Ja spēlētājs nejauši noķer bumbu, emocijzīme vispirms parādīs sprādzienu (💥) un pēc tam mainīsies uz reibuma izteiksmi (😵‍💫)."
+        },
+        {
+          "title": "Izveidot viedtālruņu piegādes diagrammu",
+          "value": "Izmantojiet React, lai izveidotu skaistu līniju diagrammu iekš {{ARTIFACT}}, pamatojoties uz sekojošo tabulu.\n------\n\nViedtālruņu piegādes pēc galvenajiem zīmoliem pēdējo desmit gadu laikā (miljardos)\n\n| Gads | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+        }
+      ],
+      "desc": "Viegli izveidojiet un prezentējiet saturu, piemēram, tīmekļa lapas vai plūsmas diagrammas, jaunā logā. Palieliniet produktivitāti ar reāllaika mijiedarbību un koncentrētu darba vidi.",
+      "name": "Artefakti"
+    },
+    "create_image": {
+      "desc": "Izveidojiet augstas kvalitātes attēlus, vienkārši aprakstot, ko vēlaties. Ģenerējiet jaunus attēlus no teksta aprakstiem vai pārveidojiet un rediģējiet esošos attēlus ar teksta norādēm. Mūsu rīks acumirklī iedzīvina jūsu idejas.",
+      "name": "Attēls"
+    },
+    "data_analysis": {
+      "demos": [
+        {
+          "title": "Nolasiet faila datus un izveidojiet sektoru diagrammu, kas parāda dažādu izdevumu budžetu proporcijas.",
+          "value": "Nolasiet faila datus un izveidojiet sektoru diagrammu, kas parāda dažādu izdevumu budžetu proporcijas."
+        }
+      ],
+      "desc": "Palaidiet Python kodu reāllaikā, lai veiktu uzlabotu matemātiku, statistiku, mašīnmācīšanos un datu apstrādi, vienkāršojot uzdevumus dažādos formātos.",
+      "name": "Datu analīze"
+    },
+    "search": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Kuri ir visaugstāk novērtētie filmas pašlaik ASV kinoteātros?"
+        },
+        {
+          "title": "",
+          "value": "Kuras akcijas šodien piedzīvoja ievērojamu pieaugumu?"
+        },
+        {
+          "title": "",
+          "value": "Kāds ir visievērojamākais jaunais elektroniskais produkts, kas šodien laists tirgū?"
+        }
+      ],
+      "desc": "Piekļūstiet reāllaika ieskatiem ārpus iepriekš apmācīto zināšanu robežām. Izmantojot dziļu daudzavotu analīzi, šī funkcija nodrošina precīzas pašreizējo notikumu, tirgus tendenču un jaunu attīstību interpretācijas, kas ļauj pieņemt labākus lēmumus mūsu strauji mainīgajā pasaulē.",
+      "name": "Meklēt"
+    },
+    "text_to_image": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Izstrādāt futūristisku lidmašīnas dizainu."
+        },
+        {
+          "title": "",
+          "value": "Uzzīmēt zelta retrīveru, kas skrien pa zāli."
+        },
+        {
+          "title": "",
+          "value": "Attēlot vecāku sievieti, kas mierīgi dzer kafiju."
+        }
+      ],
+      "desc": "Vienkārši aprakstiet, ko esat iedomājies, un uzreiz ģenerējiet augstas kvalitātes attēlus. Nav nepieciešamas dizaina prasmes – tikai jūsu iztēle.",
+      "name": "Ģenerēt attēlu"
+    },
+    "thinking_mode": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Padomā: 9.11 vai 9.8, kurš ir lielāks"
+        },
+        {
+          "title": "",
+          "value": "Izdomājiet un uzrakstiet funkciju, lai modelētu teoriju 'Seši šķiršanās grādi'. Dots sociālais tīkls kā grafiks, atrodiet īsāko ceļu starp jebkuriem diviem cilvēkiem."
+        }
+      ],
+      "desc": "Uzlabojiet jebkuru tērzēšanas modeli ar DeepSeek R1 spēcīgo loģiskās domāšanas spēju. Kad iespējots, jūsu izvēlētais modelis saņem R1 uzlaboto domāšanas ķēdes apstrādi, nodrošinot precīzākas, loģiskākas un ieskatošākas atbildes uz sarežģītiem vaicājumiem. Izmaksas 1 papildu uzlabots kredīts par vaicājumu.",
+      "name": "Domāt"
+    }
+  },
+  "toolsTitle": "Rīki",
+  "toolsUpgradeContent": {
+    "content1": "Aktivizējiet čata rīkus, lai atklātu spēcīgas iespējas.",
+    "content2": [
+      "Izpētiet pasaules tīmekli bez šķēršļiem.",
+      "Pārvērtiet savas idejas par apburošiem vizuāliem materiāliem.",
+      "Iegrimstiet dziļi datu analīzē ar ekspertu palīdzību."
+    ]
+  },
+  "toolsUpgradeTitle": "Uzlabojiet savu tērzēšanas pieredzi!",
+  "toSlides": "No tīmekļa uz slaidiem",
+  "toSlidesDesc": "Pārvērtiet jebkuru tīmekļa lapu gatavā prezentācijā ar vienu klikšķi.",
+  "total": "Kopā",
+  "transcriptFailed": "Transkripta ģenerēšana neizdevās",
+  "transcriptGenerated": "Transkripts ģenerēts",
+  "transcriptReady": "Transkripts gatavs",
+  "translate": "Tulkot",
+  "translateBackInto": "Tulkot atpakaļ uz: {{lang}}",
+  "translateInto": "Tulkot uz: {{lang}}",
+  "trial": "Izmēģinājums",
+  "troubleshooting": "Problēmu novēršana",
+  "tryArtifact": "Izmēģiniet {{ARTIFACTS}}",
+  "tryArtifactNow": "Izmēģiniet {{ARTIFACTS}} tagad",
+  "tryDemo": "Izmēģiniet demonstrāciju",
+  "tryItNow": "Izmēģiniet tagad",
+  "tryNow": "Izmēģiniet piemērus",
+  "tryWisebaseTip": "Izmēģiniet failu tērzēšanu blakus",
+  "tryWisebaseTip2": "Tīra lasīšana un tērzēšana {{WISEBASE}}",
+  "tryWisebaseTip3": "Vairāk failu? Turpiniet {{WISEBASE}}",
+  "ttsDemo": "Paraugs",
+  "tweetit": "Seko mums vietnē {{X}}",
+  "unarchive": "izarhivēt",
+  "unlimited": "Neierobežots",
+  "unlimitedCredits": "Neierobežoti kredīti",
+  "unlock": "Atbloķēt",
+  "unlockFeatMsg": "Jūs esat sasniedzis sava plāna limitu. Jauniniet tagad, lai atbloķētu visas funkcijas!",
+  "unpin": "atspraust",
+  "unpublish": "Atsaukt publicēšanu",
+  "unpublishArtifact": "Atsaukt artefakta publicēšanu",
+  "unrecognizedSpeaker": "Neatpazīts runātājs",
+  "updateNow": "Atjaunināt tagad",
+  "updateSuccess": "Atjaunināšana veiksmīga",
+  "upgrade": "Jaunināt",
+  "upgradeContent": {
+    "reader": {
+      "free": "Jūs esat sasniedzis bezmaksas kvotas ierobežojumu. Jauniniet, lai iegūtu lielāku kvotu, un atbloķējiet papildu funkcijas.",
+      "pro": "Jūs esat sasniedzis šī mēneša kvotas ierobežojumu. Jauniniet, lai iegūtu papildu kvotu.",
+      "ultra": "Jūs esat sasniedzis šī mēneša kvotas ierobežojumu. Lūdzu, sazinieties ar mums pa e-pastu <a>care@sider.ai</a>, lai sniegtu savus ieteikumus."
+    }
+  },
+  "upgradeModal": {
+    "advancedModelUpgrade": "Nepieciešami uzlaboti modeļi — veiciet jaunināšanu, lai atbloķētu",
+    "allVoices": "Visas balsis",
+    "claude35SonnetDesc": "Claude 3.5 Sonnet ir Anthropic jaunākais modelis, kas nodrošina divreiz lielāku ātrumu nekā Claude 3 Opus un augstāku inteliģenci, būtiski uzlabojot loģisko domāšanu, zināšanas, programmēšanu un vizuālos uzdevumus.",
+    "claude3OpusDesc": "Claude 3 Opus ir uzlabota MI, kas risina sarežģītus uzdevumus ar izcilu efektivitāti.",
+    "claude3SonnetDesc": "Claude 3 Sonnet ir izsmalcināts valodas modelis precīzai, niansētai komunikācijai.",
+    "desc": "Vairāk kredītu un vairāk funkciju",
+    "fullFeatures": "Pilnas funkcijas",
+    "fullFeaturesDesc": "Piekļūstiet AI meklēšanai, Domāšanas režīmam un Artifacts sarežģītiem uzdevumiem un pētījumiem.",
+    "getAllTTSVoices": "Atbloķēt visas balsis",
+    "getAllTTSVoicesDesc": "Šī balss ir ekskluzīva premium lietotājiem. Jauniniet tagad, lai piekļūtu visām balsīm.",
+    "getAllTTSVoicesDesc2": "Jūs esat sasniedzis izmēģinājuma limitu premium balsīm. Jauniniet tagad, lai iegūtu neierobežotu piekļuvi 9 dabiskām AI balsīm vai izmantojiet bezmaksas balsi.",
+    "getWebAccess": "Jauniniet, lai saņemtu atbildi tīmeklī",
+    "gpt4Desc": "GPT-4o ir ievērojami gudrāks un var palīdzēt jums iegūt loģiskākas un precīzākas atbildes.",
+    "higherLimits": "Augstāki limiti",
+    "higherLimitsDesc": "Veiciet garāku un dziļāku darbu ar vieglumu.",
+    "hitLimitUpgrade": "Jūs esat sasniedzis sava plāna limitu",
+    "instantAccess": "Tūlītēja piekļuve",
+    "instantAccessDesc": "Veiciet jauninājumu, lai iegūtu vairāk kredītu un turpinātu savu darbu nekavējoties.",
+    "instantRefill": "Tūlītēja papildināšana",
+    "instantRefillDesc": "Veiciet jauninājumu tagad un saņemiet kredītus uzreiz — bez gaidīšanas.",
+    "off": "Atlaide!",
+    "outOfCreditsUpgrade": "Kredīti beigušies. Lai turpinātu, veiciet jauninājumu",
+    "powerfulModels": "Jaudīgi modeļi",
+    "powerfulModelsDesc": "Atbloķējiet GPT-5, Claude un citus, lai iegūtu ātrākas un precīzākas atbildes.",
+    "smarterReasoning": "Gudrāka spriešana",
+    "smarterReasoningDesc": "Izmantojiet Domāšanas režīmu un ilgtermiņa konteksta analīzi.",
+    "stableResults": "Stabili rezultāti",
+    "stableResultsDesc": "Vairāk kredītu, ātrāka un konsekventa izpilde.",
+    "stayUninterrupted": "Palieciet nepārtraukti",
+    "stayUninterruptedDesc": "Turpiniet tērzēt vai veikt pētījumus — viss konteksts un vēsture paliek neskarta.",
+    "tryAllVoices": "Jūtieties brīvi izmēģināt visas balsis",
+    "unlockModels": "Atbloķējiet modeļus",
+    "unlockModelsDesc": "Iegūstiet piekļuvi <list>GPT-5, Claude Sonnet un Gemini 2.5 Pro</list>.",
+    "upgradeToUseXXX": "Jauniniet, lai izmantotu <b>bot</b>",
+    "videoSummaryDesc": "Jūs esat sasniedzis bezmaksas lietošanas ierobežojumu. Lai turpinātu piekļūt šai funkcijai, lūdzu, apsveriet iespēju jaunināt uz Premium abonementu.",
+    "videoSummay": "Jauniniet, lai izmantotu video kopsavilkumu",
+    "webAccessDesc": "Sider izgūst atbildes uz jūsu jautājumiem no Google un izmanto AI, lai īsi sakārtotu un apkopotu."
+  },
+  "upgradeNow": "Uzlabot tagad",
+  "upgradeoff": "Jauninājums {{NUM}}% atlaide",
+  "upgradeTitle": {
+    "reader": {
+      "free": "Izpētiet ārpus robežām!",
+      "pro": "Sasniegts kvotas ierobežojums",
+      "ultra": "Sasniegts kvotas ierobežojums"
+    }
+  },
+  "upgradeUnlock": "Jauniniet, lai tagad atbloķētu!",
+  "uploadImage": "Augšupielādējiet attēlu",
+  "uploadLocal": "Augšupielādēt no jūsu datora",
+  "upTo6file": "Augšupielādējiet līdz 6 failiem",
+  "used": "Lietots",
+  "usedIn": "Lietots in",
+  "useFreeVoice": "Izmantot bezmaksas balsi",
+  "using": "Izmantojot",
+  "version": "Versija",
+  "videoTutorial": "Skatīt detaļas",
+  "vote": "Balsot",
+  "watchDemoVideo": "Noskatieties demonstrācijas video",
+  "webAccess": "Tīmekļa piekļuve",
+  "webApp": "Web App",
+  "webAssistant": "Tīmekļa asistents",
+  "webEnhance": {
+    "askQuestionBtn": "Atbildēt",
+    "bilingual": "Divvalodīgs",
+    "createShortenVideo": "Izveidot īsu video",
+    "displayTranslation": "Rādīt tulkojumu",
+    "expandAll": "Izvērst visu",
+    "freeLimitTips": "Jūsu bezmaksas izmēģinājuma periods ir iztērēts. Jauniniet tūlīt, lai turpinātu izmantot video kopsavilkuma funkciju.",
+    "fullScreen": "Pilnekrāna režīms",
+    "generatedBy": "Ģenerēts ar {{name}}",
+    "hideHighlights": "Slēpt izcēlumus",
+    "hideSubtitles": "Slēpt subtitrus",
+    "keyMomentsClickExpand": "Noklikšķiniet, lai izvērstu",
+    "keyMomentsCollapse": "Sakļaut",
+    "loginToAsk": "Piesakieties, lai Jautāt",
+    "needLoginBilibiliTips": "Lai apkopotu video, piesakieties savā Bilibili kontā un pārlādējiet lapu",
+    "nextHighlight": "Nākamais izcēlums",
+    "noQuestionTip": "{{APP_NAME}} nevar novērst problēmu lapā.",
+    "noSubtitleTips": "Kopsavilkums ir pieejams tikai video ar subtitriem šobrīd.",
+    "originalSubtitles": "Oriģinālie subtitri",
+    "playbackSpeed": "Atskaņošanas ātrums",
+    "previousHighlight": "Iepriekšējais izcēlums",
+    "responseLanguage": "Atbildes valoda",
+    "shareToComment": "Kopīgot, lai komentētu",
+    "shortenVideoTips": "Pārvērst šo video par kodolīgu kopsavilkuma video, kas ietver galvenos punktus!",
+    "showHighlights": "Rādīt izcēlumus",
+    "shownotes": "Svarīgākie momenti",
+    "showSubtitles": "Rādīt subtitrus",
+    "smartPlay": "Video pārskats",
+    "smartPlayBtnTips": "Noskatieties īsu video, kas palīdzēs ātri iegūt svarīgākos momentus un ietaupīt laiku.",
+    "smartPlayCost": "Izmaksas: 1 ātrā teksta vaicājums un 1 lasītāja vaicājums, balss lasīšana tiek aprēķināta pēc patēriņa",
+    "smartPlayOnlyCost": "balss lasīšana tiek aprēķināta pēc patēriņa",
+    "smartPlayPlaybackEnded": "Svarīgāko momentu atskaņošana beigusies",
+    "smartPlayReturnToCurrentProgress": "Atgriezties pie pašreizējā progresa",
+    "smartPlaySwitchVoiceBtn": "Jā, pārslēgt balsi",
+    "smartPlaySwitchVoiceCancel": "Nē, atcelt",
+    "smartPlaySwitchVoiceContent": "Pārslēdzoties uz citu balsi, kredīti tiks atskaitīti vēlreiz, pamatojoties uz pilna video skripta garumu. Video turpināsies no pašreizējās pozīcijas. Vai vēlaties turpināt?",
+    "smartPlaySwtichVoiceTitle": "Kredītu atskaitīšanas paziņojums",
+    "subtitle": "Apakšvirsraksts",
+    "subtitleFailed": "Subtitri neizdevās ielādēt",
+    "subtitles": "Subtitri",
+    "summary": "Kopsavilkums",
+    "targetLanguage": "Mērķa valoda",
+    "transcribing": "Transkribēšana",
+    "videoSummaryBtn": "Apkopojiet video",
+    "videoSummaryCost": "Izmaksas 1 pamata kredīts un 1 lasītāja pieprasījums",
+    "videoSummaryMakeFullBtn": "Izveidot pilnu kopsavilkumu",
+    "videoSummaryText": "Video kopsavilkums",
+    "videoTooLang": "Lai veiktu kopsavilkumu, video ilgumam jābūt mazākam par 10 stundām.",
+    "whisperCostText": "Šim video trūkst ārējo subtitru, un tas ir jāpārraksta, lai izveidotu kopsavilkumu. (1 Advanced Credit/10 minūtes vai mazāk)"
+  },
+  "webStore": "Interneta veikals",
+  "welcome": "Laipni lūdzam",
+  "whatNew": "Jaunas funkcijas",
+  "whatsnewInvite": "Aiciniet izmēģināt bez maksas",
+  "wisebase": {
+    "addCollection": "Pievienot {{name}}",
+    "createAndSave": "Izveidot un Saglabāt",
+    "createFirstWisebaseDefaultName": "Mans {{WISEBASE_APP_NAME}}",
+    "createFirstWisebaseDesc": "{{WISEBASE_APP_NAME}} ir Sider AI zināšanu bāze. Jūs varat viegli pārvaldīt, skatīt un uzdot jautājumus par savu savākto saturu Sider vietnē.",
+    "createFirstWisebasePlaceholder": "Ievadiet {{WISEBASE_APP_NAME}} nosaukumu",
+    "createFirstWisebaseTitle": "Laipni lūdzam izveidot savu pirmo {{WISEBASE_APP_NAME}}",
+    "editSavedPage": "Rediģēt saglabāto lapu",
+    "editSavedVideo": "Rediģēt saglabāto video",
+    "errNameExists": "Nosaukums jau pastāv",
+    "failedToDelete": "Neizdevās dzēst",
+    "failedToSave": "Neizdevās saglabāt",
+    "highlight": "Izcelt",
+    "HighlightInvalid": "Izcēlumi trūkst",
+    "HighlightInvalidDesc": "Sakarā ar izmaiņām šajā tīmekļa lapā, jūsu izcēlumi vairs nav redzami. Jūs joprojām varat tiem piekļūt savā <a>{{name}}</a>.",
+    "inbox": "AI Iesūtne",
+    "myWisebase": "Mans {{name}}",
+    "name": "Wisebase",
+    "pageRemoved": "Lapa dzēsta",
+    "pageSaved": "Lapa saglabāta",
+    "removePage": "Dzēst lapu?",
+    "removePageDesc": "Tas dzēsīs lapu kopā ar tās izcēlumiem.",
+    "savedTo": "Saglabāts uz: {{name}}",
+    "saveLoading": "Saglabā...",
+    "saveNote": "Saglabāt kā piezīmi",
+    "savePage": "Saglabāt lapu",
+    "saveTo": "Saglabāt {{name}}",
+    "saveVideo": "Saglabāt video",
+    "saveVideoTo": "Saglabāt video uz {{WISEBASE_APP_NAME}}",
+    "saving": "Saglabāšana",
+    "unableToHighlight": "Nevar izcelt šo izvēli",
+    "unhighlight": "Noņemt izcēlumu",
+    "view": "Skatīt",
+    "viewInSite": "Skatīt vietnē",
+    "viewPageNoteTip": "Noklikšķiniet šeit, lai skatītu savas saglabātās lapas un piezīmes.",
+    "vistMyWisebase": "Atvērt {{name}}"
+  },
+  "writing": "Rakstīšana",
+  "xmasSale": "Ziemassvētku izpārdošana",
+  "yearlyPlan": "Gada plāns",
+  "you": "Tu",
+  "yourEmailAddress": "Tava epasta adrese",
+  "zoomIn": "Pietuvināt",
+  "zoomOut": "Attālināt"
+}

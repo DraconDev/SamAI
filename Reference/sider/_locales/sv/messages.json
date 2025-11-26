@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Sider: Chatta med alla AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+  },
+  "appDesc": {
+    "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok allt i en AI-sidofält för AI-sökning, läsning och skrivning."
+  },
+  "appNameEdge": {
+    "message": "Sidor: ChatGPT Sidofält"
+  },
+  "appDescEdge": {
+    "message": "ChatGPT Sidebar: Använd ChatGPT, GPT-4o, Claude3, & Gemini för avancerad AI-sökning, läsning och skrivning."
+  }
+}

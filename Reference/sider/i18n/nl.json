@@ -1,0 +1,3489 @@
+{
+  "about-author": "Leer over de auteur",
+  "account": "Account",
+  "add": "Toevoegen",
+  "addons": "Add-ons",
+  "addPrompt": "Prompt toevoegen",
+  "addPrompts": "Prompt toevoegen",
+  "addTools": "Voeg gereedschap toe",
+  "advanced": "Geavanceerd",
+  "agentPanel": {
+    "agentDesc": "De {{name}} kan uw browser bedienen om taken uit te voeren. Deze functie bevindt zich nog in de vroege previewfase en er kunnen fouten optreden. U kunt het op elk moment stoppen.",
+    "agentIsOperating": "{{name}} bedient deze pagina",
+    "browserAgent": "Browser {{name}}",
+    "chatPlaceholder": "Waarmee kan de {{name}} helpen?",
+    "creditCostTip": "{{name}} is een rekenintensief product, en de overeenkomstige Elite Credits worden afgetrokken op basis van het daadwerkelijke verbruik.",
+    "previewVersion": "Onderzoeksvoorbeeld",
+    "stopAgent": "Stop {{name}}",
+    "toolAction": {
+      "click": "Klik",
+      "extractPageText": "Extraheer paginatekst",
+      "findItem": "Zoek: \"{{text}}\"",
+      "formInput": "Stel invoer in op \"{{text}}\"",
+      "navigate": "Navigeer naar {{url}}",
+      "pressKey": "Druk op toets: {{text}}",
+      "readPage": "Lees pagina",
+      "scroll": "Scroll",
+      "takeScreenshot": "Maak screenshot",
+      "typeText": "Typ tekst: \"{{text}}\"",
+      "waitTime": "Wacht {{time}} seconden"
+    }
+  },
+  "aiResCompare": "Vergelijking van AI-antwoorden",
+  "AISlides": "AI Slides",
+  "aiSlidesPromoteTip": "Met één klik naar presentatieklare PPT's",
+  "aiSlidesPromoteTip2": "Maak deze PPT verbluffend",
+  "aiWebBuilderPromoteTip": "Converteer dit {{ARTIFACT}} nu naar een website",
+  "all": "Alle",
+  "allFeatures": "Alle functies",
+  "allSettings": "Alle instellingen",
+  "alwaysDisplay": "Altijd weergeven",
+  "analyzed": "Geanalyseerd",
+  "analyzing": "Analyseren...",
+  "analyzingFailed": "Analyseren mislukt",
+  "analyzingIntent": "Intentie analyseren",
+  "answering": "Beantwoorden",
+  "appearance": "Uiterlijk",
+  "archive": "archief",
+  "archiveTpl": "Archiveer deze sjabloon",
+  "artifactDemos": [
+    {
+      "title": "Maak een Virtuele XYlofoon",
+      "value": "Maak een HTML-gebaseerde xylofoon met kleurrijke toetsen binnen een {{ARTIFACT}}. Zorg voor visuele feedback voor aangeslagen toetsen en genereer eenvoudige, realistische geluiden met behulp van de Web Audio API op basis van frequentieparameters. Voeg basisinstructies toe."
+    },
+    {
+      "title": "Maak een Emoji Eetspel",
+      "value": "Maak een eenvoudig HTML-gebaseerd spel, vergelijkbaar met Catch the Candy, binnen een {{ARTIFACT}}. De speler bestuurt een emoji onderaan het scherm en beweegt deze snel naar links en rechts om voedselitems (bijv. 🍓, 🍔, 🍎) die van boven vallen te vangen en op te eten, terwijl bommen (💣) vermeden moeten worden. Elke keer dat de speler een voedsel-emoji vangt, verandert hun emoji in een meer overdreven positieve uitdrukking (bijv. 🤩, 😆, 😋) om succes aan te geven. Als de speler per ongeluk een bom vangt, toont de emoji eerst een explosie (💥) en verandert daarna in een duizelige uitdrukking (😵‍💫)."
+    },
+    {
+      "title": "Maak een Smartphone Verzendingen Grafiek",
+      "value": "Gebruik React om een mooie lijngrafiek te maken binnen een {{ARTIFACT}} op basis van de volgende tabel.\n------\n\nSmartphone-verzendingen door grote merken in het afgelopen decennium (in miljarden)\n\n| Jaar | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+    }
+  ],
+  "artifactError": {
+    "solution1": "<a>Ververs de Voorvertoning</a>",
+    "solution2": "Stuur het foutbericht in de chat voor hulp. <a>Stuur foutbericht</a>",
+    "title": "Je kunt de volgende opties proberen:"
+  },
+  "artifactNarrow": "Herstel standaardbreedte",
+  "artifactPublished": "Artefact Gepubliceerd",
+  "artifactPublishTip1": "Zodra je dit artefact publiceert, maken we een openbare URL zodat iedereen er toegang toe heeft. Je chat blijft privé en je kunt op elk moment stoppen met delen.",
+  "artifactPublishTip2": "Dit artefact is beschikbaar voor het publiek. Iedereen kan er toegang toe krijgen met de gedeelde link.",
+  "artifactRemixContent": "Laten we enkele variaties van dit {{ARTIFACT}} verkennen. Kun je 3 manieren voorstellen om het te remixen en op mijn reactie wachten?",
+  "artifactsBetaTip": "Geniet gratis van Artifacts (Pro) tijdens de bèta—mis het niet!",
+  "artifactUnpublishedTip": "Zodra je de publicatie ongedaan maakt, kunnen anderen het artefact niet meer via de gedeelde link benaderen.",
+  "artifactWide": "Uitbreiden naar volledige breedte",
+  "ask": "Vragen",
+  "attention": "Kennisgeving",
+  "audio-meeting-minutes": "Notulen",
+  "audio-summarize": "Samenvatten",
+  "audio-to-text": "Audio naar tekst",
+  "audioExtractedText": "Audio geëxtraheerde tekst",
+  "audioTranscript": "Audio transcript",
+  "auto": "Auto",
+  "autoToText": "Automatisch naar tekst",
+  "back": "Terug",
+  "basic": "Basis",
+  "bestForChat": "Beste voor chatten",
+  "betterAnswer": "Krijg betere resultaten met {{MODEL_NAME}}",
+  "bigSale": "Uitverkoop",
+  "bigSaleRest": "Uitverkoop",
+  "bilingualTranslation": {
+    "done": "Klaar",
+    "goToSetting": "Ga naar Instellingen",
+    "originLangClose": "Tweetalige ondertitels werken niet goed omdat Netflix-ondertitels zijn uitgeschakeld. Selecteer een ondertitelingstaal en vernieuw de pagina",
+    "refreshBtn": "Verversen",
+    "refreshPage": "Er is iets misgegaan met tweetalige ondertitels. Probeer de pagina te vernieuwen",
+    "setLangPreferDesc": "Voor de beste tweetalige ervaring, kies de talen die je waarschijnlijk zult bekijken voor nauwkeurige ondertiteling en vertalingen.",
+    "setLangPreferTitle": "Taalvoorkeuren instellen",
+    "switchTitle": "Toon tweetalige bediening op YouTube & Netflix",
+    "targetLang": "Doeltaal",
+    "title": "Ondertitel vertalen",
+    "youtubeRefreshTips": "Tweetalige ondertitels niet gedetecteerd. Vernieuw de pagina en laad de ondertitels opnieuw."
+  },
+  "browseFiles": "{{NUM}} bestanden bekeken",
+  "browseFiles1": "1 bestand bekeken",
+  "browsingFiles": "Bestanden bladeren",
+  "building": "Bezig met bouwen...",
+  "buyBooster": "Koop boosterpakket ",
+  "cancel": "Annuleren",
+  "change": "Wijzigen",
+  "changeLogPage": {
+    "learnToUse": "Leer hoe te gebruiken",
+    "logContents": {
+      "4_22_0": "Sider is klaar om je openbare X (Twitter) berichten te roosteren en op te scheppen! Doe mee voor de lol, er worden geen gegevens bewaard. Speel mee en deel het plezier met je vrienden!",
+      "5_12_0": "Ga naar Chatbesturingselementen om je voorkeuren in te stellen. Bespaar tijd en geniet van een meer gepersonaliseerde AI-ervaring zonder je voorkeuren elke keer te hoeven herhalen.",
+      "5_14_0": "Grok 4, het vlaggenschipmodel van xAI, biedt redeneren op universitair niveau, geavanceerd coderen en wiskunde, en begrijpt afbeeldingen als tekst—een krachtig hulpmiddel voor elke analytische of creatieve taak.",
+      "5_19_0": "Anthropic's nieuwste en krachtigste model tot nu toe. Het levert de beste codeerprestaties in zijn klasse en overtreft Opus 4.1 zowel in redenering als in domeinkennis op het gebied van financiën, recht en geneeskunde.",
+      "5_21_0": "Maak kennis met gpt-5-chat-latest, het nieuwste GPT-5 Chat-model dat wordt gebruikt in ChatGPT. Geniet van snellere, natuurlijkere antwoorden voor dagelijkse chats, schrijven en het verkennen van ideeën.",
+      "5_23_0": "Google's meest intelligente model. De geavanceerde redeneervermogen levert meer behulpzame, beter geformatteerde en beknopte antwoorden, waardoor het de perfecte partner is om je te helpen leren, bouwen en plannen."
+    },
+    "logs": {
+      "1_0_1": [
+        "Verbeter de samenvattingsfunctie op de YouTube-pagina",
+        "Enkele bugs opgelost met betrekking tot kopiëren/plakken en afdrukken"
+      ],
+      "1_0_10": [
+        "Ondersteun nu meer dan 50 talen!"
+      ],
+      "1_0_11": [
+        "Krijg snel toegang tot acties via een pop-upvenster zonder de zijbalk te openen.",
+        "Voeg ondersteuning toe voor extra talen.",
+        "Behoud de taalvoorkeur van de gebruiker bij gebruik van de vertaalfunctie.",
+        "Los snelkoppelingsconflicten op platforms zoals GitHub en andere op."
+      ],
+      "1_0_12": [
+        "Synchroniseer extensie-instellingen op verschillende computers",
+        "Toegang tot uw prompts vanaf verschillende laptops",
+        "Bewaar chats voor toekomstig gebruik",
+        "Deel chats via een link"
+      ],
+      "1_0_13": [
+        "Vervolg de chat na het stellen van vragen",
+        "Schakel tussen GPT-4 en GPT-3.5 voor Plus-gebruikers",
+        "Krijg eenvoudig toegang tot en zoek in de chatgeschiedenis"
+      ],
+      "1_0_2": [
+        "Voeg een stopknop toe om te stoppen met het genereren van reacties",
+        "Wijzig de plaats van de samenvouwknop"
+      ],
+      "1_0_3": [
+        "CMD/Ctrl + Enter om snel \"Verzenden\" te doen",
+        "Optie om paneel te verbergen op de pagina met zoekresultaten",
+        "Ondersteuning ESC om zijbalk te verbergen",
+        "Ondersteuning vat een lang artikel samen"
+      ],
+      "1_0_4": [
+        "Plaats promptitems opnieuw in de vervolgkeuzelijst",
+        "Archiveer promptitems die u niet zult gebruiken",
+        "Ondersteuningsreactie in meer dan 50 talen"
+      ],
+      "1_0_5": [
+        "Onthoud de locatie van het zijbalkpictogram",
+        "Sneltoetsen verbeteren",
+        "Bewaar promptsjablonen rechtstreeks vanuit de zijbalk"
+      ],
+      "1_0_6": [
+        "Verbeter de samenvattingsfunctie op de YouTube-pagina"
+      ],
+      "1_0_7": [
+        "Onthoud prompt die de laatste keer werd gebruikt",
+        "Optimaliseer de positie van het chatGPT-paneel op zoekpagina's",
+        "Voeg een optie toe om het zijbalkpictogram op de pagina aan de linkerkant te plaatsen",
+        "Optimaliseer de pakketgrootte",
+        "Voeg donkere modus toe",
+        "Ondersteun uw API-URL-proxy"
+      ],
+      "1_0_8": [
+        "Ondersteuning van GPT-4 voor Plus-gebruikers! Controleer de instellingenpagina!"
+      ],
+      "1_1_0": [
+        "Volledige chat op het <b>nieuwe tabblad</b>!",
+        "ChatGPT, <b>Bing</b>, <b>Bard</b> samen!",
+        "Bugfixes"
+      ],
+      "2_0_0": [
+        "Ondersteuning <b>GPT-4 </b>voor alle gebruikers!",
+        "Nodig vrienden uit en verdien <b>GPT-4</b> credits voor jullie beiden!",
+        "Bugfixes en andere UX-verbeteringen"
+      ],
+      "2_1_0": [
+        "Snelkoppeling voor snel opzoeken",
+        "Pas de grootte van het Quick Lookup-venster aan",
+        "Bugfixes en andere UX-verbeteringen"
+      ],
+      "2_2_0": [
+        "Stel een willekeurig bericht op",
+        "E-mail beantwoorden, tweeten, reageren enz"
+      ],
+      "2_3_0": [
+        "Ondersteuning voor browsen en plug-ins voor Plus-gebruikers!",
+        "ChatGPT met internettoegang voor iedereen!"
+      ],
+      "2_4_0": [
+        "<b>Slimme webtoegang</b>: op basis van uw vraag beslist de Al of hij toegang tot internet nodig heeft.",
+        "Verbetering van de stabiliteit"
+      ],
+      "2_5_0": [
+        "YouTube-overzicht! Bekijk 1 uur YouTube-video in 1 minuut",
+        "Vergelijk de antwoorden van mensen en AI op Q&A-sites zoals Quora, StackOverflow en Zhihu"
+      ],
+      "2_6_0": [
+        "Sider ondersteunt vaste zijbalk - U kunt tussen alle tabbladen chatten zonder enige inhoud te overlappen <br /> (beschikbaar in Chrome 114 of later)"
+      ],
+      "2_7_0": [
+        "Teken een afbeelding uit de tekst",
+        "Teken een afbeelding van een referentieafbeelding"
+      ],
+      "2_8_0": [
+        "Leesassistent: gebruik AI voor snel begrip tijdens het lezen van webpagina's",
+        "Schrijfassistent: genereer snel inhoud met AI in het webinvoervak"
+      ],
+      "2_9_0": [
+        {
+          "features": [
+            "Contextmenu lezen",
+            "Contextmenu schrijven"
+          ],
+          "title": "Verbeterde promptmanager voor"
+        },
+        {
+          "features": [
+            "Verwijder de achtergrond van alle afbeeldingen",
+            "Verwijder tekst uit afbeeldingen"
+          ],
+          "title": "AI-beeldeditor"
+        }
+      ],
+      "3_0_0": [
+        {
+          "features": [
+            "<b>Meer chatbots</b>: ondersteunt nu Claude-instant, Claude 2!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Groepschat</b>: vergelijk antwoorden tussen chatbots!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vermelding</b>: gebruik '@' om moeiteloos elke chatbot in het gesprek te vermelden en ermee te communiceren!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Snelle prompt</b>: typ gewoon '/' en ga!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Eenvoudig ontwerp</b>: maak het ontwerp eenvoudig en gemakkelijk te navigeren"
+          ]
+        }
+      ],
+      "3_1_0": [
+        {
+          "features": [
+            "Naast ChatGPT en Claude ondersteunt Sider nu Bard!"
+          ],
+          "title": "Meer bot!"
+        },
+        {
+          "features": [
+            "Herken meer dan 10 belangrijke talen",
+            "Herken handgeschreven in het Engels",
+            "Herken <b>wiskundige vergelijkingen</b> in de tekst"
+          ],
+          "title": "OCR: extraheer tekst uit elke afbeelding en stuur deze naar ChatGPT"
+        },
+        {
+          "features": [
+            "Vervang de hele achtergrond",
+            "Geselecteerd gebied verwijderen"
+          ],
+          "title": "Verbeter de schilder"
+        }
+      ],
+      "3_2_0": [
+        {
+          "features": [
+            "Goed nieuws! Onze bijgewerkte prijzen geven je nu nog meer toegang tot GPT-4 en Claude 2 credits.",
+            "Als u al een premiumgebruiker bent, wordt u automatisch geüpgraded. Bovendien hebben we een nieuw 'Onbeperkt' abonnement voor al uw hoofdgebruikers!"
+          ],
+          "title": "Nieuw prijsplan met 5x meer GPT-4 credits"
+        }
+      ],
+      "3_3_0": [
+        {
+          "features": [
+            "Extraheer tekst uit een afbeelding",
+            "Stel een vraag over de afbeelding",
+            "3 manieren om een afbeelding naar {{SIDERVISION}} te sturen <div><ol><li>Maak een screenshot</li><li>Een afbeelding slepen en neerzetten naar het chatvenster</li><li>Een afbeelding uploaden </li></ol> li></div></div>"
+          ],
+          "title": "{{SIDERVISION}} — ChatGPT-zijbalk met Vision"
+        },
+        {
+          "features": [
+            "Extraheer tekst uit een afbeelding"
+          ]
+        },
+        {
+          "features": [
+            "Extraheer tekst uit een afbeelding"
+          ]
+        }
+      ],
+      "3_4_0": [
+        {
+          "features": [
+            "Controleer grammaticafouten",
+            "Grammaticafouten herstellen",
+            "Verbeter het schrijven buiten de grammatica"
+          ],
+          "title": "Sider grammaticawidget"
+        }
+      ],
+      "3_5_0": [
+        {
+          "features": [
+            "{{4+VISION}}",
+            "1-klik om dezelfde vraag met verschillende bots te beantwoorden"
+          ],
+          "title": "{{SIDERVISION}} is slimmer geworden"
+        }
+      ],
+      "3_6_0": [
+        {
+          "features": [
+            "Pas uw vertaling aan in een speciale vertaalwidget",
+            "Verbeter ChatGPT-antwoorden in Google, Bing, Baidu, enz."
+          ],
+          "title": "Vertaalwidget"
+        }
+      ],
+      "4_0_0": [
+        {
+          "features": [
+            "Ondersteuning GPT-4 Turbo en GPT-3.5 Turbo",
+            "Vertaal de hele webpagina",
+            "Chat-webpagina in de zijbalk",
+            "Chat PDF in de zijbalk"
+          ],
+          "title": "GPT-4 Turbo- en chat-webpagina!"
+        }
+      ],
+      "4_10_0": [
+        {
+          "features": [
+            "<b>Verhoogde Snelheid:</b> Krijg 2x snellere reacties dan GPT-4"
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterd Zicht:</b> Sterk verbeterd begrip van afbeeldingen"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uitgebreide Talen:</b> Meer talen, betere kwaliteit en snellere prestaties"
+          ]
+        }
+      ],
+      "4_11_0": [
+        {
+          "features": [
+            "<b>Meerdere webpagina's:</b> Lees meerdere webpagina's of documenten tegelijk"
+          ]
+        },
+        {
+          "features": [
+            "<b>Kritische leeshulpmiddelen:</b> Verduidelijk kernconcepten, Identificeer aannames, Markeer fragmenten, Leer over de auteur, en meer."
+          ]
+        },
+        {
+          "features": [
+            "<b>{{SIDERFUSION}}:</b> Selecteert dynamisch het beste snelle model (GPT-3.5, Claude 3 Haiku, Gemini 1.5 Flash of Llama 3) voor jouw specifieke taak."
+          ]
+        }
+      ],
+      "4_12_0": [
+        {
+          "features": [
+            "<b>Ondersteuning voor Claude 3.5 Sonnet:</b> Het nieuwste model van Anthropic, met 2x de snelheid van Claude 3 Opus en hogere intelligentie, verbetert aanzienlijk het redeneren, kennis, coderen en visuele taken."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uitfasering van Claude 3 Opus:</b> vervangen door de geavanceerde Claude 3.5 Sonnet."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uitnodigen & Verdienen:</b> Nodig je vrienden uit om gratis queries te verdienen en probeer vandaag nog het nieuwste model!"
+          ]
+        }
+      ],
+      "4_13_0": [
+        {
+          "features": [
+            "<b>Natuurlijke AI-stemmen</b>: Geniet van 9 natuurlijk klinkende AI-stemmen in meerdere talen."
+          ]
+        },
+        {
+          "features": [
+            "<b>Luister overal</b>: Selecteer tekst op een webpagina om deze te laten voorlezen."
+          ]
+        },
+        {
+          "features": [
+            "<b>Sidebar-ondersteuning</b>: Luister eenvoudig naar AI-gegenereerde inhoud vanuit sidebar-widgets."
+          ]
+        }
+      ],
+      "4_16_0": [
+        {
+          "features": [
+            "<b>Sneller, Superieure Prestaties:</b> Maakt dagelijkse taken soepeler en efficiënter."
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterde Wiskunde en Codering:</b> Zorgt voor nauwkeurige prestaties bij technische taken."
+          ]
+        },
+        {
+          "features": [
+            "<b>Upgrade van GPT-3.5:</b> GPT-4o mini vervangt GPT-3.5 met betere prestaties."
+          ]
+        }
+      ],
+      "4_17_0": [
+        {
+          "features": [
+            "<b>Videomomenten</b>: Door AI gegenereerde vertelling bespaart je tijd door snel de belangrijkste punten van de video te benadrukken."
+          ]
+        },
+        {
+          "features": [
+            "<b>Natuurlijke Vertelling</b>: Realistische AI-stemmen verbeteren je kijkervaring."
+          ]
+        },
+        {
+          "features": [
+            "<b>Ondersteuning voor Meerdere Talen</b>: Begrijp gemakkelijk video's over taalbarrières heen."
+          ]
+        }
+      ],
+      "4_18_0": [
+        {
+          "features": [
+            "<b>Meerdere Formaten</b>: Deel je chat als een link of een afbeelding."
+          ]
+        },
+        {
+          "features": [
+            "<b>Flexibele Selectie</b>: Selecteer en deel een hele conversatie of slechts een deel ervan."
+          ]
+        },
+        {
+          "features": [
+            "<b>Eenvoudige Controle</b>: Herroep gedeelde links op elk moment."
+          ]
+        }
+      ],
+      "4_19_0": [
+        {
+          "features": [
+            "<b>Live Voorbeeld:</b> Bekijk en interacteer met AI-gegenereerde webpagina's, documenten en grafieken in realtime."
+          ]
+        },
+        {
+          "features": [
+            "<b>Naadloze Iteratie:</b> Itereer op gegenereerde artifacts via chat."
+          ]
+        }
+      ],
+      "4_1_0": [
+        {
+          "features": [
+            "{{SIDERVISION}} wordt mogelijk gemaakt door GPT-4V",
+            "Beter begrip van afbeeldingen",
+            "Krijg snel inzicht in e-mailintenties",
+            "Kies uit verschillende tonen en persona's",
+            "Kies moeiteloos antwoordsuggesties"
+          ],
+          "title": "GPT-4V(isie) Preview! & AI-antwoord voor Gmail"
+        }
+      ],
+      "4_20_0": [
+        {
+          "features": [
+            "<b>Multi-Model Vertaling</b>: Gebruik meerdere modellen tegelijk voor nauwkeurigere vertalingen."
+          ]
+        },
+        {
+          "features": [
+            "<b>Veelzijdige Vertaal Herschrijvingen</b>: Herschrijf vertalingen voor verschillende scenario's."
+          ]
+        },
+        {
+          "features": [
+            "<b>Tweetalige Ondertitels</b>: Bekijk YouTube-ondertitels gelijktijdig in beide talen."
+          ]
+        }
+      ],
+      "4_23_0": [
+        {
+          "features": [
+            "<b>o1-preview</b>: Behandelt complexe taken en lost moeilijkere problemen op dan eerdere modellen in wetenschap, codering en wiskunde. Kost 15 geavanceerde credits per bericht."
+          ]
+        },
+        {
+          "features": [
+            "<b>o1-mini</b>: Een sneller model dat bijzonder effectief is in codering. Ideaal voor gerichte redenering zonder brede kennis. Kost 3 geavanceerde credits per bericht."
+          ]
+        },
+        {
+          "features": [
+            "<b>Opmerking</b>: Er zijn snelheidslimieten."
+          ]
+        }
+      ],
+      "4_24_0": [
+        {
+          "features": [
+            "<b>Gemini 1.5 Pro</b>: Supercharged redenering met verbeterde wiskundige en visuele vaardigheden."
+          ]
+        },
+        {
+          "features": [
+            "<b>Gemini 1.5 Flash</b>: 2x sneller, 3x lagere latentie, beter in visuals en coderen."
+          ]
+        }
+      ],
+      "4_25_0": [
+        {
+          "features": [
+            "<b>Verfijnd ontwerp</b>: Moderne visuals, schonere lay-out voor gebruiksgemak en focus"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vastzetten van prompts</b>: Pin veelgebruikte prompts voor snelle toegang"
+          ]
+        },
+        {
+          "features": [
+            "<b>Uitvouwbare tabellen</b>: Bekijk grote gegevens in een nieuw venster voor verbeterde leesbaarheid"
+          ]
+        }
+      ],
+      "4_26_0": [
+        {
+          "features": [
+            "<b>Chain of Thought-redenering</b>: Breekt complexe taken stap voor stap af voor slimmer probleemoplossing"
+          ]
+        },
+        {
+          "features": [
+            "<b>Diepere inzichten</b>: Levert doordachte antwoorden om moeilijke vragen aan te pakken"
+          ]
+        },
+        {
+          "features": [
+            "<b>Werkt met alle modellen</b>: Naadloos beschikbaar voor elk model"
+          ]
+        }
+      ],
+      "4_27_0": [
+        {
+          "features": [
+            "<b>Gestroomlijnde UI</b>: Schonere, meer intuïtieve interface voor een soepelere ervaring"
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterde vertaling</b>: Levert gerelateerde woordbetekenissen met contextuele nauwkeurigheid"
+          ]
+        },
+        {
+          "features": [
+            "<b>Publiceer & Deel Artefacten</b>: Deel eenvoudig je artefacten openbaar via links"
+          ]
+        }
+      ],
+      "4_28_0": [
+        {
+          "features": [
+            "<b>Claude 3.5 Haiku</b>: Biedt prestaties die Claude 3 Opus overtreffen, uitblinkend in codering, gereedschapsgebruik en redenering"
+          ]
+        },
+        {
+          "features": [
+            "<b>Lettergrootte aanpassen</b>: Je kunt nu de lettergrootte van berichten wijzigen"
+          ]
+        },
+        {
+          "features": [
+            "<b>Gestroomlijnde UI</b>: Een schonere, meer intuïtieve Opties UI voor eenvoudige personalisatie"
+          ]
+        }
+      ],
+      "4_29_0": [
+        {
+          "features": [
+            "<b>Berichtbewerking</b>: Bewerk eenvoudig verzonden berichten en verzend opnieuw voor nieuwe antwoorden"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vergelijking naast elkaar</b>: Bekijk antwoorden van meerdere modellen op volledige pagina"
+          ]
+        },
+        {
+          "features": [
+            "<b>Icoon voor Aangepaste Prompts</b>: Wijs iconen toe aan aangepaste prompts voor een duidelijkere organisatie"
+          ]
+        }
+      ],
+      "4_2_0": [
+        {
+          "features": [
+            "<b>Vernieuwde interface:</b> Schoner en gemakkelijker te navigeren"
+          ]
+        },
+        {
+          "features": [
+            "<b>Inklapbare navigatiebalk:</b> Zorgt voor een gerichte chatervaring terwijl essentiële functies binnen handbereik blijven"
+          ]
+        },
+        {
+          "features": [
+            "<b>Toegang tot GPT's in de zijbalk:</b> Voor ChatGPT Plus-gebruikers is directe toegang tot GPT's nu beschikbaar in de zijbalk in de webapp-modus"
+          ]
+        }
+      ],
+      "4_30_0": [
+        {
+          "features": [
+            "<b>GPT-4o (2024-11-20)</b>: Verbeterde natuurlijke schrijfmogelijkheden en verbeterde bestandsverwerking"
+          ]
+        },
+        {
+          "features": [
+            "<b>Alleen Vertaling Weergeven</b>: Paginavertaling ondersteunt nu het bekijken van alleen de vertaalde inhoud"
+          ]
+        },
+        {
+          "features": [
+            "<b>Betere YouTube-ondertitels</b>: Geniet van hogere kwaliteit tweetalige ondertitelvertalingen"
+          ]
+        }
+      ],
+      "4_31_0": [
+        {
+          "features": [
+            "<b>Tools Nav</b>: Toegang tot AI-tools voor afbeeldingen, PDF's en video's vanuit de navigatiebalk"
+          ]
+        },
+        {
+          "features": [
+            "<b>Input Vertalen</b>: Drievoudige spatie om invoertekst te vertalen (inschakelen in Opties)"
+          ]
+        },
+        {
+          "features": [
+            "<b>Snel Kopiëren</b>: Kopieer tekst direct met het contextmenu"
+          ]
+        }
+      ],
+      "4_32_0": [
+        {
+          "features": [
+            "<b>Audio naar Tekst</b>: Upload MP3-, WAV-, M4A- of MPGA-bestand om transcripts te genereren"
+          ]
+        },
+        {
+          "features": [
+            "<b>Bekijk & Luister</b>: Lees transcripts terwijl je naar de audio luistert"
+          ]
+        },
+        {
+          "features": [
+            "<b>Samenvatten met gemak</b>: Maak snelle samenvattingen met één klik"
+          ]
+        }
+      ],
+      "4_33_0": [
+        {
+          "features": [
+            "<b>OpenAI o1</b>: Sneller dan ‘o1-preview’, blinkt uit in complexe meerstapstaken met geavanceerde nauwkeurigheid"
+          ]
+        },
+        {
+          "features": [
+            "<b>Video's Samenvatten Zonder Ondertitels</b>: Verkrijg transcripties en samenvattingen voor YouTube-video's zonder ondertitels"
+          ]
+        },
+        {
+          "features": [
+            "<b>Webinhoud Samenvatting</b>: Verbeterd voor platforms zoals Reddit en Twitter"
+          ]
+        }
+      ],
+      "4_34_0": [
+        {
+          "features": [
+            "<b>Al Antwoord in Gmail</b>: Ondersteuning voor vertaling en Al-modelselectie voor betere communicatie"
+          ]
+        },
+        {
+          "features": [
+            "<b>Artefacten</b>: Exporteer stroomdiagrammen als afbeeldingen voor eenvoudig delen"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vertalen</b>: Al-woordenboek voor nauwkeurige vertalingen van woorden en zinnen"
+          ]
+        }
+      ],
+      "4_35_0": [
+        {
+          "features": [
+            "<b>Directe Voorvertoningen</b>: Sleep links om inhoud te bekijken zonder nieuwe tabbladen te openen"
+          ]
+        },
+        {
+          "features": [
+            "<b>Slimme Samenvattingen</b>: Verkrijg snel belangrijke inzichten van pagina's"
+          ]
+        },
+        {
+          "features": [
+            "<b>Efficiënt Bladeren</b>: Blijf gefocust met minder klikken en minder afleidingen"
+          ]
+        }
+      ],
+      "4_36_0": [
+        {
+          "features": [
+            "<b>Bewaar webpagina's en markeringen</b>: Bewaar waardevolle webinhoud in Wisebase (AI kennisbank) met één klik"
+          ]
+        },
+        {
+          "features": [
+            "<b>AI Inbox</b>: Laat AI je inhoud automatisch categoriseren"
+          ]
+        },
+        {
+          "features": [
+            "<b>Chat met Meerdere Bestanden</b>: Krijg direct antwoorden van je verzamelde bestanden"
+          ]
+        }
+      ],
+      "4_37_0": [
+        {
+          "features": [
+            "<b>DeepSeek-R1</b>: Evenaart de prestaties van OpenAI-o1"
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3</b>: Blink uit in complexe redeneringen, wiskunde en programmeertaken"
+          ]
+        },
+        {
+          "features": [
+            "<b>AI Vertaler voor Webpagina</b>: Levert natuurlijke en nauwkeurige vertalingen"
+          ]
+        }
+      ],
+      "4_38_0": [
+        {
+          "features": [
+            "2x de snelheid van Gemini 1.5 Pro"
+          ]
+        },
+        {
+          "features": [
+            "Levert directe, professionele resultaten"
+          ]
+        },
+        {
+          "features": [
+            "Verbeterde tekst-, codebegrip- en redeneercapaciteiten"
+          ]
+        }
+      ],
+      "4_39_0": [
+        {
+          "features": [
+            "<b>Krachtige Redenering</b>: Evenaart de vaardigheden van OpenAI o1 in wiskunde, wetenschap en codering"
+          ]
+        },
+        {
+          "features": [
+            "<b>Sneller Dan o1-mini</b>: Geoptimaliseerd voor snellere, soepelere reacties"
+          ]
+        },
+        {
+          "features": [
+            "<b>Betrouwbaardere Antwoorden</b>: Biedt grotere nauwkeurigheid en duidelijkere redenering"
+          ]
+        }
+      ],
+      "4_3_0": [
+        {
+          "features": [
+            "Duik in een meeslepend, volledig scherm weergave"
+          ]
+        },
+        {
+          "features": [
+            "Geniet van alle zijbalk functies, nu in de volledig scherm modus"
+          ]
+        },
+        {
+          "features": [
+            "Naadloos schakelen tussen modi voor het beste van beide werelden"
+          ]
+        }
+      ],
+      "4_40_0": [
+        {
+          "features": [
+            "<b>Verbeterde Codering</b>: Blink uit in complexe coderingsopdrachten met uitstekende prestaties"
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterde Promptverwerking</b>: Begrijpt en reageert effectief op complexe prompts"
+          ]
+        }
+      ],
+      "4_41_0": [
+        {
+          "features": [
+            "<b>Spraak Invoer</b>: Voer snel tekst in met spraak voor handsfree efficiëntie"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nieuw AI-model</b>: DeepSeek-R1-70B is nu live"
+          ]
+        }
+      ],
+      "4_42_0": [
+        {
+          "features": [
+            "<b>Tweetalige Ondertitel</b>: Verhoog je kijkervaring en bevorder taal leren"
+          ]
+        },
+        {
+          "features": [
+            "<b>API-sleutel</b>: Ondersteuning van API-sleutels voor DeepSeek, OpenAl en meer"
+          ]
+        }
+      ],
+      "4_43_0": [
+        {
+          "features": [
+            "<b>{{CLAUDE37}}</b>: Stapsgewijs denken voor betere prestaties in wiskunde, natuurkunde, coderen en vele andere taken"
+          ]
+        },
+        {
+          "features": [
+            "<b>API Key Support</b>: Compatibel met Claude en Ollama API-sleutels"
+          ]
+        }
+      ],
+      "4_44_0": [
+        {
+          "features": [
+            "<b>Kenmerken</b>: Een rijkere kennisbasis, betere afstemming op gebruikersintentie en grotere emotionele intelligentie"
+          ]
+        },
+        {
+          "features": [
+            "<b>Perfect voor</b>: Het verfijnen van schrijven, programmeren en het oplossen van uitdagingen in de echte wereld"
+          ]
+        },
+        {
+          "features": [
+            "<b>Opmerking</b>: 30 geavanceerde credits/per query. Beperkt tot 1 gebruik/24 uur/gebruiker vanwege quotabeperkingen"
+          ]
+        }
+      ],
+      "4_45_0": [
+        {
+          "features": [
+            "<b>Meer ruimte & focus</b>: Een grotere interface maakt het lezen van lange berichten en het bekijken van code gemakkelijker, terwijl afleidingen worden geminimaliseerd voor betere focus."
+          ]
+        },
+        {
+          "features": [
+            "<b>Naadloze synchronisatie</b>: Chats blijven gesynchroniseerd over het web en de extensie, waardoor het eenvoudig is om te schakelen tussen webpagina- en zijbalkweergaven."
+          ]
+        }
+      ],
+      "4_4_0": [
+        {
+          "features": [
+            "<b>Nieuwe geavanceerde gegevensanalysetool:</b> Code-interpreter voor efficiënte gegevensverwerking en complexe berekeningen"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nieuwe schilderstool:</b> Maak direct afbeeldingen in de chat"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vernieuwd contextmenu:</b> Gebruik GPT-4 in het contextmenu."
+          ]
+        }
+      ],
+      "4_5_0": [
+        {
+          "features": [
+            "<b>Zoekagent-widget:</b> Ervaar de toekomst van zoeken met AI-automatisering"
+          ]
+        },
+        {
+          "features": [
+            "<b>Webpagina vertalen:</b> Meer leesvriendelijke vertaalweergavestijlen"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nieuwe instelling:</b> Automatisch het laatste chatgesprek hervatten bij het openen van de zijbalk"
+          ]
+        }
+      ],
+      "4_6_0": [
+        {
+          "features": [
+            "<b>Claude 3 Opus:</b> Beweert \"bijna menselijke\" vaardigheden te hebben en kan GPT-4 verslaan."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude 3 Sonnet:</b> Balanseert intelligentie en snelheid, ideaal voor het ophalen van informatie of automatisering van verkoop."
+          ]
+        }
+      ],
+      "4_7_0": [
+        {
+          "features": [
+            "In-Chat Samenvatting: Krijg de belangrijkste punten van YouTube video's met 'Lees deze pagina' in het chatvenster."
+          ]
+        },
+        {
+          "features": [
+            "Makkelijke Ondertitel Extractie: Krijg ondertitels met één klik op YouTube voor diepgaande inzichten."
+          ]
+        },
+        {
+          "features": [
+            "Claude 3 Haiku: Nu beschikbaar om je chatervaring te verrijken."
+          ]
+        }
+      ],
+      "4_8_0": [
+        {
+          "features": [
+            "<b>Nieuw Model:</b> Ondersteunt nu Gemini 1.5 Pro"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nieuwe AI Afbeeldingstools:</b> Toegang tot AI-functies door over een afbeelding te zweven"
+          ]
+        }
+      ],
+      "4_9_0": [
+        {
+          "features": [
+            "<b>Nieuw Model:</b> Ondersteun nu Llama 3"
+          ]
+        }
+      ],
+      "5_0_0": [
+        {
+          "features": [
+            "<b>Smart Source Discovery</b>: AI bootst mensen na, scant automatisch meer dan 100 sites snel, kiest de beste voor jou."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automatische Hoogtepunten & Notities</b>: AI markeert onderwerpgerelateerde informatie, maakt notities voor inspiratie."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automatisch Rapporten Genereren</b>: Krijg diepgaande rapporten met geciteerde bronnen in minuten."
+          ]
+        },
+        {
+          "features": [
+            "<b>Wisebase Slaat Alles Op</b>: AI-rapporten, webvondsten, chats en meer—opgeslagen om altijd te verkennen."
+          ]
+        }
+      ],
+      "5_10_0": [
+        {
+          "features": [
+            "Upload audiobestanden in Chat om transcripties te krijgen met sprekeridentificatie. Dit stelt AI in staat om gesprekken beter te begrijpen en relevantere antwoorden te geven. Perfect voor vergaderingen, interviews en meer."
+          ]
+        }
+      ],
+      "5_13_0": [
+        {
+          "features": [
+            "<b>Mindmaps</b>: Organiseer je gedachten eenvoudig en maak de logica in één oogopslag duidelijk."
+          ]
+        },
+        {
+          "features": [
+            "<b>Basisdia's</b>: Presenteer snel ideeën voor efficiënte rapportage en delen."
+          ]
+        }
+      ],
+      "5_15_0": [
+        {
+          "features": [
+            "<b>Een-klik vastleggen</b>: Neem vergaderingen, stemnotities en schermen direct op."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automatisch transcriberen</b>: Zet opnames om in doorzoekbare documenten."
+          ]
+        },
+        {
+          "features": [
+            "<b>Slimme Chat</b>: Krijg samenvattingen, actiepunten en antwoorden uit je inhoud."
+          ]
+        }
+      ],
+      "5_16_0": [
+        {
+          "features": [
+            "<b>Intelligenter hulp bij coderen</b>: Behandelt complexe projecten, schrijft schonere code, debugt sneller."
+          ]
+        },
+        {
+          "features": [
+            "<b>Betere schrijfpartner</b>: Maakt berichten duidelijker en boeiender."
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterde gezondheidsantwoorden</b>: Nauwkeuriger, doordachter en betrouwbaarder."
+          ]
+        }
+      ],
+      "5_17_0": [
+        {
+          "features": [
+            "<b>REC-notitie, automatisch verbeterd</b>: Neem op en maak snel notities terwijl AI transcribeert. Je notities en transcripties worden gecombineerd tot een duidelijke, gestructureerde REC-notitie."
+          ]
+        },
+        {
+          "features": [
+            "<b>Gratis transcriptie</b>: Elke opname wordt automatisch omgezet in tekst zodat er niets gemist wordt."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nano Banana</b>: Beeldhulpmiddel in Chat-bedieningselementen ondersteunt nu Nano Banana."
+          ]
+        }
+      ],
+      "5_18_0": [
+        {
+          "features": [
+            "<b>Onderzoek in Minuten</b>: Zoek in bronnen, vergelijk perspectieven en krijg gestructureerde rapporten met citaten"
+          ]
+        },
+        {
+          "features": [
+            "<b>Elite Credits</b>: Nieuwe kredieteenheid voor AI-agent functies zoals Diepgaand Onderzoek en AI Slides"
+          ]
+        },
+        {
+          "features": [
+            "<b>Eenvoudigere Modellijst</b>: Selecteer een model één keer; gebruik de Think-schakelaar om redeneren in of uit te schakelen"
+          ]
+        }
+      ],
+      "5_1_0": [
+        {
+          "features": [
+            "<b>Denk (R1) Modus</b>: DeepSeek-R1's denken kan nu worden gebruikt met algemene modellen voor betere antwoorden. Kost 1 Geavanceerd Tegoed per gebruik."
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterde Zoekopdracht</b>: Vind de meest relevante bronnen met verbeterde precisie."
+          ]
+        },
+        {
+          "features": [
+            "<b>Opslaan als Notities</b>: Sla AI-antwoorden op als notities in Wisebase voor later gebruik."
+          ]
+        }
+      ],
+      "5_20_0": [
+        {
+          "features": [
+            "<b>Handel op webpagina's</b>: Instrueer AI om taken voor je uit te voeren direct in je huidige browser — geen aparte 'agent browser' vereist."
+          ]
+        },
+        {
+          "features": [
+            "<b>Beperkte Uitrol</b>: Deze versie kan traag of inconsistent zijn. Toegang is voorlopig beperkt tot Ultra-gebruikers vanwege de hoge kosten."
+          ]
+        }
+      ],
+      "5_22_0": [
+        {
+          "features": [
+            "Slimmer, Natuurlijke: Klinkt menselijker en beter in het opvolgen van instructies dan GPT‑5"
+          ]
+        },
+        {
+          "features": [
+            "Denkt Preciezer: Levert snellere antwoorden voor eenvoudige taken en diepere redenering voor complexe taken"
+          ]
+        }
+      ],
+      "5_2_0": [
+        {
+          "features": [
+            "<b>Beloningscentrum</b>: Verdien gratis credits door de functies van Sider te verkennen."
+          ]
+        },
+        {
+          "features": [
+            "<b>Verbeterde Pagina Vertalen</b>: AI-vertaling met behulp van GPT, Claude of Gemini. Vertaal specifieke delen van vertaalde pagina's opnieuw."
+          ]
+        }
+      ],
+      "5_3_0": [
+        {
+          "features": [
+            "<b> Gemini 2.5 Pro</b>: Uitblinkt in coderen, wetenschap en wiskunde met verbeterd redeneervermogen en contextbewustzijn."
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3-0324</b>: Levert snelle, betrouwbare antwoorden en verbeterde ondersteuning voor wiskunde en coderen."
+          ]
+        }
+      ],
+      "5_4_0": [
+        {
+          "features": [
+            "<b>Markeer Chats</b>: Markeer belangrijke chats voor gemakkelijke toegang later."
+          ]
+        },
+        {
+          "features": [
+            "<b>Exporteer Chats</b>: Sla chats op en deel ze eenvoudig als TXT-bestanden."
+          ]
+        }
+      ],
+      "5_5_0": [
+        {
+          "features": [
+            "<b>GPT-4.1</b>: Behandelt complexe problemen en codering in de echte wereld met verbeterde nauwkeurigheid, ter vervanging van GPT-4o."
+          ]
+        },
+        {
+          "features": [
+            "<b>GPT-4.1 Mini</b>: Blink uit in beeldbegrip en levert snellere reacties."
+          ]
+        }
+      ],
+      "5_6_0": [
+        {
+          "features": [
+            "<b>o3</b>: Een krachtig model voor het oplossen van complexe problemen in wiskunde, codering, wetenschap en technisch schrijven. Vervangt o1."
+          ]
+        },
+        {
+          "features": [
+            "<b>o4-mini</b>: Ideaal voor snel redeneren, coderen en visuele taken. Vervangt o3-mini."
+          ]
+        }
+      ],
+      "5_7_0": [
+        {
+          "features": [
+            "<b>Aangedreven door GPT-Image-1</b>: Maak hoogwaardige, professionele afbeeldingen of bewerk bestaande afbeeldingen met behulp van eenvoudige beschrijvingen en het nieuwste beeldgeneratiemodel van OpenAI."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nieuwe Beeldkwaliteitsopties</b>: Kies uit Lage, Middelmatige of Hoge kwaliteit in Chatbediening—de kosten in credits variëren per selectie."
+          ]
+        }
+      ],
+      "5_8_0": [
+        {
+          "features": [
+            "<b>Verbeterde Mogelijkheden</b>: Maak afbeeldingen met GPT Image 1, bekijk artefacten in een apart paneel"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vergelijking van Twee Modellen</b>: Een zij-aan-zij weergave toont hoe verschillende modellen in real-time reageren op dezelfde vraag (exclusief voor web)"
+          ]
+        }
+      ],
+      "5_9_0": [
+        {
+          "features": [
+            "<b>Claude Opus 4</b>: Anthropic’s krachtigste model met ongeëvenaarde codeer- en complexe probleemoplossende vaardigheden."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude Sonnet 4</b>: Verbeterde redeneer- en codeercapaciteiten, vervangt Sonnet 3.7."
+          ]
+        }
+      ]
+    },
+    "logTitles": {
+      "4_10_0": "OpenAI's GPT-4o is nu hier!",
+      "4_11_0": "Diepe lezer om je kritische leesvaardigheden te verbeteren!",
+      "4_12_0": "",
+      "4_13_0": "Introductie van AI Voorlezen: Uw persoonlijke audio-assistent",
+      "4_16_0": "Introductie van GPT-4o mini",
+      "4_17_0": "Introductie van Watch Highlights voor YouTube",
+      "4_18_0": "Chat Delen is Nu Live!",
+      "4_19_0": "{{ARTIFACTS}}: Realtime, Interactieve Contentblokken",
+      "4_1_0": "",
+      "4_20_0": "Upgrade Vertaalfuncties",
+      "4_22_0": "Demon vs Engel: Röntgen je X-persoonlijkheid",
+      "4_23_0": "OpenAI o1-preview & o1-mini zijn nu beschikbaar!",
+      "4_24_0": "Gemini-modellen zijn net slimmer en sneller geworden!",
+      "4_25_0": "Frisse look voor een betere ervaring",
+      "4_26_0": "Introductie van Denkmodus (Experimenteel)",
+      "4_27_0": "Verbeterd contextmenu en artefacten",
+      "4_28_0": "Claude 3.5 Haiku & Verbeterde Opties",
+      "4_29_0": "Verbeterde chatervaring",
+      "4_2_0": "Efficiëntere toegang tot UI en zijbalk GPT's",
+      "4_30_0": "Bijgewerkte GPT-4o, Paginavertaling en YouTube-ondertitels",
+      "4_31_0": "Tools Nav, Input Vertalen, Snel Kopiëren",
+      "4_32_0": "Ondersteuning voor audiobestanden in chat",
+      "4_33_0": "O1 & Video Samenvatting Upgrades",
+      "4_34_0": "Gmail Al Antwoord, Artefacten en Vertaalverbeteringen",
+      "4_35_0": "Links Voorvertonen: Slimmer Bladeren",
+      "4_36_0": "Verzamel Kennis met Wisebase",
+      "4_37_0": "DeepSeek-R1 & V3, AI Vertaler",
+      "4_38_0": "Introductie van Gemini 2.0 Flash",
+      "4_39_0": "OpenAI o3-mini Nu Beschikbaar!",
+      "4_3_0": "Maximaliseer uw ervaring met de volledig scherm modus!",
+      "4_40_0": "Gemini 2.0 Pro is nu beschikbaar!",
+      "4_41_0": "Spraak Invoer & DeepSeek-R1-70B",
+      "4_42_0": "Tweetalige Ondertitelondersteuning voor Netflix",
+      "4_43_0": "Introductie van {{CLAUDE37}}",
+      "4_44_0": "GPT-4.5 is gearriveerd!",
+      "4_45_0": "Webchat nu live!",
+      "4_4_0": "Alle gereedschappen in Chat & GPT-4 Contextmenu",
+      "4_5_0": "",
+      "4_6_0": "Ondersteun nu de Claude 3-familie!",
+      "4_7_0": "In-Chat Video Samenvatting, Ondertitel Extractie, Claude 3 Haiku! 🚀",
+      "4_8_0": "Gemini 1.5 Pro - Nu Beschikbaar!",
+      "4_9_0": "Llama 3 Nu! De volgende generatie van Meta's geavanceerde open source LLM.",
+      "5_0_0": "Maak kennis met Sider 5.0: Diepgaand Onderzoek Gemakkelijk Gemaakt. Slim en Geautomatiseerd.",
+      "5_10_0": "Audio-naar-tekst met sprekeridentificatie",
+      "5_12_0": "Aangepaste instructies nu beschikbaar",
+      "5_13_0": "Artefacten Ondersteunen Nu Mindmaps en Dia's",
+      "5_14_0": "Grok 4 is Hier!",
+      "5_15_0": "Opnemen. Opslaan. Beheersen.",
+      "5_16_0": "GPT-5 is hier!",
+      "5_17_0": "REC-notitie & Nano Banana",
+      "5_18_0": "Diepgaand Onderzoek & Elite Credits",
+      "5_19_0": "Introductie van Claude Sonnet 4.5",
+      "5_1_0": "Slimmer Denken, Zoeken en Opslaan",
+      "5_20_0": "Introductie van Browser Agent (Onderzoek Voorvertoning)",
+      "5_21_0": "GPT-5 heeft net een update gekregen",
+      "5_22_0": "GPT-5.1 is hier",
+      "5_23_0": "Gemini 3 Pro is hier!",
+      "5_2_0": "Beloningscentrum & Verbeterde Pagina Vertalen",
+      "5_3_0": "Gemini 2.5 Pro & Bijgewerkte DeepSeek V3 Nu Beschikbaar",
+      "5_4_0": "Markeer & Exporteer Je Chats",
+      "5_5_0": "Introductie van GPT-4.1 en GPT-4.1 Mini",
+      "5_6_0": "OpenAI o3 & o4-mini Nu Beschikbaar",
+      "5_7_0": "Maak en Bewerk Afbeeldingen in Chat met GPT-Image-1",
+      "5_8_0": "Volledige Pagina Webchat Verbeterd",
+      "5_9_0": "Claude Opus 4 en Claude Sonnet 4 Nu Beschikbaar"
+    },
+    "newInVersion": "Wat is nieuw in versie {{versionId}}",
+    "rate5Star": "<b>Ben je dol op onze extensie?</b> Beoordeel ons vijf sterren in de webwinkel om ons te helpen groeien",
+    "tryRecordNote": "Probeer REC-notitie"
+  },
+  "changeSpeed": "Snelheid wijzigen",
+  "ChangeTone": "Verander de toon",
+  "changeVoice": "Een stem wijzigen",
+  "chatWithPDF": "Chatten met PDF",
+  "check": "Rekening",
+  "checkOutNow": "Nu afrekenen!",
+  "clear": "Duidelijk",
+  "clickPreview": "Klik om te bekijken",
+  "clickToAsk": "Klik om te vragen",
+  "clickToTry": "Klik om deze functie uit te proberen",
+  "clickView": "Klik om te bekijken",
+  "close": "Sluiten",
+  "code": "Code",
+  "code&preview": "Code & Voorbeeld",
+  "collapse": "Zijbalk samenvouwen",
+  "collapseNav": "Navigatiebalk inklappen",
+  "compareWith": "Vergelijk met {{NAME}}",
+  "confirm": "Bevestigen",
+  "console": "Console",
+  "constructionDesc": "Stel jezelf voor om betere, meer gepersonaliseerde antwoorden te krijgen",
+  "constructionForm": {
+    "additional_info": {
+      "descritionList": [
+        "Ik probeer Spaans te leren.",
+        "Ik ben gepassioneerd over fotografie en reizen.",
+        "Grote fan van sci-fi boeken en films."
+      ],
+      "descritionTitle": "Je kunt dingen delen zoals:",
+      "label": "Is er nog iets anders dat me kan helpen je beter te leren kennen?",
+      "placeholder": "Interesses, waarden of voorkeuren om rekening mee te houden"
+    },
+    "desired_ai_traits": {
+      "descritionList": [
+        "Gebruik een informele, vriendelijke toon.",
+        "Wees direct en kom snel ter zake.",
+        "Daag mijn ideeën uit en stel vervolgvragen."
+      ],
+      "descritionTitle": "Je kunt me dingen laten doen zoals:",
+      "label": "Wat voor soort AI-metgezel zou het beste voor je werken?",
+      "placeholder": "Communicatiestijl of persoonlijkheidskenmerken"
+    },
+    "nickname": {
+      "label": "Hoe moet ik je noemen?",
+      "placeholder": "Bijnaam"
+    },
+    "occupation": {
+      "label": "Wat doe je?",
+      "placeholder": "Je werk"
+    }
+  },
+  "contactUs": "Neem contact met ons op",
+  "contextMenu": {
+    "chatSelection": "Chat met geselecteerde tekst",
+    "highlightSelection": "Markeer geselecteerde tekst",
+    "imageTools": "{{AI}} Beeldhulpmiddelen",
+    "openFullPageChat": "Open Volledige Pagina Chat",
+    "revertSavePage": "Verwijder uit {{WISEBASE}}",
+    "revertTranslatePage": "Toon originele tekst",
+    "savePage": "Sla de pagina op in {{WISEBASE}}",
+    "summarizePage": "Vat de pagina samen",
+    "translatePage": "Vertaal naar {{lang}}"
+  },
+  "continue": "Doorgaan",
+  "contrast-analysis": "Analyseer contrasten",
+  "conversationTip": "Deze chat is gemaakt in {{CHATPROVIDER}} modus. Schakel modus om door te gaan, of start een nieuwe chat in de huidige modus.",
+  "copied": "Gekopieerd",
+  "copy": "Kopiëren",
+  "copyAsMarkdown": "Kopiëren als Markdown",
+  "copyAsSheet": "Kopiëren als Spreadsheet",
+  "createAccount": "Maak een account aan",
+  "createAccountTip": "Meld je aan om elke dag <a>{{NUM}} gratis</a> credits te krijgen",
+  "createImageTip": "Kosten worden per afbeelding in rekening gebracht op basis van het geselecteerde model.",
+  "creatingImage": "Afbeelding maken",
+  "creatingImageFailed": "Afbeelding maken mislukt",
+  "credit": "Credit",
+  "credits": "Credits",
+  "current": "Huidig",
+  "currentRecordedSpeakers": "Huidige Opgenomen Sprekers",
+  "currentTpl": "Huidige sjabloon:",
+  "customInstructions": "Aangepaste instructies",
+  "customPrompt": "Aangepaste prompt",
+  "dataAnalysisTip": "Deze tool wordt alleen geactiveerd wanneer deze wordt gebruikt, waarbij 1 Advanced Credit wordt afgetrokken.",
+  "deepReadTools": "Hulpmiddelen voor diepgaand lezen",
+  "deepResearch": "Diepgaand Onderzoek",
+  "deepResearchBlockTip": "Diepgaand onderzoek duurt naar verwachting 5–20 minuten. U kunt andere functies blijven gebruiken.",
+  "deepResearchFileModalCancelText": "Ga Verder Zonder Bestanden",
+  "deepResearchFileModalContent": "Diepgaand Onderzoek ondersteunt geen bestanden. Verlaat Diepgaand Onderzoek om bestanden te uploaden, of ga verder zonder bestanden.",
+  "deepResearchFileModalOkText": "Verlaat Onderzoek & Upload Bestand",
+  "deepResearchFileModalTitle": "Kan bestand niet uploaden",
+  "deepResearchFileTip": "Diepgaand Onderzoek ondersteunt geen bestanden. Verwijder bestanden om door te gaan of blijf chatten.",
+  "deepResearchInputHint": "Wat zou je willen onderzoeken?",
+  "deepResearchNormalTip": "Elk gebruik kost 20 Elite Credits",
+  "deepResearchTip": "Ga verder——diepgaande analyse met Deep Research",
+  "delete": "Verwijderen",
+  "deleteAll": "Alles verwijderen",
+  "delteTpl": "Verwijder dit sjabloon",
+  "describeImage": "Beschrijf dit beeld",
+  "describleImage": "Beschrijf",
+  "detected": "Gedetecteerd",
+  "disable": "Uitschakelen",
+  "Distinguish": "Onderscheiden",
+  "distinguishDesc": "3 geavanceerde kredieten / 10 minuten",
+  "DitinguishSpeakers": "De sprekers onderscheiden?",
+  "done": "Klaar",
+  "download": "Download",
+  "downloadPng": "Download PNG",
+  "downloadTypeFile": "Download {{type}} bestand",
+  "dropMsg": "Sleep hier om naar Sider te sturen",
+  "earnFree": "Verdien Gratis Credits",
+  "edgePasteBug": "Kan niet plakken met sneltoetsen vanwege een bug in de Edge-browser. Klik met de rechtermuisknop om te plakken.",
+  "edit": "Bewerking",
+  "editTitle": "Titel bewerken",
+  "editTpl": "Bewerk dit sjabloon",
+  "elite": "Elite",
+  "emailEnhance": {
+    "emailAssistant": "E-mail assistent",
+    "emailAssistantDesc": "Indien ingeschakeld, kan Sider u helpen snel e-mails te beantwoorden.",
+    "hideTranslation": "Vertaling verbergen",
+    "inputPlaceholder": "Vertel Sider hoe u wilt reageren...",
+    "intent": "Intentie van de afzender",
+    "orgLang": "E-mailtaal",
+    "quickAIReply": "AI-antwoord",
+    "replyInputPlaceholder": "Wat zou je willen antwoorden?",
+    "resultsTitle": "Antwoordconcept",
+    "showTranslation": "Vertaling tonen",
+    "translateEmail": "Vertaal de e-mail",
+    "tryAgain": "Probeer het nog eens",
+    "voice": {
+      "applicant": "Aanvrager",
+      "casual": "Casual",
+      "colleague": "Collega",
+      "confident": "vol vertrouwen",
+      "customer-service-staff": "Klantenservice personeel",
+      "direct": "direct",
+      "emailLength": "E-maillengte",
+      "empathetic": "empathisch",
+      "enthusiastic": "Gepassioneerd",
+      "formal": "Formeel",
+      "formality": "Formaliteit",
+      "friendly": "vriendelijk",
+      "human-resources": "Personeelszaken",
+      "informational": "informatief",
+      "leader": "Leider",
+      "long": "Lang",
+      "medium": "Medium",
+      "neutral": "Neutrale",
+      "personable": "Beste",
+      "project-manager": "Projectleider",
+      "sales-representative": "Verkoop vertegenwoordiger",
+      "short": "Kort",
+      "subordinate": "Ondergeschikt",
+      "tone": "Toon",
+      "witty": "slim",
+      "yourRole": "Jouw rol"
+    },
+    "voiceSettings": "Toon instelling",
+    "wayToReply": "Antwoordideeën"
+  },
+  "enable": "Inschakelen",
+  "enable&continue": "Inschakelen en doorgaan",
+  "enterText": "Voer tekst in",
+  "errorOccurred": "Er is een fout opgetreden",
+  "everyThing": "Alles",
+  "example": "Voorbeeld",
+  "exit": "Afsluiten",
+  "expand": "Uitvouwen",
+  "expandNav": "Navigatiebalk uitklappen",
+  "experimental": "Vroege toegang",
+  "experimentalDesc": "Betaalde gebruikers krijgen vroege toegang tot exclusieve, geavanceerde tools en experimentele functies die niet beschikbaar zijn voor niet-abonnees.",
+  "explain": "Uitleggen",
+  "explainSection": "Kun je deze sectie in meer detail uitleggen?",
+  "export": "Exporteren",
+  "exportXmind": "Exporteer .xmind-bestand",
+  "extra": "extra",
+  "extracted": "Audio geëxtraheerd",
+  "extractingText": "Tekst extraheren",
+  "extractingTextFailed": "Tekst extractie mislukt",
+  "ExtractText": "Extraheer tekst",
+  "faceError": "Dit probleem tegengekomen in de nieuwste {{ARTIFACT}}, graag oplossen.",
+  "fact-check": "Feitencontrole",
+  "feedback": "Feedback",
+  "fetched": "Opgehaald {{QUERY}}",
+  "fetchFailed": "Ophalen van {{QUERY}} mislukt.",
+  "fetching": "{{QUERY}} ophalen...",
+  "fileInputHint": "Stel vragen over dit bestand",
+  "finish": "Voltooien",
+  "fit": "Passend maken aan scherm",
+  "fiveStarRate": {
+    "enjoy": "😘 Vind je deze extensie leuk?",
+    "enjoyNo": "Geen feedback",
+    "enjoyYes": "Ja, 5-sterren beoordeling!",
+    "feedbackThx": "Bedankt voor je feedback.",
+    "feedbackTip": "🥹 Vertel ons alstublieft de reden van uw ontevredenheid.",
+    "rate": "Beoordeel ons met vijf sterren"
+  },
+  "free": "Gratis",
+  "freeTrial": {
+    "cancelTip": "Op elk moment annuleren",
+    "panelBtn": "Start Gratis Proefversie",
+    "panelList": [
+      "Chat vrijuit met GPT-4 & Claude 3",
+      "Chat met elk PDF, afbeelding & link",
+      "Vat webpagina's & YouTube-video's samen"
+    ],
+    "panelTitle": "3 Dagen Onbeperkt Plan Gratis Proefversie"
+  },
+  "fullPageChat": "Volledige pagina-chat",
+  "fullscreen": "Volledig scherm",
+  "fullscreenBookmarkTip": "Klik op het sterpictogram om de chat in volledig scherm te bookmarken voor gemakkelijke toegang de volgende keer!",
+  "fullScreenChat": "Volledig Scherm Chat",
+  "gamify": "Gamificeren",
+  "gamifyDoc": "Gamificeer het Document",
+  "gamifyPage": "Gamificeer deze pagina",
+  "gamifyPageDesc": "Maak gamified, interactieve weergaven van de huidige webpagina voor een beter begrip.",
+  "gamifyTip": "Leren door te spelen: Ontdek concepten via interactieve demo's",
+  "genBy": "Gegenereerd door {{MODEL_NAME}}",
+  "general": "Algemene configuratie",
+  "generating": "Genereren",
+  "generatingImageTip": "Houd de chat open totdat de afbeelding klaar is",
+  "generatingReport": "Rapport genereren...",
+  "generatingTranscript": "Transcript genereren",
+  "getAIAnswer": "Krijg AI-antwoord",
+  "getAnotherKey": "Krijg een andere sleutel",
+  "getItNow": "Profiteer nu",
+  "getKeyPage": {
+    "addKey": "Sleutel toevoegen",
+    "apiKeyInputPlaceholder": "Voer uw API-sleutel in",
+    "checkConnectionBtn": "Controleren",
+    "checkConnectionDesc": "Controleer of je API-sleutel en proxy (indien gebruikt) geldig zijn.",
+    "checkConnectionTitle": "Verbinding controleren",
+    "connectionFailed": "Verbinding mislukt. Controleer je API-sleutel en proxy-instellingen.",
+    "connectionSuccess": "Verbinding succesvol",
+    "customKey": "Aangepaste API-sleutel",
+    "deleteModelTip": "Dit model verwijderen?",
+    "modelCount": "{{count}} modellen beschikbaar",
+    "modelList": "Modellijst",
+    "noKeyWarn": "Geen API-sleutel gevonden. Voeg een sleutel toe om door te gaan of schakel over naar het gebruik van {{APP_NAME}}.",
+    "proxyUrlTitle": "API-proxy-URL (optioneel)",
+    "proxyUrlTitleRequired": "API-proxy-URL",
+    "setup": "Instellen",
+    "step1": "Stap 1: API-sleutel ophalen",
+    "step1-1": "<i>Log in op uw OpenAI-account</i> Als u geen account heeft, meldt u zich <b>HIER</b> aan",
+    "step1-2": "Bezoek de OpenAI API Key-pagina",
+    "step1-3": "Maak een nieuwe geheime sleutel en kopieer deze als volgt",
+    "step2": "Stap 2: Plak de API-sleutel in het onderstaande vak",
+    "step2-tips": "Maak je geen zorgen. Uw API-sleutel wordt alleen lokaal gebruikt binnen de ChatGPT-extensie. Het gebruik van de API is stabieler dan het direct gebruiken van ChatGPT.",
+    "step3": "Stap 3: Controleer <i>hier</i> uw tegoeden",
+    "stepTitle": "Hoe u een API-sleutel kunt krijgen.",
+    "useSider": "Gebruik {{APP_NAME}}",
+    "welcome": "Welkom bij {{APP_NAME}}! Hier is je reis om te beginnen:"
+  },
+  "getMore": "haal meer",
+  "googleSearchPage": {
+    "claude3Advantages": [
+      "Even krachtig als GPT-4",
+      "Meer natuurlijke reacties",
+      "Krachtige redeneercapaciteiten"
+    ],
+    "gpt4Advantages": [
+      "Krijg betere antwoorden",
+      "Meer diverse kennis",
+      "Sterker begrip"
+    ]
+  },
+  "goPremium": "upgrade naar premium",
+  "goPremiumGetMore": "upgrade naar premium om meer te krijgen",
+  "gotIt": "Begrepen",
+  "guideVideos": {
+    "chat": {
+      "ai-bot": "Multi-bot Chat",
+      "data-analysis": "Geavanceerde Data Analyse",
+      "painter": "Afbeelding Generatie",
+      "prompts": "Aangepaste Prompts",
+      "web-access": "Webtoegang"
+    },
+    "chatpdf": {
+      "chatpdf": "Chat met PDF"
+    },
+    "email": {
+      "reply": "Genereer E-mail Antwoorden"
+    },
+    "grammar": {
+      "context": "Grammaticacontrole via Contextmenu",
+      "widget": "Grammaticacontrole via Zijbalk"
+    },
+    "ocr": {
+      "ocr": "Extraheer Tekst en Vergelijkingen"
+    },
+    "painter": {
+      "bg-remove": "Verwijder Achtergrond",
+      "bg-replace": "Vervang Achtergrond",
+      "eraser": "Verwijder Geborsteld Gebied",
+      "image": "Genereer Afbeeldingen",
+      "text-remove": "Verwijder Tekst",
+      "upscale": "Vergroot Afbeeldingen"
+    },
+    "summary": {
+      "doc": "Geüploade Documenten",
+      "page": "Webpagina via Snelmenu",
+      "page2": "Webpagina via Chat",
+      "youtube": "YouTube Video's"
+    },
+    "translation": {
+      "in-chat": "Geselecteerde Tekst in Chat",
+      "in-chat2": "Getypte Tekst in Chat",
+      "input": "Getypte Tekst op Pagina",
+      "page": "Volledige Webpagina",
+      "selected": "Geselecteerde Tekst via Contextmenu",
+      "widget": "Geselecteerde Tekst via Zijbalk"
+    },
+    "write": {
+      "context": "Verbeter Geselecteerde Tekst",
+      "input": "Herschrijf Inputs",
+      "widget": "Op Verzoek Componeren"
+    }
+  },
+  "guideVideoTitle": {
+    "chat": "Chat",
+    "chatpdf": "ChatPDF",
+    "email": "E-mail Antwoord",
+    "grammar": "Grammatica",
+    "ocr": "OCR",
+    "painter": "Schilder",
+    "summary": "Samenvatten",
+    "translation": "Vertaal",
+    "write": "Schrijf"
+  },
+  "helpCenter": "Helpcentrum",
+  "hi": "Hoi,",
+  "hide": "Verbergen",
+  "hideImage": "Afbeelding verbergen",
+  "highlight-excerpts": "Markeer fragmenten",
+  "highlightType": {
+    "comprehensive-coverage": "Uitgebreide Dekking",
+    "key-sentences": "Belangrijke Zinnen",
+    "memorable-quotes": "Gedenkwaardige Citaten",
+    "structural-importance": "Structurele Belang"
+  },
+  "historyGroups": {
+    "earlier": "Eerder",
+    "thisMonth": "Deze maand",
+    "thisWeek": "Deze week",
+    "today": "Vandaag"
+  },
+  "howToUse": "Bekijk hoe te gebruiken",
+  "icon": "Icoon",
+  "identify-assumptions": "Identificeer aannames",
+  "image": "Afbeelding",
+  "imageInputHint": "Stel vragen over deze afbeelding",
+  "imageQuality": {
+    "high": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Hoog)"
+    },
+    "low": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Laag)"
+    },
+    "medium": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Gemiddeld)"
+    },
+    "nano_banana": {
+      "desc": "Gemini 2.5 Flash Image Preview",
+      "label": "Nano Banana"
+    },
+    "nano_banana_pro": {
+      "desc": "Gemini 3 Pro Image Preview",
+      "label": "Nano Banana Pro"
+    }
+  },
+  "imageQuoteTipContent": "Als u nogmaals naar de afbeelding wilt vragen, citeert u deze eenvoudigweg.",
+  "imageQuoteTipTitle": "Vraag de afbeelding opnieuw? Je moet de afbeelding citeren",
+  "imageRetryTip": "Er is een fout opgetreden. Probeer het opnieuw.",
+  "imageToolbar": {
+    "AITools": "AI Hulpmiddelen",
+    "chatWithImage": "Chatten met afbeelding",
+    "erase": "Gebiedsverwijdering",
+    "extractText": "Tekst extraheren",
+    "imageTools": "Afbeeldingstools",
+    "inpaint": "Lokale hertekening",
+    "removeBackground": "Achtergrond verwijderen",
+    "removeText": "Tekst verwijderen",
+    "replaceBackground": "Achtergrond vervangen",
+    "upscale": "Beeldkwaliteit Verbeteren",
+    "variation": "Maak Variaties"
+  },
+  "imageTranslateInto": "Vertaal de tekst in de afbeelding naar {{lang}}",
+  "inputTranslation": {
+    "mainSwitchDesc": "Vertaal en vervang tekst in een invoerveld op elke webpagina",
+    "mainSwitchTitle": "Vertaal invoertekst met een activeringssleutel",
+    "model": "Vertaalmodel",
+    "neverTransSites": "Nooit vertalen op deze sites",
+    "spaceKey": "Spatiebalk",
+    "title": "Invoer vertalen",
+    "triggerKeyDesc": "Druk 3 keer snel op de trigger-toets om te vertalen, maak ongedaan met {{key}}",
+    "triggerKeyTitle": "Trigger-toets"
+  },
+  "insert": "Invoegen",
+  "invite": "Uitnodiging",
+  "inviteFriendTip": "<a>Vrienden uitnodigen</a> om extra credits te krijgen",
+  "inviteYourFriends": "Nodig vrienden uit",
+  "issueType": "Type probleem",
+  "joinDiscord": "Word lid van onze Discord-gemeenschap",
+  "key-concepts": "Verduidelijk kernconcepten",
+  "keyboardShortcuts": "Toetsenbord sneltoetsen",
+  "keypoints": "Belangrijkste punten",
+  "language": "Taal",
+  "learnMore": "Meer informatie",
+  "letsTryItNow": "Laten we het nu proberen!",
+  "listen": "Luisteren",
+  "llmStatus": {
+    "thinking": "Aan het nadenken..."
+  },
+  "Loading": "Laden",
+  "loadMessageFailed": "Berichten laden mislukt",
+  "login": {
+    "apple": "Doorgaan met Apple",
+    "google": "Doorgaan met Google",
+    "microsoft": "Doorgaan met Microsoft",
+    "phone": "Doorgaan met Telefoon"
+  },
+  "loginTip": "Heb je nog geen account? <a>Maak een account aan</a>",
+  "loginTipSiderMode": "Log in om deze functie in Sider-modus te gebruiken.",
+  "loginToClaimRewards": "Log in om je beloningen in Sider-modus te claimen.",
+  "loginToUnlockFeature": "Log in om meer functies te ontgrendelen.",
+  "loginToUse": "Log in om Sider te gebruiken.",
+  "logout": "Uitloggen",
+  "longAnswerFullScreenTip": "Voel je je benauwd? Ga naar volledig scherm",
+  "longText": "Lange tekst",
+  "manage": "Beheren",
+  "mathSolver": "Wiskunde Oplosser",
+  "mathSolverTip": "Opslaan in Mijn Vragenbanken",
+  "maximize": "Maximaliseren",
+  "mentionBot": "Vermeld model",
+  "mentionGPTs": "Vermeld GPT's",
+  "mindmap": {
+    "catalogOrganization": "Catalogusorganisatie",
+    "fishbone": "Visgraat",
+    "logicalStructure": "Logische Structuur",
+    "logicalStructureLeft": "Logische Structuur Links",
+    "mindMap": "Mindmap",
+    "organizationStructure": "Organisatiestructuur",
+    "timeline": "Tijdlijn"
+  },
+  "minimize": "Minimaliseren",
+  "mobileChatHistoryAd": {
+    "btn": "App downloaden",
+    "title": "Synchroniseer chats over apparaten"
+  },
+  "model": "Model",
+  "modelCountTip": {
+    "gpt-3.5": "Kost <m>1 basiscredit</m>.",
+    "gpt-3.5-n_one": "Kosten <m>{{count}} basiscredit</m>.",
+    "gpt-3.5-n_other": "Kosten <m>{{count}} basiscredits</m>.",
+    "gpt-4": "Kost <m>1 geavanceerde credit</m>.",
+    "gpt-4-2": "Kost <m>2 geavanceerde credits</m>.",
+    "gpt-4-n_one": "Kost <m>{{count}} geavanceerde credit</m>.",
+    "gpt-4-n_other": "Kost <m>{{count}} geavanceerde credits</m>."
+  },
+  "modelDesc": {
+    "bard": "Het model van Google (PaLM 2) presteert goed bij geavanceerde redeneertaken.",
+    "claude-3-haiku": "Anthropic's meest compacte model, ontworpen voor bijna directe responsiviteit en naadloze AI-ervaringen die menselijke interacties nabootsen",
+    "claude-3-opus": "Anthropic's krachtigste model, levert state-of-the-art prestaties op zeer complexe taken en toont vloeiendheid en menselijk begrip.",
+    "claude-3-sonnet": "Anthropic's meest gebalanceerde model tussen intelligentie en snelheid, ideaal voor een breed scala aan taken.",
+    "claude-3.5-sonnet": "Anthropic's nieuwste model, levert tweemaal de snelheid van Claude 3 Opus en hogere intelligentie, wat het redeneren, de kennis, het coderen en visuele taken aanzienlijk verbetert.",
+    "claude-instant": "Het basismodel van Anthropic, gebruiksscenario's met lage latentie en hoge doorvoer.",
+    "claude2": "Het beste aanbodmodel in zijn klasse van Anthropic, superieure prestaties bij taken die complex redeneren vereisen.",
+    "gemini-1.5-flash": "Google's lichtgewicht model, geoptimaliseerd voor snelheid en efficiëntie.",
+    "gemini-1.5-pro": "Google's beste model voor algemene prestaties over een breed scala aan taken.",
+    "gemini-pro": "Google's meest gebalanceerde model, perfecte combinatie van capaciteit en efficiëntie.",
+    "gpt-3.5": "Zeer snel, ideaal voor de meeste dagelijkse taken.",
+    "gpt-4": "Meest capabele model, het beste voor complexe taken waarvoor geavanceerd redeneren vereist is.",
+    "gpt-4o": "OpenAI's beste model, het beste voor complexe taken terwijl de kwaliteit behouden blijft.",
+    "gpt-4o-mini": "OpenAI's nieuwste model, biedt snelle, superieure prestaties in chat-, codeer- en redeneertaken voor dagelijks gebruik.",
+    "gpt-5": "Het nieuwste model van OpenAI, het beste voor complexe taken terwijl de kwaliteit behouden blijft.",
+    "llama-3": "Meta's nieuwste model, het beste voor complexe taken terwijl de kwaliteit behouden blijft.",
+    "sider": "{{SIDER}} selecteert dynamisch GPT-4o mini, Claude 3 Haiku, Gemini 1.5 Flash of Llama 3 voor optimale antwoorden op basis van het scenario."
+  },
+  "modelUpdateFailed": "Updaten van model mislukt",
+  "modelUpdateSuccess": "Model geüpdatet",
+  "more": "Meer",
+  "moreFeature": "Meer eigenschappen!",
+  "morePrompts": "Meer prompts",
+  "moreQueries": "Meer credits!",
+  "moreQuery": "Meer Credits",
+  "msg": {
+    "askOriginalModel": "Origineel {{MODELNAME}}",
+    "basicCreditLimit": "Geen basiscredits meer",
+    "basicCreditLimitDesc": "U heeft al uw basiscredits gebruikt. Upgrade uw plan of nodig vrienden uit om meer credits te krijgen.",
+    "cantBeTranscribed": "Kan deze video niet samenvatten vanwege auteursrechtelijke beperkingen. Probeer een andere.",
+    "changeSaved": "Wijzigingen opgeslagen",
+    "chatgptTabGuardRefreshingTips": "Er is iets misgegaan met ChatGPT. Opnieuw verbinding maken, een ogenblik geduld a.u.b.",
+    "chatgptTabGuardRefreshingTips1": "Er is iets misgegaan met ChatGPT.",
+    "chatgptTabGuardRefreshingTips2": "Opnieuw verbinding maken, een ogenblik geduld a.u.b.",
+    "chatgptTabGuardSetupSuccessTips": "Gerepareerd, probeer het opnieuw",
+    "chatgptTabGuardTips": "Houd dit tabblad open, nu kun je teruggaan naar {{APP_NAME}}",
+    "checkInvitation": "Controleer de uitnodigingsrecords",
+    "deletePromptWarn": "Wilt u deze prompt verwijderen?",
+    "dontRemindAgain": "Vraag het me niet opnieuw",
+    "dragImgTips": "Klik om te uploaden of laat hier een afbeelding vallen",
+    "dragTips": "Klik om te uploaden of bestanden hier neer te zetten",
+    "emailRequired": "E-mail is vereist.",
+    "enterAPIKey": "Voer uw OpenAI API-sleutel in",
+    "enterEmail": "Voer een e-mailadres in om updates over het probleem te ontvangen.",
+    "errChatGPTAuth": "<m>Klik op de link om in te loggen </m>op uw ChatGPT-webpagina en wij helpen u deze vast te zetten. Dan kun je deze in de zijbalk gebruiken.",
+    "errChatGPTAuthTipTitle": "Probeer:",
+    "errChatGPTFailToFetch": "Geen reactie ontvangen van ChatGPT.",
+    "errGeminiPro": "{{GEMINI}} fout, probeer het later opnieuw.",
+    "errOpenaiFailToFetch": "Krijg geen reactie van OpenAI via uw API-sleutel.",
+    "errOpenAIFilter": "De reactie werd gefilterd omdat de prompt de inhoudsbeheerbeleid van OpenAI heeft geactiveerd. Wijzig je prompt en probeer het opnieuw.",
+    "error1139_1": "Bedankt voor het gebruik van onbeperkte abonnementen! Je kunt nog steeds geavanceerde AI-modellen blijven gebruiken. Je hebt echter een tijdelijke snelheidslimiet bereikt. <a>Hier is waarom er een snelheidslimiet is en hoe we proberen je te helpen</a>. Gelieve het te <mx>LEZEN</mx>.",
+    "error1139_1_2": "Bedankt voor het gebruik van onbeperkte abonnementen! Je kunt nog steeds geavanceerde AI-modellen blijven gebruiken. Je hebt echter een tijdelijke snelheidslimiet bereikt en alle extra geavanceerde queries gebruikt. Hier is <a>waarom er een snelheidslimiet is en hoe we proberen je te helpen</a>. Gelieve het te <mx>LEZEN</mx>.",
+    "error1139_1_3": "Bedankt voor het gebruik van onbeperkte abonnementen! Je kunt nog steeds geavanceerde AI-modellen blijven gebruiken. Je hebt echter een tijdelijke snelheidslimiet bereikt en alle cadeau geavanceerde queries gebruikt. Hier is <a>waarom er een snelheidslimiet is en hoe we proberen je te helpen</a>. Gelieve het te <mx>LEZEN</mx>.",
+    "error1139_2": "Om je huidige werk niet te onderbreken, hebben we je enkele extra geavanceerde queries als cadeau gegeven om de huidige snelheidslimiet op te heffen. <b>Nadat je al deze extra geavanceerde queries hebt gebruikt, zul je een snelheidslimiet hebben</b>.",
+    "error1139_3": "De huidige snelheidslimiet is ({{timesToUse}} keer / {{periodTime}} uur) voor geavanceerde queries. We kunnen deze aanpassen aan onze capaciteiten. Nu meer nodig? Probeer een booster pack!",
+    "error1139_4": "We hebben je 50 extra geavanceerde queries als cadeau gegeven om de huidige snelheidslimiet op te heffen. <b>Nadat je al deze extra geavanceerde credits hebt gebruikt, zul je een snelheidslimiet hebben.</b>",
+    "errorFileType": "Niet-ondersteund bestandsformaat",
+    "errorOutputLimit": "Lengtelimiet bereikt. Upgrade om een langer antwoord te krijgen.",
+    "errServiceUnavailable": "De OpenAI-server is bezet. Probeer het later opnieuw of schakel over naar de Sider API en gebruik {{model}} tijdens de OpenAI-storing.",
+    "errSiderAdminKickout": "U bent uitgelogd, log alstublieft opnieuw in",
+    "errSiderAdvancedTextLimit": "Je hebt de limiet voor geavanceerde credits bereikt. Op dit moment is er een beperking van {{count}} berichten per 60 minuten. Als alternatief kun je basiscredits gebruiken en later terugkomen.",
+    "errSiderApiHighLoad": "De OpenAI-server is momenteel bezet. Probeer het later opnieuw.",
+    "errSiderApiImageLimit": "U heeft alle basiscredits gebruikt en upgrade alstublieft om deze functie te blijven gebruiken.",
+    "errSiderApiImgLimitPremiumUltra": "Je hebt het maximum aantal basiscredits bereikt. Wacht op de volgende reset om verder te gaan.",
+    "errSiderApiLimitDevice": "Log in om te gebruiken.",
+    "errSiderApiLimitLogin": "Je hebt vandaag alle gratis credits gebruikt. Upgrade of nodig vrienden uit voor meer, of wacht tot de credit reset van morgen.",
+    "errSiderApiLimitPremium": "Uw Basiscredit voor deze maand is opgebruikt. Schakel over naar Geavanceerde Credit, wacht op de reset volgende maand (abonnementsdatum), of upgrade voor meer.",
+    "errSiderApiLimitPremiumDiscount": "Je hebt al je credits opgebruikt. Upgrade nu voor onbeperkte credits met <b>$1</b> korting.",
+    "errSiderApiOcrLimit": "Je hebt al je basiscredits opgebruikt. Upgrade om deze functie te blijven gebruiken.",
+    "errSiderApiSummaryVideoLimit": "Je hebt al je credits opgebruikt. Upgrade of nodig vrienden uit om meer te verkrijgen.",
+    "errSiderApiTrialFeatLimit": "Je hebt de proeflimiet voor de premium functie bereikt. Upgrade om alle functies te ontgrendelen.",
+    "errSiderAudioAdvancedLimit": "Je hebt meer Advanced Credits nodig. Elke 10 minuten (of minder) audio kost 1 Advanced Credit. Upgrade of nodig vrienden uit om meer te krijgen!",
+    "errSiderBasicTextLimit": "Je hebt de limiet voor basiscredits bereikt. Op dit moment is er een beperking van {{count}} berichten per 60 minuten. Als alternatief kun je geavanceerde credits gebruiken en later terugkomen.",
+    "errSiderChatDeepResearchFailed": "We ondervinden momenteel problemen bij het genereren van uw onderzoeksrapport. Probeer het opnieuw.",
+    "errSiderCreditFreqLimit": "U heeft de huidige gebruikslimiet bereikt. Deze limiet zorgt voor eerlijk gebruik voor alle gebruikers. Probeer het opnieuw na {{count}} minuten.",
+    "errSiderCreditUsageLimit": "Gebruikslimiet bereikt",
+    "errSiderDataAnalysisCredit": "Dit antwoord vereist Data-analyse (1 Geavanceerd Tegoed). Je hebt geen Geavanceerde Tegoeden meer, dus upgrade of nodig vrienden uit voor meer!",
+    "errSiderDeviceBinded": "Log in om te gebruiken.",
+    "errSiderDeviceLimitLogout": "U bent uitgelogd vanwege het bereiken van de apparaatl imiet. U kunt opnieuw inloggen en dit zal het vroegst actieve apparaat op uw account uitloggen.",
+    "errSiderEliteCreditLimitElite": "U heeft alle Elite Credits gebruikt — probeer het opnieuw na de krediet resetdatum. Voor onmiddellijke hulp, neem contact op met ons ondersteuningsteam.",
+    "errSiderEliteCreditLimitNotElite": "U heeft geen Elite Credits meer — upgrade uw Sider-lidmaatschap.",
+    "errSiderGPT45RateLimit": "Je hebt je dagelijkse limiet voor GPT-4.5 bereikt. Vanwege OpenAI quotabeperkingen is het gebruik beperkt tot 1 keer per gebruiker per dag. Probeer het over 24 uur opnieuw of schakel over naar een ander beschikbaar model om door te gaan.",
+    "errSiderGPT4HighLoad": "De OpenAI-server is momenteel bezet. Probeer het later opnieuw.",
+    "errSiderGPT4LimitDevice": "Log eerst <b>in</b>, en <amb>nodig je vrienden uit</amb> of <ta>upgrade naar premium</ta> om meer geavanceerde credits te krijgen.",
+    "errSiderGPT4LimitLogin": "Upgrade of nodig vrienden uit om meer Geavanceerde Credits te ontgrendelen voor meer inzichtelijke antwoorden.",
+    "errSiderGPT4LimitPremium": "Je hebt al je maandelijkse Advanced Credits gebruikt. Upgrade je abonnement voor een hogere maandelijkse limiet of koop een Advanced Credits-boosterpakket voor direct gebruik!",
+    "errSiderGPT4LimitPremiumDiscount": "Je Geavanceerde Credits voor deze maand zijn opgebruikt. Upgrade nu voor onbeperkte credits met <b>$1</b> korting, of wacht op de reset volgende maand (abonnementsdatum).",
+    "errSiderHighTrafficError": "Vanwege het grote verkeer kunt u het later opnieuw proberen of upgraden naar een premium-account voor snellere toegang.",
+    "errSiderHighTrafficTip": "Overweeg alstublieft <a>upgrade naar een premium account</a> voor stabiele toegang en om onze ontwikkeling te ondersteunen.",
+    "errSiderLoginExpired": "Uw sessie is verlopen, log alstublieft opnieuw in",
+    "errSiderNeedLogin": "Log in om te gebruiken.",
+    "errSiderO1Limit1": "Het OpenAI o1-model is zeer gewild en heeft zijn quotumlimiet bereikt. Maak je geen zorgen, je kunt ook gratis vragen stellen aan OpenAI o1 op onze door de gemeenschap aangedreven Q&A-website: <a>ask.sider.ai</a>",
+    "errSiderOpenaiFault": "Openai-server is bezet. Schakel over naar {{model}} tijdens de OpenAI-storing.",
+    "errSiderOpusLimit": "Je hebt je dagelijkse limiet voor Claude Opus 4 bereikt. Vanwege Anthropic quotumbeperkingen is het gebruik beperkt tot 1 keer per gebruiker per dag. Probeer het over 24 uur opnieuw of schakel over naar een ander beschikbaar model om door te gaan.",
+    "errSiderOpusTLimit": "Je hebt je dagelijkse limiet voor Claude Opus 4 Think bereikt. Vanwege Anthropic quotumbeperkingen is het gebruik beperkt tot 1 keer per gebruiker per dag. Probeer het over 24 uur opnieuw of schakel over naar een ander beschikbaar model om door te gaan.",
+    "errSiderPremiumRequired": "Deze functie is exclusief beschikbaar voor premiumgebruikers. Upgrade nu om deze functionaliteit te ontgrendelen.",
+    "errSiderProcessing": "Slechts één bericht tegelijk. Wacht alstublieft een andere reactie voordat u een ander bericht verzendt, of wacht even.",
+    "errSiderThinkingModelCredit": "Onvoldoende geavanceerde tegoeden voor \"Denkmodus\". Schakel deze modus uit of upgrade/nodig vrienden uit voor extra tegoeden.",
+    "errSiderTimeout": "Verzoek verlopen. Probeer het opnieuw.",
+    "errSiderTranslateApiLimitPremium": "Uw Basiscredit voor deze maand is opgebruikt. Wacht alstublieft op de reset volgende maand (abonnementsdatum), of upgrade voor meer.",
+    "errSiderUltraVipRequired": "Deze functie is alleen beschikbaar in het Ultra-abonnement. Upgrade naar Ultra om het te gebruiken.",
+    "errSiderUnlimitedLimit": "Je hebt een tijdelijke limiet bereikt ({{timesToUse}} keer / {{periodTime}} uur) op Advanced Credits. We proberen meer credits voor je te krijgen. Nieuwe credits zullen beschikbaar zijn om {{resetTime}}. Nu meer nodig? Probeer een booster pack!",
+    "errSiderUserBanned": "Uw account is opgeschort vanwege gedetecteerde ongebruikelijke activiteiten (bijv. schending van regels of het delen van accounts). Als u vragen heeft, stuur ons dan een e-mail op care@sider.ai met uw accountgegevens.",
+    "errTrySiderAPI": "Controleer uw <a>aangepaste API-instellingen</a>.",
+    "errTrySiderAPI2": "<a>Schakel over naar Sider</a> voor betrouwbare toegang (dit zal een nieuw gesprek starten).",
+    "errTrySiderAPI2NonChat": "<a>Schakel over naar Sider</a> voor betrouwbare toegang.",
+    "errTrySiderAPI3": "<a>Neem contact op met de ondersteuning</a> voor hulp.",
+    "failToPlay": "Afspelen mislukt",
+    "featureBrowserLimit": "Deze pagina ondersteunt geen browserextensies. Beperkte pagina's omvatten doorgaans nieuwe tabbladen, de webwinkel, andere extensies en instellingen (chrome:// URL's). Probeer in plaats daarvan een reguliere pagina.",
+    "featureLimit": "Functielimiet",
+    "featureLimitTip": "Upgrade om Claude en Bard te gebruiken.",
+    "featureUnavailableOnPage": "Kan niet op deze pagina worden uitgevoerd",
+    "fetchFailed": "De afbeelding kon niet worden opgehaald. U kunt deze downloaden en handmatig uploaden.",
+    "fileLimit": "Om dit bestand te verwerken, schakel de Geavanceerde Data-analyse Tool in. Het kost 1 geavanceerde credit per gebruik. Wil je het inschakelen en doorgaan?",
+    "fileLimitFree": "Uw geüploade bestand vereist Geavanceerde Data-analyse voor verwerking. Upgrade nu om deze functie te ontgrendelen.",
+    "fileSizeLimit": "Bestand te groot",
+    "fileSizeLimitTip": "Het bestand overschrijdt de uploadlimiet van 100MB. Verminder de bestandsgrootte en probeer het opnieuw.",
+    "fileSizeTip": "Maximale grootte: 100MB per stuk. Tot 5 bestanden.",
+    "fiveStart": "Geef ons een 5-sterren",
+    "functionCallError": "Sorry, het huidige model heeft een interne fout ondervonden bij het genereren van een antwoord. Schakel over naar een ander model en probeer het opnieuw.",
+    "getApiKeyGuide": "U hebt een OpenAI API-sleutel nodig om het te laten werken. Volg onze gids om de API-sleutel te krijgen.",
+    "getMoreGPT4": "Krijg meer Geavanceerde Credit",
+    "goToSignIn": "Ga naar inloggen",
+    "imageSizeLimit": "Afbeeldingslimiet",
+    "imageSizeLimitTip": "Zorg ervoor dat de afbeelding kleiner is dan 10 MB en dat de breedte of hoogte niet groter is dan 4096 pixels. Probeer het vervolgens opnieuw.",
+    "invalidApiKey": "API-sleutel is ongeldig, vraag een andere aan.",
+    "invitedRewardObtained": "Beloningen behaald!",
+    "invitedWelcome": "Welkom! De GPT credits zijn aan je account toegevoegd!",
+    "inviteEarn": "Verdien <mx>{{num}} credits</mx> voor jou en je vrienden. <b>Hoe meer je verwijst, hoe meer je verdient</b>.",
+    "inviteFriendJoin_one": "{{count}} vriend heeft zich aangemeld",
+    "inviteFriendJoin_other": "{{count}} vrienden hebben zich aangemeld",
+    "inviteStep1": "Verwijs je vrienden door met de uitnodigingslink",
+    "inviteStep2": "Je vrienden melden zich aan",
+    "inviteStep3": "Ze installeren extensie & login. Beloningen verdiend!",
+    "inviteTitle": "Uitnodigen & Belonen",
+    "iosDownload": "Download iOS / Android app",
+    "keepConversationTip": "Elke keer dat je Sider opent, begint er een nieuw gesprek. Om het laatste gesprek voort te zetten, pas de <a>instellingen</a> aan.",
+    "localFileAccessRequiredBtn": "Ga naar extensie-instellingen",
+    "localFileAccessRequiredDesc": "Om de extensie met lokale bestanden te gebruiken, ga naar de extensie-instellingen en schakel \"<b>Toegang tot bestands-URL's toestaan</b>\" in.",
+    "localFileAccessRequiredTitle": "Bestandstoegang vereist",
+    "loginAndCloudflareCheck": "Schakel over naar de <a>Sidebar API</a> om stabiele toegang te krijgen OF log in en passeer de Cloudflare-controle op <i>chat.openai.com</i>",
+    "maxFileSize": "Maximale bestandsgrootte is {{size}}",
+    "maxSize": "Maximale grootte: {{num}}",
+    "modelError": "De server is druk bezet. Probeer het later opnieuw, of schakel over naar een ander model.",
+    "nameYourPrompt": "Geef uw prompt een naam",
+    "nameYourTitle": "Geef je gesprek een naam",
+    "noSubtitleMsg": "De video heeft geen ondertiteling en kan niet worden samengevat.",
+    "noSubtitleTitle": "Ondertiteling vereist voor samenvatting",
+    "notSupportFile": "Niet-ondersteund bestandsformaat",
+    "notSupportLiveVideo": "Live video-samenvatting wordt momenteel niet ondersteund.",
+    "notValidEmail": "geen geldige e-mail",
+    "onlyOneRequest": "Actief verzoek in uitvoering",
+    "onlyOneRequestDesc": "Uw account heeft een actief verzoek - slechts één verzoek tegelijk. Probeer het later opnieuw.",
+    "openLastConversationCancel": "Begrepen",
+    "openLastConversationContent": "Nu kunnen we instellen of de zijbalk het laatste gesprek telkens herstelt wanneer het wordt gestart.",
+    "openLastConversationOk": "Ga naar Instellingen",
+    "openLastConversationTitle": "Laatste gesprek openen?",
+    "promptNameRequired": "Promptnaam is vereist.",
+    "promptTplRequired": "Snelle inhoud is vereist.",
+    "quotaModelContent": "Je GPT-4/Claude-2 querylimiet is bereikt. Upgrade naar het Premium Plan voor meer toegang, of nodig vrienden uit voor gratis extra credits.",
+    "reEnableInSettings": "U kunt dit opnieuw inschakelen via <a>Instellingen</a>",
+    "restorePromptWarn": "Wilt u deze promptsjabloon herstellen?",
+    "searchNotFound": "Geen resultaten gevonden",
+    "selectModel": "Selecteer een geldig model",
+    "signinAward": "Log in om {{num}} <span>GRATIS</span> credits per dag te krijgen",
+    "signinAward2": "De credits zijn opgebruikt voor niet-ingelogde gebruikers. Je kunt inloggen om <b>{{num}} gratis credits per dag</b> te krijgen.",
+    "signinAward3": "Log in om meer credits per dag te krijgen",
+    "signinAward4": "Begin aan een magische AI-reis met je browser en ontvang elke dag {{num}} <span>GRATIS</span> credits",
+    "signinFeature": "Log alstublieft in om deze functie te gebruiken",
+    "signInRequired": "Aanmelden vereist",
+    "signinTips": "Meld u aan om uw aanwijzingen en instellingen te synchroniseren",
+    "somethingWrong": "Er is iets misgegaan. Probeer het later opnieuw.",
+    "somethingWrong2": "Er is iets misgegaan.",
+    "supportedFileFormat": "Ondersteunde bestandsformaten zijn {{formats}}",
+    "switchBarTip": "Verbreed het zijpaneel om de navigatiebalk vast te zetten.",
+    "switchRequired": "Overschakelen naar {{APP_NAME}}?",
+    "switchToSiderApiToContinue": "Deze functie ondersteunt momenteel alleen de {{APP_NAME}} API-modus. <a>Schakel over naar de {{APP_NAME}} API</a> om door te gaan.",
+    "switchToSiderDesc": "Om deze functie te gebruiken, schakel je je AI-toegangsmethode over naar {{APP_NAME}}.",
+    "thankForFeedback": "Bedankt. Het formulier is succesvol verzonden. We nemen spoedig contact met u op.",
+    "titleRequired": "Titel is vereist.",
+    "ttsChangeVoiceTip": "Credits Aftrek Kennisgeving",
+    "ttsChangeVoiceTipDesc": "Het wisselen naar een andere stem zal opnieuw credits aftrekken. Weet je zeker dat je wilt doorgaan?",
+    "ttsCharacterLimit": "Tekenlimiet bereikt",
+    "ttsCharacterLimitDesc": "AI Voorlezen heeft een limiet van {{count}} tekens. Selecteer een kortere tekst of gebruik de gratis stem.",
+    "ttsCharacterLimitDesc2": "Dit bericht is te lang om door AI-stemmen te laten voorlezen. Je kunt in plaats daarvan de gratis stem gebruiken.",
+    "ttsChooseVoice": "Kies een Stem",
+    "ttsChooseVoiceLater": "Je kunt dit later wijzigen.",
+    "ttsCreditLimit": "Onvoldoende basiscredits",
+    "ttsCreditLimitDesc": "Je hebt niet genoeg Basiscredits voor deze stem. Upgrade je plan of gebruik de gratis stem.",
+    "unreadableMsg": "Kan de hoofdinhoud op deze pagina niet vinden. Probeer een andere pagina.",
+    "unreadableTitle": "Ontbrekende hoofdinhoud",
+    "updateExtTips": "Werk je Sider-extensie bij om deze functie te gebruiken",
+    "upgradeSupport": "Upgrade naar een premium abonnement om ons te ondersteunen",
+    "upgradeSupport2": "Upgrade voor meer functies",
+    "uploadFailed": "\"{{FILENAME}}\" uploaden mislukt.",
+    "useUpUpgrade": "Je credits zijn opgebruikt, upgrade om meer credits te krijgen.",
+    "videoTooLang": "Video is te lang (maximaal 10 uur). Kies een kortere video.",
+    "writeSomething": "Schrijf alsjeblieft iets."
+  },
+  "multiFileChat": "Multi-bestand chat in {{WISEBASE}}",
+  "myAccount": "Mijn rekening",
+  "myChats": "Mijn chats",
+  "myHighlights": "Mijn Hoogtepunten",
+  "newFeature": "Nieuwe functie!",
+  "newPlan": "Nieuw plan",
+  "next": "Volgende",
+  "NoFiles": "Geen recente bestanden in deze chat",
+  "noReasoningModelTip": "Uitgebreid denken via DeepSeek R1. Kost 1 extra geavanceerde credits per query.",
+  "notDistinguish": "Niet onderscheiden",
+  "notDistinguishDesc": "1 geavanceerd krediet / 10 minuten",
+  "notNotifyAgain": "Niet opnieuw melden",
+  "notNow": "Niet nu",
+  "ocrEmptyMsg": "Sorry, ik kan geen tekst vinden in deze afbeelding.",
+  "OCRPanel": {
+    "aiOCRTips": "AI OCR kan fouten maken",
+    "dragImgTips": "Klik om te uploaden of sleep een afbeelding hierheen om tekst te extraheren",
+    "noText": "Geen tekst herkend",
+    "ocrCost": "Elke {{name}} kost {{num}} basiscredit",
+    "ocrTips": "Extraheer tekst, getallen en vergelijkingen uit een afbeelding"
+  },
+  "ok": "OK",
+  "openAnswerCompare": "Vergelijking naast elkaar",
+  "openSidebar": "Zijbalk openen",
+  "openTabs": "Kies uit geopende tabbladen",
+  "optimizeWith": "Optimaliseer met {{NAME}}",
+  "optionPage": {
+    "activateContextMenu": "Open snelle vraag",
+    "addASite": "Een site toevoegen",
+    "addNewTplForSearch": "Voeg een nieuwe aanwijzingssjabloon toe",
+    "addNewTplForSidebar": "Nieuwe aanwijzingssjabloon toevoegen",
+    "apiFreeGuide": "Volg de gids om de API-sleutel te krijgen.",
+    "apiKeyGpt4Tip": "De extensie ondersteunt GPT-4 als u een GPT-4 API-sleutel invoert.",
+    "apiKeyGuideTip": "Klik op [Instellen] om een API-sleutel toe te voegen.",
+    "apiKeyLocally": "Uw API-sleutel wordt lokaal in uw browser opgeslagen en wordt nooit elders verzonden. <b>Opmerking:</b> Sommige functies zijn beperkt tot de {{APP_NAME}}-modus om technische redenen.",
+    "apiKeyProvider": "De officiële OpenAI API is stabieler en de kosten zijn gebaseerd op gebruik.",
+    "apiKeyProviderTip": "(Voor ontwikkelaars met API-sleutel)",
+    "apiKeyTip1": "Uw gratis OpenAI API-sleutel is mogelijk verlopen. <a>Controleer hier de vervalstatus van de API-sleutel.</a>",
+    "apiKeyTip2": "Als u de gratis OpenAI API-sleutel gebruikt, is de toegang tot ChatGPT mogelijk niet stabiel wanneer er veel vraag naar is.",
+    "autoQuoteSelectedText": "Automatisch geselecteerde tekst citeren in invoerveld",
+    "autoQuoteSelectedTextTip": "Wanneer ingeschakeld, verschijnt de geselecteerde tekst automatisch in het invoervak voor snelle acties",
+    "customModelName": "Gebruik aangepaste modelnaam",
+    "defaultSpeed": "Standaard snelheid",
+    "defaultVoice": "Standaard stem",
+    "disabledSites": "Uitgeschakeld op sites",
+    "displayLanguage": "Weergavetaal",
+    "displayMode": "Weergavemodus",
+    "displaySearchRes": "Geef ChatGPT-antwoord weer naast pagina's met zoekresultaten",
+    "displayWhenSelect": "Weergave wanneer tekst is geselecteerd",
+    "easiestWayUse": "De makkelijkste manier om {{APP_NAME}} te gebruiken",
+    "editSearchTplPlaceholder": "{{keywords}} in de promptinhoud worden automatisch vervangen door je zoekwoorden",
+    "editSearchTplTip": "gebruik {{keywords}} om uw zoekwoorden te verwijzen",
+    "editSidebarTplTip": "Plak of voer hier inhoud in",
+    "feedbackTypes": {
+      "bug": {
+        "detail": {
+          "label": "Probleemdetails",
+          "tip": "Beschrijf in detail wat er mis is gegaan, welke acties je hebt ondernomen en welke foutmeldingen je hebt gekregen."
+        },
+        "name": "Probleemrapportage",
+        "title": {
+          "label": "Samenvatting probleem",
+          "tip": "Laat ons in een paar woorden weten wat er mis is gegaan."
+        }
+      },
+      "fr": {
+        "detail": {
+          "label": "Beschrijving",
+          "tip": "Geef een gedetailleerde beschrijving van de nieuwe functie die u wilt."
+        },
+        "name": "Functieverzoek",
+        "title": {
+          "label": "Titel",
+          "tip": "Waar gaat je verzoek over?"
+        }
+      }
+    },
+    "fontSizeAutoTip": "Automatisch aanpassen aan de breedte van de zijbalk",
+    "fontSizeOptions": {
+      "large": "Groot",
+      "regular": "Normaal"
+    },
+    "fontSizeTip": "Alleen voor berichttekst",
+    "fontSizeTitle": "Lettergrootte voor berichten",
+    "GPT4Desc": "Je moet ingelogd blijven op je ChatGPT-account op de website. Stabiliteit kan inconsistent zijn voor zowel Plus-gebruikers als gratis gebruikers vanwege de beperking van OpenAI.",
+    "hideThinkingAfterFinish": "Denkproces samenvouwen na voltooiing",
+    "hideThinkingAfterFinishTip": "Vouw het denkblok in nadat het denkproces is voltooid",
+    "howToAccess": "Hoe toegang te krijgen tot ChatGPT en het overal te gebruiken",
+    "howToAccessTip": "Om ervoor te zorgen dat AI voor iedereen toegankelijk is, bieden we 3 manieren om toegang te krijgen tot ChatGPT en het overal te gebruiken.",
+    "importantReminders": "Belangrijke herinneringen",
+    "invalidShortcutTip": "Inclusief {{key1}}, {{key2}}, of {{key3}}",
+    "launchSidebar": "Open zijbalk",
+    "linkToSetting": "Verander de locatie van de zijbalk in de browserinstellingen",
+    "loginFirst": "Log alstublieft eerst in.",
+    "loginFirstTip": "Log in om Sider te gebruiken en elke dag gratis tegoed te ontvangen.",
+    "messageStreamEffect": "Berichtstroom effect",
+    "messageStreamEffectOptions": {
+      "classic": "Klassiek",
+      "fadeIn": "Vervagen"
+    },
+    "messageStreamEffectTip": "Stroom effect om binnenkomende chatberichten live weer te geven",
+    "noSiteAdded": "Geen sites toegevoegd",
+    "openNewChat": "Begin een nieuw gesprek",
+    "ownURL": "Gebruik mijn eigen URL",
+    "promptManage": {
+      "checkPrompt": "Controleer prompt",
+      "deletePromptWarn": "Deze prompt verwijderen?",
+      "editPrompt": "Prompt bewerken",
+      "hideFromList": "Verbergen uit lijst",
+      "howToExample": "Gebruik de volgende onderwerpen of trefwoorden om een overzicht te genereren met titels, hoofdstukken en subsecties.\nVoer het uit in Markdown-indeling. Geef me alleen de uitvoer en niets anders. Het overzicht moet in {{lang}} taal zijn.\nOnderwerpen of trefwoorden: {{content}}",
+      "howToVar1": "U kunt deze variabele gebruiken om de invoer of geselecteerde inhoud weer te geven. Als de prompt deze variabele niet bevat, wordt de invoer of de geselecteerde inhoud omsloten door drievoudige aanhalingstekens en helemaal aan het einde van de prompt geplaatst.",
+      "howToVar2": "U kunt deze variabele gebruiken om de taal weer te geven die u voor de uitvoer wilt gebruiken, op basis van de standaardtaal die in de instellingen is ingesteld.",
+      "howToVarTitle": "Welke variabelen kunnen in de prompt worden opgenomen?",
+      "howToWritePrompt": "Hoe prompt te schrijven",
+      "newPrompt": "Nieuwe prompt",
+      "noPrompts": "Geen prompts hier",
+      "promptTabChatDesc": "Prompten in 'Weergeven in lijst' verschijnen in de {{name}} functie.",
+      "promptTabReadDesc": "Prompten in 'Weergeven in lijst' verschijnen in de {{name}} voor paginatekst.",
+      "promptTabWriteDesc": "Prompten in 'Weergeven in lijst' verschijnen in de {{name}} voor invoervelden.",
+      "showInList": "Weergeven in lijst"
+    },
+    "promptTplForSearch": "Prompt-sjabloon voor Google en andere zoekmachines",
+    "providerAPIKeyDesc": "Ideaal voor degenen met een API-sleutel: stabiel, gebruiksgebaseerde prijsstelling",
+    "providerPartTitle": "AI-toegang",
+    "providerSiderDesc": "Aangedreven door officiële API's van toonaangevende modellen, snel en betrouwbaar",
+    "providerSiderTip": "{{APP_NAME}} biedt je snelle, betrouwbare toegang tot toonaangevende AI-modellen van OpenAI, DeepSeek, Anthropic, Google en meer—allemaal via officiële API's op één platform. Ontgrendel de nieuwste AI-innovaties binnen handbereik!",
+    "providerWebappDesc": "Kan onstabiel zijn door beleidswijzigingen van OpenAI",
+    "providerWebappTip": "Ervaring kan variëren voor bezoekers en ingelogde gebruikers door beperkingen van OpenAI.",
+    "quickAction": {
+      "customPromptMenu": "Beheer prompts voor {{name}}",
+      "desc": "De {{name}} biedt snelle acties voor geselecteerde tekst op een webpagina (lezen) of in een invoerveld (schrijven).",
+      "displayOnSelect": "wanneer tekst is geselecteerd",
+      "displayOnShortcut": "wanneer tekst is geselecteerd en {{key}} is ingedrukt",
+      "mainSwitchTitle": "Toon {{name}}"
+    },
+    "recommend4all": "(Aanbevolen voor iedereen)",
+    "recommended": "Aanbevolen",
+    "restoreDefault": "Standaard herstellen",
+    "scrollingBehavior": "Scrollgedrag voor lange antwoorden",
+    "sendingMsgBehavior": "Gedrag na het verzenden van bericht in chat",
+    "sendingMsgBehaviorOptions": {
+      "bottom": "Automatisch naar het einde van het antwoord scrollen",
+      "messageTop": "Scrollen pauzeren wanneer het antwoord de bovenkant bereikt"
+    },
+    "sendMessage": "Bericht verzenden",
+    "serviceProvider": "Dienstverlener",
+    "shortcutInUseTip": "Al in gebruik, probeer een andere",
+    "showSelectedTextDesc": "Toon automatisch geselecteerde tekst als citaat in het invoervak voor snelle acties met prompts",
+    "showSelectedTextTip": "Als je ervoor kiest om geselecteerde tekst niet automatisch weer te geven, schakel dit dan uit in de <a>zijbalkinstellingen</a>.",
+    "showSelectedTextTitle": "Automatisch Geselecteerde Tekst in Invoervak Weergeven",
+    "sidebarDisplayOption": "Weergavemodus zijbalk",
+    "sidebarDisplayOptions": {
+      "expand": "Uitbreiden",
+      "overlay": "Overlay"
+    },
+    "sidebarDisplayOptionTip": "Kies hoe de zijbalk op de pagina wordt weergegeven",
+    "sidebarIcon": "Zijbalk Icoon",
+    "sidebarIconAccess": "Toegang tot de zijbalk via het pictogram in de rechter benedenhoek van de pagina. U kunt slepen om het omhoog en omlaag te verplaatsen",
+    "sidebarLeftOrRight": "Plaats de zijbalk aan de linker- of rechterkant",
+    "sidebarLocation": "Zijbalk locatie",
+    "sidebarOnStartup": "Bij het openen van de zijbalk",
+    "sidebarOnStartupAutoTip": "Als binnen 10 minuten heropend, wordt de chat hervat; na 10 minuten start een nieuwe chat",
+    "sidebarOnStartupOptions": {
+      "auto": "Automatisch hervatten of herstarten",
+      "last": "Altijd de laatste chat hervatten",
+      "new": "Altijd een nieuwe chat starten"
+    },
+    "sidebarOnStartupTip": "Configureer de weergavemodus van de chatinterface bij het openen van de Sidebar",
+    "sidebarProvider": "De zijbalk gebruikt de ChatGPT Premium API om stabiele toegang te garanderen.",
+    "sidebarProviderGoPremium": "We bieden {{num}} gratis dagelijkse credits om AI-toegankelijkheid voor iedereen te garanderen. <a>Upgrade naar premium</a> om je dagelijkse creditlimiet te verhogen en onze missie te ondersteunen om <b>Universele AI voor iedereen te bieden</b>.",
+    "sidepanelLeftOrRight": "Plaats het zijpaneel aan de linker- of rechterkant. Het zijpaneel is alleen beschikbaar in Google Chrome 114 of later.",
+    "sidepanelLocation": "Locatie zijbalk",
+    "sidepanelPosition": "Zijpaneelpositie",
+    "sidepanelPositionTip": "Voor Chrome 114 of hoger, kan alleen in de browserinstellingen worden gewijzigd",
+    "siderIcon": "{{APP_NAME}}-icoon",
+    "siderIconDisplay": "Toon altijd het {{APP_NAME}}-icoon op de pagina",
+    "siderIconDisplayTip": "Wanneer ingeschakeld, verschijnt het {{APP_NAME}}-icoon rechtsonder en kan worden versleept",
+    "translatePage": "Pagina vertalen",
+    "webappGPT4": "(ChatGPT Plus-gebruikers kunnen het proberen)",
+    "webappReminder1": "Blijf ingelogd op uw account.",
+    "webappReminder2": "Deze dienst kan onstabiel zijn door beleidswijzigingen van OpenAI. Voor snelle en stabiele prestaties raden we aan {{APP_NAME}} te gebruiken.",
+    "webappTip1": "Als u een ChatGPT Plus-gebruiker bent, heeft u nu de mogelijkheid om GPT-4 te kiezen. OpenAI kan echter het aantal berichten beperken dat u per dag kunt verzenden.",
+    "webappTip2": "<m>Vast het tabblad ChatGPT vast</m> en blijf ingelogd op de ChatGPT-website. Dit garandeert echter mogelijk geen stabiliteit. Als u problemen ondervindt, gaat u naar <v>de ChatGPT-website </v>en vernieuwt u de pagina.",
+    "webAssistant": {
+      "code": {
+        "desc": "Wanneer ingeschakeld, kan {{APP_NAME}} je helpen om codes op webpagina's uit te leggen",
+        "title": "Code Assistent"
+      },
+      "image": {
+        "desc": "Wanneer ingeschakeld, kun je snel toegang krijgen tot AI-afbeeldingstools door met de muis over een afbeelding te zweven",
+        "title": "Afbeeldingsassistent"
+      },
+      "linkPreview": {
+        "autoSummarize": "Automatisch Samenvatten",
+        "collapse": "Inklappen",
+        "guideTipDesc": "Sleep een link om deze te bekijken zonder de pagina te verlaten. Uitschakelen in <link>instellingen</link> indien niet nodig.",
+        "guideTipTitle": "Links efficiënt bekijken",
+        "openInNewTab": "Openen in nieuw tabblad",
+        "pageLoadFailed": "Pagina laden mislukt",
+        "summarizeNotSupported": "Deze pagina ondersteunt geen samenvatting.",
+        "viewSummary": "Bekijk samenvatting"
+      },
+      "qa": {
+        "desc": "Indien ingeschakeld, kan {{APP_NAME}} de vraag beantwoorden op Quora, StackOverflow en andere QA-sites",
+        "title": "Q&A-assistent"
+      },
+      "video": {
+        "BilingualDesc": "<b>Tweetalige Ondertitels</b>: Wanneer ingeschakeld, zal {{APP_NAME}} automatisch ondertitels weergeven tijdens het kijken van YouTube-video's",
+        "SummaryDesc": "<b>Video Samenvatting</b>: Wanneer ingeschakeld, kan {{APP_NAME}} je helpen YouTube-video's samen te vatten",
+        "title": "YouTube Assistent"
+      }
+    },
+    "webAsstAISitesDesc": "Toon \"Vergelijk met\"-knop op {{url}}",
+    "webAsstAISitesTitle": "Vergelijk modellen op ChatGPT",
+    "webAsstCodeDesc": "Toon Leg Uit Code-knop op codeblok",
+    "webAsstCodeTitle": "Voor code",
+    "webAsstEmailDesc": "Toon AI Antwoord-knop in Gmail",
+    "webAsstEmailTitle": "Voor e-mail",
+    "webAsstImageDesc": "Toon AI-tools bij zweven over afbeelding",
+    "webAsstImageTitle": "Voor afbeeldingen",
+    "webAsstInputBoxDesc": "Toon punticoon in een invoervak om schrijven te verbeteren",
+    "webAsstInputBoxTitle": "Invoervak",
+    "webAsstLinkPreviewDesc": "Toon het voorbeeldvenster van de link wanneer u een link sleept.",
+    "webAsstLinkpreviewExampleLink": "Dit is een beveiligde link, probeer deze te slepen om het voorbeeldvenster te zien",
+    "webAsstLinkPreviewTitle": "Voor linkvoorbeelden",
+    "webAsstQADesc": "Toon Antwoord-knop op Q&A-sites",
+    "webAsstQATitle": "Voor Q&A-sites",
+    "webAsstRecordShortCutSitesDesc": "Toon het Quick Record-paneel in Google Meeting & Teams",
+    "webAsstRecordShortCutSitesTitle": "Voor vergaderingen",
+    "webAsstSearchDesc": "Toon AI-antwoord naast zoekresultaten",
+    "webAsstSearchTitle": "Voor zoeken",
+    "webAsstTranslationSitesDesc": "Toon \"Vergelijk met\"-knop op Google Translate",
+    "webAsstTranslationSitesTitle": "Vergelijk modellen op Google Translate",
+    "webAsstVideoBilingualDesc": "Toon tweetalige bediening op YouTube",
+    "webAsstVideoSummaryDesc": "Toon samenvattingspaneel op YouTube",
+    "webAsstYoutubeTitle": "Voor YouTube",
+    "whenSidebarReopens": "Wanneer de zijbalk opnieuw opent",
+    "whenToAsk": "Wanneer ChatGPT vragen",
+    "wrongSiteTip": "Ongeldige URL: Controleer de URL en probeer het opnieuw."
+  },
+  "options": {
+    "shortcut": {
+      "tips": "Typ een snelkoppeling"
+    },
+    "sidebarLocation": {
+      "left": "linkerkant",
+      "right": "rechter zijde"
+    },
+    "sidebarMode": {
+      "inpage": "Zijbalk op de pagina",
+      "sidepanel": "Vaste zijbalk"
+    },
+    "sidebarModeTip": {
+      "inpage": "Bij het wisselen van tabblad blijft de Sider niet op het scherm; u moet de zijbalk op de nieuwe pagina opnieuw openen.",
+      "sidepanel": "Bij het wisselen van tabblad blijft Sider altijd aan de rechterkant van de browser staan."
+    },
+    "sidebarPromptTpl": {
+      "explain": {
+        "template": "Leg de volgende inhoud uit:",
+        "title": "Uitleggen"
+      },
+      "explain-codes": {
+        "template": "Leg de volgende codes uit:",
+        "title": "Leg codes uit"
+      },
+      "translate": {
+        "template": "Vertaal de volgende inhoud naar {{lang}} taal:",
+        "title": "Vertalen"
+      }
+    },
+    "theme": {
+      "auto": "automatisch",
+      "dark": "donkere modus",
+      "light": "heldere modus"
+    },
+    "title": "Opties",
+    "triggerMode": {
+      "always": {
+        "desc": "Altijd",
+        "title": "Altijd"
+      },
+      "manually": {
+        "desc": "Wanneer de antwoordknop wordt aangeklikt",
+        "title": "Handmatig"
+      },
+      "questionMark": {
+        "desc": "Wanneer de vraag eindigt met een vraagteken",
+        "title": "Vraagteken"
+      }
+    }
+  },
+  "OR": "OF",
+  "orTakeAction": "Of onderneem andere acties:",
+  "otherModels": "Andere modellen",
+  "pageTranslation": {
+    "aiTranslator2": "AI Vertaler",
+    "aiTranslatorFunDesc1": "Vangt zowel intentie als toon op, gaat verder dan woord-voor-woord vertaling",
+    "aiTranslatorFunDesc2": "Vertaal met helderheid en precisie, zorg ervoor dat er geen details verloren gaan",
+    "aiTranslatorFunTitle1": "Contextbegrip",
+    "aiTranslatorFunTitle2": "Nauwkeurige Vertaling",
+    "autoDetect": "Automatische detectie",
+    "autoTrans": "Automatisch vertalen",
+    "autoTrans2": "Webpagina's automatisch vertalen",
+    "autoTrans2Desc": "Wanneer uitgeschakeld, klik op de vertaal knop of gebruik een sneltoets",
+    "demoText": "ChatGPT wordt aangedreven door de Transformer, een deep learning-model ontworpen voor natuurlijke taalverwerking, met zelfaandacht en feedforward neurale netwerken.",
+    "displayMode": "Weergavemodus",
+    "displayModes": [
+      "Tweetalig",
+      "Alleen vertaling"
+    ],
+    "displayStyle": "Weergavestijl",
+    "displayStyleDesc": "Alleen voor vertalingen in tweetalige vergelijkingsmodus",
+    "displayStyles": [
+      "Geen",
+      "Onderstrepen",
+      "Verzwakken"
+    ],
+    "free": "Gratis",
+    "neverTransSite": "Vertaal deze site nooit",
+    "neverTransSites": "Vertaal deze sites nooit",
+    "newAITranslationTip": "AI Pagina Vertaling is nu live! Klik hier om het in te stellen.",
+    "pageTranslation": "Vertaal deze pagina",
+    "reTrans": "Hertalen",
+    "showOriginal": "Toon oorspronkelijke tekst",
+    "source": "Bron taal",
+    "target": "Doeltaal",
+    "title": "Pagina vertalen",
+    "transAgain": "Opnieuw vertalen",
+    "translateService": "Vertaalservice",
+    "translateServiceTip": "AI-vertaling kost basiscredits op basis van de lengte van de inhoud.",
+    "transSettings": "Vertaalinstellingen"
+  },
+  "painterOnBoardingTip": "Klik hier voor AI-beeldcreatie en -bewerking",
+  "pasteSelection": "Selectie plakken",
+  "pasteTextPage": "Tekst van pagina plakken",
+  "pause": "Pauze",
+  "pdfOnBoardingTip": "Klik hier voor ChatPDF",
+  "personalization": "Personalisatie",
+  "phoneNumber": "Telefoonnummer",
+  "pin": "vastpinnen",
+  "pinExt": "Pin-extensie",
+  "planNames": {
+    "basic": "Basisplan",
+    "free": "Gratis Plan",
+    "pro": "Pro-plan",
+    "starter": "Starter Plan",
+    "ultra": "Onbeperkt plan"
+  },
+  "play": "Afspelen",
+  "popupPage": {
+    "chatNow": "Chat nu",
+    "desc": "De huidige pagina is een unieke pagina en de zijbalkfunctie is niet beschikbaar. U kunt echter een volledige pagina openen om te chatten!",
+    "thank": "Bedankt voor het gebruik van de {{APP_NAME}}-extensie!"
+  },
+  "poweredByGPTImage": "Aangedreven door GPT-image-1",
+  "prev": "Vorige",
+  "preview": "Voorvertoning",
+  "pricePerDay": "Minder dan {{num}}/dag",
+  "pricePerMonth": "{{price}}/mnd",
+  "producthuntPromote": {
+    "ios1Banner1": "Stem op ChitChat - ChatGPT iOS-app 🎉",
+    "ios1Banner2": "Laten we beginnen met een knaller! 😄",
+    "ios1ModalDesc": "• Krijg antwoorden van ChatGPT 3.5 & 4\n• Een ondersteuningsteam van bots helpt u op één plek\n  • Verander uw PDF in een chatbot",
+    "ios1ModalTitle": "✨ Nieuw in de ChitChat iOS-app",
+    "sidebar2Banner1": "Stem NU op ons op <b>Product Hunt</b> om het woord te verspreiden.",
+    "sidebar2ModalDesc": "• Chat-tabblad\n  • Snel opzoeken voor snelle vragen\n  • Een account om prompts te synchroniseren\n  • Bewaar en deel chats\n  • Ondersteuning voor meer talen\n  • Ondersteuning van GPT-4",
+    "sidebar2ModalTitle": "✨ Samenvatting van Sidebar 2.0",
+    "voteBtn": "Stem op Product Hunt"
+  },
+  "productivity": "Productiviteit",
+  "promotePreset": {
+    "anni2025Countdown": "Grote Uitverkoop: <b>nog {{time}} over</b>",
+    "blackFridayCountdown": "Black Friday: <b>nog {{time}}</b>",
+    "halloweenCardDesc": "Ontgrendel Spookachtige Besparingen",
+    "halloweenCardDesc2": "Geniet van {{price}} KORTING",
+    "halloweenCardTitle": "Halloween Korting",
+    "halloweenCardTitle2": "Claim Halloween Traktatie",
+    "halloweenCountdown": "Spookachtige Aanbieding: <b>{{time}} Over</b>",
+    "halloweenCountdown2": "{{price}} KORTING: <b>{{time}} Over</b>",
+    "macContent": "We zijn blij om aan te kondigen dat Sider nu beschikbaar is voor Mac-gebruikers! Geniet van een naadloze en efficiënte ervaring die speciaal is afgestemd op Mac, samen met alle krachtige functies die u zo leuk vindt in onze webversie.",
+    "macContent2": "{{APP_NAME}} is nu beschikbaar voor Mac!",
+    "macDownload": "Download nu!",
+    "macTitle": "{{APP_NAME}} voor Mac",
+    "phContent": "Neem een moment om ons te steunen met een upvote op <i>Product Hunt</i>—het is snel, eenvoudig en helpt ons enorm!",
+    "phContent2": "Stem op ons op <b>Product Hunt</b>",
+    "phFeatures1": "<b>ChatGPT-widgets</b>: schrijf, extraheer tekst uit afbeeldingen, controleer grammatica en vertaal, allemaal op één plek.",
+    "phFeatures2": "<b>Sider Vision</b>: chat over afbeeldingen met GPT-4 Vision en breng AI-gesprekken naar een hoger niveau.",
+    "phFeatures3": "<b>Groep AI-chat</b>: neem deel aan ChatGPT, GPT-4, Claude en Bard in één baanbrekende groepschat.",
+    "phFeatures4": "<b>We zijn één en al oor</b>: uw feedback vormt Sider - deel uw mening, we luisteren!",
+    "phTitle": "Vind je het leuk om onze extensie te gebruiken?",
+    "phTitle2": "We hebben Sider 3.X-versies gelanceerd op <i>Product Hunt</i>.",
+    "phVote": "Stem nu!",
+    "phVote2": "Stem op <i>Productjacht</i>",
+    "phVoteTips": "<b>De stemming van vandaag is cruciaal</b> - Steun ons nu!",
+    "xmasCountdown": "Eindejaarsuitverkoop: <b>nog {{time}}</b>"
+  },
+  "prompt": "Prompt",
+  "promptContent": "Snelle inhoud",
+  "PromptManage": "Prompt Beheer",
+  "promptManage": "Snelle beheerder",
+  "promptName": "Prompt naam",
+  "prompts": "Prompten",
+  "publish": "Publiceren",
+  "publishArtifact": "Publiceer Artefact",
+  "published": "Gepubliceerd",
+  "publishing": "Publiceren",
+  "queryNames": {
+    "advanced": "Geavanceerd",
+    "fast": "Basis",
+    "image": "Afbeelding",
+    "reader": "Lezer"
+  },
+  "quickAction": "Contextmenu",
+  "quickActions": {
+    "askAI": "Vraag {{name}}",
+    "continueImproving": "Ga door met verbeteren",
+    "defaultPlaceholder": "Vraag {{APP_NAME}} alles",
+    "defaultPlaceholder2": "Vraag {{APP_NAME}} met de bovenstaande inhoud",
+    "dictExample": "Voorbeeld:",
+    "disableGlobal": "Uitschakelen op alle sites",
+    "disableOnce": "Verbergen tot het volgende bezoek",
+    "disableSite": "Uitschakelen op deze site",
+    "managePrompts": "Beheer prompts",
+    "pressToClose": "Druk op {{name}} om te sluiten",
+    "requireSignin": "Aanmelden vereist",
+    "siginHint": "Meld u aan om toegang te krijgen tot deze functie."
+  },
+  "quiz": "Quiz",
+  "quotaInfo": {
+    "allPlans": "Bekijk alle plannen",
+    "chatActionTranslate": "Vertaal naar {{lang}}",
+    "chatFileLink": "Bestand/Link Chat",
+    "chatPDF": "PDF/Link Chat",
+    "creditRuleTip": "We trekken credits af op basis van het model, de functies en de lengte van de context die je gebruikt. Voor volledige details, bezoek het <a>Helpcentrum</a>.",
+    "creditRuleTitle": "Regels voor credit aftrek",
+    "dailyCreditTip": "De resetregel is alleen van toepassing op plan credits, niet op extra credits.",
+    "dataAnalysis": "Geavanceerde Data-analyse",
+    "enjoyUnlimitedCredits": "Geniet van Onbeperkte Credits",
+    "enjoyUnlimitedCreditsDesc": "Haal het meeste uit GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, en meer.",
+    "extraCreditTip": "Dit zijn extra credits voor eenmalig gebruik.",
+    "extractText": "AI Tekstuittreksel",
+    "inviteFriends": "<a>Vrienden uitnodigen</a> om meer credits te krijgen",
+    "mobilePlan": "Mobiel Abonnement",
+    "off": "{{num}} Korting",
+    "pocketPlanTips": "Pocket-credits zijn alleen bruikbaar op mobiel. Geniet van enkele gratis desktop-credits.",
+    "pocketUpgrade": "Upgrade om meer te ontgrendelen",
+    "premiumTrial": "Probeer premium functies gratis",
+    "premiumTrialTip": "De proefversie geeft je beperkte toegang tot premium functies die exclusief zijn voor betalende leden. Let op, elk gebruik kost nog steeds credits.",
+    "readAloud": "AI Voorlezen",
+    "resetDate": "Reset Datum",
+    "resetsDaily": "Reset dagelijks",
+    "shortVideo": "AI Video Verkorter",
+    "tryForFree": "Probeer gratis",
+    "tryReadAloudForFree": "Probeer Voorlezen Gratis",
+    "unlockAllFeats": "Ontgrendel Alle Functies",
+    "unlockAllFeats2": "Ontgrendel Volledige Toegang",
+    "unlockAllFeatsDesc": "Je hebt de proeflimiet voor premium functies bereikt. Upgrade om alle functies te ontgrendelen.",
+    "unlockAllFeatsDesc2": "Krijg onbeperkte chats, webtoegang, data-analyse, beeldgeneratie, YouTube-samenvattingen, bestand/link chat, tekstuittreksels en meer",
+    "unlockFeats": "Ontgrendel Alle Premium Functies",
+    "unlockToUse": "Ontgrendel Onbeperkt Gebruik",
+    "upgradeFor": "Upgrade voor slechts {{price}}/maand",
+    "usedCredits": "{{count}} credits gebruikt",
+    "usedCredits_one": "{{count}} credit gebruikt",
+    "usedCredits_other": "{{count}} credits gebruikt",
+    "vipInviteFriends": "Geniet je van {{APP_NAME}}? <a>Nodig je vrienden uit!</a>",
+    "webAccess": "Webtoegang",
+    "youtubeSummary": "YouTube Samenvatting"
+  },
+  "quote": "Citaat",
+  "quoteText": "Citaattekst",
+  "readAloud": "Lees voor",
+  "reading": "Lezen",
+  "readingwriting": "Lezen & Schrijven",
+  "readPage": "Lees deze pagina",
+  "reasoningModelTip": "Redenering al ingebouwd in het huidige model",
+  "reasoningModelTip2": "Schakel uitgebreid denken in voor complexe vragen. Kost ongeveer 2x credits.",
+  "recentFiles": "Recente documenten",
+  "recognizing": "Herkennen",
+  "recordPanel": {
+    "alertContinue": "Opname Doorgaan",
+    "alertStop": "Opname Voltooien",
+    "allNotes": "Alle notities",
+    "audio": "Audio",
+    "camera": "Alleen Camera",
+    "cameraDisableTip": "Camera niet beschikbaar tijdens tabbladopname",
+    "cameraPermission": {
+      "deniedDesc": "Schakel camera toegang in om de camera-opname te gebruiken.",
+      "grantedDesc": "Je kunt dit tabblad nu sluiten en beginnen met opnemen in de zijbalk.",
+      "noBrowserPremission": "Toestemming geweigerd door systeem",
+      "noBrowserPremissionTip": "Het systeem heeft de camera toegang voor de huidige browser geweigerd. Ga naar de systeeminstellingen om de toestemmingen aan te passen.",
+      "noCamera": "Geen Camera",
+      "noCameraTip": "Sorry, geen beschikbare camera gedetecteerd.",
+      "noIconDesc": "Ververs de pagina, klik dan op het {{iconImage}} icoon in de adresbalk en selecteer \"Altijd toestaan...\".",
+      "noIconTitle": "Als je het camera-icoon niet ziet",
+      "noPopupDesc": "Klik op het camera-icoon {{iconImage}} in de adresbalk, selecteer \"Altijd toestaan...\" en klik op \"Gereed\".",
+      "title": "Cameratoestemmingsgids",
+      "withPopupDesc": "Klik op \"Toestaan tijdens het bezoeken van de site\" om de camera op te nemen."
+    },
+    "cameraPrepare": "Camera voorbereiden...",
+    "cameraTipOff": "Camera uitschakelen",
+    "cameraTipOn": "Camera inschakelen",
+    "cancelConfigContent": "Annuleren resulteert in het verlies van de huidige opname.",
+    "cancelConfigTitle": "Opname annuleren bevestigen?",
+    "cancelRecording": "Opname Annuleren",
+    "cancelRecordWarn": "Bevestig annuleren opname",
+    "cancelRecordWarnContent": "Annuleren zal de huidige opname en notities verwijderen.",
+    "captureScreenshot": "Schermafbeelding maken",
+    "closePermanently": "Permanent sluiten",
+    "closeThisTime": "Deze keer sluiten",
+    "continueRecord": "Doorgaan zonder microfoon",
+    "countdown": "Aftellen",
+    "countdownTip": "Opname begint over",
+    "ctrlBar": "Bedieningsbalk",
+    "deleteNoteWarn": "Deze notitie verwijderen?",
+    "desktop": "Bureaublad",
+    "don'tShow": "Niet meer tonen",
+    "liveTips": "Maak aantekeningen en neem gelijktijdig op om belangrijke informatie vast te leggen.",
+    "micMissContent": "Uw stem wordt niet opgenomen in deze sessie. Hoe wilt u verdergaan?",
+    "micMissContent1": "Je stem wordt niet opgenomen. Wil je het inschakelen?",
+    "micMissTitle": "Microfoon is UIT",
+    "micTipOff": "Microfoon uitschakelen",
+    "micTipOn": "Microfoon inschakelen",
+    "missInputTip": "Schakel schermopname in of zet de microfoon aan voordat u een notitie maakt.",
+    "new": "Nieuw",
+    "newRecordNote": "Nieuwe REC-notitie",
+    "noDevice": "Geen apparaten gevonden",
+    "NoSoundAlertContent": "Klik hier om te controleren of uw microfoon is ingeschakeld.",
+    "NoSoundAlertTitle": "Geen geluid gedetecteerd",
+    "noteContentPlaceholder": "Voer belangrijke informatie in, en Sider helpt je deze te organiseren.",
+    "noteGuideContent": "Jij neemt de belangrijkste punten, Sider genereert de volledige notities.",
+    "noteListCreateWisebase": "Voeg een {{WISEBASE_APP_NAME}} toe",
+    "noteListEmpty": "Druk op + om te beginnen",
+    "noteListError": "Laden van notities mislukt",
+    "noteListMove": "Verplaatsen naar",
+    "noteListTitle": "Mijn Notities",
+    "noteTitlePlaceholder": "Naamloos",
+    "paused": "Gepauzeerd",
+    "pausedAlertTitle": "Opname Gepauzeerd",
+    "proceed": "Ja, ga verder",
+    "quicklyRecord": "Snel Opnemen",
+    "recordScreen": "Scherm opnemen",
+    "resolution": "Resolutie",
+    "setting": "Instelling",
+    "showCutGuide": "Je kunt een sneltoets instellen <num>hier</num>",
+    "startRecording": "Opname Starten",
+    "storageAlertContent": "Onvoldoende opslagruimte. Maak ruimte vrij om verder te gaan met opnemen, of voltooi de huidige opname.",
+    "storageAlertStart": "Onvoldoende opslagruimte. Maak ruimte vrij om verder te gaan met opnemen.",
+    "tab": "Tabblad",
+    "tabAudioOnly": "Alleen Tabblad Audio Opnemen",
+    "tabAudioOnlyShow": "Alleen Tabblad Audio",
+    "tabSound": "Tabbladgeluid",
+    "tabVideoAudio": "Tabblad Scherm + Audio Opnemen",
+    "tabVideoAudioShow": "Scherm + Audio",
+    "tabVideoOnly": "Alleen Tabbladscherm Opnemen",
+    "tabVideoOnlyShow": "Alleen Tabblad Scherm",
+    "timeLimitAlertContent": "Opname heeft de limiet van {{alertNumber}} uur bereikt",
+    "title": "Opnemen",
+    "title1": "Opname notitie",
+    "transcript": "Transcriptie",
+    "turnAndProceed": "Zet microfoon aan en ga verder",
+    "turnOnMic": "Zet microfoon aan",
+    "uploadingList": {
+      "connection": "Uploaden wordt hervat wanneer opnieuw verbonden.",
+      "delete": "Annuleren & Verwijderen",
+      "failed": "Upload mislukt",
+      "networkTip": "Geen internetverbinding.",
+      "save": "Opslaan op Lokaal",
+      "title": "Synchronisatiestatus",
+      "uploaded": "Geüpload"
+    },
+    "uploadTimedOut": "Uploaden verlopen",
+    "uploadTimedOutTip": "De upload werd onderbroken door een netwerkprobleem. Het zal automatisch hervatten wanneer de verbinding is hersteld, of je kunt eerst het opgenomen bestand naar je apparaat downloaden.",
+    "video": "Video",
+    "voice": "Alleen Stem"
+  },
+  "refresh": "Vernieuwen",
+  "refreshing": "Vernieuwen",
+  "refreshModel": "Modellen vernieuwen",
+  "related-academic-research": "Bekijk gerelateerde papers",
+  "related-news": "Vind gerelateerd nieuws",
+  "related-videos": "Bekijk gerelateerde video's",
+  "remixArtifact": "Remix artefact",
+  "remove": "Verwijderen",
+  "renameAll": "Alles hernoemen",
+  "renameOnce": "Eenmaal hernoemen",
+  "repair": "Repareren",
+  "repairing": "Repareren",
+  "replace": "Vervangen",
+  "replay": "Opnieuw afspelen",
+  "researching": "Onderzoek doen",
+  "researchProgress": "Onderzoek Voortgang",
+  "reselect": "Opnieuw selecteren",
+  "reset": "Resetten",
+  "resetTime": "Opnieuw ingesteld op <a>3 augustus 2023</a>",
+  "restoreTpl": "Herstel deze sjabloon",
+  "result": "Resultaat",
+  "resume": "Hervatten",
+  "retry": "Opnieuw proberen",
+  "rewrite": "Herschrijven",
+  "roast": {
+    "analyzing": "Analyseren...",
+    "boast": "🥰 Opscheppen",
+    "roast": "😜 Roosteren",
+    "roastX1": "🔥 Iemand heeft je net geplaagd, kijk eens",
+    "roastX2": "Roast deze kerel!"
+  },
+  "save": "Bewaar het",
+  "saved": "opgeslagen",
+  "screenshot": "Schermafbeelding",
+  "search": "Zoeken",
+  "searched3": "3 sites doorzocht",
+  "searchedFor": "Gezocht naar:",
+  "searchedN": "{{NUM}} sites doorzocht",
+  "searchEnhance": {
+    "adContent": "Slimmer dan GPT-4? Claude 3 is hier! Nodig vrienden uit en probeer het gratis!",
+    "getStarted": "Begin nu",
+    "noLoginAdContent": "Ontgrendel AI Kracht: Zoeken, Lezen, Schrijven, Vertalen Sneller & Slimmer!",
+    "noLoginBtn": "Sluit je aan bij 4M+ Tevreden Gebruikers!",
+    "relatedQuestion": "Gerelateerde vragen:"
+  },
+  "searchFailed": "Zoeken mislukt",
+  "searching": "Zoeken: {{QUERY}}",
+  "searchingFor": "Op zoek naar:",
+  "searchPage": "Zoek pagina",
+  "searchTip": "Zoek op het web indien nodig",
+  "searchTool": {
+    "braveTrouble": "Werkt nog steeds niet? Volg {{url}}",
+    "cloudflareCheck": "OpenAI vereist af en toe een veiligheidscontrole. Als dit blijft gebeuren, wijzigt u de AI-provider in OpenAI API in de <i>extensie-opties</i>.",
+    "failedResponse": "Kan reactie van ChatGPT niet laden:",
+    "fiveStart": "Geniet van deze extensie? Geef ons een 5-sterrenbeoordeling bij {{store}}",
+    "loginAndCloudflareCheck": "Log in en slaag voor de Cloudflare-controle op {{web}}",
+    "questionMark": "Activeer ChatGPT door een vraagteken achter uw zoekopdracht te plaatsen",
+    "waitResponse": "Wachten op ChatGPT-antwoord...",
+    "whenToAskTips": "Elke zoekopdracht verbruikt één basiscredit. Klik hier om in te stellen wanneer je ChatGPT wilt vragen."
+  },
+  "seeMoreHelp": "Zie meer in het <a>Helpcentrum</a>",
+  "select": "Selecteer",
+  "selectedTextInputHint": "Stel vragen over de geselecteerde tekst",
+  "selectGenerationModel": "Selecteer Generatiemodel",
+  "selectPrompt": "Selecteer prompt",
+  "send": "Versturen",
+  "sendShortcut": "Snelkoppeling verzenden",
+  "sendToChat": "Verstuur naar chat",
+  "settingApiKey": "Uw API-sleutel instellen",
+  "settings": "Instellingen",
+  "setupPage": {
+    "activeUser": "Actieve Gebruikers",
+    "endBottom": "Hulp nodig of heb je suggesties?",
+    "endBottom2": "We waarderen je input! <a>Geef Feedback</a> om ons te helpen jouw ervaring te verbeteren.",
+    "endTip": "Je kunt nu elke webpagina bekijken of duiken in ons Helpcentrum om meer te leren.",
+    "endTitle": "{{APP_NAME}} staat klaar om je te helpen!",
+    "explore": "Laten we de {{FEATURE_NAME}} functie verkennen",
+    "favorites": "De populairste extensie van Chrome",
+    "fiveStarRate": "Beoordelingen met 5 sterren",
+    "learnMore": "Leer meer over {{APP_NAME}}",
+    "loginSuccess": "Succesvol ingelogd",
+    "loginWith": "Log in met {{name}}",
+    "next": "Volgende",
+    "pinClickTip": "Klik op {{icon}} om {{APP_NAME}} vast te zetten",
+    "pinClickTip2": "Pin {{APP_NAME}} voor Snelle Toegang",
+    "pinClickTip3": "Klik op het {{icon}} icoon rechtsboven",
+    "pinTips": "<b>Zet {{APP_NAME}}</b> vast, eenvoudiger toegang!",
+    "privacy": "Door verder te gaan, ga je akkoord met de <a>Privacy Policy</a> & <b>Gebruiksvoorwaarden</b>.",
+    "privacyPart1": "Door verder te gaan, ga je akkoord met de",
+    "privacyPart2": "<a>Privacy Policy</a> & <b>Gebruiksvoorwaarden</b>",
+    "spamMsg": "Uw gegevens zullen niet worden gelekt en er zal geen spam zijn.",
+    "startUsing": "Begin met het gebruiken van {{APP_NAME}}",
+    "tryOut": "probeer het",
+    "userCount": "4M+",
+    "welcome": "Welkom bij {{APP_NAME}}!"
+  },
+  "share": "Deel",
+  "shareChat": {
+    "5starRatings": "<num>50K</num> 5-sterrenbeoordelingen",
+    "activeUsers": "<num>5M+</num> Actieve gebruikers",
+    "AIContentWarning": "Door AI gegenereerde inhoud is mogelijk niet altijd authentiek",
+    "copyIamge": "Afbeelding kopiëren",
+    "copyLink": "Kopieer Link",
+    "downloadImage": "Afbeelding downloaden",
+    "exportAs": "Exporteren als",
+    "generateImage": "Afbeelding genereren",
+    "generateLink": "Link genereren",
+    "linkCopied": "Link Gekopieerd",
+    "linkGenerated": "Link gegenereerd",
+    "qrcodeTip": "Scan om {{APP_NAME}} te krijgen!",
+    "selectAll": "Alles selecteren",
+    "shareOn": "Delen op",
+    "slogan": "Uw AI-assistent",
+    "socialMediaImageCopiedTip": "Afbeelding gekopieerd en klaar om te plakken."
+  },
+  "shortcut": "Sneltoetsen",
+  "shortPlanNames": {
+    "basic": "Basis",
+    "free": "Gratis",
+    "pocket": "Pocket",
+    "pro": "Pro",
+    "starter": "Starter",
+    "ultra": "Onbeperkt"
+  },
+  "show": "Tonen",
+  "showImage": "Toon afbeelding",
+  "showMore": "Laat meer zien",
+  "showSearchPanel": "Zoekvenster tonen",
+  "showTpl": "Laat dit sjabloon zien",
+  "sidebar": "Zijbalk",
+  "sidebarChatPanel": {
+    "addImage": "Voeg een afbeelding toe",
+    "answerFrom": "Antwoord van",
+    "answerWithoutSearching": "Vraag het aan de originele <b>Bot</b>",
+    "autoCloseBanner": "Pauzeert automatisch na inactiviteit",
+    "autoCloseTips": "Zoekassistent zal pauzeren als je binnen 30 zoekopdrachten geen knoppen op de kaart aanklikt. Je kunt het op elk moment opnieuw activeren door op de knop te klikken.",
+    "capabilities": "Mogelijkheden",
+    "chatActionTranslate": "Vertalen naar {{lang}}",
+    "chatControls": "Chatbedieningen",
+    "chatHistory": "Chatgeschiedenis",
+    "chatWithVideo": "Chat met video",
+    "compareAnsWith": "Vergelijk antwoord met",
+    "compareWeb": "Vergelijk antwoord van internet",
+    "compareWithXXX": "<b>Vraag het aan Bot</b>",
+    "continueInChat": "Ga door met chatten",
+    "deleteConfirmContent": "Deze actie kan niet ongedaan gemaakt worden.",
+    "deleteConfirmTitle": "Dit gesprek verwijderen?",
+    "experimental": "Deze functie is nog in ontwikkeling en kan veranderen, dus deel alstublieft uw gedachten.",
+    "feedback": "Feedback",
+    "improveWithBoth": "Organiseer Google Answers met GPT-4",
+    "improveWithSearch": "Ontvang een webantwoord van Google",
+    "improveWithXXX": "Krijg een slimmer antwoord van <b>Bot</b>",
+    "improveWithXXX2": "Ontvang een uitgebreid antwoord van <b>Bot</b>",
+    "inputPlaceholder": "Vraag alles, @ modellen, / prompts",
+    "newChat": "Nieuwe chat",
+    "noChatHistory": "Nog geen geschiedenis.",
+    "noSearchHistory": "Geen resultaten gevonden",
+    "ocrTextTip": "{{name}} Resultaat",
+    "readDoc": "Lees documenten",
+    "readDocFail": "Documenten lezen mislukt",
+    "readingDoc": "Documenten lezen",
+    "replyLanguage": "Reactietaal",
+    "screenshot": "Schermafbeelding",
+    "search": "Zoekopdracht",
+    "searchHistory": "Zoekgeschiedenis",
+    "send": "Versturen",
+    "share": "Deel",
+    "siderUploadFile": "Upload bestanden in PDF, DOC, XLSX, CSV, JPG, JSON en andere formaten, tot 6 bestanden tegelijk, tot 100MB per bestand.",
+    "signinToAsk": "Log in bij Vraag {{MODEL_NAME}}",
+    "smarterAnsWith": "Krijg een slimmer antwoord van",
+    "switchAndContinue": "Schakel over en ga door",
+    "textSelectedSystemMsg": "Wat zou je met de tekst willen doen?",
+    "textSelectedTip": "Tekst uit uw selectie",
+    "translateTip": "Resultaat vertalen",
+    "upload": "Uploaden",
+    "uploadFile": "Bestanden uploaden",
+    "uploadTip": {
+      "format": "Webpagina, PDF, DOC, XLSX, CSV, JPG, JSON, MP3, WAV, M4A, MPGA, en meer",
+      "formatTitle": "Ondersteuning:",
+      "limit": "Tot 6 bestanden, elk 100MB",
+      "limitTitle": "Limiet:"
+    },
+    "userStopTip": "Gebruiker heeft het verzoek geannuleerd.",
+    "webAccessModalContent": "De gegevens van ChatGPT zijn niet realtime. {{APP_NAME}} combineert de intelligentie van ChatGPT met realtime webinformatie, waardoor GPT realtime informatiegerelateerde vragen effectiever kan afhandelen. Upgrade om deze functie te krijgen en maak je geen zorgen meer over verouderde informatie!",
+    "webAccessModalTitle": "{{APP_NAME}} geeft zowel ChatGPT-3.5 als GPT-4 toegang tot internet!",
+    "welcomeMsg": "Hoe kan ik u vandaag helpen?",
+    "welcomeQues": [
+      {
+        "ques": "Schrijf een sonnet in de stijl van Shakespeare over smartphones",
+        "title": ""
+      },
+      {
+        "ques": "Stel 10 creatieve Halloween-kostuums voor kinderen voor",
+        "title": ""
+      },
+      {
+        "ques": "Schets een beginnersroutekaart voor het leren van persoonlijke financiën",
+        "title": ""
+      },
+      {
+        "ques": "Leg aan een 10-jarig kind uit waarom de lucht blauw is",
+        "title": ""
+      }
+    ],
+    "welcomeSystemMsg": "Hallo! Hoe kan ik u vandaag helpen?",
+    "writeHistory": "Schrijfgeschiedenis"
+  },
+  "sidebarComposePanel": {
+    "addToSite": "Toevoegen aan website",
+    "addToSiteTip": "Plaats uw muiscursor in het gewenste invoervak en klik op '{{name}}' om in te voegen",
+    "ads": "Marketing advertenties",
+    "AIWriter": "AI-schrijver",
+    "alsoWriteTips": "Zij aan zij schrijven met Al",
+    "basic": "basis",
+    "blog": "Blogpost",
+    "casual": "Casual",
+    "comment": "Opmerking",
+    "compose": "Componeren",
+    "continueOptimizeTips": "Blijf verfijnen en verbeteren samen met AI",
+    "email": "E-mail",
+    "enthusiastic": "Enthousiast",
+    "essay": "Essay",
+    "formal": "Formeel",
+    "format": "Formaat",
+    "formatExists": "Formaat bestaat al",
+    "funny": "Grappig",
+    "generate": "Concept genereren",
+    "history": "Geschiedenis",
+    "idea": "Idee",
+    "informational": "Informatief",
+    "insertToSite": "Voeg het resultaat in het invoervak van de webpagina in",
+    "length": "Lengte",
+    "long": "Lang",
+    "medium": "Medium",
+    "message": "Bericht",
+    "outline": "Overzicht",
+    "paragraph": "Paragraaf",
+    "professional": "Professioneel",
+    "regenerate": "Regenereren",
+    "reply": "Antwoord",
+    "replyPlaceholder1": "Voer de originele tekst in waarop je wilt reageren",
+    "replyPlaceholder2": "Beschrijf het algemene idee van je reactie",
+    "short": "Kort",
+    "style": "Stijl",
+    "submitShortcut": "Druk op {{shortcut}} om concept te genereren",
+    "tone": "Toon",
+    "twitter": "Twitteren",
+    "write": "Schrijf",
+    "writePlaceholder": "Voer het onderwerp in waarover je wilt schrijven"
+  },
+  "sidebarGrammarPanel": {
+    "accept": "Aanvaarden",
+    "checkFailed": "Controle mislukt",
+    "checking": "Controleren",
+    "checkNoError": "Geen fouten",
+    "fixError": "Alles repareren ({{errorCount}})",
+    "ignore": "Negeren",
+    "improve": "Verbeteren",
+    "inputPlaceholder": "Alleen Engels wordt ondersteund. Plak of typ tekst om te controleren.",
+    "reasonForChanges": "Reden voor de wijzigingen"
+  },
+  "sidebarPanel": {
+    "addToStarred": "Toevoegen aan Favorieten",
+    "agentTabLabel": "Agent",
+    "askTabLabel": "Vragen",
+    "chatTabLabel": "Chatten",
+    "composeTabLabel": "Schrijven",
+    "deleteAllConfirmTitle": "Alles verwijderen",
+    "downloadLabel": "Desktop/Mobiele app downloaden",
+    "extraQuota": "Extra quotum",
+    "freePlan": "Gratis abonnement",
+    "grammarTabLabel": "Grammatica",
+    "includeStarred": "Favorieten opnemen",
+    "inputPlaceholder1": "Voer een prompt in of kies uit het menu",
+    "inputPlaceholder2": "Plak of voer hier inhoud in",
+    "inputPlaceholderCodes": "Plak of voer hier codes in",
+    "inputPlaceholderQA": "Plak of voer de vraag hier in",
+    "moreTabLabel": "Meer",
+    "ocrTabLabel": "OCR",
+    "painterLabel": "Schilder",
+    "premiumPlan": "Premium-abonnement",
+    "pressToSubmit": "Druk op {{key}} om te verzenden",
+    "recordTabLabel": "REC Notitie",
+    "regenerate": "Reactie opnieuw genereren",
+    "removeFromStarred": "Verwijderen uit Favorieten",
+    "replacePrompt": "Vervang de prompt",
+    "saveNewPrompt": "Opslaan als een nieuwe prompt",
+    "searchTabLabel": "Zoeken",
+    "starred": "Favorieten",
+    "startNewLine": "Druk op {{shortcut}} om een nieuwe regel te beginnen",
+    "stopGenerating": "Stop met genereren",
+    "submitOption": "Optie indienen",
+    "toolsTabLabel": "Hulpmiddelen",
+    "translateTabLabel": "Vertalen"
+  },
+  "sidebarSearchPanel": {
+    "answer": "Antwoord",
+    "currentVisit": "Huidig bezoek",
+    "defaultSearchSuggesiton": "Wat is de beste tijd om Parijs te bezoeken?",
+    "feedback": {
+      "stepAnswer": "Genereer antwoord",
+      "stepSearch": "Voer zoekopdracht uit",
+      "stepUnderstand": "Begrijp vragen",
+      "tipTotal": "Totaal van {{count}} credits"
+    },
+    "followUpQuestion": "Vervolg vraag...",
+    "history": "Geschiedenis",
+    "newSearch": "Nieuwe zoekopdracht",
+    "relatedSearches": "Gerelateerde zoekopdrachten",
+    "searchAll": "Zoeken in alles",
+    "searchFrom": "Zoeken vanaf",
+    "searchFromAll": "Zoeken op het hele internet",
+    "searchFromSite": "Zoeken op {{domain}}-site",
+    "searchHistory": "Zoekgeschiedenis",
+    "searching": "Zoeken",
+    "searchPlaceholder": "Voer de informatie in die je wilt zoeken",
+    "searchProgress": {
+      "analyzeSearchResult": "Analyseer zoekresultaten",
+      "analyzing": "Analyseren",
+      "competed": "Voltooid",
+      "generateAnswer": "Genereer antwoord",
+      "generatingAnswer": "Antwoord genereren",
+      "organizing": "Organiseren",
+      "searchCancelled": "Zoeken geannuleerd",
+      "searchCompleted": "Zoeken voltooid",
+      "searching": "Zoeken",
+      "searchInWeb": "Zoeken op internet"
+    },
+    "searchRange": "Zoekbereik",
+    "sources": "Bronnen",
+    "stoppedSearch": "Je hebt deze zoekopdracht gestopt.",
+    "suggestions": "Suggesties",
+    "title": "Zoeken",
+    "viewAll": "Alles bekijken"
+  },
+  "sidebarTranslatePanel": {
+    "auto-detect": "Automatische detectie",
+    "currentPage": "Huidige Pagina",
+    "customization": {
+      "Complexity": "Complexiteit",
+      "ComplexityOpt": {
+        "Expert": "Deskundige",
+        "Layman": "Leek",
+        "Standard": "Standaard"
+      },
+      "defaultPreferences": "Standaard voorkeuren",
+      "Length": "Lengte",
+      "LengthOpt": {
+        "Brief": "Kort",
+        "Concise": "Beknopt",
+        "Expanded": "Uitgebreid",
+        "Standard": "Standaard"
+      },
+      "Style": "Stijl",
+      "StyleOpt": {
+        "CreativeAdaptation": "Creatieve aanpassing",
+        "DynamicEquivalence": "Dynamische gelijkwaardigheid",
+        "Literal": "Letterlijk"
+      },
+      "title": "Vertaalvoorkeuren",
+      "Tone": "Toon",
+      "ToneOpt": {
+        "Authoritative": "Gezaghebbend",
+        "Casual": "Casual",
+        "Empathetic": "Empathisch",
+        "Formal": "Formeel",
+        "Neutral": "Neutrale"
+      }
+    },
+    "errTooManyChar": "{{num}}/{{total}}: Invoer overschrijdt het tekenlimiet.",
+    "errWrongTargetLang": "Dezelfde bron- en doeltaal. Controleer je selectie.",
+    "extraTransTips": "U kunt ook vertalen:",
+    "inputTranslateAdBtn": "Stel het nu in",
+    "inputTranslateAdText": "Vertaal direct tekst in een invoerveld op elke webpagina!",
+    "placeholde": "Typ of plak tekst hier...",
+    "seeDict": "Bekijk woordenboek",
+    "upgradeForLongChar": "Upgrade nu om langere invoer ({{num}} karakters) te ontgrendelen."
+  },
+  "sidepanel": {
+    "benefit1": "Uw Sider-zijbalk zal <b>nooit verdwijnen</b> als u naar een nieuwe pagina navigeert.",
+    "benefit2": "U kunt tussen alle tabbladen chatten zonder <b>inhoud te overlappen</b>.",
+    "benefit3": "Alleen beschikbaar in <b>Google Chrome 114 of hoger</b>",
+    "micPermission": {
+      "deniedDesc": "Schakel microfoontoegang in om spraakopdrachten te gebruiken.",
+      "deniedTitle": "Toegang Niet Verleend",
+      "grantedDesc": "U kunt dit tabblad nu sluiten en de microfoon in de zijbalk gebruiken.",
+      "grantedTitle": "Toegang Succesvol Verleend",
+      "noIconDesc": "Ververs de pagina, klik vervolgens op het {{iconImage}}-pictogram in de adresbalk en selecteer \"Altijd toestaan...\".",
+      "noIconTitle": "Als u het microfoonpictogram niet ziet",
+      "noPopupDesc": "Klik op het microfoonpictogram {{iconImage}} in de adresbalk, selecteer \"Altijd toestaan...\" en klik op \"Gereed\".",
+      "noPopupTitle": "Als er geen pop-up verschijnt",
+      "tips": "💡 Tip: Vermijd het selecteren van apparaten met \"virtueel\" in hun namen om opnamefouten te voorkomen.",
+      "title": "Microfoontoestemmingsgids",
+      "withPopupDesc": "Klik op \"Toestaan tijdens het bezoeken van de site\" om spraak-naar-tekst in te schakelen.",
+      "withPopupTitle": "Als u een pop-up ziet"
+    },
+    "tip": "Tip: pas de breedte van het zijpaneel op de juiste manier aan voor een betere ervaring.",
+    "title": "Sider ondersteunt vaste zijbalk",
+    "voiceInput": "Spraakopdracht",
+    "voiceInputError": {
+      "deviceNotFound": "Sorry, er is geen beschikbare microfoon gedetecteerd.",
+      "deviceNotFoundTitle": "Geen microfoon",
+      "rateLimit": "Je hebt de limiet bereikt voor hoe vaak je deze functie kunt gebruiken. Probeer het over een uur opnieuw.",
+      "rateLimitTitle": "Limiet overschreden",
+      "systemPermission": "Het systeem heeft microfoontoegang voor de huidige browser geweigerd. Ga naar de systeeminstellingen om de toestemmingen aan te passen.",
+      "systemPermissionTitle": "Toestemming geweigerd door systeem",
+      "timeLimit": "Opnamelimiet bereikt. Transcribeer eerst de huidige opname.",
+      "tooShort": "De opname is te kort om herkend te worden",
+      "transcriptionFailed": "Er is een fout opgetreden tijdens de transcriptie. Probeer het opnieuw.",
+      "transcriptionFailedTitle": "Transcriptie mislukt"
+    }
+  },
+  "sidepanelPinGuide": {
+    "desc": "Voeg {{APP_NAME}} toe aan je werkbalk voor snelle toegang",
+    "title": "Klik op \"{{icon}}\""
+  },
+  "sidepanelTip": "Sidepanel Tip",
+  "signin": "Log in",
+  "signinNow": "Log nu in",
+  "signupTip": "Heb je al een account? <a>Log in</a>",
+  "skip": "Overslaan",
+  "smarterWith": "Krijg een slimmer antwoord van {{NAME}}",
+  "Speaker": "Woordvoerder",
+  "speechVoice": "Stemgeluid",
+  "startingResearch": "Onderzoek starten...",
+  "stop": "Stop",
+  "submit": "Indienen",
+  "subscribe": "Abonneren",
+  "success": "Succes",
+  "suggestTools": {
+    "tips": {
+      "create_image": "Wil je afbeeldingen maken? Upgrade om AI-afbeeldingstools te ontgrendelen.",
+      "search": "Heb je real-time antwoorden nodig? Upgrade voor toegang tot webzoekopdrachten."
+    }
+  },
+  "summarize": "Samenvatten",
+  "summarizeFailed": "Samenvatting mislukt",
+  "summarizePage": "Vat deze pagina samen",
+  "summarizing": "Samenvatten",
+  "summary": "Samenvatting",
+  "superAdvanced": "Super geavanceerd",
+  "switch": "Schakelen",
+  "switchAndContinue": "Schakel modus",
+  "switchModel": "Model wisselen",
+  "switchToSidepanel": "Schakel over naar zijbalk",
+  "switchToSider": "Schakel over naar de {{APP_NAME}} API",
+  "switchToXXX": "Schakel over naar {{model}}",
+  "switchVoice": "Stem wisselen",
+  "table": "Tafel",
+  "takeAScreenshot": "Maak een schermafbeelding",
+  "taskCenter": {
+    "advanceTask": "Geavanceerde Taken",
+    "beginnerGuide": "Beginnersgids",
+    "chatDemoText": "Waarmee kan ik je helpen?",
+    "claim": "Claimen",
+    "claimed": "Geclaimd",
+    "claimNow": "Claim nu",
+    "claimRewards": "Ga naar het Beloningscentrum om je beloningen te claimen.",
+    "clickChatSetting": "Klik op {{button}} om toegang te krijgen tot chatinstellingen",
+    "clickGoOptions": "Klik op {{button}} om {{name}} Opties te bekijken",
+    "clickReadPage": "Klik op {{button}} om de webpagina te lezen en een bericht te sturen",
+    "clickSavePage": "Klik op {{button}} om de pagina op te slaan",
+    "clickSend": "Klik op {{button}} om een bericht te sturen",
+    "clickSummaryVideo": "Klik op deze knop om de video samen te vatten",
+    "clickTranslatePage": "Klik op {{button}} om de pagina te vertalen",
+    "clickTryDemo": "Klik op {{button}} om de demo te bekijken en uit te proberen",
+    "clickUploadImg": "Klik op {{button}} om een afbeelding te uploaden en een bericht te sturen",
+    "completedTasks": "Voltooide Taken",
+    "completeTaskTo": "Voltooi taken om <a>Credits te Verdienen</a>",
+    "countdownTip": "<b>{{price}} KORTING:</b> {{time}} Over",
+    "expireIn": "Verloopt over {{time}}",
+    "exploreCenter": "Verken {{name}}",
+    "getAdvancedCredits": "Ontvang {{count}} geavanceerde credits",
+    "getAdvancedCredits_one": "Ontvang {{count}} geavanceerde credit",
+    "getAdvancedCredits_other": "Ontvang {{count}} geavanceerde credits",
+    "getBasicCredits": "Ontvang {{count}} basiscredits",
+    "getExtraAdvancedCredits": "Ontvang {{count}} extra geavanceerde credits",
+    "goYoutube": "Ga naar YouTube",
+    "gretNews": "Goed nieuws!",
+    "iconEntryTip": "Je kunt {{name}} hier vinden.",
+    "inviteFriend": "Vrienden Uitnodigen",
+    "name": "Beloningscentrum",
+    "progress": "Voortgang",
+    "selectText": "Selecteer wat tekst om het uit te proberen!",
+    "selectText2": "Schakel {{name}} in om tekst te selecteren",
+    "siderMode": "Overschakelen naar Sider-modus?",
+    "siderModeDesc": "Taken moeten worden voltooid in Sider-modus, wil je overschakelen?",
+    "start": "Start",
+    "starterTask": "Starter Taken",
+    "taskCompleted": "Taak voltooid!",
+    "tasks": {
+      "chat": "Stuur een bericht in Chat",
+      "chatImg": "Chat met een afbeelding",
+      "contextMenu": "Leg een woord uit via {{name}}",
+      "options": "Verken {{APP_NAME}} Opties voor 5s",
+      "pageTranslate": "Vertaal een pagina via het {{APP_NAME}}-icoon",
+      "prompt": "Probeer een {{APP_NAME}}-presetprompt",
+      "readPage": "Lees een pagina in Chat",
+      "webAccess": "Probeer de Zoekdemo",
+      "wisebase": "Sla een pagina op in {{name}}",
+      "youtubeSummary": "Vat een YouTube-video samen"
+    },
+    "trunOn": "Inschakelen",
+    "typePrompt": "Typ {{key}} om een prompt te kiezen en een bericht te sturen",
+    "unlimitedPlan": "Onbeperkt Plan (Jaarlijks)",
+    "unlockDiscount": "Je hebt een verrassingskorting ontgrendeld.",
+    "useNow": "Nu Gebruiken",
+    "watchYoutube": "Bekijk tutorials, updates en meer op ons YouTube-kanaal!",
+    "youtubeSummaryDisabled": "YouTube Samenvatting Uitgeschakeld",
+    "youtubeSummaryDisabledDesc": "Schakel het in om door te gaan. Nu inschakelen?"
+  },
+  "template": "sjabloon",
+  "textExtracted": "Tekst geëxtraheerd",
+  "textFromGrammar": "Tekst van grammatica",
+  "textFromOCR": "Tekst van OCR",
+  "textFromSearch": "Tekst van zoekagent",
+  "textFromSelect": "Tekst van uw selectie",
+  "textFromTranslate": "Tekst uit vertaling",
+  "textFromWrite": "Tekst van schrijven",
+  "theme": "Thema",
+  "think": "Denk ({{NAME}})",
+  "thinkOnly": "Denk",
+  "thoughtProgress": "Denkproces",
+  "timeUnit": {
+    "day": "Dag",
+    "day_one": "Dag",
+    "day_other": "Dagen",
+    "hour": "Uur",
+    "hour_one": "Uur",
+    "hour_other": "Uren",
+    "minute": "Minuut",
+    "minute_one": "Minuut",
+    "minute_other": "Minuten",
+    "second": "Seconde",
+    "second_one": "Seconde",
+    "second_other": "Seconden"
+  },
+  "toolMoveTip": "De chattool heeft een nieuw thuis! Je kunt hier alle chatbedieningen openen.",
+  "Tools": {
+    "desc": {
+      "artifacts": [
+        {
+          "desc": "Transformeer ideeën in tastbare resultaten, direct!",
+          "title": "Verbeterde Productiviteit"
+        },
+        {
+          "desc": "Visualiseer AI-gegenereerde webpagina's, documenten en grafieken onmiddellijk.",
+          "title": "Realtime Voorbeeld"
+        },
+        {
+          "desc": "Verfijn artefacten moeiteloos door middel van natuurlijke conversatie.",
+          "title": "Naadloze Iteratie"
+        }
+      ],
+      "create_image": [
+        {
+          "desc": "Zet beschrijvingen direct om in hoge kwaliteit.",
+          "title": "Ontsteek Creativiteit"
+        },
+        {
+          "desc": "Verhoog je projecten met aangepaste visuals.",
+          "title": "Verbeter Inhoud"
+        }
+      ],
+      "custom_instruction": [
+        {
+          "desc": "Krijg AI-antwoorden die passen bij jouw unieke stijl en voorkeuren.",
+          "title": "Speciaal voor jou op maat gemaakt"
+        },
+        {
+          "desc": "Niet meer jezelf herhalen. We onthouden hoe je graag communiceert.",
+          "title": "Bespaar tijd, elke keer"
+        }
+      ],
+      "data_analysis": [
+        {
+          "desc": "Analyseer en visualiseer gegevens gemakkelijk om duidelijke.",
+          "title": "Verkrijg Inzichten"
+        },
+        {
+          "desc": "Verfijn, interpreteer en voer code uit voor effectieve probleemoplossing.",
+          "title": "Codeer Slimmer"
+        },
+        {
+          "desc": "Los complexe wiskundige problemen gemakkelijk en nauwkeurig op.",
+          "title": "Excelleer in Wiskunde"
+        }
+      ],
+      "deep_research": [
+        {
+          "desc": "Genereer automatisch een onderzoeksplan en splits de belangrijkste vragen op",
+          "title": "Eerst Plannen"
+        },
+        {
+          "desc": "Zoek over sites heen, vergelijk standpunten en filter ruis uit",
+          "title": "Kruisbron Bewijs"
+        },
+        {
+          "desc": "Elke bewering bevat citaten; exporteer een gestructureerd rapport in één klik",
+          "title": "Traceerbare Conclusies"
+        }
+      ],
+      "search": [
+        {
+          "desc": "Toegang tot actuele informatie op het web.",
+          "title": "Blijf Geüpdatet"
+        },
+        {
+          "desc": "Krijg nauwkeurigere en relevantere antwoorden.",
+          "title": "Verbeter Nauwkeurigheid"
+        }
+      ],
+      "text_to_image": [
+        {
+          "desc": "Zet beschrijvingen direct om in hoogwaardige.",
+          "title": "Stimuleer Creativiteit"
+        },
+        {
+          "desc": "Verbeter uw projecten met aangepaste visuals.",
+          "title": "Verbeter Content"
+        }
+      ],
+      "thinking_mode": [
+        {
+          "desc": "Beheers complexe uitdagingen met meerstapsredenering!",
+          "title": "Verbeterde Probleemoplossing"
+        },
+        {
+          "desc": "Krijg direct diepgaande inzichten voor kritische beslissingen.",
+          "title": "Uitgebreide Analyse"
+        },
+        {
+          "desc": "Verfijn oplossingen moeiteloos door middel van begeleid denken.",
+          "title": "Intelligente Iteratie"
+        }
+      ]
+    },
+    "title": {
+      "artifacts": "Ontgrendel {{ARTIFACTS}}",
+      "create_image": "Ontgrendel Afbeelding Genereren",
+      "custom_instruction": "Ontgrendel Gepersonaliseerde AI",
+      "data_analysis": "Data-analyse ontgrendelen",
+      "deep_research": "Ontgrendel Diepgaand Onderzoek",
+      "search": "Webtoegang ontgrendelen",
+      "text_to_image": "Ontgrendel Genereer Afbeelding",
+      "thinking_mode": "Ontgrendel Denkmodus"
+    }
+  },
+  "tools": {
+    "artifacts": {
+      "demos": [
+        {
+          "title": "Maak een Virtueel Xylofoon",
+          "value": "Maak een op HTML gebaseerde xylofoon met kleurrijke toetsen binnen een {{ARTIFACT}}. Geef visuele feedback voor ingedrukte toetsen en genereer eenvoudige, realistische geluiden met behulp van de Web Audio API op basis van frequentieparameters. Voeg basisinstructies toe."
+        },
+        {
+          "title": "Maak een Voedsel-Eet Emoji Spel",
+          "value": "Maak een eenvoudig op HTML gebaseerd spel, vergelijkbaar met Catch the Candy, binnen een {{ARTIFACT}}. De speler bestuurt een emoji onderaan het scherm, beweegt deze snel naar links en rechts om voedselitems (bijv. 🍓, 🍔, 🍎) die van boven vallen te vangen en op te eten, terwijl hij bommen (💣) ontwijkt. Elke keer dat de speler een voedselemoji vangt, verandert hun emoji in een meer overdreven positieve uitdrukking (bijv. 🤩, 😆, 😋) om succes aan te geven. Als de speler per ongeluk een bom vangt, toont de emoji eerst een explosie (💥) en verandert vervolgens in een duizelige uitdrukking (😵‍💫)."
+        },
+        {
+          "title": "Maak een Smartphone Verzendingsgrafiek",
+          "value": "Gebruik React om een mooie lijngrafiek te maken binnen een {{ARTIFACT}} op basis van de volgende tabel.\n------\n\nSmartphone Verzendingen door Grote Merken in het Laatste Decennium (in Miljarden)\n\n| Jaar | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+        }
+      ],
+      "desc": "Maak en presenteer eenvoudig content, zoals webpagina's of stroomdiagrammen, in een nieuw venster. Verhoog de productiviteit met realtime interacties en een gefocuste werkruimte.",
+      "name": "Artefacten"
+    },
+    "create_image": {
+      "desc": "Creëer hoogwaardige afbeeldingen door simpelweg te beschrijven wat je wilt. Genereer nieuwe afbeeldingen vanuit tekstbeschrijvingen, of transformeer en bewerk bestaande afbeeldingen met tekstopdrachten. Onze tool brengt je ideeën direct tot leven.",
+      "name": "Afbeelding"
+    },
+    "data_analysis": {
+      "demos": [
+        {
+          "title": "Lees bestandsgegevens en maak een cirkeldiagram dat de verhouding van verschillende uitgavenbudgetten toont.",
+          "value": "Lees bestandsgegevens en maak een cirkeldiagram dat de verhouding van verschillende uitgavenbudgetten toont."
+        }
+      ],
+      "desc": "Voer Python-code in realtime uit voor geavanceerde wiskunde, statistiek, machine learning en gegevensverwerking, waardoor taken in verschillende formaten worden gestroomlijnd.",
+      "name": "Data-analyse"
+    },
+    "search": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Wat zijn de best beoordeelde films die momenteel in de Amerikaanse bioscopen draaien?"
+        },
+        {
+          "title": "",
+          "value": "Welke aandelen hebben vandaag opmerkelijke stijgingen ervaren?"
+        },
+        {
+          "title": "",
+          "value": "Wat is het meest opmerkelijke nieuwe elektronische product dat vandaag is uitgebracht?"
+        }
+      ],
+      "desc": "Toegang tot realtime inzichten buiten de grenzen van vooraf getrainde kennis. Door diepgaande multi-bron analyse levert deze functie nauwkeurige interpretaties van actuele gebeurtenissen, markttrends en opkomende ontwikkelingen—wat betere beslissingen mogelijk maakt in onze snel veranderende wereld.",
+      "name": "Zoeken"
+    },
+    "text_to_image": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Ontwerp een futuristisch ontwerp voor een vliegende auto."
+        },
+        {
+          "title": "",
+          "value": "Schets een golden retriever die op gras rent."
+        },
+        {
+          "title": "",
+          "value": "Beeld een oudere vrouw af die casual koffie drinkt."
+        }
+      ],
+      "desc": "Beschrijf eenvoudig wat je in gedachten hebt en genereer direct hoogwaardige afbeeldingen. Geen ontwerpvaardigheden nodig – alleen je verbeelding.",
+      "name": "Genereer Afbeelding"
+    },
+    "thinking_mode": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Denk na: 9.11 of 9.8, welke is groter"
+        },
+        {
+          "title": "",
+          "value": "Denk na over en schrijf een functie om de theorie van 'Zes Graden van Scheiding' te modelleren. Gegeven een sociaal netwerk als een grafiek, vind het kortste pad tussen twee personen."
+        }
+      ],
+      "desc": "Versterk elk chatmodel met de krachtige redeneercapaciteit van DeepSeek R1. Wanneer ingeschakeld, ontvangt uw geselecteerde model R1's geavanceerde Chain of Thought-verwerking, wat zorgt voor nauwkeurigere, logische en inzichtelijke antwoorden op complexe vragen. Kost 1 extra geavanceerd tegoed per query.",
+      "name": "Denk"
+    }
+  },
+  "toolsTitle": "Tools",
+  "toolsUpgradeContent": {
+    "content1": "Activeer de chattools om krachtige mogelijkheden te ontgrendelen.",
+    "content2": [
+      "Verken het wereldwijde web naadloos.",
+      "Transformeer je ideeën in verbluffende visuals.",
+      "Duik diep in de data met deskundige analyse."
+    ]
+  },
+  "toolsUpgradeTitle": "Upgrade uw chatervaring!",
+  "toSlides": "Web naar Dia's",
+  "toSlidesDesc": "Verander elke webpagina in een kant-en-klare presentatie met slechts één klik.",
+  "total": "totaal",
+  "transcriptFailed": "Transcript generatie mislukt",
+  "transcriptGenerated": "Transcript gegenereerd",
+  "transcriptReady": "Transcript klaar",
+  "translate": "Vertalen",
+  "translateBackInto": "Vertaal terug naar: {{lang}}",
+  "translateInto": "Vertaal naar: {{lang}}",
+  "trial": "Proefversie",
+  "troubleshooting": "Probleemoplossen",
+  "tryArtifact": "Probeer {{ARTIFACTS}}",
+  "tryArtifactNow": "Probeer nu {{ARTIFACTS}}",
+  "tryDemo": "Probeer een demo",
+  "tryItNow": "Probeer het nu",
+  "tryNow": "Probeer voorbeelden",
+  "tryWisebaseTip": "Probeer Zij-aan-zij bestand chat",
+  "tryWisebaseTip2": "Puur Lezen & Chatten in {{WISEBASE}}",
+  "tryWisebaseTip3": "Meer bestanden? Ga verder in {{WISEBASE}}",
+  "ttsDemo": "Voorbeeld",
+  "tweetit": "Volg ons op {{X}}",
+  "unarchive": "uit het archief halen",
+  "unlimited": "Onbeperkt",
+  "unlimitedCredits": "Onbeperkte Credits",
+  "unlock": "Ontgrendel",
+  "unlockFeatMsg": "Je hebt de limiet van je abonnement bereikt. Upgrade nu om alle functies te ontgrendelen!",
+  "unpin": "losmaken",
+  "unpublish": "Publicatie ongedaan maken",
+  "unpublishArtifact": "Artefact publicatie ongedaan maken",
+  "unrecognizedSpeaker": "Onherkende spreker",
+  "updateNow": "Nu bijwerken",
+  "updateSuccess": "Succesvol bijgewerkt",
+  "upgrade": "Upgrade",
+  "upgradeContent": {
+    "reader": {
+      "free": "U heeft uw gratis quotumlimiet bereikt. Upgrade voor een hoger quotum en ontgrendel geavanceerde functies.",
+      "pro": "U heeft uw quotumlimiet van deze maand bereikt. Upgrade voor extra quotum.",
+      "ultra": "U heeft uw quotumlimiet van deze maand bereikt. Neem contact met ons op via <a>care@sider.ai</a> om uw suggesties te geven."
+    }
+  },
+  "upgradeModal": {
+    "advancedModelUpgrade": "Geavanceerde modellen vereist — upgrade om te ontgrendelen",
+    "allVoices": "Alle stemmen",
+    "claude35SonnetDesc": "Claude 3.5 Sonnet is het nieuwste model van Anthropic, levert tweemaal de snelheid van Claude 3 Opus en hogere intelligentie, wat het redeneren, de kennis, het coderen en visuele taken aanzienlijk verbetert.",
+    "claude3OpusDesc": "Claude 3 Opus is een geavanceerde AI voor het aanpakken van complexe taken met opmerkelijke efficiëntie.",
+    "claude3SonnetDesc": "Claude 3 Sonnet is een verfijnd taalmodel voor nauwkeurige, genuanceerde communicatie.",
+    "desc": "Meer credits en meer functies",
+    "fullFeatures": "Volledige functies",
+    "fullFeaturesDesc": "Toegang tot AI Zoeken, Denkmodus en Artifacts voor geavanceerde taken en onderzoek.",
+    "getAllTTSVoices": "Ontgrendel alle stemmen",
+    "getAllTTSVoicesDesc": "Deze stem is exclusief voor premium gebruikers. Upgrade nu om toegang te krijgen tot alle stemmen.",
+    "getAllTTSVoicesDesc2": "Je hebt de proeflimiet voor premium stemmen bereikt. Upgrade nu voor onbeperkte toegang tot 9 natuurlijk klinkende AI-stemmen of gebruik de gratis stem.",
+    "getWebAccess": "Upgrade om een webantwoord te krijgen",
+    "gpt4Desc": "GPT-4o is aanzienlijk slimmer en kan je helpen om logischere en nauwkeurigere antwoorden te krijgen.",
+    "higherLimits": "Hogere limieten",
+    "higherLimitsDesc": "Behandel langer, dieper werk met gemak.",
+    "hitLimitUpgrade": "Je hebt je limiet van het plan bereikt",
+    "instantAccess": "Directe toegang",
+    "instantAccessDesc": "Upgrade om meer credits te krijgen en direct door te gaan met je werk.",
+    "instantRefill": "Directe aanvulling",
+    "instantRefillDesc": "Upgrade nu en ontvang direct credits — geen wachttijd.",
+    "off": "Korting!",
+    "outOfCreditsUpgrade": "Geen tegoed meer. Upgrade om door te gaan",
+    "powerfulModels": "Krachtige modellen",
+    "powerfulModelsDesc": "Ontgrendel GPT-5, Claude en meer voor snellere, scherpere antwoorden.",
+    "smarterReasoning": "Slimmer redeneren",
+    "smarterReasoningDesc": "Gebruik Denkmodus en lange-contextanalyse.",
+    "stableResults": "Stabiele resultaten",
+    "stableResultsDesc": "Meer credits, snellere en consistente output.",
+    "stayUninterrupted": "Blijf ononderbroken",
+    "stayUninterruptedDesc": "Blijf chatten of onderzoeken — alle context en geschiedenis blijven behouden.",
+    "tryAllVoices": "Voel je vrij om alle stemmen te proberen",
+    "unlockModels": "Ontgrendel modellen",
+    "unlockModelsDesc": "Krijg toegang tot <list>GPT-5, Claude Sonnet en Gemini 2.5 Pro</list>.",
+    "upgradeToUseXXX": "Upgrade om <b>bot</b> te gebruiken",
+    "videoSummaryDesc": "U heeft uw gratis gebruikslimiet bereikt. Om toegang te blijven krijgen tot deze functie, kunt u overwegen om te upgraden naar een premium lidmaatschap.",
+    "videoSummay": "Upgrade om video samenvatting te gebruiken",
+    "webAccessDesc": "Sider haalt de antwoorden op uw vragen op bij Google en zet AI in voor een beknopte organisatie en samenvatting."
+  },
+  "upgradeNow": "Waardeer nu op",
+  "upgradeoff": "Upgrade {{NUM}}% korting",
+  "upgradeTitle": {
+    "reader": {
+      "free": "Grenzenloos ontdekken!",
+      "pro": "Quotumlimiet bereikt",
+      "ultra": "Quotumlimiet bereikt"
+    }
+  },
+  "upgradeUnlock": "Upgrade nu om te ontgrendelen!",
+  "uploadImage": "Upload een afbeelding",
+  "uploadLocal": "Uploaden vanaf uw computer",
+  "upTo6file": "Upload maximaal 6 bestanden",
+  "used": "Gebruikt",
+  "usedIn": "Gebruikt in",
+  "useFreeVoice": "Gebruik Gratis Stem",
+  "using": "Gebruik makend van",
+  "version": "Versie",
+  "videoTutorial": "Bekijk details",
+  "vote": "Stemmen",
+  "watchDemoVideo": "Bekijk Demovideo",
+  "webAccess": "Toegang tot het web",
+  "webApp": "web applicatie",
+  "webAssistant": "Webassistent",
+  "webEnhance": {
+    "askQuestionBtn": "Antwoord",
+    "bilingual": "Tweetalig",
+    "createShortenVideo": "Maak Korte Video",
+    "displayTranslation": "Vertaling weergeven",
+    "expandAll": "Alles uitvouwen",
+    "freeLimitTips": "Je gratis proefperiode is opgebruikt, upgrade nu om de video-overzichtsfunctie te blijven gebruiken.",
+    "fullScreen": "Volledig scherm",
+    "generatedBy": "Gegenereerd door {{name}}",
+    "hideHighlights": "Hoogtepunten verbergen",
+    "hideSubtitles": "Ondertitels verbergen",
+    "keyMomentsClickExpand": "Klik om uit te vouwen",
+    "keyMomentsCollapse": "Inklappen",
+    "loginToAsk": "Log in op Vraag",
+    "needLoginBilibiliTips": "Om de video samen te vatten, log in op je Bilibili-account en herlaad de pagina",
+    "nextHighlight": "Volgende Hoogtepunt",
+    "noQuestionTip": "{{APP_NAME}} kan het probleem niet op de pagina krijgen.",
+    "noSubtitleTips": "Samenvattingen zijn op dit moment alleen beschikbaar voor video's met ondertiteling.",
+    "originalSubtitles": "Originele ondertitels",
+    "playbackSpeed": "Afspeelsnelheid",
+    "previousHighlight": "Vorige Hoogtepunt",
+    "responseLanguage": "Taal van de reactie",
+    "shareToComment": "Delen om te reageren",
+    "shortenVideoTips": "Zet deze video om in een beknopte samenvattingsvideo die de belangrijkste punten vastlegt!",
+    "showHighlights": "Hoogtepunten weergeven",
+    "shownotes": "Hoogtepunten",
+    "showSubtitles": "Ondertitels weergeven",
+    "smartPlay": "Snelle video-overzicht",
+    "smartPlayBtnTips": "Bekijk een korte video die je snel de hoogtepunten laat zien en tijd bespaart.",
+    "smartPlayCost": "Kost 1 snelle tekstquery en 1 lezerquery, stemlezen wordt gefactureerd op basis van pay-as-you-go",
+    "smartPlayOnlyCost": "stemlezen wordt gefactureerd op basis van pay-as-you-go",
+    "smartPlayPlaybackEnded": "Hoogtepunten afspelen beëindigd",
+    "smartPlayReturnToCurrentProgress": "Terug naar huidige voortgang",
+    "smartPlaySwitchVoiceBtn": "Ja, Stem Wisselen",
+    "smartPlaySwitchVoiceCancel": "Nee, Annuleren",
+    "smartPlaySwitchVoiceContent": "Overschakelen naar een andere stem zal opnieuw credits aftrekken op basis van de volledige videoscriptlengte. De video zal verder spelen vanaf de huidige positie. Wilt u doorgaan?",
+    "smartPlaySwtichVoiceTitle": "Kredietaftrek Kennisgeving",
+    "subtitle": "Ondertitel",
+    "subtitleFailed": "Ondertiteling kon niet worden geladen",
+    "subtitles": "Ondertitels",
+    "summary": "Samenvatten",
+    "targetLanguage": "Doeltaal",
+    "transcribing": "Transcriberen",
+    "videoSummaryBtn": "Vat video samen",
+    "videoSummaryCost": "Kost 1 basiscredit en 1 lezerquery",
+    "videoSummaryMakeFullBtn": "Maak een Volledige Samenvatting",
+    "videoSummaryText": "Video samenvatting",
+    "videoTooLang": "Voor samenvattingen moeten video's minder dan 10 uur lang zijn.",
+    "whisperCostText": "Deze video mist externe ondertitels en moet worden getranscribeerd om samen te vatten. (1 Advanced Credit/10 min of minder)"
+  },
+  "webStore": "Webwinkel",
+  "welcome": "Welkom",
+  "whatNew": "Nieuwste functies",
+  "whatsnewInvite": "Uitnodigen om gratis te proberen",
+  "wisebase": {
+    "addCollection": "Voeg een {{name}} toe",
+    "createAndSave": "Aanmaken & Opslaan",
+    "createFirstWisebaseDefaultName": "Mijn {{WISEBASE_APP_NAME}}",
+    "createFirstWisebaseDesc": "{{WISEBASE_APP_NAME}} is de AI-kennisbank van Sider. Je kunt eenvoudig je verzamelde inhoud beheren, bekijken en vragen stellen op de Sider-website.",
+    "createFirstWisebasePlaceholder": "Voer de naam van {{WISEBASE_APP_NAME}} in",
+    "createFirstWisebaseTitle": "Welkom bij het maken van je eerste {{WISEBASE_APP_NAME}}",
+    "editSavedPage": "Bewerk opgeslagen pagina",
+    "editSavedVideo": "Opgeslagen video bewerken",
+    "errNameExists": "Naam bestaat al",
+    "failedToDelete": "Verwijderen mislukt",
+    "failedToSave": "Opslaan mislukt",
+    "highlight": "Markeer",
+    "HighlightInvalid": "Markeringen ontbreken",
+    "HighlightInvalidDesc": "Door wijzigingen op deze webpagina zijn je markeringen niet langer zichtbaar. Je kunt ze nog steeds openen in je <a>{{name}}</a>.",
+    "inbox": "AI Inbox",
+    "myWisebase": "Mijn {{name}}",
+    "name": "Wisebase",
+    "pageRemoved": "Pagina verwijderd",
+    "pageSaved": "Pagina opgeslagen",
+    "removePage": "Pagina verwijderen?",
+    "removePageDesc": "Hiermee wordt de pagina samen met de markeringen verwijderd.",
+    "savedTo": "Opgeslagen in: {{name}}",
+    "saveLoading": "Opslaan...",
+    "saveNote": "Opslaan als een notitie",
+    "savePage": "Pagina opslaan",
+    "saveTo": "Opslaan in {{name}}",
+    "saveVideo": "Video opslaan",
+    "saveVideoTo": "Sla de video op in {{WISEBASE_APP_NAME}}",
+    "saving": "Opslaan",
+    "unableToHighlight": "Kan deze selectie niet markeren",
+    "unhighlight": "Demarkeer",
+    "view": "Bekijken",
+    "viewInSite": "Bekijk op site",
+    "viewPageNoteTip": "Klik hier om je opgeslagen pagina's en notities te bekijken.",
+    "vistMyWisebase": "Open {{name}}"
+  },
+  "writing": "Schrijven",
+  "xmasSale": "Kerstuitverkoop",
+  "yearlyPlan": "Jaarlijks Plan",
+  "you": "Jij",
+  "yourEmailAddress": "Jouw e-mailadres",
+  "zoomIn": "Inzoomen",
+  "zoomOut": "Uitzoomen"
+}

@@ -1,0 +1,3489 @@
+{
+  "about-author": "Dozvedieť sa o autorovi",
+  "account": "Účet",
+  "add": "Pridať",
+  "addons": "Doplnky",
+  "addPrompt": "Pridať výzvu",
+  "addPrompts": "Pridať výzvu",
+  "addTools": "Pridať nástroje",
+  "advanced": "Pokročilé",
+  "agentPanel": {
+    "agentDesc": "{{name}} môže ovládať váš prehliadač na vykonávanie úloh. Táto funkcia je stále v počiatočnej fáze náhľadu a môžu sa vyskytnúť chyby. Môžete ju kedykoľvek zastaviť.",
+    "agentIsOperating": "{{name}} ovláda túto stránku",
+    "browserAgent": "Prehliadač {{name}}",
+    "chatPlaceholder": "S čím môže {{name}} pomôcť?",
+    "creditCostTip": "{{name}} je produkt náročný na výpočty a zodpovedajúce Elite Credits budú odpočítané na základe skutočnej spotreby.",
+    "previewVersion": "Náhľad výskumu",
+    "stopAgent": "Zastaviť {{name}}",
+    "toolAction": {
+      "click": "Kliknúť",
+      "extractPageText": "Extrahovať text zo stránky",
+      "findItem": "Nájsť: \"{{text}}\"",
+      "formInput": "Nastaviť vstup na \"{{text}}\"",
+      "navigate": "Prejsť na {{url}}",
+      "pressKey": "Stlačiť kláves: {{text}}",
+      "readPage": "Prečítať stránku",
+      "scroll": "Posunúť",
+      "takeScreenshot": "Urobiť snímku obrazovky",
+      "typeText": "Napísať text: \"{{text}}\"",
+      "waitTime": "Čakať {{time}} sekúnd"
+    }
+  },
+  "aiResCompare": "Porovnanie odpovedí AI",
+  "AISlides": "AI Slides",
+  "aiSlidesPromoteTip": "Jedným kliknutím na PPT prezentácie na profesionálnej úrovni",
+  "aiSlidesPromoteTip2": "Urobte túto PPT ohromujúcu",
+  "aiWebBuilderPromoteTip": "Preveďte tento {{ARTIFACT}} na webovú stránku teraz",
+  "all": "Všetky",
+  "allFeatures": "Všetky funkcie",
+  "allSettings": "Všetky nastavenia",
+  "alwaysDisplay": "Vždy zobraziť",
+  "analyzed": "Analyzované",
+  "analyzing": "Analyzovanie...",
+  "analyzingFailed": "Analýza zlyhala",
+  "analyzingIntent": "Analýza zámeru",
+  "answering": "Odpovedanie",
+  "appearance": "Vzhľad",
+  "archive": "archív",
+  "archiveTpl": "Archivovať túto šablónu",
+  "artifactDemos": [
+    {
+      "title": "Vytvorte virtuálny xylofón",
+      "value": "Vytvorte HTML-based xylofón s farebnými klávesmi v rámci {{ARTIFACT}}. Poskytnite vizuálnu spätnú väzbu pre zasiahnuté klávesy a generujte jednoduché, realistické zvuky pomocou Web Audio API na základe frekvenčných parametrov. Zahrňte základné pokyny."
+    },
+    {
+      "title": "Vytvorte hru s jedením jedla s emoji",
+      "value": "Vytvorte jednoduchú HTML-based hru, podobnú Catch the Candy, v rámci {{ARTIFACT}}. Hráč ovláda emoji na spodnej časti obrazovky, pohybujúc ho rýchlo doľava a doprava, aby chytil a zjedol potravinové položky (napr. 🍓, 🍔, 🍎), ktoré padajú zhora, pričom sa vyhýba bombám (💣). Každýkrát, keď hráč chytí emoji s jedlom, jeho emoji sa zmení na výraznejší pozitívny výraz (napr. 🤩, 😆, 😋) na označenie úspechu. Ak hráč náhodou chytí bombu, emoji najprv ukáže výbuch (💥) a potom sa zmení na závratný výraz (😵‍💫)."
+    },
+    {
+      "title": "Vytvorte graf zásielok smartfónov",
+      "value": "Použite React na vytvorenie krásneho čiarového grafu v rámci {{ARTIFACT}} na základe nasledujúcej tabuľky.\n------\n\nDodávky smartfónov podľa hlavných značiek za posledné desaťročie (v miliardách)\n\n| Rok | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+    }
+  ],
+  "artifactError": {
+    "solution1": "<a>Obnoviť náhľad</a>",
+    "solution2": "Pošlite chybové hlásenie v chate pre pomoc. <a>Poslať chybové hlásenie</a>",
+    "title": "Môžete vyskúšať nasledujúce možnosti:"
+  },
+  "artifactNarrow": "Obnoviť predvolenú šírku",
+  "artifactPublished": "Artefakt zverejnený",
+  "artifactPublishTip1": "Keď zverejníte tento artefakt, vytvoríme verejnú URL adresu, aby k nemu mal prístup každý. Váš chat zostane súkromný a zdieľanie môžete kedykoľvek zastaviť.",
+  "artifactPublishTip2": "Tento artefakt je dostupný verejnosti. Každý k nemu môže pristúpiť pomocou zdieľaného odkazu.",
+  "artifactRemixContent": "Poďme preskúmať niektoré variácie tohto {{ARTIFACT}}. Môžete navrhnúť 3 spôsoby, ako ho remixovať, a počkajte na moju odpoveď?",
+  "artifactsBetaTip": "Užite si Artifacts (Pro) zadarmo počas beta verzie—nepremeškajte to!",
+  "artifactUnpublishedTip": "Po zrušení zverejnenia už ostatní nebudú mať prístup k artefaktu prostredníctvom zdieľaného odkazu.",
+  "artifactWide": "Rozšíriť na celú šírku",
+  "ask": "Opýtať sa",
+  "attention": "Všimnite si",
+  "audio-meeting-minutes": "Zápisnica zo stretnutia",
+  "audio-summarize": "Zhrnúť",
+  "audio-to-text": "Audio na text",
+  "audioExtractedText": "Text extrahovaný z audia",
+  "audioTranscript": "Audio prepis",
+  "auto": "Auto",
+  "autoToText": "Automaticky na text",
+  "back": "Späť",
+  "basic": "Základné",
+  "bestForChat": "Najlepšie pre Chat",
+  "betterAnswer": "Získajte lepšie výsledky s {{MODEL_NAME}}",
+  "bigSale": "Výpredaj",
+  "bigSaleRest": "Výpredaj",
+  "bilingualTranslation": {
+    "done": "Hotovo",
+    "goToSetting": "Prejsť do nastavení",
+    "originLangClose": "Dvojjazyčné titulky nefungujú správne, pretože titulky Netflix sú vypnuté. Vyberte jazyk titulkov a obnovte stránku",
+    "refreshBtn": "Obnoviť",
+    "refreshPage": "Niečo sa pokazilo s dvojjazyčnými titulkami. Skúste obnoviť stránku",
+    "setLangPreferDesc": "Pre najlepší dvojjazyčný zážitok vyberte jazyky, ktoré pravdepodobne budete sledovať, pre presné titulky a preklady.",
+    "setLangPreferTitle": "Nastaviť jazykové preferencie",
+    "switchTitle": "Zobraziť dvojjazyčné ovládanie na YouTube & Netflix",
+    "targetLang": "Cieľový jazyk",
+    "title": "Preklad titulkov",
+    "youtubeRefreshTips": "Dvojjazyčné titulky neboli zistené. Prosím, obnovte stránku a načítajte titulky znova."
+  },
+  "browseFiles": "Prezerali ste {{NUM}} súborov",
+  "browseFiles1": "Prezerali ste 1 súbor",
+  "browsingFiles": "Prehliadanie súborov",
+  "building": "Buduje sa...",
+  "buyBooster": "Kúpiť booster pack",
+  "cancel": "Zrušiť",
+  "change": "Zmeniť",
+  "changeLogPage": {
+    "learnToUse": "Naučte sa používať",
+    "logContents": {
+      "4_22_0": "Sider je pripravený opekať a chváliť tvoje verejné X (Twitter) príspevky! Zapoj sa pre zábavu, žiadne údaje sa neuchovávajú. Hra začína a zdieľaj radosť so svojimi priateľmi!",
+      "5_12_0": "Prejdite do ovládania chatu a nastavte svoje preferencie. Ušetrite čas a užívajte si viac personalizovaný zážitok s AI bez nutnosti opakovane zadávať svoje preferencie.",
+      "5_14_0": "Grok 4, vlajkový model xAI, ponúka úroveň uvažovania na úrovni absolventov, pokročilé kódovanie a matematiku a rozumie obrázkom ako textu—silný nástroj pre akúkoľvek analytickú alebo kreatívnu úlohu.",
+      "5_19_0": "Najnovší a najvýkonnejší model od Anthropic. Poskytuje najlepšie kódovanie vo svojej triede a prekonáva Opus 4.1 v oblasti logického uvažovania a znalostí v oblastiach financií, práva a medicíny.",
+      "5_21_0": "Zoznámte sa s gpt-5-chat-latest, najnovším modelom GPT-5 Chat používaným v ChatGPT. Užite si rýchlejšie a prirodzenejšie odpovede pre každodenné rozhovory, písanie a objavovanie nápadov.",
+      "5_23_0": "Najinteligentnejší model od Google. Jeho špičkové uvažovanie poskytuje užitočnejšie, lepšie formátované a stručné odpovede, vďaka čomu je ideálnym partnerom na učenie, tvorbu a plánovanie."
+    },
+    "logs": {
+      "1_0_1": [
+        "Vylepšite funkciu zhrnutia na stránke Youtube",
+        "Opravte niektoré chyby týkajúce sa kopírovania/vkladania a tlače"
+      ],
+      "1_0_10": [
+        "Podporujte teraz viac ako 50 jazykov!"
+      ],
+      "1_0_11": [
+        "Rýchly prístup k akciám prostredníctvom kontextového okna bez otvárania bočného panela.",
+        "Pridajte podporu pre ďalšie jazyky.",
+        "Pri používaní funkcie prekladu zachovajte predvoľbu jazyka používateľa.",
+        "Vyriešte konflikty skratiek na platformách ako GitHub a ďalších."
+      ],
+      "1_0_12": [
+        "Synchronizujte nastavenia rozšírenia medzi počítačmi",
+        "Získajte prístup k výzvam z rôznych prenosných počítačov",
+        "Uložte čety pre budúce použitie",
+        "Zdieľajte čety prostredníctvom odkazu"
+      ],
+      "1_0_13": [
+        "Po položení otázok pokračujte v rozhovore",
+        "Prepínajte medzi GPT-4 a GPT-3.5 pre používateľov Plus",
+        "Jednoduchý prístup a vyhľadávanie v histórii chatu"
+      ],
+      "1_0_2": [
+        "Ak chcete zastaviť generovanie odpovede, pridajte tlačidlo stop",
+        "Zmeňte miesto zbalenia tlačidla"
+      ],
+      "1_0_3": [
+        "CMD/Ctrl + Enter na rýchle „Odoslať“",
+        "Možnosť skryť panel na stránke s výsledkami vyhľadávania",
+        "Podpora ESC na skrytie bočného panela",
+        "Podpora zhrnúť dlhý článok"
+      ],
+      "1_0_4": [
+        "Znova zoraďte položky výzvy v rozbaľovacom zozname",
+        "Archivujte položky výzvy, ktoré nebudete používať",
+        "Podpora odozvy vo viac ako 50 jazykoch"
+      ],
+      "1_0_5": [
+        "Zapamätajte si umiestnenie ikony na bočnom paneli",
+        "Vylepšite klávesové skratky",
+        "Uložte šablóny výziev priamo z bočného panela"
+      ],
+      "1_0_6": [
+        "Vylepšite funkciu zhrnutia na stránke Youtube"
+      ],
+      "1_0_7": [
+        "Zapamätať si výzvu použitú naposledy",
+        "Optimalizujte polohu panela chatGPT na stránkach vyhľadávania",
+        "Pridajte možnosť umiestniť ikonu bočného panela na stránke na ľavú stranu",
+        "Optimalizujte veľkosť balenia",
+        "Pridajte tmavý režim",
+        "Podporte svoj proxy server URL API"
+      ],
+      "1_0_8": [
+        "Podpora GPT-4 pre používateľov Plus! Skontrolujte stránku nastavení!"
+      ],
+      "1_1_0": [
+        "Úplný rozhovor na <b>novej karte</b>!",
+        "Chat GPT, <b>Bing</b>, <b>Bard</b> spolu!",
+        "Opravy chýb"
+      ],
+      "2_0_0": [
+        "Podpora <b>GPT-4 </b>pre všetkých používateľov!",
+        "Pozvite priateľov a získajte <b>GPT-4</b> kredity pre oboch!",
+        "Opravy chýb a ďalšie vylepšenia UX"
+      ],
+      "2_1_0": [
+        "Skratka pre rýchle vyhľadávanie",
+        "Zmeňte veľkosť okna Rýchle vyhľadávanie",
+        "Opravy chýb a ďalšie vylepšenia UX"
+      ],
+      "2_2_0": [
+        "Napíšte ľubovoľnú správu",
+        "Odpovedzte na e-mail, tweet, komentár atď"
+      ],
+      "2_3_0": [
+        "Podpora prehliadania a doplnkov pre používateľov Plus!",
+        "ChatGPT s prístupom na internet pre každého!"
+      ],
+      "2_4_0": [
+        "<b>Inteligentný prístup na web</b>: Na základe vášho dopytu sa Al rozhodne, či potrebuje prístup na web.",
+        "Zlepšenie stability"
+      ],
+      "2_5_0": [
+        "Súhrn YouTube! Pozrite si 1 hodinu videa na YouTube za 1 minútu",
+        "Porovnajte odpovede poskytnuté ľuďmi a AI na stránkach Q&A, ako sú Quora, StackOverflow a Zhihu"
+      ],
+      "2_6_0": [
+        "Sider podporuje pevný bočný panel – môžete četovať medzi všetkými kartami bez prekrývania akéhokoľvek obsahu <br /> (k dispozícii v prehliadači Chrome 114 alebo novšom)"
+      ],
+      "2_7_0": [
+        "Nakreslite obrázok z textu",
+        "Nakreslite obrázok z referenčného obrázka"
+      ],
+      "2_8_0": [
+        "Asistent čítania: Použite AI na rýchle pochopenie pri čítaní webových stránok",
+        "Asistent písania: Rýchlo generujte obsah pomocou AI vo webovom vstupnom poli"
+      ],
+      "2_9_0": [
+        {
+          "features": [
+            "Kontextové menu čítania",
+            "Písanie kontextového menu"
+          ],
+          "title": "Vylepšený správca výziev pre"
+        },
+        {
+          "features": [
+            "Odstráňte pozadie zo všetkých obrázkov",
+            "Odstráňte text zo všetkých obrázkov"
+          ],
+          "title": "AI editor obrázkov"
+        }
+      ],
+      "3_0_0": [
+        {
+          "features": [
+            "<b>Viac chatbotov</b>: Teraz podporuje Claude-instant, Claude 2!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Skupinový rozhovor</b>: Porovnajte odpovede medzi chatbotmi!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zmienka</b>: Pomocou znaku „@“ môžete bez námahy spomenúť a komunikovať s ktorýmkoľvek chatbotom v konverzácii!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Rýchla výzva</b>: Stačí zadať „/“ a ísť!"
+          ]
+        },
+        {
+          "features": [
+            "<b>Jednoduchý dizajn</b>: Urobte dizajn jednoduchým a ľahko navigovateľným"
+          ]
+        }
+      ],
+      "3_1_0": [
+        {
+          "features": [
+            "Okrem ChatGPT a Claude teraz Sider podporuje Barda!"
+          ],
+          "title": "Viac robotov!"
+        },
+        {
+          "features": [
+            "Rozpoznať 10+ hlavných jazykov",
+            "Rozpoznať rukou písané v angličtine",
+            "Rozpoznať <b>matematické rovnice</b> v texte"
+          ],
+          "title": "OCR: Extrahujte text z ľubovoľného obrázka a odošlite ho do služby ChatGPT"
+        },
+        {
+          "features": [
+            "Vymeňte celé pozadie",
+            "Odstráňte vybranú oblasť"
+          ],
+          "title": "Vylepšiť Paintera"
+        }
+      ],
+      "3_2_0": [
+        {
+          "features": [
+            "Skvelé správy! Naše aktualizované ceny vám teraz poskytujú ešte viac prístupu ku kreditom GPT-4 a Claude 2.",
+            "Ak už ste prémiovým používateľom, budete automaticky inovovaní. Navyše máme pre všetkých náročných používateľov nový plán „Neobmedzený“!"
+          ],
+          "title": "Nový cenový plán s 5x viac kreditmi GPT-4"
+        }
+      ],
+      "3_3_0": [
+        {
+          "features": [
+            "Extrahujte text z obrázka",
+            "Opýtajte sa na čokoľvek o obrázku",
+            "3 spôsoby, ako poslať obrázok do {{SIDERVISION}} <div><ol><li>Urobiť snímku obrazovky</li><li>Pretiahnuť obrázok do okna rozhovoru</li><li>Nahrať obrázok </li></ol></div>"
+          ],
+          "title": "{{SIDERVISION}} — Postranný panel ChatGPT s Vision"
+        },
+        {
+          "features": [
+            "Extrahujte text z obrázka"
+          ]
+        },
+        {
+          "features": [
+            "Extrahujte text z obrázka"
+          ]
+        }
+      ],
+      "3_4_0": [
+        {
+          "features": [
+            "Skontrolujte gramatické chyby",
+            "Opravte gramatické chyby",
+            "Zlepšite písanie nad rámec gramatiky"
+          ],
+          "title": "Widget Sider Gramatika"
+        }
+      ],
+      "3_5_0": [
+        {
+          "features": [
+            "{{4+VISION}}",
+            "1-kliknutím odpoviete na rovnakú otázku s rôznymi robotmi"
+          ],
+          "title": "{{SIDERVISION}} sa stal múdrejším"
+        }
+      ],
+      "3_6_0": [
+        {
+          "features": [
+            "Prispôsobte si preklad vo vyhradenej miniaplikácii Preklad",
+            "Zlepšite odpovede ChatGPT v Google, Bing, Baidu atď."
+          ],
+          "title": "Widget prekladu"
+        }
+      ],
+      "4_0_0": [
+        {
+          "features": [
+            "Podpora GPT-4 Turbo a GPT-3.5 Turbo",
+            "Preložiť celú webovú stránku",
+            "Webová stránka rozhovoru na bočnom paneli",
+            "Rozhovor PDF na bočnom paneli"
+          ],
+          "title": "Webová stránka GPT-4 Turbo a chat!"
+        }
+      ],
+      "4_10_0": [
+        {
+          "features": [
+            "<b>Zvýšená rýchlosť:</b> Získajte odpovede 2x rýchlejšie než GPT-4"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vylepšené videnie:</b> Výrazne lepšie porozumenie obrázkom"
+          ]
+        },
+        {
+          "features": [
+            "<b>Rozšírené jazyky:</b> Viac jazykov, lepšia kvalita a rýchlejší výkon"
+          ]
+        }
+      ],
+      "4_11_0": [
+        {
+          "features": [
+            "<b>Viaceré webové stránky:</b> Čítajte viacero webových stránok alebo dokumentov naraz"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nástroje na kritické čítanie:</b> Ujasnite si kľúčové pojmy, Identifikujte predpoklady, Zvýraznite úryvky, Zistite viac o autorovi a ďalšie."
+          ]
+        },
+        {
+          "features": [
+            "<b>{{SIDERFUSION}}:</b> Dynamicky vyberá najlepší rýchly model (GPT-3.5, Claude 3 Haiku, Gemini 1.5 Flash alebo Llama 3) pre vašu konkrétnu úlohu."
+          ]
+        }
+      ],
+      "4_12_0": [
+        {
+          "features": [
+            "<b>Podpora pre Claude 3.5 Sonnet:</b> Najnovší model od Anthropic, s 2x vyššou rýchlosťou ako Claude 3 Opus a vyššou inteligenciou, výrazne zlepšuje uvažovanie, vedomosti, kódovanie a vizuálne úlohy."
+          ]
+        },
+        {
+          "features": [
+            "<b>Ukončenie podpory Claude 3 Opus:</b> nahradený pokročilým Claude 3.5 Sonnet."
+          ]
+        },
+        {
+          "features": [
+            "<b>Pozvať a získať:</b> Pozvite svojich priateľov, aby získali bezplatné dopyty a vyskúšali najnovší model ešte dnes!"
+          ]
+        }
+      ],
+      "4_13_0": [
+        {
+          "features": [
+            "<b>Prirodzené AI hlasy</b>: Užite si 9 prirodzene znejúcich AI hlasov v rôznych jazykoch."
+          ]
+        },
+        {
+          "features": [
+            "<b>Počúvajte kdekoľvek</b>: Vyberte akýkoľvek text na webovej stránke a počúvajte ho nahlas."
+          ]
+        },
+        {
+          "features": [
+            "<b>Podpora bočného panela</b>: Jednoducho počúvajte AI generovaný obsah z widgetov bočného panela."
+          ]
+        }
+      ],
+      "4_16_0": [
+        {
+          "features": [
+            "<b>Rýchlejší, vynikajúci výkon:</b> Zabezpečuje plynulejšie a efektívnejšie každodenné úlohy."
+          ]
+        },
+        {
+          "features": [
+            "<b>Vylepšená matematika a kódovanie:</b> Zabezpečuje presný výkon pre technické úlohy."
+          ]
+        },
+        {
+          "features": [
+            "<b>Upgrade z GPT-3.5:</b> GPT-4o mini nahrádza GPT-3.5 s lepším výkonom."
+          ]
+        }
+      ],
+      "4_17_0": [
+        {
+          "features": [
+            "<b>Video Highlights</b>: Rozprávanie generované AI vám ušetrí čas tým, že rýchlo zvýrazní kľúčové body videa."
+          ]
+        },
+        {
+          "features": [
+            "<b>Prirodzené rozprávanie</b>: Realistické hlasy AI zlepšujú váš zážitok zo sledovania."
+          ]
+        },
+        {
+          "features": [
+            "<b>Podpora viacerých jazykov</b>: Jednoducho pochopte videá naprieč jazykovými bariérami."
+          ]
+        }
+      ],
+      "4_18_0": [
+        {
+          "features": [
+            "<b>Viaceré formáty</b>: Zdieľajte svoj chat ako odkaz alebo obrázok."
+          ]
+        },
+        {
+          "features": [
+            "<b>Flexibilný výber</b>: Vyberte a zdieľajte celú konverzáciu alebo len jej časť."
+          ]
+        },
+        {
+          "features": [
+            "<b>Jednoduchá kontrola</b>: Kedykoľvek zrušte zdieľané odkazy."
+          ]
+        }
+      ],
+      "4_19_0": [
+        {
+          "features": [
+            "<b>Živý náhľad:</b> Náhľad a interakcia s AI-generovanými webovými stránkami, dokumentmi a grafmi v reálnom čase."
+          ]
+        },
+        {
+          "features": [
+            "<b>Plynulá iterácia:</b> Iterácia na generovaných artefaktoch prostredníctvom chatu."
+          ]
+        }
+      ],
+      "4_1_0": [
+        {
+          "features": [
+            "{{SIDERVISION}} je napájaný GPT-4V",
+            "Lepšie pochopenie obrázkov",
+            "Rýchlo pochopte zámery e-mailu",
+            "Vyberte si z rôznych tónov a osobností",
+            "Bez námahy vyberte návrhy odpovedí"
+          ],
+          "title": "Ukážka GPT-4V(ision)! a odpoveď AI pre Gmail"
+        }
+      ],
+      "4_20_0": [
+        {
+          "features": [
+            "<b>Preklad pomocou viacerých modelov</b>: Použite viacero modelov naraz pre presnejšie preklady."
+          ]
+        },
+        {
+          "features": [
+            "<b>Univerzálne prepisy prekladov</b>: Prepisujte preklady pre rôzne scenáre."
+          ]
+        },
+        {
+          "features": [
+            "<b>Dvojjazyčné titulky</b>: Zobrazte titulky na YouTube v oboch jazykoch súčasne."
+          ]
+        }
+      ],
+      "4_23_0": [
+        {
+          "features": [
+            "<b>o1-preview</b>: Rieši zložité úlohy a rieši ťažšie problémy ako predchádzajúce modely v oblasti vedy, programovania a matematiky. Stojí 15 pokročilých kreditov za správu."
+          ]
+        },
+        {
+          "features": [
+            "<b>o1-mini</b>: Rýchlejší model, ktorý je obzvlášť efektívny pri programovaní. Ideálny pre zamerané uvažovanie bez širokých znalostí. Stojí 3 pokročilé kredity za správu."
+          ]
+        },
+        {
+          "features": [
+            "<b>Poznámka</b>: Existujú obmedzenia rýchlosti."
+          ]
+        }
+      ],
+      "4_24_0": [
+        {
+          "features": [
+            "<b>Gemini 1.5 Pro</b>: Vylepšené logické uvažovanie s lepšími matematickými a vizuálnymi schopnosťami."
+          ]
+        },
+        {
+          "features": [
+            "<b>Gemini 1.5 Flash</b>: 2x rýchlejší, 3x nižšia latencia, lepší vo vizuáloch a kódovaní."
+          ]
+        }
+      ],
+      "4_25_0": [
+        {
+          "features": [
+            "<b>Vylepšený dizajn</b>: Moderné vizuály, čistejšie rozloženie pre jednoduchšie používanie a sústredenie"
+          ]
+        },
+        {
+          "features": [
+            "<b>Pripínanie výziev</b>: Pripnite často používané výzvy pre rýchly prístup"
+          ]
+        },
+        {
+          "features": [
+            "<b>Rozšíriteľné tabuľky</b>: Zobrazenie veľkých dát v novom okne pre lepšiu čitateľnosť"
+          ]
+        }
+      ],
+      "4_26_0": [
+        {
+          "features": [
+            "<b>Uvažovanie Chain of Thought</b>: Rozkladá zložité úlohy krok za krokom pre inteligentnejšie riešenie problémov"
+          ]
+        },
+        {
+          "features": [
+            "<b>Hlbšie poznatky</b>: Poskytuje premyslené odpovede na riešenie náročných otázok"
+          ]
+        },
+        {
+          "features": [
+            "<b>Funguje so všetkými modelmi</b>: Bezproblémovo dostupné vo všetkých modeloch"
+          ]
+        }
+      ],
+      "4_27_0": [
+        {
+          "features": [
+            "<b>Zjednodušené používateľské rozhranie</b>: Čistejšie, intuitívnejšie rozhranie pre plynulejší zážitok"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vylepšený preklad</b>: Poskytuje významy súvisiacich slov s kontextovou presnosťou"
+          ]
+        },
+        {
+          "features": [
+            "<b>Publikovať a zdieľať artefakty</b>: Jednoducho zdieľajte svoje artefakty verejne prostredníctvom odkazov"
+          ]
+        }
+      ],
+      "4_28_0": [
+        {
+          "features": [
+            "<b>Claude 3.5 Haiku</b>: Poskytuje výkon, ktorý prekonáva Claude 3 Opus, vynikajúci v kódovaní, používaní nástrojov a uvažovaní"
+          ]
+        },
+        {
+          "features": [
+            "<b>Prispôsobiť veľkosť písma</b>: Teraz môžete zmeniť veľkosť písma správy"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zjednodušené používateľské rozhranie</b>: Čistejšie, intuitívnejšie používateľské rozhranie možností pre jednoduchú personalizáciu"
+          ]
+        }
+      ],
+      "4_29_0": [
+        {
+          "features": [
+            "<b>Úprava správ</b>: Jednoducho upravte odoslané správy a odošlite ich znova pre nové odpovede"
+          ]
+        },
+        {
+          "features": [
+            "<b>Porovnanie vedľa seba</b>: Zobraziť odpovede z viacerých modelov na celej stránke"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ikona pre vlastné výzvy</b>: Priraďte ikony k vlastným výzvam pre jasnejšiu organizáciu"
+          ]
+        }
+      ],
+      "4_2_0": [
+        {
+          "features": [
+            "<b>Obnovené rozhranie:</b> Čistejšie a jednoduchšia navigácia"
+          ]
+        },
+        {
+          "features": [
+            "<b>Skladací navigačný panel:</b> Zaisťuje sústredený zážitok z chatu a zároveň udržiava základné funkcie na dosah ruky"
+          ]
+        },
+        {
+          "features": [
+            "<b>Prístup GPT na bočnom paneli:</b> Pre používateľov ChatGPT Plus je teraz priamy prístup k GPT k dispozícii na bočnom paneli v režime webovej aplikácie"
+          ]
+        }
+      ],
+      "4_30_0": [
+        {
+          "features": [
+            "<b>GPT-4o (2024-11-20)</b>: Vylepšené schopnosti prirodzeného písania a zlepšená správa súborov"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zobrazenie iba prekladu</b>: Preklad stránok teraz podporuje zobrazenie iba preloženého obsahu"
+          ]
+        },
+        {
+          "features": [
+            "<b>Lepšie YouTube titulky</b>: Užite si kvalitnejšie dvojjazyčné preklady titulkov"
+          ]
+        }
+      ],
+      "4_31_0": [
+        {
+          "features": [
+            "<b>Nástroje Nav</b>: Prístup k AI nástrojom pre obrázky, PDF a videá z navigačného panela"
+          ]
+        },
+        {
+          "features": [
+            "<b>Preklad vstupu</b>: Trojitá medzera na preklad vstupného textu (povoliť v Možnostiach)"
+          ]
+        },
+        {
+          "features": [
+            "<b>Rýchle kopírovanie</b>: Okamžité kopírovanie textu pomocou kontextového menu"
+          ]
+        }
+      ],
+      "4_32_0": [
+        {
+          "features": [
+            "<b>Audio na text</b>: Nahrajte súbor MP3, WAV, M4A alebo MPGA na generovanie prepisov"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zobraziť a počúvať</b>: Čítajte prepisy počas počúvania audia"
+          ]
+        },
+        {
+          "features": [
+            "<b>Jednoduché zhrnutie</b>: Vytvorte rýchle zhrnutia jedným kliknutím"
+          ]
+        }
+      ],
+      "4_33_0": [
+        {
+          "features": [
+            "<b>OpenAI o1</b>: Rýchlejší ako ‘o1-preview’, vyniká pri zložitých viacstupňových úlohách s pokročilou presnosťou"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zhrnutie videí bez titulkov</b>: Získajte prepisy a zhrnutia pre YouTube videá bez titulkov"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zhrnutie webového obsahu</b>: Vylepšené pre platformy ako Reddit a Twitter"
+          ]
+        }
+      ],
+      "4_34_0": [
+        {
+          "features": [
+            "<b>Al Odpoveď v Gmail</b>: Podpora prekladu a výber Al modelu pre lepšiu komunikáciu"
+          ]
+        },
+        {
+          "features": [
+            "<b>Artefakty</b>: Exportujte vývojové diagramy ako obrázky pre jednoduché zdieľanie"
+          ]
+        },
+        {
+          "features": [
+            "<b>Preklad</b>: Al slovník pre presné preklady slov a fráz"
+          ]
+        }
+      ],
+      "4_35_0": [
+        {
+          "features": [
+            "<b>Okamžité náhľady</b>: Presuňte odkazy na zobrazenie obsahu bez otvárania nových kariet"
+          ]
+        },
+        {
+          "features": [
+            "<b>Inteligentné zhrnutia</b>: Získajte kľúčové poznatky z stránok na prvý pohľad"
+          ]
+        },
+        {
+          "features": [
+            "<b>Efektívne prehliadanie</b>: Zostaňte sústredení s menším počtom kliknutí a menej rozptýlení"
+          ]
+        }
+      ],
+      "4_36_0": [
+        {
+          "features": [
+            "<b>Uložte webové stránky a zvýraznenia</b>: Uložte cenný webový obsah do Wisebase (Al znalostná základňa) jedným kliknutím"
+          ]
+        },
+        {
+          "features": [
+            "<b>Al Inbox</b>: Nechajte Al automaticky kategorizovať váš obsah"
+          ]
+        },
+        {
+          "features": [
+            "<b>Chat s viacerými súbormi</b>: Získajte okamžité odpovede z vašich zhromaždených súborov"
+          ]
+        }
+      ],
+      "4_37_0": [
+        {
+          "features": [
+            "<b>DeepSeek-R1</b>: Zodpovedá výkonu OpenAI-o1"
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3</b>: Vyniká v zložitom uvažovaní, matematike a programovaní"
+          ]
+        },
+        {
+          "features": [
+            "<b>AI Prekladač pre webové stránky</b>: Poskytuje prirodzené a presné preklady"
+          ]
+        }
+      ],
+      "4_38_0": [
+        {
+          "features": [
+            "2x rýchlejší ako Gemini 1.5 Pro"
+          ]
+        },
+        {
+          "features": [
+            "Poskytuje okamžité, profesionálne výsledky"
+          ]
+        },
+        {
+          "features": [
+            "Vylepšené schopnosti porozumenia textu, kódu a uvažovania"
+          ]
+        }
+      ],
+      "4_39_0": [
+        {
+          "features": [
+            "<b>Sila v uvažovaní</b>: Zodpovedá schopnostiam OpenAI o1 v matematike, vede a programovaní"
+          ]
+        },
+        {
+          "features": [
+            "<b>Rýchlejší než o1-mini</b>: Optimalizovaný pre rýchlejšie a plynulejšie odpovede"
+          ]
+        },
+        {
+          "features": [
+            "<b>Spoľahlivejšie odpovede</b>: Poskytuje väčšiu presnosť a jasnejšie uvažovanie"
+          ]
+        }
+      ],
+      "4_3_0": [
+        {
+          "features": [
+            "Ponořte sa do pohlcujúceho zobrazenia na celú obrazovku"
+          ]
+        },
+        {
+          "features": [
+            "Vychutnajte si všetky bočné funkcie teraz v režime na celú obrazovku"
+          ]
+        },
+        {
+          "features": [
+            "Bezproblémové prepínanie medzi režimami pre to najlepšie z oboch svetov"
+          ]
+        }
+      ],
+      "4_40_0": [
+        {
+          "features": [
+            "<b>Vylepšené kódovanie</b>: Vyniká v zložitých kódovacích úlohách s vynikajúcim výkonom"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zlepšené spracovanie výziev</b>: Efektívne rozumie a reaguje na zložité výzvy"
+          ]
+        }
+      ],
+      "4_41_0": [
+        {
+          "features": [
+            "<b>Hlasový vstup</b>: Rýchlo zadávajte text pomocou reči pre efektívnu prácu bez použitia rúk"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nový AI model</b>: DeepSeek-R1-70B je teraz dostupný"
+          ]
+        }
+      ],
+      "4_42_0": [
+        {
+          "features": [
+            "<b>Dvojjazyčné titulky</b>: Zlepšite svoj zážitok zo sledovania a posilnite učenie sa jazykov"
+          ]
+        },
+        {
+          "features": [
+            "<b>API kľúč</b>: Podpora API kľúčov pre DeepSeek, OpenAl a ďalšie"
+          ]
+        }
+      ],
+      "4_43_0": [
+        {
+          "features": [
+            "<b>{{CLAUDE37}}</b>: Krok za krokom myslenie pre lepší výkon v matematike, fyzike, programovaní a mnohých ďalších úlohách"
+          ]
+        },
+        {
+          "features": [
+            "<b>Podpora API kľúča</b>: Kompatibilné s Claude a Ollama API kľúčmi"
+          ]
+        }
+      ],
+      "4_44_0": [
+        {
+          "features": [
+            "<b>Vyznačuje sa</b>: Bohatšou databázou znalostí, lepším zosúladením s úmyslom používateľa a väčšou emocionálnou inteligenciou"
+          ]
+        },
+        {
+          "features": [
+            "<b>Ideálne pre</b>: Zlepšovanie písania, programovania a riešenie reálnych výziev"
+          ]
+        },
+        {
+          "features": [
+            "<b>Poznámka</b>: 30 pokročilých kreditov/dotaz. Obmedzené na 1 použitie/24 hodín/používateľ kvôli limitom kvót"
+          ]
+        }
+      ],
+      "4_45_0": [
+        {
+          "features": [
+            "<b>Viac priestoru a sústredenia</b>: Väčšie rozhranie uľahčuje čítanie dlhých správ a prezeranie kódu, pričom minimalizuje rušivé vplyvy pre lepšie sústredenie."
+          ]
+        },
+        {
+          "features": [
+            "<b>Bezproblémová synchronizácia</b>: Chaty zostávajú synchronizované medzi webom a rozšírením, čo umožňuje jednoduché prepínanie medzi zobrazením webovej stránky a bočného panela."
+          ]
+        }
+      ],
+      "4_4_0": [
+        {
+          "features": [
+            "<b>Nový pokročilý nástroj na analýzu dát:</b> Kódový interpret pre efektívne spracovanie dát a zložité výpočty"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nový nástroj na kreslenie:</b> Vytvárajte obrázky okamžite v chate"
+          ]
+        },
+        {
+          "features": [
+            "<b>Vylepšená ponuka kontextového menu:</b> Použite GPT-4 v kontextovom menu."
+          ]
+        }
+      ],
+      "4_5_0": [
+        {
+          "features": [
+            "<b>Widget pre vyhľadávačov:</b> Zažite budúcnosť vyhľadávania s automatizáciou AI"
+          ]
+        },
+        {
+          "features": [
+            "<b>Preklad webovej stránky:</b> Viac čitateľsky prívetivejšie zobrazenie prekladu"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nové nastavenie:</b> Automatické obnovenie posledného chatu pri otvorení bočného panela"
+          ]
+        }
+      ],
+      "4_6_0": [
+        {
+          "features": [
+            "<b>Claude 3 Opus:</b> Tvrdí, že má \"blízke ľudské\" schopnosti a dokáže poraziť GPT-4."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude 3 Sonnet:</b> Vyvažuje inteligenciu a rýchlosť, ideálny pre získavanie informácií alebo automatizáciu predaja."
+          ]
+        }
+      ],
+      "4_7_0": [
+        {
+          "features": [
+            "Súhrn v chate: Získajte kľúčové body videí na YouTube s 'Prečítajte si túto stránku' v okne chatu."
+          ]
+        },
+        {
+          "features": [
+            "Jednoduchá extrakcia titulkov: Získajte titulky jediným kliknutím na YouTube pre hlbšie pochopenie."
+          ]
+        },
+        {
+          "features": [
+            "Claude 3 Haiku: Teraz dostupné na obohatenie vášho chatovacieho zážitku."
+          ]
+        }
+      ],
+      "4_8_0": [
+        {
+          "features": [
+            "<b>Nový model:</b> Podpora pre Gemini 1.5 Pro teraz"
+          ]
+        },
+        {
+          "features": [
+            "<b>Nové AI nástroje pre obrázky:</b> Prístup k AI funkciám prechádzaním nad ľubovoľným obrázkom"
+          ]
+        }
+      ],
+      "4_9_0": [
+        {
+          "features": [
+            "<b>Nový model:</b> Podpora Llama 3 už teraz"
+          ]
+        }
+      ],
+      "5_0_0": [
+        {
+          "features": [
+            "<b>Inteligentné objavovanie zdrojov</b>: AI napodobňuje ľudí, automaticky rýchlo prehľadáva viac ako 100 stránok a vyberá to najlepšie pre vás."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automatické zvýraznenia a poznámky</b>: AI zvýrazňuje informácie súvisiace s témou a vytvára poznámky pre inšpiráciu."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automatické generovanie správ</b>: Získajte hĺbkové správy s citovanými zdrojmi za pár minút."
+          ]
+        },
+        {
+          "features": [
+            "<b>Wisebase všetko uloží</b>: AI správy, nálezy z webu, rozhovory a viac—uložené na preskúmanie kedykoľvek."
+          ]
+        }
+      ],
+      "5_10_0": [
+        {
+          "features": [
+            "Nahrajte zvukové súbory do Chatu, aby ste získali prepisy s identifikáciou hovoriacich. To umožňuje AI lepšie porozumieť konverzáciám a poskytovať relevantnejšie odpovede. Ideálne pre stretnutia, rozhovory a ďalšie."
+          ]
+        }
+      ],
+      "5_13_0": [
+        {
+          "features": [
+            "<b>Myšlienkové mapy</b>: Jednoducho organizujte svoje myšlienky a urobte logiku jasnou na prvý pohľad."
+          ]
+        },
+        {
+          "features": [
+            "<b>Základné prezentácie</b>: Rýchlo prezentujte nápady pre efektívne reportovanie a zdieľanie."
+          ]
+        }
+      ],
+      "5_15_0": [
+        {
+          "features": [
+            "<b>Jednoduché zachytenie</b>: Nahrávajte stretnutia, hlasové poznámky a obrazovky okamžite."
+          ]
+        },
+        {
+          "features": [
+            "<b>Automatický prepis</b>: Premeňte nahrávky na prehľadávateľné dokumenty."
+          ]
+        },
+        {
+          "features": [
+            "<b>Inteligentný chat</b>: Získajte zhrnutia, úlohy a odpovede z vášho obsahu."
+          ]
+        }
+      ],
+      "5_16_0": [
+        {
+          "features": [
+            "<b>Inteligentnejšia pomoc pri kódovaní</b>: Rieši zložité projekty, píše čistejší kód, rýchlejšie odstraňuje chyby."
+          ]
+        },
+        {
+          "features": [
+            "<b>Lepší partner pri písaní</b>: Robí správy jasnejšími a pútavejšími."
+          ]
+        },
+        {
+          "features": [
+            "<b>Zlepšené odpovede na zdravotné otázky</b>: Presnejšie, premyslenejšie a spoľahlivejšie."
+          ]
+        }
+      ],
+      "5_17_0": [
+        {
+          "features": [
+            "<b>Poznámka REC, automaticky vylepšená</b>: Zaznamenávajte a rýchlo si zapisujte poznámky, zatiaľ čo AI prepisuje. Vaše poznámky a prepisy sú kombinované do jasnej, štruktúrovanej poznámky REC."
+          ]
+        },
+        {
+          "features": [
+            "<b>Bezplatný prepis</b>: Každý záznam je automaticky prepísaný do textu, takže nič neunikne."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nano Banana</b>: Nástroj na obrázky v ovládacích prvkoch chatu teraz podporuje Nano Banana."
+          ]
+        }
+      ],
+      "5_18_0": [
+        {
+          "features": [
+            "<b>Výskum za pár minút</b>: Vyhľadávajte naprieč zdrojmi, porovnávajte perspektívy a získajte štruktúrované správy s citáciami"
+          ]
+        },
+        {
+          "features": [
+            "<b>Elite Credits</b>: Nová kreditná jednotka pre funkcie AI agenta ako Hĺbkový výskum a AI Slides"
+          ]
+        },
+        {
+          "features": [
+            "<b>Zjednodušený zoznam modelov</b>: Vyberte model raz; použite prepínač Think na povolenie alebo zakázanie uvažovania"
+          ]
+        }
+      ],
+      "5_1_0": [
+        {
+          "features": [
+            "<b>Režim Premýšľania (R1)</b>: Premýšľanie DeepSeek-R1 je teraz možné použiť s všeobecnými modelmi pre lepšie odpovede. Stojí 1 Pokročilý Kredit na použitie."
+          ]
+        },
+        {
+          "features": [
+            "<b>Vylepšené vyhľadávanie</b>: Nájdite najrelevantnejšie zdroje s vylepšenou presnosťou."
+          ]
+        },
+        {
+          "features": [
+            "<b>Uložiť ako poznámky</b>: Uložte odpovede AI ako poznámky vo Wisebase pre neskoršie použitie."
+          ]
+        }
+      ],
+      "5_20_0": [
+        {
+          "features": [
+            "<b>Aktivita na webových stránkach</b>: Inštruujte AI, aby vykonávala úlohy priamo vo vašom aktuálnom prehliadači — nie je potrebný žiadny samostatný „agent prehliadač“."
+          ]
+        },
+        {
+          "features": [
+            "<b>Obmedzené zavedenie</b>: Táto verzia môže byť pomalá alebo nekonzistentná. Prístup je momentálne obmedzený na Ultra používateľov kvôli vysokým nákladom."
+          ]
+        }
+      ],
+      "5_22_0": [
+        {
+          "features": [
+            "Inteligentnejší, prirodzenejší: Znie viac ľudsky a lepšie dodržiava pokyny ako GPT‑5"
+          ]
+        },
+        {
+          "features": [
+            "Myslí presnejšie: Poskytuje rýchlejšie odpovede na jednoduché úlohy a hlbšie uvažovanie pri zložitých"
+          ]
+        }
+      ],
+      "5_2_0": [
+        {
+          "features": [
+            "<b>Centrum odmien</b>: Získajte bezplatné kredity skúmaním funkcií Sider."
+          ]
+        },
+        {
+          "features": [
+            "<b>Vylepšený preklad stránky</b>: AI preklad pomocou GPT, Claude alebo Gemini. Preložte znova konkrétne časti preložených stránok."
+          ]
+        }
+      ],
+      "5_3_0": [
+        {
+          "features": [
+            "<b>Gemini 2.5 Pro</b>: Vyniká v kódovaní, vede a matematike s vylepšeným logickým myslením a povedomím o kontexte."
+          ]
+        },
+        {
+          "features": [
+            "<b>DeepSeek-V3-0324</b>: Poskytuje rýchle, spoľahlivé odpovede a vylepšenú podporu pre matematiku a kódovanie."
+          ]
+        }
+      ],
+      "5_4_0": [
+        {
+          "features": [
+            "<b>Označiť hviezdičkou rozhovory</b>: Označte dôležité rozhovory pre jednoduchý prístup neskôr."
+          ]
+        },
+        {
+          "features": [
+            "<b>Exportovať rozhovory</b>: Uložte a zdieľajte rozhovory ako súbory TXT jednoducho."
+          ]
+        }
+      ],
+      "5_5_0": [
+        {
+          "features": [
+            "<b>GPT-4.1</b>: Rieši zložité problémy a reálne programovanie s vylepšenou presnosťou, nahrádza GPT-4o."
+          ]
+        },
+        {
+          "features": [
+            "<b>GPT-4.1 Mini</b>: Vyniká v porozumení obrázkov a poskytuje rýchlejšie odpovede."
+          ]
+        }
+      ],
+      "5_6_0": [
+        {
+          "features": [
+            "<b>o3</b>: Výkonný model na riešenie zložitých problémov v matematike, programovaní, vede a technickom písaní. Nahrádza o1."
+          ]
+        },
+        {
+          "features": [
+            "<b>o4-mini</b>: Ideálny pre rýchle uvažovanie, programovanie a vizuálne úlohy. Nahrádza o3-mini."
+          ]
+        }
+      ],
+      "5_7_0": [
+        {
+          "features": [
+            "<b>Poháňané GPT-Image-1</b>: Vytvárajte vysokokvalitné, profesionálne obrázky alebo upravujte existujúce pomocou jednoduchých popisov a najnovšieho modelu generovania obrázkov od OpenAI."
+          ]
+        },
+        {
+          "features": [
+            "<b>Nové možnosti kvality obrázkov</b>: Vyberte si z nízkej, strednej alebo vysokej kvality v ovládacích prvkoch chatu—náklady na kredity sa líšia podľa výberu."
+          ]
+        }
+      ],
+      "5_8_0": [
+        {
+          "features": [
+            "<b>Vylepšené schopnosti</b>: Vytvárajte obrázky s GPT Image 1, prezerajte artefakty v samostatnom paneli"
+          ]
+        },
+        {
+          "features": [
+            "<b>Porovnanie dvoch modelov</b>: Zobrazenie vedľa seba ukazuje, ako rôzne modely reagujú na rovnakú otázku v reálnom čase (exkluzívne pre web)"
+          ]
+        }
+      ],
+      "5_9_0": [
+        {
+          "features": [
+            "<b>Claude Opus 4</b>: Najsilnejší model od Anthropic s neprekonateľnými schopnosťami kódovania a riešenia zložitých problémov."
+          ]
+        },
+        {
+          "features": [
+            "<b>Claude Sonnet 4</b>: Vylepšené schopnosti uvažovania a kódovania, nahrádza Sonnet 3.7."
+          ]
+        }
+      ]
+    },
+    "logTitles": {
+      "4_10_0": "OpenAI GPT-4o je tu!",
+      "4_11_0": "Hlboký čitateľ na zlepšenie vašich kritických čitateľských schopností!",
+      "4_12_0": "",
+      "4_13_0": "Predstavujeme AI čítanie nahlas: Váš osobný audio asistent",
+      "4_16_0": "Predstavujeme GPT-4o mini",
+      "4_17_0": "Predstavujeme Watch Highlights pre YouTube",
+      "4_18_0": "Zdieľanie chatu je teraz dostupné!",
+      "4_19_0": "{{ARTIFACTS}}: Interaktívne bloky obsahu v reálnom čase",
+      "4_1_0": "",
+      "4_20_0": "Vylepšenie prekladových funkcií",
+      "4_22_0": "Démon vs Anjel: Röntgenová snímka tvojej X-osobnosti",
+      "4_23_0": "OpenAI o1-preview & o1-mini sú teraz k dispozícii!",
+      "4_24_0": "Modely Gemini sú teraz inteligentnejšie a rýchlejšie!",
+      "4_25_0": "Nový vzhľad pre lepší zážitok",
+      "4_26_0": "Predstavujeme Režim myslenia (Experimentálne)",
+      "4_27_0": "Vylepšené kontextové menu a artefakty",
+      "4_28_0": "Claude 3.5 Haiku & Rozšírené možnosti",
+      "4_29_0": "Vylepšený zážitok z chatu",
+      "4_2_0": "Efektívnejší prístup k GPT používateľskému rozhraniu a bočnému panelu",
+      "4_30_0": "Aktualizovaný GPT-4o, Preklad stránok a YouTube titulky",
+      "4_31_0": "Nástroje Nav, Preklad vstupu, Rýchle kopírovanie",
+      "4_32_0": "Podpora pre audio súbory v chate",
+      "4_33_0": "O1 & Vylepšenia zhrnutia videa",
+      "4_34_0": "Gmail Al Odpoveď, Artefakty a Vylepšenia Prekladu",
+      "4_35_0": "Náhľad odkazov: Prehliadajte múdrejšie",
+      "4_36_0": "Zbierajte vedomosti s Wisebase",
+      "4_37_0": "DeepSeek-R1 & V3, AI Prekladač",
+      "4_38_0": "Predstavujeme Gemini 2.0 Flash",
+      "4_39_0": "OpenAI o3-mini teraz k dispozícii!",
+      "4_3_0": "Maximalizujte svoje skúsenosti s režimom na celú obrazovku!",
+      "4_40_0": "Gemini 2.0 Pro je teraz k dispozícii!",
+      "4_41_0": "Hlasový vstup a DeepSeek-R1-70B",
+      "4_42_0": "Podpora dvojjazyčných titulkov pre Netflix",
+      "4_43_0": "Predstavujeme {{CLAUDE37}}",
+      "4_44_0": "GPT-4.5 je tu!",
+      "4_45_0": "Webový chat je teraz živý!",
+      "4_4_0": "Všetky nástroje v ponuke Chat & GPT-4",
+      "4_5_0": "",
+      "4_6_0": "Podporujte teraz rodinu Claude 3!",
+      "4_7_0": "Video súhrn v chate, extrakcia titulkov, Claude 3 Haiku! 🚀",
+      "4_8_0": "Gemini 1.5 Pro - Teraz dostupné!",
+      "4_9_0": "Llama 3 už teraz! Ďalšia generácia špičkového open source LLM od spoločnosti Meta.",
+      "5_0_0": "Zoznámte sa so Sider 5.0: Hlboký výskum jednoducho. Inteligentne a automatizovane.",
+      "5_10_0": "Prepis zvuku s identifikáciou hovoriaceho",
+      "5_12_0": "Vlastné pokyny sú teraz k dispozícii",
+      "5_13_0": "Artefakty teraz podporujú myšlienkové mapy a prezentácie",
+      "5_14_0": "Grok 4 je tu!",
+      "5_15_0": "Nahrávaj. Ulož. Ovládaj.",
+      "5_16_0": "GPT-5 je tu!",
+      "5_17_0": "Poznámka REC & Nano Banana",
+      "5_18_0": "Hĺbkový výskum & Elite Credits",
+      "5_19_0": "Predstavujeme Claude Sonnet 4.5",
+      "5_1_0": "Inteligentnejšie premýšľanie, vyhľadávanie a ukladanie",
+      "5_20_0": "Predstavujeme Browser Agent (výskumná ukážka)",
+      "5_21_0": "GPT-5 práve dostal aktualizáciu",
+      "5_22_0": "GPT-5.1 je tu",
+      "5_23_0": "Gemini 3 Pro je tu!",
+      "5_2_0": "Centrum odmien a vylepšený preklad stránky",
+      "5_3_0": "Gemini 2.5 Pro & Aktualizovaný DeepSeek V3 teraz k dispozícii",
+      "5_4_0": "Označiť hviezdičkou a exportovať vaše rozhovory",
+      "5_5_0": "Predstavujeme GPT-4.1 a GPT-4.1 Mini",
+      "5_6_0": "OpenAI o3 & o4-mini teraz k dispozícii",
+      "5_7_0": "Vytvárajte a upravujte obrázky v chate s GPT-Image-1",
+      "5_8_0": "Vylepšený webový chat na celej stránke",
+      "5_9_0": "Claude Opus 4 a Claude Sonnet 4 teraz k dispozícii"
+    },
+    "newInVersion": "Čo je nové vo verzii {{versionId}}",
+    "rate5Star": "<b>Páči sa vám naše rozšírenie?</b> Ohodnoťte nás piatimi hviezdičkami v internetovom obchode, aby ste nám pomohli rásť",
+    "tryRecordNote": "Vyskúšajte poznámku REC"
+  },
+  "changeSpeed": "Zmeniť rýchlosť",
+  "ChangeTone": "Zmeňte tón",
+  "changeVoice": "Zmeniť hlas",
+  "chatWithPDF": "Chat s PDF",
+  "check": "Skontrolujte",
+  "checkOutNow": "Pozrite si teraz!",
+  "clear": "jasný",
+  "clickPreview": "Kliknite pre náhľad",
+  "clickToAsk": "Kliknutím sa spýtate",
+  "clickToTry": "Kliknite, aby ste vyskúšali túto funkciu",
+  "clickView": "Kliknite pre zobrazenie",
+  "close": "Zavrieť",
+  "code": "Kód",
+  "code&preview": "Kód a náhľad",
+  "collapse": "Zbaliť bočný panel",
+  "collapseNav": "Zbaliť navigačný panel",
+  "compareWith": "Porovnať s {{NAME}}",
+  "confirm": "Potvrďte",
+  "console": "Konzola",
+  "constructionDesc": "Predstavte sa, aby ste získali lepšie, viac personalizované odpovede",
+  "constructionForm": {
+    "additional_info": {
+      "descritionList": [
+        "Snažím sa naučiť španielčinu.",
+        "Som vášnivý fotograf a cestovateľ.",
+        "Veľký fanúšik sci-fi kníh a filmov."
+      ],
+      "descritionTitle": "Môžete zdieľať veci ako:",
+      "label": "Čokoľvek iné, čo by mi pomohlo vás lepšie spoznať?",
+      "placeholder": "Záujmy, hodnoty alebo preferencie, ktoré treba mať na pamäti"
+    },
+    "desired_ai_traits": {
+      "descritionList": [
+        "Používajte neformálny, priateľský tón.",
+        "Buďte priamy a choďte rovno k veci.",
+        "Vyjadrite výzvy mojim myšlienkam a pýtajte sa doplňujúce otázky."
+      ],
+      "descritionTitle": "Môžete mi povedať, aby som robil veci ako:",
+      "label": "Aký typ AI spoločníka by pre vás najlepšie fungoval?",
+      "placeholder": "Štýl komunikácie alebo osobnostné črty"
+    },
+    "nickname": {
+      "label": "Ako vás mám oslovovať?",
+      "placeholder": "Prezývka"
+    },
+    "occupation": {
+      "label": "Čo robíte?",
+      "placeholder": "Vaša práca"
+    }
+  },
+  "contactUs": "Kontaktuj nás",
+  "contextMenu": {
+    "chatSelection": "Chat s vybraným textom",
+    "highlightSelection": "Zvýrazniť vybraný text",
+    "imageTools": "{{AI}} Nástroje na úpravu obrázkov",
+    "openFullPageChat": "Otvoriť chat na celej stránke",
+    "revertSavePage": "Odstrániť z {{WISEBASE}}",
+    "revertTranslatePage": "Zobraziť pôvodný text",
+    "savePage": "Uložiť stránku do {{WISEBASE}}",
+    "summarizePage": "Zhrnúť stránku",
+    "translatePage": "Preložiť do {{lang}}"
+  },
+  "continue": "ďalej",
+  "contrast-analysis": "Analyzovať kontrasty",
+  "conversationTip": "Tento chat bol vytvorený v režime {{CHATPROVIDER}}. Pre pokračovanie prepnite režim alebo začnite nový chat v aktuálnom režime.",
+  "copied": "Skopírované",
+  "copy": "Kopírovať",
+  "copyAsMarkdown": "Kopírovať ako Markdown",
+  "copyAsSheet": "Kopírovať ako tabuľku",
+  "createAccount": "Vytvoriť účet",
+  "createAccountTip": "Zaregistrujte sa a získajte <a>{{NUM}} zdarma</a> kredity každý deň",
+  "createImageTip": "Poplatky sa účtujú za obrázok na základe vybraného modelu.",
+  "creatingImage": "Vytváranie obrázka",
+  "creatingImageFailed": "Vytvorenie obrázka zlyhalo",
+  "credit": "Kredit",
+  "credits": "Kredity",
+  "current": "Aktuálne",
+  "currentRecordedSpeakers": "Aktuálni zaznamenaní hovorcovia",
+  "currentTpl": "Aktuálna šablóna:",
+  "customInstructions": "Vlastné pokyny",
+  "customPrompt": "Vlastná výzva",
+  "dataAnalysisTip": "Tento nástroj sa aktivuje iba pri použití, pričom sa odpočíta 1 Advanced Credit.",
+  "deepReadTools": "Nástroje pre hlboké čítanie",
+  "deepResearch": "Hĺbkový výskum",
+  "deepResearchBlockTip": "Hĺbkový výskum sa očakáva, že bude trvať 5–20 minút. Môžete pokračovať v používaní iných funkcií.",
+  "deepResearchFileModalCancelText": "Pokračovať bez súborov",
+  "deepResearchFileModalContent": "Hĺbkový výskum nepodporuje súbory. Ukončite hĺbkový výskum, aby ste mohli nahrať súbory, alebo pokračujte bez súborov.",
+  "deepResearchFileModalOkText": "Ukončiť výskum a nahrať súbor",
+  "deepResearchFileModalTitle": "Nie je možné nahrať súbor",
+  "deepResearchFileTip": "Hĺbkový výskum nepodporuje súbory. Odstráňte súbory, aby ste mohli pokračovať, alebo pokračujte v chatovaní.",
+  "deepResearchInputHint": "Čo by ste chceli skúmať?",
+  "deepResearchNormalTip": "Každé použitie stojí 20 Elite kreditov",
+  "deepResearchTip": "Choďte ďalej——hĺbková analýza s Deep Research",
+  "delete": "Odstrániť",
+  "deleteAll": "Vymazať všetko",
+  "delteTpl": "Odstrániť túto šablónu",
+  "describeImage": "Opíšte tento obrázok",
+  "describleImage": "Opísať",
+  "detected": "Zistené",
+  "disable": "Deaktivovať",
+  "Distinguish": "Rozlišovať",
+  "distinguishDesc": "3 pokročilé kredity / 10 minút",
+  "DitinguishSpeakers": "Rozlíšiť hovorcov?",
+  "done": "hotový",
+  "download": "Stiahnuť",
+  "downloadPng": "Stiahnuť PNG",
+  "downloadTypeFile": "Stiahnuť súbor typu {{type}}",
+  "dropMsg": "Presuňte sem pre odoslanie do Sider",
+  "earnFree": "Získajte zdarma kredity",
+  "edgePasteBug": "Nie je možné prilepiť pomocou klávesových skratiek kvôli chybe prehliadača Edge. Kliknite pravým tlačidlom myši a prilepte.",
+  "edit": "Upraviť",
+  "editTitle": "Upraviť názov",
+  "editTpl": "Upravte túto šablónu",
+  "elite": "Elite",
+  "emailEnhance": {
+    "emailAssistant": "E-mailový asistent",
+    "emailAssistantDesc": "Keď je Sider zapnutý, môže vám pomôcť rýchlo odpovedať na e-maily.",
+    "hideTranslation": "Skryť preklad",
+    "inputPlaceholder": "Povedzte svojmu partnerovi, ako chcete odpovedať...",
+    "intent": "Úmysel odosielateľa",
+    "orgLang": "Jazyk e-mailu",
+    "quickAIReply": "AI odpoveď",
+    "replyInputPlaceholder": "Čo by ste chceli odpovedať?",
+    "resultsTitle": "Návrh odpovede",
+    "showTranslation": "Zobraziť preklad",
+    "translateEmail": "Preložiť e-mail",
+    "tryAgain": "Skúste to znova",
+    "voice": {
+      "applicant": "Žiadateľ",
+      "casual": "Neformálne",
+      "colleague": "Kolega",
+      "confident": "sebavedomý",
+      "customer-service-staff": "Personál zákazníckeho servisu",
+      "direct": "priamy",
+      "emailLength": "Dĺžka emailu",
+      "empathetic": "empatický",
+      "enthusiastic": "Vášnivý",
+      "formal": "Formálne",
+      "formality": "Formálnosť",
+      "friendly": "priateľský",
+      "human-resources": "Ľudské zdroje",
+      "informational": "informatívny",
+      "leader": "Vodca",
+      "long": "Dlhé",
+      "medium": "Stredná",
+      "neutral": "Neutrálne",
+      "personable": "drahá",
+      "project-manager": "Projektový manažér",
+      "sales-representative": "Obchodný zástupca",
+      "short": "Krátky",
+      "subordinate": "Podriadený",
+      "tone": "Tón",
+      "witty": "šikovný",
+      "yourRole": "Tvoja roľa"
+    },
+    "voiceSettings": "Nastavenie tónu",
+    "wayToReply": "Nápady na odpoveď"
+  },
+  "enable": "Povoliť",
+  "enable&continue": "Povoliť a pokračovať",
+  "enterText": "Zadajte text",
+  "errorOccurred": "Vyskytla sa chyba",
+  "everyThing": "Všetko",
+  "example": "Príklad",
+  "exit": "Ukončiť",
+  "expand": "Rozbaliť",
+  "expandNav": "Rozbaliť navigačný panel",
+  "experimental": "Predbežný prístup",
+  "experimentalDesc": "Platení používatelia získajú predbežný prístup k exkluzívnym, najmodernejším nástrojom a experimentálnym funkciám, ktoré nie sú dostupné pre nepredplatiteľov.",
+  "explain": "Vysvetliť",
+  "explainSection": "Môžete mi vysvetliť túto časť podrobnejšie?",
+  "export": "Exportovať",
+  "exportXmind": "Exportovať .xmind súbor",
+  "extra": "extra",
+  "extracted": "Audio extrahované",
+  "extractingText": "Extrahovanie textu",
+  "extractingTextFailed": "Extrahovanie textu zlyhalo",
+  "ExtractText": "Extrahovať text",
+  "faceError": "Vyskytla sa táto chyba v najnovšom {{ARTIFACT}}, prosím opravte ju.",
+  "fact-check": "Overenie faktov",
+  "feedback": "Spätná väzba",
+  "fetched": "Načítané {{QUERY}}",
+  "fetchFailed": "Nepodarilo sa načítať {{QUERY}}.",
+  "fetching": "Načítavam {{QUERY}}...",
+  "fileInputHint": "Pýtať sa na tento súbor",
+  "finish": "Dokončiť",
+  "fit": "Prispôsobiť obrazovke",
+  "fiveStarRate": {
+    "enjoy": "😘 Baví vás toto rozšírenie?",
+    "enjoyNo": "Nie, spätná väzba",
+    "enjoyYes": "Áno, hodnotenie 5 hviezdičiek!",
+    "feedbackThx": "Ďakujem za spätnú väzbu.",
+    "feedbackTip": "🥹 Povedzte nám, prosím, dôvod vašej nespokojnosti.",
+    "rate": "Ohodnoťte nás piatimi hviezdičkami"
+  },
+  "free": "Voľný",
+  "freeTrial": {
+    "cancelTip": "Zrušiť kedykoľvek",
+    "panelBtn": "Začať skúšobnú verziu zdarma",
+    "panelList": [
+      "Chatovanie s GPT-4 a Claude 3 bez obmedzení",
+      "Chatovanie s akýmkoľvek PDF, obrázkom a odkazom",
+      "Zhrnutie webových stránok a videí na YouTube"
+    ],
+    "panelTitle": "3-dňový neobmedzený plán zdarma"
+  },
+  "fullPageChat": "Celostránkový rozhovor",
+  "fullscreen": "Celá obrazovka",
+  "fullscreenBookmarkTip": "Kliknite na ikonu hviezdy, aby ste si uložili chat na celú obrazovku pre jednoduchý prístup nabudúce!",
+  "fullScreenChat": "Chat na celú obrazovku",
+  "gamify": "Gamifikovať",
+  "gamifyDoc": "Gamifikovať dokument",
+  "gamifyPage": "Gamifikovať túto stránku",
+  "gamifyPageDesc": "Vytvorte gamifikované, interaktívne pohľady na aktuálnu webovú stránku pre lepšie pochopenie.",
+  "gamifyTip": "Učte sa hrou: Objavujte koncepty prostredníctvom interaktívnych ukážok",
+  "genBy": "Generované pomocou {{MODEL_NAME}}",
+  "general": "Všeobecná konfigurácia",
+  "generating": "Generovanie",
+  "generatingImageTip": "Nechajte chat otvorený, kým nebude obrázok pripravený",
+  "generatingReport": "Generovanie správy...",
+  "generatingTranscript": "Generovanie prepisu",
+  "getAIAnswer": "Získať odpoveď AI",
+  "getAnotherKey": "Získajte ďalší kľúč",
+  "getItNow": "Získať teraz",
+  "getKeyPage": {
+    "addKey": "Pridať kľúč",
+    "apiKeyInputPlaceholder": "Zadajte svoj API kľúč",
+    "checkConnectionBtn": "Skontrolovať",
+    "checkConnectionDesc": "Skontrolujte, či je váš API kľúč a proxy (ak sa používa) platný.",
+    "checkConnectionTitle": "Skontrolovať pripojenie",
+    "connectionFailed": "Pripojenie zlyhalo. Skontrolujte nastavenia API kľúča a proxy.",
+    "connectionSuccess": "Pripojenie úspešné",
+    "customKey": "Vlastný API kľúč",
+    "deleteModelTip": "Odstrániť tento model?",
+    "modelCount": "{{count}} modelov k dispozícii",
+    "modelList": "Zoznam modelov",
+    "noKeyWarn": "Nenašiel sa žiadny API kľúč. Pridajte kľúč na pokračovanie alebo prepnite na používanie {{APP_NAME}}.",
+    "proxyUrlTitle": "URL proxy API (voliteľné)",
+    "proxyUrlTitleRequired": "URL proxy API",
+    "setup": "Nastaviť",
+    "step1": "Krok 1: Získajte kľúč API",
+    "step1-1": "<i>Prihláste svoj účet OpenAI</i> Ak účet nemáte, zaregistrujte sa <b>TU</b>",
+    "step1-2": "Navštívte stránku OpenAI API Key",
+    "step1-3": "Vytvorte nový tajný kľúč a skopírujte ho nasledovne",
+    "step2": "Krok 2: Vložte kľúč API do poľa nižšie",
+    "step2-tips": "Neboj sa. Váš kľúč API sa používa iba lokálne v rámci rozšírenia ChatGPT. Používanie API je stabilnejšie ako priame používanie ChatGPT.",
+    "step3": "Krok 3: Skontrolujte svoje kredity <i>tu</i>",
+    "stepTitle": "Ako získať kľúč API.",
+    "useSider": "Použiť {{APP_NAME}}",
+    "welcome": "Vitajte v aplikácii {{APP_NAME}}! Tu je vaša cesta na začiatok:"
+  },
+  "getMore": "získať viac",
+  "googleSearchPage": {
+    "claude3Advantages": [
+      "Rovnako výkonný ako GPT-4",
+      "Prirodzenejšie odpovede",
+      "Silné schopnosti uvažovania"
+    ],
+    "gpt4Advantages": [
+      "Získať lepšie odpovede",
+      "Rozmanitejšie vedomosti",
+      "Silnejšie porozumenie"
+    ]
+  },
+  "goPremium": "upgrade na prémiu",
+  "goPremiumGetMore": "inovujte na prémiové a získajte viac",
+  "gotIt": "Mám to",
+  "guideVideos": {
+    "chat": {
+      "ai-bot": "Multi-bot Chat",
+      "data-analysis": "Pokročilá analýza dát",
+      "painter": "Generovanie obrázkov",
+      "prompts": "Vlastné výzvy",
+      "web-access": "Prístup na web"
+    },
+    "chatpdf": {
+      "chatpdf": "Chat s PDF"
+    },
+    "email": {
+      "reply": "Generovať odpovede e-mailom"
+    },
+    "grammar": {
+      "context": "Kontrola gramatiky cez kontextové menu",
+      "widget": "Kontrola gramatiky cez bočný panel"
+    },
+    "ocr": {
+      "ocr": "Extrahovať text a rovnice"
+    },
+    "painter": {
+      "bg-remove": "Odstrániť pozadie",
+      "bg-replace": "Nahradiť pozadie",
+      "eraser": "Odstrániť vyčistenú oblasť",
+      "image": "Generovať obrázky",
+      "text-remove": "Odstrániť text",
+      "upscale": "Zväčšiť obrázky"
+    },
+    "summary": {
+      "doc": "Nahrané dokumenty",
+      "page": "Webová stránka cez rýchle menu",
+      "page2": "Webová stránka cez chat",
+      "youtube": "YouTube videá"
+    },
+    "translation": {
+      "in-chat": "Vybraný text v chate",
+      "in-chat2": "Napísaný text v chate",
+      "input": "Napísaný text na stránke",
+      "page": "Celá webová stránka",
+      "selected": "Vybraný text cez kontextové menu",
+      "widget": "Vybraný text cez bočný panel"
+    },
+    "write": {
+      "context": "Vylepšiť vybraný text",
+      "input": "Prepísať vstupy",
+      "widget": "Komponovať na požiadanie"
+    }
+  },
+  "guideVideoTitle": {
+    "chat": "Chat",
+    "chatpdf": "ChatPDF",
+    "email": "Odpoveď e-mailom",
+    "grammar": "Gramatika",
+    "ocr": "OCR",
+    "painter": "Maliar",
+    "summary": "Zhrnúť",
+    "translation": "Preložiť",
+    "write": "Písať"
+  },
+  "helpCenter": "Centrum pomoci",
+  "hi": "Ahoj,",
+  "hide": "Skryť",
+  "hideImage": "Skryť obrázok",
+  "highlight-excerpts": "Zvýrazniť úryvky",
+  "highlightType": {
+    "comprehensive-coverage": "Komplexné pokrytie",
+    "key-sentences": "Kľúčové vety",
+    "memorable-quotes": "Pamätné citáty",
+    "structural-importance": "Štrukturálna dôležitosť"
+  },
+  "historyGroups": {
+    "earlier": "Skôr",
+    "thisMonth": "Tento mesiac",
+    "thisWeek": "Tento týždeň",
+    "today": "Dnes"
+  },
+  "howToUse": "Pozrite si, ako používať",
+  "icon": "Ikona",
+  "identify-assumptions": "Identifikovať predpoklady",
+  "image": "Obrázok",
+  "imageInputHint": "Opýtajte sa na tento obrázok",
+  "imageQuality": {
+    "high": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Vysoká)"
+    },
+    "low": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Nízka)"
+    },
+    "medium": {
+      "desc": "GPT-image-1",
+      "label": "GPT-image-1 (Stredná)"
+    },
+    "nano_banana": {
+      "desc": "Gemini 2.5 Flash Image Preview",
+      "label": "Nano Banana"
+    },
+    "nano_banana_pro": {
+      "desc": "Gemini 3 Pro Image Preview",
+      "label": "Nano Banana Pro"
+    }
+  },
+  "imageQuoteTipContent": "Ak sa chcete znova opýtať na obrázok, jednoducho ho citujte.",
+  "imageQuoteTipTitle": "Spýtať sa obrázok znova? Treba citovať obrázok",
+  "imageRetryTip": "Vyskytla sa chyba. Prosím, skúste to znovu.",
+  "imageToolbar": {
+    "AITools": "AI Nástroje",
+    "chatWithImage": "Chat s obrázkom",
+    "erase": "Oblasť vymazania",
+    "extractText": "Extrahovať text",
+    "imageTools": "Nástroje pre obrázky",
+    "inpaint": "Lokálne prekreslenie",
+    "removeBackground": "Odstránenie pozadia",
+    "removeText": "Odstránenie znakov",
+    "replaceBackground": "Nahradenie pozadia",
+    "upscale": "Zlepšenie kvality obrazu",
+    "variation": "Vytvoriť variácie"
+  },
+  "imageTranslateInto": "Preložte text na obrázku do {{lang}}",
+  "inputTranslation": {
+    "mainSwitchDesc": "Preložte a nahraďte text v vstupnom poli na akejkoľvek webovej stránke",
+    "mainSwitchTitle": "Preložte vstupný text pomocou spúšťacieho klávesu",
+    "model": "Prekladový model",
+    "neverTransSites": "Nikdy neprekladať na týchto stránkach",
+    "spaceKey": "Medzerník",
+    "title": "Vstupný preklad",
+    "triggerKeyDesc": "Rýchlo stlačte spúšťací kláves 3-krát na preklad, zrušte pomocou {{key}}",
+    "triggerKeyTitle": "Spúšťací kláves"
+  },
+  "insert": "Vložiť",
+  "invite": "Pozvať",
+  "inviteFriendTip": "<a>Pozvite priateľov</a> a získajte extra kredity",
+  "inviteYourFriends": "Pozvať priateľov",
+  "issueType": "Typ problému",
+  "joinDiscord": "Pripojte sa k našej komunite na Discorde",
+  "key-concepts": "Vysvetliť kľúčové pojmy",
+  "keyboardShortcuts": "Klávesové skratky",
+  "keypoints": "Kľúčové body",
+  "language": "Jazyk",
+  "learnMore": "Zistiť viac",
+  "letsTryItNow": "Vyskúšajme to teraz!",
+  "listen": "Počúvaj",
+  "llmStatus": {
+    "thinking": "Premýšľam..."
+  },
+  "Loading": "Načítava sa",
+  "loadMessageFailed": "Načítanie správ zlyhalo",
+  "login": {
+    "apple": "Pokračovať s Apple",
+    "google": "Pokračovať s Google",
+    "microsoft": "Pokračovať s Microsoft",
+    "phone": "Pokračovať s telefónom"
+  },
+  "loginTip": "Nemáte účet? <a>Vytvoriť účet</a>",
+  "loginTipSiderMode": "Prihláste sa, aby ste mohli používať túto funkciu v režime Sider.",
+  "loginToClaimRewards": "Prihláste sa, aby ste si mohli uplatniť svoje odmeny v režime Sider.",
+  "loginToUnlockFeature": "Prihláste sa, aby ste odomkli viac funkcií.",
+  "loginToUse": "Prihláste sa, aby ste mohli začať používať Sider.",
+  "logout": "Odhlásiť sa",
+  "longAnswerFullScreenTip": "Cítite sa stiesnene? Prejdite na celú obrazovku",
+  "longText": "Dlhý text",
+  "manage": "Spravovať",
+  "mathSolver": "Riešiteľ matematických úloh",
+  "mathSolverTip": "Uložiť do Mojich bank otázok",
+  "maximize": "Maximalizovať",
+  "mentionBot": "Spomenúť model",
+  "mentionGPTs": "Spomeňte GPTs",
+  "mindmap": {
+    "catalogOrganization": "Organizácia katalógu",
+    "fishbone": "Rybinový diagram",
+    "logicalStructure": "Logická štruktúra",
+    "logicalStructureLeft": "Logická štruktúra vľavo",
+    "mindMap": "Myšlienková mapa",
+    "organizationStructure": "Organizačná štruktúra",
+    "timeline": "Časová os"
+  },
+  "minimize": "Minimalizovať",
+  "mobileChatHistoryAd": {
+    "btn": "Získať aplikáciu",
+    "title": "Synchronizácia chatov medzi zariadeniami"
+  },
+  "model": "Model",
+  "modelCountTip": {
+    "gpt-3.5": "Stojí <m>1 základný kredit</m>.",
+    "gpt-3.5-n_one": "Cena <m>{{count}} základný kredit</m>.",
+    "gpt-3.5-n_other": "Cena <m>{{count}} základných kreditov</m>.",
+    "gpt-4": "Stojí <m>1 pokročilý kredit</m>.",
+    "gpt-4-2": "Stojí <m>2 pokročilé kredity</m>.",
+    "gpt-4-n_one": "Stojí <m>{{count}} pokročilý kredit</m>.",
+    "gpt-4-n_other": "Stojí <m>{{count}} pokročilých kreditov</m>."
+  },
+  "modelDesc": {
+    "bard": "Model od spoločnosti Google (PaLM 2) funguje dobre v pokročilých úlohách uvažovania.",
+    "claude-3-haiku": "Najkompaktnejší model od Anthropic, navrhnutý pre takmer okamžitú odozvu a plynulé AI zážitky, ktoré napodobňujú ľudskú interakciu",
+    "claude-3-opus": "Najvýkonnejší model Anthropic, poskytujúci výkonnosť na úrovni najmodernejších úloh a prejavujúci plynulosť a porozumenie podobné ľudskému.",
+    "claude-3-sonnet": "Najvyváženejší model Anthropic medzi inteligenciou a rýchlosťou, ideálny pre širokú škálu úloh.",
+    "claude-3.5-sonnet": "Najnovší model od Anthropic, ktorý poskytuje dvojnásobnú rýchlosť oproti Claude 3 Opus a vyššiu inteligenciu, čo výrazne zlepšuje schopnosti v oblasti logického myslenia, vedomostí, programovania a vizuálnych úloh.",
+    "claude-instant": "Základný model od Anthropic, prípady použitia s nízkou latenciou a vysokou priepustnosťou.",
+    "claude2": "Najlepší model vo svojej triede od spoločnosti Anthropic, vynikajúci výkon pri úlohách, ktoré si vyžadujú komplexné uvažovanie.",
+    "gemini-1.5-flash": "Ľahký model spoločnosti Google, optimalizovaný pre rýchlosť a efektivitu.",
+    "gemini-1.5-pro": "Najlepší model spoločnosti Google pre všeobecný výkon v širokej škále úloh.",
+    "gemini-pro": "Najvyváženejší model od Google, dokonale spája schopnosti s efektivitou.",
+    "gpt-3.5": "Veľmi rýchle, skvelé pre väčšinu každodenných úloh.",
+    "gpt-4": "Najschopnejší model, najlepší pre zložité úlohy vyžadujúce pokročilé uvažovanie.",
+    "gpt-4o": "Najlepší model od OpenAI, najlepší pre zložité úlohy pri zachovaní kvality.",
+    "gpt-4o-mini": "Najnovší model od OpenAI, ponúka rýchly a vynikajúci výkon v chate, kódovaní a úlohách logického myslenia pre každodenné použitie.",
+    "gpt-5": "Najnovší model OpenAI, najlepší pre zložité úlohy pri zachovaní kvality.",
+    "llama-3": "Najnovší model spoločnosti Meta, najlepší pre zložité úlohy pri zachovaní kvality.",
+    "sider": "{{SIDER}} dynamicky vyberá GPT-4o mini, Claude 3 Haiku, Gemini 1.5 Flash alebo Llama 3 pre optimálne odpovede na základe scenára."
+  },
+  "modelUpdateFailed": "Aktualizácia modelu zlyhala",
+  "modelUpdateSuccess": "Model bol úspešne aktualizovaný",
+  "more": "Viac",
+  "moreFeature": "Viac funkcií!",
+  "morePrompts": "Viac výziev",
+  "moreQueries": "Viac kreditov!",
+  "moreQuery": "Viac kreditov",
+  "msg": {
+    "askOriginalModel": "Pôvodný {{MODELNAME}}",
+    "basicCreditLimit": "Vyčerpané základné kredity",
+    "basicCreditLimitDesc": "Vyčerpali ste všetky svoje základné kredity. Aktualizujte svoj plán alebo pozvite priateľov, aby ste získali viac kreditov.",
+    "cantBeTranscribed": "Nie je možné zhrnúť toto video kvôli obmedzeniam autorských práv. Skúste iné.",
+    "changeSaved": "Zmeny boli uložené",
+    "chatgptTabGuardRefreshingTips": "S ChatGPT sa niečo pokazilo. Opätovné pripojenie, čakajte...",
+    "chatgptTabGuardRefreshingTips1": "S ChatGPT sa niečo pokazilo.",
+    "chatgptTabGuardRefreshingTips2": "Opätovné pripojenie, čakajte...",
+    "chatgptTabGuardSetupSuccessTips": "Opravené, skúste to znova",
+    "chatgptTabGuardTips": "Nechajte túto kartu otvorenú, teraz sa môžete vrátiť do aplikácie {{APP_NAME}}",
+    "checkInvitation": "Skontrolujte záznamy pozvánok",
+    "deletePromptWarn": "Chcete odstrániť túto výzvu?",
+    "dontRemindAgain": "Nežiadaj ma znova",
+    "dragImgTips": "Kliknite pre nahranie alebo presuňte obrázok sem",
+    "dragTips": "Kliknite pre nahratie alebo presuňte súbory sem",
+    "emailRequired": "Vyžaduje sa e-mail.",
+    "enterAPIKey": "Zadajte svoj kľúč OpenAI API",
+    "enterEmail": "Ak chcete dostávať aktualizácie o probléme, zadajte e-mailovú adresu.",
+    "errChatGPTAuth": "Prosím <m>kliknite na odkaz na prihlásenie </m>na vašu webovú stránku ChatGPT a my vám pomôžeme s pripnutím. Potom ho môžete použiť na bočnom paneli.",
+    "errChatGPTAuthTipTitle": "Skúste:",
+    "errChatGPTFailToFetch": "Nepodarilo sa dostať odpoveď od ChatGPT.",
+    "errGeminiPro": "{{GEMINI}} chyba, skúste to prosím neskôr.",
+    "errOpenaiFailToFetch": "Nepodarilo sa získať odpoveď z OpenAI prostredníctvom vášho kľúča API.",
+    "errOpenAIFilter": "Odpoveď bola filtrovaná kvôli spusteniu politiky správy obsahu OpenAI. Upravte svoju výzvu a skúste to znova.",
+    "error1139_1": "Ďakujeme, že používate neobmedzené plány! Stále môžete pokračovať v používaní pokročilých AI modelov. Dosiahli ste však dočasný rýchlostný limit. <a>Tu je dôvod, prečo existuje rýchlostný limit a ako sa snažíme vám pomôcť</a>. Prosím, <mx>PREČÍTAJTE SI TO</mx>.",
+    "error1139_1_2": "Ďakujeme, že používate neobmedzené plány! Stále môžete pokračovať v používaní pokročilých AI modelov. Dosiahli ste však dočasný rýchlostný limit a vyčerpali ste všetky extra pokročilé dotazy. Tu je <a>dôvod, prečo existuje rýchlostný limit a ako sa snažíme vám pomôcť</a>. Prosím, <mx>PREČÍTAJTE SI TO</mx>.",
+    "error1139_1_3": "Ďakujeme, že používate neobmedzené plány! Stále môžete pokračovať v používaní pokročilých AI modelov. Dosiahli ste však dočasný rýchlostný limit a vyčerpali ste všetky darované pokročilé dotazy. Tu je <a>dôvod, prečo existuje rýchlostný limit a ako sa snažíme vám pomôcť</a>. Prosím, <mx>PREČÍTAJTE SI TO</mx>.",
+    "error1139_2": "Aby sme neprerušili vašu aktuálnu prácu, dali sme vám niekoľko extra pokročilých dotazov ako darček na odomknutie aktuálneho rýchlostného limitu. <b>Po vyčerpaní všetkých týchto extra pokročilých dotazov budete mať rýchlostný limit</b>.",
+    "error1139_3": "Aktuálny rýchlostný limit je ({{timesToUse}} krát / {{periodTime}} hodín) na pokročilé dotazy. Môžeme ho upraviť podľa našich kapacít. Potrebujete viac teraz? Skúste booster pack!",
+    "error1139_4": "Dali sme vám extra 50 pokročilých dotazov ako darček na odomknutie aktuálneho rýchlostného limitu. <b>Po vyčerpaní všetkých týchto extra pokročilých kreditov budete mať rýchlostný limit.</b>",
+    "errorFileType": "Nepodporovaný formát súboru",
+    "errorOutputLimit": "Dosiahnutý limit dĺžky. Pre dlhšiu odpoveď si zakúpte upgrade.",
+    "errServiceUnavailable": "Openai server je zaneprázdnený, skúste to znova neskôr alebo prejdite na Sider API a použite {{model}} počas výpadku OpenAI.",
+    "errSiderAdminKickout": "Boli ste odhlásení, prosím, prihláste sa znova",
+    "errSiderAdvancedTextLimit": "Dosiahli ste limit pre pokročilý kredit. V súčasnosti je obmedzenie {{count}} správ každých 60 minút. Alternatívne môžete použiť základný kredit a vrátiť sa neskôr.",
+    "errSiderApiHighLoad": "Server OpenAI je momentálne zaneprázdnený. Skúste neskôr prosím.",
+    "errSiderApiImageLimit": "Použili ste všetky základné kredity, prosím upgradujte, aby ste mohli pokračovať v používaní tejto funkcie.",
+    "errSiderApiImgLimitPremiumUltra": "Dosiahli ste maximálny počet základných kreditov. Prosím, počkajte na ďalšie obnovenie na pokračovanie v používaní.",
+    "errSiderApiLimitDevice": "Ak chcete použiť, prihláste sa.",
+    "errSiderApiLimitLogin": "Dnes ste použili všetky zdarma kredity. Inovujte alebo pozvite priateľov na získanie ďalších, alebo počkajte na zajtrajšie obnovenie kreditov.",
+    "errSiderApiLimitPremium": "Váš základný kredit na tento mesiac je vyčerpaný. Prepnite na pokročilý kredit, počkajte na obnovenie budúci mesiac (dátum predplatného), alebo upgradujte pre viac.",
+    "errSiderApiLimitPremiumDiscount": "Vyčerpali ste všetky svoje kredity. Inovujte teraz na neobmedzené kredity so zľavou <b>$1</b>.",
+    "errSiderApiOcrLimit": "Vyčerpali ste všetky svoje základné kredity. Prosím, inovujte na pokračovanie v prístupe k tejto funkcii.",
+    "errSiderApiSummaryVideoLimit": "Vyčerpali ste všetky svoje kredity. Prosím, inovujte alebo pozvite priateľov na získanie ďalších.",
+    "errSiderApiTrialFeatLimit": "Dosiahli ste limit skúšobnej verzie pre prémiovú funkciu. Upgradujte, aby ste odomkli všetky funkcie.",
+    "errSiderAudioAdvancedLimit": "Potrebujete viac pokročilých kreditov. Každých 10 minút (alebo menej) audia stojí 1 pokročilý kredit. Upgradujte alebo pozvite priateľov, aby ste získali viac!",
+    "errSiderBasicTextLimit": "Dosiahli ste limit pre základný kredit. V súčasnosti je obmedzenie {{count}} správ každých 60 minút. Alternatívne môžete použiť pokročilý kredit a vrátiť sa neskôr.",
+    "errSiderChatDeepResearchFailed": "Momentálne máme problémy s generovaním vašej výskumnej správy. Skúste to prosím znova.",
+    "errSiderCreditFreqLimit": "Dosiahli ste aktuálny limit používania. Tento limit zabezpečuje spravodlivé používanie pre všetkých používateľov. Prosím, skúste to znova po {{count}} minútach.",
+    "errSiderCreditUsageLimit": "Dosiahnutý limit používania",
+    "errSiderDataAnalysisCredit": "Táto odpoveď vyžaduje analýzu dát (1 pokročilý kredit). Nemáte dostatok pokročilých kreditov, tak upgradujte alebo pozvite priateľov pre viac!",
+    "errSiderDeviceBinded": "Ak chcete použiť, prihláste sa.",
+    "errSiderDeviceLimitLogout": "Boli ste odhlásení kvôli dosiahnutiu limitu zariadení. Môžete sa znova prihlásiť a týmto sa odhlási najskoršie aktívne zariadenie na vašom účte.",
+    "errSiderEliteCreditLimitElite": "Vyčerpali ste všetky Elite kredity — skúste to znova po dátume obnovenia kreditov. Pre okamžitú pomoc kontaktujte náš tím podpory.",
+    "errSiderEliteCreditLimitNotElite": "Nemáte žiadne Elite kredity — prosím, upgradujte svoje členstvo Sider.",
+    "errSiderGPT45RateLimit": "Dosiahli ste svoj denný limit pre GPT-4.5. Kvôli obmedzeniam kvót OpenAI je používanie obmedzené na 1 krát denne na používateľa. Skúste to znova o 24 hodín alebo prepnite na iný dostupný model, aby ste mohli pokračovať.",
+    "errSiderGPT4HighLoad": "Server OpenAI je momentálne zaneprázdnený. Skúste neskôr prosím.",
+    "errSiderGPT4LimitDevice": "Prosím, <b>prihláste sa</b> najprv, a <amb>pozvite svojich priateľov</amb> alebo <ta>inovujte na prémiovú verziu</ta> na získanie viac pokročilých kreditov.",
+    "errSiderGPT4LimitLogin": "Inovujte alebo pozvite priateľov na odomknutie viac pokročilých kreditov pre viac informovaných odpovedí.",
+    "errSiderGPT4LimitPremium": "Vyčerpali ste všetky svoje mesačné Pokročilé kredity. Inovujte svoj plán pre vyššiu mesačnú kvótu alebo si zakúpte balík posilňovača Pokročilých kreditov na okamžité použitie!",
+    "errSiderGPT4LimitPremiumDiscount": "Vaše pokročilé kredity na tento mesiac sú vyčerpané. Inovujte teraz na neobmedzené kredity so zľavou <b>$1</b>, alebo počkajte na obnovenie budúci mesiac (dátum predplatného).",
+    "errSiderHighTrafficError": "Z dôvodu vysokej návštevnosti to skúste znova neskôr alebo inovujte na prémiový účet pre rýchlejší prístup.",
+    "errSiderHighTrafficTip": "Zvážte <a>inováciu na prémiový účet</a> pre stabilný prístup a podporu nášho vývoja.",
+    "errSiderLoginExpired": "Vaše prihlásenie vypršalo, prosím, prihláste sa znova",
+    "errSiderNeedLogin": "Ak chcete použiť, prihláste sa.",
+    "errSiderO1Limit1": "Model OpenAI o1 je veľmi žiadaný a dosiahol svoj kvótový limit. Nebojte sa, môžete tiež klásť otázky OpenAI o1 zadarmo na našej komunitou riadenej webovej stránke s otázkami a odpoveďami: <a>ask.sider.ai</a>",
+    "errSiderOpenaiFault": "Server Openai je zaneprázdnený. Počas výpadku OpenAI prejdite na {{model}}.",
+    "errSiderOpusLimit": "Dosiahli ste svoj denný limit pre Claude Opus 4. V dôsledku obmedzení kvót Anthropic je používanie obmedzené na 1-krát na používateľa denne. Skúste to znova o 24 hodín alebo prepnite na iný dostupný model, aby ste mohli pokračovať.",
+    "errSiderOpusTLimit": "Dosiahli ste svoj denný limit pre Claude Opus 4 Think. V dôsledku obmedzení kvót Anthropic je používanie obmedzené na 1-krát na používateľa denne. Skúste to znova o 24 hodín alebo prepnite na iný dostupný model, aby ste mohli pokračovať.",
+    "errSiderPremiumRequired": "Táto funkcia je dostupná výhradne pre prémiových používateľov. Ak chcete odomknúť túto funkciu, inovujte teraz.",
+    "errSiderProcessing": "Iba jedna správa naraz. Pred odoslaním ďalšej správy nechajte dokončenie akejkoľvek inej odpovede alebo chvíľu počkajte.",
+    "errSiderThinkingModelCredit": "Nedostatok pokročilých kreditov pre \"Režim premýšľania\". Prosím, deaktivujte tento režim alebo upgradujte/pozvite priateľov pre získanie ďalších kreditov.",
+    "errSiderTimeout": "Požiadavka vypršala. Prosím skúste znova.",
+    "errSiderTranslateApiLimitPremium": "Váš základný kredit na tento mesiac je vyčerpaný. Prosím, počkajte na obnovenie budúci mesiac (dátum predplatného), alebo upgradujte pre viac.",
+    "errSiderUltraVipRequired": "Táto funkcia je dostupná iba v pláne Ultra. Prosím, upgradujte na Ultra, aby ste ju mohli používať.",
+    "errSiderUnlimitedLimit": "Dosiahli ste dočasný limit ({{timesToUse}} krát / {{periodTime}} hodina) na pokročilé kredity. Snažíme sa získať pre vás viac kreditov. Nové kredity budú dostupné o {{resetTime}}. Potrebujete viac teraz? Skúste booster balíček!",
+    "errSiderUserBanned": "Váš účet bol pozastavený z dôvodu zistenia neobvyklej aktivity (napr. porušenie pravidiel alebo zdieľanie účtu). Ak máte akékoľvek otázky, pošlite nám e-mail na adresu care@sider.ai s podrobnosťami o vašom účte.",
+    "errTrySiderAPI": "Skontrolujte svoje <a>vlastné nastavenia API</a>.",
+    "errTrySiderAPI2": "<a>Prepnite na Sider</a> pre spoľahlivý prístup (týmto sa začne nový chat).",
+    "errTrySiderAPI2NonChat": "<a>Prepnite na Sider</a> pre spoľahlivý prístup.",
+    "errTrySiderAPI3": "<a>Kontaktujte podporu</a> pre pomoc.",
+    "failToPlay": "Nepodarilo sa prehrať",
+    "featureBrowserLimit": "Táto stránka nepodporuje rozšírenia prehliadača. Obmedzené stránky zvyčajne zahŕňajú nové karty, webový obchod, iné rozšírenia a nastavenia (chrome:// URL). Skúste prosím namiesto toho bežnú stránku.",
+    "featureLimit": "Limit funkcií",
+    "featureLimitTip": "Inovujte, aby ste mohli používať Claude a Bard.",
+    "featureUnavailableOnPage": "Nemožno spustiť na tejto stránke",
+    "fetchFailed": "Obrázok sa nepodarilo získať. Môžete ho stiahnuť a manuálne ho nahrať.",
+    "fileLimit": "Na spracovanie tohto súboru prosím povolte nástroj na pokročilú analýzu dát. Stojí 1 pokročilý kredit za použitie. Chcete ho povoliť a pokračovať?",
+    "fileLimitFree": "Váš nahraný súbor vyžaduje pokročilú analýzu dát na spracovanie. Pre odomknutie tejto funkcie vykonajte upgrade.",
+    "fileSizeLimit": "Súbor je príliš veľký",
+    "fileSizeLimitTip": "Súbor prekračuje limit pre nahrávanie 100MB. Prosím, znížte veľkosť súboru a skúste to znovu.",
+    "fileSizeTip": "Maximálna veľkosť: 100MB každý. Až 5 súborov.",
+    "fiveStart": "Dajte nám 5 hviezdičiek",
+    "functionCallError": "Ospravedlňujeme sa, aktuálny model narazil na internú chybu pri generovaní odpovede. Prosím, prepnite na iný model a skúste to znova.",
+    "getApiKeyGuide": "Aby to fungovalo, potrebujete kľúč OpenAI API. Ak chcete získať kľúč API, postupujte podľa nášho sprievodcu.",
+    "getMoreGPT4": "Získajte viac pokročilých kreditov",
+    "goToSignIn": "Prejdite na prihlásenie",
+    "imageSizeLimit": "Obmedzenie obrázkov",
+    "imageSizeLimitTip": "Uistite sa, že obrázok je menší ako 10 MB a jeho šírka alebo výška nepresahuje 4 096 pixelov, potom skúste znova.",
+    "invalidApiKey": "Kľúč API je neplatný, získajte iný.",
+    "invitedRewardObtained": "Získané odmeny!",
+    "invitedWelcome": "Vitajte! GPT kredity boli pridané na váš účet!",
+    "inviteEarn": "Získajte <mx>{{num}} kreditov</mx> pre vás a vašich priateľov. <b>Čím viac odporúčate, tým viac získavate</b>.",
+    "inviteFriendJoin_one": "{{count}} priateľ sa pridal",
+    "inviteFriendJoin_other": "{{count}} priatelia sa pridali",
+    "inviteStep1": "Odporučte svojim priateľom odkaz na pozvánku",
+    "inviteStep2": "Vaši priatelia sa prihlásia",
+    "inviteStep3": "Inštalujú rozšírenie a prihlásenie. Získané odmeny!",
+    "inviteTitle": "Pozvanie a odmeny",
+    "iosDownload": "Stiahnuť aplikáciu pre iOS / Android",
+    "keepConversationTip": "Pri každom otvorení Sider sa začne nový chat. Ak chcete pokračovať v poslednom chate, upravte <a>nastavenia</a>.",
+    "localFileAccessRequiredBtn": "Prejsť do nastavení rozšírenia",
+    "localFileAccessRequiredDesc": "Ak chcete používať rozšírenie s lokálnymi súbormi, prejdite do nastavení rozšírenia a zapnite \"<b>Povoliť prístup k URL súborov</b>\".",
+    "localFileAccessRequiredTitle": "Vyžaduje sa prístup k súborom",
+    "loginAndCloudflareCheck": "Prepnite na <a>Sidebar API</a> a získajte stabilný prístup ALEBO sa prihláste a prejdite kontrolou Cloudflare na <i>chat.openai.com</i>",
+    "maxFileSize": "Maximálna veľkosť súboru je {{size}}",
+    "maxSize": "Maximálna veľkosť: {{num}}",
+    "modelError": "Server je zaneprázdnený. Skúste to prosím neskôr, alebo prepnite na iný model.",
+    "nameYourPrompt": "Pomenujte výzvu",
+    "nameYourTitle": "Pomenujte konverzáciu",
+    "noSubtitleMsg": "Video nemá titulky a nemôže byť zhrnuté.",
+    "noSubtitleTitle": "Pre zhrnutie je potrebný titulok",
+    "notSupportFile": "Nepodporovaný formát súboru",
+    "notSupportLiveVideo": "Živé zhrnutie videa momentálne nie je podporované.",
+    "notValidEmail": "nie je platný e-mail",
+    "onlyOneRequest": "Aktívna požiadavka prebieha",
+    "onlyOneRequestDesc": "Váš účet má aktívnu požiadavku - iba jedna požiadavka naraz. Prosím, skúste to znova neskôr.",
+    "openLastConversationCancel": "Rozumiem",
+    "openLastConversationContent": "Teraz môžeme nastaviť, či sa bude bočný panel obnovovať pri každom spustení posledného rozhovoru.",
+    "openLastConversationOk": "Prejsť do nastavení",
+    "openLastConversationTitle": "Otvoriť posledný rozhovor?",
+    "promptNameRequired": "Vyžaduje sa názov výzvy.",
+    "promptTplRequired": "Vyžaduje sa rýchly obsah.",
+    "quotaModelContent": "Dosiahli ste limit dotazov GPT-4/Claude-2. Inovujte na prémiový plán pre viac prístupu, alebo pozvite priateľov na získanie zdarma extra kreditov.",
+    "reEnableInSettings": "Môžete ho znova povoliť v <a>Nastaveniach</a>",
+    "restorePromptWarn": "Chcete obnoviť túto šablónu výzvy?",
+    "searchNotFound": "Nenašli sa žiadne výsledky",
+    "selectModel": "Vyberte platný model",
+    "signinAward": "Prihláste sa a získajte {{num}} <span>ZADARMO</span> kredity denne",
+    "signinAward2": "Kredity pre neprihláseného používateľa boli vyčerpané. Môžete sa prihlásiť a získať <b>{{num}} zdarma kredity denne</b>.",
+    "signinAward3": "Prihláste sa a získajte viac kreditov denne",
+    "signinAward4": "Vydajte sa na magickú AI cestu so svojím prehliadačom a získajte {{num}} <span>ZADARMO</span> kredity denne",
+    "signinFeature": "Prosím, prihláste sa pre prístup k tejto funkcii",
+    "signInRequired": "Vyžaduje sa prihlásenie",
+    "signinTips": "Prihláste sa na synchronizáciu výziev a nastavení",
+    "somethingWrong": "Niečo sa pokazilo. Skúste to prosím neskôr znova.",
+    "somethingWrong2": "Niečo sa pokazilo.",
+    "supportedFileFormat": "Podporované formáty súborov sú {{formats}}",
+    "switchBarTip": "Rozšírením bočného panela pripnete navigačnú lištu.",
+    "switchRequired": "Prepnúť na {{APP_NAME}}?",
+    "switchToSiderApiToContinue": "Táto funkcia momentálne podporuje iba režim API {{APP_NAME}}. Ak chcete pokračovať, <a>prepnite na {{APP_NAME}} API</a>.",
+    "switchToSiderDesc": "Ak chcete použiť túto funkciu, prosím, zmeňte spôsob prístupu k AI na {{APP_NAME}}.",
+    "thankForFeedback": "Ďakujem. Formulár bol úspešne odoslaný. Čoskoro vás budeme kontaktovať.",
+    "titleRequired": "Vyžaduje sa názov.",
+    "ttsChangeVoiceTip": "Oznámenie o odpočítaní kreditov",
+    "ttsChangeVoiceTipDesc": "Prepnúť na iný hlas znova odpočíta kredity. Ste si istí, že chcete pokračovať?",
+    "ttsCharacterLimit": "Dosiahnutý limit znakov",
+    "ttsCharacterLimitDesc": "AI Čítanie nahlas má limit {{count}} znakov. Vyberte kratší text alebo použite voľný hlas.",
+    "ttsCharacterLimitDesc2": "Táto správa je príliš dlhá na to, aby ju AI hlasy prečítali. Namiesto toho môžete použiť voľný hlas.",
+    "ttsChooseVoice": "Vyberte hlas",
+    "ttsChooseVoiceLater": "Toto môžete zmeniť neskôr.",
+    "ttsCreditLimit": "Nedostatok základných kreditov",
+    "ttsCreditLimitDesc": "Nemáte dostatok základných kreditov pre tento hlas. Upgradujte svoj plán alebo použite voľný hlas.",
+    "unreadableMsg": "Na tejto stránke nie je možné nájsť hlavný obsah. Skúste inú stránku.",
+    "unreadableTitle": "Chýba hlavný obsah",
+    "updateExtTips": "Aktualizujte svoju Sider rozšírenie, aby ste mohli používať túto funkciu",
+    "upgradeSupport": "Inovujte na prémiový plán, aby ste nás podporili",
+    "upgradeSupport2": "Vylepšenie pre viac funkcií",
+    "uploadFailed": "Nahrávanie súboru \"{{FILENAME}}\" zlyhalo.",
+    "useUpUpgrade": "Vaše kredity boli vyčerpané, prosím inovujte na získanie viac kreditov.",
+    "videoTooLang": "Video je príliš dlhé (maximálne 10 hodín). Prosím, vyberte kratšie video.",
+    "writeSomething": "Prosím napíšte niečo."
+  },
+  "multiFileChat": "Chat s viacerými súbormi v {{WISEBASE}}",
+  "myAccount": "Môj účet",
+  "myChats": "Moje chaty",
+  "myHighlights": "Moje zvýraznenia",
+  "newFeature": "Nová funkcia!",
+  "newPlan": "Nový plán",
+  "next": "Ďalej",
+  "NoFiles": "V tomto čete nie sú žiadne nedávne súbory",
+  "noReasoningModelTip": "Rozšírené premýšľanie cez DeepSeek R1. Stojí 1 extra pokročilý kredit/dotaz.",
+  "notDistinguish": "Nerozlišovať",
+  "notDistinguishDesc": "1 pokročilý kredit / 10 minút",
+  "notNotifyAgain": "Neupozorňovať znova",
+  "notNow": "Teraz nie",
+  "ocrEmptyMsg": "Prepáčte, nemôžem nájsť text na tomto obrázku.",
+  "OCRPanel": {
+    "aiOCRTips": "AI OCR môže robiť chyby",
+    "dragImgTips": "Kliknite na nahranie alebo sem presuňte obrázok na extrahovanie textu",
+    "noText": "Nebol rozpoznaný žiadny text",
+    "ocrCost": "Každý {{name}} bude stáť {{num}} základný kredit",
+    "ocrTips": "Extrahujte text, čísla a rovnice z obrázka"
+  },
+  "ok": "OK",
+  "openAnswerCompare": "Porovnanie vedľa seba",
+  "openSidebar": "Otvoriť bočný panel",
+  "openTabs": "Vybrať z otvorených kariet",
+  "optimizeWith": "Optimalizujte s {{NAME}}",
+  "optionPage": {
+    "activateContextMenu": "Otvoriť rýchlu otázku",
+    "addASite": "Pridať stránku",
+    "addNewTplForSearch": "Pridajte novú šablónu výzvy",
+    "addNewTplForSidebar": "Pridať novú šablónu výzvy",
+    "apiFreeGuide": "Ak chcete získať kľúč API, postupujte podľa pokynov.",
+    "apiKeyGpt4Tip": "Rozšírenie podporuje GPT-4, ak zadáte kľúč API GPT-4.",
+    "apiKeyGuideTip": "Kliknite na [Nastaviť] pre pridanie API kľúča.",
+    "apiKeyLocally": "Váš API kľúč je uložený lokálne vo vašom prehliadači a nikdy nie je odoslaný inde. <b>Poznámka:</b> Niektoré funkcie sú z technických dôvodov obmedzené na režim {{APP_NAME}}.",
+    "apiKeyProvider": "Oficiálne API OpenAI je stabilnejšie a poplatky sú založené na používaní.",
+    "apiKeyProviderTip": "(Pre vývojárov s kľúčom API)",
+    "apiKeyTip1": "Platnosť vášho bezplatného kľúča OpenAI API možno vypršala. <a>Skontrolujte stav vypršania platnosti kľúča API tu.</a>",
+    "apiKeyTip2": "Ak použijete bezplatný kľúč OpenAI API, prístup k ChatGPT nemusí byť stabilný, keď sa stretne s vysokým dopytom.",
+    "autoQuoteSelectedText": "Automaticky citovať vybraný text v vstupnom poli",
+    "autoQuoteSelectedTextTip": "Keď je zapnuté, vybraný text sa automaticky objaví vo vstupnom poli pre rýchle akcie",
+    "customModelName": "Použiť vlastné meno modelu",
+    "defaultSpeed": "Predvolená rýchlosť",
+    "defaultVoice": "Predvolený hlas",
+    "disabledSites": "Zakázané na stránkach",
+    "displayLanguage": "Jazyk zobrazenia",
+    "displayMode": "Režim zobrazenia",
+    "displaySearchRes": "Zobrazte odpoveď ChatGPT vedľa stránok s výsledkami vyhľadávania",
+    "displayWhenSelect": "Zobraziť, keď je vybratý text",
+    "easiestWayUse": "Najjednoduchší spôsob používania aplikácie {{APP_NAME}}",
+    "editSearchTplPlaceholder": "{{keywords}} v obsahu výzvy budú automaticky nahradené vašimi vyhľadávacími kľúčovými slovami",
+    "editSearchTplTip": "použite {{keywords}} na sprostredkovanie vašich kľúčových slov pre vyhľadávanie",
+    "editSidebarTplTip": "Sem vložte alebo vložte obsah",
+    "feedbackTypes": {
+      "bug": {
+        "detail": {
+          "label": "Podrobnosti o probléme",
+          "tip": "Podrobne popíšte, čo sa pokazilo, aké kroky ste vykonali a chybové hlásenia, ktoré sa vám zobrazili."
+        },
+        "name": "Správa o probléme",
+        "title": {
+          "label": "Zhrnutie problému",
+          "tip": "Dajte nám pár slovami vedieť, čo sa pokazilo."
+        }
+      },
+      "fr": {
+        "detail": {
+          "label": "Popis",
+          "tip": "Uveďte podrobný popis novej funkcie, ktorú chcete."
+        },
+        "name": "Požiadavka funkcie",
+        "title": {
+          "label": "Názov",
+          "tip": "Čoho sa týka tvoja žiadosť?"
+        }
+      }
+    },
+    "fontSizeAutoTip": "Automatické prispôsobenie podľa šírky bočného panela",
+    "fontSizeOptions": {
+      "large": "Veľké",
+      "regular": "Bežné"
+    },
+    "fontSizeTip": "Len pre text správy",
+    "fontSizeTitle": "Veľkosť písma pre správu",
+    "GPT4Desc": "Musíte zostať prihlásení do svojho účtu ChatGPT na webovej stránke. Stabilita môže byť nekonzistentná pre používateľov Plus aj pre bezplatných používateľov kvôli obmedzeniu OpenAI.",
+    "hideThinkingAfterFinish": "Zbaliť premýšľanie po dokončení",
+    "hideThinkingAfterFinishTip": "Zbaliť blok premýšľania po dokončení premýšľania",
+    "howToAccess": "Ako získať prístup k ChatGPT a používať ho kdekoľvek",
+    "howToAccessTip": "Aby sme sa uistili, že AI je prístupná pre každého, poskytujeme 3 spôsoby, ako získať prístup k ChatGPT a používať ho kdekoľvek.",
+    "importantReminders": "Dôležité pripomienky",
+    "invalidShortcutTip": "Zahrnúť {{key1}}, {{key2}}, alebo {{key3}}",
+    "launchSidebar": "Otvoriť bočný panel",
+    "linkToSetting": "Zmeniť umiestnenie bočného panela v nastaveniach prehliadača",
+    "loginFirst": "Najprv sa prihláste.",
+    "loginFirstTip": "Prihláste sa, aby ste mohli začať používať Sider a získavať každý deň bezplatné kredity.",
+    "messageStreamEffect": "Efekt správy",
+    "messageStreamEffectOptions": {
+      "classic": "Klasický",
+      "fadeIn": "Postupné zobrazenie"
+    },
+    "messageStreamEffectTip": "Efekt prúdu na zobrazenie prichádzajúcich správ chatu naživo, ako prichádzajú",
+    "noSiteAdded": "Žiadne stránky neboli pridané",
+    "openNewChat": "Začať nový chat",
+    "ownURL": "Použiť moju vlastnú URL",
+    "promptManage": {
+      "checkPrompt": "Skontrolujte výzvu",
+      "deletePromptWarn": "Odstrániť túto výzvu?",
+      "editPrompt": "Výzva na úpravu",
+      "hideFromList": "Skryť zo zoznamu",
+      "howToExample": "Na vytvorenie prehľadu, ktorý obsahuje názvy, kapitoly a podsekcie, použite nasledujúce témy alebo kľúčové slová.\nVytlačte ho vo formáte Markdown. Dajte mi len výstup a nič iné. Náčrt by mal byť v jazyku {{lang}}.\nTémy alebo kľúčové slová: {{content}}",
+      "howToVar1": "Túto premennú môžete použiť na reprezentáciu vstupu alebo vybraného obsahu. Ak výzva neobsahuje túto premennú, vstup alebo vybraný obsah bude uzavretý v trojitých úvodzovkách a umiestnený na samom konci výzvy.",
+      "howToVar2": "Túto premennú môžete použiť na vyjadrenie jazyka, ktorý chcete použiť pre výstup, na základe predvoleného jazyka nastaveného v nastaveniach.",
+      "howToVarTitle": "Aké premenné môžu byť zahrnuté do výzvy?",
+      "howToWritePrompt": "Ako napísať výzvu",
+      "newPrompt": "Nová výzva",
+      "noPrompts": "Žiadne výzvy tu",
+      "promptTabChatDesc": "Výzvy v 'Zobraziť v zozname' sa objavujú vo funkcii {{name}}.",
+      "promptTabReadDesc": "Výzvy v 'Zobraziť v zozname' sa objavujú v {{name}} pre text stránky.",
+      "promptTabWriteDesc": "Výzvy v 'Zobraziť v zozname' sa objavujú v {{name}} pre vstupné polia.",
+      "showInList": "Zobraziť v zozname"
+    },
+    "promptTplForSearch": "Šablóna výzvy pre Google a iné vyhľadávače",
+    "providerAPIKeyDesc": "Ideálne pre tých, ktorí majú API kľúč: stabilné, cenovo výhodné na základe používania",
+    "providerPartTitle": "Prístup k AI",
+    "providerSiderDesc": "Poháňané oficiálnymi API popredných modelov, rýchle a spoľahlivé",
+    "providerSiderTip": "{{APP_NAME}} vám poskytuje rýchly a spoľahlivý prístup k popredným AI modelom od OpenAI, DeepSeek, Anthropic, Google a ďalších—všetko prostredníctvom oficiálnych API na jednej platforme. Odomknite najnovšie AI inovácie na dosah ruky!",
+    "providerWebappDesc": "Môže byť nestabilné kvôli zmenám politiky OpenAI",
+    "providerWebappTip": "Skúsenosti sa môžu líšiť pre návštevníkov a prihlásených používateľov kvôli obmedzeniam OpenAI.",
+    "quickAction": {
+      "customPromptMenu": "Spravovať výzvy pre {{name}}",
+      "desc": "{{name}} poskytuje rýchle akcie pre vybraný text na webovej stránke (čítanie) alebo v vstupnom poli (písanie).",
+      "displayOnSelect": "keď je text vybraný",
+      "displayOnShortcut": "keď je text vybraný a stlačené {{key}}",
+      "mainSwitchTitle": "Zobraziť {{name}}"
+    },
+    "recommend4all": "(Odporúčané pre každého)",
+    "recommended": "Odporúčané",
+    "restoreDefault": "Obnoviť predvolené",
+    "scrollingBehavior": "Správanie pri posúvaní pre dlhé odpovede",
+    "sendingMsgBehavior": "Správanie po odoslaní správy v chate",
+    "sendingMsgBehaviorOptions": {
+      "bottom": "Automaticky posunúť na koniec odpovede",
+      "messageTop": "Pozastaviť posúvanie, keď odpoveď dosiahne vrch"
+    },
+    "sendMessage": "Odoslať správu",
+    "serviceProvider": "Poskytovateľ služby",
+    "shortcutInUseTip": "Už sa používa, skúste iné",
+    "showSelectedTextDesc": "Automaticky zobrazovať vybraný text ako citát v poli pre vstup pre rýchle akcie s výzvami",
+    "showSelectedTextTip": "Ak nechcete automaticky zobrazovať vybraný text, vypnite to v <a>nastaveniach bočného panela</a>.",
+    "showSelectedTextTitle": "Automatické zobrazenie vybraného textu v poli pre vstup",
+    "sidebarDisplayOption": "Režim zobrazenia bočného panela",
+    "sidebarDisplayOptions": {
+      "expand": "Rozširujúce sa",
+      "overlay": "Prekrytie"
+    },
+    "sidebarDisplayOptionTip": "Vyberte spôsob zobrazenia bočného panela na stránke",
+    "sidebarIcon": "Ikona bočného panela",
+    "sidebarIconAccess": "Prejdite na bočný panel pomocou ikony umiestnenej v pravom dolnom rohu stránky. Potiahnutím ho môžete posúvať nahor a nadol",
+    "sidebarLeftOrRight": "Umiestnite bočný panel na ľavú alebo pravú stranu",
+    "sidebarLocation": "Umiestnenie bočného panela",
+    "sidebarOnStartup": "Pri otvorení bočného panela",
+    "sidebarOnStartupAutoTip": "Ak sa chat otvorí do 10 minút, pokračuje; ak po 10 minútach, začne nový chat",
+    "sidebarOnStartupOptions": {
+      "auto": "Automatické obnovenie alebo reštart",
+      "last": "Vždy obnoviť posledný chat",
+      "new": "Vždy začať nový chat"
+    },
+    "sidebarOnStartupTip": "Nakonfigurujte režim zobrazenia rozhrania chatu pri otvorení bočného panela",
+    "sidebarProvider": "Bočný panel využíva rozhranie ChatGPT Premium API na zabezpečenie stabilného prístupu.",
+    "sidebarProviderGoPremium": "Ponúkame {{num}} zdarma denné kredity, aby sme zaručili prístup k AI pre všetkých. <a>Inovujte na prémiovú verziu</a> a zvýšte svoj denný limit kreditov a podporte našu misiu <b>poskytovať univerzálnu AI pre každého</b>.",
+    "sidepanelLeftOrRight": "Umiestnite bočný panel na ľavú alebo pravú stranu. Bočný panel je k dispozícii iba v prehliadači Google Chrome 114 alebo novšej verzii.",
+    "sidepanelLocation": "Umiestnenie bočného panela",
+    "sidepanelPosition": "Pozícia bočného panela",
+    "sidepanelPositionTip": "Pre Chrome 114 alebo vyšší, možno zmeniť len v nastaveniach prehliadača",
+    "siderIcon": "Ikona {{APP_NAME}}",
+    "siderIconDisplay": "Vždy zobrazovať ikonu {{APP_NAME}} na stránke",
+    "siderIconDisplayTip": "Keď je zapnuté, ikona {{APP_NAME}} sa objaví v pravom dolnom rohu a môže byť presunutá",
+    "translatePage": "Preložiť stránku",
+    "webappGPT4": "(Používatelia služby ChatGPT Plus to môžu vyskúšať)",
+    "webappReminder1": "Zostaňte prihlásení do svojho účtu.",
+    "webappReminder2": "Táto služba môže byť nestabilná kvôli zmenám politiky OpenAI. Pre rýchly a stabilný výkon odporúčame používať {{APP_NAME}}.",
+    "webappTip1": "Ak ste používateľom ChatGPT Plus, teraz máte možnosť vybrať si GPT-4. OpenAI však môže obmedziť počet správ, ktoré môžete odoslať za deň.",
+    "webappTip2": "Prosím <m>Pripnite si kartu ChatGPT</m> a zostaňte prihlásený/-á na webovej stránke ChatGPT. To však nemusí zaručiť stabilitu. Ak narazíte na nejaké problémy, navštívte <v>webovú lokalitu ChatGPT </v>a obnovte stránku.",
+    "webAssistant": {
+      "code": {
+        "desc": "Keď je zapnutý, {{APP_NAME}} vám môže pomôcť vysvetliť kódy na webovej stránke",
+        "title": "Kódový asistent"
+      },
+      "image": {
+        "desc": "Keď je zapnuté, môžete rýchlo pristupovať k nástrojom AI pre obrázky prechádzaním nad akýmkoľvek obrázkom",
+        "title": "Asistent obrázkov"
+      },
+      "linkPreview": {
+        "autoSummarize": "Automatické zhrnutie",
+        "collapse": "Zbaliť",
+        "guideTipDesc": "Presuňte odkaz na náhľad bez opustenia stránky. Vypnite v <link>nastaveniach</link>, ak nie je potrebné.",
+        "guideTipTitle": "Efektívne prezeranie odkazov",
+        "openInNewTab": "Otvoriť v novej karte",
+        "pageLoadFailed": "Načítanie stránky zlyhalo",
+        "summarizeNotSupported": "Táto stránka nepodporuje zhrnutie.",
+        "viewSummary": "Zobraziť zhrnutie"
+      },
+      "qa": {
+        "desc": "Keď je aplikácia {{APP_NAME}} zapnutá, môže odpovedať na otázku na stránkach Quora, StackOverflow a ďalších stránkach kontroly kvality",
+        "title": "Asistent otázok a odpovedí"
+      },
+      "video": {
+        "BilingualDesc": "<b>Dvojjazyčné titulky</b>: Keď je povolené, {{APP_NAME}} automaticky zobrazí titulky pri sledovaní videí na YouTube",
+        "SummaryDesc": "<b>Zhrnutie videa</b>: Keď je povolené, {{APP_NAME}} vám môže pomôcť zhrnúť videá na YouTube",
+        "title": "YouTube Asistent"
+      }
+    },
+    "webAsstAISitesDesc": "Zobraziť tlačidlo \"Porovnať s\" na {{url}}",
+    "webAsstAISitesTitle": "Porovnajte modely na ChatGPT",
+    "webAsstCodeDesc": "Zobraziť tlačidlo Vysvetliť kód na blokoch kódu",
+    "webAsstCodeTitle": "Pre kód",
+    "webAsstEmailDesc": "Zobraziť tlačidlo AI odpovede v Gmaili",
+    "webAsstEmailTitle": "Pre email",
+    "webAsstImageDesc": "Zobraziť AI nástroje pri prechode myšou nad obrázkom",
+    "webAsstImageTitle": "Pre obrázky",
+    "webAsstInputBoxDesc": "Zobraziť bodku v vstupnom poli na zlepšenie písania",
+    "webAsstInputBoxTitle": "Vstupné pole",
+    "webAsstLinkPreviewDesc": "Zobraziť okno náhľadu odkazu pri ťahaní odkazu.",
+    "webAsstLinkpreviewExampleLink": "Toto je zabezpečený odkaz, skúste ho presunúť, aby ste videli okno s náhľadom",
+    "webAsstLinkPreviewTitle": "Pre náhľady odkazov",
+    "webAsstQADesc": "Zobraziť tlačidlo Odpoveď na stránkach s otázkami a odpoveďami",
+    "webAsstQATitle": "Pre Q&A stránky",
+    "webAsstRecordShortCutSitesDesc": "Zobraziť panel Rýchleho záznamu v Google stretnutí a Teams",
+    "webAsstRecordShortCutSitesTitle": "Pre stretnutia",
+    "webAsstSearchDesc": "Zobraziť odpoveď AI vedľa výsledkov vyhľadávania",
+    "webAsstSearchTitle": "Pre vyhľadávanie",
+    "webAsstTranslationSitesDesc": "Zobraziť tlačidlo \"Porovnať s\" na Google Translate",
+    "webAsstTranslationSitesTitle": "Porovnať modely na Google Translate",
+    "webAsstVideoBilingualDesc": "Zobraziť dvojjazyčné ovládanie na YouTube",
+    "webAsstVideoSummaryDesc": "Zobraziť panel so zhrnutím na YouTube",
+    "webAsstYoutubeTitle": "Pre YouTube",
+    "whenSidebarReopens": "Keď sa bočný panel znovu otvorí",
+    "whenToAsk": "Kedy sa opýtať ChatGPT",
+    "wrongSiteTip": "Neplatná URL: Skontrolujte URL a skúste to znova."
+  },
+  "options": {
+    "shortcut": {
+      "tips": "Napíšte skratku"
+    },
+    "sidebarLocation": {
+      "left": "ľavá strana",
+      "right": "pravá strana"
+    },
+    "sidebarMode": {
+      "inpage": "Bočný panel na stránke",
+      "sidepanel": "Pevný bočný panel"
+    },
+    "sidebarModeTip": {
+      "inpage": "Pri prepínaní kariet Sider nezostane na displeji; musíte znova otvoriť bočný panel na novej stránke.",
+      "sidepanel": "Pri prepínaní kariet zostane Sider vždy fixovaný na pravej strane prehliadača."
+    },
+    "sidebarPromptTpl": {
+      "explain": {
+        "template": "Vysvetlite nasledujúci obsah:",
+        "title": "Vysvetlite"
+      },
+      "explain-codes": {
+        "template": "Vysvetlite nasledujúce kódy:",
+        "title": "Vysvetlite kódy"
+      },
+      "translate": {
+        "template": "Preložte nasledujúci obsah do jazyka {{lang}}:",
+        "title": "Preložiť"
+      }
+    },
+    "theme": {
+      "auto": "automatické",
+      "dark": "tmavý režim",
+      "light": "jasný režim"
+    },
+    "title": "Možnosti",
+    "triggerMode": {
+      "always": {
+        "desc": "Vždy",
+        "title": "Vždy"
+      },
+      "manually": {
+        "desc": "Keď je kliknuté na tlačidlo odpovede",
+        "title": "Manuálne"
+      },
+      "questionMark": {
+        "desc": "Keď dotaz končí otáznikom",
+        "title": "Otáznik"
+      }
+    }
+  },
+  "OR": "ALEBO",
+  "orTakeAction": "Alebo vykonajte iné kroky:",
+  "otherModels": "Iné modely",
+  "pageTranslation": {
+    "aiTranslator2": "AI Prekladač",
+    "aiTranslatorFunDesc1": "Zachytáva zámer aj tón, ide hlbšie než len doslovný preklad",
+    "aiTranslatorFunDesc2": "Prekladajte s jasnosťou a presnosťou, zabezpečte, aby sa žiadne detaily nestratili",
+    "aiTranslatorFunTitle1": "Porozumenie kontextu",
+    "aiTranslatorFunTitle2": "Presný preklad",
+    "autoDetect": "Automatická detekcia",
+    "autoTrans": "Automatický preklad",
+    "autoTrans2": "Automaticky prekladať webové stránky",
+    "autoTrans2Desc": "Keď je vypnuté, kliknite na tlačidlo prekladu alebo použite skratku",
+    "demoText": "ChatGPT je poháňaný modelom Transformer, hlbokým učením navrhnutým pre spracovanie prirodzeného jazyka, ktorý obsahuje sebapozornosť a dopredné neurónové siete.",
+    "displayMode": "Režim zobrazenia",
+    "displayModes": [
+      "Dvojjazyčný",
+      "Iba preklad"
+    ],
+    "displayStyle": "Štýl zobrazenia",
+    "displayStyleDesc": "Iba pre preklady v režime dvojjazyčného porovnania",
+    "displayStyles": [
+      "Žiadny",
+      "Podčiarknuť",
+      "Oslabiť"
+    ],
+    "free": "Zdarma",
+    "neverTransSite": "Nikdy neprekladať túto stránku",
+    "neverTransSites": "Nikdy neprekladať tieto stránky",
+    "newAITranslationTip": "Preklad stránky pomocou AI je teraz dostupný! Kliknite sem a nastavte ho.",
+    "pageTranslation": "Preložiť túto stránku",
+    "reTrans": "Preložiť znova",
+    "showOriginal": "Zobraziť pôvodný text",
+    "source": "Zdrojový jazyk",
+    "target": "Cieľový jazyk",
+    "title": "Preklad stránky",
+    "transAgain": "Preložiť znova",
+    "translateService": "Prekladateľská služba",
+    "translateServiceTip": "AI preklad stojí základné kredity na základe dĺžky obsahu.",
+    "transSettings": "Nastavenia prekladu"
+  },
+  "painterOnBoardingTip": "Kliknite sem pre vytvorenie a úpravu obrázkov s umelou inteligenciou",
+  "pasteSelection": "Výber prilepenia",
+  "pasteTextPage": "Prilepte text zo stránky",
+  "pause": "Pauza",
+  "pdfOnBoardingTip": "Kliknite sem pre ChatPDF",
+  "personalization": "Personalizácia",
+  "phoneNumber": "Telefónne číslo",
+  "pin": "pin up",
+  "pinExt": "Pin rozšírenie",
+  "planNames": {
+    "basic": "Základný plán",
+    "free": "Bezplatný plán",
+    "pro": "Pro plán",
+    "starter": "Štartovací plán",
+    "ultra": "Neobmedzený plán"
+  },
+  "play": "Prehrať",
+  "popupPage": {
+    "chatNow": "Chatujte teraz",
+    "desc": "Aktuálna stránka je jedinečná stránka a funkcia bočného panela nie je dostupná. Môžete však otvoriť celú stránku a chatovať!",
+    "thank": "Ďakujeme, že používate rozšírenie {{APP_NAME}}!"
+  },
+  "poweredByGPTImage": "Poháňané GPT-image-1",
+  "prev": "Predchádzajúci",
+  "preview": "Náhľad",
+  "pricePerDay": "Menej ako {{num}}/deň",
+  "pricePerMonth": "{{price}}/mes",
+  "producthuntPromote": {
+    "ios1Banner1": "Hlasujte za ChitChat - ChatGPT iOS aplikáciu 🎉",
+    "ios1Banner2": "Rozbehnime veci naplno! 😄",
+    "ios1ModalDesc": "• Získajte odpovede zo služby ChatGPT 3.5 a 4\n• Podporný tím robotov vám pomáha na jednom mieste\n  • Premeňte svoj PDF na chatbota",
+    "ios1ModalTitle": "✨ Novinka v aplikácii ChitChat pre iOS",
+    "sidebar2Banner1": "Hlasujte za nás v <b>Hľadaní produktov</b> TERAZ, aby ste o tom informovali.",
+    "sidebar2ModalDesc": "• Karta Chat\n  • Rýchle vyhľadávanie pre rýchle dotazy\n  • Účet na synchronizáciu výziev\n  • Ukladať a zdieľať chaty\n  • Podpora viacerých jazykov\n  • Podpora GPT-4",
+    "sidebar2ModalTitle": "✨ Zhrnutie bočného panela 2.0",
+    "voteBtn": "Hlasujte o produkte Hunt"
+  },
+  "productivity": "Produktivita",
+  "promotePreset": {
+    "anni2025Countdown": "Veľký výpredaj: <b>Ostáva {{time}}</b>",
+    "blackFridayCountdown": "Black Friday: <b>Ostáva {{time}}</b>",
+    "halloweenCardDesc": "Odomknite strašidelné úspory",
+    "halloweenCardDesc2": "Užite si {{price}} ZĽAVU",
+    "halloweenCardTitle": "Halloweensky zľavový kupón",
+    "halloweenCardTitle2": "Získajte halloweensku pochúťku",
+    "halloweenCountdown": "Strašidelná ponuka: <b>{{time}} zostáva</b>",
+    "halloweenCountdown2": "{{price}} ZĽAVA: <b>{{time}} zostáva</b>",
+    "macContent": "S nadšením oznamujeme, že Sider je teraz k dispozícii pre používateľov počítačov Mac! Vychutnajte si bezproblémové a efektívne prostredie prispôsobené len pre Mac spolu so všetkými výkonnými funkciami, ktoré máte radi z našej webovej verzie.",
+    "macContent2": "Aplikácia {{APP_NAME}} je teraz k dispozícii pre Mac!",
+    "macDownload": "Stiahni teraz!",
+    "macTitle": "{{APP_NAME}} pre Mac",
+    "phContent": "Venujte chvíľu na podporu nás hlasovaním na <i>Product Hunt</i>—je to rýchle, jednoduché a veľmi nám to pomôže!",
+    "phContent2": "Hlasujte za nás v <b>Hľadaní produktov</b>",
+    "phFeatures1": "<b>Miniaplikácie ChatGPT</b>: Píšte, extrahujte text z obrázkov, kontrolujte gramatiku a prekladajte, všetko na jednom mieste.",
+    "phFeatures2": "<b>Sider Vision</b>: Rozprávajte sa o obrázkoch pomocou GPT-4 Vision, čím posúvate konverzáciu AI na ďalšiu úroveň.",
+    "phFeatures3": "<b>Skupinový chat AI</b>: Spojte sa s ChatGPT, GPT-4, Claudom a Bardom v jednom prelomovom skupinovom chate.",
+    "phFeatures4": "<b>Všetci sme uši</b>: Vaša spätná väzba formuje Sider – podeľte sa o svoje myšlienky, počúvame!",
+    "phTitle": "Radi používate naše rozšírenie?",
+    "phTitle2": "Verzie Sider 3.X sme spustili na <i>Hľadanie produktov</i>.",
+    "phVote": "Hlasujte teraz!",
+    "phVote2": "Hlasujte za <i>Hľadanie produktov</i>",
+    "phVoteTips": "<b>Dnešné hlasovanie je kľúčové</b> – podporte nás!",
+    "xmasCountdown": "Výpredaj na konci roka: <b>Zostáva {{time}}</b>"
+  },
+  "prompt": "Výzva",
+  "promptContent": "Prompt Content",
+  "PromptManage": "Správa výziev",
+  "promptManage": "Prompt Manager",
+  "promptName": "Meno výzvy",
+  "prompts": "Výzvy",
+  "publish": "Zverejniť",
+  "publishArtifact": "Zverejniť artefakt",
+  "published": "Zverejnené",
+  "publishing": "Publikovanie",
+  "queryNames": {
+    "advanced": "Pokročilý",
+    "fast": "Základný",
+    "image": "Obrázok",
+    "reader": "Čitateľ"
+  },
+  "quickAction": "Kontextové menu",
+  "quickActions": {
+    "askAI": "Opýtajte sa {{name}}",
+    "continueImproving": "Pokračujte v zlepšovaní",
+    "defaultPlaceholder": "Spýtajte sa aplikácie {{APP_NAME}} na čokoľvek",
+    "defaultPlaceholder2": "Opýtajte sa aplikácie {{APP_NAME}} s vyššie uvedeným obsahom",
+    "dictExample": "Príklad:",
+    "disableGlobal": "Zakázať na všetkých stránkach",
+    "disableOnce": "Skryť do ďalšej návštevy",
+    "disableSite": "Zakázať na tejto stránke",
+    "managePrompts": "Spravovať výzvy",
+    "pressToClose": "Zatvorte stlačením tlačidla {{name}}",
+    "requireSignin": "Vyžaduje sa prihlásenie",
+    "siginHint": "Ak chcete získať prístup k tejto funkcii, prihláste sa."
+  },
+  "quiz": "Kvíz",
+  "quotaInfo": {
+    "allPlans": "Zobraziť všetky plány",
+    "chatActionTranslate": "Preložiť do {{lang}}",
+    "chatFileLink": "Chat so súbormi/odkazmi",
+    "chatPDF": "PDF/Odkaz Chat",
+    "creditRuleTip": "Kredity odpočítavame na základe modelu, funkcií a dĺžky kontextu, ktorý používate. Pre úplné podrobnosti navštívte <a>Centrum pomoci</a>.",
+    "creditRuleTitle": "Pravidlá odpočítania kreditov",
+    "dailyCreditTip": "Pravidlo obnovenia sa vzťahuje iba na plánové kredity, nie na extra kredity.",
+    "dataAnalysis": "Pokročilá analýza dát",
+    "enjoyUnlimitedCredits": "Užite si neobmedzené kredity",
+    "enjoyUnlimitedCreditsDesc": "Využite naplno GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro a ďalšie.",
+    "extraCreditTip": "Toto sú extra kredity na jednorazové použitie.",
+    "extractText": "AI Extrakcia textu",
+    "inviteFriends": "<a>Pozvite priateľov</a> a získajte viac kreditov",
+    "mobilePlan": "Mobilný plán",
+    "off": "{{num}} Zľava",
+    "pocketPlanTips": "Kredity Pocket sú použiteľné iba na mobilných zariadeniach. Užite si niekoľko kreditov na desktop zadarmo.",
+    "pocketUpgrade": "Vylepšiť pre odomknutie ďalších funkcií",
+    "premiumTrial": "Vyskúšajte prémiové funkcie zdarma",
+    "premiumTrialTip": "Skúšobná verzia vám poskytuje obmedzený prístup k prémiovým funkciám, ktoré sú exkluzívne pre platiacich členov. Upozorňujeme, že každé použitie bude stále stáť kredity.",
+    "readAloud": "AI čítanie nahlas",
+    "resetDate": "Dátum obnovenia",
+    "resetsDaily": "Obnovuje sa denne",
+    "shortVideo": "AI Skracovač videí",
+    "tryForFree": "Vyskúšajte zdarma",
+    "tryReadAloudForFree": "Vyskúšajte Čítanie nahlas zadarmo",
+    "unlockAllFeats": "Odomknite všetky funkcie",
+    "unlockAllFeats2": "Odomknúť plný prístup",
+    "unlockAllFeatsDesc": "Dosiahli ste limit skúšobnej verzie pre prémiové funkcie. Upgradujte, aby ste odomkli všetky funkcie.",
+    "unlockAllFeatsDesc2": "Získajte neobmedzené chaty, prístup na web, analýzu dát, generovanie obrázkov, zhrnutia YouTube, chatovanie so súbormi/odkazmi, extrakciu textu a ďalšie",
+    "unlockFeats": "Odomknite všetky prémiové funkcie",
+    "unlockToUse": "Odomknite neobmedzené používanie",
+    "upgradeFor": "Inovujte len za {{price}}/mesiac",
+    "usedCredits": "Použitých {{count}} kreditov",
+    "usedCredits_one": "{{count}} kredit použitý",
+    "usedCredits_other": "{{count}} kreditov použitých",
+    "vipInviteFriends": "Užívate si {{APP_NAME}}? <a>Pozvite svojich priateľov!</a>",
+    "webAccess": "Prístup na web",
+    "youtubeSummary": "Zhrnutie YouTube"
+  },
+  "quote": "Citovať",
+  "quoteText": "Text citátu",
+  "readAloud": "Čítať nahlas",
+  "reading": "Čítanie",
+  "readingwriting": "Čítanie a písanie",
+  "readPage": "Prečítajte si túto stránku",
+  "reasoningModelTip": "Úvaha už je zabudovaná v aktuálnom modeli",
+  "reasoningModelTip2": "Povoliť rozšírené premýšľanie pre zložité otázky. Stojí približne 2x kreditov.",
+  "recentFiles": "Nedávne súbory",
+  "recognizing": "Rozpoznávanie",
+  "recordPanel": {
+    "alertContinue": "Pokračovať v nahrávaní",
+    "alertStop": "Dokončiť nahrávanie",
+    "allNotes": "Všetky poznámky",
+    "audio": "Audio",
+    "camera": "Iba kamera",
+    "cameraDisableTip": "Kamera nie je dostupná počas nahrávania karty",
+    "cameraPermission": {
+      "deniedDesc": "Prosím, povoľte prístup ku kamere pre použitie nahrávania kamery.",
+      "grantedDesc": "Teraz môžete zavrieť túto kartu a začať nahrávať v postrannom paneli.",
+      "noBrowserPremission": "Prístup zamietnutý systémom",
+      "noBrowserPremissionTip": "Systém zamietol prístup ku kamere pre aktuálny prehliadač. Prosím, prejdite do nastavení systému a upravte povolenia.",
+      "noCamera": "Žiadna kamera",
+      "noCameraTip": "Prepáčte, žiadna dostupná kamera nebola zistená.",
+      "noIconDesc": "Obnovte stránku, potom kliknite na ikonu {{iconImage}} v adresnom riadku a vyberte \"Vždy povoliť...\".",
+      "noIconTitle": "Ak nevidíte ikonu kamery",
+      "noPopupDesc": "Kliknite na ikonu kamery {{iconImage}} v adresnom riadku, vyberte \"Vždy povoliť...\" a kliknite na \"Hotovo\".",
+      "title": "Sprievodca povolením kamery",
+      "withPopupDesc": "Kliknite na \"Povoliť počas návštevy stránky\" pre nahrávanie kamery."
+    },
+    "cameraPrepare": "Pripravuje sa vaša kamera...",
+    "cameraTipOff": "Vypnúť kameru",
+    "cameraTipOn": "Zapnúť kameru",
+    "cancelConfigContent": "Zrušením stratíte aktuálny záznam.",
+    "cancelConfigTitle": "Potvrdiť zrušenie nahrávania?",
+    "cancelRecording": "Zrušiť nahrávanie",
+    "cancelRecordWarn": "Potvrdiť zrušenie nahrávania",
+    "cancelRecordWarnContent": "Zrušením sa vymaže aktuálne nahrávanie a poznámky.",
+    "captureScreenshot": "Zachytiť snímku obrazovky",
+    "closePermanently": "Zavrieť natrvalo",
+    "closeThisTime": "Zavrieť tentokrát",
+    "continueRecord": "Pokračovať bez mikrofónu",
+    "countdown": "Odpočítavanie",
+    "countdownTip": "Nahrávanie začne o",
+    "ctrlBar": "Ovládací panel",
+    "deleteNoteWarn": "Odstrániť túto poznámku?",
+    "desktop": "Plocha",
+    "don'tShow": "Nezobrazovať znova",
+    "liveTips": "Robte si poznámky a zaznamenávajte súčasne, aby ste zachytili kľúčové informácie.",
+    "micMissContent": "Váš hlas nebude v tejto relácii zaznamenaný. Ako si želáte pokračovať?",
+    "micMissContent1": "Váš hlas sa nebude nahrávať. Chcete ho zapnúť?",
+    "micMissTitle": "Mikrofón je VYPNUTÝ",
+    "micTipOff": "Vypnúť mikrofón",
+    "micTipOn": "Zapnúť mikrofón",
+    "missInputTip": "Prosím, povoľte nahrávanie obrazovky alebo zapnite mikrofón pred vytvorením poznámky.",
+    "new": "Nové",
+    "newRecordNote": "Nová poznámka REC",
+    "noDevice": "Žiadne zariadenia neboli nájdené",
+    "NoSoundAlertContent": "Kliknite sem, aby ste skontrolovali, či je váš mikrofón zapnutý.",
+    "NoSoundAlertTitle": "Neboli zistené žiadne zvuky",
+    "noteContentPlaceholder": "Zadajte kľúčové informácie a Sider vám pomôže ich usporiadať.",
+    "noteGuideContent": "Vy zaznamenáte kľúčové body, Sider vygeneruje celé poznámky.",
+    "noteListCreateWisebase": "Pridať {{WISEBASE_APP_NAME}}",
+    "noteListEmpty": "Stlačte + pre začiatok",
+    "noteListError": "Nepodarilo sa načítať poznámky",
+    "noteListMove": "Presunúť do",
+    "noteListTitle": "Moje poznámky",
+    "noteTitlePlaceholder": "Bez názvu",
+    "paused": "Pozastavené",
+    "pausedAlertTitle": "Nahrávanie pozastavené",
+    "proceed": "Áno, pokračovať",
+    "quicklyRecord": "Rýchle zaznamenanie",
+    "recordScreen": "Nahrávať obrazovku",
+    "resolution": "Rozlíšenie",
+    "setting": "Nastavenie",
+    "showCutGuide": "Môžete nastaviť klávesovú skratku <num>tu</num>",
+    "startRecording": "Začať nahrávať",
+    "storageAlertContent": "Nedostatok úložného priestoru. Prosím, uvoľnite miesto pre pokračovanie v nahrávaní alebo dokončite aktuálne nahrávanie.",
+    "storageAlertStart": "Nedostatok úložného priestoru. Uvoľnite prosím miesto, aby ste mohli pokračovať v nahrávaní.",
+    "tab": "Karta",
+    "tabAudioOnly": "Nahrávať iba zvuk karty",
+    "tabAudioOnlyShow": "Len zvuk karty",
+    "tabSound": "Zvuk karty",
+    "tabVideoAudio": "Nahrávať obrazovku karty + zvuk",
+    "tabVideoAudioShow": "Obrazovka + zvuk",
+    "tabVideoOnly": "Nahrávať kartu iba obrazovku",
+    "tabVideoOnlyShow": "Len obrazovka karty",
+    "timeLimitAlertContent": "Nahrávanie dosiahlo {{alertNumber}}-hodinový limit",
+    "title": "Nahrávanie",
+    "title1": "Záznamová poznámka",
+    "transcript": "Prepis",
+    "turnAndProceed": "Zapnúť mikrofón a pokračovať",
+    "turnOnMic": "Zapnúť mikrofón",
+    "uploadingList": {
+      "connection": "Nahrávanie bude pokračovať po opätovnom pripojení.",
+      "delete": "Zrušiť a vymazať",
+      "failed": "Nahrávanie zlyhalo",
+      "networkTip": "Žiadne pripojenie na internet.",
+      "save": "Uložiť lokálne",
+      "title": "Stav synchronizácie",
+      "uploaded": "Nahrané"
+    },
+    "uploadTimedOut": "Nahrávanie vypršalo",
+    "uploadTimedOutTip": "Nahrávanie bolo prerušené kvôli problému so sieťou. Automaticky sa obnoví, keď sa pripojenie obnoví, alebo si môžete najprv stiahnuť zaznamenaný súbor do svojho zariadenia.",
+    "video": "Video",
+    "voice": "Iba hlas"
+  },
+  "refresh": "Obnoviť",
+  "refreshing": "Obnovuje sa",
+  "refreshModel": "Obnoviť modely",
+  "related-academic-research": "Zobraziť súvisiace články",
+  "related-news": "Nájsť súvisiace správy",
+  "related-videos": "Pozrieť súvisiace videá",
+  "remixArtifact": "Remix artefaktu",
+  "remove": "Odstrániť",
+  "renameAll": "Premenovať všetko",
+  "renameOnce": "Premenovať raz",
+  "repair": "Oprava",
+  "repairing": "Opravovanie",
+  "replace": "Nahradiť",
+  "replay": "Znova prehrať",
+  "researching": "Výskum",
+  "researchProgress": "Postup výskumu",
+  "reselect": "Znovu vybrať",
+  "reset": "Obnoviť",
+  "resetTime": "Resetovať <a>3. augusta 2023</a>",
+  "restoreTpl": "Obnovte túto šablónu",
+  "result": "Výsledok",
+  "resume": "Pokračovať",
+  "retry": "Opakovať",
+  "rewrite": "Prepísať",
+  "roast": {
+    "analyzing": "Analyzujem...",
+    "boast": "🥰 Chváliť sa",
+    "roast": "😜 Pečené",
+    "roastX1": "🔥 Niekto ťa práve podpichol, pozri sa",
+    "roastX2": "Podpichni tohto chlapíka!"
+  },
+  "save": "Ulož to",
+  "saved": "Uložené",
+  "screenshot": "Snímka obrazovky",
+  "search": "Vyhľadávanie",
+  "searched3": "Prehľadané 3 stránky",
+  "searchedFor": "Hľadané:",
+  "searchedN": "Prehľadaných {{NUM}} stránok",
+  "searchEnhance": {
+    "adContent": "Chytrejší než GPT-4? Claude 3 je tu! Pozvite priateľov a vyskúšajte ho zdarma!",
+    "getStarted": "Začať teraz",
+    "noLoginAdContent": "Odomknite moc AI: Hľadajte, čítajte, píšte, prekladajte rýchlejšie a múdrejšie!",
+    "noLoginBtn": "Pridajte sa k viac ako 4M spokojným používateľom!",
+    "relatedQuestion": "Súvisiace otázky:"
+  },
+  "searchFailed": "Vyhľadávanie zlyhalo",
+  "searching": "Vyhľadávanie: {{QUERY}}",
+  "searchingFor": "Hľadanie:",
+  "searchPage": "Stránka vyhľadávania",
+  "searchTip": "Vyhľadajte na webe, ak je to potrebné",
+  "searchTool": {
+    "braveTrouble": "Stále nefunguje? Sledovať {{url}}",
+    "cloudflareCheck": "OpenAI vyžaduje raz za čas prejsť bezpečnostnou kontrolou. Ak sa to bude opakovať, zmeňte poskytovateľa AI na OpenAI API v <i>možnostiach rozšírenia</i>.",
+    "failedResponse": "Nepodarilo sa načítať odpoveď z ChatGPT:",
+    "fiveStart": "Páči sa vám toto rozšírenie? Dajte nám 5-hviezdičkové hodnotenie v obchode {{store}}",
+    "loginAndCloudflareCheck": "Prihláste sa a prejdite kontrolou Cloudflare na {{web}}",
+    "questionMark": "Spustite ChatGPT pripojením otáznika za svoj dopyt",
+    "waitResponse": "Čaká sa na odpoveď ChatGPT...",
+    "whenToAskTips": "Každé vyhľadávanie spotrebuje jeden základný kredit. Kliknite sem a nastavte, kedy sa má ChatGPT opýtať."
+  },
+  "seeMoreHelp": "Viac nájdete v <a>Centrále pomoci</a>",
+  "select": "Vybrať",
+  "selectedTextInputHint": "Pýtať sa na vybraný text",
+  "selectGenerationModel": "Vyberte model generovania",
+  "selectPrompt": "Vybrať výzvu",
+  "send": "Odoslať",
+  "sendShortcut": "Odoslať skratku",
+  "sendToChat": "Poslať do chatu",
+  "settingApiKey": "Nastavenie kľúča API",
+  "settings": "nastavenie",
+  "setupPage": {
+    "activeUser": "Aktívni používatelia",
+    "endBottom": "Potrebujete pomoc alebo máte návrhy?",
+    "endBottom2": "Vážime si váš názor! <a>Poskytnite spätnú väzbu</a> a pomôžte nám zlepšiť váš zážitok.",
+    "endTip": "Teraz môžete prehľadávať ľubovoľnú webovú stránku alebo sa ponoriť do nášho Centra pomoci a dozvedieť sa viac.",
+    "endTitle": "{{APP_NAME}} je pripravený vám pomôcť!",
+    "explore": "Pozrime sa na funkciu {{FEATURE_NAME}}",
+    "favorites": "Najpopulárnejšie rozšírenie pre Chrome",
+    "fiveStarRate": "Hodnotenie 5 hviezdičiek",
+    "learnMore": "Dozvedieť sa viac o {{APP_NAME}}",
+    "loginSuccess": "Prihlásenie úspešné",
+    "loginWith": "Prihláste sa pomocou {{name}}",
+    "next": "Ďalšie",
+    "pinClickTip": "Kliknutím na ikonu {{icon}} pripnete aplikáciu {{APP_NAME}}",
+    "pinClickTip2": "Pripnúť {{APP_NAME}} pre rýchly prístup",
+    "pinClickTip3": "Kliknite na ikonu {{icon}} v pravom hornom rohu",
+    "pinTips": "<b>Pripnite si aplikáciu {{APP_NAME}}</b>, jednoduchší prístup!",
+    "privacy": "Pokračovaním súhlasíte s <a>Pravidlami ochrany osobných údajov</a> a <b>Podmienkami používania</b>.",
+    "privacyPart1": "Pokračovaním súhlasíte s",
+    "privacyPart2": "<a>Pravidlami ochrany osobných údajov</a> a <b>Podmienkami používania</b>",
+    "spamMsg": "Vaše údaje nebudú uniknúť a nebude tu žiadny spam.",
+    "startUsing": "Začnite používať {{APP_NAME}}",
+    "tryOut": "vyskúšaj to",
+    "userCount": "4M+",
+    "welcome": "Vitajte v aplikácii {{APP_NAME}}!"
+  },
+  "share": "zdieľam",
+  "shareChat": {
+    "5starRatings": "<num>50 tis.</num> 5-hviezdičkové hodnotenia",
+    "activeUsers": "<num>5 mil.+</num> aktívnych používateľov",
+    "AIContentWarning": "Obsah generovaný umelou inteligenciou nemusí byť vždy autentický",
+    "copyIamge": "Kopírovať obrázok",
+    "copyLink": "Kopírovať odkaz",
+    "downloadImage": "Stiahnuť obrázok",
+    "exportAs": "Exportovať ako",
+    "generateImage": "Generovať obrázok",
+    "generateLink": "Generovať odkaz",
+    "linkCopied": "Odkaz skopírovaný",
+    "linkGenerated": "Odkaz vygenerovaný",
+    "qrcodeTip": "Naskenujte pre získanie {{APP_NAME}}!",
+    "selectAll": "Vybrať všetko",
+    "shareOn": "Zdieľať na",
+    "slogan": "Váš AI asistent",
+    "socialMediaImageCopiedTip": "Obrázok skopírovaný a pripravený na vloženie."
+  },
+  "shortcut": "Klávesové skratky",
+  "shortPlanNames": {
+    "basic": "Základný",
+    "free": "Bezplatný",
+    "pocket": "Pocket",
+    "pro": "Profesionálny",
+    "starter": "Štartovací",
+    "ultra": "Neobmedzený"
+  },
+  "show": "Zobraziť",
+  "showImage": "Zobraziť obrázok",
+  "showMore": "Zobraziť viac",
+  "showSearchPanel": "Zobraziť panel vyhľadávania",
+  "showTpl": "Ukážte túto šablónu",
+  "sidebar": "Bočný panel",
+  "sidebarChatPanel": {
+    "addImage": "Pridajte obrázok",
+    "answerFrom": "Odpoveď od",
+    "answerWithoutSearching": "Opýtajte sa pôvodného <b>robota</b>",
+    "autoCloseBanner": "Automaticky sa pozastaví po nečinnosti",
+    "autoCloseTips": "Asistent vyhľadávania sa pozastaví, ak nekliknete na žiadne tlačidlá na karte do 30 vyhľadávaní. Môžete ho kedykoľvek znovu aktivovať kliknutím na tlačidlo.",
+    "capabilities": "Schopnosti",
+    "chatActionTranslate": "Preložiť do jazyka {{lang}}",
+    "chatControls": "Ovládacie prvky chatu",
+    "chatHistory": "História chatu",
+    "chatWithVideo": "Chat s videom",
+    "compareAnsWith": "Porovnať odpoveď s",
+    "compareWeb": "Porovnajte odpoveď z webu",
+    "compareWithXXX": "Opýtajte sa <b>robota</b>",
+    "continueInChat": "Pokračujte v chate",
+    "deleteConfirmContent": "Túto akciu nie je možné vrátiť späť.",
+    "deleteConfirmTitle": "Chcete odstrániť túto konverzáciu?",
+    "experimental": "Táto funkcia sa stále vyvíja a môže sa zmeniť, preto prosím podeľte sa o svoje myšlienky.",
+    "feedback": "Spätná väzba",
+    "improveWithBoth": "Usporiadajte odpovede Google pomocou značky GPT-4",
+    "improveWithSearch": "Získajte webovú odpoveď od spoločnosti Google",
+    "improveWithXXX": "Získajte inteligentnejšiu odpoveď od <b>Bota</b>",
+    "improveWithXXX2": "Získajte komplexnú odpoveď od <b>Bota</b>",
+    "inputPlaceholder": "Opýtajte sa čokoľvek, @ modely, / výzvy",
+    "newChat": "Nový chat",
+    "noChatHistory": "Zatiaľ žiadna história.",
+    "noSearchHistory": "Nenašli sa žiadne výsledky",
+    "ocrTextTip": "{{name}} Výsledok",
+    "readDoc": "Čítať dokumenty",
+    "readDocFail": "Čítanie dokumentov zlyhalo",
+    "readingDoc": "Čítanie dokumentov",
+    "replyLanguage": "Jazyk odpovede",
+    "screenshot": "Snímka obrazovky",
+    "search": "Vyhľadávanie",
+    "searchHistory": "História vyhľadávania",
+    "send": "Odoslať",
+    "share": "zdieľam",
+    "siderUploadFile": "Nahrajte súbory vo formátoch PDF, DOC, XLSX, CSV, JPG, JSON a iných, až do 6 súborov naraz, do 100MB na súbor.",
+    "signinToAsk": "Prihláste sa a spýtajte sa {{MODEL_NAME}}",
+    "smarterAnsWith": "Získajte inteligentnejšiu odpoveď od",
+    "switchAndContinue": "Prepnúť a pokračovať",
+    "textSelectedSystemMsg": "Čo by ste chceli urobiť s textom?",
+    "textSelectedTip": "Text z vášho výberu",
+    "translateTip": "Preložiť výsledok",
+    "upload": "Nahrať",
+    "uploadFile": "Nahrať súbory",
+    "uploadTip": {
+      "format": "Webová stránka, PDF, DOC, XLSX, CSV, JPG, JSON, MP3, WAV, M4A, MPGA a ďalšie",
+      "formatTitle": "Podpora:",
+      "limit": "Až 6 súborov, každý do 100MB",
+      "limitTitle": "Limit:"
+    },
+    "userStopTip": "Používateľ zrušil požiadavku.",
+    "webAccessModalContent": "Údaje ChatGPT nie sú v reálnom čase. {{APP_NAME}} kombinuje inteligenciu ChatGPT s webovými informáciami v reálnom čase, čo umožňuje GPT efektívnejšie spracovávať otázky súvisiace s informáciami v reálnom čase. Inovujte, aby ste získali túto funkciu a už si nemusíte robiť starosti so zastaranými informáciami!",
+    "webAccessModalTitle": "{{APP_NAME}} umožňuje ChatGPT-3.5 a GPT-4 prístup na web!",
+    "welcomeMsg": "Ako vám môžem dnes pomôcť?",
+    "welcomeQues": [
+      {
+        "ques": "Napíšte sonet v štýle Shakespeara o smartfónoch",
+        "title": ""
+      },
+      {
+        "ques": "Navrhnite 10 kreatívnych halloweenskych kostýmov pre deti",
+        "title": ""
+      },
+      {
+        "ques": "Nastínte cestovnú mapu pre začiatočníkov na učenie sa osobných financií",
+        "title": ""
+      },
+      {
+        "ques": "Vysvetlite 10-ročnému dieťaťu, prečo je obloha modrá",
+        "title": ""
+      }
+    ],
+    "welcomeSystemMsg": "Ahoj! Ako vám dnes môžem pomôcť?",
+    "writeHistory": "História písania"
+  },
+  "sidebarComposePanel": {
+    "addToSite": "Pridať na stránku",
+    "addToSiteTip": "Umiestnite kurzor myši do požadovaného vstupného poľa a kliknutím na '{{name}}' ho vložte",
+    "ads": "Marketingové reklamy",
+    "AIWriter": "AI spisovateľ",
+    "alsoWriteTips": "Písanie bok po boku s Al",
+    "basic": "základný",
+    "blog": "Príspevok v blogu",
+    "casual": "Neformálne",
+    "comment": "Komentujte",
+    "compose": "Skladať",
+    "continueOptimizeTips": "Pokračujte v zdokonaľovaní a zlepšovaní bok po boku s AI",
+    "email": "Email",
+    "enthusiastic": "Nadšený",
+    "essay": "Esej",
+    "formal": "Formálne",
+    "format": "Formátovať",
+    "formatExists": "Formát už existuje",
+    "funny": "Smiešne",
+    "generate": "Generovať koncept",
+    "history": "História",
+    "idea": "Nápad",
+    "informational": "Informačné",
+    "insertToSite": "Vložiť výsledok do vstupného poľa webovej stránky",
+    "length": "Dĺžka",
+    "long": "Dlhé",
+    "medium": "Stredná",
+    "message": "Správa",
+    "outline": "Obrys",
+    "paragraph": "Odsek",
+    "professional": "Profesionálny",
+    "regenerate": "Regenerovať",
+    "reply": "Odpovedzte",
+    "replyPlaceholder1": "Zadajte pôvodný text, na ktorý chcete odpovedať",
+    "replyPlaceholder2": "Opíšte všeobecnú myšlienku vašej odpovede",
+    "short": "Krátky",
+    "style": "Štýl",
+    "submitShortcut": "Stlačením {{shortcut}} vygenerujete koncept",
+    "tone": "Tón",
+    "twitter": "Twitter",
+    "write": "Napísať",
+    "writePlaceholder": "Zadajte tému, o ktorej chcete písať"
+  },
+  "sidebarGrammarPanel": {
+    "accept": "súhlasiť",
+    "checkFailed": "Kontrola zlyhala",
+    "checking": "Kontrola",
+    "checkNoError": "Žiadne chyby",
+    "fixError": "Opraviť všetko ({{errorCount}})",
+    "ignore": "Ignorovať",
+    "improve": "Vylepšiť",
+    "inputPlaceholder": "Podporovaný je iba anglický jazyk. Vložte alebo napíšte text na kontrolu.",
+    "reasonForChanges": "Dôvod zmien"
+  },
+  "sidebarPanel": {
+    "addToStarred": "Pridať k obľúbeným",
+    "agentTabLabel": "Agent",
+    "askTabLabel": "Opýtať sa",
+    "chatTabLabel": "Chat",
+    "composeTabLabel": "Napíšte",
+    "deleteAllConfirmTitle": "Vymazať všetko",
+    "downloadLabel": "Stiahnuť desktopovú/mobilnú aplikáciu",
+    "extraQuota": "Extra kvóta",
+    "freePlan": "Voľný plán",
+    "grammarTabLabel": "Gramatika",
+    "includeStarred": "Zahrnúť obľúbené",
+    "inputPlaceholder1": "Zadajte výzvu alebo vyberte z ponuky",
+    "inputPlaceholder2": "Sem vložte alebo vložte obsah",
+    "inputPlaceholderCodes": "Sem vložte alebo zadajte kódy",
+    "inputPlaceholderQA": "Sem vložte alebo vložte otázku",
+    "moreTabLabel": "Viac",
+    "ocrTabLabel": "OCR",
+    "painterLabel": "Maliar",
+    "premiumPlan": "Prémiový plán",
+    "pressToSubmit": "Stlačením {{key}} odošlite",
+    "recordTabLabel": "REC Poznámky",
+    "regenerate": "Regenerovať odozvu",
+    "removeFromStarred": "Odstrániť z obľúbených",
+    "replacePrompt": "Nahraďte výzvu",
+    "saveNewPrompt": "Uložiť ako novú výzvu",
+    "searchTabLabel": "Vyhľadávanie",
+    "starred": "Obľúbené",
+    "startNewLine": "Stlačením tlačidla {{shortcut}} začnite nový riadok",
+    "stopGenerating": "Zastavte generovanie",
+    "submitOption": "Odoslať možnosť",
+    "toolsTabLabel": "Nástroje",
+    "translateTabLabel": "Preložiť"
+  },
+  "sidebarSearchPanel": {
+    "answer": "Odpoveď",
+    "currentVisit": "Aktuálna návšteva",
+    "defaultSearchSuggesiton": "Kedy je najlepší čas navštíviť Paríž?",
+    "feedback": {
+      "stepAnswer": "Generovať odpoveď",
+      "stepSearch": "Vykonať vyhľadávanie",
+      "stepUnderstand": "Rozumieť otázkam",
+      "tipTotal": "Celkom {{count}} kreditov"
+    },
+    "followUpQuestion": "Následná otázka...",
+    "history": "História",
+    "newSearch": "Nové vyhľadávanie",
+    "relatedSearches": "Súvisiace vyhľadávania",
+    "searchAll": "Vyhľadávať zo všetkého",
+    "searchFrom": "Vyhľadávať z",
+    "searchFromAll": "Vyhľadávať na celom internete",
+    "searchFromSite": "Vyhľadávať na stránke {{domain}}",
+    "searchHistory": "História vyhľadávania",
+    "searching": "Hľadanie",
+    "searchPlaceholder": "Zadajte informácie, ktoré chcete vyhľadať",
+    "searchProgress": {
+      "analyzeSearchResult": "Analyzovať výsledky vyhľadávania",
+      "analyzing": "Analýza",
+      "competed": "Dokončené",
+      "generateAnswer": "Generovať odpoveď",
+      "generatingAnswer": "Generovanie odpovede",
+      "organizing": "Organizovanie",
+      "searchCancelled": "Vyhľadávanie zrušené",
+      "searchCompleted": "Vyhľadávanie dokončené",
+      "searching": "Vyhľadávanie",
+      "searchInWeb": "Vyhľadávať na webe"
+    },
+    "searchRange": "Rozsah vyhľadávania",
+    "sources": "Zdroje",
+    "stoppedSearch": "Toto vyhľadávanie ste zastavili.",
+    "suggestions": "Návrhy",
+    "title": "Vyhľadávanie",
+    "viewAll": "Zobraziť všetko"
+  },
+  "sidebarTranslatePanel": {
+    "auto-detect": "Automatická detekcia",
+    "currentPage": "Aktuálna stránka",
+    "customization": {
+      "Complexity": "Zložitosť",
+      "ComplexityOpt": {
+        "Expert": "Expert",
+        "Layman": "Laicky",
+        "Standard": "Štandardné"
+      },
+      "defaultPreferences": "Predvolené nastavenia",
+      "Length": "Dĺžka",
+      "LengthOpt": {
+        "Brief": "Stručný",
+        "Concise": "Stručný",
+        "Expanded": "Rozšírené",
+        "Standard": "Štandardné"
+      },
+      "Style": "Štýl",
+      "StyleOpt": {
+        "CreativeAdaptation": "Kreatívna adaptácia",
+        "DynamicEquivalence": "Dynamická ekvivalencia",
+        "Literal": "Doslovný"
+      },
+      "title": "Preferencie prekladu",
+      "Tone": "Tón",
+      "ToneOpt": {
+        "Authoritative": "Autoritatívny",
+        "Casual": "Neformálne",
+        "Empathetic": "Empatický",
+        "Formal": "Formálne",
+        "Neutral": "Neutrálne"
+      }
+    },
+    "errTooManyChar": "{{num}}/{{total}}: Vstup prekračuje limit znakov.",
+    "errWrongTargetLang": "Rovnaký zdrojový a cieľový jazyk. Skontrolujte svoj výber.",
+    "extraTransTips": "Môžete tiež preložiť:",
+    "inputTranslateAdBtn": "Nastavte to teraz",
+    "inputTranslateAdText": "Okamžite preložte text v vstupnom poli na akejkoľvek webovej stránke!",
+    "placeholde": "Napíšte alebo vložte text sem...",
+    "seeDict": "Pozrieť slovník",
+    "upgradeForLongChar": "Vylepšite teraz pre odomknutie dlhšieho vstupu ({{num}} znakov)."
+  },
+  "sidepanel": {
+    "benefit1": "Váš bočný panel Sider <b>nikdy nezmizne</b>, ak prejdete na novú stránku.",
+    "benefit2": "Môžete četovať medzi všetkými kartami bez <b>prekrývania akéhokoľvek obsahu</b>.",
+    "benefit3": "K dispozícii iba v <b>Google Chrome 114 alebo novšom</b>",
+    "micPermission": {
+      "deniedDesc": "Povoľte prístup k mikrofónu, aby ste mohli používať hlasový vstup.",
+      "deniedTitle": "Prístup nebol udelený",
+      "grantedDesc": "Teraz môžete zatvoriť túto kartu a použiť mikrofón v postrannom paneli.",
+      "grantedTitle": "Prístup bol úspešne udelený",
+      "noIconDesc": "Obnovte stránku, potom kliknite na ikonu {{iconImage}} v paneli s adresou a vyberte \"Vždy povoliť...\".",
+      "noIconTitle": "Ak nevidíte ikonu mikrofónu",
+      "noPopupDesc": "Kliknite na ikonu mikrofónu {{iconImage}} v paneli s adresou, vyberte \"Vždy povoliť...\" a kliknite na \"Hotovo\".",
+      "noPopupTitle": "Ak sa nezobrazí vyskakovacie okno",
+      "tips": "💡 Tip: Vyhnite sa výberu zariadení s \"virtuálnym\" v názve, aby ste predišli zlyhaniu nahrávania.",
+      "title": "Sprievodca povolením mikrofónu",
+      "withPopupDesc": "Kliknite na \"Povoliť počas návštevy stránky\", aby ste povolili prevod reči na text.",
+      "withPopupTitle": "Ak vidíte vyskakovacie okno"
+    },
+    "tip": "Tip: Pre lepší zážitok upravte šírku bočného panela.",
+    "title": "Sider podporuje pevnú bočnú lištu",
+    "voiceInput": "Hlasový vstup",
+    "voiceInputError": {
+      "deviceNotFound": "Prepáčte, nebol zistený žiadny dostupný mikrofón.",
+      "deviceNotFoundTitle": "Žiadny mikrofón",
+      "rateLimit": "Dosiahli ste limit, ako často môžete túto funkciu používať. Skúste to znova o hodinu.",
+      "rateLimitTitle": "Prekročený limit používania",
+      "systemPermission": "Systém zamietol prístup k mikrofónu pre aktuálny prehliadač. Prosím, prejdite do systémových nastavení a upravte povolenia.",
+      "systemPermissionTitle": "Prístup zamietnutý systémom",
+      "timeLimit": "Dosiahnutý limit nahrávania. Najprv prepisujte aktuálny záznam.",
+      "tooShort": "Nahrávka je príliš krátka na rozpoznanie",
+      "transcriptionFailed": "Počas prepisu došlo k chybe. Skúste to prosím znova.",
+      "transcriptionFailedTitle": "Prepis zlyhal"
+    }
+  },
+  "sidepanelPinGuide": {
+    "desc": "Pridajte {{APP_NAME}} na svoj panel nástrojov pre rýchly prístup",
+    "title": "Kliknite na \"{{icon}}\""
+  },
+  "sidepanelTip": "Tip na bočnom paneli",
+  "signin": "Prihlásiť sa",
+  "signinNow": "Prihlás sa teraz",
+  "signupTip": "Už máte účet? <a>Prihlásiť sa</a>",
+  "skip": "Preskočiť",
+  "smarterWith": "Získajte inteligentnejšiu odpoveď od {{NAME}}",
+  "Speaker": "Hovorca",
+  "speechVoice": "Hlas reči",
+  "startingResearch": "Začiatok výskumu...",
+  "stop": "Stop",
+  "submit": "Predložiť",
+  "subscribe": "Prihlásiť sa na odber",
+  "success": "Úspech",
+  "suggestTools": {
+    "tips": {
+      "create_image": "Chcete vytvárať obrázky? Upgradujte na odomknutie AI nástrojov na tvorbu obrázkov.",
+      "search": "Potrebujete odpovede v reálnom čase? Upgradujte pre prístup k webovému vyhľadávaniu."
+    }
+  },
+  "summarize": "Zhrnúť",
+  "summarizeFailed": "Zhrnutie zlyhalo",
+  "summarizePage": "Zhrňte túto stránku",
+  "summarizing": "Zhrnutie",
+  "summary": "Zhrnutie",
+  "superAdvanced": "Super pokročilý",
+  "switch": "Prepnúť",
+  "switchAndContinue": "Prepnúť režim",
+  "switchModel": "Prepnúť model",
+  "switchToSidepanel": "Prepnúť na bočný panel",
+  "switchToSider": "Prepnúť na {{APP_NAME}} API",
+  "switchToXXX": "Prepnúť na {{model}}",
+  "switchVoice": "Prepnúť hlas",
+  "table": "Tabuľka",
+  "takeAScreenshot": "Urobte snímku obrazovky",
+  "taskCenter": {
+    "advanceTask": "Pokročilé úlohy",
+    "beginnerGuide": "Príručka pre začiatočníkov",
+    "chatDemoText": "S čím vám môžem pomôcť?",
+    "claim": "Uplatniť",
+    "claimed": "Uplatnené",
+    "claimNow": "Uplatnite teraz",
+    "claimRewards": "Choďte do Centra odmien a uplatnite si svoje odmeny.",
+    "clickChatSetting": "Kliknite na {{button}} na prístup k nastaveniam chatu",
+    "clickGoOptions": "Kliknite na {{button}} na zobrazenie možností {{name}}",
+    "clickReadPage": "Kliknite na {{button}} na prečítanie webovej stránky a odoslanie správy",
+    "clickSavePage": "Kliknite na {{button}} na uloženie stránky",
+    "clickSend": "Kliknite na {{button}} na odoslanie správy",
+    "clickSummaryVideo": "Kliknite na toto tlačidlo na zhrnutie videa",
+    "clickTranslatePage": "Kliknite na {{button}} na preklad stránky",
+    "clickTryDemo": "Kliknite na {{button}} na zobrazenie a vyskúšanie dema",
+    "clickUploadImg": "Kliknite na {{button}} na nahranie obrázka a odoslanie správy",
+    "completedTasks": "Dokončené úlohy",
+    "completeTaskTo": "Dokončite úlohy na <a>Získanie kreditov</a>",
+    "countdownTip": "<b>{{price}} ZĽAVA:</b> Zostáva {{time}}",
+    "expireIn": "Platnosť vyprší za {{time}}",
+    "exploreCenter": "Preskúmajte {{name}}",
+    "getAdvancedCredits": "Získajte {{count}} pokročilých kreditov",
+    "getAdvancedCredits_one": "Získajte {{count}} pokročilý kredit",
+    "getAdvancedCredits_other": "Získajte {{count}} pokročilých kreditov",
+    "getBasicCredits": "Získajte {{count}} základných kreditov",
+    "getExtraAdvancedCredits": "Získajte {{count}} extra pokročilých kreditov",
+    "goYoutube": "Prejsť na YouTube",
+    "gretNews": "Skvelé správy!",
+    "iconEntryTip": "Tu nájdete {{name}}.",
+    "inviteFriend": "Pozvať priateľov",
+    "name": "Centrum odmien",
+    "progress": "Postup",
+    "selectText": "Vyberte nejaký text a vyskúšajte to!",
+    "selectText2": "Povoľte {{name}} na výber textu",
+    "siderMode": "Prepnúť do režimu Sider?",
+    "siderModeDesc": "Úlohy musia byť dokončené v režime Sider, chcete prepnúť?",
+    "start": "Začať",
+    "starterTask": "Úlohy pre začiatočníkov",
+    "taskCompleted": "Úloha dokončená!",
+    "tasks": {
+      "chat": "Odoslať správu v Chate",
+      "chatImg": "Chat s obrázkom",
+      "contextMenu": "Vysvetlite slovo cez {{name}}",
+      "options": "Preskúmajte možnosti {{APP_NAME}} na 5 sekúnd",
+      "pageTranslate": "Preložte stránku cez ikonu {{APP_NAME}}",
+      "prompt": "Vyskúšajte prednastavenú výzvu {{APP_NAME}}",
+      "readPage": "Prečítajte si stránku v Chate",
+      "webAccess": "Vyskúšajte demo vyhľadávania",
+      "wisebase": "Uložte stránku do {{name}}",
+      "youtubeSummary": "Zhrňte video na YouTube"
+    },
+    "trunOn": "Zapnúť",
+    "typePrompt": "Napíšte {{key}} na výber výzvy a odoslanie správy",
+    "unlimitedPlan": "Neobmedzený plán (Ročne)",
+    "unlockDiscount": "Odomkli ste prekvapivú zľavu.",
+    "useNow": "Použiť teraz",
+    "watchYoutube": "Sledujte návody, novinky a ďalšie na našom YouTube kanáli!",
+    "youtubeSummaryDisabled": "Zhrnutie YouTube je vypnuté",
+    "youtubeSummaryDisabledDesc": "Povoľte ho na pokračovanie. Zapnúť teraz?"
+  },
+  "template": "šablóna",
+  "textExtracted": "Text extrahovaný",
+  "textFromGrammar": "Text z gramatiky",
+  "textFromOCR": "Text z OCR",
+  "textFromSearch": "Text z vyhľadávacieho agenta",
+  "textFromSelect": "Text z vášho výberu",
+  "textFromTranslate": "Text z prekladu",
+  "textFromWrite": "Text z písania",
+  "theme": "Téma",
+  "think": "Premýšľanie ({{NAME}})",
+  "thinkOnly": "Premýšľaj",
+  "thoughtProgress": "Myšlienkový proces",
+  "timeUnit": {
+    "day": "Deň",
+    "day_one": "Deň",
+    "day_other": "Dni",
+    "hour": "Hodina",
+    "hour_one": "Hodina",
+    "hour_other": "Hodiny",
+    "minute": "Minúta",
+    "minute_one": "Minúta",
+    "minute_other": "Minúty",
+    "second": "Sekunda",
+    "second_one": "Sekunda",
+    "second_other": "Sekundy"
+  },
+  "toolMoveTip": "Nástroj na chat má nové miesto! Všetky ovládacie prvky chatu môžete nájsť tu.",
+  "Tools": {
+    "desc": {
+      "artifacts": [
+        {
+          "desc": "Premeniť nápady na hmatateľné výstupy, okamžite!",
+          "title": "Zvýšená produktivita"
+        },
+        {
+          "desc": "Okamžite vizualizujte AI-generované webové stránky, dokumenty a grafy.",
+          "title": "Náhľad v reálnom čase"
+        },
+        {
+          "desc": "Zlepšujte artefakty bez námahy prostredníctvom prirodzenej konverzácie.",
+          "title": "Bezproblémová iterácia"
+        }
+      ],
+      "create_image": [
+        {
+          "desc": "Okamžite premeňte popisy na vysokú kvalitu.",
+          "title": "Podnietiť kreativitu"
+        },
+        {
+          "desc": "Vylepšite svoje projekty vlastnými vizuálmi.",
+          "title": "Vylepšiť obsah"
+        }
+      ],
+      "custom_instruction": [
+        {
+          "desc": "Získajte odpovede AI, ktoré zodpovedajú vášmu jedinečnému štýlu a preferenciám.",
+          "title": "Prispôsobené práve pre vás"
+        },
+        {
+          "desc": "Už žiadne opakovanie. Zapamätáme si, ako radi komunikujete.",
+          "title": "Ušetrite čas, zakaždým"
+        }
+      ],
+      "data_analysis": [
+        {
+          "desc": "Ľahko analyzovať a vizualizovať dáta pre jasné.",
+          "title": "Získať prehľady"
+        },
+        {
+          "desc": "Rafinovať, interpretovať a spúšťať kód pre efektívne riešenie problémov.",
+          "title": "Programovať múdrejšie"
+        },
+        {
+          "desc": "Riešiť zložité matematické problémy s ľahkosťou a presnosťou.",
+          "title": "Vyniknúť v matematike"
+        }
+      ],
+      "deep_research": [
+        {
+          "desc": "Automaticky generovať plán výskumu a rozložiť kľúčové otázky",
+          "title": "Najprv plán"
+        },
+        {
+          "desc": "Vyhľadávajte naprieč stránkami, porovnávajte názory a filtrujte šum",
+          "title": "Dôkazy z viacerých zdrojov"
+        },
+        {
+          "desc": "Každé tvrdenie obsahuje citácie; exportujte štruktúrovanú správu jedným kliknutím",
+          "title": "Sledovateľné závery"
+        }
+      ],
+      "search": [
+        {
+          "desc": "Získajte prístup k aktuálnym informáciám na webe.",
+          "title": "Zostaňte informovaní"
+        },
+        {
+          "desc": "Získajte presnejšie a relevantnejšie odpovede.",
+          "title": "Zvýšiť presnosť"
+        }
+      ],
+      "text_to_image": [
+        {
+          "desc": "Okamžite premeniť popisy na vysokokvalitné.",
+          "title": "Podnietiť kreativitu"
+        },
+        {
+          "desc": "Vylepšite svoje projekty s vlastnými vizuálmi.",
+          "title": "Vylepšiť obsah"
+        }
+      ],
+      "thinking_mode": [
+        {
+          "desc": "Ovládajte komplexné výzvy s viacstupňovým uvažovaním!",
+          "title": "Vylepšené riešenie problémov"
+        },
+        {
+          "desc": "Získajte hlboké poznatky pre kritické rozhodnutia okamžite.",
+          "title": "Komplexná analýza"
+        },
+        {
+          "desc": "Zlepšujte riešenia bez námahy prostredníctvom usmerneného myslenia.",
+          "title": "Inteligentná iterácia"
+        }
+      ]
+    },
+    "title": {
+      "artifacts": "Odomknúť {{ARTIFACTS}}",
+      "create_image": "Odomknúť generovanie obrázkov",
+      "custom_instruction": "Odomknite personalizovanú AI",
+      "data_analysis": "Odomknúť analýzu dát",
+      "deep_research": "Odomknúť hĺbkový výskum",
+      "search": "Odomknúť prístup k Webu",
+      "text_to_image": "Odomknite generovanie obrázkov",
+      "thinking_mode": "Odomknite Režim myslenia"
+    }
+  },
+  "tools": {
+    "artifacts": {
+      "demos": [
+        {
+          "title": "Vytvoriť virtuálny xylofón",
+          "value": "Vytvorte xylofón založený na HTML s farebnými klávesmi v rámci {{ARTIFACT}}. Poskytnite vizuálnu spätnú väzbu pre udreté klávesy a generujte jednoduché, realistické zvuky pomocou Web Audio API na základe frekvenčných parametrov. Zahrňte základné pokyny."
+        },
+        {
+          "title": "Vytvoriť hru s emoji jedlom",
+          "value": "Vytvorte jednoduchú hru založenú na HTML, podobnú Catch the Candy, v rámci {{ARTIFACT}}. Hráč ovláda emoji na spodnej časti obrazovky, rýchlo ho pohybuje doľava a doprava, aby zachytil a zjedol jedlo (napr. 🍓, 🍔, 🍎), ktoré padá zhora, pričom sa vyhýba bombám (💣). Každý raz, keď hráč zachytí jedlo emoji, jeho emoji sa zmení na prehnane pozitívny výraz (napr. 🤩, 😆, 😋), aby naznačil úspech. Ak hráč náhodou zachytí bombu, emoji najprv ukáže výbuch (💥) a potom sa zmení na omámený výraz (😵‍💫)."
+        },
+        {
+          "title": "Vytvoriť graf dodávok smartfónov",
+          "value": "Použite React na vytvorenie krásneho čiarového grafu v rámci {{ARTIFACT}} na základe nasledujúcej tabuľky.\n------\n\nDodávky smartfónov podľa hlavných značiek za posledné desaťročie (v miliardách)\n\n| Rok | Samsung | Apple | Huawei | Xiaomi | OPPO |\n|------|---------|-------|--------|--------|------|\n| 2014 | 3.24 | 1.76 | 0.75 | 0.50 | 0.40 |\n| 2015 | 3.36 | 2.00 | 1.00 | 1.00 | 0.80 |\n| 2016 | 3.43 | 2.16 | 1.40 | 1.50 | 1.20 |\n| 2017 | 3.20 | 2.10 | 1.60  | 2.00 | 1.50 |\n| 2018 | 2.94 | 2.20 | 1.70 | 2.50 | 1.80 |\n| 2019 | 3.00 | 2.50 | 2.20 | 3.00 | 2.00 |\n| 2020 | 2.80 | 2.80 | 2.50 | 4.00 | 3.00 |\n| 2021 | 2.90 | 2.90 | 2.00 | 4.50 | 3.50 |\n| 2022 | 2.60 | 2.25 | 1.60 | 3.50 | 3.00 |\n| 2023 | 2.26 | 2.34 | 1.20 | 3.00 | 3.50 |"
+        }
+      ],
+      "desc": "Jednoducho vytvárajte a prezentujte obsah, ako sú webové stránky alebo vývojové diagramy, v novom okne. Zvýšte produktivitu s interakciami v reálnom čase a zameraným pracovným priestorom.",
+      "name": "Artefakty"
+    },
+    "create_image": {
+      "desc": "Vytvárajte vysoko kvalitné obrázky len opísaním toho, čo chcete. Generujte nové obrázky z textových popisov alebo transformujte a upravujte existujúce obrázky pomocou textových výziev. Náš nástroj okamžite oživí vaše nápady.",
+      "name": "Obrázok"
+    },
+    "data_analysis": {
+      "demos": [
+        {
+          "title": "Prečítajte údaje zo súboru a vytvorte koláčový graf zobrazujúci podiel rôznych rozpočtov na výdavky.",
+          "value": "Prečítajte údaje zo súboru a vytvorte koláčový graf zobrazujúci podiel rôznych rozpočtov na výdavky."
+        }
+      ],
+      "desc": "Spustite Python kód v reálnom čase pre pokročilú matematiku, štatistiku, strojové učenie a spracovanie dát, zjednodušujúc úlohy naprieč rôznymi formátmi.",
+      "name": "Analýza dát"
+    },
+    "search": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Aké sú najlepšie hodnotené filmy momentálne v kinách v USA?"
+        },
+        {
+          "title": "",
+          "value": "Ktoré akcie zaznamenali dnes výrazné zvýšenie?"
+        },
+        {
+          "title": "",
+          "value": "Aký je najvýznamnejší nový elektronický produkt uvedený na trh dnes?"
+        }
+      ],
+      "desc": "Prístup k aktuálnym poznatkom nad rámec predtrénovaných znalostných hraníc. Prostredníctvom hlbokej analýzy z viacerých zdrojov táto funkcia poskytuje presné interpretácie aktuálnych udalostí, trhových trendov a nových vývojov—umožňujúc lepšie rozhodnutia v našom rýchlo sa meniacom svete.",
+      "name": "Vyhľadávanie"
+    },
+    "text_to_image": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Navrhnite futuristický dizajn lietajúceho auta."
+        },
+        {
+          "title": "",
+          "value": "Nakreslite zlatého retrievera, ktorý beží po tráve."
+        },
+        {
+          "title": "",
+          "value": "Zobrazte staršiu ženu, ktorá si pokojne vychutnáva kávu."
+        }
+      ],
+      "desc": "Jednoducho opíšte, čo máte na mysli, a okamžite generujte vysoko kvalitné obrázky. Nie sú potrebné žiadne dizajnérske zručnosti – stačí vaša predstavivosť.",
+      "name": "Generovať obrázok"
+    },
+    "thinking_mode": {
+      "demos": [
+        {
+          "title": "",
+          "value": "Premýšľajte: 9.11 alebo 9.8, ktoré je väčšie"
+        },
+        {
+          "title": "",
+          "value": "Premýšľajte a napíšte funkciu na modelovanie teórie 'Šesť stupňov odlúčenia'. Vzhľadom na sociálnu sieť ako graf, nájdite najkratšiu cestu medzi dvoma ľuďmi."
+        }
+      ],
+      "desc": "Vylepšite akýkoľvek chatovací model pomocou výkonných schopností uvažovania DeepSeek R1. Keď je povolené, váš vybraný model dostane pokročilé spracovanie R1's Chain of Thought, čo poskytuje presnejšie, logickejšie a prehľadnejšie odpovede na zložité otázky. Stojí 1 extra pokročilý kredit na dotaz.",
+      "name": "Premýšľaj"
+    }
+  },
+  "toolsTitle": "Nástroje",
+  "toolsUpgradeContent": {
+    "content1": "Aktivujte chatovacie nástroje a odomknite silné funkcie.",
+    "content2": [
+      "Preskúmajte svetovú sieť bezproblémovo.",
+      "Premieňte svoje nápady na ohromujúce vizuály.",
+      "Prehĺbte sa do dát s odbornou analýzou."
+    ]
+  },
+  "toolsUpgradeTitle": "Vylepšite si svoje chatovacie skúsenosti!",
+  "toSlides": "Web na Prezentácie",
+  "toSlidesDesc": "Premeňte akúkoľvek webovú stránku na pripravenú prezentáciu jediným kliknutím.",
+  "total": "Celkom",
+  "transcriptFailed": "Generovanie prepisu zlyhalo",
+  "transcriptGenerated": "Prepis vygenerovaný",
+  "transcriptReady": "Prepis pripravený",
+  "translate": "Preložiť",
+  "translateBackInto": "Preložiť späť do: {{lang}}",
+  "translateInto": "Preložiť do: {{lang}}",
+  "trial": "Skúška",
+  "troubleshooting": "Riešenie problémov",
+  "tryArtifact": "Vyskúšajte {{ARTIFACTS}}",
+  "tryArtifactNow": "Vyskúšajte {{ARTIFACTS}} teraz",
+  "tryDemo": "Vyskúšajte demo",
+  "tryItNow": "Vyskúšajte to teraz",
+  "tryNow": "Vyskúšajte príklady",
+  "tryWisebaseTip": "Vyskúšajte chatovanie súborov vedľa seba",
+  "tryWisebaseTip2": "Čisté čítanie a chat v {{WISEBASE}}",
+  "tryWisebaseTip3": "Viac súborov? Pokračujte v {{WISEBASE}}",
+  "ttsDemo": "Ukážka",
+  "tweetit": "Sledujte nás na {{X}}",
+  "unarchive": "zrušiť archiváciu",
+  "unlimited": "Neobmedzené",
+  "unlimitedCredits": "Neobmedzené kredity",
+  "unlock": "Odomknúť",
+  "unlockFeatMsg": "Dosiahli ste limit svojho plánu. Inovujte teraz a odomknite všetky funkcie!",
+  "unpin": "odopnúť",
+  "unpublish": "Zrušiť zverejnenie",
+  "unpublishArtifact": "Zrušiť zverejnenie artefaktu",
+  "unrecognizedSpeaker": "Neznámy hovorca",
+  "updateNow": "Aktualizovať teraz",
+  "updateSuccess": "Aktualizácia úspešná",
+  "upgrade": "Inovovať",
+  "upgradeContent": {
+    "reader": {
+      "free": "Dosiahli ste limit bezplatnej kvóty. Inovujte pre vyššiu kvótu a odomknite pokročilé funkcie.",
+      "pro": "Dosiahli ste limit kvóty pre tento mesiac. Inovujte a získajte ďalšiu kvótu.",
+      "ultra": "Dosiahli ste limit kvóty pre tento mesiac. Ak chcete poskytnúť svoje návrhy, kontaktujte nás na adrese <a>care@sider.ai</a>."
+    }
+  },
+  "upgradeModal": {
+    "advancedModelUpgrade": "Vyžadujú sa pokročilé modely — pre odomknutie inovujte",
+    "allVoices": "Všetky hlasy",
+    "claude35SonnetDesc": "Claude 3.5 Sonnet je najnovší model od Anthropic, ktorý poskytuje dvojnásobnú rýchlosť oproti Claude 3 Opus a vyššiu inteligenciu, čo výrazne zlepšuje schopnosti v oblasti logického myslenia, vedomostí, programovania a vizuálnych úloh.",
+    "claude3OpusDesc": "Claude 3 Opus je pokročilá AI na riešenie zložitých úloh s výnimočnou efektívnosťou.",
+    "claude3SonnetDesc": "Claude 3 Sonnet je vylepšený jazykový model pre presnú, nuansovanú komunikáciu.",
+    "desc": "Viac kreditov a viac funkcií",
+    "fullFeatures": "Plné funkcie",
+    "fullFeaturesDesc": "Prístup k AI vyhľadávaniu, režimu premýšľania a Artifacts pre pokročilé úlohy a výskum.",
+    "getAllTTSVoices": "Odomknúť všetky hlasy",
+    "getAllTTSVoicesDesc": "Tento hlas je exkluzívny pre prémiových používateľov. Aktualizujte teraz, aby ste získali prístup ku všetkým hlasom.",
+    "getAllTTSVoicesDesc2": "Dosiahli ste limit skúšobnej verzie pre prémiové hlasy. Upgradujte teraz pre neobmedzený prístup k 9 prirodzene znejúcim AI hlasom alebo použite voľný hlas.",
+    "getWebAccess": "Inovujte a získajte webovú odpoveď",
+    "gpt4Desc": "GPT-4o je výrazne inteligentnejší a môže vám pomôcť získať logickejšie a presnejšie odpovede.",
+    "higherLimits": "Vyššie limity",
+    "higherLimitsDesc": "Jednoducho zvládnite dlhšiu a hlbšiu prácu.",
+    "hitLimitUpgrade": "Dosiahli ste limit vášho plánu",
+    "instantAccess": "Okamžitý prístup",
+    "instantAccessDesc": "Inovujte, aby ste získali viac kreditov a pokračovali vo svojej práci okamžite.",
+    "instantRefill": "Okamžité doplnenie",
+    "instantRefillDesc": "Inovujte teraz a získajte kredity okamžite — bez čakania.",
+    "off": "Zľava!",
+    "outOfCreditsUpgrade": "Kredity sú vyčerpané. Pre pokračovanie inovujte",
+    "powerfulModels": "Výkonné modely",
+    "powerfulModelsDesc": "Odomknite GPT-5, Claude a ďalšie pre rýchlejšie a presnejšie odpovede.",
+    "smarterReasoning": "Inteligentnejšie uvažovanie",
+    "smarterReasoningDesc": "Použite režim premýšľania a analýzu dlhého kontextu.",
+    "stableResults": "Stabilné výsledky",
+    "stableResultsDesc": "Viac kreditov, rýchlejší a konzistentný výstup.",
+    "stayUninterrupted": "Zostaňte neprerušení",
+    "stayUninterruptedDesc": "Pokračujte v chatovaní alebo výskume — všetok kontext a história zostávajú zachované.",
+    "tryAllVoices": "Neváhajte vyskúšať všetky hlasy",
+    "unlockModels": "Odomknite modely",
+    "unlockModelsDesc": "Získajte prístup k <list>GPT-5, Claude Sonnet a Gemini 2.5 Pro</list>.",
+    "upgradeToUseXXX": "Inovujte na používanie <b>bota</b>",
+    "videoSummaryDesc": "Dosiahli ste limit bezplatného používania. Ak chcete naďalej využívať túto funkciu, zvážte inováciu na prémiové členstvo.",
+    "videoSummay": "Inovujte na použitie súhrnu videa",
+    "webAccessDesc": "Sider získava odpovede na vaše otázky od spoločnosti Google a využíva AI na stručnú organizáciu a zhrnutie."
+  },
+  "upgradeNow": "Vylepšiť teraz",
+  "upgradeoff": "Inovácia {{NUM}}% zľava",
+  "upgradeTitle": {
+    "reader": {
+      "free": "Bádaj za hranicami možností!",
+      "pro": "Dosiahnutý limit kvóty",
+      "ultra": "Dosiahnutý limit kvóty"
+    }
+  },
+  "upgradeUnlock": "Vylepšite pre odomknutie teraz!",
+  "uploadImage": "Nahrajte obrázok",
+  "uploadLocal": "Nahrať z vášho počítača",
+  "upTo6file": "Nahrajte až 6 súborov",
+  "used": "Použité",
+  "usedIn": "Použité v",
+  "useFreeVoice": "Použiť voľný hlas",
+  "using": "Použitím",
+  "version": "Verzia",
+  "videoTutorial": "Zobraziť podrobnosti",
+  "vote": "Hlasujte",
+  "watchDemoVideo": "Sledujte ukážkové video",
+  "webAccess": "Webový prístup",
+  "webApp": "Web App",
+  "webAssistant": "Webový asistent",
+  "webEnhance": {
+    "askQuestionBtn": "Odpoveď",
+    "bilingual": "Dvojjazyčný",
+    "createShortenVideo": "Vytvoriť krátke video",
+    "displayTranslation": "Zobraziť preklad",
+    "expandAll": "Rozbaliť všetko",
+    "freeLimitTips": "Vaša bezplatná skúšobná verzia bola vyčerpaná, inovujte teraz, aby ste mohli naďalej používať funkciu súhrnu videa.",
+    "fullScreen": "Celá obrazovka",
+    "generatedBy": "Vygenerované používateľom {{name}}",
+    "hideHighlights": "Skryť zvýraznenia",
+    "hideSubtitles": "Skryť titulky",
+    "keyMomentsClickExpand": "Kliknite pre rozbalenie",
+    "keyMomentsCollapse": "Zbaliť",
+    "loginToAsk": "Prihláste sa do Ask",
+    "needLoginBilibiliTips": "Ak chcete zhrnúť video, prihláste sa do svojho účtu Bilibili a obnovte stránku",
+    "nextHighlight": "Nasledujúce zvýraznenie",
+    "noQuestionTip": "Aplikácii {{APP_NAME}} sa nepodarilo dostať problém na stránku.",
+    "noSubtitleTips": "Zhrnutie je momentálne dostupné len pre videá s titulkami.",
+    "originalSubtitles": "Pôvodné titulky",
+    "playbackSpeed": "Rýchlosť prehrávania",
+    "previousHighlight": "Predchádzajúce zvýraznenie",
+    "responseLanguage": "Jazyk odpovede",
+    "shareToComment": "Zdieľať na komentovanie",
+    "shortenVideoTips": "Preveďte toto video na stručné zhrňujúce video zachytávajúce kľúčové body!",
+    "showHighlights": "Zobraziť zvýraznenia",
+    "shownotes": "Najdôležitejšie",
+    "showSubtitles": "Zobraziť titulky",
+    "smartPlay": "Rýchly prehľad videa",
+    "smartPlayBtnTips": "Pozrite si krátke video, ktoré vám rýchlo poskytne najdôležitejšie informácie a ušetrí čas.",
+    "smartPlayCost": "Stojí 1 rýchly textový dotaz a 1 čitateľský dotaz, hlasové čítanie je účtované podľa spotreby",
+    "smartPlayOnlyCost": "hlasové čítanie je účtované podľa spotreby",
+    "smartPlayPlaybackEnded": "Prehrávanie zvýraznení skončilo",
+    "smartPlayReturnToCurrentProgress": "Vrátiť sa k aktuálnemu pokroku",
+    "smartPlaySwitchVoiceBtn": "Áno, prepnúť hlas",
+    "smartPlaySwitchVoiceCancel": "Nie, zrušiť",
+    "smartPlaySwitchVoiceContent": "Prechod na iný hlas znova odpočíta kredity na základe celkovej dĺžky skriptu videa. Video bude pokračovať z aktuálnej pozície. Chcete pokračovať?",
+    "smartPlaySwtichVoiceTitle": "Oznámenie o odpočítaní kreditov",
+    "subtitle": "Titulok",
+    "subtitleFailed": "Nepodarilo sa načítať titulky",
+    "subtitles": "Titulky",
+    "summary": "Zhrnúť",
+    "targetLanguage": "Cieľový jazyk",
+    "transcribing": "Prepisovanie",
+    "videoSummaryBtn": "Zhrnutie videa",
+    "videoSummaryCost": "Stojí 1 základný kredit a 1 dotaz čitateľa",
+    "videoSummaryMakeFullBtn": "Vytvoriť úplné zhrnutie",
+    "videoSummaryText": "Zhrnutie videa",
+    "videoTooLang": "Pre zhrnutie musia byť videá kratšie ako 10 hodín.",
+    "whisperCostText": "Toto video nemá externé titulky a vyžaduje prepis na zhrnutie. (1 Pokročilý kredit/10 minút alebo menej)"
+  },
+  "webStore": "Internetový obchod",
+  "welcome": "Vitajte",
+  "whatNew": "Novinky",
+  "whatsnewInvite": "Pozvať na vyskúšanie zadarmo",
+  "wisebase": {
+    "addCollection": "Pridať {{name}}",
+    "createAndSave": "Vytvoriť a uložiť",
+    "createFirstWisebaseDefaultName": "Moja {{WISEBASE_APP_NAME}}",
+    "createFirstWisebaseDesc": "{{WISEBASE_APP_NAME}} je AI znalostná databáza od Sider. Na webovej stránke Sider môžete jednoducho spravovať, prezerať a klásť otázky týkajúce sa vášho zhromaždeného obsahu.",
+    "createFirstWisebasePlaceholder": "Zadajte názov {{WISEBASE_APP_NAME}}",
+    "createFirstWisebaseTitle": "Vitajte pri vytváraní vašej prvej aplikácie {{WISEBASE_APP_NAME}}",
+    "editSavedPage": "Upraviť uloženú stránku",
+    "editSavedVideo": "Upraviť uložené video",
+    "errNameExists": "Názov už existuje",
+    "failedToDelete": "Nepodarilo sa odstrániť",
+    "failedToSave": "Nepodarilo sa uložiť",
+    "highlight": "Zvýrazniť",
+    "HighlightInvalid": "Zvýraznenia chýbajú",
+    "HighlightInvalidDesc": "V dôsledku zmien na tejto webovej stránke vaše zvýraznenia už nie sú viditeľné. Stále k nim máte prístup vo vašom <a>{{name}}</a>.",
+    "inbox": "AI Schránka",
+    "myWisebase": "Moje {{name}}",
+    "name": "Wisebase",
+    "pageRemoved": "Stránka odstránená",
+    "pageSaved": "Stránka uložená",
+    "removePage": "Odstrániť stránku?",
+    "removePageDesc": "Týmto sa odstráni stránka spolu s jej zvýrazneniami.",
+    "savedTo": "Uložené do: {{name}}",
+    "saveLoading": "Ukladanie...",
+    "saveNote": "Uložiť ako poznámku",
+    "savePage": "Uložiť stránku",
+    "saveTo": "Uložiť do {{name}}",
+    "saveVideo": "Uložiť video",
+    "saveVideoTo": "Uložiť video do {{WISEBASE_APP_NAME}}",
+    "saving": "Ukladanie",
+    "unableToHighlight": "Nie je možné zvýrazniť tento výber",
+    "unhighlight": "Zrušiť zvýraznenie",
+    "view": "Zobraziť",
+    "viewInSite": "Zobraziť na stránke",
+    "viewPageNoteTip": "Kliknite sem pre zobrazenie vašich uložených stránok a poznámok.",
+    "vistMyWisebase": "Otvoriť {{name}}"
+  },
+  "writing": "Písanie",
+  "xmasSale": "Vianočný výpredaj",
+  "yearlyPlan": "Ročný plán",
+  "you": "Ty",
+  "yourEmailAddress": "Vaša emailová adresa",
+  "zoomIn": "Priblížiť",
+  "zoomOut": "Oddialiť"
+}

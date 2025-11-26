@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Sider: Kalbėkitės su visais AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+  },
+  "appDesc": {
+    "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok visi vienoje AI šoninėje juostoje AI paieškai, skaitymui ir rašymui."
+  },
+  "appNameEdge": {
+    "message": "Šoninė juosta: ChatGPT šoninė juosta"
+  },
+  "appDescEdge": {
+    "message": "ChatGPT šoninė juosta: Naudokite ChatGPT, GPT-4o, Claude3, & Gemini pažangiai AI paieškai, skaitymui ir rašymui."
+  }
+}

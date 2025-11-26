@@ -1,0 +1,1 @@
+import{g as s}from"./F5AXRJSB.js";import{a as f}from"./4B6UFNBQ.js";import{f as u}from"./GAV6HCJA.js";var t=u(f());var g=e=>{let{isLogin:o}=s(),r=(0,t.useRef)(o),n=(0,t.useRef)(e);(0,t.useEffect)(()=>{n.current=e},[e]),(0,t.useEffect)(()=>{if(!o&&r.current){let c=n.current();return()=>{c&&c()}}r.current=o},[o])};export{g as a};
