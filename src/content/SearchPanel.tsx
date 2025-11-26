@@ -341,11 +341,12 @@ ${content}`;
     try {
       let fullPrompt = enhancedContext || chatInput;
 
-      // Extract fresh content based on source selection
-      if (source === "page" || source === "html") {
+      // **CRITICAL**: Always extract fresh content for page-related queries
+      if (source === "page" || source === "html" || !source) {
         setIsExtractingContent(true);
         const currentPageContent = await getPageContent(
-          source === "html" ? "html" : outputFormat
+          source === "html" ? "html" : "visible",
+          true // Force fresh extraction
         );
         setIsExtractingContent(false);
 
@@ -353,7 +354,7 @@ ${content}`;
 
 CURRENT PAGE CONTENT (freshly extracted from the ${
           source === "html" ? "HTML structure" : "visible text"
-        } of the page you're currently viewing):
+        } of the page you're currently viewing - URL: ${window.location.href}):
 ${currentPageContent}
 
 Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page: ${
