@@ -79,6 +79,26 @@ const HomeTab: React.FC<HomeTabProps> = ({
     }
   };
 
+  // Add current site
+  const addCurrentSite = async () => {
+    const url = window.location.href;
+    const name = document.title || "Current Page";
+
+    const newIcon: HomeIcon = {
+      id: Date.now().toString(),
+      name: name.length > 30 ? name.substring(0, 30) + "..." : name,
+      url,
+      folderId: homeData.currentFolderId,
+      createdAt: new Date().toISOString(),
+    };
+
+    const newData = {
+      ...homeData,
+      icons: [...homeData.icons, newIcon],
+    };
+    await saveHomeData(newData);
+  };
+
   // Sample data for testing
   const getSampleIcons = (): HomeIcon[] => [
     {
@@ -183,13 +203,13 @@ const HomeTab: React.FC<HomeTabProps> = ({
   };
 
   // Add new icon
-  const handleAddIcon = async (url: string, name: string) => {
-    if (!url || !name) return;
+  const handleAddIcon = async () => {
+    if (!newIconName.trim() || !newIconUrl.trim()) return;
 
     const newIcon: HomeIcon = {
       id: Date.now().toString(),
-      name,
-      url: url.startsWith("http") ? url : `https://${url}`,
+      name: newIconName,
+      url: newIconUrl.startsWith("http") ? newIconUrl : `https://${newIconUrl}`,
       folderId: homeData.currentFolderId,
       createdAt: new Date().toISOString(),
     };
@@ -198,17 +218,19 @@ const HomeTab: React.FC<HomeTabProps> = ({
       ...homeData,
       icons: [...homeData.icons, newIcon],
     };
-    saveHomeData(newData);
+    await saveHomeData(newData);
     setIsAddingIcon(false);
+    setNewIconName("");
+    setNewIconUrl("");
   };
 
   // Add new folder
-  const handleAddFolder = async (name: string) => {
-    if (!name) return;
+  const handleAddFolder = async () => {
+    if (!newFolderName.trim()) return;
 
     const newFolder: Folder = {
       id: Date.now().toString(),
-      name,
+      name: newFolderName,
       parentId: homeData.currentFolderId,
       createdAt: new Date().toISOString(),
     };
@@ -217,8 +239,9 @@ const HomeTab: React.FC<HomeTabProps> = ({
       ...homeData,
       folders: [...homeData.folders, newFolder],
     };
-    saveHomeData(newData);
+    await saveHomeData(newData);
     setIsAddingFolder(false);
+    setNewFolderName("");
   };
 
   // Delete icon
@@ -255,7 +278,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "0.5rem",
+            marginBottom: "0.75rem",
           }}
         >
           <div
@@ -355,18 +378,21 @@ const HomeTab: React.FC<HomeTabProps> = ({
           </div>
         )}
 
-        {/* Search and Add */}
+        {/* Search and Add Buttons */}
         <div
           style={{
             display: "flex",
             gap: "0.5rem",
             alignItems: "center",
+            flexWrap: "wrap",
           }}
         >
+          {/* Search */}
           <div
             style={{
               position: "relative",
               flex: 1,
+              minWidth: "150px",
             }}
           >
             <input
@@ -404,6 +430,23 @@ const HomeTab: React.FC<HomeTabProps> = ({
             )}
           </div>
 
+          {/* Quick Add Current Site */}
+          <button
+            onClick={addCurrentSite}
+            style={{
+              padding: "0.5rem 0.75rem",
+              borderRadius: "0.5rem",
+              border: "1px solid rgba(234, 179, 8, 0.4)",
+              background: "rgba(234, 179, 8, 0.1)",
+              color: "#fbbf24",
+              fontSize: "0.75rem",
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            ⭐ Add Current
+          </button>
+
           <button
             onClick={() => setIsAddingIcon(!isAddingIcon)}
             style={{
@@ -414,9 +457,10 @@ const HomeTab: React.FC<HomeTabProps> = ({
               color: "#86efac",
               fontSize: "0.75rem",
               cursor: "pointer",
+              whiteSpace: "nowrap",
             }}
           >
-            ➕ Add Icon
+            ➕ Add Site
           </button>
 
           <button
@@ -429,6 +473,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
               color: "#93c5fd",
               fontSize: "0.75rem",
               cursor: "pointer",
+              whiteSpace: "nowrap",
             }}
           >
             📁 Add Folder
@@ -450,14 +495,17 @@ const HomeTab: React.FC<HomeTabProps> = ({
               display: "flex",
               gap: "0.5rem",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <input
               type="text"
+              value={newIconName}
+              onChange={(e) => setNewIconName(e.target.value)}
               placeholder="Site name (e.g., Google)"
-              id="iconName"
               style={{
                 flex: 1,
+                minWidth: "120px",
                 padding: "0.5rem",
                 borderRadius: "0.375rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
@@ -468,10 +516,12 @@ const HomeTab: React.FC<HomeTabProps> = ({
             />
             <input
               type="text"
+              value={newIconUrl}
+              onChange={(e) => setNewIconUrl(e.target.value)}
               placeholder="URL (e.g., google.com)"
-              id="iconUrl"
               style={{
                 flex: 1,
+                minWidth: "120px",
                 padding: "0.5rem",
                 borderRadius: "0.375rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
@@ -481,15 +531,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
               }}
             />
             <button
-              onClick={() => {
-                const name = (
-                  document.getElementById("iconName") as HTMLInputElement
-                )?.value;
-                const url = (
-                  document.getElementById("iconUrl") as HTMLInputElement
-                )?.value;
-                handleAddIcon(url, name);
-              }}
+              onClick={handleAddIcon}
               style={{
                 padding: "0.5rem 1rem",
                 borderRadius: "0.375rem",
@@ -498,12 +540,17 @@ const HomeTab: React.FC<HomeTabProps> = ({
                 color: "#86efac",
                 fontSize: "0.8rem",
                 cursor: "pointer",
+                whiteSpace: "nowrap",
               }}
             >
               Add
             </button>
             <button
-              onClick={() => setIsAddingIcon(false)}
+              onClick={() => {
+                setIsAddingIcon(false);
+                setNewIconName("");
+                setNewIconUrl("");
+              }}
               style={{
                 padding: "0.5rem",
                 borderRadius: "0.375rem",
@@ -534,14 +581,17 @@ const HomeTab: React.FC<HomeTabProps> = ({
               display: "flex",
               gap: "0.5rem",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
           >
             <input
               type="text"
+              value={newFolderName}
+              onChange={(e) => setNewFolderName(e.target.value)}
               placeholder="Folder name (e.g., Work)"
-              id="folderName"
               style={{
                 flex: 1,
+                minWidth: "120px",
                 padding: "0.5rem",
                 borderRadius: "0.375rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
@@ -551,12 +601,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
               }}
             />
             <button
-              onClick={() => {
-                const name = (
-                  document.getElementById("folderName") as HTMLInputElement
-                )?.value;
-                handleAddFolder(name);
-              }}
+              onClick={handleAddFolder}
               style={{
                 padding: "0.5rem 1rem",
                 borderRadius: "0.375rem",
@@ -565,12 +610,16 @@ const HomeTab: React.FC<HomeTabProps> = ({
                 color: "#93c5fd",
                 fontSize: "0.8rem",
                 cursor: "pointer",
+                whiteSpace: "nowrap",
               }}
             >
               Add
             </button>
             <button
-              onClick={() => setIsAddingFolder(false)}
+              onClick={() => {
+                setIsAddingFolder(false);
+                setNewFolderName("");
+              }}
               style={{
                 padding: "0.5rem",
                 borderRadius: "0.375rem",
@@ -587,7 +636,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
         </div>
       )}
 
-      {/* Content Grid */}
+      {/* Content Grid - Phone Style Layout */}
       <div
         style={{
           flex: 1,
@@ -613,8 +662,8 @@ const HomeTab: React.FC<HomeTabProps> = ({
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
-                gap: "0.75rem",
+                gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+                gap: "0.5rem",
                 marginBottom: "1rem",
               }}
             >
@@ -623,7 +672,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
                   key={folder.id}
                   onClick={() => navigateToFolder(folder.id)}
                   style={{
-                    padding: "1rem 0.75rem",
+                    padding: "0.75rem 0.5rem",
                     borderRadius: "0.75rem",
                     border: "1px solid rgba(71, 85, 105, 0.6)",
                     background: "rgba(15, 23, 42, 0.8)",
@@ -634,20 +683,24 @@ const HomeTab: React.FC<HomeTabProps> = ({
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "0.5rem",
+                    gap: "0.25rem",
                   }}
                 >
                   <div
                     style={{
-                      fontSize: "1.5rem",
+                      fontSize: "1.25rem",
                     }}
                   >
                     📁
                   </div>
                   <div
                     style={{
-                      fontSize: "0.8rem",
+                      fontSize: "0.75rem",
                       fontWeight: 500,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      width: "100%",
                     }}
                   >
                     {folder.name}
@@ -676,8 +729,8 @@ const HomeTab: React.FC<HomeTabProps> = ({
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
-                gap: "0.75rem",
+                gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+                gap: "0.5rem",
               }}
             >
               {filteredIcons.map((icon) => (
@@ -685,7 +738,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
                   key={icon.id}
                   style={{
                     position: "relative",
-                    padding: "1rem 0.75rem",
+                    padding: "0.75rem 0.5rem",
                     borderRadius: "0.75rem",
                     border: "1px solid rgba(71, 85, 105, 0.6)",
                     background: "rgba(15, 23, 42, 0.8)",
@@ -695,7 +748,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "0.5rem",
+                    gap: "0.25rem",
                   }}
                   onClick={() => handleIconClick(icon)}
                 >
@@ -706,15 +759,15 @@ const HomeTab: React.FC<HomeTabProps> = ({
                     }}
                     style={{
                       position: "absolute",
-                      top: "0.5rem",
-                      right: "0.5rem",
-                      width: "20px",
-                      height: "20px",
+                      top: "0.25rem",
+                      right: "0.25rem",
+                      width: "18px",
+                      height: "18px",
                       borderRadius: "50%",
                       border: "none",
                       background: "rgba(239, 68, 68, 0.8)",
                       color: "white",
-                      fontSize: "0.7rem",
+                      fontSize: "0.6rem",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -722,20 +775,26 @@ const HomeTab: React.FC<HomeTabProps> = ({
                       opacity: 0,
                       transition: "opacity 0.2s ease",
                     }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = "0";
+                    }}
                   >
                     ✕
                   </button>
 
                   <div
                     style={{
-                      width: "32px",
-                      height: "32px",
+                      width: "28px",
+                      height: "28px",
                       borderRadius: "8px",
                       background: "rgba(59, 130, 246, 0.2)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "1.2rem",
+                      fontSize: "1rem",
                       border: "1px solid rgba(59, 130, 246, 0.4)",
                     }}
                   >
@@ -744,8 +803,8 @@ const HomeTab: React.FC<HomeTabProps> = ({
                         src={icon.iconUrl}
                         alt={icon.name}
                         style={{
-                          width: "24px",
-                          height: "24px",
+                          width: "20px",
+                          height: "20px",
                           borderRadius: "4px",
                         }}
                         onError={(e) => {
@@ -766,7 +825,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
 
                   <div
                     style={{
-                      fontSize: "0.8rem",
+                      fontSize: "0.7rem",
                       fontWeight: 500,
                       color: "#e2e8f0",
                       overflow: "hidden",
@@ -815,8 +874,23 @@ const HomeTab: React.FC<HomeTabProps> = ({
                   display: "flex",
                   gap: "0.5rem",
                   justifyContent: "center",
+                  flexWrap: "wrap",
                 }}
               >
+                <button
+                  onClick={addCurrentSite}
+                  style={{
+                    padding: "0.5rem 1rem",
+                    borderRadius: "0.5rem",
+                    border: "1px solid rgba(234, 179, 8, 0.4)",
+                    background: "rgba(234, 179, 8, 0.1)",
+                    color: "#fbbf24",
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  ⭐ Add Current Site
+                </button>
                 <button
                   onClick={() => setIsAddingIcon(true)}
                   style={{
@@ -829,7 +903,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
                     cursor: "pointer",
                   }}
                 >
-                  Add Your First Site
+                  ➕ Add Manual Site
                 </button>
               </div>
             )}
