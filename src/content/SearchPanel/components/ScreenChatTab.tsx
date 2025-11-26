@@ -161,11 +161,11 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
       let response: string | null = null;
 
       // Use Google Cloud Vision API for image analysis
-      if (provider === "google" && apiKeyData.googleApiKey) {
+      if (provider === "google" && apiKeyData.googleVisionApiKey) {
         try {
           // Google Cloud Vision API
           const visionResponse = await fetch(
-            `https://vision.googleapis.com/v1/images:annotate?key=${apiKeyData.googleApiKey}`,
+            `https://vision.googleapis.com/v1/images:annotate?key=${apiKeyData.googleVisionApiKey}`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -203,19 +203,23 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
           response = visionResults;
         } catch (visionError) {
           console.error("Google Cloud Vision API error:", visionError);
-          // Fall back to Gemini if vision API fails
-          if (apiKeyData.googleApiKey) {
-            const fallbackResponse = await generateFormResponse(
-              `You are analyzing a screenshot. The user asks: "${message}". Please analyze what you can see in this screenshot and provide a helpful response about the visible content, UI elements, text, and overall interface.`
-            );
-            response = fallbackResponse;
-          } else {
-            throw new Error("No Google API key available for fallback");
-          }
+          throw new Error(
+            `Vision API error: ${visionError.message}. Please check your Google Cloud Vision API key and try again.`
+          );
         }
+      } else if (
+        provider === "google" &&
+        !apiKeyData.googleVisionApiKey &&
+        apiKeyData.googleApiKey
+      ) {
+        // Has Google AI key but no Vision API key
+        const fallbackResponse = await generateFormResponse(
+          `You are analyzing a screenshot. The user asks: "${message}". Please analyze what you can see in this screenshot and provide a helpful response about the visible content, UI elements, text, and overall interface. Note: Google Cloud Vision API not configured - this is a text-based analysis.`
+        );
+        response = fallbackResponse;
       } else {
         // Non-Google providers or no API key - use text model with description
-        const prompt = `You are analyzing a screenshot. The user asks: "${message}". Please provide a helpful response about what you would expect to see in a typical screenshot analysis, including UI elements, layout suggestions, and general visual guidance. Note: This is a text-only analysis since no vision API is available.`;
+        const prompt = `You are analyzing a screenshot. The user asks: "${message}". Please provide a helpful response about what you would expect to see in a typical screenshot analysis, including UI elements, layout suggestions, and general visual guidance. Note: This is a text-only analysis since Google Cloud Vision API is not available.`;
 
         response = await generateFormResponse(prompt);
       }
