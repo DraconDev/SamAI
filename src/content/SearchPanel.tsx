@@ -20,190 +20,112 @@ import type { ScrapeResultFormat } from "./SearchPanel/types";
 // Define ChatSource locally since it's not exported
 type ChatSource = "none" | "page" | "html" | "screen" | "video";
 
-// Function to auto-enable transcript by clicking buttons
-const autoEnableTranscript = async (): Promise<void> => {
-  console.log("[SamAI] Auto-enabling transcript...");
+// AI-powered button finder function
+const findButtonWithAI = async (
+  buttonDescription: string
+): Promise<HTMLElement | null> => {
+  try {
+    console.log(`[SamAI] Using AI to find: ${buttonDescription}`);
 
-  // Step 1: Try to find and click the "more" (three dots) button first
-  const moreButtonSelectors = [
-    // YouTube video info section more button
-    "ytd-video-secondary-info-renderer #button",
-    "ytd-video-secondary-info-renderer yt-button-shape button",
-    "ytd-video-secondary-info-renderer tp-yt-paper-icon-button",
-    // Alternative selectors
-    'button[aria-label*="more"]',
-    'button[aria-label*="More"]',
-    '[aria-expanded="false"] + button',
-    // Generic more buttons
-    'button[title*="more"]',
-    'button[title*="More"]',
-    // Try common YouTube elements
-    "#top-level-buttons-computed button:last-child",
-    "tp-yt-paper-icon-button",
-    "yt-button-shape button",
-  ];
+    // Extract current HTML content for AI analysis
+    const htmlContent = document.documentElement.outerHTML;
 
-  let moreButtonClicked = false;
+    const prompt = `I need you to analyze this YouTube page HTML and find the exact CSS selector for a specific button. 
 
-  for (const selector of moreButtonSelectors) {
+Button to find: "${buttonDescription}"
+
+Please examine the HTML and return ONLY a valid CSS selector string that can be used with document.querySelector() to find this button. 
+
+Look for:
+- The button's role in opening a menu for video actions/options
+- Any button with "more", "show transcript", "transcript", "caption", or similar functionality
+- Consider the button's aria-labels, titles, and surrounding structure
+- Return the most specific and reliable CSS selector possible
+
+Return ONLY the CSS selector string, nothing else.`;
+
+    const response = await generateFormResponse(prompt);
+
+    if (!response || !response.trim()) {
+      console.log("[SamAI] AI did not return a valid selector");
+      return null;
+    }
+
+    const selector = response.trim();
+    console.log(`[SamAI] AI found selector: ${selector}`);
+
+    // Try to find the button using the AI-provided selector
     const button = document.querySelector(selector) as HTMLElement;
-    if (button && !moreButtonClicked) {
-      // Check if this looks like a menu trigger button
-      const ariaLabel = button.getAttribute("aria-label") || "";
-      const title = button.getAttribute("title") || "";
-      const text = button.textContent || "";
 
-      const looksLikeMenuButton =
-        ariaLabel.toLowerCase().includes("more") ||
-        title.toLowerCase().includes("more") ||
-        text.toLowerCase().includes("more") ||
-        button.querySelector('[data-icon="more_vert"]') ||
-        button.querySelector('[data-icon="expand_more"]');
-
-      if (looksLikeMenuButton) {
-        console.log(`[SamAI] Found more button: ${selector}`);
-        console.log(`[SamAI] More button aria-label: "${ariaLabel}"`);
-        console.log(`[SamAI] More button title: "${title}"`);
-        try {
-          button.click();
-          moreButtonClicked = true;
-          console.log("[SamAI] Clicked more button, waiting for menu...");
-          await new Promise((resolve) => setTimeout(resolve, 1500));
-          break;
-        } catch (error) {
-          console.log(`[SamAI] Could not click more button:`, error);
-        }
-      }
-    }
-  }
-
-  // If no more button was found with selectors, try a different approach - look for any button with three dots
-  if (!moreButtonClicked) {
-    console.log("[SamAI] Trying fallback method for more button...");
-    const allButtons = document.querySelectorAll(
-      "button, yt-button-shape button"
-    );
-
-    for (const button of allButtons) {
-      const ariaLabel = button.getAttribute("aria-label") || "";
-      const title = button.getAttribute("title") || "";
-      const text = button.textContent || "";
-
-      // Check for three dots icon in the button
-      const icon =
-        button.querySelector('[data-icon="more_vert"]') ||
-        button.querySelector('[data-icon="expand_more"]') ||
-        button.querySelector('[data-icon="more"]');
-
-      if (
-        icon ||
-        ariaLabel.toLowerCase().includes("more") ||
-        title.toLowerCase().includes("more") ||
-        ariaLabel.toLowerCase().includes("action") ||
-        title.toLowerCase().includes("action")
-      ) {
-        console.log(`[SamAI] Found potential more button with fallback method`);
-        console.log(`[SamAI] Button aria-label: "${ariaLabel}"`);
-        console.log(`[SamAI] Button title: "${title}"`);
-        console.log(`[SamAI] Button text: "${text}"`);
-        try {
-          (button as HTMLElement).click();
-          moreButtonClicked = true;
-          console.log(
-            "[SamAI] Clicked more button via fallback, waiting for menu..."
-          );
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-          break;
-        } catch (error) {
-          console.log(`[SamAI] Could not click fallback more button:`, error);
-        }
-      }
-    }
-  }
-
-  // Step 2: Search all buttons for transcript-related text content
-  const allButtons = document.querySelectorAll(
-    "button, yt-button-shape button, paper-button, .ytp-button"
-  );
-  let transcriptButtonFound = false;
-
-  for (const button of allButtons) {
-    const text = button.textContent?.toLowerCase().trim() || "";
-    const ariaLabel = button.getAttribute("aria-label")?.toLowerCase() || "";
-    const title = button.getAttribute("title")?.toLowerCase() || "";
-
-    const fullText = `${text} ${ariaLabel} ${title}`;
-
-    if (
-      fullText.includes("transcript") ||
-      fullText.includes("show captions") ||
-      fullText.includes("closed captions") ||
-      fullText.includes("subtitles")
-    ) {
+    if (button) {
       console.log(
-        `[SamAI] Found transcript button by content: "${
-          text || ariaLabel || title
+        `[SamAI] Successfully found button with AI selector: ${selector}`
+      );
+      console.log(
+        `[SamAI] Button aria-label: "${
+          button.getAttribute("aria-label") || "none"
         }"`
       );
-      try {
-        (button as HTMLElement).click();
-        transcriptButtonFound = true;
-        console.log("[SamAI] Clicked transcript button by content");
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        return;
-      } catch (error) {
-        console.log(`[SamAI] Could not click transcript button:`, error);
-      }
+      console.log(
+        `[SamAI] Button title: "${button.getAttribute("title") || "none"}"`
+      );
+      console.log(
+        `[SamAI] Button text: "${button.textContent?.trim() || "none"}"`
+      );
+      return button;
+    } else {
+      console.log(`[SamAI] AI selector found no element: ${selector}`);
+      return null;
     }
+  } catch (error) {
+    console.error(`[SamAI] Error using AI to find button: ${error}`);
+    return null;
   }
+};
 
-  // Step 3: Alternative approach - try to click CC button and then try transcript
-  if (!transcriptButtonFound) {
-    for (const button of allButtons) {
-      const text = button.textContent?.toLowerCase() || "";
-      const ariaLabel = button.getAttribute("aria-label")?.toLowerCase() || "";
-      const icon =
-        button.querySelector("[data-icon]")?.getAttribute("data-icon") || "";
+// Function to auto-enable transcript using AI-powered button finding
+const autoEnableTranscript = async (): Promise<void> => {
+  console.log("[SamAI] Auto-enabling transcript using AI-powered approach...");
 
-      if (
-        text.includes("cc") ||
-        text.includes("closed caption") ||
-        ariaLabel.includes("cc") ||
-        icon === "closed_caption"
-      ) {
-        console.log(`[SamAI] Found CC button, clicking to enable captions...`);
-        try {
-          (button as HTMLElement).click();
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          break;
-        } catch (error) {
-          console.log(`[SamAI] Could not click CC button:`, error);
-        }
-      }
-    }
-  }
-
-  // Step 4: Try direct aria-label buttons
-  const ariaButtons = document.querySelectorAll(
-    'button[aria-label*="transcript"], button[aria-label*="caption"], button[aria-label*="subtitle"]'
+  // Step 1: Use AI to find and click the "more" (three dots) button
+  const moreButton = await findButtonWithAI(
+    "YouTube's 'more options' button (three dots) in the video description area that opens a menu with video options"
   );
-  for (const button of ariaButtons) {
-    console.log(
-      `[SamAI] Found transcript button by aria-label: ${button.getAttribute(
-        "aria-label"
-      )}`
-    );
+
+  if (moreButton) {
     try {
-      (button as HTMLElement).click();
-      console.log("[SamAI] Clicked transcript button by aria-label");
+      console.log("[SamAI] Clicking more button...");
+      moreButton.click();
+      console.log("[SamAI] Clicked more button, waiting for menu to appear...");
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      return;
     } catch (error) {
-      console.log(`[SamAI] Could not click aria-label button:`, error);
+      console.log(`[SamAI] Could not click more button: ${error}`);
     }
+  } else {
+    console.log("[SamAI] Could not find more button with AI");
   }
 
-  console.log("[SamAI] Auto-enable transcript process completed");
+  // Step 2: Use AI to find and click the "show transcript" button
+  const transcriptButton = await findButtonWithAI(
+    "YouTube's 'Show transcript' button or any button that enables video captions/subtitles/transcript"
+  );
+
+  if (transcriptButton) {
+    try {
+      console.log("[SamAI] Clicking transcript button...");
+      transcriptButton.click();
+      console.log(
+        "[SamAI] Clicked transcript button, waiting for transcript to load..."
+      );
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+    } catch (error) {
+      console.log(`[SamAI] Could not click transcript button: ${error}`);
+    }
+  } else {
+    console.log("[SamAI] Could not find transcript button with AI");
+  }
+
+  console.log("[SamAI] AI-powered auto-enable transcript process completed");
 };
 
 // Video transcript extraction function
