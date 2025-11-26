@@ -634,7 +634,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
             }}
           >
             <form
-              onSubmit={onSubmit}
+              onSubmit={handleSubmitWithScreenshot}
               style={{
                 display: "flex",
                 flexDirection: "column",
