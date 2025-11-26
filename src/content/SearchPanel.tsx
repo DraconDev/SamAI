@@ -345,7 +345,7 @@ ${content}`;
       if (source === "page" || source === "html" || !source) {
         setIsExtractingContent(true);
         const currentPageContent = await getPageContent(
-          source === "html" ? "html" : "visible",
+          source === "html" ? "html" : outputFormat,
           true // Force fresh extraction
         );
         setIsExtractingContent(false);
