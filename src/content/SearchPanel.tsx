@@ -5,7 +5,6 @@ import {
 } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import React, { useRef, useState } from "react";
-import type { ChatSource } from "./SearchPanel/components";
 import {
   ChatTab,
   FormTab,
@@ -17,6 +16,9 @@ import {
   type TabId,
 } from "./SearchPanel/components";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
+
+// Define ChatSource locally since it's not exported
+type ChatSource = "none" | "page" | "html" | "screen";
 
 interface SearchPanelProps {
   response: string | null;
