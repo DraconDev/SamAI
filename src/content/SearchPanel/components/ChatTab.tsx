@@ -1,7 +1,8 @@
 import { LoadingSpinner } from "@/src/components/ui/LoadingSpinner";
 import { MarkdownRenderer } from "@/utils/markdown";
 import type { OutputFormat } from "@/utils/page-content";
-import React, { useEffect } from "react";
+import { apiKeyStore } from "@/utils/store";
+import React, { useEffect, useState } from "react";
 import type { ChatMessage } from "../types";
 
 type ChatSource = "none" | "page" | "html" | "screen";
@@ -25,17 +26,279 @@ export const ChatTab: React.FC<ChatTabProps> = ({
   isChatLoading,
   chatMessages,
   chatInput,
-  includePageContent,
   outputFormat,
   messagesEndRef,
   onInputChange,
   onSubmit,
-  onIncludePageContentChange,
   onOpenApiKey,
 }) => {
+  const [chatSource, setChatSource] = useState<ChatSource>("none");
+  const [screenImage, setScreenImage] = useState<string | null>(null);
+  const [isCapturingScreen, setIsCapturingScreen] = useState(false);
+  const [isVisionApiKeySet, setIsVisionApiKeySet] = useState(false);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
+
+  // Check for vision API key
+  useEffect(() => {
+    const checkVisionApiKey = async () => {
+      try {
+        const apiKeyData = await apiKeyStore.getValue();
+        setIsVisionApiKeySet(!!apiKeyData.googleVisionApiKey);
+      } catch (error) {
+        console.error("Error checking Vision API key:", error);
+        setIsVisionApiKeySet(false);
+      }
+    };
+    checkVisionApiKey();
+  }, []);
+
+  // Screen capture functionality
+  const captureScreenshot = async () => {
+    try {
+      setIsCapturingScreen(true);
+
+      const response = await new Promise<string>((resolve, reject) => {
+        chrome.runtime.sendMessage({ type: "captureScreenshot" }, (result) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else if (result) {
+            resolve(result);
+          } else {
+            reject(new Error("No screenshot received"));
+          }
+        });
+      });
+
+      setScreenImage(response);
+      setChatSource("screen");
+    } catch (error) {
+      console.error("Screenshot capture failed:", error);
+      alert("Failed to capture screenshot. Please try again.");
+    } finally {
+      setIsCapturingScreen(false);
+    }
+  };
+
+  // Vision analysis for screenshots
+  const analyzeScreenshot = async (message: string, base64Image: string) => {
+    try {
+      const apiKeyData = await apiKeyStore.getValue();
+
+      if (!apiKeyData.googleVisionApiKey) {
+        throw new Error("Google Cloud Vision API key not configured");
+      }
+
+      const visionResponse = await fetch(
+        `https://vision.googleapis.com/v1/images:annotate?key=${apiKeyData.googleVisionApiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            requests: [
+              {
+                image: {
+                  content: base64Image,
+                },
+                features: [
+                  { type: "LABEL_DETECTION", maxResults: 10 },
+                  { type: "TEXT_DETECTION", maxResults: 10 },
+                  { type: "OBJECT_LOCALIZATION", maxResults: 10 },
+                  { type: "FACE_DETECTION", maxResults: 5 },
+                  { type: "LOGO_DETECTION", maxResults: 5 },
+                ],
+              },
+            ],
+          }),
+        }
+      );
+
+      if (!visionResponse.ok) {
+        throw new Error(`Vision API error: ${visionResponse.status}`);
+      }
+
+      const visionData = await visionResponse.json();
+      const annotations = visionData.responses?.[0];
+
+      if (!annotations) {
+        throw new Error("No vision data received");
+      }
+
+      // Process vision results for visual elements
+      let analysis = "";
+
+      // Detect visual elements
+      if (
+        annotations.localizedObjectAnnotations &&
+        annotations.localizedObjectAnnotations.length > 0
+      ) {
+        analysis += "**Visual elements I can identify:**\n";
+        const topObjects = annotations.localizedObjectAnnotations.slice(0, 5);
+        analysis +=
+          topObjects.map((obj: any) => `• ${obj.name}`).join("\n") + "\n\n";
+      }
+
+      // Detect images and visual content
+      const visualLabels = annotations.labelAnnotations?.filter(
+        (label: any) => {
+          const desc = label.description.toLowerCase();
+          const visualTerms = [
+            "photo",
+            "image",
+            "picture",
+            "drawing",
+            "painting",
+            "artwork",
+            "diagram",
+            "chart",
+            "map",
+            "portrait",
+            "landscape",
+            "architecture",
+            "building",
+            "vehicle",
+            "food",
+            "nature",
+            "flower",
+            "tree",
+            "mountain",
+            "ocean",
+            "sky",
+            "clouds",
+            "screenshot",
+          ];
+          return (
+            visualTerms.some((term) => desc.includes(term)) && label.score > 0.5
+          );
+        }
+      );
+
+      if (visualLabels && visualLabels.length > 0) {
+        analysis += "**Visual content I can see:**\n";
+        const topVisualLabels = visualLabels.slice(0, 5);
+        analysis +=
+          topVisualLabels
+            .map((label: any) => `• ${label.description}`)
+            .join("\n") + "\n\n";
+      }
+
+      // Detect logos
+      if (
+        annotations.logoAnnotations &&
+        annotations.logoAnnotations.length > 0
+      ) {
+        analysis += "**Brands/Logos I can identify:**\n";
+        analysis +=
+          annotations.logoAnnotations
+            .map((logo: any) => `• ${logo.description}`)
+            .join("\n") + "\n\n";
+      }
+
+      // Detect people
+      if (
+        annotations.faceAnnotations &&
+        annotations.faceAnnotations.length > 0
+      ) {
+        analysis += `I can see ${annotations.faceAnnotations.length} person${
+          annotations.faceAnnotations.length > 1 ? "s" : ""
+        } in this image.\n\n`;
+      }
+
+      // Detect animals
+      if (message.toLowerCase().includes("animal")) {
+        const animalLabels = annotations.labelAnnotations?.filter(
+          (label: any) =>
+            [
+              "cat",
+              "dog",
+              "bird",
+              "fish",
+              "horse",
+              "cow",
+              "pig",
+              "sheep",
+              "goat",
+              "rabbit",
+              "bear",
+              "lion",
+              "tiger",
+              "elephant",
+              "giraffe",
+              "zebra",
+              "kangaroo",
+              "penguin",
+              "dolphin",
+              "whale",
+              "shark",
+            ].includes(label.description.toLowerCase())
+        );
+
+        if (animalLabels && animalLabels.length > 0) {
+          analysis += `I can see **${animalLabels[0].description}** in your screenshot.\n\n`;
+        } else {
+          analysis +=
+            "I don't see any animals clearly visible in this screenshot.\n\n";
+        }
+      }
+
+      // Minimal text info if specifically asked
+      if (
+        message.toLowerCase().includes("text") ||
+        message.toLowerCase().includes("read")
+      ) {
+        if (
+          annotations.textAnnotations &&
+          annotations.textAnnotations.length > 0
+        ) {
+          const fullText = annotations.textAnnotations[0]?.description || "";
+          if (fullText.trim()) {
+            analysis += "**Some readable text is visible** in the image.\n\n";
+          }
+        }
+      }
+
+      analysis += "**Visual Summary:**\n";
+      analysis +=
+        "I've analyzed the visual elements in your screenshot. This screen contains various visual content, UI components, or interface elements that I can identify.";
+
+      return analysis;
+    } catch (error) {
+      console.error("Vision analysis error:", error);
+      throw error;
+    }
+  };
+
+  // Enhanced submit handler that includes screenshot analysis
+  const handleSubmitWithScreenshot = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isApiKeySet || !chatInput.trim() || isChatLoading) return;
+
+    const userMessage = {
+      role: "user" as const,
+      content: chatInput,
+      timestamp: new Date().toLocaleTimeString(),
+    };
+
+    // Add user message immediately
+    // We'll handle the response in the parent component via onSubmit
+
+    onSubmit(e);
+
+    // If screen source is selected, analyze screenshot
+    if (chatSource === "screen" && screenImage) {
+      try {
+        const base64Image = screenImage.split(",")[1];
+        const visionAnalysis = await analyzeScreenshot(chatInput, base64Image);
+
+        // Add vision analysis as assistant message (this would need to be handled by parent)
+        console.log("Vision analysis:", visionAnalysis);
+      } catch (error) {
+        console.error("Error analyzing screenshot:", error);
+      }
+    }
+  };
 
   const renderMessages = () => {
     if (chatMessages.length === 0) {
@@ -83,11 +346,11 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 color: "#e2e8f0",
               }}
             >
-              Chat is ready
+              Unified Chat Assistant
             </div>
             <p style={{ fontSize: "0.85rem" }}>
-              Ask anything about the page and SamAI will respond with
-              context-aware answers.
+              Choose your chat source below and ask anything about the page or
+              your screen.
             </p>
           </div>
         </div>
@@ -215,10 +478,10 @@ export const ChatTab: React.FC<ChatTabProps> = ({
             <div
               style={{ fontSize: "0.9rem", fontWeight: 700, color: "#34d399" }}
             >
-              Page Chat Assistant
+              Unified Chat Assistant
             </div>
             <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
-              Ask focused questions about the current page
+              Chat with page content or screenshots
             </div>
           </div>
         </div>
@@ -246,7 +509,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 animation: "samai-spin 0.6s linear infinite",
               }}
             />
-            Reading page…
+            Processing…
           </div>
         )}
       </div>
@@ -305,7 +568,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 marginBottom: "1.25rem",
               }}
             >
-              Configure your Gemini API key to start chatting with page context.
+              Configure your Gemini API key to start chatting with page context
+              or screenshots.
             </p>
             <button
               onClick={onOpenApiKey}
@@ -377,40 +641,91 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                 gap: "0.5rem",
               }}
             >
+              {/* Source Selection */}
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
+                  gap: "0.5rem",
                   marginBottom: "0.25rem",
+                  flexWrap: "wrap",
                 }}
               >
-                <label
+                <span
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
                     fontSize: "0.8rem",
                     color: "#cbd5f5",
+                    marginRight: "0.5rem",
+                  }}
+                >
+                  Chat source:
+                </span>
+                <select
+                  value={chatSource}
+                  onChange={(e) => setChatSource(e.target.value as ChatSource)}
+                  style={{
+                    fontSize: "0.75rem",
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "0.375rem",
+                    border: "1px solid rgba(71,85,105,0.6)",
+                    background: "rgba(15,23,42,0.9)",
+                    color: "#f1f5f9",
                     cursor: "pointer",
                   }}
                 >
-                  <input
-                    type="checkbox"
-                    checked={includePageContent}
-                    onChange={(e) =>
-                      onIncludePageContentChange(e.target.checked)
-                    }
+                  <option value="none">No source</option>
+                  <option value="page">Page text</option>
+                  <option value="html">HTML content</option>
+                  <option value="screen">Screen</option>
+                </select>
+
+                {chatSource === "screen" && (
+                  <button
+                    type="button"
+                    onClick={captureScreenshot}
+                    disabled={isCapturingScreen || !isVisionApiKeySet}
                     style={{
-                      width: "16px",
-                      height: "16px",
-                      accentColor: "#10b981",
-                      cursor: "pointer",
+                      padding: "0.25rem 0.75rem",
+                      borderRadius: "0.375rem",
+                      border: "1px solid rgba(34,197,94,0.3)",
+                      background: isCapturingScreen
+                        ? "rgba(34,197,94,0.3)"
+                        : "rgba(34,197,94,0.1)",
+                      color: "#4ade80",
+                      fontSize: "0.75rem",
+                      cursor:
+                        isCapturingScreen || !isVisionApiKeySet
+                          ? "not-allowed"
+                          : "pointer",
+                      transition: "all 0.2s",
+                    }}
+                  >
+                    {isCapturingScreen ? "Capturing..." : "Capture Screen"}
+                  </button>
+                )}
+
+                {!isVisionApiKeySet && chatSource === "screen" && (
+                  <span style={{ fontSize: "0.7rem", color: "#f59e0b" }}>
+                    (Need Google Vision API key)
+                  </span>
+                )}
+              </div>
+
+              {screenImage && chatSource === "screen" && (
+                <div style={{ marginBottom: "0.5rem", textAlign: "center" }}>
+                  <img
+                    src={screenImage}
+                    alt="Current screenshot"
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "120px",
+                      borderRadius: "0.375rem",
+                      border: "1px solid rgba(34,197,94,0.3)",
+                      boxShadow: "0 2px 8px rgba(34,197,94,0.2)",
                     }}
                   />
-                  Include page content
-                </label>
-              </div>
+                </div>
+              )}
 
               <div
                 style={{
@@ -425,8 +740,12 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     value={chatInput}
                     onChange={(e) => onInputChange(e.target.value)}
                     placeholder={
-                      includePageContent
+                      chatSource === "screen"
+                        ? "Ask about the screenshot..."
+                        : chatSource === "page"
                         ? "Ask about this page…"
+                        : chatSource === "html"
+                        ? "Ask about the HTML content…"
                         : "Ask anything…"
                     }
                     disabled={isChatLoading || isExtractingContent}
