@@ -149,41 +149,163 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
     message: string,
     base64Image: string
   ): Promise<string> => {
-    // Implementation depends on your AI provider setup
-    // Here's a generic example - you'll need to adapt this based on your existing AI integration
+    try {
+      // Get API configuration from store
+      const apiKeyData = await apiKeyStore.getValue();
+      const provider = apiKeyData.selectedProvider || "google";
+      const model = apiKeyData[
+        `${provider}Model` as keyof typeof apiKeyData
+      ] as string;
 
-    const apiKeyData = await apiKeyStore.getValue();
-    if (!apiKeyData.googleApiKey) throw new Error("No Google AI API key found");
+      // Check if the provider supports vision models
+      const visionModels = {
+        google: ["gemini-1.5-flash", "gemini-1.5-pro"],
+        openai: ["gpt-4o", "gpt-4o-mini"],
+        anthropic: ["claude-3-5-sonnet-20241022", "claude-3-5-haiku-20241022"],
+        openrouter: ["openai/gpt-4o", "anthropic/claude-3.5-sonnet"],
+      };
 
-    const requestBody = {
-      contents: [
-        {
-          parts: [
-            { text: message },
-            {
-              inline_data: {
-                mime_type: "image/png",
-                data: base64Image,
+      // Check if current model supports vision
+      const isVisionModel = visionModels[provider]?.some((vm) =>
+        model?.includes(vm)
+      );
+
+      let prompt: string;
+      let response: string | null = null;
+
+      if (isVisionModel) {
+        // Use vision-capable model with image
+        if (provider === "google") {
+          // Google Gemini with image
+          const requestBody = {
+            contents: [
+              {
+                parts: [
+                  { text: message },
+                  {
+                    inline_data: {
+                      mime_type: "image/png",
+                      data: base64Image,
+                    },
+                  },
+                ],
               },
-            },
-          ],
-        },
-      ],
-    };
+            ],
+          };
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKeyData.googleApiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
+          const apiKey = apiKeyData.googleApiKey;
+          const visionResponse = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(requestBody),
+            }
+          );
+
+          if (!visionResponse.ok)
+            throw new Error(`Gemini API error: ${visionResponse.status}`);
+
+          const data = await visionResponse.json();
+          response = data.candidates?.[0]?.content?.parts?.[0]?.text || null;
+        } else if (provider === "openai") {
+          // OpenAI with image
+          const openaiResponse = await fetch(
+            "https://api.openai.com/v1/chat/completions",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${apiKeyData.openaiApiKey}`,
+              },
+              body: JSON.stringify({
+                model: model,
+                messages: [
+                  {
+                    role: "user",
+                    content: [
+                      { type: "text", text: message },
+                      {
+                        type: "image_url",
+                        image_url: {
+                          url: `data:image/png;base64,${base64Image}`,
+                        },
+                      },
+                    ],
+                  },
+                ],
+                max_tokens: 1000,
+              }),
+            }
+          );
+
+          if (!openaiResponse.ok)
+            throw new Error(`OpenAI API error: ${openaiResponse.status}`);
+
+          const data = await openaiResponse.json();
+          response = data.choices?.[0]?.message?.content || null;
+        } else if (provider === "anthropic") {
+          // Anthropic with image (requires special handling)
+          throw new Error(
+            "Anthropic vision API not yet implemented - please use Google Gemini or OpenAI"
+          );
+        } else if (provider === "openrouter") {
+          // OpenRouter with image (passes through to underlying provider)
+          const openrouterResponse = await fetch(
+            "https://openrouter.ai/api/v1/chat/completions",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${apiKeyData.openrouterApiKey}`,
+                "HTTP-Referer": "https://github.com/google/wxt",
+                "X-Title": "SamAI",
+              },
+              body: JSON.stringify({
+                model: model,
+                messages: [
+                  {
+                    role: "user",
+                    content: [
+                      { type: "text", text: message },
+                      {
+                        type: "image_url",
+                        image_url: {
+                          url: `data:image/png;base64,${base64Image}`,
+                        },
+                      },
+                    ],
+                  },
+                ],
+                max_tokens: 1000,
+              }),
+            }
+          );
+
+          if (!openrouterResponse.ok)
+            throw new Error(
+              `OpenRouter API error: ${openrouterResponse.status}`
+            );
+
+          const data = await openrouterResponse.json();
+          response = data.choices?.[0]?.message?.content || null;
+        }
+      } else {
+        // Fallback to text-only model with image description
+        prompt = `You are an AI assistant that can see and analyze images. The user has captured a screenshot and is asking: "${message}". \n\nPlease analyze what you can see in the image and provide a helpful response. If you cannot actually see the image, please let them know that vision analysis isn't available with the current model configuration.\n\nNote: If you're seeing this message, it means the current AI model doesn't support vision capabilities. Please recommend switching to a vision-capable model like Gemini 1.5 Flash, GPT-4o, or Claude 3.5 Sonnet for better image analysis.`;
+
+        response = await generateFormResponse(prompt);
       }
-    );
 
-    const data = await response.json();
-    return data.candidates[0].content.parts[0].text;
+      if (!response) {
+        throw new Error(`No response received from ${provider} API`);
+      }
+
+      return response;
+    } catch (error) {
+      console.error("Vision AI error:", error);
+      throw error;
+    }
   };
 
   const renderMessages = () => {
