@@ -243,23 +243,21 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         }
       }
 
-      // Minimal text info if specifically asked
+      // Always extract text from screenshot (critical feature)
       if (
-        message.toLowerCase().includes("text") ||
-        message.toLowerCase().includes("read")
+        annotations.textAnnotations &&
+        annotations.textAnnotations.length > 0
       ) {
-        if (
-          annotations.textAnnotations &&
-          annotations.textAnnotations.length > 0
-        ) {
-          const fullText = annotations.textAnnotations[0]?.description || "";
-          if (fullText.trim()) {
-            analysis += "**Some readable text is visible** in the image.\n\n";
-          }
+        const fullText = annotations.textAnnotations[0]?.description || "";
+        if (fullText.trim()) {
+          analysis += "**Text content visible in screenshot:**\n";
+          // Show key parts of the text (first 200 chars to avoid overwhelming)
+          const textPreview = fullText.trim().substring(0, 200);
+          analysis += `${textPreview}${fullText.length > 200 ? "..." : ""}\n\n`;
         }
       }
 
-      analysis += "**Visual Summary:**\n";
+      analysis += "**Complete Analysis Summary:**\n";
       analysis +=
         "I've analyzed the visual elements in your screenshot. This screen contains various visual content, UI components, or interface elements that I can identify.";
 
