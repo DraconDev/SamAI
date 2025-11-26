@@ -215,3 +215,42 @@ export const highlightPatternsStore =
   storage.defineItem<HighlightPatternsStore>("sync:highlightPatterns", {
     fallback: defaultHighlightPatternsStore,
   });
+
+// Home tab store for icons and folders
+export interface HomeIcon {
+  id: string;
+  name: string;
+  url: string;
+  iconUrl?: string;
+  folderId?: string;
+  createdAt: string;
+}
+
+export interface Folder {
+  id: string;
+  name: string;
+  parentId?: string;
+  createdAt: string;
+}
+
+export interface HomeData {
+  icons: HomeIcon[];
+  folders: Folder[];
+  currentFolderId?: string;
+}
+
+export interface HomeStore {
+  data: HomeData;
+}
+
+export const defaultHomeStore: HomeStore = {
+  data: {
+    icons: [],
+    folders: [],
+    currentFolderId: undefined,
+  },
+};
+
+export const homeStore = storage.defineItem<HomeStore>("local:home", {
+  fallback: defaultHomeStore,
+});
