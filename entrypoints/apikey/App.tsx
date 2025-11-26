@@ -244,6 +244,37 @@ function App() {
                   "gemini-flash-lite-latest",
                   "e.g., gemini-1.5-pro, gemini-1.5-flash"
                 )}
+                <div className="border-t border-[#2E2F3E]/60 pt-4">
+                  <div className="mb-3 text-xs font-medium text-gray-400">
+                    📷 Screen Chat Vision (Optional)
+                  </div>
+                  {renderKeyInput(
+                    "Google Cloud Vision API Key",
+                    googleVisionKey,
+                    setGoogleVisionKey,
+                    "googleVision",
+                    "AIzaSy...",
+                    "https://console.cloud.google.com/apis/credentials"
+                  )}
+                  <div className="flex gap-2 mt-2 text-xs">
+                    <a
+                      href="https://console.cloud.google.com/apis/library/vision.googleapis.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 px-3 py-2 bg-[#10b981]/10 hover:bg-[#10b981]/20 text-[#34d399] rounded-lg transition-colors text-center font-medium border border-[#10b981]/30"
+                    >
+                      🎯 Enable Vision API
+                    </a>
+                    <a
+                      href="https://console.cloud.google.com/apis/credentials"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 px-3 py-2 bg-[#10b981]/10 hover:bg-[#10b981]/20 text-[#34d399] rounded-lg transition-colors text-center font-medium border border-[#10b981]/30"
+                    >
+                      🔑 Create API Key
+                    </a>
+                  </div>
+                </div>
                 <div className="flex gap-2 text-xs">
                   <a
                     href="https://ai.google.dev/gemini-api/docs/models/gemini"
