@@ -65,9 +65,9 @@ export const ChatTab: React.FC<ChatTabProps> = ({
       setIsCapturingScreen(true);
 
       const response = await new Promise<string>((resolve, reject) => {
-        chrome.runtime.sendMessage({ type: "captureScreenshot" }, (result) => {
-          if (chrome.runtime.lastError) {
-            reject(new Error(chrome.runtime.lastError.message));
+        browser.runtime.sendMessage({ type: "captureScreenshot" }, (result) => {
+          if (browser.runtime.lastError) {
+            reject(new Error(browser.runtime.lastError.message));
           } else if (result) {
             resolve(result);
           } else {
