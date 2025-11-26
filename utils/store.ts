@@ -90,6 +90,7 @@ export interface ApiKeyStore {
 export const defaultApiKeyStore: ApiKeyStore = {
   googleApiKey: "",
   googleModel: "gemini-flash-lite-latest",
+  googleVisionApiKey: "",
   openaiApiKey: "",
   openaiModel: "gpt-4o-mini",
   anthropicApiKey: "",
