@@ -14,7 +14,7 @@ import {
   SearchTab,
   SummaryTab,
   TabNavigation,
-  type TabId
+  type TabId,
 } from "./SearchPanel/components";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
@@ -33,7 +33,9 @@ export default function SearchPanel({
 
   // Core state
   const [isApiKeySet, setIsApiKeySet] = useState(false);
-  const [activeTab, setActiveTab] = useState<TabId>(response ? "chat" : "search");
+  const [activeTab, setActiveTab] = useState<TabId>(
+    response ? "chat" : "search"
+  );
 
   // Tab-specific state
   const [isScraping, setIsScraping] = useState(false);
@@ -68,13 +70,13 @@ export default function SearchPanel({
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as Node;
-      
+
       // Don't close if clicking on modal or settings panel
       if (target instanceof Element) {
-        const isModal = target.closest('.samai-modal, .search-settings-panel');
+        const isModal = target.closest(".samai-modal, .search-settings-panel");
         if (isModal) return;
       }
-      
+
       if (panelRef.current && !panelRef.current.contains(target)) {
         onClose();
       }
@@ -262,18 +264,26 @@ ${truncatedContent}`;
     setSummary("");
 
     try {
-      console.log("[SamAI] Starting fresh page content extraction for summary...");
+      console.log(
+        "[SamAI] Starting fresh page content extraction for summary..."
+      );
       // Always extract fresh content from current page for summarization
       const content = await getPageContent(outputFormat, true);
-      console.log("[SamAI] Fresh page content extracted, length:", content.length);
+      console.log(
+        "[SamAI] Fresh page content extracted, length:",
+        content.length
+      );
       console.log("[SamAI] Current page URL:", window.location.href);
-      
+
       if (!content || content.trim().length === 0) {
-        throw new Error("No readable content found on this page. The page might be empty, protected, or not fully loaded.");
+        throw new Error(
+          "No readable content found on this page. The page might be empty, protected, or not fully loaded."
+        );
       }
 
       // Show a preview of the content being summarized for debugging
-      const contentPreview = content.length > 200 ? content.substring(0, 200) + "..." : content;
+      const contentPreview =
+        content.length > 200 ? content.substring(0, 200) + "..." : content;
       console.log("[SamAI] Content preview:", contentPreview);
 
       const prompt = `Please provide a comprehensive summary of the following content. Focus on the main points, key information, and important details. Structure your summary with clear sections and bullet points where appropriate.
@@ -286,8 +296,11 @@ ${content}`;
 
       console.log("[SamAI] Generating AI summary...");
       const summaryText = await generateFormResponse(prompt);
-      console.log("[SamAI] AI summary generated, length:", summaryText?.length || 0);
-      
+      console.log(
+        "[SamAI] AI summary generated, length:",
+        summaryText?.length || 0
+      );
+
       if (!summaryText || summaryText.trim().length === 0) {
         throw new Error(
           "No summary received from AI. Please check your API key configuration and try again."
@@ -380,17 +393,17 @@ Please provide a helpful response about the user's question specifically related
       <div
         ref={panelRef}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100vh',
-          maxHeight: '100vh',
-          padding: '0.25rem',
-          overflow: 'hidden',
-          boxSizing: 'border-box',
-          animation: 'samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          maxHeight: "100vh",
+          padding: "0.25rem",
+          overflow: "hidden",
+          boxSizing: "border-box",
+          animation: "samai-slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <div style={{ flexShrink: 0, marginBottom: '0.5rem' }}>
+        <div style={{ flexShrink: 0, marginBottom: "0.5rem" }}>
           <TabNavigation
             activeTab={activeTab}
             setActiveTab={setActiveTab}
@@ -401,15 +414,17 @@ Please provide a helpful response about the user's question specifically related
           />
         </div>
 
-        <div style={{ 
-          flex: 1, 
-          overflow: 'hidden', 
-          display: 'flex', 
-          flexDirection: 'column',
-          minHeight: 0
-        }}>
+        <div
+          style={{
+            flex: 1,
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 0,
+          }}
+        >
           {activeTab === "search" && (
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ flex: 1, overflowY: "auto" }}>
               <SearchTab
                 response={response}
                 isApiKeySet={isApiKeySet}
@@ -420,7 +435,7 @@ Please provide a helpful response about the user's question specifically related
           )}
 
           {activeTab === "scrape" && (
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ flex: 1, overflowY: "auto" }}>
               <ScrapeTab
                 isScraping={isScraping}
                 scrapeMode={scrapeMode}
@@ -458,7 +473,7 @@ Please provide a helpful response about the user's question specifically related
           )}
 
           {activeTab === "sum" && (
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ flex: 1, overflowY: "auto" }}>
               <SummaryTab
                 isSummarizing={isSummarizing}
                 summary={summary}
@@ -469,22 +484,23 @@ Please provide a helpful response about the user's question specifically related
           )}
 
           {activeTab === "form" && (
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ flex: 1, overflowY: "auto" }}>
               <FormTab onFormClick={handleForm} />
             </div>
           )}
 
           {activeTab === "image" && (
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ flex: 1, overflowY: "auto" }}>
               <ImageTab onImageClick={handleImage} />
             </div>
           )}
-        </div>
+
           {activeTab === "screen" && (
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div style={{ flex: 1, overflowY: "auto" }}>
               <ScreenChatTab />
             </div>
           )}
+        </div>
       </div>
     </>
   );
