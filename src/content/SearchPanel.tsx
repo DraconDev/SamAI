@@ -57,10 +57,13 @@ const autoEnableTranscript = async (): Promise<void> => {
         ariaLabel.toLowerCase().includes("more") ||
         title.toLowerCase().includes("more") ||
         text.toLowerCase().includes("more") ||
-        button.querySelector('[data-icon="more_vert"]');
+        button.querySelector('[data-icon="more_vert"]') ||
+        button.querySelector('[data-icon="expand_more"]');
 
       if (looksLikeMenuButton) {
         console.log(`[SamAI] Found more button: ${selector}`);
+        console.log(`[SamAI] More button aria-label: "${ariaLabel}"`);
+        console.log(`[SamAI] More button title: "${title}"`);
         try {
           button.click();
           moreButtonClicked = true;
@@ -69,6 +72,50 @@ const autoEnableTranscript = async (): Promise<void> => {
           break;
         } catch (error) {
           console.log(`[SamAI] Could not click more button:`, error);
+        }
+      }
+    }
+  }
+
+  // If no more button was found with selectors, try a different approach - look for any button with three dots
+  if (!moreButtonClicked) {
+    console.log("[SamAI] Trying fallback method for more button...");
+    const allButtons = document.querySelectorAll(
+      "button, yt-button-shape button"
+    );
+
+    for (const button of allButtons) {
+      const ariaLabel = button.getAttribute("aria-label") || "";
+      const title = button.getAttribute("title") || "";
+      const text = button.textContent || "";
+
+      // Check for three dots icon in the button
+      const icon =
+        button.querySelector('[data-icon="more_vert"]') ||
+        button.querySelector('[data-icon="expand_more"]') ||
+        button.querySelector('[data-icon="more"]');
+
+      if (
+        icon ||
+        ariaLabel.toLowerCase().includes("more") ||
+        title.toLowerCase().includes("more") ||
+        ariaLabel.toLowerCase().includes("action") ||
+        title.toLowerCase().includes("action")
+      ) {
+        console.log(`[SamAI] Found potential more button with fallback method`);
+        console.log(`[SamAI] Button aria-label: "${ariaLabel}"`);
+        console.log(`[SamAI] Button title: "${title}"`);
+        console.log(`[SamAI] Button text: "${text}"`);
+        try {
+          (button as HTMLElement).click();
+          moreButtonClicked = true;
+          console.log(
+            "[SamAI] Clicked more button via fallback, waiting for menu..."
+          );
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          break;
+        } catch (error) {
+          console.log(`[SamAI] Could not click fallback more button:`, error);
         }
       }
     }
