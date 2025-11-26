@@ -239,7 +239,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
     }
   };
 
-  // Process Google Cloud Vision API results
+  // Process Google Cloud Vision API results with conversational responses
   const processVisionResults = (
     visionData: any,
     userQuestion: string
@@ -250,114 +250,283 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
         return "I couldn't analyze the image. Please try again.";
       }
 
-      let analysis = `Based on my analysis of your screenshot regarding "${userQuestion}":\n\n`;
+      // Start with conversational response based on the user's question
+      let analysis = "";
 
-      // Add labels (objects/concepts detected)
-      if (
-        annotations.labelAnnotations &&
-        annotations.labelAnnotations.length > 0
-      ) {
-        analysis += "**Objects & Concepts Detected:**\n";
-        const topLabels = annotations.labelAnnotations.slice(0, 5);
-        analysis += topLabels
-          .map(
-            (label: any) =>
-              `• ${label.description} (${Math.round(
-                label.score * 100
-              )}% confidence)`
-          )
-          .join("\n");
-        analysis += "\n\n";
-      }
+      // Detect animals and provide direct answers
+      if (userQuestion.toLowerCase().includes("animal")) {
+        const animalLabels = annotations.labelAnnotations?.filter(
+          (label: any) =>
+            [
+              "cat",
+              "dog",
+              "bird",
+              "fish",
+              "horse",
+              "cow",
+              "pig",
+              "sheep",
+              "goat",
+              "rabbit",
+              "hamster",
+              "guinea pig",
+              "mouse",
+              "rat",
+              "monkey",
+              "bear",
+              "lion",
+              "tiger",
+              "elephant",
+              "giraffe",
+              "zebra",
+              "kangaroo",
+              "penguin",
+              "dolphin",
+              "whale",
+              "shark",
+              "frog",
+              "snake",
+              "lizard",
+              "turtle",
+              "spider",
+              "butterfly",
+              "bee",
+              "ant",
+              "dragonfly",
+              "octopus",
+              "squid",
+              "crab",
+              "lobster",
+              "tiger",
+              "leopard",
+              "cheetah",
+              "wolf",
+              "fox",
+              "deer",
+              "moose",
+              "elk",
+              "reindeer",
+              "bison",
+              "buffalo",
+              "ox",
+              "camel",
+              "llama",
+              "alpaca",
+              "yak",
+              "water buffalo",
+              "rhinoceros",
+              "hippopotamus",
+              "crocodile",
+              "alligator",
+              "iguana",
+              "chameleon",
+              "gecko",
+              "tortoise",
+              "panda",
+              "koala",
+              "sloth",
+              "otter",
+              "beaver",
+              "squirrel",
+              "chipmunk",
+              "marmot",
+              "groundhog",
+              "hedgehog",
+              "porcupine",
+              "raccoon",
+              "opossum",
+              "skunk",
+              "badger",
+              "wolverine",
+              "weasel",
+              "mink",
+              "ferret",
+              "polecat",
+              "stoat",
+              "ermine",
+              "muskrat",
+              "vole",
+              "lemming",
+            ].includes(label.description.toLowerCase())
+        );
 
-      // Add text detection
-      if (
-        annotations.textAnnotations &&
-        annotations.textAnnotations.length > 0
-      ) {
-        analysis += "**Text Found:**\n";
-        const fullText = annotations.textAnnotations[0]?.description || "";
-        const preview =
-          fullText.length > 200 ? fullText.substring(0, 200) + "..." : fullText;
-        analysis += preview || "No readable text detected";
-        analysis += "\n\n";
-      }
-
-      // Add objects localization
-      if (
-        annotations.localizedObjectAnnotations &&
-        annotations.localizedObjectAnnotations.length > 0
-      ) {
-        analysis += "**UI Elements & Objects:**\n";
-        const topObjects = annotations.localizedObjectAnnotations.slice(0, 3);
-        analysis += topObjects
-          .map((obj: any) => {
-            const location = obj.boundingPoly?.vertices?.[0];
-            const pos = location
-              ? `(position: ${location.x || "N/A"}, ${location.y || "N/A"})`
-              : "";
-            return `• ${obj.name} (${Math.round(
-              obj.score * 100
-            )}% confidence) ${pos}`;
-          })
-          .join("\n");
-        analysis += "\n\n";
-      }
-
-      // Add face detection
-      if (
-        annotations.faceAnnotations &&
-        annotations.faceAnnotations.length > 0
-      ) {
-        analysis += "**Faces Detected:**\n";
-        analysis += `• ${annotations.faceAnnotations.length} face(s) found\n`;
-        analysis += `• Face detection confidence: ${Math.round(
-          annotations.faceAnnotations[0]?.detectionConfidence * 100
-        )}%\n\n`;
-      }
-
-      // Add landmarks/logos if found
-      if (
-        annotations.landmarkAnnotations &&
-        annotations.landmarkAnnotations.length > 0
-      ) {
-        analysis += "**Landmarks Found:**\n";
-        analysis += annotations.landmarkAnnotations
-          .map((landmark: any) => `• ${landmark.description}`)
-          .join("\n");
-        analysis += "\n\n";
-      }
-
-      if (
-        annotations.logoAnnotations &&
-        annotations.logoAnnotations.length > 0
-      ) {
-        analysis += "**Logos Detected:**\n";
-        analysis += annotations.logoAnnotations
-          .map((logo: any) => `• ${logo.description}`)
-          .join("\n");
-        analysis += "\n\n";
-      }
-
-      // Safe search information
-      if (annotations.safeSearchAnnotation) {
-        const safeLevels = annotations.safeSearchAnnotation;
-        const overall =
-          safeLevels.adult || safeLevels.violence || safeLevels.racy;
-        if (overall && overall !== "VERY_UNLIKELY") {
+        if (animalLabels && animalLabels.length > 0) {
+          const topAnimal = animalLabels[0];
+          analysis += `I can see **${topAnimal.description}** in your screenshot`;
+          if (animalLabels.length > 1) {
+            const otherAnimals = animalLabels
+              .slice(1)
+              .map((a: any) => a.description)
+              .join(", ");
+            analysis += ` (and possibly ${otherAnimals})`;
+          }
+          analysis += `.\n\n`;
+        } else {
           analysis +=
-            "**Content Safety:** Some content may require review.\n\n";
+            "I don't see any animals clearly visible in this screenshot.\n\n";
         }
       }
 
-      // Answer the specific question based on what's detected
-      analysis += "**My Analysis:**\n";
+      // Detect people
+      if (
+        userQuestion.toLowerCase().includes("person") ||
+        userQuestion.toLowerCase().includes("people")
+      ) {
+        if (
+          annotations.faceAnnotations &&
+          annotations.faceAnnotations.length > 0
+        ) {
+          analysis += `I can see ${annotations.faceAnnotations.length} person${
+            annotations.faceAnnotations.length > 1 ? "s" : ""
+          } in this image.\n\n`;
+        } else {
+          analysis +=
+            "I don't see any people clearly visible in this screenshot.\n\n";
+        }
+      }
+
+      // Detect objects and UI elements
+      if (
+        userQuestion.toLowerCase().includes("object") ||
+        userQuestion.toLowerCase().includes("thing") ||
+        userQuestion.toLowerCase().includes("see")
+      ) {
+        if (
+          annotations.localizedObjectAnnotations &&
+          annotations.localizedObjectAnnotations.length > 0
+        ) {
+          analysis += "**Objects/UI Elements I can identify:**\n";
+          const topObjects = annotations.localizedObjectAnnotations.slice(0, 5);
+          analysis +=
+            topObjects.map((obj: any) => `• ${obj.name}`).join("\n") + "\n\n";
+        }
+
+        // Add labels for broader context
+        if (
+          annotations.labelAnnotations &&
+          annotations.labelAnnotations.length > 0
+        ) {
+          const topLabels = annotations.labelAnnotations.slice(0, 3);
+          analysis += "**I also see:**\n";
+          analysis +=
+            topLabels.map((label: any) => `• ${label.description}`).join("\n") +
+            "\n\n";
+        }
+      }
+
+      // Text detection - show readable text if asked
+      if (
+        userQuestion.toLowerCase().includes("text") ||
+        userQuestion.toLowerCase().includes("read") ||
+        userQuestion.toLowerCase().includes("word")
+      ) {
+        if (
+          annotations.textAnnotations &&
+          annotations.textAnnotations.length > 0
+        ) {
+          const fullText = annotations.textAnnotations[0]?.description || "";
+          if (fullText.trim()) {
+            analysis += "**Text I can read:**\n";
+            const preview =
+              fullText.length > 300
+                ? fullText.substring(0, 300) + "..."
+                : fullText;
+            analysis += preview + "\n\n";
+          } else {
+            analysis +=
+              "I can see there is text in the image, but it's not clearly readable.\n\n";
+          }
+        } else {
+          analysis += "I don't see any readable text in this screenshot.\n\n";
+        }
+      }
+
+      // Detect logos/websites
+      if (
+        userQuestion.toLowerCase().includes("website") ||
+        userQuestion.toLowerCase().includes("logo") ||
+        userQuestion.toLowerCase().includes("brand")
+      ) {
+        if (
+          annotations.logoAnnotations &&
+          annotations.logoAnnotations.length > 0
+        ) {
+          analysis += "**Brands/Logos detected:**\n";
+          analysis +=
+            annotations.logoAnnotations
+              .map((logo: any) => `• ${logo.description}`)
+              .join("\n") + "\n\n";
+        } else if (
+          annotations.labelAnnotations?.some((label: any) =>
+            [
+              "google",
+              "youtube",
+              "facebook",
+              "twitter",
+              "instagram",
+              "linkedin",
+              "amazon",
+              "netflix",
+              "microsoft",
+              "apple",
+            ].includes(label.description.toLowerCase())
+          )
+        ) {
+          analysis +=
+            "I can see what appears to be a website or application interface.\n\n";
+        }
+      }
+
+      // If no specific analysis was added, provide a general summary
+      if (!analysis.trim()) {
+        analysis += "Based on my analysis of your screenshot:\n\n";
+
+        if (
+          annotations.labelAnnotations &&
+          annotations.labelAnnotations.length > 0
+        ) {
+          analysis += "**I can see:**\n";
+          const topLabels = annotations.labelAnnotations.slice(0, 5);
+          analysis +=
+            topLabels.map((label: any) => `• ${label.description}`).join("\n") +
+            "\n\n";
+        }
+
+        if (
+          annotations.textAnnotations &&
+          annotations.textAnnotations[0]?.description?.trim()
+        ) {
+          analysis += "**Some text is visible** in the image.\n\n";
+        }
+
+        if (
+          annotations.localizedObjectAnnotations &&
+          annotations.localizedObjectAnnotations.length > 0
+        ) {
+          analysis += "**UI elements and objects** are detected.\n\n";
+        }
+      }
+
+      // Add helpful context for specific questions
+      if (
+        userQuestion.toLowerCase().includes("help") ||
+        userQuestion.toLowerCase().includes("understand")
+      ) {
+        analysis += "**What I can help with:**\n";
+        analysis += "• Describing what's visible in your screenshot\n";
+        analysis += "• Reading text from the image\n";
+        analysis += "• Identifying objects, people, or animals\n";
+        analysis += "• Understanding the interface or layout\n\n";
+      }
+
+      // Provide natural conclusion
+      analysis += "**Summary:**\n";
       if (
         userQuestion.toLowerCase().includes("what") &&
         userQuestion.toLowerCase().includes("see")
       ) {
         analysis +=
-          "I can see the visual elements described above. Based on the detected objects, text, and UI elements, this appears to be a screenshot of a typical interface.";
+          "I can see the visual elements described above. The screenshot shows a typical interface or webpage with various UI elements.";
       } else if (userQuestion.toLowerCase().includes("help")) {
         analysis +=
           "Based on what's visible in the screenshot, I can help you navigate, understand the interface, or provide guidance on how to interact with the displayed elements.";
@@ -369,7 +538,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
           "I've analyzed the screenshot for potential issues. The detected elements suggest this is a standard interface view.";
       } else {
         analysis +=
-          "I've detected the visual elements shown above. Feel free to ask more specific questions about any part of the screenshot.";
+          "I've provided details about what's visible in your screenshot. Feel free to ask more specific questions about any part of the image.";
       }
 
       return analysis;
