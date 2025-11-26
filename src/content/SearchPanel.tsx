@@ -20,10 +20,110 @@ import type { ScrapeResultFormat } from "./SearchPanel/types";
 // Define ChatSource locally since it's not exported
 type ChatSource = "none" | "page" | "html" | "screen" | "video";
 
+// Function to auto-enable transcript by clicking buttons
+const autoEnableTranscript = async (): Promise<void> => {
+  console.log("[SamAI] Auto-enabling transcript...");
+
+  // Try multiple ways to find and click the transcript-related buttons
+
+  // Step 1: Try to find and click the "more" (three dots) button first
+  const moreButtons = [
+    'button[aria-label*="more actions"]',
+    'button[aria-label*="More actions"]',
+    'button[aria-label*="Show more"]',
+    "ytd-menu-renderer yt-icon-button",
+    'button[data-testid="more-button"]',
+    'button:has([data-icon="more_vert"])',
+    '[data-icon="more_vert"]',
+  ];
+
+  let moreButtonClicked = false;
+
+  for (const selector of moreButtons) {
+    const button = document.querySelector(selector) as HTMLElement;
+    if (button && !moreButtonClicked) {
+      console.log(`[SamAI] Found more button: ${selector}`);
+      try {
+        button.click();
+        moreButtonClicked = true;
+        console.log("[SamAI] Clicked more button, waiting for menu...");
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        break;
+      } catch (error) {
+        console.log(`[SamAI] Could not click more button:`, error);
+      }
+    }
+  }
+
+  // Step 2: Look for transcript button in the menu or page
+  const transcriptSelectors = [
+    // Look for text-based buttons
+    'button:contains("Show transcript")',
+    'button:contains("Transcript")',
+    'button:contains("Show captions")',
+    'button:contains("Subtitles")',
+    // Look for aria-label buttons
+    'button[aria-label*="transcript"]',
+    'button[aria-label*="caption"]',
+    'button[aria-label*="subtitle"]',
+    // Look for icon buttons
+    'button:has([data-icon="subtitles"])',
+    'button:has([data-icon="closed_caption")]',
+    // Data test IDs
+    'button[data-testid="show-transcript"]',
+    'button[data-testid="transcript"]',
+  ];
+
+  for (const selector of transcriptSelectors) {
+    const button = document.querySelector(selector) as HTMLElement;
+    if (button) {
+      console.log(`[SamAI] Found transcript button: ${selector}`);
+      try {
+        button.click();
+        console.log(
+          "[SamAI] Clicked transcript button, waiting for transcript..."
+        );
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return; // Success
+      } catch (error) {
+        console.log(`[SamAI] Could not click transcript button:`, error);
+      }
+    }
+  }
+
+  // Step 3: Fallback - search by text content in all buttons
+  const allButtons = document.querySelectorAll(
+    "button, yt-button-shape button, paper-button, .ytp-button"
+  );
+  for (const button of allButtons) {
+    const text = button.textContent?.toLowerCase() || "";
+    if (
+      text.includes("transcript") ||
+      text.includes("caption") ||
+      text.includes("subtitle")
+    ) {
+      console.log(`[SamAI] Found transcript button by text: "${text}"`);
+      try {
+        (button as HTMLElement).click();
+        console.log("[SamAI] Clicked transcript button by text");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return;
+      } catch (error) {
+        console.log(`[SamAI] Could not click button by text:`, error);
+      }
+    }
+  }
+
+  console.log("[SamAI] Could not auto-enable transcript");
+};
+
 // Video transcript extraction function
 const extractVideoTranscript = async (): Promise<string> => {
   try {
     console.log("[SamAI] Attempting to extract video transcript...");
+
+    // Auto-enable transcript first
+    await autoEnableTranscript();
 
     // Enhanced selectors for current YouTube structure
     const transcriptSelectors = [
@@ -31,10 +131,13 @@ const extractVideoTranscript = async (): Promise<string> => {
       "#transcript .cues-box .cue-group",
       "#transcript .cues-box .cue",
       "#transcript .cues-box",
+      "#transcript .captions-text",
+      "#transcript .caption-window",
       // Alternative YouTube selectors
       ".ytp-caption-segment",
       ".caption-window .caption-line",
       "[data-time] .captions-text",
+      '[data-time]:not([data-time=""])',
       // Generic video platforms
       ".vp-captions-cue",
       '[class*="transcript"]',
@@ -42,8 +145,6 @@ const extractVideoTranscript = async (): Promise<string> => {
       '[class*="caption"]',
       // Video tracks
       "video[tracks]",
-      // Fallback: look for any element containing timestamps and text
-      '[data-time]:not([data-time=""])',
     ];
 
     let transcriptText = "";
@@ -99,11 +200,12 @@ const extractVideoTranscript = async (): Promise<string> => {
       ) {
         console.log("[SamAI] Found video elements but no transcript");
         transcriptText =
-          "This appears to be a video page, but no transcript or captions are currently available. " +
-          "To get a transcript, you may need to:\n" +
-          "1. Enable captions/subtitles on the video\n" +
-          "2. Click the 'Show transcript' button if available\n" +
-          "3. Check if the video has closed captions";
+          "This appears to be a YouTube video page, but the transcript/captions are not currently available. " +
+          "This could mean:\n" +
+          "1. The video doesn't have captions/subtitles available\n" +
+          "2. The captions are in a different language than your browser setting\n" +
+          "3. The transcript extraction needs more time to load\n\n" +
+          "Try manually enabling captions by clicking the CC button on the video player.";
       } else {
         throw new Error(
           "No video page detected. Please make sure you're on a YouTube video, Vimeo, or other video platform page."
@@ -112,9 +214,9 @@ const extractVideoTranscript = async (): Promise<string> => {
     }
 
     // Validate transcript quality
-    if (transcriptText.length < 50) {
+    if (transcriptText.length < 50 && !transcriptText.includes("captions")) {
       throw new Error(
-        "Found transcript content but it's too short to be useful. The video might not have captions enabled."
+        "Found transcript content but it's too short to be useful. The video might not have captions enabled or the transcript may not be fully loaded yet."
       );
     }
 
