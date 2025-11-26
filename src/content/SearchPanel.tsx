@@ -443,13 +443,7 @@ Please provide a helpful response about the user's question specifically related
             minHeight: 0,
           }}
         >
-          {activeTab === "home" && (
-            <HomeTab
-              onClose={onClose}
-              setActiveTab={setActiveTab}
-              onChatClick={handleChat}
-            />
-          )}
+          {activeTab === "home" && <HomeTab />}
 
           {activeTab === "search" && (
             <div style={{ flex: 1, overflowY: "auto" }}>
