@@ -275,28 +275,28 @@ export const ChatTab: React.FC<ChatTabProps> = ({
     e.preventDefault();
     if (!isApiKeySet || !chatInput.trim() || isChatLoading) return;
 
-    const userMessage = {
-      role: "user" as const,
-      content: chatInput,
-      timestamp: new Date().toLocaleTimeString(),
-    };
-
-    // Add user message immediately
-    // We'll handle the response in the parent component via onSubmit
-
-    onSubmit(e);
-
-    // If screen source is selected, analyze screenshot
+    // Handle screenshot source differently
     if (chatSource === "screen" && screenImage) {
       try {
+        setIsExtractingContent(true);
         const base64Image = screenImage.split(",")[1];
         const visionAnalysis = await analyzeScreenshot(chatInput, base64Image);
 
-        // Add vision analysis as assistant message (this would need to be handled by parent)
-        console.log("Vision analysis:", visionAnalysis);
+        // Create enhanced prompt with vision analysis
+        const enhancedPrompt = `${chatInput}\n\n**Screenshot Analysis Context:**\n${visionAnalysis}\n\nPlease respond to the user's question about the current screenshot, focusing on what I can see visually.`;
+
+        // Now call parent submit with enhanced context
+        onSubmit(e, enhancedPrompt);
       } catch (error) {
         console.error("Error analyzing screenshot:", error);
+        // Fall back to regular submit
+        onSubmit(e);
+      } finally {
+        setIsExtractingContent(false);
       }
+    } else {
+      // Regular submit for non-screenshot sources
+      onSubmit(e);
     }
   };
 
