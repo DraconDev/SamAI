@@ -37,6 +37,27 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
 
   const mainTabs: Tab[] = [
     {
+      id: "home",
+      label: "Home",
+      gradient: "from-violet-500 to-violet-600",
+      shadow: "rgba(139, 92, 246, 0.5)",
+      icon: (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+      ),
+    },
+    {
       id: "search",
       label: "Search",
       gradient: "from-indigo-500 to-indigo-600",
@@ -79,6 +100,27 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
       ),
     },
     {
+      id: "scrape",
+      label: "Scrape",
+      gradient: "from-blue-500 to-blue-600",
+      shadow: "rgba(59, 130, 246, 0.5)",
+      icon: (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+      ),
+    },
+    {
       id: "sum",
       label: "Sum",
       gradient: "from-amber-500 to-amber-600",
@@ -99,27 +141,6 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
           <line x1="21" y1="6" x2="3" y2="6" />
           <line x1="21" y1="14" x2="3" y2="14" />
           <line x1="21" y1="18" x2="3" y2="18" />
-        </svg>
-      ),
-    },
-    {
-      id: "scrape",
-      label: "Scrape",
-      gradient: "from-blue-500 to-blue-600",
-      shadow: "rgba(59, 130, 246, 0.5)",
-      icon: (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
         </svg>
       ),
     },
