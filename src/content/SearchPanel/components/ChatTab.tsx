@@ -4,18 +4,18 @@ import type { OutputFormat } from "@/utils/page-content";
 import React, { useEffect } from "react";
 import type { ChatMessage } from "../types";
 
+type ChatSource = "none" | "page" | "html" | "screen";
+
 interface ChatTabProps {
   isApiKeySet: boolean;
   isExtractingContent: boolean;
   isChatLoading: boolean;
   chatMessages: ChatMessage[];
   chatInput: string;
-  includePageContent: boolean;
   outputFormat: OutputFormat;
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
   onInputChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
-  onIncludePageContentChange: (checked: boolean) => void;
   onOpenApiKey: () => void;
 }
 
@@ -398,7 +398,9 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                   <input
                     type="checkbox"
                     checked={includePageContent}
-                    onChange={(e) => onIncludePageContentChange(e.target.checked)}
+                    onChange={(e) =>
+                      onIncludePageContentChange(e.target.checked)
+                    }
                     style={{
                       width: "16px",
                       height: "16px",
@@ -442,7 +444,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = "rgba(59, 130, 246, 0.6)";
-                      e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.2)";
+                      e.target.style.boxShadow =
+                        "0 0 0 3px rgba(59, 130, 246, 0.2)";
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = "rgba(71,85,105,0.6)";
