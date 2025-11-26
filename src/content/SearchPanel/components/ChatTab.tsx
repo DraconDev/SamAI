@@ -284,7 +284,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         const enhancedPrompt = `${chatInput}\n\n**Screenshot Analysis Context:**\n${visionAnalysis}\n\nPlease respond to the user's question about the current screenshot, focusing on what I can see visually.`;
 
         // Now call parent submit with enhanced context
-        onSubmit(e, enhancedPrompt);
+        onSubmit(e, "screen", enhancedPrompt);
       } catch (error) {
         console.error("Error analyzing screenshot:", error);
         // Fall back to regular submit
@@ -293,8 +293,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         setIsExtractingContent(false);
       }
     } else {
-      // Regular submit for non-screenshot sources
-      onSubmit(e);
+      // Regular submit for non-screenshot sources, pass the source type
+      onSubmit(e, chatSource);
     }
   };
 
