@@ -16,7 +16,7 @@ interface ChatTabProps {
   outputFormat: OutputFormat;
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
   onInputChange: (value: string) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (e: React.FormEvent, source?: ChatSource) => void;
   onOpenApiKey: () => void;
 }
 
