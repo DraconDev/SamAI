@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react";
 import {
   ChatTab,
   FormTab,
+  HomeTab,
   ImageTab,
   ScrapeTab,
   SearchTab,
