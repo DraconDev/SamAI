@@ -676,6 +676,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                   <option value="none">No source</option>
                   <option value="page">Page text</option>
                   <option value="html">HTML content</option>
+                  <option value="video">Video transcript</option>
                   <option value="screen">Screen</option>
                 </select>
 
