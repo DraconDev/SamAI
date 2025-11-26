@@ -747,6 +747,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                         ? "Ask about this page…"
                         : chatSource === "html"
                         ? "Ask about the HTML content…"
+                        : chatSource === "video"
+                        ? "Ask about the video transcript…"
                         : "Ask anything…"
                     }
                     disabled={isChatLoading || isExtractingContent}
