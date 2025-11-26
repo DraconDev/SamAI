@@ -25,37 +25,52 @@ const extractVideoTranscript = async (): Promise<string> => {
   try {
     console.log("[SamAI] Attempting to extract video transcript...");
 
-    // Try different selectors for common video platforms
+    // Enhanced selectors for current YouTube structure
     const transcriptSelectors = [
-      // YouTube
-      "#transcript ytp-caption-segment",
-      ".caption-line",
-      '[class*="caption"]',
-      // Vimeo
+      // YouTube transcript panel (most likely)
+      "#transcript .cues-box .cue-group",
+      "#transcript .cues-box .cue",
+      "#transcript .cues-box",
+      // Alternative YouTube selectors
+      ".ytp-caption-segment",
+      ".caption-window .caption-line",
+      "[data-time] .captions-text",
+      // Generic video platforms
       ".vp-captions-cue",
-      '[class*="transcript"]',
-      // Generic
       '[class*="transcript"]',
       '[class*="subtitle"]',
       '[class*="caption"]',
-      "video[tracks] + *", // Video with tracks
+      // Video tracks
+      "video[tracks]",
+      // Fallback: look for any element containing timestamps and text
+      '[data-time]:not([data-time=""])',
     ];
 
     let transcriptText = "";
+    let foundElements = 0;
 
     for (const selector of transcriptSelectors) {
       const elements = document.querySelectorAll(selector);
       if (elements.length > 0) {
         console.log(
-          `[SamAI] Found transcript elements with selector: ${selector}`
+          `[SamAI] Found ${elements.length} transcript elements with selector: ${selector}`
         );
 
         // Extract text from all transcript elements
         const texts = Array.from(elements)
-          .map((el) => el.textContent?.trim())
+          .map((el) => {
+            // For elements with timestamps, include the time info
+            const timeAttr = el.getAttribute("data-time");
+            const text = el.textContent?.trim() || "";
+            if (timeAttr && text) {
+              return `[${timeAttr}] ${text}`;
+            }
+            return text;
+          })
           .filter((text) => text && text.length > 0);
 
         if (texts.length > 0) {
+          foundElements = texts.length;
           transcriptText = texts.join(" ");
           console.log(
             `[SamAI] Extracted transcript (${texts.length} segments):`,
@@ -66,28 +81,47 @@ const extractVideoTranscript = async (): Promise<string> => {
       }
     }
 
+    // If no transcript found, check if we're on a video page at least
     if (!transcriptText) {
-      // Check for HTML5 video with tracks
-      const videoTracks = document.querySelectorAll("video[tracks]");
-      if (videoTracks.length > 0) {
-        console.log("[SamAI] Found HTML5 video with tracks");
+      const videoElements = document.querySelectorAll("video");
+      const youtubeIndicators = [
+        document.querySelector(
+          'meta[property="og:site_name"][content*="YouTube"]'
+        ),
+        document.querySelector('[data-testid="watch-video"]'),
+        document.querySelector("#movie_player"),
+        document.querySelector(".html5-video-container"),
+      ];
+
+      if (
+        videoElements.length > 0 ||
+        youtubeIndicators.some((el) => el !== null)
+      ) {
+        console.log("[SamAI] Found video elements but no transcript");
         transcriptText =
-          "Found HTML5 video element with caption tracks. The transcript may be available in the video player's subtitle/caption options.";
+          "This appears to be a video page, but no transcript or captions are currently available. " +
+          "To get a transcript, you may need to:\n" +
+          "1. Enable captions/subtitles on the video\n" +
+          "2. Click the 'Show transcript' button if available\n" +
+          "3. Check if the video has closed captions";
+      } else {
+        throw new Error(
+          "No video page detected. Please make sure you're on a YouTube video, Vimeo, or other video platform page."
+        );
       }
     }
 
-    if (!transcriptText) {
+    // Validate transcript quality
+    if (transcriptText.length < 50) {
       throw new Error(
-        "No transcript found. This might not be a video page or the transcript might not be available."
+        "Found transcript content but it's too short to be useful. The video might not have captions enabled."
       );
     }
 
     return transcriptText;
   } catch (error) {
     console.error("[SamAI] Error extracting video transcript:", error);
-    throw new Error(
-      "Failed to extract video transcript. Please make sure you're on a video page with available captions."
-    );
+    throw error; // Re-throw the specific error message
   }
 };
 
