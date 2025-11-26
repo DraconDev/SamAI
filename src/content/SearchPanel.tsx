@@ -18,7 +18,7 @@ import {
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
 // Define ChatSource locally since it's not exported
-type ChatSource = "none" | "page" | "html" | "screen";
+type ChatSource = "none" | "page" | "html" | "screen" | "video";
 
 interface SearchPanelProps {
   response: string | null;
