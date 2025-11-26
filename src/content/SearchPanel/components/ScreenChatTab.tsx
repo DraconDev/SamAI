@@ -203,8 +203,12 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
           response = visionResults;
         } catch (visionError) {
           console.error("Google Cloud Vision API error:", visionError);
+          const errorMessage =
+            visionError instanceof Error
+              ? visionError.message
+              : String(visionError);
           throw new Error(
-            `Vision API error: ${visionError.message}. Please check your Google Cloud Vision API key and try again.`
+            `Vision API error: ${errorMessage}. Please check your Google Cloud Vision API key and try again.`
           );
         }
       } else if (
