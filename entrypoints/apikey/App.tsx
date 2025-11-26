@@ -21,6 +21,7 @@ function App() {
     apiKeyStore.getValue().then((store) => {
       setGoogleKey(store.googleApiKey || "");
       setGoogleModel(store.googleModel || "gemini-flash-lite-latest");
+      setGoogleVisionKey(store.googleVisionApiKey || "");
       setOpenaiKey(store.openaiApiKey || "");
       setOpenaiModel(store.openaiModel || "gpt-4o-mini");
       setAnthropicKey(store.anthropicApiKey || "");
@@ -35,6 +36,7 @@ function App() {
     await apiKeyStore.setValue({
       googleApiKey: googleKey,
       googleModel: googleModel,
+      googleVisionApiKey: googleVisionKey,
       openaiApiKey: openaiKey,
       openaiModel: openaiModel,
       anthropicApiKey: anthropicKey,
