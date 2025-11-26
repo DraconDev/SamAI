@@ -7,7 +7,7 @@ export default defineConfig({
     name: "SamAI - Smart AI Assistant",
     description:
       "✨ Free AI assistant that enhances search results, provides insights, and helps with writing. ",
-    version: "1.3.356",
+    version: "1.3.357",
     permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
     host_permissions: ["<all_urls>"],
     content_scripts: [

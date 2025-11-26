@@ -34,21 +34,36 @@ const findButtonByText = async (
 
   for (let i = 0; i < allButtons.length; i++) {
     const button = allButtons[i] as HTMLElement;
-    const text = button.textContent?.toLowerCase().trim() || "";
+    const text = button.textContent?.trim() || "";
     const ariaLabel = button.getAttribute("aria-label")?.toLowerCase() || "";
     const title = button.getAttribute("title")?.toLowerCase() || "";
     const dataTestId = button.getAttribute("data-testid")?.toLowerCase() || "";
 
-    const fullText = `${text} ${ariaLabel} ${title} ${dataTestId}`;
+    // Keep original case for better matching, but also prepare lowercase version
+    const textLower = text.toLowerCase();
+    const fullText =
+      `${text} ${ariaLabel} ${title} ${dataTestId}`.toLowerCase();
+    const fullTextOriginal = `${text} ${ariaLabel} ${title} ${dataTestId}`;
 
     if (buttonDescription.includes("more")) {
-      // Looking for "more" button
-      if (fullText.includes("more") && !fullText.includes("show")) {
+      // Looking for "more" button - check both original and lowercased
+      const hasMore = textLower.includes("more") || fullText.includes("more");
+      const hasEllipsis =
+        text.includes("⋯") ||
+        text.includes("...") ||
+        text.includes("⋮") ||
+        text.includes("⋰");
+      const isNotShow = !fullText.includes("show");
+
+      if ((hasMore || hasEllipsis) && isNotShow) {
         console.log(
           `[SamAI] Found more button: "${text || ariaLabel || title}"`
         );
         console.log(
           `[SamAI] Button details - text: "${text}", aria: "${ariaLabel}", title: "${title}"`
+        );
+        console.log(
+          `[SamAI] Matching criteria - hasMore: ${hasMore}, hasEllipsis: ${hasEllipsis}, isNotShow: ${isNotShow}`
         );
         return button;
       }
@@ -58,7 +73,8 @@ const findButtonByText = async (
         fullText.includes("transcript") ||
         fullText.includes("show transcript") ||
         fullText.includes("show captions") ||
-        fullText.includes("closed captions")
+        fullText.includes("closed captions") ||
+        textLower.includes("transcript")
       ) {
         console.log(
           `[SamAI] Found transcript button: "${text || ariaLabel || title}"`
