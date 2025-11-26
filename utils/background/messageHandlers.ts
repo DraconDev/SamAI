@@ -175,6 +175,29 @@ export const handleInputElementClicked = async (
   return undefined;
 };
 
+export const handleCaptureScreenshot = async (
+  message: CaptureScreenshotRequest,
+  sender: Runtime.MessageSender
+): Promise<string | null> => {
+  try {
+    if (!sender.tab || !sender.tab.id) {
+      throw new Error("No sender tab found");
+    }
+
+    // Capture screenshot of the current tab
+    const screenshot = await browser.tabs.captureVisibleTab(null, {
+      format: "png",
+      quality: 100,
+    });
+
+    return screenshot;
+  } catch (error) {
+    const err = error as Error;
+    console.error("[SamAI Background] Screenshot capture failed:", err);
+    throw err;
+  }
+};
+
 // Main message router
 export async function routeMessage(
   message: BackgroundMessage,
@@ -197,6 +220,8 @@ export async function routeMessage(
       return handleClearInputElement();
     case "inputElementClicked":
       return handleInputElementClicked(message);
+    case "captureScreenshot":
+      return handleCaptureScreenshot(message, sender);
     default:
       console.warn("[SamAI Background] Unknown message type:", message.type);
       return undefined;
