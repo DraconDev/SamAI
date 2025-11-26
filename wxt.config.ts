@@ -8,7 +8,14 @@ export default defineConfig({
     description:
       "✨ Free AI assistant that enhances search results, provides insights, and helps with writing. ",
     version: "1.3.349",
-    permissions: ["storage", "contextMenus", "activeTab", "tabs", "scripting"],
+    permissions: [
+      "storage",
+      "contextMenus",
+      "activeTab",
+      "tabs",
+      "scripting",
+      "screenCapture",
+    ],
     host_permissions: ["<all_urls>"],
     content_scripts: [
       {

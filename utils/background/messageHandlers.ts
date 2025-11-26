@@ -46,6 +46,16 @@ interface InputElementClickedMessage extends BaseMessage {
   inputInfo: any; // Would be better typed
 }
 
+interface CaptureScreenshotRequest extends BaseMessage {
+  type: "captureScreenshot";
+}
+
+interface ScreenshotResponseMessage extends BaseMessage {
+  type: "screenshotResponse";
+  dataUrl: string;
+  error?: string;
+}
+
 export type BackgroundMessage =
   | GenerateGeminiResponseRequest
   | OpenApiKeyPageRequest
@@ -54,10 +64,14 @@ export type BackgroundMessage =
   | GetPageContentRequest
   | PageContentResponseMessage
   | InputElementClickedMessage
-  | ClearInputElementMessage;
+  | ClearInputElementMessage
+  | CaptureScreenshotRequest
+  | ScreenshotResponseMessage;
 
 // Type guard for incoming messages
-export function isBackgroundMessage(message: any): message is BackgroundMessage {
+export function isBackgroundMessage(
+  message: any
+): message is BackgroundMessage {
   return (
     typeof message === "object" &&
     message !== null &&
@@ -83,10 +97,10 @@ export const handleGenerateGeminiResponse = async (
       text = await generateFormResponse(message.prompt);
     } catch (error: unknown) {
       const err = error as Error;
-      console.error(
-        "[SamAI Background] Error in generateFormResponse call:",
-        { message: err.message, stack: err.stack }
-      );
+      console.error("[SamAI Background] Error in generateFormResponse call:", {
+        message: err.message,
+        stack: err.stack,
+      });
     }
 
     if (text !== null) {
@@ -132,7 +146,9 @@ export const handleSetInputValue = async (
   }
 };
 
-export const handlePageContentResponse = async (message: PageContentResponseMessage): Promise<undefined> => {
+export const handlePageContentResponse = async (
+  message: PageContentResponseMessage
+): Promise<undefined> => {
   if (message.outputFormat === "text") {
     await browser.storage.local.set({
       pageBodyText: message.content || "Unable to access page content",
@@ -150,7 +166,9 @@ export const handleClearInputElement = async (): Promise<undefined> => {
   return undefined;
 };
 
-export const handleInputElementClicked = async (message: InputElementClickedMessage): Promise<undefined> => {
+export const handleInputElementClicked = async (
+  message: InputElementClickedMessage
+): Promise<undefined> => {
   await browser.storage.local.set({
     inputInfo: message.inputInfo,
   });
