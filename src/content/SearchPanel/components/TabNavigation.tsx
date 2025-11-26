@@ -170,40 +170,18 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
           <polyline points="21 15 16 10 5 21" />
         </svg>
       ),
-    },
-    {
-      id: "screen",
-      label: "Screen",
-      gradient: "from-green-500 to-green-600",
-      shadow: "rgba(34, 197, 94, 0.5)",
-      icon: (
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ),
     }
   );
 
   // Gradient color mapping
   const gradientColors: Record<string, { from: string; to: string }> = {
-    'from-indigo-500 to-indigo-600': { from: '#6366f1', to: '#4f46e5' },
-    'from-blue-500 to-blue-600': { from: '#3b82f6', to: '#2563eb' },
-    'from-emerald-500 to-emerald-600': { from: '#10b981', to: '#059669' },
-    'from-amber-500 to-amber-600': { from: '#f59e0b', to: '#d97706' },
-    'from-purple-500 to-purple-600': { from: '#a855f7', to: '#9333ea' },
-    'from-pink-500 to-pink-600': { from: '#ec4899', to: '#db2777' },
-    'from-green-500 to-green-600': { from: '#22c55e', to: '#16a34a' },
+    "from-indigo-500 to-indigo-600": { from: "#6366f1", to: "#4f46e5" },
+    "from-blue-500 to-blue-600": { from: "#3b82f6", to: "#2563eb" },
+    "from-emerald-500 to-emerald-600": { from: "#10b981", to: "#059669" },
+    "from-amber-500 to-amber-600": { from: "#f59e0b", to: "#d97706" },
+    "from-purple-500 to-purple-600": { from: "#a855f7", to: "#9333ea" },
+    "from-pink-500 to-pink-600": { from: "#ec4899", to: "#db2777" },
+    "from-green-500 to-green-600": { from: "#22c55e", to: "#16a34a" },
   };
 
   const TabButton: React.FC<{ tab: Tab; className?: string }> = ({
@@ -211,8 +189,11 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     className,
   }) => {
     const isActive = activeTab === tab.id;
-    const gradient = gradientColors[tab.gradient] || { from: '#6366f1', to: '#4f46e5' };
-    
+    const gradient = gradientColors[tab.gradient] || {
+      from: "#6366f1",
+      to: "#4f46e5",
+    };
+
     const baseButtonStyle: React.CSSProperties = {
       display: "flex",
       alignItems: "center",
@@ -235,20 +216,21 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     const activeStyle: React.CSSProperties = {
       ...baseButtonStyle,
       background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})`,
-      color: 'white',
+      color: "white",
       boxShadow: `0 10px 25px -5px ${tab.shadow}, 0 4px 12px -2px ${tab.shadow}, inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
-      transform: 'translateY(-1px) scale(1.02)',
+      transform: "translateY(-1px) scale(1.02)",
       border: `1px solid rgba(255, 255, 255, 0.2)`,
     };
 
     const inactiveStyle: React.CSSProperties = {
       ...baseButtonStyle,
-      background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))',
-      color: '#94a3b8',
-      border: '1px solid rgba(51, 65, 85, 0.4)',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      background:
+        "linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8))",
+      color: "#94a3b8",
+      border: "1px solid rgba(51, 65, 85, 0.4)",
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
     };
-    
+
     return (
       <button
         onClick={() => handleTabClick(tab)}
@@ -256,34 +238,42 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
         className={className}
         onMouseEnter={(e) => {
           if (!isActive) {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(51, 65, 85, 0.7), rgba(30, 41, 59, 0.9))';
-            e.currentTarget.style.color = '#cbd5e1';
-            e.currentTarget.style.transform = 'translateY(-1px)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
-            e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.6)';
+            e.currentTarget.style.background =
+              "linear-gradient(135deg, rgba(51, 65, 85, 0.7), rgba(30, 41, 59, 0.9))";
+            e.currentTarget.style.color = "#cbd5e1";
+            e.currentTarget.style.transform = "translateY(-1px)";
+            e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
+            e.currentTarget.style.borderColor = "rgba(71, 85, 105, 0.6)";
           }
         }}
         onMouseLeave={(e) => {
           if (!isActive) {
-            e.currentTarget.style.background = inactiveStyle.background as string;
+            e.currentTarget.style.background =
+              inactiveStyle.background as string;
             e.currentTarget.style.color = inactiveStyle.color as string;
-            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.transform = "translateY(0)";
             e.currentTarget.style.boxShadow = inactiveStyle.boxShadow as string;
             e.currentTarget.style.borderColor = inactiveStyle.border as string;
           }
         }}
       >
-        <span style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          filter: isActive ? 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))' : 'none'
-        }}>
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            filter: isActive
+              ? "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
+              : "none",
+          }}
+        >
           {tab.icon}
         </span>
-        <span style={{ 
-          textShadow: isActive ? '0 1px 2px rgba(0, 0, 0, 0.2)' : 'none'
-        }}>
+        <span
+          style={{
+            textShadow: isActive ? "0 1px 2px rgba(0, 0, 0, 0.2)" : "none",
+          }}
+        >
           {tab.label}
         </span>
       </button>
@@ -309,12 +299,8 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
     >
       {/* Row 1 - Main Actions */}
       {mainTabs.map((tab) => (
-        <TabButton
-          key={tab.id}
-          tab={tab}
-        />
+        <TabButton key={tab.id} tab={tab} />
       ))}
-
     </div>
   );
 };
