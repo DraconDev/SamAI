@@ -184,22 +184,8 @@ export const handleCaptureScreenshot = async (
       throw new Error("No sender tab found");
     }
 
-    // Check if browser APIs are available
-    if (!browser || !browser.tabs) {
-      console.error("[SamAI Background] Browser APIs not available");
-      throw new Error("Browser APIs not available");
-    }
-
-    console.log(
-      "[SamAI Background] Attempting to capture screenshot for tab:",
-      sender.tab.id
-    );
-
-    // Capture screenshot of the current tab
-    const screenshot = await browser.tabs.captureVisibleTab(undefined, {
-      format: "png",
-      quality: 100,
-    });
+    // Use WXT browser API instead of standard chrome APIs
+    const screenshot = await browser.tabs.captureVisibleTab();
 
     if (!screenshot) {
       throw new Error("Screenshot returned null/undefined");
