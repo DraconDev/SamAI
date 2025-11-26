@@ -36,7 +36,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
   onSubmit,
   onOpenApiKey,
 }) => {
-  const [chatSource, setChatSource] = useState<ChatSource>("none");
+  const [chatSource, setChatSource] = useState<ChatSource>("page");
   const [screenImage, setScreenImage] = useState<string | null>(null);
   const [isCapturingScreen, setIsCapturingScreen] = useState(false);
   const [isVisionApiKeySet, setIsVisionApiKeySet] = useState(false);
