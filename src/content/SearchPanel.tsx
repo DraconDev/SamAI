@@ -461,12 +461,10 @@ Please provide a helpful response about the user's question specifically related
               isChatLoading={isChatLoading}
               chatMessages={chatMessages}
               chatInput={chatInput}
-              includePageContent={includePageContent}
               outputFormat={outputFormat}
               messagesEndRef={messagesEndRef}
               onInputChange={setChatInput}
               onSubmit={handleSendChatMessage}
-              onIncludePageContentChange={setIncludePageContent}
               onOpenApiKey={handleOpenApiKey}
             />
           )}
