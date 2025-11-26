@@ -348,8 +348,9 @@ export const ChatTab: React.FC<ChatTabProps> = ({
               Unified Chat Assistant
             </div>
             <p style={{ fontSize: "0.85rem" }}>
-              Choose your chat source below and ask anything about the page or
-              your screen.
+              Ask anything about the current page. The AI will analyze the page
+              content automatically, or switch to screen mode for visual
+              analysis.
             </p>
           </div>
         </div>
