@@ -30,19 +30,18 @@ const findButtonWithAI = async (
     // Extract current HTML content for AI analysis
     const htmlContent = document.documentElement.outerHTML;
 
-    const prompt = `I need you to analyze this YouTube page HTML and find the exact CSS selector for a specific button. 
+    const prompt = `Find the YouTube button for: "${buttonDescription}"
 
-Button to find: "${buttonDescription}"
+Look for buttons with text containing:
+- "...more" or "more options"
+- "Show transcript" or "transcript"
 
-Please examine the HTML and return ONLY a valid CSS selector string that can be used with document.querySelector() to find this button. 
+Return ONLY a simple CSS selector like:
+button:nth-child(3)
+#description button
+.ytd-menu-renderer button
 
-Look for:
-- The button's role in opening a menu for video actions/options
-- Any button with "more", "show transcript", "transcript", "caption", or similar functionality
-- Consider the button's aria-labels, titles, and surrounding structure
-- Return the most specific and reliable CSS selector possible
-
-Return ONLY the CSS selector string, nothing else.`;
+No quotes or backticks. Raw selector only.`;
 
     const response = await generateFormResponse(prompt);
 
@@ -51,7 +50,19 @@ Return ONLY the CSS selector string, nothing else.`;
       return null;
     }
 
-    const selector = response.trim();
+    // Clean the selector - remove backticks, quotes, and extra whitespace
+    let selector = response.trim();
+    selector = selector.replace(/[`"']/g, ""); // Remove backticks and quotes
+    selector = selector.replace(/\s+/g, " "); // Normalize whitespace
+    console.log(`[SamAI] Raw AI response: "${response}"`);
+    console.log(`[SamAI] Cleaned selector: "${selector}"`);
+
+    // Validate the selector format before trying to use it
+    if (!selector || selector.length === 0) {
+      console.log("[SamAI] Empty selector received");
+      return null;
+    }
+
     console.log(`[SamAI] AI found selector: ${selector}`);
 
     // Try to find the button using the AI-provided selector
