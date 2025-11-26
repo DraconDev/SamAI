@@ -49,35 +49,6 @@ const HomeTab: React.FC<HomeTabProps> = ({
   const [newIconUrl, setNewIconUrl] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
 
-  // Initialize with sample data if empty
-  useEffect(() => {
-    const initializeData = async () => {
-      try {
-        const store = await homeStore.getValue();
-        if (store.data.icons.length === 0 && store.data.folders.length === 0) {
-          // Set default sample data
-          const defaultData = {
-            icons: getSampleIcons(),
-            folders: getSampleFolders(),
-            currentFolderId: undefined,
-          };
-          await homeStore.setValue({ data: defaultData });
-          setHomeData(defaultData);
-        } else {
-          setHomeData(store.data);
-        }
-      } catch (error) {
-        console.error("Error loading home data:", error);
-        setHomeData({
-          icons: getSampleIcons(),
-          folders: getSampleFolders(),
-          currentFolderId: undefined,
-        });
-      }
-    };
-    initializeData();
-  }, []);
-
   // Load home data from storage
   useEffect(() => {
     const loadHomeData = async () => {
@@ -86,7 +57,6 @@ const HomeTab: React.FC<HomeTabProps> = ({
         setHomeData(store.data);
       } catch (error) {
         console.error("Error loading home data:", error);
-        // Set default data
         setHomeData({
           icons: getSampleIcons(),
           folders: getSampleFolders(),
