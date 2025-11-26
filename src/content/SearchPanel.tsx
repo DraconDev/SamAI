@@ -24,97 +24,139 @@ type ChatSource = "none" | "page" | "html" | "screen" | "video";
 const autoEnableTranscript = async (): Promise<void> => {
   console.log("[SamAI] Auto-enabling transcript...");
 
-  // Try multiple ways to find and click the transcript-related buttons
-
   // Step 1: Try to find and click the "more" (three dots) button first
-  const moreButtons = [
-    'button[aria-label*="more actions"]',
-    'button[aria-label*="More actions"]',
-    'button[aria-label*="Show more"]',
-    "ytd-menu-renderer yt-icon-button",
-    'button[data-testid="more-button"]',
-    'button:has([data-icon="more_vert"])',
-    '[data-icon="more_vert"]',
+  const moreButtonSelectors = [
+    // YouTube video info section more button
+    "ytd-video-secondary-info-renderer #button",
+    "ytd-video-secondary-info-renderer yt-button-shape button",
+    "ytd-video-secondary-info-renderer tp-yt-paper-icon-button",
+    // Alternative selectors
+    'button[aria-label*="more"]',
+    'button[aria-label*="More"]',
+    '[aria-expanded="false"] + button',
+    // Generic more buttons
+    'button[title*="more"]',
+    'button[title*="More"]',
+    // Try common YouTube elements
+    "#top-level-buttons-computed button:last-child",
+    "tp-yt-paper-icon-button",
+    "yt-button-shape button",
   ];
 
   let moreButtonClicked = false;
 
-  for (const selector of moreButtons) {
+  for (const selector of moreButtonSelectors) {
     const button = document.querySelector(selector) as HTMLElement;
     if (button && !moreButtonClicked) {
-      console.log(`[SamAI] Found more button: ${selector}`);
-      try {
-        button.click();
-        moreButtonClicked = true;
-        console.log("[SamAI] Clicked more button, waiting for menu...");
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        break;
-      } catch (error) {
-        console.log(`[SamAI] Could not click more button:`, error);
+      // Check if this looks like a menu trigger button
+      const ariaLabel = button.getAttribute("aria-label") || "";
+      const title = button.getAttribute("title") || "";
+      const text = button.textContent || "";
+
+      const looksLikeMenuButton =
+        ariaLabel.toLowerCase().includes("more") ||
+        title.toLowerCase().includes("more") ||
+        text.toLowerCase().includes("more") ||
+        button.querySelector('[data-icon="more_vert"]');
+
+      if (looksLikeMenuButton) {
+        console.log(`[SamAI] Found more button: ${selector}`);
+        try {
+          button.click();
+          moreButtonClicked = true;
+          console.log("[SamAI] Clicked more button, waiting for menu...");
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+          break;
+        } catch (error) {
+          console.log(`[SamAI] Could not click more button:`, error);
+        }
       }
     }
   }
 
-  // Step 2: Look for transcript button in the menu or page
-  const transcriptSelectors = [
-    // Look for text-based buttons
-    'button:contains("Show transcript")',
-    'button:contains("Transcript")',
-    'button:contains("Show captions")',
-    'button:contains("Subtitles")',
-    // Look for aria-label buttons
-    'button[aria-label*="transcript"]',
-    'button[aria-label*="caption"]',
-    'button[aria-label*="subtitle"]',
-    // Look for icon buttons
-    'button:has([data-icon="subtitles"])',
-    'button:has([data-icon="closed_caption")]',
-    // Data test IDs
-    'button[data-testid="show-transcript"]',
-    'button[data-testid="transcript"]',
-  ];
+  // Step 2: Search all buttons for transcript-related text content
+  const allButtons = document.querySelectorAll(
+    "button, yt-button-shape button, paper-button, .ytp-button"
+  );
+  let transcriptButtonFound = false;
 
-  for (const selector of transcriptSelectors) {
-    const button = document.querySelector(selector) as HTMLElement;
-    if (button) {
-      console.log(`[SamAI] Found transcript button: ${selector}`);
+  for (const button of allButtons) {
+    const text = button.textContent?.toLowerCase().trim() || "";
+    const ariaLabel = button.getAttribute("aria-label")?.toLowerCase() || "";
+    const title = button.getAttribute("title")?.toLowerCase() || "";
+
+    const fullText = `${text} ${ariaLabel} ${title}`;
+
+    if (
+      fullText.includes("transcript") ||
+      fullText.includes("show captions") ||
+      fullText.includes("closed captions") ||
+      fullText.includes("subtitles")
+    ) {
+      console.log(
+        `[SamAI] Found transcript button by content: "${
+          text || ariaLabel || title
+        }"`
+      );
       try {
-        button.click();
-        console.log(
-          "[SamAI] Clicked transcript button, waiting for transcript..."
-        );
+        (button as HTMLElement).click();
+        transcriptButtonFound = true;
+        console.log("[SamAI] Clicked transcript button by content");
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        return; // Success
+        return;
       } catch (error) {
         console.log(`[SamAI] Could not click transcript button:`, error);
       }
     }
   }
 
-  // Step 3: Fallback - search by text content in all buttons
-  const allButtons = document.querySelectorAll(
-    "button, yt-button-shape button, paper-button, .ytp-button"
-  );
-  for (const button of allButtons) {
-    const text = button.textContent?.toLowerCase() || "";
-    if (
-      text.includes("transcript") ||
-      text.includes("caption") ||
-      text.includes("subtitle")
-    ) {
-      console.log(`[SamAI] Found transcript button by text: "${text}"`);
-      try {
-        (button as HTMLElement).click();
-        console.log("[SamAI] Clicked transcript button by text");
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        return;
-      } catch (error) {
-        console.log(`[SamAI] Could not click button by text:`, error);
+  // Step 3: Alternative approach - try to click CC button and then try transcript
+  if (!transcriptButtonFound) {
+    for (const button of allButtons) {
+      const text = button.textContent?.toLowerCase() || "";
+      const ariaLabel = button.getAttribute("aria-label")?.toLowerCase() || "";
+      const icon =
+        button.querySelector("[data-icon]")?.getAttribute("data-icon") || "";
+
+      if (
+        text.includes("cc") ||
+        text.includes("closed caption") ||
+        ariaLabel.includes("cc") ||
+        icon === "closed_caption"
+      ) {
+        console.log(`[SamAI] Found CC button, clicking to enable captions...`);
+        try {
+          (button as HTMLElement).click();
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          break;
+        } catch (error) {
+          console.log(`[SamAI] Could not click CC button:`, error);
+        }
       }
     }
   }
 
-  console.log("[SamAI] Could not auto-enable transcript");
+  // Step 4: Try direct aria-label buttons
+  const ariaButtons = document.querySelectorAll(
+    'button[aria-label*="transcript"], button[aria-label*="caption"], button[aria-label*="subtitle"]'
+  );
+  for (const button of ariaButtons) {
+    console.log(
+      `[SamAI] Found transcript button by aria-label: ${button.getAttribute(
+        "aria-label"
+      )}`
+    );
+    try {
+      (button as HTMLElement).click();
+      console.log("[SamAI] Clicked transcript button by aria-label");
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      return;
+    } catch (error) {
+      console.log(`[SamAI] Could not click aria-label button:`, error);
+    }
+  }
+
+  console.log("[SamAI] Auto-enable transcript process completed");
 };
 
 // Video transcript extraction function
@@ -443,7 +485,7 @@ ${truncatedContent}`;
       .slice(0, 10)}.${extension}`;
     document.body.appendChild(a);
     a.click();
-    document.removeChild(a);
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
 
