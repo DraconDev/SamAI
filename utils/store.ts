@@ -77,6 +77,7 @@ export type AiProvider = "google" | "openai" | "anthropic" | "openrouter";
 export interface ApiKeyStore {
   googleApiKey: string;
   googleModel: string;
+  googleVisionApiKey: string;
   openaiApiKey: string;
   openaiModel: string;
   anthropicApiKey: string;
@@ -110,8 +111,12 @@ export const apiKeyStore = storage.defineItem<ApiKeyStore>("sync:apiKey", {
         };
       }
       // If it was an object but with old structure (though strictly typed before, storage might be raw)
-      if (typeof oldValue === "object" && oldValue !== null && "apiKey" in oldValue) {
-         return {
+      if (
+        typeof oldValue === "object" &&
+        oldValue !== null &&
+        "apiKey" in oldValue
+      ) {
+        return {
           ...defaultApiKeyStore,
           googleApiKey: oldValue.apiKey,
         };
@@ -163,9 +168,7 @@ export async function addPageAssistantText(text: string) {
     texts: { ...store.texts, pageAssistantTexts },
   });
   return pageAssistantTexts;
-
 }
-
 
 export interface PageContextStore {
   content: string;
@@ -183,9 +186,12 @@ export const defaultPageContextStore: PageContextStore = {
   format: "text",
 };
 
-export const pageContextStore = storage.defineItem<PageContextStore>("local:pageContext", {
-  fallback: defaultPageContextStore,
-});
+export const pageContextStore = storage.defineItem<PageContextStore>(
+  "local:pageContext",
+  {
+    fallback: defaultPageContextStore,
+  }
+);
 
 export interface HighlightPattern {
   id: string;
@@ -204,10 +210,7 @@ export const defaultHighlightPatternsStore: HighlightPatternsStore = {
   patterns: [],
 };
 
-export const highlightPatternsStore = storage.defineItem<HighlightPatternsStore>(
-  "sync:highlightPatterns",
-  {
+export const highlightPatternsStore =
+  storage.defineItem<HighlightPatternsStore>("sync:highlightPatterns", {
     fallback: defaultHighlightPatternsStore,
-  }
-);
-
+  });
