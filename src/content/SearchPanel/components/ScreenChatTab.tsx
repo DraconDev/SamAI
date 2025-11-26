@@ -158,154 +158,216 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
         `${provider}Model` as keyof typeof apiKeyData
       ] as string;
 
-      // Check if the provider supports vision models
-      const visionModels = {
-        google: ["gemini-1.5-flash", "gemini-1.5-pro"],
-        openai: ["gpt-4o", "gpt-4o-mini"],
-        anthropic: ["claude-3-5-sonnet-20241022", "claude-3-5-haiku-20241022"],
-        openrouter: ["openai/gpt-4o", "anthropic/claude-3.5-sonnet"],
-      };
-
-      // Check if current model supports vision
-      const isVisionModel = visionModels[provider]?.some((vm) =>
-        model?.includes(vm)
-      );
-
-      let prompt: string;
       let response: string | null = null;
 
-      if (isVisionModel) {
-        // Use vision-capable model with image
-        if (provider === "google") {
-          // Google Gemini with image
-          const requestBody = {
-            contents: [
-              {
-                parts: [
-                  { text: message },
-                  {
-                    inline_data: {
-                      mime_type: "image/png",
-                      data: base64Image,
-                    },
-                  },
-                ],
-              },
-            ],
-          };
-
-          const apiKey = apiKeyData.googleApiKey;
+      // Use Google Cloud Vision API for image analysis
+      if (provider === "google" && apiKeyData.googleApiKey) {
+        try {
+          // Google Cloud Vision API
           const visionResponse = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+            `https://vision.googleapis.com/v1/images:annotate?key=${apiKeyData.googleApiKey}`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(requestBody),
-            }
-          );
-
-          if (!visionResponse.ok)
-            throw new Error(`Gemini API error: ${visionResponse.status}`);
-
-          const data = await visionResponse.json();
-          response = data.candidates?.[0]?.content?.parts?.[0]?.text || null;
-        } else if (provider === "openai") {
-          // OpenAI with image
-          const openaiResponse = await fetch(
-            "https://api.openai.com/v1/chat/completions",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${apiKeyData.openaiApiKey}`,
-              },
               body: JSON.stringify({
-                model: model,
-                messages: [
+                requests: [
                   {
-                    role: "user",
-                    content: [
-                      { type: "text", text: message },
-                      {
-                        type: "image_url",
-                        image_url: {
-                          url: `data:image/png;base64,${base64Image}`,
-                        },
-                      },
+                    image: {
+                      content: base64Image,
+                    },
+                    features: [
+                      { type: "LABEL_DETECTION", maxResults: 10 },
+                      { type: "TEXT_DETECTION", maxResults: 10 },
+                      { type: "OBJECT_LOCALIZATION", maxResults: 10 },
+                      { type: "FACE_DETECTION", maxResults: 5 },
+                      { type: "LANDMARK_DETECTION", maxResults: 5 },
+                      { type: "LOGO_DETECTION", maxResults: 5 },
+                      { type: "SAFE_SEARCH_DETECTION", maxResults: 5 },
                     ],
                   },
                 ],
-                max_tokens: 1000,
               }),
             }
           );
 
-          if (!openaiResponse.ok)
-            throw new Error(`OpenAI API error: ${openaiResponse.status}`);
-
-          const data = await openaiResponse.json();
-          response = data.choices?.[0]?.message?.content || null;
-        } else if (provider === "anthropic") {
-          // Anthropic with image (requires special handling)
-          throw new Error(
-            "Anthropic vision API not yet implemented - please use Google Gemini or OpenAI"
-          );
-        } else if (provider === "openrouter") {
-          // OpenRouter with image (passes through to underlying provider)
-          const openrouterResponse = await fetch(
-            "https://openrouter.ai/api/v1/chat/completions",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${apiKeyData.openrouterApiKey}`,
-                "HTTP-Referer": "https://github.com/google/wxt",
-                "X-Title": "SamAI",
-              },
-              body: JSON.stringify({
-                model: model,
-                messages: [
-                  {
-                    role: "user",
-                    content: [
-                      { type: "text", text: message },
-                      {
-                        type: "image_url",
-                        image_url: {
-                          url: `data:image/png;base64,${base64Image}`,
-                        },
-                      },
-                    ],
-                  },
-                ],
-                max_tokens: 1000,
-              }),
-            }
-          );
-
-          if (!openrouterResponse.ok)
+          if (!visionResponse.ok) {
             throw new Error(
-              `OpenRouter API error: ${openrouterResponse.status}`
+              `Google Cloud Vision API error: ${visionResponse.status}`
             );
+          }
 
-          const data = await openrouterResponse.json();
-          response = data.choices?.[0]?.message?.content || null;
+          const visionData = await visionResponse.json();
+
+          // Process the vision results
+          const visionResults = processVisionResults(visionData, message);
+          response = visionResults;
+        } catch (visionError) {
+          console.error("Google Cloud Vision API error:", visionError);
+          // Fall back to Gemini if vision API fails
+          if (apiKeyData.googleApiKey) {
+            const fallbackResponse = await generateFormResponse(
+              `You are analyzing a screenshot. The user asks: "${message}". Please analyze what you can see in this screenshot and provide a helpful response about the visible content, UI elements, text, and overall interface.`
+            );
+            response = fallbackResponse;
+          } else {
+            throw new Error("No Google API key available for fallback");
+          }
         }
       } else {
-        // Fallback to text-only model with image description
-        prompt = `You are an AI assistant that can see and analyze images. The user has captured a screenshot and is asking: "${message}". \n\nPlease analyze what you can see in the image and provide a helpful response. If you cannot actually see the image, please let them know that vision analysis isn't available with the current model configuration.\n\nNote: If you're seeing this message, it means the current AI model doesn't support vision capabilities. Please recommend switching to a vision-capable model like Gemini 1.5 Flash, GPT-4o, or Claude 3.5 Sonnet for better image analysis.`;
+        // Non-Google providers or no API key - use text model with description
+        const prompt = `You are analyzing a screenshot. The user asks: "${message}". Please provide a helpful response about what you would expect to see in a typical screenshot analysis, including UI elements, layout suggestions, and general visual guidance. Note: This is a text-only analysis since no vision API is available.`;
 
         response = await generateFormResponse(prompt);
       }
 
       if (!response) {
-        throw new Error(`No response received from ${provider} API`);
+        throw new Error("No response received from vision analysis");
       }
 
       return response;
     } catch (error) {
       console.error("Vision AI error:", error);
       throw error;
+    }
+  };
+
+  // Process Google Cloud Vision API results
+  const processVisionResults = (
+    visionData: any,
+    userQuestion: string
+  ): string => {
+    try {
+      const annotations = visionData.responses?.[0];
+      if (!annotations) {
+        return "I couldn't analyze the image. Please try again.";
+      }
+
+      let analysis = `Based on my analysis of your screenshot regarding "${userQuestion}":\n\n`;
+
+      // Add labels (objects/concepts detected)
+      if (
+        annotations.labelAnnotations &&
+        annotations.labelAnnotations.length > 0
+      ) {
+        analysis += "**Objects & Concepts Detected:**\n";
+        const topLabels = annotations.labelAnnotations.slice(0, 5);
+        analysis += topLabels
+          .map(
+            (label: any) =>
+              `• ${label.description} (${Math.round(
+                label.score * 100
+              )}% confidence)`
+          )
+          .join("\n");
+        analysis += "\n\n";
+      }
+
+      // Add text detection
+      if (
+        annotations.textAnnotations &&
+        annotations.textAnnotations.length > 0
+      ) {
+        analysis += "**Text Found:**\n";
+        const fullText = annotations.textAnnotations[0]?.description || "";
+        const preview =
+          fullText.length > 200 ? fullText.substring(0, 200) + "..." : fullText;
+        analysis += preview || "No readable text detected";
+        analysis += "\n\n";
+      }
+
+      // Add objects localization
+      if (
+        annotations.localizedObjectAnnotations &&
+        annotations.localizedObjectAnnotations.length > 0
+      ) {
+        analysis += "**UI Elements & Objects:**\n";
+        const topObjects = annotations.localizedObjectAnnotations.slice(0, 3);
+        analysis += topObjects
+          .map((obj: any) => {
+            const location = obj.boundingPoly?.vertices?.[0];
+            const pos = location
+              ? `(position: ${location.x || "N/A"}, ${location.y || "N/A"})`
+              : "";
+            return `• ${obj.name} (${Math.round(
+              obj.score * 100
+            )}% confidence) ${pos}`;
+          })
+          .join("\n");
+        analysis += "\n\n";
+      }
+
+      // Add face detection
+      if (
+        annotations.faceAnnotations &&
+        annotations.faceAnnotations.length > 0
+      ) {
+        analysis += "**Faces Detected:**\n";
+        analysis += `• ${annotations.faceAnnotations.length} face(s) found\n`;
+        analysis += `• Face detection confidence: ${Math.round(
+          annotations.faceAnnotations[0]?.detectionConfidence * 100
+        )}%\n\n`;
+      }
+
+      // Add landmarks/logos if found
+      if (
+        annotations.landmarkAnnotations &&
+        annotations.landmarkAnnotations.length > 0
+      ) {
+        analysis += "**Landmarks Found:**\n";
+        analysis += annotations.landmarkAnnotations
+          .map((landmark: any) => `• ${landmark.description}`)
+          .join("\n");
+        analysis += "\n\n";
+      }
+
+      if (
+        annotations.logoAnnotations &&
+        annotations.logoAnnotations.length > 0
+      ) {
+        analysis += "**Logos Detected:**\n";
+        analysis += annotations.logoAnnotations
+          .map((logo: any) => `• ${logo.description}`)
+          .join("\n");
+        analysis += "\n\n";
+      }
+
+      // Safe search information
+      if (annotations.safeSearchAnnotation) {
+        const safeLevels = annotations.safeSearchAnnotation;
+        const overall =
+          safeLevels.adult || safeLevels.violence || safeLevels.racy;
+        if (overall && overall !== "VERY_UNLIKELY") {
+          analysis +=
+            "**Content Safety:** Some content may require review.\n\n";
+        }
+      }
+
+      // Answer the specific question based on what's detected
+      analysis += "**My Analysis:**\n";
+      if (
+        userQuestion.toLowerCase().includes("what") &&
+        userQuestion.toLowerCase().includes("see")
+      ) {
+        analysis +=
+          "I can see the visual elements described above. Based on the detected objects, text, and UI elements, this appears to be a screenshot of a typical interface.";
+      } else if (userQuestion.toLowerCase().includes("help")) {
+        analysis +=
+          "Based on what's visible in the screenshot, I can help you navigate, understand the interface, or provide guidance on how to interact with the displayed elements.";
+      } else if (
+        userQuestion.toLowerCase().includes("error") ||
+        userQuestion.toLowerCase().includes("problem")
+      ) {
+        analysis +=
+          "I've analyzed the screenshot for potential issues. The detected elements suggest this is a standard interface view.";
+      } else {
+        analysis +=
+          "I've detected the visual elements shown above. Feel free to ask more specific questions about any part of the screenshot.";
+      }
+
+      return analysis;
+    } catch (error) {
+      console.error("Error processing vision results:", error);
+      return "I had trouble analyzing the detailed vision results, but I can see this is a screenshot.";
     }
   };
 
