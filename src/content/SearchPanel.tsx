@@ -20,6 +20,77 @@ import type { ScrapeResultFormat } from "./SearchPanel/types";
 // Define ChatSource locally since it's not exported
 type ChatSource = "none" | "page" | "html" | "screen" | "video";
 
+// Video transcript extraction function
+const extractVideoTranscript = async (): Promise<string> => {
+  try {
+    console.log("[SamAI] Attempting to extract video transcript...");
+
+    // Try different selectors for common video platforms
+    const transcriptSelectors = [
+      // YouTube
+      "#transcript ytp-caption-segment",
+      ".caption-line",
+      '[class*="caption"]',
+      // Vimeo
+      ".vp-captions-cue",
+      '[class*="transcript"]',
+      // Generic
+      '[class*="transcript"]',
+      '[class*="subtitle"]',
+      '[class*="caption"]',
+      "video[tracks] + *", // Video with tracks
+    ];
+
+    let transcriptText = "";
+
+    for (const selector of transcriptSelectors) {
+      const elements = document.querySelectorAll(selector);
+      if (elements.length > 0) {
+        console.log(
+          `[SamAI] Found transcript elements with selector: ${selector}`
+        );
+
+        // Extract text from all transcript elements
+        const texts = Array.from(elements)
+          .map((el) => el.textContent?.trim())
+          .filter((text) => text && text.length > 0);
+
+        if (texts.length > 0) {
+          transcriptText = texts.join(" ");
+          console.log(
+            `[SamAI] Extracted transcript (${texts.length} segments):`,
+            transcriptText.substring(0, 200) + "..."
+          );
+          break;
+        }
+      }
+    }
+
+    if (!transcriptText) {
+      // Check for HTML5 video with tracks
+      const videoTracks = document.querySelectorAll("video[tracks]");
+      if (videoTracks.length > 0) {
+        console.log("[SamAI] Found HTML5 video with tracks");
+        transcriptText =
+          "Found HTML5 video element with caption tracks. The transcript may be available in the video player's subtitle/caption options.";
+      }
+    }
+
+    if (!transcriptText) {
+      throw new Error(
+        "No transcript found. This might not be a video page or the transcript might not be available."
+      );
+    }
+
+    return transcriptText;
+  } catch (error) {
+    console.error("[SamAI] Error extracting video transcript:", error);
+    throw new Error(
+      "Failed to extract video transcript. Please make sure you're on a video page with available captions."
+    );
+  }
+};
+
 interface SearchPanelProps {
   response: string | null;
   onClose: () => void;
