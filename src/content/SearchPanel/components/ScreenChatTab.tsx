@@ -1,4 +1,5 @@
 import { LoadingSpinner } from "@/src/components/ui/LoadingSpinner";
+import { apiKeyStore } from "@/utils/store";
 import React, { useState } from "react";
 
 interface ScreenChatTabProps {
@@ -73,10 +74,27 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
       }
     } catch (error) {
       console.error("Screenshot capture failed:", error);
+      let errorContent = "Failed to capture screenshot.";
+
+      if (error instanceof Error) {
+        if (error.message.includes("No sender tab found")) {
+          errorContent += " No active tab found. Please try again.";
+        } else if (error.message.includes("Browser APIs not available")) {
+          errorContent +=
+            " Browser extension APIs not available. Please reload the page.";
+        } else if (error.message.includes("Screenshot returned null")) {
+          errorContent += " Screenshot was empty. Please try again.";
+        } else {
+          errorContent += ` Error: ${error.message}`;
+        }
+      }
+
+      errorContent +=
+        " Please ensure you have granted the necessary permissions and try again.";
+
       const errorMessage: ChatMessage = {
         role: "assistant",
-        content:
-          "Failed to capture screenshot. Please ensure you have granted the necessary permissions.",
+        content: errorContent,
         timestamp: new Date().toLocaleTimeString(),
       };
       setChatMessages([errorMessage]);
