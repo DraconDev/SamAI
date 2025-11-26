@@ -20,88 +20,67 @@ import type { ScrapeResultFormat } from "./SearchPanel/types";
 // Define ChatSource locally since it's not exported
 type ChatSource = "none" | "page" | "html" | "screen" | "video";
 
-// AI-powered button finder function
-const findButtonWithAI = async (
+// Simple button finder by text content
+const findButtonByText = async (
   buttonDescription: string
 ): Promise<HTMLElement | null> => {
-  try {
-    console.log(`[SamAI] Using AI to find: ${buttonDescription}`);
+  console.log(`[SamAI] Searching for button: ${buttonDescription}`);
 
-    // Extract current HTML content for AI analysis
-    const htmlContent = document.documentElement.outerHTML;
+  // Get all possible buttons
+  const allButtons = document.querySelectorAll(
+    "button, yt-button-shape button, paper-button, .ytp-button"
+  );
+  console.log(`[SamAI] Found ${allButtons.length} total buttons to check`);
 
-    const prompt = `Find the YouTube button for: "${buttonDescription}"
+  for (let i = 0; i < allButtons.length; i++) {
+    const button = allButtons[i] as HTMLElement;
+    const text = button.textContent?.toLowerCase().trim() || "";
+    const ariaLabel = button.getAttribute("aria-label")?.toLowerCase() || "";
+    const title = button.getAttribute("title")?.toLowerCase() || "";
+    const dataTestId = button.getAttribute("data-testid")?.toLowerCase() || "";
 
-Look for buttons with text containing:
-- "...more" or "more options"
-- "Show transcript" or "transcript"
+    const fullText = `${text} ${ariaLabel} ${title} ${dataTestId}`;
 
-Return ONLY a simple CSS selector like:
-button:nth-child(3)
-#description button
-.ytd-menu-renderer button
-
-No quotes or backticks. Raw selector only.`;
-
-    const response = await generateFormResponse(prompt);
-
-    if (!response || !response.trim()) {
-      console.log("[SamAI] AI did not return a valid selector");
-      return null;
+    if (buttonDescription.includes("more")) {
+      // Looking for "more" button
+      if (fullText.includes("more") && !fullText.includes("show")) {
+        console.log(
+          `[SamAI] Found more button: "${text || ariaLabel || title}"`
+        );
+        console.log(
+          `[SamAI] Button details - text: "${text}", aria: "${ariaLabel}", title: "${title}"`
+        );
+        return button;
+      }
+    } else if (buttonDescription.includes("transcript")) {
+      // Looking for transcript button
+      if (
+        fullText.includes("transcript") ||
+        fullText.includes("show transcript") ||
+        fullText.includes("show captions") ||
+        fullText.includes("closed captions")
+      ) {
+        console.log(
+          `[SamAI] Found transcript button: "${text || ariaLabel || title}"`
+        );
+        console.log(
+          `[SamAI] Button details - text: "${text}", aria: "${ariaLabel}", title: "${title}"`
+        );
+        return button;
+      }
     }
-
-    // Clean the selector - remove backticks, quotes, and extra whitespace
-    let selector = response.trim();
-    selector = selector.replace(/[`"']/g, ""); // Remove backticks and quotes
-    selector = selector.replace(/\s+/g, " "); // Normalize whitespace
-    console.log(`[SamAI] Raw AI response: "${response}"`);
-    console.log(`[SamAI] Cleaned selector: "${selector}"`);
-
-    // Validate the selector format before trying to use it
-    if (!selector || selector.length === 0) {
-      console.log("[SamAI] Empty selector received");
-      return null;
-    }
-
-    console.log(`[SamAI] AI found selector: ${selector}`);
-
-    // Try to find the button using the AI-provided selector
-    const button = document.querySelector(selector) as HTMLElement;
-
-    if (button) {
-      console.log(
-        `[SamAI] Successfully found button with AI selector: ${selector}`
-      );
-      console.log(
-        `[SamAI] Button aria-label: "${
-          button.getAttribute("aria-label") || "none"
-        }"`
-      );
-      console.log(
-        `[SamAI] Button title: "${button.getAttribute("title") || "none"}"`
-      );
-      console.log(
-        `[SamAI] Button text: "${button.textContent?.trim() || "none"}"`
-      );
-      return button;
-    } else {
-      console.log(`[SamAI] AI selector found no element: ${selector}`);
-      return null;
-    }
-  } catch (error) {
-    console.error(`[SamAI] Error using AI to find button: ${error}`);
-    return null;
   }
+
+  console.log(`[SamAI] No button found for: ${buttonDescription}`);
+  return null;
 };
 
-// Function to auto-enable transcript using AI-powered button finding
+// Simple auto-enable transcript function
 const autoEnableTranscript = async (): Promise<void> => {
-  console.log("[SamAI] Auto-enabling transcript using AI-powered approach...");
+  console.log("[SamAI] Auto-enabling transcript (simple approach)...");
 
-  // Step 1: Use AI to find and click the "more" (three dots) button
-  const moreButton = await findButtonWithAI(
-    "YouTube's 'more options' button (three dots) in the video description area that opens a menu with video options"
-  );
+  // Step 1: Click the "more" (three dots) button
+  const moreButton = await findButtonByText("more options button");
 
   if (moreButton) {
     try {
@@ -113,13 +92,11 @@ const autoEnableTranscript = async (): Promise<void> => {
       console.log(`[SamAI] Could not click more button: ${error}`);
     }
   } else {
-    console.log("[SamAI] Could not find more button with AI");
+    console.log("[SamAI] Could not find more button");
   }
 
-  // Step 2: Use AI to find and click the "show transcript" button
-  const transcriptButton = await findButtonWithAI(
-    "YouTube's 'Show transcript' button or any button that enables video captions/subtitles/transcript"
-  );
+  // Step 2: Click the "show transcript" button
+  const transcriptButton = await findButtonByText("show transcript button");
 
   if (transcriptButton) {
     try {
@@ -133,10 +110,10 @@ const autoEnableTranscript = async (): Promise<void> => {
       console.log(`[SamAI] Could not click transcript button: ${error}`);
     }
   } else {
-    console.log("[SamAI] Could not find transcript button with AI");
+    console.log("[SamAI] Could not find transcript button");
   }
 
-  console.log("[SamAI] AI-powered auto-enable transcript process completed");
+  console.log("[SamAI] Simple auto-enable transcript completed");
 };
 
 // Video transcript extraction function
