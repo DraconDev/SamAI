@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 function App() {
   const [googleKey, setGoogleKey] = useState("");
   const [googleModel, setGoogleModel] = useState("");
+  const [googleVisionKey, setGoogleVisionKey] = useState("");
   const [openaiKey, setOpenaiKey] = useState("");
   const [openaiModel, setOpenaiModel] = useState("");
   const [anthropicKey, setAnthropicKey] = useState("");
   const [anthropicModel, setAnthropicModel] = useState("");
   const [openrouterKey, setOpenrouterKey] = useState("");
   const [openrouterModel, setOpenrouterModel] = useState("");
-  const [selectedProvider, setSelectedProvider] = useState<AiProvider>("google");
+  const [selectedProvider, setSelectedProvider] =
+    useState<AiProvider>("google");
   const [showKey, setShowKey] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
 
@@ -133,10 +135,7 @@ function App() {
     helpText: string
   ) => (
     <div className="space-y-2">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-gray-300"
-      >
+      <label htmlFor={id} className="block text-sm font-medium text-gray-300">
         {label}
       </label>
       <input
@@ -159,10 +158,22 @@ function App() {
       <div className="relative p-8 w-[500px] bg-gradient-to-br from-[#1E1F2E] to-[#16172a] rounded-2xl shadow-2xl border border-[#2E2F3E]/80 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="relative mb-8 text-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#4f46e5]/20 via-[#818cf8]/20 to-[#4f46e5]/20 blur-3xl animate-pulse" style={{ animationDuration: '3s' }}></div>
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-[#4f46e5]/20 via-[#818cf8]/20 to-[#4f46e5]/20 blur-3xl animate-pulse"
+            style={{ animationDuration: "3s" }}
+          ></div>
           <div className="relative flex items-center justify-center gap-3 mb-3">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] flex items-center justify-center shadow-xl shadow-[#4f46e5]/50 transform hover:scale-110 transition-transform duration-300">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="3" />
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
@@ -171,7 +182,9 @@ function App() {
               AI Providers
             </h1>
           </div>
-          <p className="text-xs font-medium tracking-wide text-gray-400">Configure your AI service</p>
+          <p className="text-xs font-medium tracking-wide text-gray-400">
+            Configure your AI service
+          </p>
           <div className="h-1 w-24 mx-auto mt-3 bg-gradient-to-r from-transparent via-[#4f46e5] to-transparent rounded-full shadow-lg shadow-[#4f46e5]/40"></div>
         </div>
 
@@ -182,12 +195,14 @@ function App() {
               Active Provider
             </label>
             <div className="grid grid-cols-2 gap-3 p-2 bg-[#0D0E16]/60 rounded-xl border border-[#2E2F3E]/60">
-              {([
-                { id: "google", name: "Google", icon: "🔷" },
-                { id: "openai", name: "OpenAI", icon: "🤖" },
-                { id: "anthropic", name: "Anthropic", icon: "🧠" },
-                { id: "openrouter", name: "OpenRouter", icon: "🔀" },
-              ] as const).map((provider) => (
+              {(
+                [
+                  { id: "google", name: "Google", icon: "🔷" },
+                  { id: "openai", name: "OpenAI", icon: "🤖" },
+                  { id: "anthropic", name: "Anthropic", icon: "🧠" },
+                  { id: "openrouter", name: "OpenRouter", icon: "🔀" },
+                ] as const
+              ).map((provider) => (
                 <button
                   key={provider.id}
                   onClick={() => setSelectedProvider(provider.id)}
@@ -198,7 +213,9 @@ function App() {
                         : "text-gray-400 hover:text-gray-200 hover:bg-[#2E2F3E]/60 hover:scale-102"
                     }`}
                 >
-                  <span className="text-lg transition-transform transform group-hover:scale-110">{provider.icon}</span>
+                  <span className="text-lg transition-transform transform group-hover:scale-110">
+                    {provider.icon}
+                  </span>
                   <span>{provider.name}</span>
                 </button>
               ))}
@@ -287,7 +304,9 @@ function App() {
             </div>
 
             {/* Anthropic Section */}
-            <div className={selectedProvider === "anthropic" ? "block" : "hidden"}>
+            <div
+              className={selectedProvider === "anthropic" ? "block" : "hidden"}
+            >
               <div className="space-y-4 p-5 bg-[#0D0E16]/40 rounded-xl border border-[#2E2F3E]/40">
                 {renderKeyInput(
                   "Anthropic API Key",
@@ -327,7 +346,9 @@ function App() {
             </div>
 
             {/* OpenRouter Section */}
-            <div className={selectedProvider === "openrouter" ? "block" : "hidden"}>
+            <div
+              className={selectedProvider === "openrouter" ? "block" : "hidden"}
+            >
               <div className="space-y-4 p-5 bg-[#0D0E16]/40 rounded-xl border border-[#2E2F3E]/40">
                 {renderKeyInput(
                   "OpenRouter API Key",
@@ -375,7 +396,16 @@ function App() {
                      transition-all duration-300 transform hover:scale-[1.02] mt-6
                      font-bold text-base border border-[#4f46e5]/30 flex items-center justify-center gap-2"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
               <polyline points="17 21 17 13 7 13 7 21" />
               <polyline points="7 3 7 8 15 8" />
