@@ -5,6 +5,7 @@ import {
 } from "@/utils/page-content";
 import { apiKeyStore } from "@/utils/store";
 import React, { useRef, useState } from "react";
+import type { ChatSource } from "./SearchPanel/components";
 import {
   ChatTab,
   FormTab,
