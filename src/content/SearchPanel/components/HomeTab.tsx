@@ -32,11 +32,7 @@ interface HomeTabProps {
   onChatClick: () => void;
 }
 
-const HomeTab: React.FC<HomeTabProps> = ({
-  onClose,
-  setActiveTab,
-  onChatClick,
-}) => {
+const HomeTab: React.FC<HomeTabProps> = ({ setActiveTab, onChatClick }) => {
   const [homeData, setHomeData] = useState<HomeData>({
     icons: [],
     folders: [],
