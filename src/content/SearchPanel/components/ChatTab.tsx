@@ -280,7 +280,6 @@ export const ChatTab: React.FC<ChatTabProps> = ({
     // Handle screenshot source differently
     if (chatSource === "screen" && screenImage) {
       try {
-        setIsExtractingContent(true);
         const base64Image = screenImage.split(",")[1];
         const visionAnalysis = await analyzeScreenshot(chatInput, base64Image);
 
@@ -293,8 +292,6 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         console.error("Error analyzing screenshot:", error);
         // Fall back to regular submit
         onSubmit(e);
-      } finally {
-        setIsExtractingContent(false);
       }
     } else {
       // Regular submit for non-screenshot sources, pass the source type
