@@ -17,8 +17,7 @@ import {
 } from "./SearchPanel/components";
 import type { ScrapeResultFormat } from "./SearchPanel/types";
 
-// Define ChatSource locally since it's not exported
-type ChatSource = "none" | "page" | "html" | "screen" | "video";
+type ChatSource = "none" | "page" | "html" | "screen";
 
 // Simple button finder by text content
 const findButtonByText = async (
