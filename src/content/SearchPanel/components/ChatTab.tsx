@@ -290,8 +290,8 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         onSubmit(e, "screen", enhancedPrompt);
       } catch (error) {
         console.error("Error analyzing screenshot:", error);
-        // Fall back to regular submit
-        onSubmit(e);
+        // Fall back to regular submit with screen source
+        onSubmit(e, "screen");
       }
     } else {
       // Regular submit for non-screenshot sources, pass the source type
