@@ -64,23 +64,23 @@ export const ChatTab: React.FC<ChatTabProps> = ({
     try {
       setIsCapturingScreen(true);
 
-      const response = await new Promise<string>((resolve, reject) => {
-        browser.runtime.sendMessage({ type: "captureScreenshot" }, (result) => {
-          if (browser.runtime.lastError) {
-            reject(new Error(browser.runtime.lastError.message));
-          } else if (result) {
-            resolve(result);
-          } else {
-            reject(new Error("No screenshot received"));
-          }
-        });
-      });
+      const response = (await browser.runtime.sendMessage({
+        type: "captureScreenshot",
+      })) as string;
+
+      if (!response) {
+        throw new Error("No screenshot received");
+      }
 
       setScreenImage(response);
       setChatSource("screen");
     } catch (error) {
       console.error("Screenshot capture failed:", error);
-      alert("Failed to capture screenshot. Please try again.");
+      alert(
+        `Failed to capture screenshot: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
     } finally {
       setIsCapturingScreen(false);
     }
@@ -647,7 +647,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                   display: "flex",
                   alignItems: "center",
                   gap: "0.5rem",
-                  marginBottom: "0.25rem",
+                  marginBottom: "0.75rem",
                   flexWrap: "wrap",
                 }}
               >
@@ -655,30 +655,83 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                   style={{
                     fontSize: "0.8rem",
                     color: "#cbd5f5",
-                    marginRight: "0.5rem",
+                    fontWeight: 600,
                   }}
                 >
-                  Chat source:
+                  Chat with:
                 </span>
-                <select
-                  value={chatSource}
-                  onChange={(e) => setChatSource(e.target.value as ChatSource)}
+
+                <div
                   style={{
-                    fontSize: "0.75rem",
-                    padding: "0.25rem 0.5rem",
-                    borderRadius: "0.375rem",
-                    border: "1px solid rgba(71,85,105,0.6)",
-                    background: "rgba(15,23,42,0.9)",
-                    color: "#f1f5f9",
-                    cursor: "pointer",
+                    display: "flex",
+                    gap: "0.35rem",
+                    flexWrap: "wrap",
                   }}
                 >
-                  <option value="none">No source</option>
-                  <option value="page">Page text</option>
-                  <option value="html">HTML content</option>
-                  <option value="video">Video transcript</option>
-                  <option value="screen">Screen</option>
-                </select>
+                  {[
+                    { value: "page", label: "Page Text", icon: "📄" },
+                    { value: "html", label: "HTML", icon: "🔧" },
+                    { value: "video", label: "Video", icon: "🎬" },
+                    { value: "screen", label: "Screenshot", icon: "📸" },
+                    { value: "none", label: "Free Chat", icon: "💭" },
+                  ].map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setChatSource(option.value as ChatSource)}
+                      style={{
+                        padding: "0.4rem 0.8rem",
+                        borderRadius: "0.5rem",
+                        border: `1px solid ${
+                          chatSource === option.value
+                            ? "rgba(59, 130, 246, 0.5)"
+                            : "rgba(71, 85, 105, 0.6)"
+                        }`,
+                        background:
+                          chatSource === option.value
+                            ? "linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(96, 165, 250, 0.15))"
+                            : "rgba(15, 23, 42, 0.7)",
+                        color:
+                          chatSource === option.value ? "#e0f2fe" : "#cbd5f5",
+                        fontSize: "0.75rem",
+                        fontWeight: chatSource === option.value ? 600 : 500,
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.4rem",
+                        boxShadow:
+                          chatSource === option.value
+                            ? "0 2px 8px rgba(59, 130, 246, 0.3)"
+                            : "none",
+                        transform:
+                          chatSource === option.value
+                            ? "translateY(-1px)"
+                            : "translateY(0)",
+                        backdropFilter: "blur(10px)",
+                      }}
+                      onMouseEnter={(e) => {
+                        if (chatSource !== option.value) {
+                          e.currentTarget.style.background =
+                            "rgba(30, 41, 59, 0.8)";
+                          e.currentTarget.style.borderColor =
+                            "rgba(71, 85, 105, 0.8)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (chatSource !== option.value) {
+                          e.currentTarget.style.background =
+                            "rgba(15, 23, 42, 0.7)";
+                          e.currentTarget.style.borderColor =
+                            "rgba(71, 85, 105, 0.6)";
+                        }
+                      }}
+                    >
+                      <span style={{ fontSize: "0.9rem" }}>{option.icon}</span>
+                      <span>{option.label}</span>
+                    </button>
+                  ))}
+                </div>
 
                 {chatSource === "screen" && (
                   <button
@@ -686,31 +739,73 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                     onClick={captureScreenshot}
                     disabled={isCapturingScreen || !isVisionApiKeySet}
                     style={{
-                      padding: "0.25rem 0.75rem",
-                      borderRadius: "0.375rem",
-                      border: "1px solid rgba(34,197,94,0.3)",
-                      background: isCapturingScreen
-                        ? "rgba(34,197,94,0.3)"
-                        : "rgba(34,197,94,0.1)",
-                      color: "#4ade80",
+                      padding: "0.4rem 0.8rem",
+                      borderRadius: "0.5rem",
+                      border: `1px solid ${
+                        !isVisionApiKeySet
+                          ? "rgba(245, 158, 11, 0.5)"
+                          : isCapturingScreen
+                          ? "rgba(34, 197, 94, 0.5)"
+                          : "rgba(34, 197, 94, 0.4)"
+                      }`,
+                      background: !isVisionApiKeySet
+                        ? "linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.15))"
+                        : isCapturingScreen
+                        ? "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(74, 222, 128, 0.2))"
+                        : "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(74, 222, 128, 0.1))",
+                      color: !isVisionApiKeySet ? "#fed7aa" : "#86efac",
                       fontSize: "0.75rem",
+                      fontWeight: 600,
                       cursor:
                         isCapturingScreen || !isVisionApiKeySet
                           ? "not-allowed"
                           : "pointer",
-                      transition: "all 0.2s",
+                      transition: "all 0.2s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      boxShadow: !isVisionApiKeySet
+                        ? "0 2px 8px rgba(245, 158, 11, 0.2)"
+                        : isCapturingScreen
+                        ? "0 2px 12px rgba(34, 197, 94, 0.4)"
+                        : "0 2px 8px rgba(34, 197, 94, 0.2)",
                     }}
                   >
-                    {isCapturingScreen ? "Capturing..." : "Capture Screen"}
+                    <span
+                      style={{
+                        animation: isCapturingScreen
+                          ? "samai-spin 0.8s linear infinite"
+                          : "none",
+                      }}
+                    >
+                      📸
+                    </span>
+                    {isCapturingScreen ? "Capturing..." : "Take Screenshot"}
                   </button>
                 )}
-
-                {!isVisionApiKeySet && chatSource === "screen" && (
-                  <span style={{ fontSize: "0.7rem", color: "#f59e0b" }}>
-                    (Need Google Vision API key)
-                  </span>
-                )}
               </div>
+
+              {!isVisionApiKeySet && chatSource === "screen" && (
+                <div
+                  style={{
+                    padding: "0.5rem 0.75rem",
+                    background:
+                      "linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05))",
+                    border: "1px solid rgba(245, 158, 11, 0.3)",
+                    borderRadius: "0.5rem",
+                    fontSize: "0.75rem",
+                    color: "#f59e0b",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <span>⚠️</span>
+                  <span>
+                    Google Vision API key required for screenshot analysis
+                  </span>
+                </div>
+              )}
 
               {screenImage && chatSource === "screen" && (
                 <div style={{ marginBottom: "0.5rem", textAlign: "center" }}>
