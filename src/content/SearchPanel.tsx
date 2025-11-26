@@ -10,7 +10,6 @@ import {
   FormTab,
   ImageTab,
   ScrapeTab,
-  ScreenChatTab,
   SearchTab,
   SummaryTab,
   TabNavigation,
