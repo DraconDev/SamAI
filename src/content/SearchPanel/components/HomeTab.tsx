@@ -1,3 +1,4 @@
+import { homeStore } from "@/utils/store";
 import React, { useEffect, useState } from "react";
 
 // Types for home icons and folders
@@ -49,13 +50,8 @@ const HomeTab: React.FC<HomeTabProps> = ({
   useEffect(() => {
     const loadHomeData = async () => {
       try {
-        const stored = await apiKeyStore.getValue();
-        const homeData = stored.homeData || {
-          icons: [],
-          folders: [],
-          currentFolderId: undefined,
-        };
-        setHomeData(homeData);
+        const store = await homeStore.getValue();
+        setHomeData(store.data);
       } catch (error) {
         console.error("Error loading home data:", error);
         // Set default data
@@ -72,10 +68,8 @@ const HomeTab: React.FC<HomeTabProps> = ({
   // Save home data to storage
   const saveHomeData = async (newData: HomeData) => {
     try {
-      const current = await apiKeyStore.getValue();
-      await apiKeyStore.setValue({
-        ...current,
-        homeData: newData,
+      await homeStore.setValue({
+        data: newData,
       });
       setHomeData(newData);
     } catch (error) {
