@@ -65,7 +65,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
       const newMessage: ChatMessage = {
         role: "assistant",
         content:
-          "Screenshot captured! You can now ask me questions about what's visible on your screen.",
+          "Screenshot captured! Ask me about the visual elements - pictures, images, UI components, or anything you can see on screen.",
         timestamp: new Date().toLocaleTimeString(),
       };
       setChatMessages([newMessage]);
@@ -218,12 +218,12 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
       ) {
         // Has Google AI key but no Vision API key
         const fallbackResponse = await generateFormResponse(
-          `You are analyzing a screenshot. The user asks: "${message}". Please analyze what you can see in this screenshot and provide a helpful response about the visible content, UI elements, text, and overall interface. Note: Google Cloud Vision API not configured - this is a text-based analysis.`
+          `You are analyzing a visual screenshot. The user asks: "${message}". Focus on what visual elements, images, UI components, or visual content you can see. This is about visual analysis, not text content. Note: Google Cloud Vision API not configured - this is a text-based analysis.`
         );
         response = fallbackResponse;
       } else {
         // Non-Google providers or no API key - use text model with description
-        const prompt = `You are analyzing a screenshot. The user asks: "${message}". Please provide a helpful response about what you would expect to see in a typical screenshot analysis, including UI elements, layout suggestions, and general visual guidance. Note: This is a text-only analysis since Google Cloud Vision API is not available.`;
+        const prompt = `You are analyzing a visual screenshot. The user asks: "${message}". Please focus on visual elements like images, photos, UI components, people, animals, logos, charts, diagrams, or any visual content. This is for visual analysis of what's on screen. Note: This is a text-only analysis since Google Cloud Vision API is not available.`;
 
         response = await generateFormResponse(prompt);
       }
@@ -239,7 +239,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
     }
   };
 
-  // Process Google Cloud Vision API results with improved filtering
+  // Focus on visual elements - not text content
   const processVisionResults = (
     visionData: any,
     userQuestion: string
@@ -252,67 +252,9 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
 
       let analysis = "";
 
-      // Text detection - prioritize this for web pages
-      if (
-        annotations.textAnnotations &&
-        annotations.textAnnotations.length > 0
-      ) {
-        const fullText = annotations.textAnnotations[0]?.description || "";
-        if (fullText.trim()) {
-          analysis += "**Text I can read:**\n";
+      // Visual content first - what makes Screen mode special
 
-          // Show a preview of the text
-          const preview =
-            fullText.length > 300
-              ? fullText.substring(0, 300) + "..."
-              : fullText;
-          analysis += preview + "\n\n";
-        }
-      }
-
-      // Filter and show most relevant labels for web content
-      if (
-        annotations.labelAnnotations &&
-        annotations.labelAnnotations.length > 0
-      ) {
-        // Filter out irrelevant labels and focus on meaningful ones
-        const relevantLabels = annotations.labelAnnotations.filter(
-          (label: any) => {
-            const desc = label.description.toLowerCase();
-            // Exclude clearly irrelevant or generic labels
-            const irrelevantTerms = [
-              "screenshot",
-              "multimedia",
-              "technology",
-              "electronic device",
-              "software",
-              "video game software",
-              "pc game",
-              "graphics",
-              "display",
-              "computer graphics",
-              "digital image",
-            ];
-
-            // Only include relevant labels
-            return (
-              !irrelevantTerms.includes(desc) &&
-              desc.length > 3 && // Exclude very short labels
-              label.score > 0.5
-            ); // Only show high-confidence detections
-          }
-        );
-
-        if (relevantLabels.length > 0) {
-          analysis += "**Main topics/content:**\n";
-          const topLabels = relevantLabels.slice(0, 5);
-          analysis +=
-            topLabels.map((label: any) => `• ${label.description}`).join("\n") +
-            "\n\n";
-        }
-      }
-
-      // Detect animals specifically
+      // Detect animals - very visual content
       if (userQuestion.toLowerCase().includes("animal")) {
         const animalLabels = annotations.labelAnnotations?.filter(
           (label: any) =>
@@ -369,10 +311,11 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
         }
       }
 
-      // Detect people
+      // Detect people - very visual
       if (
         userQuestion.toLowerCase().includes("person") ||
-        userQuestion.toLowerCase().includes("people")
+        userQuestion.toLowerCase().includes("people") ||
+        userQuestion.toLowerCase().includes("face")
       ) {
         if (
           annotations.faceAnnotations &&
@@ -387,129 +330,158 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
         }
       }
 
-      // Detect UI elements and layout
+      // Visual objects and UI elements - this is what Screen mode should focus on
       if (
-        userQuestion.toLowerCase().includes("page") ||
-        userQuestion.toLowerCase().includes("website") ||
-        userQuestion.toLowerCase().includes("interface")
+        annotations.localizedObjectAnnotations &&
+        annotations.localizedObjectAnnotations.length > 0
+      ) {
+        analysis += "**Visual elements I can identify:**\n";
+        const topObjects = annotations.localizedObjectAnnotations.slice(0, 5);
+        analysis +=
+          topObjects.map((obj: any) => `• ${obj.name}`).join("\n") + "\n\n";
+      }
+
+      // Images, photos, visuals - the main reason for Screen mode
+      const visualLabels = annotations.labelAnnotations?.filter(
+        (label: any) => {
+          const desc = label.description.toLowerCase();
+          const visualTerms = [
+            "photo",
+            "image",
+            "picture",
+            "drawing",
+            "painting",
+            "artwork",
+            "diagram",
+            "chart",
+            "map",
+            "portrait",
+            "landscape",
+            "architecture",
+            "building",
+            "vehicle",
+            "food",
+            "nature",
+            "flower",
+            "tree",
+            "mountain",
+            "ocean",
+            "sky",
+            "clouds",
+            "screenshot",
+            "logo",
+            "icon",
+            "button",
+            "interface",
+            "layout",
+            "design",
+            "style",
+            "color",
+          ];
+          return (
+            visualTerms.some((term) => desc.includes(term)) && label.score > 0.5
+          );
+        }
+      );
+
+      if (visualLabels && visualLabels.length > 0) {
+        analysis += "**Visual content I can see:**\n";
+        const topVisualLabels = visualLabels.slice(0, 5);
+        analysis +=
+          topVisualLabels
+            .map((label: any) => `• ${label.description}`)
+            .join("\n") + "\n\n";
+      }
+
+      // Logos/websites - visual branding
+      if (
+        annotations.logoAnnotations &&
+        annotations.logoAnnotations.length > 0
+      ) {
+        analysis += "**Brands/Logos I can identify:**\n";
+        analysis +=
+          annotations.logoAnnotations
+            .map((logo: any) => `• ${logo.description}`)
+            .join("\n") + "\n\n";
+      }
+
+      // UI elements and interface - visual layout
+      if (
+        userQuestion.toLowerCase().includes("interface") ||
+        userQuestion.toLowerCase().includes("ui") ||
+        userQuestion.toLowerCase().includes("button") ||
+        userQuestion.toLowerCase().includes("menu")
       ) {
         if (
           annotations.localizedObjectAnnotations &&
           annotations.localizedObjectAnnotations.length > 0
         ) {
-          analysis += "**Web page elements I can identify:**\n";
-          const topObjects = annotations.localizedObjectAnnotations.slice(0, 5);
-          analysis +=
-            topObjects.map((obj: any) => `• ${obj.name}`).join("\n") + "\n\n";
-        }
-      }
-
-      // Detect logos/websites
-      if (
-        userQuestion.toLowerCase().includes("website") ||
-        userQuestion.toLowerCase().includes("logo") ||
-        userQuestion.toLowerCase().includes("brand")
-      ) {
-        if (
-          annotations.logoAnnotations &&
-          annotations.logoAnnotations.length > 0
-        ) {
-          analysis += "**Brands/Logos detected:**\n";
-          analysis +=
-            annotations.logoAnnotations
-              .map((logo: any) => `• ${logo.description}`)
-              .join("\n") + "\n\n";
-        } else if (
-          annotations.labelAnnotations?.some((label: any) =>
-            [
-              "google",
-              "wikipedia",
-              "youtube",
-              "facebook",
-              "twitter",
-              "instagram",
-              "linkedin",
-              "amazon",
-              "netflix",
-              "microsoft",
-              "apple",
-            ].includes(label.description.toLowerCase())
-          )
-        ) {
-          analysis +=
-            "I can see what appears to be a website or application interface.\n\n";
-        }
-      }
-
-      // If no specific analysis was added, provide a general summary
-      if (!analysis.trim()) {
-        analysis += "Based on my analysis of your screenshot:\n\n";
-
-        // Only show text if available
-        if (
-          annotations.textAnnotations &&
-          annotations.textAnnotations[0]?.description?.trim()
-        ) {
-          analysis += "**Some text is visible** in the image.\n\n";
-        }
-
-        // Show only high-confidence, relevant detections
-        if (
-          annotations.labelAnnotations &&
-          annotations.labelAnnotations.length > 0
-        ) {
-          const goodLabels = annotations.labelAnnotations.filter(
-            (label: any) =>
-              label.score > 0.6 &&
-              ![
-                "screenshot",
-                "multimedia",
-                "technology",
-                "electronic device",
-                "software",
-              ].includes(label.description.toLowerCase())
+          analysis += "**Interface elements I can see:**\n";
+          const uiElements = annotations.localizedObjectAnnotations.filter(
+            (obj: any) => {
+              const name = obj.name.toLowerCase();
+              return [
+                "button",
+                "menu",
+                "tab",
+                "link",
+                "form",
+                "input",
+                "checkbox",
+                "radio",
+                "slider",
+                "dropdown",
+                "window",
+                "dialog",
+              ].some((ui) => name.includes(ui));
+            }
           );
-
-          if (goodLabels.length > 0) {
-            analysis += "**I can see:**\n";
-            const topLabels = goodLabels.slice(0, 3);
+          if (uiElements.length > 0) {
             analysis +=
-              topLabels
-                .map((label: any) => `• ${label.description}`)
-                .join("\n") + "\n\n";
+              uiElements.map((obj: any) => `• ${obj.name}`).join("\n") + "\n\n";
           } else {
             analysis +=
-              "**I can see this is a web page or interface** with various elements.\n\n";
+              "I can see various interface elements and UI components.\n\n";
           }
         }
       }
 
-      // Provide better context based on what's detected
-      analysis += "**My Assessment:**\n";
+      // Only show minimal text info if specifically asked
+      if (
+        userQuestion.toLowerCase().includes("text") ||
+        userQuestion.toLowerCase().includes("read")
+      ) {
+        if (
+          annotations.textAnnotations &&
+          annotations.textAnnotations.length > 0
+        ) {
+          const fullText = annotations.textAnnotations[0]?.description || "";
+          if (fullText.trim()) {
+            analysis += "**Some readable text is visible** in the image.\n\n";
+          }
+        }
+      }
+
+      // Provide visual-focused conclusion
+      analysis += "**Visual Summary:**\n";
       if (
         userQuestion.toLowerCase().includes("what") &&
-        userQuestion.toLowerCase().includes("page")
+        userQuestion.toLowerCase().includes("see")
       ) {
         analysis +=
-          "This appears to be a web page with content and interface elements. The text recognition shows readable content from the page.";
+          "I can see the visual elements described above. This screen contains various visual content, UI components, or interface elements that I can identify.";
       } else if (userQuestion.toLowerCase().includes("help")) {
         analysis +=
-          "Based on what's visible in the screenshot, I can help you navigate, understand the interface, or provide guidance on how to interact with the displayed elements.";
-      } else if (
-        userQuestion.toLowerCase().includes("error") ||
-        userQuestion.toLowerCase().includes("problem")
-      ) {
-        analysis +=
-          "I've analyzed the screenshot for potential issues. The detected elements suggest this is a standard interface view.";
+          "I can help you understand the visual layout, identify interface elements, describe images or photos, or explain what's visually displayed on your screen.";
       } else {
         analysis +=
-          "I've provided details about what's visible in your screenshot. The text recognition shows content from the page, and I can identify various interface elements.";
+          "I've identified the visual elements in your screenshot. For text content analysis, you can use the regular Chat tab which analyzes page content more thoroughly.";
       }
 
       return analysis;
     } catch (error) {
       console.error("Error processing vision results:", error);
-      return "I had trouble analyzing the detailed vision results, but I can see this is a screenshot.";
+      return "I had trouble analyzing the visual elements, but I can see this is a screenshot.";
     }
   };
 
@@ -670,7 +642,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
               backgroundClip: "text",
             }}
           >
-            Capture Your Screen
+            Visual Screen Analysis
           </h3>
           <p
             style={{
@@ -681,8 +653,9 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
               lineHeight: "1.5",
             }}
           >
-            Take a screenshot of your current page and chat with AI about what's
-            visible. Get visual insights and ask questions about the interface.
+            Capture a screenshot to analyze visual elements like images, UI
+            components, interface layout, and visual content. For text analysis,
+            use the Chat tab.
           </p>
           <button
             onClick={captureScreenshot}
@@ -868,7 +841,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Ask me about what's on your screen..."
+            placeholder="Ask about visual elements, images, UI components..."
             disabled={isProcessing || !screenImage}
             style={{
               flex: 1,
@@ -979,10 +952,10 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
             <div
               style={{ fontSize: "0.9rem", fontWeight: 700, color: "#22c55e" }}
             >
-              Screen Chat
+              Visual Screen Chat
             </div>
             <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
-              Chat with AI about your screen
+              Analyze visual elements & interface
             </div>
           </div>
         </div>
@@ -997,7 +970,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
               border: "1px solid rgba(34, 197, 94, 0.3)",
             }}
           >
-            Screenshot Ready
+            Visual Ready
           </div>
         )}
       </div>
