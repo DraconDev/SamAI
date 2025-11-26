@@ -413,24 +413,46 @@ ${content}`;
       let fullPrompt = enhancedContext || chatInput;
 
       // **CRITICAL**: Always extract fresh content for page-related queries
-      if (source === "page" || source === "html" || !source) {
+      if (
+        source === "page" ||
+        source === "html" ||
+        source === "video" ||
+        !source
+      ) {
         setIsExtractingContent(true);
-        const currentPageContent = await getPageContent(
-          source === "html" ? "html" : outputFormat,
-          true // Force fresh extraction
-        );
+
+        let currentPageContent = "";
+        let contentLabel = "";
+
+        if (source === "video") {
+          // Extract video transcript
+          try {
+            console.log("[SamAI] Extracting video transcript...");
+            currentPageContent = await extractVideoTranscript();
+            contentLabel = "video transcript";
+          } catch (error) {
+            console.error("[SamAI] Error extracting video transcript:", error);
+            // Fallback to regular page content
+            currentPageContent = await getPageContent(outputFormat, true);
+            contentLabel = "page content (video transcript extraction failed)";
+          }
+        } else {
+          // Regular page content extraction
+          currentPageContent = await getPageContent(
+            source === "html" ? "html" : outputFormat,
+            true // Force fresh extraction
+          );
+          contentLabel = source === "html" ? "HTML structure" : "visible text";
+        }
+
         setIsExtractingContent(false);
 
         fullPrompt = `${chatInput}
 
-CURRENT PAGE CONTENT (freshly extracted from the ${
-          source === "html" ? "HTML structure" : "visible text"
-        } of the page you're currently viewing - URL: ${window.location.href}):
+CURRENT PAGE CONTENT (freshly extracted from the ${contentLabel} of the page you're currently viewing - URL: ${window.location.href}):
 ${currentPageContent}
 
-Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page: ${
-          window.location.href
-        }`;
+Please provide a helpful response about the user's question specifically related to the current page content above. Focus on what's actually on this page: ${window.location.href}`;
       } else if (source === "none") {
         // Just use the raw question without page context
         fullPrompt = chatInput;
