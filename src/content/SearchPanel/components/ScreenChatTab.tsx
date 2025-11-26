@@ -239,7 +239,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
     }
   };
 
-  // Process Google Cloud Vision API results with conversational responses
+  // Process Google Cloud Vision API results with improved filtering
   const processVisionResults = (
     visionData: any,
     userQuestion: string
@@ -250,10 +250,69 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
         return "I couldn't analyze the image. Please try again.";
       }
 
-      // Start with conversational response based on the user's question
       let analysis = "";
 
-      // Detect animals and provide direct answers
+      // Text detection - prioritize this for web pages
+      if (
+        annotations.textAnnotations &&
+        annotations.textAnnotations.length > 0
+      ) {
+        const fullText = annotations.textAnnotations[0]?.description || "";
+        if (fullText.trim()) {
+          analysis += "**Text I can read:**\n";
+
+          // Show a preview of the text
+          const preview =
+            fullText.length > 300
+              ? fullText.substring(0, 300) + "..."
+              : fullText;
+          analysis += preview + "\n\n";
+        }
+      }
+
+      // Filter and show most relevant labels for web content
+      if (
+        annotations.labelAnnotations &&
+        annotations.labelAnnotations.length > 0
+      ) {
+        // Filter out irrelevant labels and focus on meaningful ones
+        const relevantLabels = annotations.labelAnnotations.filter(
+          (label: any) => {
+            const desc = label.description.toLowerCase();
+            // Exclude clearly irrelevant or generic labels
+            const irrelevantTerms = [
+              "screenshot",
+              "multimedia",
+              "technology",
+              "electronic device",
+              "software",
+              "video game software",
+              "pc game",
+              "graphics",
+              "display",
+              "computer graphics",
+              "digital image",
+            ];
+
+            // Only include relevant labels
+            return (
+              !irrelevantTerms.includes(desc) &&
+              desc.length > 3 && // Exclude very short labels
+              label.score > 0.5
+            ); // Only show high-confidence detections
+          }
+        );
+
+        if (relevantLabels.length > 0) {
+          analysis += "**Main topics/content:**\n";
+          const topLabels = relevantLabels.slice(0, 5);
+          analysis +=
+            topLabels.map((label: any) => `• ${label.description}`).join("\n") +
+            "\n\n";
+        }
+      }
+
+      // Detect animals specifically
       if (userQuestion.toLowerCase().includes("animal")) {
         const animalLabels = annotations.labelAnnotations?.filter(
           (label: any) =>
@@ -269,7 +328,6 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
               "goat",
               "rabbit",
               "hamster",
-              "guinea pig",
               "mouse",
               "rat",
               "monkey",
@@ -292,67 +350,11 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
               "butterfly",
               "bee",
               "ant",
-              "dragonfly",
-              "octopus",
-              "squid",
-              "crab",
-              "lobster",
-              "tiger",
-              "leopard",
-              "cheetah",
-              "wolf",
-              "fox",
-              "deer",
-              "moose",
-              "elk",
-              "reindeer",
-              "bison",
-              "buffalo",
-              "ox",
-              "camel",
-              "llama",
-              "alpaca",
-              "yak",
-              "water buffalo",
-              "rhinoceros",
-              "hippopotamus",
-              "crocodile",
-              "alligator",
-              "iguana",
-              "chameleon",
-              "gecko",
-              "tortoise",
-              "panda",
-              "koala",
-              "sloth",
-              "otter",
-              "beaver",
-              "squirrel",
-              "chipmunk",
-              "marmot",
-              "groundhog",
-              "hedgehog",
-              "porcupine",
-              "raccoon",
-              "opossum",
-              "skunk",
-              "badger",
-              "wolverine",
-              "weasel",
-              "mink",
-              "ferret",
-              "polecat",
-              "stoat",
-              "ermine",
-              "muskrat",
-              "vole",
-              "lemming",
             ].includes(label.description.toLowerCase())
         );
 
         if (animalLabels && animalLabels.length > 0) {
-          const topAnimal = animalLabels[0];
-          analysis += `I can see **${topAnimal.description}** in your screenshot`;
+          analysis = `I can see **${animalLabels[0].description}** in your screenshot`;
           if (animalLabels.length > 1) {
             const otherAnimals = animalLabels
               .slice(1)
@@ -385,59 +387,20 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
         }
       }
 
-      // Detect objects and UI elements
+      // Detect UI elements and layout
       if (
-        userQuestion.toLowerCase().includes("object") ||
-        userQuestion.toLowerCase().includes("thing") ||
-        userQuestion.toLowerCase().includes("see")
+        userQuestion.toLowerCase().includes("page") ||
+        userQuestion.toLowerCase().includes("website") ||
+        userQuestion.toLowerCase().includes("interface")
       ) {
         if (
           annotations.localizedObjectAnnotations &&
           annotations.localizedObjectAnnotations.length > 0
         ) {
-          analysis += "**Objects/UI Elements I can identify:**\n";
+          analysis += "**Web page elements I can identify:**\n";
           const topObjects = annotations.localizedObjectAnnotations.slice(0, 5);
           analysis +=
             topObjects.map((obj: any) => `• ${obj.name}`).join("\n") + "\n\n";
-        }
-
-        // Add labels for broader context
-        if (
-          annotations.labelAnnotations &&
-          annotations.labelAnnotations.length > 0
-        ) {
-          const topLabels = annotations.labelAnnotations.slice(0, 3);
-          analysis += "**I also see:**\n";
-          analysis +=
-            topLabels.map((label: any) => `• ${label.description}`).join("\n") +
-            "\n\n";
-        }
-      }
-
-      // Text detection - show readable text if asked
-      if (
-        userQuestion.toLowerCase().includes("text") ||
-        userQuestion.toLowerCase().includes("read") ||
-        userQuestion.toLowerCase().includes("word")
-      ) {
-        if (
-          annotations.textAnnotations &&
-          annotations.textAnnotations.length > 0
-        ) {
-          const fullText = annotations.textAnnotations[0]?.description || "";
-          if (fullText.trim()) {
-            analysis += "**Text I can read:**\n";
-            const preview =
-              fullText.length > 300
-                ? fullText.substring(0, 300) + "..."
-                : fullText;
-            analysis += preview + "\n\n";
-          } else {
-            analysis +=
-              "I can see there is text in the image, but it's not clearly readable.\n\n";
-          }
-        } else {
-          analysis += "I don't see any readable text in this screenshot.\n\n";
         }
       }
 
@@ -460,6 +423,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
           annotations.labelAnnotations?.some((label: any) =>
             [
               "google",
+              "wikipedia",
               "youtube",
               "facebook",
               "twitter",
@@ -481,17 +445,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
       if (!analysis.trim()) {
         analysis += "Based on my analysis of your screenshot:\n\n";
 
-        if (
-          annotations.labelAnnotations &&
-          annotations.labelAnnotations.length > 0
-        ) {
-          analysis += "**I can see:**\n";
-          const topLabels = annotations.labelAnnotations.slice(0, 5);
-          analysis +=
-            topLabels.map((label: any) => `• ${label.description}`).join("\n") +
-            "\n\n";
-        }
-
+        // Only show text if available
         if (
           annotations.textAnnotations &&
           annotations.textAnnotations[0]?.description?.trim()
@@ -499,34 +453,45 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
           analysis += "**Some text is visible** in the image.\n\n";
         }
 
+        // Show only high-confidence, relevant detections
         if (
-          annotations.localizedObjectAnnotations &&
-          annotations.localizedObjectAnnotations.length > 0
+          annotations.labelAnnotations &&
+          annotations.labelAnnotations.length > 0
         ) {
-          analysis += "**UI elements and objects** are detected.\n\n";
+          const goodLabels = annotations.labelAnnotations.filter(
+            (label: any) =>
+              label.score > 0.6 &&
+              ![
+                "screenshot",
+                "multimedia",
+                "technology",
+                "electronic device",
+                "software",
+              ].includes(label.description.toLowerCase())
+          );
+
+          if (goodLabels.length > 0) {
+            analysis += "**I can see:**\n";
+            const topLabels = goodLabels.slice(0, 3);
+            analysis +=
+              topLabels
+                .map((label: any) => `• ${label.description}`)
+                .join("\n") + "\n\n";
+          } else {
+            analysis +=
+              "**I can see this is a web page or interface** with various elements.\n\n";
+          }
         }
       }
 
-      // Add helpful context for specific questions
-      if (
-        userQuestion.toLowerCase().includes("help") ||
-        userQuestion.toLowerCase().includes("understand")
-      ) {
-        analysis += "**What I can help with:**\n";
-        analysis += "• Describing what's visible in your screenshot\n";
-        analysis += "• Reading text from the image\n";
-        analysis += "• Identifying objects, people, or animals\n";
-        analysis += "• Understanding the interface or layout\n\n";
-      }
-
-      // Provide natural conclusion
-      analysis += "**Summary:**\n";
+      // Provide better context based on what's detected
+      analysis += "**My Assessment:**\n";
       if (
         userQuestion.toLowerCase().includes("what") &&
-        userQuestion.toLowerCase().includes("see")
+        userQuestion.toLowerCase().includes("page")
       ) {
         analysis +=
-          "I can see the visual elements described above. The screenshot shows a typical interface or webpage with various UI elements.";
+          "This appears to be a web page with content and interface elements. The text recognition shows readable content from the page.";
       } else if (userQuestion.toLowerCase().includes("help")) {
         analysis +=
           "Based on what's visible in the screenshot, I can help you navigate, understand the interface, or provide guidance on how to interact with the displayed elements.";
@@ -538,7 +503,7 @@ export const ScreenChatTab: React.FC<ScreenChatTabProps> = ({
           "I've analyzed the screenshot for potential issues. The detected elements suggest this is a standard interface view.";
       } else {
         analysis +=
-          "I've provided details about what's visible in your screenshot. Feel free to ask more specific questions about any part of the image.";
+          "I've provided details about what's visible in your screenshot. The text recognition shows content from the page, and I can identify various interface elements.";
       }
 
       return analysis;
