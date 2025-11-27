@@ -82,6 +82,45 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           currentFolderId: undefined,
         });
       }
+      // Fetch favicon for a URL
+      const fetchFavicon = async (url: string): Promise<string | null> => {
+        try {
+          const domain = new URL(url).hostname;
+
+          // Check cache first
+          if (faviconCache.has(domain)) {
+            return faviconCache.get(domain) || null;
+          }
+
+          // Try multiple favicon sources
+          const faviconSources = [
+            `https://${domain}/favicon.ico`,
+            `https://${domain}/favicon.png`,
+            `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+            `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+          ];
+
+          for (const faviconUrl of faviconSources) {
+            try {
+              const response = await fetch(faviconUrl, { method: "HEAD" });
+              if (response.ok) {
+                // Cache the successful favicon
+                const newCache = new Map(faviconCache);
+                newCache.set(domain, faviconUrl);
+                setFaviconCache(newCache);
+                return faviconUrl;
+              }
+            } catch (e) {
+              continue; // Try next source
+            }
+          }
+
+          return null;
+        } catch (error) {
+          console.warn("Failed to fetch favicon for:", url);
+          return null;
+        }
+      };
     };
     loadHomeData();
   }, []);
