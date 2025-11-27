@@ -236,13 +236,33 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     setNewFolderName("");
   };
 
-  // Delete icon
+  // Delete icon with confirmation
   const handleDeleteIcon = async (iconId: string) => {
-    const newData = {
-      ...homeData,
-      icons: homeData.icons.filter((icon) => icon.id !== iconId),
-    };
-    saveHomeData(newData);
+    if (confirm("Are you sure you want to remove this site?")) {
+      const newData = {
+        ...homeData,
+        icons: homeData.icons.filter((icon) => icon.id !== iconId),
+      };
+      saveHomeData(newData);
+    }
+  };
+
+  // Delete folder with confirmation and move sites to home
+  const handleDeleteFolder = async (folderId: string) => {
+    if (
+      confirm(
+        "Are you sure you want to delete this folder? Sites inside will be moved to the home screen."
+      )
+    ) {
+      const newData = {
+        ...homeData,
+        folders: homeData.folders.filter((folder) => folder.id !== folderId),
+        icons: homeData.icons.map((icon) =>
+          icon.folderId === folderId ? { ...icon, folderId: undefined } : icon
+        ),
+      };
+      saveHomeData(newData);
+    }
   };
 
   return (
