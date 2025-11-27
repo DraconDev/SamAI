@@ -424,6 +424,85 @@ function App() {
                     📚 Docs
                   </a>
                 </div>
+
+                {/* Chrome AI Section */}
+                <div
+                  className={selectedProvider === "chrome" ? "block" : "hidden"}
+                >
+                  <div className="space-y-4 p-5 bg-[#0D0E16]/40 rounded-xl border border-[#2E2F3E]/40">
+                    <div className="space-y-3 text-center">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#f59e0b] to-[#fbbf24] flex items-center justify-center">
+                        <span className="text-2xl">⚡</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-[#fbbf24]">
+                          Chrome Built-in AI
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-400">
+                          Uses Chrome's built-in AI capabilities - no API key
+                          required!
+                        </p>
+                      </div>
+                      <div className="bg-[#f59e0b]/10 border border-[#f59e0b]/30 rounded-lg p-3">
+                        <div className="flex items-center gap-2 text-[#fbbf24] text-sm font-medium mb-1">
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Ready to use
+                        </div>
+                        <p className="text-xs text-gray-400">
+                          Chrome AI is automatically available in compatible
+                          browsers
+                        </p>
+                      </div>
+                    </div>
+                    <div className="border-t border-[#2E2F3E]/60 pt-4">
+                      <label className="block mb-2 text-sm font-medium text-gray-300">
+                        Chrome AI Model
+                      </label>
+                      <input
+                        type="text"
+                        value={chromeModel}
+                        onChange={(e) => setChromeModel(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-[#1a1b2e] border border-[#2E2F3E] rounded-lg shadow-sm
+                                 text-gray-100 placeholder-gray-500
+                                 focus:outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b]
+                                 transition-all duration-200"
+                        placeholder="chrome-ai"
+                        readOnly
+                      />
+                      <p className="mt-1 text-xs text-gray-500">
+                        Chrome's built-in AI model (automatically selected)
+                      </p>
+                    </div>
+                    <div className="flex gap-2 text-xs">
+                      <a
+                        href="https://developer.chrome.com/docs/ai"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 px-3 py-2 bg-[#f59e0b]/10 hover:bg-[#f59e0b]/20 text-[#fbbf24] rounded-lg transition-colors text-center font-medium border border-[#f59e0b]/30"
+                      >
+                        📚 Chrome AI Docs
+                      </a>
+                      <a
+                        href="https://developer.chrome.com/docs/ai/built-in-ai"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 px-3 py-2 bg-[#f59e0b]/10 hover:bg-[#f59e0b]/20 text-[#fbbf24] rounded-lg transition-colors text-center font-medium border border-[#f59e0b]/30"
+                      >
+                        🚀 Built-in AI Guide
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
