@@ -6,7 +6,10 @@ export let model: any;
 
 export function initializeGeminiModel(apiKey: string, modelName: string) {
   try {
-    console.log("[SamAI] Initializing GoogleGenerativeAI with model:", modelName);
+    console.log(
+      "[SamAI] Initializing GoogleGenerativeAI with model:",
+      modelName
+    );
     genAI = new GoogleGenerativeAI(apiKey);
     model = genAI.getGenerativeModel({
       model: modelName,
@@ -18,13 +21,18 @@ export function initializeGeminiModel(apiKey: string, modelName: string) {
   }
 }
 
-async function generateGeminiResponse(apiKey: string, modelName: string, prompt: string): Promise<string | null> {
+async function generateGeminiResponse(
+  apiKey: string,
+  modelName: string,
+  prompt: string
+): Promise<string | null> {
   if (!model) {
     initializeGeminiModel(apiKey, modelName);
   }
   try {
     const result = await model.generateContent(prompt);
-    if (!result || !result.response) throw new Error("Empty response from Gemini API");
+    if (!result || !result.response)
+      throw new Error("Empty response from Gemini API");
     return result.response.text();
   } catch (error) {
     console.error("[SamAI] Gemini API Error:", error);
@@ -32,13 +40,17 @@ async function generateGeminiResponse(apiKey: string, modelName: string, prompt:
   }
 }
 
-async function generateOpenAIResponse(apiKey: string, model: string, prompt: string): Promise<string | null> {
+async function generateOpenAIResponse(
+  apiKey: string,
+  model: string,
+  prompt: string
+): Promise<string | null> {
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         model: model || "gpt-4o-mini",
@@ -59,7 +71,11 @@ async function generateOpenAIResponse(apiKey: string, model: string, prompt: str
   }
 }
 
-async function generateAnthropicResponse(apiKey: string, model: string, prompt: string): Promise<string | null> {
+async function generateAnthropicResponse(
+  apiKey: string,
+  model: string,
+  prompt: string
+): Promise<string | null> {
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -89,21 +105,28 @@ async function generateAnthropicResponse(apiKey: string, model: string, prompt: 
   }
 }
 
-async function generateOpenRouterResponse(apiKey: string, model: string, prompt: string): Promise<string | null> {
+async function generateOpenRouterResponse(
+  apiKey: string,
+  model: string,
+  prompt: string
+): Promise<string | null> {
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-        "HTTP-Referer": "https://github.com/google/wxt", // Optional, for including your app on openrouter.ai rankings.
-        "X-Title": "SamAI", // Optional. Shows in rankings on openrouter.ai.
-      },
-      body: JSON.stringify({
-        model: model || "openai/gpt-oss-20b",
-        messages: [{ role: "user", content: prompt }],
-      }),
-    });
+    const response = await fetch(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+          "HTTP-Referer": "https://github.com/google/wxt", // Optional, for including your app on openrouter.ai rankings.
+          "X-Title": "SamAI", // Optional. Shows in rankings on openrouter.ai.
+        },
+        body: JSON.stringify({
+          model: model || "openai/gpt-oss-20b",
+          messages: [{ role: "user", content: prompt }],
+        }),
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();
@@ -118,7 +141,41 @@ async function generateOpenRouterResponse(apiKey: string, model: string, prompt:
   }
 }
 
-export async function generateFormResponse(prompt: string): Promise<string | null> {
+async function generateChromeAIResponse(
+  apiKey: string,
+  model: string,
+  prompt: string
+): Promise<string | null> {
+  try {
+    // Check if Chrome AI is available
+    if (!window.ai || !window.ai.languageModel) {
+      throw new Error("Chrome AI is not available in this browser");
+    }
+
+    console.log("[SamAI] Using Chrome AI (built-in)");
+
+    // Create a session with Chrome AI
+    const session = await window.ai.languageModel.create({
+      systemPrompt:
+        "You are SamAI, a helpful AI assistant. Provide helpful, accurate responses.",
+    });
+
+    // Generate response
+    const response = await session.prompt(prompt);
+
+    // Close the session
+    session.close();
+
+    return response || null;
+  } catch (error) {
+    console.error("[SamAI] Chrome AI Error:", error);
+    return null;
+  }
+}
+
+export async function generateFormResponse(
+  prompt: string
+): Promise<string | null> {
   try {
     const store = await apiKeyStore.getValue();
     const provider = store.selectedProvider || "google";
@@ -137,9 +194,17 @@ export async function generateFormResponse(prompt: string): Promise<string | nul
       case "openai":
         return await generateOpenAIResponse(apiKey, store.openaiModel, prompt);
       case "anthropic":
-        return await generateAnthropicResponse(apiKey, store.anthropicModel, prompt);
+        return await generateAnthropicResponse(
+          apiKey,
+          store.anthropicModel,
+          prompt
+        );
       case "openrouter":
-        return await generateOpenRouterResponse(apiKey, store.openrouterModel, prompt);
+        return await generateOpenRouterResponse(
+          apiKey,
+          store.openrouterModel,
+          prompt
+        );
       default:
         console.error("[SamAI] Unknown provider:", provider);
         return null;

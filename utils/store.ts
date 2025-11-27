@@ -72,7 +72,12 @@ export const searchSettingsStore = storage.defineItem<SearchSettingsStore>(
   }
 );
 
-export type AiProvider = "google" | "openai" | "anthropic" | "openrouter";
+export type AiProvider =
+  | "google"
+  | "openai"
+  | "anthropic"
+  | "openrouter"
+  | "chrome";
 
 export interface ApiKeyStore {
   googleApiKey: string;
