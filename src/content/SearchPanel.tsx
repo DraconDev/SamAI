@@ -329,9 +329,18 @@ ${content}`;
       );
 
       if (!summaryText || summaryText.trim().length === 0) {
-        throw new Error(
-          "No summary received from AI. Please check your API key configuration and try again."
-        );
+        const apiKeyData = await apiKeyStore.getValue();
+        const provider = apiKeyData.selectedProvider || "chrome";
+
+        if (provider === "chrome") {
+          throw new Error(
+            "Chrome AI is not available in this browser. Please check if Chrome AI is enabled or try switching to a different provider in settings."
+          );
+        } else {
+          throw new Error(
+            "No summary received from AI. Please check your API key configuration and try again."
+          );
+        }
       }
       setSummary(summaryText);
     } catch (error) {
@@ -350,7 +359,35 @@ ${content}`;
     enhancedContext?: string
   ) => {
     e.preventDefault();
-    if (!isApiKeySet || !chatInput.trim() || isChatLoading) return;
+
+    // Check if we can use AI (either Chrome AI is available or other provider has API key)
+    if (!isApiKeySet) {
+      const apiKeyData = await apiKeyStore.getValue();
+      const provider = apiKeyData.selectedProvider || "chrome";
+
+      if (provider === "chrome") {
+        // For Chrome AI, show a message about availability
+        const errorMessage = {
+          role: "assistant" as const,
+          content:
+            "Chrome AI is not available in this browser. Please check if Chrome AI is enabled or try switching to a different provider in settings.",
+          timestamp: new Date().toLocaleTimeString(),
+        };
+        setChatMessages((prev) => [...prev, errorMessage]);
+        return;
+      } else {
+        const errorMessage = {
+          role: "assistant" as const,
+          content:
+            "Please configure your API key before using the chat feature.",
+          timestamp: new Date().toLocaleTimeString(),
+        };
+        setChatMessages((prev) => [...prev, errorMessage]);
+        return;
+      }
+    }
+
+    if (!chatInput.trim() || isChatLoading) return;
 
     const userMessage = {
       role: "user" as const,
