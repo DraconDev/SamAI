@@ -205,6 +205,12 @@ export async function generateFormResponse(
           store.openrouterModel,
           prompt
         );
+      case "chrome":
+        return await generateChromeAIResponse(
+          apiKey,
+          store.chromeModel,
+          prompt
+        );
       default:
         console.error("[SamAI] Unknown provider:", provider);
         return null;
