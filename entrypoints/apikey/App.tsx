@@ -11,8 +11,10 @@ function App() {
   const [anthropicModel, setAnthropicModel] = useState("");
   const [openrouterKey, setOpenrouterKey] = useState("");
   const [openrouterModel, setOpenrouterModel] = useState("");
+  const [chromeKey, setChromeKey] = useState("");
+  const [chromeModel, setChromeModel] = useState("");
   const [selectedProvider, setSelectedProvider] =
-    useState<AiProvider>("google");
+    useState<AiProvider>("chrome");
   const [showKey, setShowKey] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
 
