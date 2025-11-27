@@ -260,6 +260,6 @@ export const defaultHomeStore: HomeStore = {
   },
 };
 
-export const homeStore = storage.defineItem<HomeStore>("local:home", {
+export const homeStore = storage.defineItem<HomeStore>("sync:home", {
   fallback: defaultHomeStore,
 });
