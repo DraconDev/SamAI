@@ -106,7 +106,7 @@ export const defaultApiKeyStore: ApiKeyStore = {
   openrouterModel: "openai/gpt-oss-20b", // User requested default
   chromeApiKey: "",
   chromeModel: "chrome-ai",
-  selectedProvider: "chrome",
+  selectedProvider: "google",
 };
 
 export const apiKeyStore = storage.defineItem<ApiKeyStore>("sync:apiKey", {
