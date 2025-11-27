@@ -33,11 +33,40 @@ export default function SearchPanel({
 }: SearchPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
+  // Smart tab selection logic
+  const getInitialTab = (): TabId => {
+    // If there's a response from search enhancement, always use search tab
+    if (response) return "search";
+
+    // Check if we're on a search page
+    const url = window.location.href.toLowerCase();
+    const hostname = window.location.hostname.toLowerCase();
+    const isSearchPage =
+      // Google search
+      (hostname.includes("google.") &&
+        (url.includes("/search?") ||
+          url.includes("?q=") ||
+          url.includes("?query="))) ||
+      // Bing search
+      (hostname.includes("bing.") && url.includes("/search?")) ||
+      // DuckDuckGo search
+      (hostname.includes("duckduckgo.") && url.includes("/?q=")) ||
+      // Yahoo search
+      (hostname.includes("yahoo.") && url.includes("/search?")) ||
+      // Ask.com search
+      (hostname.includes("ask.") && url.includes("/search?q=")) ||
+      // Other common search engines
+      (hostname.includes("search.") && url.includes("?q=")) ||
+      // YouTube search
+      (hostname.includes("youtube.") && url.includes("/results?search_query="));
+
+    // If on a search page, open search tab; otherwise open home tab
+    return isSearchPage ? "search" : "home";
+  };
+
   // Core state
   const [isApiKeySet, setIsApiKeySet] = useState(false);
-  const [activeTab, setActiveTab] = useState<TabId>(
-    response ? "search" : "home"
-  );
+  const [activeTab, setActiveTab] = useState<TabId>(getInitialTab());
 
   // Tab-specific state
   const [isScraping, setIsScraping] = useState(false);
