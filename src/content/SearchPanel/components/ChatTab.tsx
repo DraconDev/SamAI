@@ -669,7 +669,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
                   }}
                 >
                   {[
-                    { value: "page", label: "Page Text", icon: "📄" },
+                    { value: "page", label: "Text", icon: "📄" },
                     { value: "html", label: "HTML", icon: "🔧" },
                     { value: "screen", label: "Screenshot", icon: "📸" },
                     { value: "none", label: "Free Chat", icon: "💭" },
