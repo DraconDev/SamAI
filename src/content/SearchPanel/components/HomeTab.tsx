@@ -936,3 +936,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 };
 
 export default HomeTab;
+
+// Enhanced types with order field for drag and drop
+export interface HomeIcon {
+  id: string;
+  name: string;
+  url: string;
+  iconUrl?: string;
+  folderId?: string;
+  createdAt: string;
+  order?: number; // For drag and drop ordering
+}
+
+export interface Folder {
+  id: string;
+  name: string;
+  parentId?: string;
+  createdAt: string;
+  order?: number; // For drag and drop ordering
+}
