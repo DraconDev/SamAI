@@ -143,7 +143,7 @@ export default function SearchPanel({
   // Watch for API key changes
   React.useEffect(() => {
     const unsubscribe = apiKeyStore.watch((newValue) => {
-      const provider = newValue.selectedProvider || "chrome";
+      const provider = newValue.selectedProvider || "google";
 
       // Chrome AI doesn't need an API key
       if (provider === "chrome") {
