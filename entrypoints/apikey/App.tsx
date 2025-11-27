@@ -30,7 +30,9 @@ function App() {
       setAnthropicModel(store.anthropicModel || "claude-3-haiku-20240307");
       setOpenrouterKey(store.openrouterApiKey || "");
       setOpenrouterModel(store.openrouterModel || "openai/gpt-oss-20b");
-      setSelectedProvider(store.selectedProvider || "google");
+      setChromeKey(store.chromeApiKey || "");
+      setChromeModel(store.chromeModel || "chrome-ai");
+      setSelectedProvider(store.selectedProvider || "chrome");
     });
   }, []);
 
@@ -45,6 +47,8 @@ function App() {
       anthropicModel: anthropicModel,
       openrouterApiKey: openrouterKey,
       openrouterModel: openrouterModel,
+      chromeApiKey: chromeKey,
+      chromeModel: chromeModel,
       selectedProvider: selectedProvider,
     });
     setSaved(true);
