@@ -178,37 +178,56 @@ export async function generateFormResponse(
 ): Promise<string | null> {
   try {
     const store = await apiKeyStore.getValue();
-    const provider = store.selectedProvider || "google";
-    const apiKey = store[`${provider}ApiKey` as keyof typeof store] as string;
-
-    if (!apiKey) {
-      console.warn(`[SamAI] No API key found for provider: ${provider}`);
-      return null;
-    }
+    const provider = store.selectedProvider || "chrome";
 
     console.log(`[SamAI] Generating response using provider: ${provider}`);
 
     switch (provider) {
+      case "chrome":
+        // Chrome AI doesn't need an API key
+        return await generateChromeAIResponse("", store.chromeModel, prompt);
       case "google":
-        return await generateGeminiResponse(apiKey, store.googleModel, prompt);
+        const googleApiKey = store.googleApiKey;
+        if (!googleApiKey) {
+          console.warn("[SamAI] No API key found for Google provider");
+          return null;
+        }
+        return await generateGeminiResponse(
+          googleApiKey,
+          store.googleModel,
+          prompt
+        );
       case "openai":
-        return await generateOpenAIResponse(apiKey, store.openaiModel, prompt);
+        const openaiApiKey = store.openaiApiKey;
+        if (!openaiApiKey) {
+          console.warn("[SamAI] No API key found for OpenAI provider");
+          return null;
+        }
+        return await generateOpenAIResponse(
+          openaiApiKey,
+          store.openaiModel,
+          prompt
+        );
       case "anthropic":
+        const anthropicApiKey = store.anthropicApiKey;
+        if (!anthropicApiKey) {
+          console.warn("[SamAI] No API key found for Anthropic provider");
+          return null;
+        }
         return await generateAnthropicResponse(
-          apiKey,
+          anthropicApiKey,
           store.anthropicModel,
           prompt
         );
       case "openrouter":
+        const openrouterApiKey = store.openrouterApiKey;
+        if (!openrouterApiKey) {
+          console.warn("[SamAI] No API key found for OpenRouter provider");
+          return null;
+        }
         return await generateOpenRouterResponse(
-          apiKey,
+          openrouterApiKey,
           store.openrouterModel,
-          prompt
-        );
-      case "chrome":
-        return await generateChromeAIResponse(
-          apiKey,
-          store.chromeModel,
           prompt
         );
       default:

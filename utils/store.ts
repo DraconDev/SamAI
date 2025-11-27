@@ -104,6 +104,8 @@ export const defaultApiKeyStore: ApiKeyStore = {
   anthropicModel: "claude-3-haiku-20240307",
   openrouterApiKey: "",
   openrouterModel: "openai/gpt-oss-20b", // User requested default
+  chromeApiKey: "",
+  chromeModel: "chrome-ai",
   selectedProvider: "chrome",
 };
 
