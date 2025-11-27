@@ -32,7 +32,7 @@ function App() {
       setOpenrouterModel(store.openrouterModel || "openai/gpt-oss-20b");
       setChromeKey(store.chromeApiKey || "");
       setChromeModel(store.chromeModel || "chrome-ai");
-      setSelectedProvider(store.selectedProvider || "chrome");
+      setSelectedProvider(store.selectedProvider || "google");
     });
   }, []);
 
