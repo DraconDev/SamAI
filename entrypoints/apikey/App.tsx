@@ -205,6 +205,7 @@ function App() {
             <div className="grid grid-cols-2 gap-3 p-2 bg-[#0D0E16]/60 rounded-xl border border-[#2E2F3E]/60">
               {(
                 [
+                  { id: "chrome", name: "Chrome AI", icon: "⚡" },
                   { id: "google", name: "Google", icon: "🔷" },
                   { id: "openai", name: "OpenAI", icon: "🤖" },
                   { id: "anthropic", name: "Anthropic", icon: "🧠" },
