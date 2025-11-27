@@ -40,6 +40,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const [newIconName, setNewIconName] = useState("");
   const [newIconUrl, setNewIconUrl] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
+  const [draggedItem, setDraggedItem] = useState<{
+    id: string;
+    type: "icon" | "folder";
+    index: number;
+  } | null>(null);
+  const [dropTarget, setDropTarget] = useState<string | null>(null);
+  const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
+    new Map()
+  );
 
   // Load home data from storage
   useEffect(() => {
