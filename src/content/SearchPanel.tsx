@@ -96,7 +96,15 @@ export default function SearchPanel({
   React.useEffect(() => {
     const checkApiKey = async () => {
       const apiKeyData = await apiKeyStore.getValue();
-      const provider = apiKeyData.selectedProvider || "google";
+      const provider = apiKeyData.selectedProvider || "chrome";
+
+      // Chrome AI doesn't need an API key
+      if (provider === "chrome") {
+        setIsApiKeySet(true);
+        return;
+      }
+
+      // Other providers need API keys
       const key = apiKeyData[`${provider}ApiKey` as keyof typeof apiKeyData];
       setIsApiKeySet(!!key);
     };
