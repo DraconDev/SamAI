@@ -89,6 +89,8 @@ export interface ApiKeyStore {
   anthropicModel: string;
   openrouterApiKey: string;
   openrouterModel: string;
+  chromeApiKey: string;
+  chromeModel: string;
   selectedProvider: AiProvider;
 }
 
