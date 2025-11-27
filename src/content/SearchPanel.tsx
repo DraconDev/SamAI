@@ -166,9 +166,18 @@ export default function SearchPanel({
   // Handlers
   const handleScrape = async () => {
     if (!isApiKeySet) {
-      setScrapeError(
-        "Please configure your API key before running the scraper."
-      );
+      const apiKeyData = await apiKeyStore.getValue();
+      const provider = apiKeyData.selectedProvider || "chrome";
+
+      if (provider === "chrome") {
+        setScrapeError(
+          "Chrome AI is not available in this browser. Please try a different provider."
+        );
+      } else {
+        setScrapeError(
+          "Please configure your API key before running the scraper."
+        );
+      }
       return;
     }
     if (!scrapeInstructions.trim()) {
@@ -191,8 +200,8 @@ export default function SearchPanel({
       const contentLabel =
         scrapeMode === "html" ? "Optimized HTML" : "Visible text content";
 
-      const prompt = `You are SamAI, an expert web scraper embedded inside the browser. 
-Follow the user's extraction request carefully and use ONLY the provided page data. 
+      const prompt = `You are SamAI, an expert web scraper embedded inside the browser.
+Follow the user's extraction request carefully and use ONLY the provided page data.
 Format requirements: ${formatGuidance}
 
 Extraction request:
