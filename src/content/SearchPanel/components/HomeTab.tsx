@@ -160,6 +160,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const getSampleIcons = (): HomeIcon[] => [
 
 
+  // Sample data for testing
+  const getSampleIcons = (): HomeIcon[] => [
   const addCurrentSite = async () => {
     const url = window.location.href;
     const name = document.title || "Current Page";
