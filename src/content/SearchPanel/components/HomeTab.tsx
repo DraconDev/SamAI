@@ -152,60 +152,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     await saveHomeData(newData);
   };
 
-  // Add current site with auto-fetched favicon
-
-
-
-  // Sample data for testing
-  const getSampleIcons = (): HomeIcon[] => [
-
-
-  // Sample data for testing
-
-
-
-  // Get current folder
-  // Get current folder
-  const currentFolder = homeData.currentFolderId
-    ? homeData.folders.find((f) => f.id === homeData.currentFolderId)
-    : null;
-  const getSampleIcons = (): HomeIcon[] => [
-  const addCurrentSite = async () => {
-    const url = window.location.href;
-    const name = document.title || "Current Page";
-
-    // Fetch favicon
-    const iconUrl = await fetchFavicon(url);
-
-    const newIcon: HomeIcon = {
-      id: Date.now().toString(),
-      name: name.length > 30 ? name.substring(0, 30) + "..." : name,
-    // Fetch favicon
-    const iconUrl = await fetchFavicon(url);
-
-    const newIcon: HomeIcon = {
-      id: Date.now().toString(),
-      name: name.length > 30 ? name.substring(0, 30) + "..." : name,
-      url,
-      iconUrl: iconUrl || undefined,
-      folderId: homeData.currentFolderId,
-      createdAt: new Date().toISOString(),
-      order: homeData.icons.length,
-    };
-      url,
-      iconUrl,
-      folderId: homeData.currentFolderId,
-      createdAt: new Date().toISOString(),
-      order: homeData.icons.length,
-    };
-
-    const newData = {
-      ...homeData,
-      icons: [...homeData.icons, newIcon],
-    };
-    await saveHomeData(newData);
-  };
-
   // Sample data for testing
   const getSampleIcons = (): HomeIcon[] => [
     {
@@ -309,18 +255,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     };
     saveHomeData(newData);
   };
-    // Fetch favicon for the new URL
-    const iconUrl = await fetchFavicon(newIconUrl);
-
-    const newIcon: HomeIcon = {
-      id: Date.now().toString(),
-      name: newIconName,
-      url: newIconUrl.startsWith("http") ? newIconUrl : `https://${newIconUrl}`,
-      iconUrl: iconUrl || undefined,
-      folderId: homeData.currentFolderId,
-      createdAt: new Date().toISOString(),
-      order: homeData.icons.length,
-    };
 
   // Handle icon click
   const handleIconClick = async (icon: HomeIcon) => {
@@ -328,7 +262,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   };
 
   // Add new icon with auto-favicon
-      iconUrl: iconUrl || undefined,
   const handleAddIcon = async () => {
     if (!newIconName.trim() || !newIconUrl.trim()) return;
 
@@ -339,7 +272,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       id: Date.now().toString(),
       name: newIconName,
       url: newIconUrl.startsWith("http") ? newIconUrl : `https://${newIconUrl}`,
-      iconUrl,
+      iconUrl: iconUrl || undefined,
       folderId: homeData.currentFolderId,
       createdAt: new Date().toISOString(),
       order: homeData.icons.length,
