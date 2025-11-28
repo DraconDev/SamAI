@@ -154,6 +154,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
   // Add current site with auto-fetched favicon
 
+
   const addCurrentSite = async () => {
     const url = window.location.href;
     const name = document.title || "Current Page";
