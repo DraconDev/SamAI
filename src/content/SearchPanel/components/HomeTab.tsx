@@ -138,6 +138,18 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     const newIcon: HomeIcon = {
       id: Date.now().toString(),
       name: name.length > 30 ? name.substring(0, 30) + "..." : name,
+    // Fetch favicon
+    const iconUrl = await fetchFavicon(url);
+
+    const newIcon: HomeIcon = {
+      id: Date.now().toString(),
+      name: name.length > 30 ? name.substring(0, 30) + "..." : name,
+      url,
+      iconUrl: iconUrl || undefined,
+      folderId: homeData.currentFolderId,
+      createdAt: new Date().toISOString(),
+      order: homeData.icons.length,
+    };
       url,
       iconUrl,
       folderId: homeData.currentFolderId,
