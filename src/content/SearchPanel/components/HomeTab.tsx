@@ -164,6 +164,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
 
 
+  // Get current folder
   const getSampleIcons = (): HomeIcon[] => [
   const addCurrentSite = async () => {
     const url = window.location.href;
