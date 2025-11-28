@@ -309,6 +309,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   };
 
   // Add new icon with auto-favicon
+      iconUrl: iconUrl || undefined,
   const handleAddIcon = async () => {
     if (!newIconName.trim() || !newIconUrl.trim()) return;
 
