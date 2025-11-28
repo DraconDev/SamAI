@@ -302,6 +302,18 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     };
     saveHomeData(newData);
   };
+    // Fetch favicon for the new URL
+    const iconUrl = await fetchFavicon(newIconUrl);
+
+    const newIcon: HomeIcon = {
+      id: Date.now().toString(),
+      name: newIconName,
+      url: newIconUrl.startsWith("http") ? newIconUrl : `https://${newIconUrl}`,
+      iconUrl: iconUrl || undefined,
+      folderId: homeData.currentFolderId,
+      createdAt: new Date().toISOString(),
+      order: homeData.icons.length,
+    };
 
   // Handle icon click
   const handleIconClick = async (icon: HomeIcon) => {
