@@ -1,7 +1,6 @@
 import { homeStore } from "@/utils/store";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-// Types for home icons and folders
 // Enhanced types with order field for drag and drop
 export interface HomeIcon {
   id: string;
@@ -20,21 +19,6 @@ export interface Folder {
   createdAt: string;
   order?: number; // For drag and drop ordering
 }
-export interface HomeIcon {
-  id: string;
-  name: string;
-  url: string;
-  iconUrl?: string;
-  folderId?: string;
-  createdAt: string;
-}
-
-export interface Folder {
-  id: string;
-  name: string;
-  parentId?: string;
-  createdAt: string;
-}
 
 export interface HomeData {
   icons: HomeIcon[];
@@ -44,6 +28,13 @@ export interface HomeData {
 
 interface HomeTabProps {
   // Home tab is self-contained, no props needed
+}
+
+// Drag and drop types
+interface DragItem {
+  id: string;
+  type: "icon" | "folder";
+  index: number;
 }
 
 const HomeTab: React.FC<HomeTabProps> = () => {
@@ -58,12 +49,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const [newIconName, setNewIconName] = useState("");
   const [newIconUrl, setNewIconUrl] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
-  const [draggedItem, setDraggedItem] = useState<{
-    id: string;
-    type: "icon" | "folder";
-    index: number;
-  } | null>(null);
-  const [dropTarget, setDropTarget] = useState<string | null>(null);
+  const [draggedItem, setDraggedItem] = useState<DragItem | null>(null);
   const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
     new Map()
   );
@@ -82,45 +68,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           currentFolderId: undefined,
         });
       }
-      // Fetch favicon for a URL
-      const fetchFavicon = async (url: string): Promise<string | null> => {
-        try {
-          const domain = new URL(url).hostname;
-
-          // Check cache first
-          if (faviconCache.has(domain)) {
-            return faviconCache.get(domain) || null;
-          }
-
-          // Try multiple favicon sources
-          const faviconSources = [
-            `https://${domain}/favicon.ico`,
-            `https://${domain}/favicon.png`,
-            `https://icons.duckduckgo.com/ip3/${domain}.ico`,
-            `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
-          ];
-
-          for (const faviconUrl of faviconSources) {
-            try {
-              const response = await fetch(faviconUrl, { method: "HEAD" });
-              if (response.ok) {
-                // Cache the successful favicon
-                const newCache = new Map(faviconCache);
-                newCache.set(domain, faviconUrl);
-                setFaviconCache(newCache);
-                return faviconUrl;
-              }
-            } catch (e) {
-              continue; // Try next source
-            }
-          }
-
-          return null;
-        } catch (error) {
-          console.warn("Failed to fetch favicon for:", url);
-          return null;
-        }
-      };
     };
     loadHomeData();
   }, []);
@@ -136,6 +83,49 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       console.error("Error saving home data:", error);
     }
   };
+
+  // Fetch favicon for a URL
+  const fetchFavicon = useCallback(
+    async (url: string): Promise<string | null> => {
+      try {
+        const domain = new URL(url).hostname;
+
+        // Check cache first
+        if (faviconCache.has(domain)) {
+          return faviconCache.get(domain) || null;
+        }
+
+        // Try multiple favicon sources
+        const faviconSources = [
+          `https://${domain}/favicon.ico`,
+          `https://${domain}/favicon.png`,
+          `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+          `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+        ];
+
+        for (const faviconUrl of faviconSources) {
+          try {
+            const response = await fetch(faviconUrl, { method: "HEAD" });
+            if (response.ok) {
+              // Cache the successful favicon
+              const newCache = new Map(faviconCache);
+              newCache.set(domain, faviconUrl);
+              setFaviconCache(newCache);
+              return faviconUrl;
+            }
+          } catch (e) {
+            continue; // Try next source
+          }
+        }
+
+        return null;
+      } catch (error) {
+        console.warn("Failed to fetch favicon for:", url);
+        return null;
+      }
+    },
+    [faviconCache]
+  );
 
   // Add current site with auto-fetched favicon
   const addCurrentSite = async () => {
@@ -161,25 +151,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     };
     await saveHomeData(newData);
   };
-  // Add current site
-  const addCurrentSite = async () => {
-    const url = window.location.href;
-    const name = document.title || "Current Page";
-
-    const newIcon: HomeIcon = {
-      id: Date.now().toString(),
-      name: name.length > 30 ? name.substring(0, 30) + "..." : name,
-      url,
-      folderId: homeData.currentFolderId,
-      createdAt: new Date().toISOString(),
-    };
-
-    const newData = {
-      ...homeData,
-      icons: [...homeData.icons, newIcon],
-    };
-    await saveHomeData(newData);
-  };
 
   // Sample data for testing
   const getSampleIcons = (): HomeIcon[] => [
@@ -189,6 +160,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       url: "https://google.com",
       iconUrl: "https://www.google.com/favicon.ico",
       createdAt: new Date().toISOString(),
+      order: 0,
     },
     {
       id: "2",
@@ -196,6 +168,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       url: "https://github.com",
       iconUrl: "https://github.com/favicon.ico",
       createdAt: new Date().toISOString(),
+      order: 1,
     },
     {
       id: "3",
@@ -203,6 +176,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       url: "https://youtube.com",
       iconUrl: "https://www.youtube.com/favicon.ico",
       createdAt: new Date().toISOString(),
+      order: 2,
     },
     {
       id: "4",
@@ -210,6 +184,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       url: "https://stackoverflow.com",
       iconUrl: "https://stackoverflow.com/favicon.ico",
       createdAt: new Date().toISOString(),
+      order: 3,
     },
   ];
 
@@ -218,11 +193,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       id: "1",
       name: "Social",
       createdAt: new Date().toISOString(),
+      order: 0,
     },
     {
       id: "2",
       name: "Development",
       createdAt: new Date().toISOString(),
+      order: 1,
     },
   ];
 
@@ -284,16 +261,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     window.open(icon.url, "_blank");
   };
 
-  // Add new icon
+  // Add new icon with auto-favicon
   const handleAddIcon = async () => {
     if (!newIconName.trim() || !newIconUrl.trim()) return;
+
+    // Fetch favicon for the new URL
+    const iconUrl = await fetchFavicon(newIconUrl);
 
     const newIcon: HomeIcon = {
       id: Date.now().toString(),
       name: newIconName,
       url: newIconUrl.startsWith("http") ? newIconUrl : `https://${newIconUrl}`,
+      iconUrl,
       folderId: homeData.currentFolderId,
       createdAt: new Date().toISOString(),
+      order: homeData.icons.length,
     };
 
     const newData = {
@@ -315,6 +297,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       name: newFolderName,
       parentId: homeData.currentFolderId,
       createdAt: new Date().toISOString(),
+      order: homeData.folders.length,
     };
 
     const newData = {
@@ -355,24 +338,101 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     }
   };
 
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent, item: DragItem) => {
+    setDraggedItem(item);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  const handleDrop = async (
+    e: React.DragEvent,
+    targetIndex: number,
+    type: "icon" | "folder"
+  ) => {
+    e.preventDefault();
+    if (!draggedItem) return;
+
+    const isSameType = draggedItem.type === type;
+    if (!isSameType) return; // Don't allow mixing types
+
+    let newData = { ...homeData };
+
+    if (type === "icon") {
+      const newIcons = [...currentIcons];
+      const [movedIcon] = newIcons.splice(draggedItem.index, 1);
+      newIcons.splice(targetIndex, 0, movedIcon);
+
+      // Update order property
+      newIcons.forEach((icon, index) => {
+        icon.order = index;
+      });
+
+      newData.icons = homeData.icons.map((icon) => {
+        const updatedIcon = newIcons.find((newIcon) => newIcon.id === icon.id);
+        return updatedIcon || icon;
+      });
+    } else {
+      const newFolders = [...currentFolders];
+      const [movedFolder] = newFolders.splice(draggedItem.index, 1);
+      newFolders.splice(targetIndex, 0, movedFolder);
+
+      // Update order property
+      newFolders.forEach((folder, index) => {
+        folder.order = index;
+      });
+
+      newData.folders = homeData.folders.map((folder) => {
+        const updatedFolder = newFolders.find(
+          (newFolder) => newFolder.id === folder.id
+        );
+        return updatedFolder || folder;
+      });
+    }
+
+    await saveHomeData(newData);
+    setDraggedItem(null);
+  };
+
+  // Get domain icon or fallback icon
+  const getIconForUrl = (icon: HomeIcon) => {
+    if (icon.iconUrl) {
+      return icon.iconUrl;
+    }
+
+    try {
+      const domain = new URL(icon.url).hostname;
+      return `https://icons.duckduckgo.com/ip3/${domain}.ico`;
+    } catch {
+      return null;
+    }
+  };
+
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        background: "rgba(15, 23, 42, 0.95)",
-        border: "1px solid rgba(51, 65, 85, 0.6)",
+        background:
+          "linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%)",
+        border: "1px solid rgba(71, 85, 105, 0.6)",
         borderRadius: "1rem",
         overflow: "hidden",
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
       }}
     >
-      {/* Header */}
+      {/* Enhanced Header */}
       <div
         style={{
-          padding: "0.75rem 1rem",
-          borderBottom: "1px solid rgba(51,65,85,0.4)",
-          background: "rgba(30,41,59,0.95)",
+          padding: "1rem 1.25rem",
+          borderBottom: "1px solid rgba(71, 85, 105, 0.4)",
+          background: "rgba(30, 41, 59, 0.9)",
+          backdropFilter: "blur(10px)",
         }}
       >
         <div
@@ -380,27 +440,28 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "0.75rem",
+            marginBottom: "1rem",
           }}
         >
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.75rem",
+              gap: "1rem",
             }}
           >
             <div
               style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "8px",
+                width: "40px",
+                height: "40px",
+                borderRadius: "12px",
                 background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 color: "white",
-                fontSize: "16px",
+                fontSize: "20px",
+                boxShadow: "0 4px 14px 0 rgba(139, 92, 246, 0.39)",
               }}
             >
               🏠
@@ -408,14 +469,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             <div>
               <div
                 style={{
-                  fontSize: "0.9rem",
-                  fontWeight: 600,
-                  color: "#e2e8f0",
+                  fontSize: "1.1rem",
+                  fontWeight: 700,
+                  color: "#f1f5f9",
+                  letterSpacing: "-0.025em",
                 }}
               >
                 Home
               </div>
-              <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
+              <div
+                style={{
+                  fontSize: "0.8rem",
+                  color: "#94a3b8",
+                  fontWeight: 500,
+                }}
+              >
                 Quick access to your favorite sites
               </div>
             </div>
@@ -426,13 +494,23 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               <button
                 onClick={goHome}
                 style={{
-                  padding: "0.4rem 0.8rem",
-                  borderRadius: "0.5rem",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "0.75rem",
                   border: "1px solid rgba(71, 85, 105, 0.6)",
-                  background: "rgba(15, 23, 42, 0.7)",
-                  color: "#cbd5f5",
-                  fontSize: "0.75rem",
+                  background: "rgba(15, 23, 42, 0.8)",
+                  color: "#e2e8f0",
+                  fontSize: "0.8rem",
                   cursor: "pointer",
+                  fontWeight: 500,
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(15, 23, 42, 0.8)";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
                 🏠 Home
@@ -443,15 +521,29 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               onClick={currentFolder ? goBack : undefined}
               disabled={!currentFolder}
               style={{
-                padding: "0.4rem 0.8rem",
-                borderRadius: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "0.75rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
                 background: currentFolder
-                  ? "rgba(15, 23, 42, 0.7)"
+                  ? "rgba(15, 23, 42, 0.8)"
                   : "rgba(15, 23, 42, 0.3)",
-                color: currentFolder ? "#cbd5f5" : "#64748b",
-                fontSize: "0.75rem",
+                color: currentFolder ? "#e2e8f0" : "#64748b",
+                fontSize: "0.8rem",
                 cursor: currentFolder ? "pointer" : "not-allowed",
+                fontWeight: 500,
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                if (currentFolder) {
+                  e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (currentFolder) {
+                  e.currentTarget.style.background = "rgba(15, 23, 42, 0.8)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }
               }}
             >
               ← Back
@@ -459,37 +551,47 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
         </div>
 
-        {/* Navigation breadcrumb */}
+        {/* Enhanced Navigation breadcrumb */}
         {currentFolder && (
           <div
             style={{
-              fontSize: "0.8rem",
+              fontSize: "0.85rem",
               color: "#94a3b8",
-              marginBottom: "0.5rem",
+              marginBottom: "0.75rem",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
             }}
           >
-            <span style={{ cursor: "pointer" }} onClick={goHome}>
+            <span
+              style={{ cursor: "pointer", color: "#60a5fa", fontWeight: 500 }}
+              onClick={goHome}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#93c5fd";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "#60a5fa";
+              }}
+            >
               Home
             </span>
-            {currentFolder && (
-              <>
-                <span style={{ margin: "0 0.25rem" }}>/</span>
-                <span>{currentFolder.name}</span>
-              </>
-            )}
+            <span style={{ color: "#64748b" }}>/</span>
+            <span style={{ color: "#e2e8f0", fontWeight: 500 }}>
+              {currentFolder.name}
+            </span>
           </div>
         )}
 
-        {/* Search and Add Buttons */}
+        {/* Enhanced Search and Add Buttons */}
         <div
           style={{
             display: "flex",
-            gap: "0.5rem",
+            gap: "0.75rem",
             alignItems: "center",
             flexWrap: "wrap",
           }}
         >
-          {/* Search */}
+          {/* Enhanced Search */}
           <div
             style={{
               position: "relative",
@@ -504,13 +606,23 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               placeholder="Search your sites..."
               style={{
                 width: "100%",
-                padding: "0.5rem 0.75rem",
-                borderRadius: "0.5rem",
+                padding: "0.75rem 1rem",
+                borderRadius: "0.75rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
                 background: "rgba(15, 23, 42, 0.9)",
                 color: "#f1f5f9",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 outline: "none",
+                transition: "all 0.2s ease",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "#8b5cf6";
+                e.currentTarget.style.boxShadow =
+                  "0 0 0 3px rgba(139, 92, 246, 0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "rgba(71, 85, 105, 0.6)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             />
             {searchQuery && (
@@ -518,13 +630,29 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 onClick={() => setSearchQuery("")}
                 style={{
                   position: "absolute",
-                  right: "0.5rem",
+                  right: "0.75rem",
                   top: "50%",
                   transform: "translateY(-50%)",
                   background: "none",
                   border: "none",
                   color: "#94a3b8",
                   cursor: "pointer",
+                  fontSize: "1rem",
+                  width: "20px",
+                  height: "20px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "50%",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.1)";
+                  e.currentTarget.style.color = "#fca5a5";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "none";
+                  e.currentTarget.style.color = "#94a3b8";
                 }}
               >
                 ✕
@@ -532,18 +660,29 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             )}
           </div>
 
-          {/* Quick Add Current Site */}
+          {/* Enhanced Action Buttons */}
           <button
             onClick={addCurrentSite}
             style={{
-              padding: "0.5rem 0.75rem",
-              borderRadius: "0.5rem",
+              padding: "0.75rem 1rem",
+              borderRadius: "0.75rem",
               border: "1px solid rgba(234, 179, 8, 0.4)",
-              background: "rgba(234, 179, 8, 0.1)",
+              background:
+                "linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(234, 179, 8, 0.05) 100%)",
               color: "#fbbf24",
-              fontSize: "0.75rem",
+              fontSize: "0.8rem",
               cursor: "pointer",
               whiteSpace: "nowrap",
+              fontWeight: 500,
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(234, 179, 8, 0.25)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(234, 179, 8, 0.15)";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             ⭐ Add Current
@@ -552,14 +691,25 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <button
             onClick={() => setIsAddingIcon(!isAddingIcon)}
             style={{
-              padding: "0.5rem 0.75rem",
-              borderRadius: "0.5rem",
+              padding: "0.75rem 1rem",
+              borderRadius: "0.75rem",
               border: "1px solid rgba(34, 197, 94, 0.4)",
-              background: "rgba(34, 197, 94, 0.1)",
+              background:
+                "linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%)",
               color: "#86efac",
-              fontSize: "0.75rem",
+              fontSize: "0.8rem",
               cursor: "pointer",
               whiteSpace: "nowrap",
+              fontWeight: 500,
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(34, 197, 94, 0.25)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(34, 197, 94, 0.15)";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             ➕ Add Site
@@ -568,14 +718,25 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <button
             onClick={() => setIsAddingFolder(!isAddingFolder)}
             style={{
-              padding: "0.5rem 0.75rem",
-              borderRadius: "0.5rem",
+              padding: "0.75rem 1rem",
+              borderRadius: "0.75rem",
               border: "1px solid rgba(59, 130, 246, 0.4)",
-              background: "rgba(59, 130, 246, 0.1)",
+              background:
+                "linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%)",
               color: "#93c5fd",
-              fontSize: "0.75rem",
+              fontSize: "0.8rem",
               cursor: "pointer",
               whiteSpace: "nowrap",
+              fontWeight: 500,
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(59, 130, 246, 0.25)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(59, 130, 246, 0.15)";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             📁 Add Folder
@@ -583,19 +744,19 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       </div>
 
-      {/* Add Icon Form */}
+      {/* Enhanced Add Icon Form */}
       {isAddingIcon && (
         <div
           style={{
-            padding: "1rem",
-            borderBottom: "1px solid rgba(51,65,85,0.4)",
-            background: "rgba(30,41,59,0.5)",
+            padding: "1.25rem",
+            borderBottom: "1px solid rgba(71, 85, 105, 0.4)",
+            background: "rgba(30, 41, 59, 0.7)",
           }}
         >
           <div
             style={{
               display: "flex",
-              gap: "0.5rem",
+              gap: "0.75rem",
               alignItems: "center",
               flexWrap: "wrap",
             }}
@@ -608,12 +769,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               style={{
                 flex: 1,
                 minWidth: "120px",
-                padding: "0.5rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
                 background: "rgba(15, 23, 42, 0.9)",
                 color: "#f1f5f9",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
+                outline: "none",
               }}
             />
             <input
@@ -624,25 +786,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               style={{
                 flex: 1,
                 minWidth: "120px",
-                padding: "0.5rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
                 background: "rgba(15, 23, 42, 0.9)",
                 color: "#f1f5f9",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
+                outline: "none",
               }}
             />
             <button
               onClick={handleAddIcon}
               style={{
-                padding: "0.5rem 1rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem 1.25rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(34, 197, 94, 0.6)",
                 background: "rgba(34, 197, 94, 0.2)",
                 color: "#86efac",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
+                fontWeight: 500,
               }}
             >
               Add
@@ -654,12 +818,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 setNewIconUrl("");
               }}
               style={{
-                padding: "0.5rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(239, 68, 68, 0.6)",
                 background: "rgba(239, 68, 68, 0.1)",
                 color: "#fca5a5",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 cursor: "pointer",
               }}
             >
@@ -669,19 +833,19 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       )}
 
-      {/* Add Folder Form */}
+      {/* Enhanced Add Folder Form */}
       {isAddingFolder && (
         <div
           style={{
-            padding: "1rem",
-            borderBottom: "1px solid rgba(51,65,85,0.4)",
-            background: "rgba(30,41,59,0.5)",
+            padding: "1.25rem",
+            borderBottom: "1px solid rgba(71, 85, 105, 0.4)",
+            background: "rgba(30, 41, 59, 0.7)",
           }}
         >
           <div
             style={{
               display: "flex",
-              gap: "0.5rem",
+              gap: "0.75rem",
               alignItems: "center",
               flexWrap: "wrap",
             }}
@@ -694,25 +858,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               style={{
                 flex: 1,
                 minWidth: "120px",
-                padding: "0.5rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(71, 85, 105, 0.6)",
                 background: "rgba(15, 23, 42, 0.9)",
                 color: "#f1f5f9",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
+                outline: "none",
               }}
             />
             <button
               onClick={handleAddFolder}
               style={{
-                padding: "0.5rem 1rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem 1.25rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(59, 130, 246, 0.6)",
                 background: "rgba(59, 130, 246, 0.2)",
                 color: "#93c5fd",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
+                fontWeight: 500,
               }}
             >
               Add
@@ -723,12 +889,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 setNewFolderName("");
               }}
               style={{
-                padding: "0.5rem",
-                borderRadius: "0.375rem",
+                padding: "0.75rem",
+                borderRadius: "0.5rem",
                 border: "1px solid rgba(239, 68, 68, 0.6)",
                 background: "rgba(239, 68, 68, 0.1)",
                 color: "#fca5a5",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 cursor: "pointer",
               }}
             >
@@ -738,11 +904,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       )}
 
-      {/* Content Grid - Phone Style Layout */}
+      {/* Enhanced Content Grid */}
       <div
         style={{
           flex: 1,
-          padding: "1rem",
+          padding: "1.25rem",
           overflowY: "auto",
         }}
       >
@@ -751,12 +917,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <>
             <h3
               style={{
-                fontSize: "0.8rem",
-                fontWeight: 600,
+                fontSize: "0.85rem",
+                fontWeight: 700,
                 color: "#94a3b8",
-                marginBottom: "0.75rem",
+                marginBottom: "1rem",
                 textTransform: "uppercase",
-                letterSpacing: "0.05em",
+                letterSpacing: "0.1em",
               }}
             >
               Folders
@@ -764,20 +930,28 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-                gap: "0.5rem",
-                marginBottom: "1rem",
+                gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+                gap: "0.75rem",
+                marginBottom: "1.5rem",
               }}
             >
-              {currentFolders.map((folder) => (
+              {currentFolders.map((folder, index) => (
                 <div
                   key={folder.id}
+                  draggable
+                  onDragStart={(e) =>
+                    handleDragStart(e, { id: folder.id, type: "folder", index })
+                  }
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDrop(e, index, "folder")}
                   onClick={() => navigateToFolder(folder.id)}
                   style={{
-                    padding: "0.75rem 0.5rem",
-                    borderRadius: "0.75rem",
+                    position: "relative",
+                    padding: "1rem 0.75rem",
+                    borderRadius: "1rem",
                     border: "1px solid rgba(71, 85, 105, 0.6)",
-                    background: "rgba(15, 23, 42, 0.8)",
+                    background:
+                      "linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%)",
                     color: "#cbd5f5",
                     textAlign: "center",
                     cursor: "pointer",
@@ -785,91 +959,42 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "0.25rem",
+                    gap: "0.5rem",
+                    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
                   }}
-                >
-                  <div
-                    style={{
-                      fontSize: "1.25rem",
-                    }}
-                  >
-                    📁
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.75rem",
-                      fontWeight: 500,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      width: "100%",
-                    }}
-                  >
-                    {folder.name}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Icons */}
-        {filteredIcons.length > 0 && (
-          <>
-            <h3
-              style={{
-                fontSize: "0.8rem",
-                fontWeight: 600,
-                color: "#94a3b8",
-                marginBottom: "0.75rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-              }}
-            >
-              Sites
-            </h3>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-                gap: "0.5rem",
-              }}
-            >
-              {filteredIcons.map((icon) => (
-                <div
-                  key={icon.id}
-                  style={{
-                    position: "relative",
-                    padding: "0.75rem 0.5rem",
-                    borderRadius: "0.75rem",
-                    border: "1px solid rgba(71, 85, 105, 0.6)",
-                    background: "rgba(15, 23, 42, 0.8)",
-                    textAlign: "center",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "0.25rem",
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(59, 130, 246, 0.6)";
+                    e.currentTarget.style.background = "rgba(30, 41, 59, 0.95)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
                   }}
-                  onClick={() => handleIconClick(icon)}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(71, 85, 105, 0.6)";
+                    e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
+                  }}
                 >
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDeleteIcon(icon.id);
+                      handleDeleteFolder(folder.id);
                     }}
                     style={{
                       position: "absolute",
-                      top: "0.25rem",
-                      right: "0.25rem",
-                      width: "18px",
-                      height: "18px",
+                      top: "0.5rem",
+                      right: "0.5rem",
+                      width: "20px",
+                      height: "20px",
                       borderRadius: "50%",
                       border: "none",
-                      background: "rgba(239, 68, 68, 0.8)",
+                      background: "rgba(239, 68, 68, 0.9)",
                       color: "white",
-                      fontSize: "0.6rem",
+                      fontSize: "0.7rem",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -889,46 +1014,178 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                   <div
                     style={{
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "8px",
-                      background: "rgba(59, 130, 246, 0.2)",
+                      fontSize: "1.75rem",
+                      filter: "drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1))",
+                    }}
+                  >
+                    📁
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.8rem",
+                      fontWeight: 600,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      width: "100%",
+                    }}
+                  >
+                    {folder.name}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Icons */}
+        {filteredIcons.length > 0 && (
+          <>
+            <h3
+              style={{
+                fontSize: "0.85rem",
+                fontWeight: 700,
+                color: "#94a3b8",
+                marginBottom: "1rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Sites
+            </h3>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+                gap: "0.75rem",
+              }}
+            >
+              {filteredIcons.map((icon, index) => (
+                <div
+                  key={icon.id}
+                  draggable
+                  onDragStart={(e) =>
+                    handleDragStart(e, { id: icon.id, type: "icon", index })
+                  }
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDrop(e, index, "icon")}
+                  style={{
+                    position: "relative",
+                    padding: "1rem 0.75rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(71, 85, 105, 0.6)",
+                    background:
+                      "linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%)",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                  }}
+                  onClick={() => handleIconClick(icon)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(139, 92, 246, 0.6)";
+                    e.currentTarget.style.background = "rgba(30, 41, 59, 0.95)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(71, 85, 105, 0.6)";
+                    e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
+                  }}
+                >
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteIcon(icon.id);
+                    }}
+                    style={{
+                      position: "absolute",
+                      top: "0.5rem",
+                      right: "0.5rem",
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      border: "none",
+                      background: "rgba(239, 68, 68, 0.9)",
+                      color: "white",
+                      fontSize: "0.7rem",
+                      cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "1rem",
-                      border: "1px solid rgba(59, 130, 246, 0.4)",
+                      opacity: 0,
+                      transition: "opacity 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = "0";
                     }}
                   >
-                    {icon.iconUrl ? (
-                      <img
-                        src={icon.iconUrl}
-                        alt={icon.name}
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          borderRadius: "4px",
-                        }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                          target.nextElementSibling!.textContent = icon.name
-                            .charAt(0)
-                            .toUpperCase();
-                        }}
-                      />
-                    ) : (
-                      <span>📄</span>
-                    )}
-                    <span style={{ display: "none" }}>
+                    ✕
+                  </button>
+
+                  <div
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      borderRadius: "12px",
+                      background:
+                        "linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "1.25rem",
+                      border: "1px solid rgba(59, 130, 246, 0.4)",
+                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    }}
+                  >
+                    {(() => {
+                      const iconUrl = getIconForUrl(icon);
+                      if (iconUrl) {
+                        return (
+                          <img
+                            src={iconUrl}
+                            alt={icon.name}
+                            style={{
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "6px",
+                            }}
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = "none";
+                              const fallback =
+                                target.nextElementSibling as HTMLElement;
+                              if (fallback) {
+                                fallback.style.display = "block";
+                              }
+                            }}
+                          />
+                        );
+                      }
+                      return <span>📄</span>;
+                    })()}
+                    <span style={{ display: "none", fontSize: "1.25rem" }}>
                       {icon.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
 
                   <div
                     style={{
-                      fontSize: "0.7rem",
-                      fontWeight: 500,
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
                       color: "#e2e8f0",
                       overflow: "hidden",
                       textOverflow: "ellipsis",
@@ -944,28 +1201,35 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </>
         )}
 
-        {/* Empty State */}
+        {/* Enhanced Empty State */}
         {filteredIcons.length === 0 && currentFolders.length === 0 && (
           <div
             style={{
               textAlign: "center",
-              padding: "2rem",
+              padding: "3rem 2rem",
               color: "#94a3b8",
             }}
           >
-            <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>
+            <div style={{ fontSize: "3rem", marginBottom: "1.5rem" }}>
               {searchQuery ? "🔍" : "🏠"}
             </div>
             <div
               style={{
-                fontSize: "1rem",
-                fontWeight: 600,
-                marginBottom: "0.5rem",
+                fontSize: "1.25rem",
+                fontWeight: 700,
+                marginBottom: "0.75rem",
+                color: "#e2e8f0",
               }}
             >
               {searchQuery ? "No sites found" : "Your home is empty"}
             </div>
-            <div style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>
+            <div
+              style={{
+                fontSize: "1rem",
+                marginBottom: "1.5rem",
+                color: "#94a3b8",
+              }}
+            >
               {searchQuery
                 ? "Try a different search term"
                 : "Add some sites or create folders to get started"}
@@ -974,7 +1238,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               <div
                 style={{
                   display: "flex",
-                  gap: "0.5rem",
+                  gap: "0.75rem",
                   justifyContent: "center",
                   flexWrap: "wrap",
                 }}
@@ -982,13 +1246,26 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 <button
                   onClick={addCurrentSite}
                   style={{
-                    padding: "0.5rem 1rem",
-                    borderRadius: "0.5rem",
+                    padding: "0.75rem 1.5rem",
+                    borderRadius: "0.75rem",
                     border: "1px solid rgba(234, 179, 8, 0.4)",
-                    background: "rgba(234, 179, 8, 0.1)",
+                    background:
+                      "linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(234, 179, 8, 0.05) 100%)",
                     color: "#fbbf24",
-                    fontSize: "0.8rem",
+                    fontSize: "0.9rem",
                     cursor: "pointer",
+                    fontWeight: 500,
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(234, 179, 8, 0.25)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(234, 179, 8, 0.15)";
+                    e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
                   ⭐ Add Current Site
@@ -996,13 +1273,26 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 <button
                   onClick={() => setIsAddingIcon(true)}
                   style={{
-                    padding: "0.5rem 1rem",
-                    borderRadius: "0.5rem",
+                    padding: "0.75rem 1.5rem",
+                    borderRadius: "0.75rem",
                     border: "1px solid rgba(34, 197, 94, 0.4)",
-                    background: "rgba(34, 197, 94, 0.1)",
+                    background:
+                      "linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%)",
                     color: "#86efac",
-                    fontSize: "0.8rem",
+                    fontSize: "0.9rem",
                     cursor: "pointer",
+                    fontWeight: 500,
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(34, 197, 94, 0.25)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(34, 197, 94, 0.15)";
+                    e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
                   ➕ Add Manual Site
@@ -1017,22 +1307,3 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 };
 
 export default HomeTab;
-
-// Enhanced types with order field for drag and drop
-export interface HomeIcon {
-  id: string;
-  name: string;
-  url: string;
-  iconUrl?: string;
-  folderId?: string;
-  createdAt: string;
-  order?: number; // For drag and drop ordering
-}
-
-export interface Folder {
-  id: string;
-  name: string;
-  parentId?: string;
-  createdAt: string;
-  order?: number; // For drag and drop ordering
-}
