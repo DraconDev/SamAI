@@ -138,6 +138,30 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     const newIcon: HomeIcon = {
       id: Date.now().toString(),
       name: name.length > 30 ? name.substring(0, 30) + "..." : name,
+      url,
+      iconUrl: iconUrl || undefined,
+      folderId: homeData.currentFolderId,
+      createdAt: new Date().toISOString(),
+      order: homeData.icons.length,
+    };
+
+    const newData = {
+      ...homeData,
+      icons: [...homeData.icons, newIcon],
+    };
+    await saveHomeData(newData);
+  };
+  // Add current site with auto-fetched favicon
+  const addCurrentSite = async () => {
+    const url = window.location.href;
+    const name = document.title || "Current Page";
+
+    // Fetch favicon
+    const iconUrl = await fetchFavicon(url);
+
+    const newIcon: HomeIcon = {
+      id: Date.now().toString(),
+      name: name.length > 30 ? name.substring(0, 30) + "..." : name,
     // Fetch favicon
     const iconUrl = await fetchFavicon(url);
 
