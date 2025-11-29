@@ -13,9 +13,9 @@
   - [x] make the back to home button even cool
 - [x] when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
 - [x] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
-- be able to edit the current icons and folders, but how?
-  - can we do right click menu on the icons and folders to edit them?
-  - this could support delete and edit,
+- [x] be able to edit the current icons and folders, but how?
+  - [x] can we do right click menu on the icons and folders to edit them?
+  - [x] this could support delete and edit,
 - Simplify the search highlight
   - Its either favorite or hide
 
