@@ -574,8 +574,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
+              gap: "1rem",
               marginBottom: "0.875rem",
             }}
           >
@@ -584,6 +584,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: "1.25rem",
+                flexShrink: 0,
               }}
             >
               <div
@@ -656,8 +657,40 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               </div>
             </div>
 
+            <div style={{ flex: 1, maxWidth: "300px" }}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search apps..."
+                style={{
+                  width: "100%",
+                  padding: "0.75rem 1rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(139, 92, 246, 0.3)",
+                  background: "rgba(15, 23, 42, 0.95)",
+                  color: "#f1f5f9",
+                  fontSize: "0.9rem",
+                  outline: "none",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#8b5cf6";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 3px rgba(139, 92, 246, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+            </div>
             <div
-              style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}
+              style={{
+                display: "flex",
+                gap: "0.75rem",
+                alignItems: "center",
+                flexShrink: 0,
+              }}
             >
               {/* Big Plus Button in Top Right */}
               <button
