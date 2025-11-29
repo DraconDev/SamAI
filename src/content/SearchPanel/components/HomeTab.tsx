@@ -21,7 +21,7 @@ export interface HomeData {
 }
 
 interface HomeTabProps {
-  // Home tab is self-contained, no props needed
+  onImageTabClick?: () => void;
 }
 
 // Drag and drop types
