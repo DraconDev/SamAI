@@ -15,6 +15,8 @@
 - back to home button should be below the search and add site button, taking up the full width, but on the same panel, not among the icons 
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open
 
+- the home bg should be the same as the chat tab bg
+
 ## Done
 
 - add current and add site butttons should be the same size
