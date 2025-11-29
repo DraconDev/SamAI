@@ -382,6 +382,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: getCurrentItems().length,
       isFolder: false,
+      isFavorite: false,
     };
 
     const newData = {
@@ -658,6 +659,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: getCurrentItems().length,
       isFolder: true,
+      isFavorite: false,
     });
 
     await saveHomeData(newData);
@@ -1726,6 +1728,30 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     <span style={{ display: "none", fontSize: "24px" }}>
                       {item.name.charAt(0).toUpperCase()}
                     </span>
+
+                    {/* Favorite indicator */}
+                    {item.isFavorite && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "-2px",
+                          right: "-2px",
+                          width: "16px",
+                          height: "16px",
+                          background:
+                            "linear-gradient(135deg, #fbbf24, #f59e0b)",
+                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "10px",
+                          boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                          border: "2px solid rgba(15, 23, 42, 0.95)",
+                        }}
+                      >
+                        ⭐
+                      </div>
+                    )}
                   </div>
 
                   <div
