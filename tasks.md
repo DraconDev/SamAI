@@ -17,7 +17,9 @@
   - make it have a much cooler icon and round corners
 - make the icons more tightly packet much like a phone screen, this also allows more space for text
 
-- What if we didn't have those big add current and add site
+- What if we didn't have those big add current and add site buttons and instead we had normal sized buttons in the icon grid, and one of the buttons was a plus button to add a new site
+  - this would allow more space for icons and text
+  - we could have a hover effect that shows the add current and add site buttons when you hover over the plus button
 
 ## Done
 
