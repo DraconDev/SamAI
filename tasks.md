@@ -18,7 +18,7 @@
 - make the icons more tightly packet much like a phone screen, 
   - this is pretty close but make icon even bigger
   - also folder icons should be big too
-- Change popup ? instead we have a settings tab on the sidebar and by pretty the popup they can also open the sidebar, 
+- Change popup ? instead we have a settings tab on the sidebar and by pretty the popup they can also open the sidebar, on the settings page
 
 
 
