@@ -576,88 +576,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               display: "flex",
               alignItems: "center",
               gap: "1rem",
-              marginBottom: "0.875rem",
+              padding: "0.5rem 0",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1.25rem",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "16px",
-                  background:
-                    "linear-gradient(135deg, #8b5cf6 0%, #a855f7 30%, #ec4899 70%, #f97316 100%)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "white",
-                  fontSize: "20px",
-                  boxShadow: "0 8px 25px rgba(139, 92, 246, 0.35)",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background:
-                      "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)",
-                    animation: "shimmer 3s infinite",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background:
-                      "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%)",
-                  }}
-                />
-                🏠
-              </div>
-              <div>
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: 900,
-                    background:
-                      "linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    letterSpacing: "-0.02em",
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  Home
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.9rem",
-                    color: "#a1a1aa",
-                    fontWeight: 500,
-                    letterSpacing: "0.025em",
-                  }}
-                >
-                  Your personal app launcher
-                </div>
-              </div>
-            </div>
-
-            <div style={{ flex: 1, maxWidth: "300px" }}>
+            <div style={{ flex: 1, maxWidth: "400px" }}>
               <input
                 type="text"
                 value={searchQuery}
@@ -687,12 +609,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             <div
               style={{
                 display: "flex",
-                gap: "0.75rem",
                 alignItems: "center",
                 flexShrink: 0,
               }}
             >
-              {/* Big Plus Button in Top Right */}
+              {/* Plus Button */}
               <button
                 onClick={(e) => {
                   setIsAddMenuOpen(!isAddMenuOpen);
@@ -703,9 +624,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }, 100);
                 }}
                 style={{
-                  padding: "0.75rem 1.25rem",
-                  borderRadius: "16px",
-                  border: "2px solid rgba(34, 197, 94, 0.4)",
+                  padding: "0.75rem 1rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(34, 197, 94, 0.4)",
                   background:
                     "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))",
                   color: "#86efac",
