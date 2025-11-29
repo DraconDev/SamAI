@@ -1,5 +1,9 @@
 # Tasks
 
+## Planned
+- Filter
+    
+
 ## Do
 
 - add current and add site should be the same size
