@@ -843,7 +843,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       {/* Enhanced Header */}
       <div
         style={{
-          padding: "1.25rem",
+          padding: "0.75rem 1rem",
           borderBottom: "1px solid rgba(51,65,85,0.4)",
           background: "rgba(30,41,59,0.95)",
           position: "relative",
