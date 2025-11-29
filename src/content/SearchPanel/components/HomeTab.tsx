@@ -69,6 +69,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const [editingItem, setEditingItem] = useState<HomeIcon | null>(null);
   const [editValue, setEditValue] = useState("");
 
+  // Touch/mobile support state
+  const [touchTimeout, setTouchTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [touchStartTime, setTouchStartTime] = useState<number>(0);
+
   // Load home data from storage
   useEffect(() => {
     const loadHomeData = async () => {
