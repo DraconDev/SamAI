@@ -594,6 +594,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   background: "rgba(15, 23, 42, 0.95)",
                   color: "#f1f5f9",
                   fontSize: "0.9rem",
+                  height: "42px",
+                  boxSizing: "border-box",
                   outline: "none",
                 }}
                 onFocus={(e) => {
