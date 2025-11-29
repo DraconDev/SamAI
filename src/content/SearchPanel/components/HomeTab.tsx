@@ -556,9 +556,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         flexDirection: "column",
         height: "100%",
         background: "rgba(15, 23, 42, 0.95)",
-        borderRadius: "1rem",
+        borderRadius: "16px",
         boxShadow: "0 24px 45px -18px rgba(0,0,0,0.65)",
         position: "relative",
+        overflow: "hidden",
       }}
     >
       {/* Enhanced Header */}
@@ -654,8 +655,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         <div
           style={{
             position: "absolute",
-            top: "80px",
-            right: "20px",
+            top: "70px",
+            right: "12px",
             background: "rgba(30, 41, 59, 0.98)",
             border: "1px solid rgba(139, 92, 246, 0.3)",
             borderRadius: "12px",
@@ -664,6 +665,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             padding: "0.5rem",
             minWidth: "160px",
             backdropFilter: "blur(20px)",
+            overflow: "visible",
           }}
           onMouseLeave={() => setIsAddMenuOpen(false)}
         >
