@@ -508,12 +508,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        background: `
-          linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.98) 50%, rgba(15, 23, 42, 0.95) 100%)
-        `,
+        background: "rgba(15, 23, 42, 0.95)",
         borderRadius: "1rem",
         overflow: "hidden",
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
+        boxShadow: "0 24px 45px -18px rgba(0,0,0,0.65)",
         position: "relative",
       }}
     >
@@ -521,27 +519,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       <div
         style={{
           padding: "0.875rem",
-          borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
-          background: "rgba(30, 41, 59, 0.98)",
-          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(51,65,85,0.4)",
+          background: "rgba(30,41,59,0.95)",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Background gradient overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background:
-              "linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 50%, rgba(59, 130, 246, 0.1) 100%)",
-            pointerEvents: "none",
-          }}
-        />
-
         <div style={{ position: "relative", zIndex: 1 }}>
           <div
             style={{
