@@ -572,6 +572,37 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     setDraggedItem(null);
   };
 
+  // Generate consistent color for site name
+  const getColorForSite = (name: string) => {
+    const colors = [
+      "#FF6B6B",
+      "#4ECDC4",
+      "#45B7D1",
+      "#96CEB4",
+      "#FFEAA7",
+      "#DDA0DD",
+      "#98D8C8",
+      "#F7DC6F",
+      "#BB8FCE",
+      "#85C1E9",
+      "#F8C471",
+      "#82E0AA",
+      "#F1948A",
+      "#85C1E9",
+      "#D7BDE2",
+      "#A9DFBF",
+      "#F9E79F",
+      "#AED6F1",
+      "#D5A6BD",
+      "#A9CCE3",
+    ];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return colors[Math.abs(hash) % colors.length];
+  };
+
   // Get domain icon or fallback icon
   const getIconForItem = (item: HomeIcon) => {
     if (item.isFolder) return "📂"; // Modern folder icon
@@ -584,7 +615,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       const domain = new URL(item.url).hostname;
       return `https://icons.duckduckgo.com/ip3/${domain}.ico`;
     } catch {
-      return "📄";
+      return {
+        type: "fallback",
+        name: item.name,
+        color: getColorForSite(item.name),
+      };
     }
   };
 
