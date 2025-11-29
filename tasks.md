@@ -9,8 +9,6 @@
 
 ## Do
 
-- [x] The back to home button should not move up when hovered over
-  - [x] make the back to home button even cool
 - [x] when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
 - [x] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
 - [x] be able to edit the current icons and folders, but how?
@@ -21,6 +19,8 @@
 
 ## Done
 
+- [x] The back to home button should not move up when hovered over
+  - [x] make the back to home button even cool
 - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
   - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
     - folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
