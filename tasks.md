@@ -11,7 +11,7 @@
 
 ## To Do
 
-- folders should have a big icon just like sites do, and 
+- folders should have a big icon just like sites do, and the folder icon should be modern and cool looking, we dont need that blue background behind the folder icon
 - [ ] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab 
 
