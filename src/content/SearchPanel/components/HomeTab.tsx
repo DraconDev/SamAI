@@ -697,21 +697,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       </div>
 
-      {/* Add Menu Dropdown - positioned relative to the main container */}
+      {/* Add Menu Dropdown - positioned relative to header with portal */}
       {isAddMenuOpen && (
         <div
           style={{
-            position: "fixed",
-            top: "120px",
-            right: "20px",
+            position: "absolute",
+            top: "100%",
+            right: "0.875rem",
             background: "rgba(30, 41, 59, 0.98)",
             border: "1px solid rgba(139, 92, 246, 0.3)",
             borderRadius: "12px",
             boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4)",
-            zIndex: 9999,
+            zIndex: 10000,
             padding: "0.5rem",
             minWidth: "160px",
             backdropFilter: "blur(20px)",
+            marginTop: "0.5rem",
           }}
           onMouseLeave={() => setIsAddMenuOpen(false)}
         >
