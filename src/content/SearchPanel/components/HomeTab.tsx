@@ -752,7 +752,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               e.currentTarget.style.background = "transparent";
             }}
           >
-            <span>📁</span>
+            <span>🗂️</span>
             Create Folder
           </button>
         </div>
@@ -1342,11 +1342,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   style={{
                     width: "52px",
                     height: "52px",
-                      ? "transparent"
                     borderRadius: "10px",
-                    background: item.isFolder
-                      ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
-                      : "transparent",
+                    background: "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1357,7 +1354,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "44px" }}>📁</span>
+                    <span style={{ fontSize: "44px" }}>🗂️</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
