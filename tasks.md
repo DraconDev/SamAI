@@ -13,7 +13,7 @@
 ## To Do
 
 - one fix we need that hte text in the search bar and custom site and add folder are all black which is near impossible to read on our background, and our backgroudn is fine, we just need to adjust the text color
-- folders should have a big icon just like sites do, and the folder icon should be modern and cool looking, we dont need that blue background behind the folder icon
+- folders should have a big icon just like sites do, i am talking about their picture, and the folder icon should be modern and cool looking, we dont need that blue background behind the folder icon
 - [ ] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
 
