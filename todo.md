@@ -1,3 +1,6 @@
+3. add site is very spartan, previously i commented on how it should be changed follow that 
+
+
 # SamAI Todo - ROOT CAUSE FOUND: WXT & Tailwind CSS Compatibility Issue 🔍
 
 ## 🚨 CRITICAL DISCOVERY: Extension Environment CSS Loading Problem

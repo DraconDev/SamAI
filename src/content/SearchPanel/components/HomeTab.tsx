@@ -587,16 +587,16 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
 
           <div style={{ display: "flex", gap: "0.5rem" }}>
-            {/* Add Current - moved to top right corner */}
+            {/* Add Current - same style as Add Site */}
             <button
               onClick={addCurrentSite}
               style={{
-                padding: "0.6rem 1rem",
+                padding: "0.8rem 1.25rem",
                 borderRadius: "12px",
-                border: "1px solid rgba(234, 179, 8, 0.4)",
+                border: "1px solid rgba(34, 197, 94, 0.4)",
                 background:
-                  "linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05))",
-                color: "#fbbf24",
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))",
+                color: "#86efac",
                 fontSize: "0.8rem",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
@@ -605,14 +605,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(234, 179, 8, 0.15))";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.15))";
                 e.currentTarget.style.transform = "translateY(-2px)";
                 e.currentTarget.style.boxShadow =
-                  "0 8px 25px rgba(234, 179, 8, 0.3)";
+                  "0 8px 25px rgba(34, 197, 94, 0.3)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05))";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))";
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}
