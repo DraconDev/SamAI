@@ -158,15 +158,62 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     await saveHomeData(newData);
   };
 
+  // Create new folder
+  const handleCreateFolder = async () => {
+    if (!newFolderName.trim()) return;
+
+    const folderId = `folder-${Date.now().toString()}`;
+    const newFolder: HomeIcon = {
+      id: folderId,
+      name: newFolderName.trim(),
+      url: "#",
+      iconUrl: undefined,
+      folderId: homeData.currentFolderId,
+      createdAt: new Date().toISOString(),
+      order: getCurrentItems().length,
+      isFolder: true,
+    };
+
+    const newData = {
+      ...homeData,
+      icons: [...homeData.icons, newFolder],
+    };
+
+    await saveHomeData(newData);
+    setIsAddMenuOpen(false);
+    setAddMenuType(null);
+    setNewFolderName("");
+  };
+
+  // Handle plus button menu
+  const handlePlusMenu = (type: "current" | "custom" | "folder") => {
+    setAddMenuType(type);
+    if (type === "current") {
+      addCurrentSite();
+      setIsAddMenuOpen(false);
+    } else {
+      setIsAddingIcon(type === "custom");
+    }
+  };
+
   // Sample data for testing
   const getSampleData = (): HomeIcon[] => [
+    {
+      id: "folder-1",
+      name: "Social",
+      url: "#",
+      iconUrl: undefined,
+      createdAt: new Date().toISOString(),
+      order: 0,
+      isFolder: true,
+    },
     {
       id: "1",
       name: "Google",
       url: "https://google.com",
       iconUrl: "https://www.google.com/favicon.ico",
       createdAt: new Date().toISOString(),
-      order: 0,
+      order: 1,
       isFolder: false,
     },
     {
@@ -175,17 +222,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       url: "https://github.com",
       iconUrl: "https://github.com/favicon.ico",
       createdAt: new Date().toISOString(),
-      order: 1,
-      isFolder: false,
-    },
-    {
-      id: "folder-1",
-      name: "Social",
-      url: "#",
-      iconUrl: undefined,
-      createdAt: new Date().toISOString(),
       order: 2,
-      isFolder: true,
+      isFolder: false,
     },
     {
       id: "3",
