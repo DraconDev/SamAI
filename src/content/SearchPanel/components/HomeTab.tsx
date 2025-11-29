@@ -846,7 +846,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
               textAlign: "center",
               width: "100%",
-              maxWidth: "300px",
             }}
           >
             <div
