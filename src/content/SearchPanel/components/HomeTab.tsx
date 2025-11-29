@@ -426,47 +426,38 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         await createFolderFromIcons(draggedIcon, targetItem);
       }
     }
-    // Case 3: Reorder within current view (or when dragging from folder to main)
-    else if (draggedItem.id !== targetItem.id) {
-      if (isTargetSameLevel) {
-        // Reorder within current level
-        const currentItems = getCurrentItems();
-        const newItems = [...currentItems];
-        newItems.splice(draggedItem.index, 1);
-        newItems.splice(targetIndex, 0, draggedIcon);
+    // Case 3: Reorder within current view
+    else if (draggedItem.id !== targetItem.id && isTargetSameLevel) {
+      // Reorder within current level
+      const currentItems = getCurrentItems();
+      const draggedIconInCurrent = currentItems[draggedItem.index];
 
-        // Update order for all affected items
-        newItems.forEach((item, index) => {
-          item.order = index;
-        });
-
-        const newData = {
-          ...homeData,
-          icons: homeData.icons.map((icon) => {
-            const updatedItem = newItems.find(
-              (newItem) => newItem.id === icon.id
-            );
-            return updatedItem || icon;
-          }),
-        };
-        await saveHomeData(newData);
-      } else if (isTargetInMain && draggedIcon.folderId) {
-        // Drag item from folder back to main level
-        const newData = {
-          ...homeData,
-          currentFolderId: undefined,
-          icons: homeData.icons.map((icon) =>
-            icon.id === draggedItem.id
-              ? {
-                  ...icon,
-                  folderId: undefined,
-                  order: getCurrentItems().length,
-                }
-              : icon
-          ),
-        };
-        await saveHomeData(newData);
+      if (!draggedIconInCurrent || draggedIconInCurrent.id !== draggedItem.id) {
+        console.warn("Dragged item not found in current items");
+        return;
       }
+
+      const newItems = [...currentItems];
+      newItems.splice(draggedItem.index, 1);
+      newItems.splice(targetIndex, 0, draggedIconInCurrent);
+
+      // Update order for all items in the current view
+      const orderUpdates: Record<string, number> = {};
+      newItems.forEach((item, index) => {
+        orderUpdates[item.id] = index;
+      });
+
+      // Apply the order updates to the main icons array
+      const newData = {
+        ...homeData,
+        icons: homeData.icons.map((icon) => {
+          if (orderUpdates.hasOwnProperty(icon.id)) {
+            return { ...icon, order: orderUpdates[icon.id] };
+          }
+          return icon;
+        }),
+      };
+      await saveHomeData(newData);
     }
 
     setDraggedItem(null);
