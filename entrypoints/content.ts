@@ -1,10 +1,11 @@
 import { initializeGoogleSearch } from "@/src/content/google-search";
 import { showSidePanel } from "@/src/content/search";
-import { routeMessage, isContentScriptMessage } from "@/utils/content/messageHandlers";
-import type { OutputFormat } from "@/utils/page-content";
-import { extractPageContent } from "@/utils/page-content";
-import { searchSettingsStore } from "@/utils/store";
+import {
+  isContentScriptMessage,
+  routeMessage,
+} from "@/utils/content/messageHandlers";
 import { SearchHighlighter } from "@/utils/searchHighlighter";
+import { searchSettingsStore } from "@/utils/store";
 import "./style.css";
 
 export interface InputElementClickedMessage {
@@ -27,17 +28,20 @@ export default defineContentScript({
     const isSearchPage = (): boolean => {
       const url = window.location.href.toLowerCase();
       const searchEngines = [
-        'google.com/search',
-        'bing.com/search', 
-        'duckduckgo.com/',
-        'yahoo.com/search',
-        'search.yahoo.com',
-        'ask.com/web'
+        "google.com/search",
+        "bing.com/search",
+        "duckduckgo.com/",
+        "yahoo.com/search",
+        "search.yahoo.com",
+        "ask.com/web",
       ];
-      
-      return searchEngines.some(engine => url.includes(engine)) ||
-             url.includes('/search') ||
-             (url.includes('?q=') || url.includes('?query='));
+
+      return (
+        searchEngines.some((engine) => url.includes(engine)) ||
+        url.includes("/search") ||
+        url.includes("?q=") ||
+        url.includes("?query=")
+      );
     };
 
     // Debug logging for Google search initialization
@@ -167,6 +171,11 @@ export default defineContentScript({
 
       if (!showIcon) return;
 
+      // Check if panel is already open
+      if (document.getElementById("samai-container")) {
+        return; // Don't show icon if panel is already open
+      }
+
       const icon = document.createElement("div");
       icon.id = "samai-floating-icon";
       icon.innerHTML = `
@@ -184,31 +193,62 @@ export default defineContentScript({
         height: "56px",
         borderRadius: "50%",
         background: "linear-gradient(135deg, #4f46e5 0%, #818cf8 100%)",
-        boxShadow: "0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3)",
+        boxShadow:
+          "0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         cursor: "pointer",
-        zIndex: "999999",
+        zIndex: "2147483646", // Maximum safe z-index (one below side panel)
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         opacity: "0.95",
         animation: "pulse-glow 3s ease-in-out infinite",
+        // Prevent interference with drag and drop
+        pointerEvents: "auto",
+        willChange: "transform, opacity, box-shadow",
+        // Ensure it doesn't get covered by site elements
+        filter: "drop-shadow(0 0 0.5px rgba(0,0,0,0.8))",
       });
 
       icon.onmouseenter = () => {
         icon.style.transform = "scale(1.15) rotate(5deg)";
         icon.style.opacity = "1";
-        icon.style.boxShadow = "0 12px 32px rgba(79, 70, 229, 0.6), 0 0 30px rgba(79, 70, 229, 0.4)";
+        icon.style.boxShadow =
+          "0 12px 32px rgba(79, 70, 229, 0.6), 0 0 30px rgba(79, 70, 229, 0.4)";
+        icon.style.zIndex = "2147483646"; // Ensure highest z-index on hover
       };
       icon.onmouseleave = () => {
         icon.style.transform = "scale(1) rotate(0deg)";
         icon.style.opacity = "0.95";
-        icon.style.boxShadow = "0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3)";
+        icon.style.boxShadow =
+          "0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3)";
+        icon.style.zIndex = "2147483646";
       };
 
-      icon.onclick = () => {
+      icon.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         showSidePanel("", true); // Pass true to enable toggle behavior
       };
+
+      // Add pulse animation if not already present
+      if (!document.getElementById("samai-pulse-animation")) {
+        const style = document.createElement("style");
+        style.id = "samai-pulse-animation";
+        style.textContent = `
+          @keyframes pulse-glow {
+            0%, 100% {
+              box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5), 0 0 20px rgba(79, 70, 229, 0.3);
+              transform: scale(1);
+            }
+            50% {
+              box-shadow: 0 12px 32px rgba(79, 70, 229, 0.7), 0 0 35px rgba(79, 70, 229, 0.5);
+              transform: scale(1.02);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
 
       document.body.appendChild(icon);
     };
