@@ -1,7 +1,7 @@
+import SearchPanel from "@/src/content/SearchPanel";
 import { searchSettingsStore } from "@/utils/store";
 import React from "react";
 import { createRoot, type Root } from "react-dom/client";
-import SearchPanel from "@/src/content/SearchPanel";
 
 let samaiRoot: Root | null = null;
 let samaiPanelContainer: HTMLDivElement | null = null;
@@ -13,9 +13,9 @@ export async function showSidePanel(
   console.log("[SamAI Debug] showSidePanel called", { response, toggleIfOpen });
 
   // Inject CSS animations and styles if not already present
-  if (!document.getElementById('samai-animations')) {
-    const style = document.createElement('style');
-    style.id = 'samai-animations';
+  if (!document.getElementById("samai-animations")) {
+    const style = document.createElement("style");
+    style.id = "samai-animations";
     style.textContent = `
       @keyframes samai-spin {
         0% { transform: rotate(0deg); }
@@ -67,7 +67,7 @@ export async function showSidePanel(
     console.log("[SamAI Debug] Toggling off panel");
     if (samaiRoot) {
       samaiRoot.unmount();
-      samaiRoot = null; 
+      samaiRoot = null;
     }
     if (samaiPanelContainer) {
       samaiPanelContainer.remove();
@@ -101,12 +101,12 @@ export async function showSidePanel(
   }
 
   console.log("[SamAI Debug] Creating new panel");
-  
+
   // Create new panel container with inline styles (no Tailwind dependency)
   samaiPanelContainer = document.createElement("div");
   samaiPanelContainer.id = "samai-container";
-  
-  // Apply inline styles to ensure the panel is visible
+
+  // Apply inline styles to ensure the panel is visible with proper z-index hierarchy
   Object.assign(samaiPanelContainer.style, {
     position: "fixed",
     top: "0px",
@@ -114,9 +114,10 @@ export async function showSidePanel(
     width: "420px",
     height: "100vh",
     maxHeight: "100vh",
-    zIndex: "2147483647",
+    zIndex: "2147483647", // Maximum safe z-index for side panel
     pointerEvents: "auto",
-    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    fontFamily:
+      "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     color: "#f1f5f9",
     WebkitFontSmoothing: "antialiased",
     MozOsxFontSmoothing: "grayscale",
@@ -127,9 +128,16 @@ export async function showSidePanel(
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   });
-  
+
+  // Ensure floating icon is hidden when panel is open
+  const floatingIcon = document.getElementById("samai-floating-icon");
+  if (floatingIcon) {
+    floatingIcon.style.display = "none";
+    floatingIcon.style.zIndex = "1"; // Push it behind when panel is open
+  }
+
   document.body.appendChild(samaiPanelContainer);
   console.log("[SamAI Debug] Panel container created and appended");
 
