@@ -6,8 +6,6 @@
 
 ## Do
 
-- add current and add site butttons should be the same size
-  - they are not currently 
 - we need better styling for the home page
   - the styling got worse with the last update
 - we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
@@ -19,6 +17,8 @@
 
 ## Done
 
+- add current and add site butttons should be the same size
+  - they are not currently 
 - add site button changes
   - site name first
   - site url second
