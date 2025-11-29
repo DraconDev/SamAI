@@ -7,9 +7,6 @@
 - we need better styling for the home tab
   - the big glow button are not very appealing
   - the top section is too fat
-- make the icons more tightly package much like a phone screen
-  - have 5 icons in a row, and they should have 2 rows of text each
-  - having 2 row descriptions for the icons is okay much like a phone screen
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 
 ## Do
@@ -20,8 +17,8 @@
 
 - [x] the back to home button is in the rught place but we need to style it better, it could take up the whole space
   - this is almost perfect but i the button to take up the whole space, no rounded courses either, and make it more much cooler
-  - make it have a much cooler i
-- [x] lets have 5 icons in a row, and they should have 2 rows of text each
+  - make it have a much cooler icon and round corners
+- make the icons more tightly package much like a phone screen
 
 ## Done
 
