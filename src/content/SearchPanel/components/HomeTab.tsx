@@ -37,8 +37,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [isAddingIcon, setIsAddingIcon] = useState(false);
+  const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
+  const [addMenuType, setAddMenuType] = useState<
+    "current" | "custom" | "folder" | null
+  >(null);
   const [newItemName, setNewItemName] = useState("");
   const [newItemUrl, setNewItemUrl] = useState("");
+  const [newFolderName, setNewFolderName] = useState("");
   const [draggedItem, setDraggedItem] = useState<DragItem | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
@@ -1230,6 +1235,75 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 </div>
               </div>
             ))}
+
+            {/* Plus button for adding new items */}
+            <div
+              onClick={() => setIsAddingIcon(true)}
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "48px",
+                padding: "0.375rem",
+                borderRadius: "6px",
+                overflow: "hidden",
+                background: "rgba(34, 197, 94, 0.1)",
+                border: "1px solid rgba(34, 197, 94, 0.3)",
+                color: "#86efac",
+                textAlign: "center",
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "0.25rem",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(34, 197, 94, 0.2)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(34, 197, 94, 0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(34, 197, 94, 0.1)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "6px",
+                  background:
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3))",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "20px",
+                  fontWeight: 700,
+                  color: "#86efac",
+                }}
+              >
+                +
+              </div>
+              <div
+                style={{
+                  fontSize: "0.6rem",
+                  fontWeight: 600,
+                  color: "#86efac",
+                  width: "100%",
+                  textAlign: "center",
+                  lineHeight: "1.1",
+                  height: "2.2em",
+                  maxWidth: "46px",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                Add
+              </div>
+            </div>
           </div>
         ) : (
           <div
@@ -1261,73 +1335,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             >
               {searchQuery
                 ? "Try a different search term"
-                : "Drag apps together to create folders, or add individual sites"}
+                : "Tap the + button to start adding your apps"}
             </div>
-            {!searchQuery && (
-              <div
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <button
-                  onClick={addCurrentSite}
-                  style={{
-                    padding: "1rem 2rem",
-                    borderRadius: "16px",
-                    border: "1px solid rgba(234, 179, 8, 0.4)",
-                    background:
-                      "linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05))",
-                    color: "#fbbf24",
-                    fontSize: "0.9rem",
-                    cursor: "pointer",
-                    fontWeight: 600,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(234, 179, 8, 0.15))";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05))";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  ⭐ Add Current Site
-                </button>
-                <button
-                  onClick={() => setIsAddingIcon(true)}
-                  style={{
-                    padding: "1rem 2rem",
-                    borderRadius: "16px",
-                    border: "1px solid rgba(34, 197, 94, 0.4)",
-                    background:
-                      "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))",
-                    color: "#86efac",
-                    fontSize: "0.9rem",
-                    cursor: "pointer",
-                    fontWeight: 600,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.15))";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  ➕ Add Site
-                </button>
-              </div>
-            )}
           </div>
         )}
       </div>
