@@ -1304,8 +1304,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           >
             {filteredItems.map((item, index) => {
               const isDraggedOver = dragOverIndex === index;
-              const isPreviewIndex =
-                dragPreviewIndex === index && draggedItem && !item.isFolder;
+              const isPreviewIndex = dragPreviewIndex === index && draggedItem;
               const isDraggedOverFolder = draggedOverFolder === item.id;
 
               return (
