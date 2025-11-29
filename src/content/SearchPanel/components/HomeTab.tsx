@@ -1020,8 +1020,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       {getCurrentFolder() && (
         <div
           style={{
-            padding: "1.25rem",
-            paddingTop: "0",
+            padding: "1rem",
             display: "flex",
             justifyContent: "center",
           }}
@@ -1081,7 +1080,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               fontSize: "0.9rem",
               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
               textAlign: "center",
-              maxWidth: "280px",
               width: "100%",
             }}
           >
