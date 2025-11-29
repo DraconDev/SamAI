@@ -1312,7 +1312,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     padding: "0.1rem",
                     borderRadius: "6px",
                     overflow: "hidden",
-                    background: isDraggedOver
+                    background: isDraggedOverFolder
+                      ? "rgba(59, 130, 246, 0.15)"
+                      : isDraggedOver
                       ? "rgba(255, 255, 255, 0.08)"
                       : isPreviewIndex
                       ? "rgba(34, 197, 94, 0.1)"
@@ -1325,7 +1327,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     gap: "0.25rem",
-                    border: isPreviewIndex
+                    border: isDraggedOverFolder
+                      ? "2px solid rgba(59, 130, 246, 0.6)"
+                      : isPreviewIndex
                       ? "2px dashed rgba(34, 197, 94, 0.6)"
                       : "none",
                   }}
