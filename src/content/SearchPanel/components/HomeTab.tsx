@@ -1125,7 +1125,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "0.25rem",
+              gap: "0.125rem",
               justifyItems: "center",
               padding: "0.125rem",
             }}
@@ -1142,8 +1142,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "48px",
-                  padding: "0.125rem",
+                  maxWidth: "42px",
+                  padding: "0.0625rem",
                   borderRadius: "6px",
                   overflow: "hidden",
                   background:
@@ -1157,7 +1157,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.25rem",
+                  gap: "0.125rem",
                 }}
                 onMouseEnter={(e) => {
                   if (dragOverIndex !== index) {
@@ -1207,9 +1207,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "8px",
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "7px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
                       : "transparent",
