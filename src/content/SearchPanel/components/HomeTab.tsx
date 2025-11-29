@@ -1865,6 +1865,36 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             Edit
           </button>
           <button
+            onClick={handleContextToggleFavorite}
+            style={{
+              width: "100%",
+              padding: "0.75rem 1rem",
+              border: "none",
+              background: "transparent",
+              color: contextMenu.item?.isFavorite ? "#fbbf24" : "#f59e0b",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              textAlign: "left",
+              cursor: "pointer",
+              borderRadius: "8px",
+              transition: "all 0.2s ease",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(245, 158, 11, 0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            <span>{contextMenu.item?.isFavorite ? "⭐" : "☆"}</span>
+            {contextMenu.item?.isFavorite
+              ? "Remove from Favorites"
+              : "Add to Favorites"}
+          </button>
+          <button
             onClick={handleContextDelete}
             style={{
               width: "100%",
