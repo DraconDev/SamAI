@@ -10,7 +10,6 @@
 - make the icons more tightly package much like a phone screen
   - have 5 icons in a row, and they should have 2 rows of text each
   - having 2 row descriptions for the icons is okay much like a phone screen
-  - not in the icon field we need to move it up, i tried to but now its not showing
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 
 ## Do

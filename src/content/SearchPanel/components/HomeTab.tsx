@@ -831,45 +831,83 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             onClick={goBack}
             style={{
               background:
-                "linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15))",
-              border: "1px solid rgba(139, 92, 246, 0.3)",
-              borderRadius: "12px",
-              padding: "0.75rem 1.5rem",
+                "linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(16, 185, 129, 0.08))",
+              border: "2px solid rgba(34, 197, 94, 0.3)",
+              borderRadius: "0px",
+              padding: "1.25rem 1.5rem",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
-              gap: "0.75rem",
-              transition: "all 0.2s ease",
+              gap: "1rem",
+              transition: "all 0.3s ease",
               color: "#ffffff",
-              fontWeight: 600,
-              fontSize: "0.85rem",
-              boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+              fontWeight: 700,
+              fontSize: "0.9rem",
+              boxShadow:
+                "0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
               textAlign: "center",
               width: "100%",
+              position: "relative",
+              overflow: "hidden",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background =
+                "linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.12))";
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background =
+                "linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(16, 185, 129, 0.08))";
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)";
             }}
           >
             <div
               style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "8px",
-                background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
+                width: "40px",
+                height: "40px",
+                borderRadius: "0px",
+                background: "linear-gradient(135deg, #10b981, #059669)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "16px",
+                fontSize: "18px",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
               }}
             >
               ←
             </div>
             <div style={{ textAlign: "left" }}>
-              <div style={{ fontSize: "0.9rem", fontWeight: 700 }}>
+              <div
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.5px",
+                }}
+              >
                 Back to Home
               </div>
-              <div style={{ fontSize: "0.75rem", opacity: 0.8 }}>
+              <div
+                style={{ fontSize: "0.8rem", opacity: 0.9, fontWeight: 500 }}
+              >
                 Drop icons here to move them back
               </div>
             </div>
+            <div
+              style={{
+                position: "absolute",
+                right: "1rem",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "2px",
+                height: "60%",
+                background:
+                  "linear-gradient(to bottom, transparent, rgba(34, 197, 94, 0.3), transparent)",
+              }}
+            />
           </div>
         </div>
       )}
