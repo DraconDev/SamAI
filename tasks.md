@@ -16,8 +16,8 @@
 - [x] be able to edit the current icons and folders, but how?
   - [x] can we do right click menu on the icons and folders to edit them?
   - [x] this could support delete and edit,
-- Simplify the search highlight
-  - Its either favorite or hide
+- [x] Simplify the search highlight
+  - [x] Its either favorite or hide
 
 ## Done
 
