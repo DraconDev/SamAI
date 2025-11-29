@@ -587,7 +587,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
 
           <div style={{ display: "flex", gap: "0.5rem" }}>
-            {/* Add Current - consistent style with Add Site */}
+            {/* Add Current - same size as Add Site */}
             <button
               onClick={addCurrentSite}
               style={{
@@ -602,6 +602,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 whiteSpace: "nowrap",
                 fontWeight: 600,
                 transition: "all 0.3s ease",
+                minWidth: "120px",
+                textAlign: "center",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background =
@@ -710,7 +712,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             )}
           </div>
 
-          {/* Add Site */}
+          {/* Add Site - same size as Add Current */}
           <button
             onClick={() => setIsAddingIcon(!isAddingIcon)}
             style={{
@@ -725,6 +727,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               whiteSpace: "nowrap",
               fontWeight: 600,
               transition: "all 0.3s ease",
+              minWidth: "120px",
+              textAlign: "center",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background =
@@ -1333,3 +1337,4 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 };
 
 export default HomeTab;
+
