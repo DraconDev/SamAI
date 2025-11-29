@@ -1432,14 +1432,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                       <span style={{ fontSize: "44px" }}>📂</span>
                     ) : (
                       (() => {
-                        const iconUrl = getIconForItem(item);
+                        const iconResult = getIconForItem(item);
                         if (
-                          typeof iconUrl === "string" &&
-                          iconUrl.startsWith("http")
+                          typeof iconResult === "string" &&
+                          iconResult.startsWith("http")
                         ) {
                           return (
                             <img
-                              src={iconUrl}
+                              src={iconResult}
                               alt={item.name}
                               style={{
                                 width: "52px",
@@ -1457,10 +1457,37 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                               }}
                             />
                           );
+                        } else if (
+                          typeof iconResult === "object" &&
+                          iconResult.type === "fallback"
+                        ) {
+                          return (
+                            <div
+                              style={{
+                                width: "52px",
+                                height: "52px",
+                                borderRadius: "50%",
+                                background: iconResult.color,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontSize: "20px",
+                                fontWeight: 700,
+                                color: "white",
+                                textShadow: "0 1px 2px rgba(0,0,0,0.3)",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                              }}
+                            >
+                              {iconResult.name.charAt(0).toUpperCase()}
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <span style={{ fontSize: "24px" }}>
+                              {iconResult}
+                            </span>
+                          );
                         }
-                        return (
-                          <span style={{ fontSize: "24px" }}>{iconUrl}</span>
-                        );
                       })()
                     )}
                     <span style={{ display: "none", fontSize: "24px" }}>
