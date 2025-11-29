@@ -43,6 +43,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const [newItemName, setNewItemName] = useState("");
   const [newItemUrl, setNewItemUrl] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [draggedItem, setDraggedItem] = useState<DragItem | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
@@ -281,8 +282,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     });
   };
 
-  // Get items (no search filtering)
-  const filteredItems = getCurrentItems();
+  // Get items with search filtering
+  const getFilteredItems = () => {
+    const currentItems = getCurrentItems();
+    if (!searchQuery.trim()) return currentItems;
+    return currentItems.filter((item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+  const filteredItems = getFilteredItems();
 
   // Navigation (simplified)
   const openFolder = (folderId: string) => {
