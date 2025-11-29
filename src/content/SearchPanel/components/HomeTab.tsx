@@ -410,6 +410,97 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     }
   };
 
+  // Context menu handlers
+  const handleContextMenu = (e: React.MouseEvent, item: HomeIcon) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setContextMenu({
+      visible: true,
+      position: { x: e.clientX, y: e.clientY },
+      item,
+    });
+  };
+
+  const closeContextMenu = () => {
+    setContextMenu({
+      visible: false,
+      position: { x: 0, y: 0 },
+      item: null,
+    });
+  };
+
+  // Handle clicks outside context menu
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (contextMenu.visible) {
+        closeContextMenu();
+      }
+    };
+
+    // Handle escape key
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && contextMenu.visible) {
+        closeContextMenu();
+      }
+    };
+
+    if (contextMenu.visible) {
+      document.addEventListener("click", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
+
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+        document.removeEventListener("keydown", handleEscape);
+      };
+    }
+  }, [contextMenu.visible]);
+
+  // Edit functionality
+  const startEditing = (item: HomeIcon) => {
+    setEditingItem(item);
+    setEditValue(item.name);
+    closeContextMenu();
+  };
+
+  const saveEdit = async () => {
+    if (!editingItem || !editValue.trim()) {
+      setEditingItem(null);
+      setEditValue("");
+      return;
+    }
+
+    const newData = {
+      ...homeData,
+      icons: homeData.icons.map((icon) =>
+        icon.id === editingItem.id ? { ...icon, name: editValue.trim() } : icon
+      ),
+    };
+
+    await saveHomeData(newData);
+    setEditingItem(null);
+    setEditValue("");
+  };
+
+  const cancelEdit = () => {
+    setEditingItem(null);
+    setEditValue("");
+  };
+
+  // Context menu actions
+  const handleContextEdit = () => {
+    if (contextMenu.item) {
+      startEditing(contextMenu.item);
+    }
+  };
+
+  const handleContextDelete = () => {
+    if (contextMenu.item) {
+      handleDeleteItem(contextMenu.item.id);
+      closeContextMenu();
+    }
+  };
+
   // Enhanced drag and drop handlers
   const handleDragStart = (
     e: React.DragEvent,
