@@ -187,11 +187,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   // Handle plus button menu
   const handlePlusMenu = (type: "current" | "custom" | "folder") => {
     setAddMenuType(type);
+    setIsAddMenuOpen(false);
+
     if (type === "current") {
       addCurrentSite();
-      setIsAddMenuOpen(false);
     } else {
-      setIsAddingIcon(type === "custom");
+      setIsAddingIcon(true);
     }
   };
 
