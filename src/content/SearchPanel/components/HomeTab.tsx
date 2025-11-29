@@ -35,7 +35,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     icons: [],
     currentFolderId: undefined,
   });
-  const [searchQuery, setSearchQuery] = useState("");
   const [isAddingIcon, setIsAddingIcon] = useState(false);
   const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
   const [addMenuType, setAddMenuType] = useState<
