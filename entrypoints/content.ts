@@ -231,6 +231,22 @@ export default defineContentScript({
         showSidePanel("", true); // Pass true to enable toggle behavior
       };
 
+      // Add drag-drop event handlers to ensure proper behavior
+      icon.addEventListener("dragstart", (e) => {
+        e.preventDefault(); // Prevent icon from being dragged
+        e.stopPropagation();
+      });
+
+      icon.addEventListener("dragover", (e) => {
+        e.preventDefault(); // Allow drop events to pass through
+        e.stopPropagation();
+      });
+
+      icon.addEventListener("drop", (e) => {
+        e.preventDefault(); // Allow drop events to pass through
+        e.stopPropagation();
+      });
+
       // Add pulse animation if not already present
       if (!document.getElementById("samai-pulse-animation")) {
         const style = document.createElement("style");
