@@ -1543,6 +1543,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   onContextMenu={(e) =>
                     !editingItem && handleContextMenu(e, item)
                   }
+                  onTouchStart={(e) =>
+                    !editingItem && handleTouchStart(e, item)
+                  }
+                  onTouchEnd={handleTouchEnd}
+                  onTouchCancel={handleTouchCancel}
                   style={{
                     position: "relative",
                     width: "100%",
