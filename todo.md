@@ -1,5 +1,9 @@
 3. add site is very spartan, previously i commented on how it should be changed follow that 
 
+site name first 
+site url second 
+
+
 
 # SamAI Todo - ROOT CAUSE FOUND: WXT & Tailwind CSS Compatibility Issue 🔍
 

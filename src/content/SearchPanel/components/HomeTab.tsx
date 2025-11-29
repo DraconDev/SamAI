@@ -846,163 +846,261 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         }}
       >
         {filteredItems.length > 0 ? (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "1rem",
-              justifyItems: "center",
-            }}
-          >
-            {filteredItems.map((item, index) => (
-              <div
-                key={item.id}
-                draggable
-                onDragStart={(e) => handleDragStart(e, item, index)}
-                onDragOver={(e) => handleDragOver(e, index)}
-                onDragLeave={handleDragLeave}
-                onDrop={(e) => handleDrop(e, index, item)}
-                onClick={() => handleItemClick(item)}
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  maxWidth: "60px",
-                  padding: "0.25rem",
-                  borderRadius: "8px",
-                  background:
-                    dragOverIndex === index
-                      ? "rgba(255, 255, 255, 0.1)"
-                      : "transparent",
-                  color: "#ffffff",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                }}
-                onMouseEnter={(e) => {
-                  if (dragOverIndex !== index) {
-                    e.currentTarget.style.background =
-                      "rgba(255, 255, 255, 0.05)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (dragOverIndex !== index) {
-                    e.currentTarget.style.background = "transparent";
-                  }
-                }}
-              >
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteItem(item.id);
-                  }}
+          <>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(5, 1fr)",
+                gap: "1rem",
+                justifyItems: "center",
+              }}
+            >
+              {filteredItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, item, index)}
+                  onDragOver={(e) => handleDragOver(e, index)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, index, item)}
+                  onClick={() => handleItemClick(item)}
                   style={{
-                    position: "absolute",
-                    top: "1px",
-                    right: "1px",
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "50%",
-                    border: "none",
-                    background: "rgba(239, 68, 68, 0.9)",
-                    color: "white",
-                    fontSize: "0.5rem",
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "60px",
+                    padding: "0.25rem",
+                    borderRadius: "8px",
+                    background:
+                      dragOverIndex === index
+                        ? "rgba(255, 255, 255, 0.1)"
+                        : "transparent",
+                    color: "#ffffff",
+                    textAlign: "center",
                     cursor: "pointer",
+                    transition: "all 0.2s ease",
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
-                    opacity: 0,
-                    transition: "opacity 0.2s ease",
-                    zIndex: 1,
+                    gap: "0.4rem",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
+                    if (dragOverIndex !== index) {
+                      e.currentTarget.style.background =
+                        "rgba(255, 255, 255, 0.05)";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0";
+                    if (dragOverIndex !== index) {
+                      e.currentTarget.style.background = "transparent";
+                    }
                   }}
                 >
-                  ✕
-                </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteItem(item.id);
+                    }}
+                    style={{
+                      position: "absolute",
+                      top: "1px",
+                      right: "1px",
+                      width: "16px",
+                      height: "16px",
+                      borderRadius: "50%",
+                      border: "none",
+                      background: "rgba(239, 68, 68, 0.9)",
+                      color: "white",
+                      fontSize: "0.5rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0,
+                      transition: "opacity 0.2s ease",
+                      zIndex: 1,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = "0";
+                    }}
+                  >
+                    ✕
+                  </button>
 
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "10px",
-                    background: item.isFolder
-                      ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
-                      : "transparent",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "20px",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {item.isFolder ? (
-                    <span style={{ fontSize: "24px" }}>📁</span>
-                  ) : (
-                    (() => {
-                      const iconUrl = getIconForItem(item);
-                      if (
-                        typeof iconUrl === "string" &&
-                        iconUrl.startsWith("http")
-                      ) {
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "10px",
+                      background: item.isFolder
+                        ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
+                        : "transparent",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "20px",
+                      position: "relative",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {item.isFolder ? (
+                      <span style={{ fontSize: "24px" }}>📁</span>
+                    ) : (
+                      (() => {
+                        const iconUrl = getIconForItem(item);
+                        if (
+                          typeof iconUrl === "string" &&
+                          iconUrl.startsWith("http")
+                        ) {
+                          return (
+                            <img
+                              src={iconUrl}
+                              alt={item.name}
+                              style={{
+                                width: "48px",
+                                height: "48px",
+                                borderRadius: "10px",
+                              }}
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = "none";
+                                const fallback =
+                                  target.nextElementSibling as HTMLElement;
+                                if (fallback) {
+                                  fallback.style.display = "block";
+                                }
+                              }}
+                            />
+                          );
+                        }
                         return (
-                          <img
-                            src={iconUrl}
-                            alt={item.name}
-                            style={{
-                              width: "48px",
-                              height: "48px",
-                              borderRadius: "10px",
-                            }}
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = "none";
-                              const fallback =
-                                target.nextElementSibling as HTMLElement;
-                              if (fallback) {
-                                fallback.style.display = "block";
-                              }
-                            }}
-                          />
+                          <span style={{ fontSize: "24px" }}>{iconUrl}</span>
                         );
-                      }
-                      return (
-                        <span style={{ fontSize: "24px" }}>{iconUrl}</span>
-                      );
-                    })()
-                  )}
-                  <span style={{ display: "none", fontSize: "24px" }}>
-                    {item.name.charAt(0).toUpperCase()}
-                  </span>
-                </div>
+                      })()
+                    )}
+                    <span style={{ display: "none", fontSize: "24px" }}>
+                      {item.name.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
 
+                  <div
+                    style={{
+                      fontSize: "0.7rem",
+                      fontWeight: 600,
+                      color: "#ffffff",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      width: "100%",
+                      textAlign: "center",
+                      lineHeight: "1.2",
+                      maxWidth: "55px",
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                </div>
+              ))}
+
+              {/* Back to Home Button - centered in icon field when in folder */}
+              {getCurrentFolder() && (
                 <div
                   style={{
-                    fontSize: "0.7rem",
-                    fontWeight: 600,
-                    color: "#ffffff",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    width: "100%",
-                    textAlign: "center",
-                    lineHeight: "1.2",
-                    maxWidth: "55px",
+                    gridColumn: "1 / -1",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "1.5rem",
                   }}
                 >
-                  {item.name}
+                  <div
+                    onDragOver={(e) => {
+                      if (draggedItem && draggedItem.isFolder === false) {
+                        e.preventDefault();
+                        e.currentTarget.style.background =
+                          "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 8px 25px rgba(34, 197, 94, 0.4)";
+                      }
+                    }}
+                    onDragLeave={(e) => {
+                      e.currentTarget.style.background =
+                        "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 12px rgba(0, 0, 0, 0.2)";
+                    }}
+                    onDrop={async (e) => {
+                      if (draggedItem && draggedItem.isFolder === false) {
+                        e.preventDefault();
+                        // Move dragged item back to main level
+                        const newData = {
+                          ...homeData,
+                          currentFolderId: undefined,
+                          icons: homeData.icons.map((icon) =>
+                            icon.id === draggedItem.id
+                              ? {
+                                  ...icon,
+                                  folderId: undefined,
+                                  order: getCurrentItems().length,
+                                }
+                              : icon
+                          ),
+                        };
+                        await saveHomeData(newData);
+                        setDraggedItem(null);
+                      }
+                    }}
+                    onClick={goBack}
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))",
+                      border: "2px solid rgba(139, 92, 246, 0.4)",
+                      borderRadius: "16px",
+                      padding: "1.5rem 2rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                      transition: "all 0.3s ease",
+                      color: "#ffffff",
+                      fontWeight: 600,
+                      fontSize: "0.9rem",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                      textAlign: "center",
+                      maxWidth: "280px",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "48px",
+                        height: "48px",
+                        borderRadius: "12px",
+                        background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "24px",
+                      }}
+                    >
+                      ←
+                    </div>
+                    <div style={{ textAlign: "left" }}>
+                      <div style={{ fontSize: "1rem", fontWeight: 700 }}>
+                        Back to Home
+                      </div>
+                      <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>
+                        Drop icons here to move them back
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              )}
+            </div>
+          </>
         ) : (
           <div
             style={{
