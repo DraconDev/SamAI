@@ -361,6 +361,42 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     setDragOverIndex(null);
   };
 
+  // Auto-create folder when dropping one icon on another
+  const createFolderFromIcons = async (icon1: HomeIcon, icon2: HomeIcon) => {
+    const folderId = `folder-${Date.now().toString()}`;
+    const folderName = `${icon1.name.split(" ")[0]} & ${
+      icon2.name.split(" ")[0]
+    }`;
+
+    const newData = {
+      ...homeData,
+      icons: homeData.icons.map((icon) => {
+        if (icon.id === icon1.id || icon.id === icon2.id) {
+          return {
+            ...icon,
+            folderId,
+            order: undefined, // Remove order when in folder
+          };
+        }
+        return icon;
+      }),
+    };
+
+    // Add the folder icon
+    newData.icons.push({
+      id: folderId,
+      name: folderName,
+      url: "#",
+      iconUrl: undefined,
+      folderId: homeData.currentFolderId,
+      createdAt: new Date().toISOString(),
+      order: getCurrentItems().length,
+      isFolder: true,
+    });
+
+    await saveHomeData(newData);
+  };
+
   const handleDrop = async (
     e: React.DragEvent,
     targetIndex: number,
@@ -371,9 +407,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
     if (!draggedItem) return;
 
+    // Get the dragged item
+    const draggedIcon = getCurrentItems().find(
+      (item) => item.id === draggedItem.id
+    );
+    if (!draggedIcon) return;
+
     // Check if dropping onto a folder
     if (targetItem.isFolder && draggedItem.id !== targetItem.id) {
-      // Move item to folder
+      // Move item to existing folder
       const newData = {
         ...homeData,
         icons: homeData.icons.map((icon) =>
@@ -383,17 +425,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         ),
       };
       await saveHomeData(newData);
-    } else if (!targetItem.isFolder && !targetItem.folderId) {
-      // Reorder items in current view
+    } else if (!targetItem.isFolder && draggedItem.id !== targetItem.id) {
+      // Auto-create folder when dropping one icon on another regular icon
+      await createFolderFromIcons(draggedIcon, targetItem);
+    } else if (draggedItem.id === targetItem.id) {
+      // Reorder within current view
       const currentItems = getCurrentItems();
-      const itemToMove = currentItems.find(
-        (item) => item.id === draggedItem.id
-      );
-      if (!itemToMove) return;
-
       const newItems = [...currentItems];
       newItems.splice(draggedItem.index, 1);
-      newItems.splice(targetIndex, 0, itemToMove);
+      newItems.splice(targetIndex, 0, draggedIcon);
 
       // Update order for all affected items
       newItems.forEach((item, index) => {
