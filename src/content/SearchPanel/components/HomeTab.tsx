@@ -436,20 +436,33 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         await createFolderFromIcons(draggedIcon, targetItem);
       }
     }
-    // Case 3: Reorder within current view
-    else if (draggedItem.id !== targetItem.id && isTargetSameLevel) {
-      // Reorder within current level
+    // Case 3: Reorder within current view (improved logic)
+    else if (isTargetSameLevel) {
+      // Get current items in the correct order
       const currentItems = getCurrentItems();
-      const draggedIconInCurrent = currentItems[draggedItem.index];
 
-      if (!draggedIconInCurrent || draggedIconInCurrent.id !== draggedItem.id) {
+      // Find the dragged item in current items
+      const draggedItemIndex = currentItems.findIndex(
+        (item) => item.id === draggedItem.id
+      );
+      if (draggedItemIndex === -1) {
         console.warn("Dragged item not found in current items");
         return;
       }
 
+      // If dropping on the same position, no need to reorder
+      if (draggedItemIndex === targetIndex) {
+        return;
+      }
+
+      // Create new array with the dragged item removed and inserted at new position
       const newItems = [...currentItems];
-      newItems.splice(draggedItem.index, 1);
-      newItems.splice(targetIndex, 0, draggedIconInCurrent);
+      const [removedItem] = newItems.splice(draggedItemIndex, 1);
+
+      // Adjust target index if dragging forward
+      const adjustedTargetIndex =
+        draggedItemIndex < targetIndex ? targetIndex - 1 : targetIndex;
+      newItems.splice(adjustedTargetIndex, 0, removedItem);
 
       // Update order for all items in the current view
       const orderUpdates: Record<string, number> = {};
@@ -1337,4 +1350,3 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 };
 
 export default HomeTab;
-
