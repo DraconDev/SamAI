@@ -122,6 +122,16 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     const url = window.location.href;
     const name = document.title || "Current Page";
 
+    // Check for duplicates (case-insensitive URL comparison)
+    const isDuplicate = homeData.icons.some(
+      (icon) => icon.url.toLowerCase() === url.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      alert("This website is already added to your home screen!");
+      return;
+    }
+
     // Fetch favicon
     const iconUrl = await fetchFavicon(url);
 
