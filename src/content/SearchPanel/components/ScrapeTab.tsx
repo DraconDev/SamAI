@@ -63,48 +63,100 @@ export const ScrapeTab: React.FC<ScrapeTabProps> = ({
   try {
     return (
       <div
-        className="space-y-6"
         style={{
-          padding: "0.25rem",
+          display: "flex",
+          flexDirection: "column",
           height: "100%",
-          overflowY: "auto",
+          border: "1px solid rgba(51, 65, 85, 0.6)",
+          borderRadius: "1rem",
+          background: "rgba(15, 23, 42, 0.95)",
+          boxShadow: "0 24px 45px -18px rgba(0,0,0,0.65)",
+          overflow: "hidden",
         }}
       >
+        {/* Header Section */}
         <div
           style={{
-            background: "linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))",
-            border: "1px solid rgba(59, 130, 246, 0.3)",
-            borderRadius: "1rem",
-            padding: "1.25rem",
-            boxShadow: "0 10px 30px -10px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-            backdropFilter: "blur(12px)",
-            marginBottom: "1rem",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "0.75rem 1rem",
+            borderBottom: "1px solid rgba(51,65,85,0.4)",
+            background: "rgba(30,41,59,0.95)",
           }}
         >
-          <div style={{ marginBottom: "1.25rem" }}>
-            <h3
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <div
               style={{
-                fontSize: "1.125rem",
-                fontWeight: 700,
-                marginBottom: "0.5rem",
+                width: "36px",
+                height: "36px",
+                borderRadius: "10px",
                 background: "linear-gradient(135deg, #3b82f6, #60a5fa)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 8px 16px rgba(59, 130, 246, 0.35)",
               }}
             >
-              Page Scraper
-            </h3>
-            <p
-              style={{
-                fontSize: "0.8rem",
-                color: "#94a3b8",
-                lineHeight: "1.4",
-              }}
-            >
-              Select extraction mode, add instructions, scrape for preview, then download or open in chat.
-            </p>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
+            <div>
+              <div
+                style={{ fontSize: "0.9rem", fontWeight: 700, color: "#60a5fa" }}
+              >
+                Page Scraper
+              </div>
+              <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
+                Extract specific content from the current page
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* Main Content */}
+        <div
+          style={{
+            flex: 1,
+            padding: "1rem",
+            overflowY: "auto",
+            minHeight: 0,
+          }}
+        >
+          <div
+            style={{
+              background: "linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.08))",
+              border: "1px solid rgba(59, 130, 246, 0.3)",
+              borderRadius: "0.75rem",
+              padding: "1.25rem",
+              boxShadow: "0 4px 12px rgba(59, 130, 246, 0.1)",
+              backdropFilter: "blur(12px)",
+              marginBottom: "1rem",
+            }}
+          >
+            <div style={{ marginBottom: "1.25rem" }}>
+              <p
+                style={{
+                  fontSize: "0.85rem",
+                  color: "#94a3b8",
+                  lineHeight: "1.4",
+                  margin: 0,
+                }}
+              >
+                Select extraction mode, add instructions, scrape for preview, then download or open in chat.
+              </p>
+            </div>
 
           {/* Mode Selector */}
           <div
