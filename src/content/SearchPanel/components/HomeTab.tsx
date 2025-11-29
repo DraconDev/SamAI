@@ -54,6 +54,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     new Map()
   );
 
+  // Context menu state
+  const [contextMenu, setContextMenu] = useState<{
+    visible: boolean;
+    position: { x: number; y: number };
+    item: HomeIcon | null;
+  }>({
+    visible: false,
+    position: { x: 0, y: 0 },
+    item: null,
+  });
+
+  // Edit mode state
+  const [editingItem, setEditingItem] = useState<HomeIcon | null>(null);
+  const [editValue, setEditValue] = useState("");
+
   // Load home data from storage
   useEffect(() => {
     const loadHomeData = async () => {
