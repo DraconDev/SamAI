@@ -522,7 +522,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       {/* Enhanced Header */}
       <div
         style={{
-          padding: "1.5rem",
+          padding: "1.125rem",
           borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
           background: "rgba(30, 41, 59, 0.98)",
           backdropFilter: "blur(20px)",
@@ -550,7 +550,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "1.5rem",
+              marginBottom: "1.125rem",
             }}
           >
             <div
@@ -562,17 +562,17 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             >
               <div
                 style={{
-                  width: "52px",
-                  height: "52px",
-                  borderRadius: "20px",
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "16px",
                   background:
                     "linear-gradient(135deg, #8b5cf6 0%, #a855f7 30%, #ec4899 70%, #f97316 100%)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "white",
-                  fontSize: "26px",
-                  boxShadow: "0 12px 40px rgba(139, 92, 246, 0.5)",
+                  fontSize: "20px",
+                  boxShadow: "0 8px 25px rgba(139, 92, 246, 0.35)",
                   position: "relative",
                   overflow: "hidden",
                 }}
@@ -1012,102 +1012,102 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 Add Site
               </button>
             </div>
-          {/* Back to Home Button - appears right after search when in folder */}
-          {getCurrentFolder() && (
-            <div
-              style={{
-                padding: "1rem",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
+            {/* Back to Home Button - appears right after search when in folder */}
+            {getCurrentFolder() && (
               <div
-                onDragOver={(e) => {
-                  if (draggedItem && draggedItem.isFolder === false) {
-                    e.preventDefault();
-                    e.currentTarget.style.background =
-                      "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 8px 25px rgba(34, 197, 94, 0.4)";
-                  }
-                }}
-                onDragLeave={(e) => {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.2)";
-                }}
-                onDrop={async (e) => {
-                  if (draggedItem && draggedItem.isFolder === false) {
-                    e.preventDefault();
-                    // Move dragged item back to main level
-                    const newData = {
-                      ...homeData,
-                      currentFolderId: undefined,
-                      icons: homeData.icons.map((icon) =>
-                        icon.id === draggedItem.id
-                          ? {
-                              ...icon,
-                              folderId: undefined,
-                              order: getCurrentItems().length,
-                            }
-                          : icon
-                      ),
-                    };
-                    await saveHomeData(newData);
-                    setDraggedItem(null);
-                  }
-                }}
-                onClick={goBack}
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))",
-                  border: "2px solid rgba(139, 92, 246, 0.4)",
-                  borderRadius: "16px",
-                  padding: "1.5rem 2rem",
-                  cursor: "pointer",
+                  padding: "1rem",
                   display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  transition: "all 0.3s ease",
-                  color: "#ffffff",
-                  fontWeight: 600,
-                  fontSize: "0.9rem",
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-                  textAlign: "center",
-                  width: "100%",
+                  justifyContent: "center",
                 }}
               >
                 <div
+                  onDragOver={(e) => {
+                    if (draggedItem && draggedItem.isFolder === false) {
+                      e.preventDefault();
+                      e.currentTarget.style.background =
+                        "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 8px 25px rgba(34, 197, 94, 0.4)";
+                    }
+                  }}
+                  onDragLeave={(e) => {
+                    e.currentTarget.style.background =
+                      "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(0, 0, 0, 0.2)";
+                  }}
+                  onDrop={async (e) => {
+                    if (draggedItem && draggedItem.isFolder === false) {
+                      e.preventDefault();
+                      // Move dragged item back to main level
+                      const newData = {
+                        ...homeData,
+                        currentFolderId: undefined,
+                        icons: homeData.icons.map((icon) =>
+                          icon.id === draggedItem.id
+                            ? {
+                                ...icon,
+                                folderId: undefined,
+                                order: getCurrentItems().length,
+                              }
+                            : icon
+                        ),
+                      };
+                      await saveHomeData(newData);
+                      setDraggedItem(null);
+                    }
+                  }}
+                  onClick={goBack}
                   style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "12px",
-                    background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
+                    background:
+                      "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))",
+                    border: "2px solid rgba(139, 92, 246, 0.4)",
+                    borderRadius: "16px",
+                    padding: "1.5rem 2rem",
+                    cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "24px",
+                    gap: "1rem",
+                    transition: "all 0.3s ease",
+                    color: "#ffffff",
+                    fontWeight: 600,
+                    fontSize: "0.9rem",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                    textAlign: "center",
+                    width: "100%",
                   }}
                 >
-                  ←
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <div style={{ fontSize: "1rem", fontWeight: 700 }}>
-                    Back to Home
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "12px",
+                      background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "24px",
+                    }}
+                  >
+                    ←
                   </div>
-                  <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>
-                    Drop icons here to move them back
+                  <div style={{ textAlign: "left" }}>
+                    <div style={{ fontSize: "1rem", fontWeight: 700 }}>
+                      Back to Home
+                    </div>
+                    <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>
+                      Drop icons here to move them back
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
           </div>
+        </div>
       )}
-
 
       {/* Mobile-like App Grid */}
       <div
