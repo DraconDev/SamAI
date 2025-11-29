@@ -756,7 +756,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     setDraggedItem(null);
   };
 
-  // Generate consistent color for site name
+  // Generate consistent vibrant colors for site name
   const getColorForSite = (name: string) => {
     const colors = [
       "#FF6B6B",
@@ -772,13 +772,23 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       "#F8C471",
       "#82E0AA",
       "#F1948A",
-      "#85C1E9",
       "#D7BDE2",
       "#A9DFBF",
       "#F9E79F",
       "#AED6F1",
       "#D5A6BD",
       "#A9CCE3",
+      "#F4D03F",
+      "#A3E4D7",
+      "#F8C471",
+      "#D7DBDD",
+      "#A569BD",
+      "#5DADE2",
+      "#58D68D",
+      "#F1948A",
+      "#FAD7A0",
+      "#D2B4DE",
+      "#AED6F1",
     ];
     let hash = 0;
     for (let i = 0; i < name.length; i++) {
@@ -787,9 +797,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     return colors[Math.abs(hash) % colors.length];
   };
 
-  // Get domain icon or fallback icon
+  // Get domain icon or enhanced fallback icon
   const getIconForItem = (item: HomeIcon) => {
-    if (item.isFolder) return "📂"; // Modern folder icon
+    if (item.isFolder) return "📁"; // Modern folder icon
 
     if (item.iconUrl) {
       return item.iconUrl;
