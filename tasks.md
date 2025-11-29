@@ -3,7 +3,7 @@
 ## Plan
 
 - [x] we need better styling for the home tab
-- make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
+- [x] make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 - the page scraper doesn't follow the same tab style exactly as the rest of the app, we need to fix that, but otherwise looks good
 - add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
 - [ ] Simplify the search highlight, we have a search highlight feature that allows us to mark sites, this is not home tab but search tab related, we have various colors now but that is overall we should just have a favorite and hide feature, so we can favorite sites to show them at the top of search results with choose color decoration, and hide sites to not show them at all in search results
@@ -14,7 +14,7 @@
 
 - folders should have a big icon just like sites do, and the folder icon should be modern and cool looking, we dont need that blue background behind the folder icon
 - [ ] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
-- [ ] right click edit or delete when right clicking on an icon or folder on the home tab 
+- [ ] right click edit or delete when right clicking on an icon or folder on the home tab
 
 ## Done
 
