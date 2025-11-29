@@ -249,7 +249,6 @@ export interface HomeStore {
 export const defaultHomeStore: HomeStore = {
   data: {
     icons: [],
-    folders: [],
     currentFolderId: undefined,
   },
 };
