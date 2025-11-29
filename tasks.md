@@ -20,6 +20,7 @@
     - folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
     - [x] folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
     - [x] Fixed: Green borders for reordering (site→site, folder→folder), blue for putting into folders (site→folder)
+    - [x] Cleaned up: Removed background glows, now using only clean borders for visual feedback
 - sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
 - The back to home button should not move up when hovered over
 
