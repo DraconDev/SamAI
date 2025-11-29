@@ -2,7 +2,6 @@
 
 ## Plan
 
-- [x] we need better styling for the home tab
 - [ ] add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
 - [ ] Simplify the search highlight, we have a search highlight feature that allows us to mark sites, this is not home tab but search tab related, we have various colors now but that is overall we should just have a favorite and hide feature, so we can favorite sites to show them at the top of search results with choose color decoration, and hide sites to not show them at all in search results
   - [ ] Its either favorite or hide, no other colors
@@ -14,6 +13,7 @@
 - folders should have a big icon just like sites do, i am talking about their picture, and the folder icon should be modern and cool looking, we dont need that blue background behind the folder icon
 - [ ] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
+- [ ] we need better styling for the home tab the top section of our home tab should be just as tall as the chat tab header and search tab header, currently it is much taller than those two headers, we need to make it the same height
 
 ## Done
 
