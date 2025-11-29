@@ -46,9 +46,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [draggedItem, setDraggedItem] = useState<DragItem | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
-  const [draggedOverFolder, setDraggedOverFolder] = useState<string | null>(null);
+  const [draggedOverFolder, setDraggedOverFolder] = useState<string | null>(
+    null
+  );
   const [dragPreviewIndex, setDragPreviewIndex] = useState<number | null>(null);
-  const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
   const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
     new Map()
   );
@@ -404,14 +405,32 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     e.dataTransfer.effectAllowed = "move";
   };
 
-  const handleDragOver = (e: React.DragEvent, index: number) => {
+  const handleDragOver = (
+    e: React.DragEvent,
+    index: number,
+    item: HomeIcon
+  ) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
+
+    // Show visual feedback for folder drops
+    if (item.isFolder && draggedItem && !draggedItem.isFolder) {
+      setDraggedOverFolder(item.id);
+      setDragPreviewIndex(null);
+    } else {
+      setDraggedOverFolder(null);
+      setDragPreviewIndex(index);
+    }
     setDragOverIndex(index);
   };
 
-  const handleDragLeave = () => {
-    setDragOverIndex(null);
+  const handleDragLeave = (e: React.DragEvent) => {
+    // Only clear if we're leaving the drag area completely
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragOverIndex(null);
+      setDraggedOverFolder(null);
+      setDragPreviewIndex(null);
+    }
   };
 
   // Auto-create folder when dropping one icon on another
@@ -457,6 +476,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   ) => {
     e.preventDefault();
     setDragOverIndex(null);
+    setDragPreviewIndex(null);
 
     if (!draggedItem) return;
 
@@ -470,9 +490,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     const isTargetInMain = !homeData.currentFolderId;
     const isTargetSameLevel = draggedIcon.folderId === homeData.currentFolderId;
 
-    // Case 1: Dropping onto a folder (prevent folder-in-folder)
+    // Case 1: Dropping onto a folder (allow adding to folders)
     if (targetItem.isFolder && draggedItem.id !== targetItem.id) {
-      // Only allow moving non-folders from main level into folders
+      // Allow moving non-folders from main level into folders
       if (!draggedIcon.isFolder && isDraggedFromMain && isTargetInMain) {
         const newData = {
           ...homeData,
@@ -483,9 +503,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           ),
         };
         await saveHomeData(newData);
+        setDraggedOverFolder(null);
+        setDraggedItem(null);
+        return;
       }
-      // Otherwise ignore (prevent folders in folders, or moving from folder to main)
     }
+
     // Case 2: Reorder within current view (improved logic)
     if (isTargetSameLevel) {
       // Get current items in the correct order
@@ -533,12 +556,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       await saveHomeData(newData);
     }
 
+    setDraggedOverFolder(null);
     setDraggedItem(null);
   };
 
   // Get domain icon or fallback icon
   const getIconForItem = (item: HomeIcon) => {
-    if (item.isFolder) return "🗂️";
+    if (item.isFolder) return "📂"; // Modern folder icon
 
     if (item.iconUrl) {
       return item.iconUrl;
@@ -755,7 +779,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               e.currentTarget.style.background = "transparent";
             }}
           >
-            <span>🗂️</span>
+            <span>📂</span>
             Create Folder
           </button>
         </div>
@@ -1266,160 +1290,183 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               position: "relative",
             }}
           >
-            {filteredItems.map((item, index) => (
-              <div
-                key={item.id}
-                draggable
-                onDragStart={(e) => handleDragStart(e, item, index)}
-                onDragOver={(e) => handleDragOver(e, index)}
-                onDragLeave={handleDragLeave}
-                onDrop={(e) => handleDrop(e, index, item)}
-                onClick={() => handleItemClick(item)}
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  maxWidth: "76px",
-                  padding: "0.1rem",
-                  borderRadius: "6px",
-                  overflow: "hidden",
-                  background:
-                    dragOverIndex === index
-                      ? "rgba(255, 255, 255, 0.08)"
-                      : "transparent",
-                  color: "#ffffff",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  transition: "all 0.15s ease",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "0.25rem",
-                }}
-                onMouseEnter={(e) => {
-                  if (dragOverIndex !== index) {
-                    e.currentTarget.style.background =
-                      "rgba(255, 255, 255, 0.03)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (dragOverIndex !== index) {
-                    e.currentTarget.style.background = "transparent";
-                  }
-                }}
-              >
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteItem(item.id);
-                  }}
+            {filteredItems.map((item, index) => {
+              const isDraggedOver = dragOverIndex === index;
+              const isPreviewIndex =
+                dragPreviewIndex === index && draggedItem && !item.isFolder;
+              const isDraggedOverFolder = draggedOverFolder === item.id;
+
+              return (
+                <div
+                  key={item.id}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, item, index)}
+                  onDragOver={(e) => handleDragOver(e, index, item)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, index, item)}
+                  onClick={() => handleItemClick(item)}
                   style={{
-                    position: "absolute",
-                    top: "1px",
-                    right: "1px",
-                    width: "14px",
-                    height: "14px",
-                    borderRadius: "50%",
-                    border: "none",
-                    background: "rgba(239, 68, 68, 0.9)",
-                    color: "white",
-                    fontSize: "0.45rem",
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "76px",
+                    padding: "0.1rem",
+                    borderRadius: "6px",
+                    overflow: "hidden",
+                    background: isDraggedOverFolder
+                      ? "rgba(59, 130, 246, 0.15)"
+                      : isDraggedOver
+                      ? "rgba(255, 255, 255, 0.08)"
+                      : isPreviewIndex
+                      ? "rgba(34, 197, 94, 0.1)"
+                      : "transparent",
+                    color: "#ffffff",
+                    textAlign: "center",
                     cursor: "pointer",
+                    transition: "all 0.15s ease",
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
-                    opacity: 0,
-                    transition: "opacity 0.15s ease",
-                    zIndex: 1,
+                    gap: "0.25rem",
+                    border: isDraggedOverFolder
+                      ? "2px solid rgba(59, 130, 246, 0.6)"
+                      : isPreviewIndex
+                      ? "2px dashed rgba(34, 197, 94, 0.6)"
+                      : "none",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
+                    if (
+                      !isDraggedOver &&
+                      !isDraggedOverFolder &&
+                      !isPreviewIndex
+                    ) {
+                      e.currentTarget.style.background =
+                        "rgba(255, 255, 255, 0.03)";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0";
+                    if (
+                      !isDraggedOver &&
+                      !isDraggedOverFolder &&
+                      !isPreviewIndex
+                    ) {
+                      e.currentTarget.style.background = "transparent";
+                    }
                   }}
                 >
-                  ✕
-                </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteItem(item.id);
+                    }}
+                    style={{
+                      position: "absolute",
+                      top: "1px",
+                      right: "1px",
+                      width: "14px",
+                      height: "14px",
+                      borderRadius: "50%",
+                      border: "none",
+                      background: "rgba(239, 68, 68, 0.9)",
+                      color: "white",
+                      fontSize: "0.45rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0,
+                      transition: "opacity 0.15s ease",
+                      zIndex: 1,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = "0";
+                    }}
+                  >
+                    ✕
+                  </button>
 
-                <div
-                  style={{
-                    width: "52px",
-                    height: "52px",
-                    borderRadius: "10px",
-                    background: "transparent",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "22px",
-                    position: "relative",
-                    overflow: "hidden",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
-                  }}
-                >
-                  {item.isFolder ? (
-                    <span style={{ fontSize: "44px" }}>🗂️</span>
-                  ) : (
-                    (() => {
-                      const iconUrl = getIconForItem(item);
-                      if (
-                        typeof iconUrl === "string" &&
-                        iconUrl.startsWith("http")
-                      ) {
+                  <div
+                    style={{
+                      width: "52px",
+                      height: "52px",
+                      borderRadius: "10px",
+                      background: "transparent",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "22px",
+                      position: "relative",
+                      overflow: "hidden",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    {item.isFolder ? (
+                      <span style={{ fontSize: "44px" }}>📂</span>
+                    ) : (
+                      (() => {
+                        const iconUrl = getIconForItem(item);
+                        if (
+                          typeof iconUrl === "string" &&
+                          iconUrl.startsWith("http")
+                        ) {
+                          return (
+                            <img
+                              src={iconUrl}
+                              alt={item.name}
+                              style={{
+                                width: "52px",
+                                height: "52px",
+                                borderRadius: "10px",
+                              }}
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = "none";
+                                const fallback =
+                                  target.nextElementSibling as HTMLElement;
+                                if (fallback) {
+                                  fallback.style.display = "block";
+                                }
+                              }}
+                            />
+                          );
+                        }
                         return (
-                          <img
-                            src={iconUrl}
-                            alt={item.name}
-                            style={{
-                              width: "52px",
-                              height: "52px",
-                              borderRadius: "10px",
-                            }}
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = "none";
-                              const fallback =
-                                target.nextElementSibling as HTMLElement;
-                              if (fallback) {
-                                fallback.style.display = "block";
-                              }
-                            }}
-                          />
+                          <span style={{ fontSize: "24px" }}>{iconUrl}</span>
                         );
-                      }
-                      return (
-                        <span style={{ fontSize: "24px" }}>{iconUrl}</span>
-                      );
-                    })()
-                  )}
-                  <span style={{ display: "none", fontSize: "24px" }}>
-                    {item.name.charAt(0).toUpperCase()}
-                  </span>
-                </div>
+                      })()
+                    )}
+                    <span style={{ display: "none", fontSize: "24px" }}>
+                      {item.name.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
 
-                <div
-                  style={{
-                    fontSize: "0.55rem",
-                    fontWeight: 500,
-                    color: "#ffffff",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "normal",
-                    width: "100%",
-                    textAlign: "center",
-                    lineHeight: "1.1",
-                    height: "2.2em",
-                    maxWidth: "50px",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                  }}
-                >
-                  {item.name.length > 12
-                    ? item.name.substring(0, 12) + "..."
-                    : item.name}
+                  <div
+                    style={{
+                      fontSize: "0.55rem",
+                      fontWeight: 500,
+                      color: "#ffffff",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "normal",
+                      width: "100%",
+                      textAlign: "center",
+                      lineHeight: "1.1",
+                      height: "2.2em",
+                      maxWidth: "50px",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
+                    {item.name.length > 12
+                      ? item.name.substring(0, 12) + "..."
+                      : item.name}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div
