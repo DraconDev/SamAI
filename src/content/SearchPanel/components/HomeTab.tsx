@@ -12,6 +12,7 @@ export interface HomeIcon {
   order?: number; // For drag and drop ordering
   isFolder?: boolean; // For combined display
   folderName?: string; // For folder items
+  isFavorite?: boolean; // For favorites system
 }
 
 export interface HomeData {
