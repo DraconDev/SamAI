@@ -1737,10 +1737,99 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         )}
       </div>
 
+      {/* Context Menu */}
+      {contextMenu.visible && contextMenu.item && (
+        <div
+          style={{
+            position: "fixed",
+            top: contextMenu.position.y,
+            left: contextMenu.position.x,
+            background: "rgba(30, 41, 59, 0.98)",
+            border: "1px solid rgba(139, 92, 246, 0.4)",
+            borderRadius: "12px",
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.6)",
+            zIndex: 10000,
+            padding: "0.5rem",
+            minWidth: "140px",
+            backdropFilter: "blur(20px)",
+            transform: "translateY(0)",
+            animation: "contextMenuSlideIn 0.2s ease-out",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={handleContextEdit}
+            style={{
+              width: "100%",
+              padding: "0.75rem 1rem",
+              border: "none",
+              background: "transparent",
+              color: "#8b5cf6",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              textAlign: "left",
+              cursor: "pointer",
+              borderRadius: "8px",
+              transition: "all 0.2s ease",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(139, 92, 246, 0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            <span>✏️</span>
+            Edit
+          </button>
+          <button
+            onClick={handleContextDelete}
+            style={{
+              width: "100%",
+              padding: "0.75rem 1rem",
+              border: "none",
+              background: "transparent",
+              color: "#ef4444",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              textAlign: "left",
+              cursor: "pointer",
+              borderRadius: "8px",
+              transition: "all 0.2s ease",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(239, 68, 68, 0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            <span>🗑️</span>
+            Delete
+          </button>
+        </div>
+      )}
+
       <style>{`
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
+        }
+        @keyframes contextMenuSlideIn {
+          0% {
+            opacity: 0;
+            transform: translateY(-8px) scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
       `}</style>
     </div>
