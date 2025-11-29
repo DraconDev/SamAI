@@ -9,6 +9,7 @@
 - the page scraper doesn't follow the same tab style exactly as the rest of the app, we need to fix that, but otherwise looks good
 
 ## Do
+- when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
 
 ## Done
 

@@ -34,3 +34,15 @@ web-ext.config.ts
 *.env
 *.kilocode
 node_modules/
+
+# Auto-committer ignored files
+.vscode/**
+.idea/**
+.vs/**
+node_modules/**
+.git/**
+dist/**
+build/**
+*.swp
+*.swo
+Thumbs.db
