@@ -9,7 +9,7 @@
 
 ## Done
 
-- add current and add site butttons should be the same size
+- add current and add site buttons should be the same size
   - they are not currently
 - add site button changes
   - site name first
