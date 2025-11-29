@@ -1484,7 +1484,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         } else {
                           return (
                             <span style={{ fontSize: "24px" }}>
-                              {iconResult}
+                              {typeof iconResult === "string"
+                                ? iconResult
+                                : "📄"}
                             </span>
                           );
                         }
