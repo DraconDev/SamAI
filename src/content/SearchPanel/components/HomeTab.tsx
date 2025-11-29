@@ -1665,9 +1665,41 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                       WebkitBoxOrient: "vertical",
                     }}
                   >
-                    {item.name.length > 12
-                      ? item.name.substring(0, 12) + "..."
-                      : item.name}
+                    {editingItem?.id === item.id ? (
+                      <input
+                        type="text"
+                        value={editValue}
+                        onChange={(e) => setEditValue(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            saveEdit();
+                          } else if (e.key === "Escape") {
+                            cancelEdit();
+                          }
+                          e.stopPropagation();
+                        }}
+                        onBlur={saveEdit}
+                        style={{
+                          fontSize: "0.55rem",
+                          fontWeight: 500,
+                          color: "#ffffff",
+                          background: "rgba(15, 23, 42, 0.95)",
+                          border: "1px solid rgba(139, 92, 246, 0.6)",
+                          borderRadius: "4px",
+                          padding: "2px 4px",
+                          width: "100%",
+                          textAlign: "center",
+                          outline: "none",
+                          height: "20px",
+                        }}
+                        autoFocus
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    ) : item.name.length > 12 ? (
+                      item.name.substring(0, 12) + "..."
+                    ) : (
+                      item.name
+                    )}
                   </div>
                 </div>
               );
