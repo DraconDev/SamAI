@@ -1347,9 +1347,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "52px",
-                  padding: "0.25rem",
-                  borderRadius: "4px",
+                  maxWidth: "64px",
+                  padding: "0.125rem",
+                  borderRadius: "6px",
                   overflow: "hidden",
                   background:
                     dragOverIndex === index
@@ -1362,7 +1362,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.125rem",
+                  gap: "0.25rem",
                 }}
                 onMouseEnter={(e) => {
                   if (dragOverIndex !== index) {
@@ -1499,9 +1499,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               color: "#94a3b8",
             }}
           >
-            <div style={{ fontSize: "4rem", marginBottom: "2rem" }}>
-              {searchQuery ? "🔍" : "🏠"}
-            </div>
+            <div style={{ fontSize: "4rem", marginBottom: "2rem" }}>🏠</div>
             <div
               style={{
                 fontSize: "1.5rem",
@@ -1510,7 +1508,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 color: "#e2e8f0",
               }}
             >
-              {searchQuery ? "No apps found" : "Your home is empty"}
+              Your home is empty
             </div>
             <div
               style={{
@@ -1519,9 +1517,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 color: "#94a3b8",
               }}
             >
-              {searchQuery
-                ? "Try a different search term"
-                : "Tap the + button in the header to start adding your apps"}
+              Tap the + button in the header to start adding your apps
             </div>
           </div>
         )}
