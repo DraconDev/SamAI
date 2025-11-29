@@ -505,6 +505,51 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     }
   };
 
+  // Touch handlers for mobile support
+  const handleTouchStart = (e: React.TouchEvent, item: HomeIcon) => {
+    if (editingItem) return;
+
+    setTouchStartTime(Date.now());
+
+    const timeout = setTimeout(() => {
+      handleContextMenu(
+        {
+          clientX: e.touches[0].clientX,
+          clientY: e.touches[0].clientY,
+          preventDefault: () => {},
+          stopPropagation: () => {},
+        } as React.MouseEvent,
+        item
+      );
+    }, 500); // 500ms long press
+
+    setTouchTimeout(timeout);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchTimeout) {
+      clearTimeout(touchTimeout);
+      setTouchTimeout(null);
+    }
+
+    const touchDuration = Date.now() - touchStartTime;
+
+    // If it was a short tap and context menu is not open, treat as regular click
+    if (touchDuration < 500 && !contextMenu.visible && editingItem) {
+      if (contextMenu.item) {
+        handleItemClick(contextMenu.item);
+        closeContextMenu();
+      }
+    }
+  };
+
+  const handleTouchCancel = () => {
+    if (touchTimeout) {
+      clearTimeout(touchTimeout);
+      setTouchTimeout(null);
+    }
+  };
+
   // Enhanced drag and drop handlers
   const handleDragStart = (
     e: React.DragEvent,
