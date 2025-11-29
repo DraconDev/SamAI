@@ -19,7 +19,7 @@
 
 - What if we didn't have those big add current and add site buttons and instead we had normal sized buttons in the icon grid, and one of the buttons was a plus always at the end to add select between adding current site, custom site, or custom folder
   - this would make the whole thing more compact and allow more icons to be visible at once
-  - presumably this would also fix our drag and drop issue 
+  - presumably this would also fix our drag and drop issue, cause here me our we can drag and drop issue cause lets say folders come first, then sites, then the add button is last, so whe we drag 
 
 
 ## Done
