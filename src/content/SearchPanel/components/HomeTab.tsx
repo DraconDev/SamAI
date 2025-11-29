@@ -413,10 +413,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
 
-    // Show visual feedback for reordering - both folders and icons show green
-    // No blue highlighting for folders since they can't contain other folders
-    setDraggedOverFolder(null);
-    setDragPreviewIndex(index);
+    // Show visual feedback based on what we're dragging and what we're dragging over
+    if (draggedItem) {
+      if (draggedItem.isFolder && item.isFolder) {
+        // Folders dragged onto folders → green (reordering)
+        setDraggedOverFolder(null);
+        setDragPreviewIndex(index);
+      } else if (!draggedItem.isFolder && item.isFolder) {
+        // Site icons dragged onto folders → blue (put into)
+        setDraggedOverFolder(item.id);
+        setDragPreviewIndex(null);
+      } else {
+        // Everything else → no special highlighting for now
+        setDraggedOverFolder(null);
+        setDragPreviewIndex(null);
+      }
+    }
     setDragOverIndex(index);
   };
 
