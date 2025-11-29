@@ -7,6 +7,7 @@
 - we need better styling for the home tab
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 - the page scraper doesn't follow the same tab style exactly as the rest of the app, we need to fix that, but otherwise looks good
+- add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab 
 
 ## Do
 
@@ -15,7 +16,10 @@
   - can we do right click menu on the icons and folders to edit them?
   - this could support delete and edit,
 - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
-  - [x] folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
+  - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
+    - folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
+    - [x] folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
+    - [x] Fixed: Now folders dragged onto other folders show green (reordering), site icons dragged onto folders show blue (put into)
 - sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
 - The back to home button should not move up when hovered over
 

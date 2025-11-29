@@ -498,14 +498,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     const isTargetInMain = !homeData.currentFolderId;
     const isTargetSameLevel = draggedIcon.folderId === homeData.currentFolderId;
 
-    // Case 1: Dropping onto a folder - only allow reordering folders
+    // Case 1: Dropping onto a folder
     if (targetItem.isFolder && draggedItem.id !== targetItem.id) {
-      // Folders can only be reordered, not moved into other folders
-      if (draggedIcon.isFolder) {
-        // Handle folder reordering - this will be handled by the reorder logic below
-      } else {
-        // Sites cannot be moved into folders - only reordered
-        // This case will be handled by the reorder logic below
+      // Allow moving non-folders from main level into folders
+      if (!draggedIcon.isFolder && isDraggedFromMain && isTargetInMain) {
+        const newData = {
+          ...homeData,
+          icons: homeData.icons.map((icon) =>
+            icon.id === draggedItem.id
+              ? { ...icon, folderId: targetItem.id, order: undefined }
+              : icon
+          ),
+        };
+        await saveHomeData(newData);
+        setDraggedOverFolder(null);
+        setDraggedItem(null);
+        return;
       }
     }
 
@@ -1334,13 +1342,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                       : "none",
                   }}
                   onMouseEnter={(e) => {
-                    if (!isDraggedOver && !isPreviewIndex) {
+                    if (
+                      !isDraggedOver &&
+                      !isDraggedOverFolder &&
+                      !isPreviewIndex
+                    ) {
                       e.currentTarget.style.background =
                         "rgba(255, 255, 255, 0.03)";
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (!isDraggedOver && !isPreviewIndex) {
+                    if (
+                      !isDraggedOver &&
+                      !isDraggedOverFolder &&
+                      !isPreviewIndex
+                    ) {
                       e.currentTarget.style.background = "transparent";
                     }
                   }}
