@@ -307,7 +307,6 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))",
         gap: "0.5rem",
-        marginBottom: "0.75rem",
         padding: "0.6rem",
         background:
           "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9))",
