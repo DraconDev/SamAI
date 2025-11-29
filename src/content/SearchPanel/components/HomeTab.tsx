@@ -1317,8 +1317,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "64px",
-                  padding: "0.125rem",
+                  maxWidth: "76px",
+                  padding: "0.1rem",
                   borderRadius: "6px",
                   overflow: "hidden",
                   background:
@@ -1382,19 +1382,19 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "8px",
+                    width: "52px",
+                    height: "52px",
+                    borderRadius: "10px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
                       : "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "18px",
+                    fontSize: "22px",
                     position: "relative",
                     overflow: "hidden",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
                   }}
                 >
                   {item.isFolder ? (
@@ -1411,9 +1411,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "44px",
-                              height: "44px",
-                              borderRadius: "8px",
+                              width: "52px",
+                              height: "52px",
+                              borderRadius: "10px",
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -1428,11 +1428,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "20px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "24px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "20px" }}>
+                  <span style={{ display: "none", fontSize: "24px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
