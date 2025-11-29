@@ -1,1 +1,0 @@
-import{c as t}from"./BGNVWJOE.js";import{E as o}from"./WINLMBYH.js";var c=r=>{let e=o(t);return r||(e==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":e==="dark"?"dark":"light")};export{c as a};

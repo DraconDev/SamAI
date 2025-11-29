@@ -1,1 +1,0 @@
-import{a as e}from"./ZPJNXK6I.js";import{b as o}from"./GEQQUCT3.js";import{a as m}from"./4B6UFNBQ.js";import{f as d}from"./GAV6HCJA.js";var r=d(m());var h=t=>{let{shadowRootElement:i,children:n}=t,p=e();return r.default.createElement(o,{colorMode:p,popupContainer:i},n)},P=h;export{P as a};

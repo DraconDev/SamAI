@@ -1,1 +1,0 @@
-(function(){window.__MAXAI__EXTENSION__VERSION__="8.33.1",window.addEventListener("MAXAI_INJECT_SCRIPT",n=>{let{id:e,src:_,attrs:s}=n.detail||{};if(!e)return;let t=document.createElement("script");t.src=_,Object.assign(t,s),document.head.appendChild(t),window.dispatchEvent(new CustomEvent(`${e}-result`,{detail:{}}))})})();

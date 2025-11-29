@@ -549,7 +549,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         height: "100%",
         background: "rgba(15, 23, 42, 0.95)",
         borderRadius: "1rem",
-        overflow: "hidden",
         boxShadow: "0 24px 45px -18px rgba(0,0,0,0.65)",
         position: "relative",
       }}
@@ -654,7 +653,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             >
               {/* Big Plus Button in Top Right */}
               <button
-                onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}
+                onClick={(e) => {
+                  setIsAddMenuOpen(!isAddMenuOpen);
+                  // Add a small click animation
+                  e.currentTarget.style.transform = "scale(0.95)";
+                  setTimeout(() => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }, 100);
+                }}
                 style={{
                   padding: "0.75rem 1.25rem",
                   borderRadius: "16px",
@@ -672,22 +678,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   gap: "0.5rem",
                   boxShadow: "0 4px 12px rgba(34, 197, 94, 0.25)",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25))";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 20px rgba(34, 197, 94, 0.35)";
-                  e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.6)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 12px rgba(34, 197, 94, 0.25)";
-                  e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.4)";
-                }}
               >
                 <span style={{ fontSize: "1.2rem", fontWeight: 900 }}>+</span>
                 <span>Add</span>
@@ -697,13 +687,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       </div>
 
-      {/* Add Menu Dropdown - positioned relative to header with portal */}
+      {/* Add Menu Dropdown - positioned relative to header */}
       {isAddMenuOpen && (
         <div
           style={{
             position: "absolute",
-            top: "100%",
-            right: "0.875rem",
+            top: "80px",
+            right: "20px",
             background: "rgba(30, 41, 59, 0.98)",
             border: "1px solid rgba(139, 92, 246, 0.3)",
             borderRadius: "12px",
@@ -712,7 +702,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             padding: "0.5rem",
             minWidth: "160px",
             backdropFilter: "blur(20px)",
-            marginTop: "0.5rem",
           }}
           onMouseLeave={() => setIsAddMenuOpen(false)}
         >

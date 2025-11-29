@@ -1,1 +1,0 @@
-import{a as n}from"./NVNEBEEL.js";import{a as t}from"./3JI2HIGL.js";var r=["feedback","funnel_survey__survey_cancel_completed"];var s=new n({runtime:"client"}),g=async(e=!1,o=[...r])=>(await s.postMessage({event:"Client_updateMaxAISurveyStatus",data:{surveyKeys:o,forceUpdate:e}})).data||{},I=async()=>(await t.getLocalSettings())?.surveyStatus??null;export{g as a,I as b};
