@@ -258,13 +258,26 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const handleAddIcon = async () => {
     if (!newItemName.trim() || !newItemUrl.trim()) return;
 
+    // Check for duplicates (case-insensitive URL comparison)
+    const normalizedUrl = newItemUrl.startsWith("http")
+      ? newItemUrl
+      : `https://${newItemUrl}`;
+    const isDuplicate = homeData.icons.some(
+      (icon) => icon.url.toLowerCase() === normalizedUrl.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      alert("This website is already added to your home screen!");
+      return;
+    }
+
     // Fetch favicon for the new URL
     const iconUrl = await fetchFavicon(newItemUrl);
 
     const newIcon: HomeIcon = {
       id: Date.now().toString(),
       name: newItemName,
-      url: newItemUrl.startsWith("http") ? newItemUrl : `https://${newItemUrl}`,
+      url: normalizedUrl,
       iconUrl: iconUrl || undefined,
       folderId: homeData.currentFolderId,
       createdAt: new Date().toISOString(),
