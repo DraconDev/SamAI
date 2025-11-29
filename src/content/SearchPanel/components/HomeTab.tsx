@@ -191,6 +191,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
     if (type === "current") {
       addCurrentSite();
+    } else if (type === "folder") {
+      setIsAddingIcon(false);
     } else {
       setIsAddingIcon(true);
     }
