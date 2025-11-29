@@ -616,11 +616,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             </div>
           </div>
 
-          {/* Top Row: Search Bar and Add Site */}
+          {/* Top Row: Compact Search Bar */}
           <div
             style={{
               display: "flex",
-              gap: "0.75rem",
+              gap: "0.5rem",
               alignItems: "center",
             }}
           >
@@ -629,7 +629,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               style={{
                 position: "relative",
                 flex: 1,
-                minWidth: "200px",
+                minWidth: "150px",
               }}
             >
               <input
@@ -639,37 +639,37 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 placeholder="Search your apps..."
                 style={{
                   width: "100%",
-                  padding: "0.75rem 1rem 0.75rem 2.5rem",
-                  borderRadius: "16px",
+                  padding: "0.6rem 0.8rem 0.6rem 2.2rem",
+                  borderRadius: "12px",
                   border: "1px solid rgba(139, 92, 246, 0.3)",
                   background: "rgba(15, 23, 42, 0.9)",
                   color: "#f1f5f9",
-                  fontSize: "0.85rem",
+                  fontSize: "0.8rem",
                   outline: "none",
                   transition: "all 0.2s ease",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.12)",
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = "#8b5cf6";
                   e.currentTarget.style.boxShadow =
-                    "0 0 0 3px rgba(139, 92, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2)";
+                    "0 0 0 3px rgba(139, 92, 246, 0.15), 0 3px 8px rgba(0, 0, 0, 0.18)";
                   e.currentTarget.style.background = "rgba(15, 23, 42, 0.95)";
                 }}
                 onBlur={(e) => {
                   e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
                   e.currentTarget.style.boxShadow =
-                    "0 2px 8px rgba(0, 0, 0, 0.15)";
+                    "0 2px 6px rgba(0, 0, 0, 0.12)";
                   e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
                 }}
               />
               <div
                 style={{
                   position: "absolute",
-                  left: "0.75rem",
+                  left: "0.6rem",
                   top: "50%",
                   transform: "translateY(-50%)",
                   color: "#94a3b8",
-                  fontSize: "1rem",
+                  fontSize: "0.9rem",
                   pointerEvents: "none",
                 }}
               >
@@ -680,16 +680,16 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   onClick={() => setSearchQuery("")}
                   style={{
                     position: "absolute",
-                    right: "0.75rem",
+                    right: "0.6rem",
                     top: "50%",
                     transform: "translateY(-50%)",
                     background: "rgba(239, 68, 68, 0.2)",
                     border: "1px solid rgba(239, 68, 68, 0.4)",
                     color: "#fca5a5",
                     cursor: "pointer",
-                    fontSize: "0.75rem",
-                    width: "24px",
-                    height: "24px",
+                    fontSize: "0.7rem",
+                    width: "20px",
+                    height: "20px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -707,41 +707,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 </button>
               )}
             </div>
-
-            {/* Add Site - enhanced styling */}
-            <button
-              onClick={() => setIsAddingIcon(!isAddingIcon)}
-              style={{
-                padding: "0.75rem 1rem",
-                borderRadius: "12px",
-                border: "1px solid rgba(34, 197, 94, 0.4)",
-                background:
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08))",
-                color: "#86efac",
-                fontSize: "0.8rem",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                fontWeight: 600,
-                transition: "all 0.2s ease",
-                minWidth: "120px",
-                textAlign: "center",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.12))";
-                e.currentTarget.style.transform = "translateY(-1px)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 8px rgba(34, 197, 94, 0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08))";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              ➕ Add Site
-            </button>
           </div>
         </div>
       </div>
