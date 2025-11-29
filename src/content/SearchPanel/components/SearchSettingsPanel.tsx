@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { searchSettingsStore } from "@/utils/store";
 import type { OutputFormat } from "@/utils/page-content";
+import { searchSettingsStore } from "@/utils/store";
+import React, { useEffect, useState } from "react";
 
 interface HighlightPattern {
   id: string;
   pattern: string;
-  color: string;
+  type: "favorite" | "hide";
   description: string;
   enabled: boolean;
 }
@@ -15,10 +15,15 @@ interface SearchSettingsPanelProps {
   onClose: () => void;
 }
 
-export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsPanelProps) {
+export default function SearchSettingsPanel({
+  isOpen,
+  onClose,
+}: SearchSettingsPanelProps) {
   const [patterns, setPatterns] = useState<HighlightPattern[]>([]);
   const [searchActive, setSearchActive] = useState(true);
-  const [promptStyle, setPromptStyle] = useState<"short" | "medium" | "long">("short");
+  const [promptStyle, setPromptStyle] = useState<"short" | "medium" | "long">(
+    "short"
+  );
   const [outputFormat, setOutputFormat] = useState<OutputFormat>("text");
   const [autoHighlight, setAutoHighlight] = useState(true);
   const [highlightOpacity, setHighlightOpacity] = useState(0.3);
@@ -35,7 +40,7 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
       setSearchActive(settings.searchActive ?? true);
       setPromptStyle(settings.promptStyle ?? "short");
       setOutputFormat(settings.outputFormat ?? "text");
-      
+
       // Load highlight patterns from local storage or default
       const savedPatterns = localStorage.getItem("samai-highlight-patterns");
       if (savedPatterns) {
@@ -46,14 +51,14 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
           {
             id: "1",
             pattern: "wikipedia.org",
-            color: "#4f46e5",
+            type: "favorite",
             description: "Wikipedia articles",
             enabled: true,
           },
           {
-            id: "2", 
+            id: "2",
             pattern: "github.com",
-            color: "#059669",
+            type: "favorite",
             description: "GitHub repositories",
             enabled: true,
           },
@@ -72,10 +77,13 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
         outputFormat,
         showFloatingIcon: true,
       });
-      
+
       // Save patterns to local storage
-      localStorage.setItem("samai-highlight-patterns", JSON.stringify(patterns));
-      
+      localStorage.setItem(
+        "samai-highlight-patterns",
+        JSON.stringify(patterns)
+      );
+
       // Trigger re-highlighting of search results
       window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
     } catch (error) {
@@ -95,19 +103,17 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
   };
 
   const updatePattern = (id: string, updates: Partial<HighlightPattern>) => {
-    setPatterns(patterns.map(p => 
-      p.id === id ? { ...p, ...updates } : p
-    ));
+    setPatterns(patterns.map((p) => (p.id === id ? { ...p, ...updates } : p)));
   };
 
   const removePattern = (id: string) => {
-    setPatterns(patterns.filter(p => p.id !== id));
+    setPatterns(patterns.filter((p) => p.id !== id));
   };
 
   const togglePattern = (id: string) => {
-    setPatterns(patterns.map(p => 
-      p.id === id ? { ...p, enabled: !p.enabled } : p
-    ));
+    setPatterns(
+      patterns.map((p) => (p.id === id ? { ...p, enabled: !p.enabled } : p))
+    );
   };
 
   const exportSettings = () => {
@@ -120,14 +126,16 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
       highlightOpacity,
       exportDate: new Date().toISOString(),
     };
-    
+
     const blob = new Blob([JSON.stringify(exportData, null, 2)], {
       type: "application/json",
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `samai-search-settings-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `samai-search-settings-${new Date()
+      .toISOString()
+      .slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -144,8 +152,10 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
         if (data.searchActive !== undefined) setSearchActive(data.searchActive);
         if (data.promptStyle) setPromptStyle(data.promptStyle);
         if (data.outputFormat) setOutputFormat(data.outputFormat);
-        if (data.autoHighlight !== undefined) setAutoHighlight(data.autoHighlight);
-        if (data.highlightOpacity !== undefined) setHighlightOpacity(data.highlightOpacity);
+        if (data.autoHighlight !== undefined)
+          setAutoHighlight(data.autoHighlight);
+        if (data.highlightOpacity !== undefined)
+          setHighlightOpacity(data.highlightOpacity);
       } catch (error) {
         console.error("Error importing settings:", error);
         alert("Invalid settings file");
@@ -163,7 +173,16 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
         <div className="flex items-center justify-between p-6 border-b border-[#2E2F3E]/30">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
                 <circle cx="11" cy="11" r="3" />
@@ -173,14 +192,23 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
               <h2 className="text-xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text">
                 Search Enhancement Settings
               </h2>
-              <p className="text-xs text-gray-400">Customize your search experience</p>
+              <p className="text-xs text-gray-400">
+                Customize your search experience
+              </p>
             </div>
           </div>
           <button
             onClick={onClose}
             className="p-2 text-gray-400 hover:text-white hover:bg-[#2E2F3E]/50 rounded-lg transition-colors"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -194,7 +222,7 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
               <span className="text-[#4f46e5]">⚙️</span>
               Search Behavior
             </h3>
-            
+
             <div className="space-y-4">
               <label className="block mb-3 text-xs font-bold tracking-wider text-gray-300 uppercase">
                 Response Style
@@ -256,8 +284,12 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
 
             <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
               <div>
-                <label className="text-sm font-medium text-gray-200">Enable Search Enhancement</label>
-                <p className="text-xs text-gray-400">Toggle AI-powered search assistance</p>
+                <label className="text-sm font-medium text-gray-200">
+                  Enable Search Enhancement
+                </label>
+                <p className="text-xs text-gray-400">
+                  Toggle AI-powered search assistance
+                </p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -288,7 +320,10 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
 
             <div className="space-y-3">
               {patterns.map((pattern) => (
-                <div key={pattern.id} className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                <div
+                  key={pattern.id}
+                  className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30"
+                >
                   <div className="grid items-center grid-cols-12 gap-3">
                     <div className="col-span-1">
                       <input
@@ -302,7 +337,9 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
                       <input
                         type="color"
                         value={pattern.color}
-                        onChange={(e) => updatePattern(pattern.id, { color: e.target.value })}
+                        onChange={(e) =>
+                          updatePattern(pattern.id, { color: e.target.value })
+                        }
                         className="w-full h-8 rounded border border-[#2E2F3E]/50"
                       />
                     </div>
@@ -311,7 +348,9 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
                         type="text"
                         placeholder="Domain or pattern (e.g., wikipedia.org, github.com, *.edu)"
                         value={pattern.pattern}
-                        onChange={(e) => updatePattern(pattern.id, { pattern: e.target.value })}
+                        onChange={(e) =>
+                          updatePattern(pattern.id, { pattern: e.target.value })
+                        }
                         className="w-full p-2 bg-[#0D0E16] border border-[#2E2F3E]/50 rounded text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#4f46e5]/50"
                       />
                     </div>
@@ -320,7 +359,14 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
                         onClick={() => removePattern(pattern.id)}
                         className="p-2 text-red-400 transition-colors rounded hover:text-red-300 hover:bg-red-900/20"
                       >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
                           <line x1="18" y1="6" x2="6" y2="18" />
                           <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
@@ -334,7 +380,9 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
             {patterns.length === 0 && (
               <div className="py-8 text-center text-gray-500">
                 <p className="text-sm">No highlight patterns added yet</p>
-                <p className="text-xs">Add patterns to automatically highlight search results</p>
+                <p className="text-xs">
+                  Add patterns to automatically highlight search results
+                </p>
               </div>
             )}
           </div>
@@ -345,11 +393,15 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
               <span className="text-[#4f46e5]">🎯</span>
               Highlight Settings
             </h3>
-            
+
             <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
               <div>
-                <label className="text-sm font-medium text-gray-200">Auto-highlight results</label>
-                <p className="text-xs text-gray-400">Automatically apply highlights to search results</p>
+                <label className="text-sm font-medium text-gray-200">
+                  Auto-highlight results
+                </label>
+                <p className="text-xs text-gray-400">
+                  Automatically apply highlights to search results
+                </p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -372,7 +424,9 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
                 max="1"
                 step="0.1"
                 value={highlightOpacity}
-                onChange={(e) => setHighlightOpacity(parseFloat(e.target.value))}
+                onChange={(e) =>
+                  setHighlightOpacity(parseFloat(e.target.value))
+                }
                 className="w-full h-2 bg-[#2E2F3E] rounded-lg appearance-none cursor-pointer"
               />
             </div>
@@ -384,7 +438,7 @@ export default function SearchSettingsPanel({ isOpen, onClose }: SearchSettingsP
               <span className="text-[#4f46e5]">💾</span>
               Settings Management
             </h3>
-            
+
             <div className="flex gap-3">
               <button
                 onClick={exportSettings}
