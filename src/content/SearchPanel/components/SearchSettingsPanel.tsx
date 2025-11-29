@@ -95,7 +95,7 @@ export default function SearchSettingsPanel({
     const newPattern: HighlightPattern = {
       id: Date.now().toString(),
       pattern: "",
-      color: "#4f46e5",
+      type: "favorite",
       description: "",
       enabled: true,
     };
