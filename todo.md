@@ -2,7 +2,8 @@
 
 site name first 
 site url second 
-
+then icon url third 
+then cancel button left side and add button right side
 
 
 # SamAI Todo - ROOT CAUSE FOUND: WXT & Tailwind CSS Compatibility Issue 🔍
