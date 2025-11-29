@@ -1276,7 +1276,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
             {/* Plus button for adding new items */}
             <div
-              onClick={() => setIsAddingIcon(true)}
+              onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}
               style={{
                 position: "relative",
                 width: "100%",
@@ -1342,6 +1342,114 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 Add
               </div>
             </div>
+
+            {/* Add Menu Dropdown */}
+            {isAddMenuOpen && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  right: "0",
+                  background: "rgba(30, 41, 59, 0.98)",
+                  border: "1px solid rgba(139, 92, 246, 0.3)",
+                  borderRadius: "12px",
+                  boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4)",
+                  zIndex: 1000,
+                  padding: "0.5rem",
+                  minWidth: "160px",
+                  backdropFilter: "blur(20px)",
+                }}
+                onMouseLeave={() => setIsAddMenuOpen(false)}
+              >
+                <button
+                  onClick={() => handlePlusMenu("current")}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem 1rem",
+                    border: "none",
+                    background: "transparent",
+                    color: "#fbbf24",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    textAlign: "left",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(234, 179, 8, 0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                  }}
+                >
+                  <span>⭐</span>
+                  Add Current Site
+                </button>
+                <button
+                  onClick={() => handlePlusMenu("custom")}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem 1rem",
+                    border: "none",
+                    background: "transparent",
+                    color: "#86efac",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    textAlign: "left",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(34, 197, 94, 0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                  }}
+                >
+                  <span>🌐</span>
+                  Add Custom Site
+                </button>
+                <button
+                  onClick={() => handlePlusMenu("folder")}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem 1rem",
+                    border: "none",
+                    background: "transparent",
+                    color: "#60a5fa",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    textAlign: "left",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(96, 165, 250, 0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                  }}
+                >
+                  <span>📁</span>
+                  Create Folder
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <div
