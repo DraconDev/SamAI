@@ -17,7 +17,7 @@
   - make it have a much cooler icon and round corners
 - make the icons more tightly packet much like a phone screen, this also allows more space for text
 
-- fixing 
+- What if we didn't have those big add current and add site
 
 ## Done
 
