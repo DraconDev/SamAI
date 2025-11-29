@@ -661,8 +661,49 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "0.5rem" }}>
-              {/* Search and Add Site buttons moved to main row for compactness */}
+            <div
+              style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}
+            >
+              {/* Big Plus Button in Top Right */}
+              <button
+                onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}
+                style={{
+                  padding: "0.75rem 1.25rem",
+                  borderRadius: "16px",
+                  border: "2px solid rgba(34, 197, 94, 0.4)",
+                  background:
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))",
+                  color: "#86efac",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  fontWeight: 700,
+                  transition: "all 0.2s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  boxShadow: "0 4px 12px rgba(34, 197, 94, 0.25)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25))";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 20px rgba(34, 197, 94, 0.35)";
+                  e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.6)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(34, 197, 94, 0.25)";
+                  e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.4)";
+                }}
+              >
+                <span style={{ fontSize: "1.2rem", fontWeight: 900 }}>+</span>
+                <span>Add</span>
+              </button>
             </div>
           </div>
 
