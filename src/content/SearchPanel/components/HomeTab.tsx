@@ -1112,13 +1112,49 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               marginTop: "1rem",
             }}
           >
-            <button
+            <div
+              onDragOver={(e) => {
+                if (draggedItem && draggedItem.isFolder === false) {
+                  e.preventDefault();
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 25px rgba(34, 197, 94, 0.4)";
+                }
+              }}
+              onDragLeave={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(0, 0, 0, 0.2)";
+              }}
+              onDrop={async (e) => {
+                if (draggedItem && draggedItem.isFolder === false) {
+                  e.preventDefault();
+                  // Move dragged item back to main level
+                  const newData = {
+                    ...homeData,
+                    currentFolderId: undefined,
+                    icons: homeData.icons.map((icon) =>
+                      icon.id === draggedItem.id
+                        ? {
+                            ...icon,
+                            folderId: undefined,
+                            order: getCurrentItems().length,
+                          }
+                        : icon
+                    ),
+                  };
+                  await saveHomeData(newData);
+                  setDraggedItem(null);
+                }
+              }}
               onClick={goBack}
               style={{
                 background:
-                  draggedItem && draggedItem.isFolder === false
-                    ? "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))"
-                    : "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))",
+                  "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))",
                 border: "2px solid rgba(139, 92, 246, 0.4)",
                 borderRadius: "16px",
                 padding: "1.5rem 2rem",
@@ -1130,14 +1166,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 color: "#ffffff",
                 fontWeight: 600,
                 fontSize: "0.9rem",
-                transform:
-                  draggedItem && draggedItem.isFolder === false
-                    ? "translateY(-2px)"
-                    : "translateY(0)",
-                boxShadow:
-                  draggedItem && draggedItem.isFolder === false
-                    ? "0 8px 25px rgba(34, 197, 94, 0.4)"
-                    : "0 4px 12px rgba(0, 0, 0, 0.2)",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
                 textAlign: "center",
                 maxWidth: "200px",
               }}
@@ -1161,12 +1190,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   Back to Home
                 </div>
                 <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>
-                  {draggedItem && draggedItem.isFolder === false
-                    ? "Drop here to move back!"
-                    : "Click to go back"}
+                  Drop icons here to move them back
                 </div>
               </div>
-            </button>
+            </div>
           </div>
         )}
       </div>
