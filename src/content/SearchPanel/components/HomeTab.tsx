@@ -1003,6 +1003,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </>
+        ) : (
 
               {/* Back to Home Button - centered in icon field when in folder */}
               {getCurrentFolder() && (
