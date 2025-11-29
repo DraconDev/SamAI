@@ -11,6 +11,8 @@
 ## Do
 - when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
 - be able to edit the current icons and folders, but how? 
+  - can we do right click menu on the icons and folders to edit them?
+  - this could support delete and edit, 
 
 ## Done
 
