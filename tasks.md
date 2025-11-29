@@ -16,7 +16,7 @@
 - make the icons more tightly packet much like a phone screen, 
   - this is pretty close but make icon even bigger
   - also folder icons should be big too
-    - folder icons should be much likker like the images 
+    - folder icons should be much bigger like the images 
 
 
 
