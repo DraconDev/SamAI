@@ -268,8 +268,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       );
     }
 
-    // Sort by order
-    return allItems.sort((a, b) => (a.order || 0) - (b.order || 0));
+    // Sort by order: folders first, then sites
+    return allItems.sort((a, b) => {
+      // Folders first
+      if (a.isFolder && !b.isFolder) return -1;
+      if (!a.isFolder && b.isFolder) return 1;
+
+      // Both same type, sort by order
+      return (a.order || 0) - (b.order || 0);
+    });
   };
 
   // Filter items by search query
