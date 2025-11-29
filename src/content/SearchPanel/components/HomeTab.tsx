@@ -522,243 +522,283 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       {/* Enhanced Header */}
       <div
         style={{
-          padding: "1rem 1.25rem",
+          padding: "1.5rem",
           borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
-          background: "rgba(30, 41, 59, 0.95)",
-          backdropFilter: "blur(15px)",
+          background: "rgba(30, 41, 59, 0.98)",
+          backdropFilter: "blur(20px)",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
+        {/* Background gradient overlay */}
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "1rem",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              "linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 50%, rgba(59, 130, 246, 0.1) 100%)",
+            pointerEvents: "none",
           }}
-        >
+        />
+
+        <div style={{ position: "relative", zIndex: 1 }}>
           <div
             style={{
               display: "flex",
+              justifyContent: "space-between",
               alignItems: "center",
-              gap: "1rem",
+              marginBottom: "1.5rem",
             }}
           >
             <div
               style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "16px",
-                background:
-                  "linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #ec4899 100%)",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                fontSize: "22px",
-                boxShadow: "0 8px 32px rgba(139, 92, 246, 0.4)",
-                position: "relative",
-                overflow: "hidden",
+                gap: "1.25rem",
               }}
             >
               <div
                 style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "20px",
                   background:
-                    "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%)",
-                  animation: "shimmer 2s infinite",
+                    "linear-gradient(135deg, #8b5cf6 0%, #a855f7 30%, #ec4899 70%, #f97316 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontSize: "26px",
+                  boxShadow: "0 12px 40px rgba(139, 92, 246, 0.5)",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
-              />
-              🏠
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background:
+                      "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)",
+                    animation: "shimmer 3s infinite",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background:
+                      "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                  }}
+                />
+                🏠
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 900,
+                    background:
+                      "linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    letterSpacing: "-0.02em",
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  Home
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#a1a1aa",
+                    fontWeight: 500,
+                    letterSpacing: "0.025em",
+                  }}
+                >
+                  Your personal app launcher
+                </div>
+              </div>
             </div>
-            <div>
-              <div
+
+            <div style={{ display: "flex", gap: "0.75rem" }}>
+              {/* Add Current - enhanced styling */}
+              <button
+                onClick={addCurrentSite}
                 style={{
-                  fontSize: "1.2rem",
-                  fontWeight: 800,
-                  background: "linear-gradient(135deg, #f1f5f9, #94a3b8)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  letterSpacing: "-0.025em",
+                  padding: "0.9rem 1.5rem",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(34, 197, 94, 0.5)",
+                  background:
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))",
+                  color: "#86efac",
+                  fontSize: "0.85rem",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  fontWeight: 600,
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  minWidth: "130px",
+                  textAlign: "center",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(34, 197, 94, 0.2))";
+                  e.currentTarget.style.transform = "translateY(-3px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 12px 35px rgba(34, 197, 94, 0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                Home
-              </div>
-              <div
-                style={{
-                  fontSize: "0.8rem",
-                  color: "#94a3b8",
-                  fontWeight: 500,
-                }}
-              >
-                Your personal app launcher
-              </div>
+                ⭐ Add Current
+              </button>
             </div>
           </div>
 
-          <div style={{ display: "flex", gap: "0.5rem" }}>
-            {/* Add Current - same size as Add Site */}
-            <button
-              onClick={addCurrentSite}
+          {/* Top Row: Search Bar and Add Site */}
+          <div
+            style={{
+              display: "flex",
+              gap: "1rem",
+              alignItems: "center",
+            }}
+          >
+            {/* Search Bar - enhanced styling */}
+            <div
               style={{
-                padding: "0.8rem 1.25rem",
-                borderRadius: "12px",
-                border: "1px solid rgba(34, 197, 94, 0.4)",
+                position: "relative",
+                flex: 1,
+                minWidth: "200px",
+              }}
+            >
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search your apps..."
+                style={{
+                  width: "100%",
+                  padding: "1rem 1.25rem 1rem 3rem",
+                  borderRadius: "20px",
+                  border: "1px solid rgba(139, 92, 246, 0.4)",
+                  background: "rgba(15, 23, 42, 0.9)",
+                  color: "#f1f5f9",
+                  fontSize: "0.9rem",
+                  outline: "none",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#8b5cf6";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 4px rgba(139, 92, 246, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3)";
+                  e.currentTarget.style.background = "rgba(15, 23, 42, 0.95)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.4)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 15px rgba(0, 0, 0, 0.2)";
+                  e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  left: "1rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: "#94a3b8",
+                  fontSize: "1.1rem",
+                  pointerEvents: "none",
+                }}
+              >
+                🔍
+              </div>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  style={{
+                    position: "absolute",
+                    right: "1rem",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "rgba(239, 68, 68, 0.2)",
+                    border: "1px solid rgba(239, 68, 68, 0.4)",
+                    color: "#fca5a5",
+                    cursor: "pointer",
+                    fontSize: "0.8rem",
+                    width: "28px",
+                    height: "28px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "50%",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(239, 68, 68, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(239, 68, 68, 0.2)";
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Add Site - enhanced styling */}
+            <button
+              onClick={() => setIsAddingIcon(!isAddingIcon)}
+              style={{
+                padding: "1rem 1.5rem",
+                borderRadius: "16px",
+                border: "1px solid rgba(34, 197, 94, 0.5)",
                 background:
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))",
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))",
                 color: "#86efac",
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
                 fontWeight: 600,
-                transition: "all 0.3s ease",
-                minWidth: "120px",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                minWidth: "130px",
                 textAlign: "center",
+                position: "relative",
+                overflow: "hidden",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.15))";
-                e.currentTarget.style.transform = "translateY(-2px)";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(34, 197, 94, 0.2))";
+                e.currentTarget.style.transform = "translateY(-3px)";
                 e.currentTarget.style.boxShadow =
-                  "0 8px 25px rgba(34, 197, 94, 0.3)";
+                  "0 12px 35px rgba(34, 197, 94, 0.4)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))";
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              ⭐ Add Current
+              ➕ Add Site
             </button>
           </div>
-        </div>
-
-        {/* Top Row: Search Bar and Add Site */}
-        <div
-          style={{
-            display: "flex",
-            gap: "0.75rem",
-            alignItems: "center",
-            marginBottom: "1rem",
-          }}
-        >
-          {/* Search Bar - takes remaining space */}
-          <div
-            style={{
-              position: "relative",
-              flex: 1,
-              minWidth: "150px",
-            }}
-          >
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search your apps..."
-              style={{
-                width: "100%",
-                padding: "0.8rem 1rem 0.8rem 2.5rem",
-                borderRadius: "16px",
-                border: "1px solid rgba(139, 92, 246, 0.3)",
-                background: "rgba(15, 23, 42, 0.8)",
-                color: "#f1f5f9",
-                fontSize: "0.85rem",
-                outline: "none",
-                transition: "all 0.3s ease",
-              }}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = "#8b5cf6";
-                e.currentTarget.style.boxShadow =
-                  "0 0 0 4px rgba(139, 92, 246, 0.15)";
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                left: "0.75rem",
-                top: "50%",
-                transform: "translateY(-50%)",
-                color: "#94a3b8",
-                fontSize: "1rem",
-              }}
-            >
-              🔍
-            </div>
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                style={{
-                  position: "absolute",
-                  right: "0.75rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "rgba(239, 68, 68, 0.2)",
-                  border: "1px solid rgba(239, 68, 68, 0.4)",
-                  color: "#fca5a5",
-                  cursor: "pointer",
-                  fontSize: "0.8rem",
-                  width: "24px",
-                  height: "24px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "50%",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.2)";
-                }}
-              >
-                ✕
-              </button>
-            )}
-          </div>
-
-          {/* Add Site - same size as Add Current */}
-          <button
-            onClick={() => setIsAddingIcon(!isAddingIcon)}
-            style={{
-              padding: "0.8rem 1.25rem",
-              borderRadius: "12px",
-              border: "1px solid rgba(34, 197, 94, 0.4)",
-              background:
-                "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))",
-              color: "#86efac",
-              fontSize: "0.8rem",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              fontWeight: 600,
-              transition: "all 0.3s ease",
-              minWidth: "120px",
-              textAlign: "center",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.15))";
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 25px rgba(34, 197, 94, 0.3)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05))";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            ➕ Add Site
-          </button>
         </div>
       </div>
 
