@@ -506,7 +506,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "0.5rem",
+            marginBottom: "1rem",
           }}
         >
           <div
