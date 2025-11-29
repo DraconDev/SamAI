@@ -1286,6 +1286,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               gap: "0.5rem",
               justifyItems: "center",
               padding: "0.25rem",
+              position: "relative",
             }}
           >
             {filteredItems.map((item, index) => (
