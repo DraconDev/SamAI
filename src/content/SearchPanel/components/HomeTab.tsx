@@ -1354,7 +1354,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "28px" }}>📁</span>
+                    <span style={{ fontSize: "44px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
