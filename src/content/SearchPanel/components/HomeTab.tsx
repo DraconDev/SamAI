@@ -278,14 +278,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     });
   };
 
-  // Filter items by search query
-  const filteredItems = searchQuery
-    ? getCurrentItems().filter(
-        (item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.url.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : getCurrentItems();
+  // Get items (no search filtering)
+  const filteredItems = getCurrentItems();
 
   // Navigation (simplified)
   const openFolder = (folderId: string) => {
