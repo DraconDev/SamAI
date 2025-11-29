@@ -1,10 +1,10 @@
 # Tasks
 
-## Planned
+## Plan
 - Simplify the search highlight
   - Its either favorite or hide
 
-## To Do
+## Do
 
 - add current and add site butttons should be the same size
   - they are not currently 

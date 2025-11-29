@@ -635,7 +635,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               <button
                 onClick={addCurrentSite}
                 style={{
-                  padding: "0.9rem 1.5rem",
+                  padding: "1rem 1.5rem",
                   borderRadius: "16px",
                   border: "1px solid rgba(34, 197, 94, 0.5)",
                   background:
