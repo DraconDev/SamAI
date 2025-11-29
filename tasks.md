@@ -10,6 +10,7 @@
 
 ## Do
 
+- now we need to take out the plus button in the icon grid, now that we have one on the home tab header
 - [x] we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
   - keep in mind that we have the drag on mechanic that allows us to create folders, so that might be making this harder cause its not working now
 
