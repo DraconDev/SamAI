@@ -31,7 +31,7 @@ interface DragItem {
   isFolder: boolean;
 }
 
-const HomeTab: React.FC<HomeTabProps> = () => {
+const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
   const [homeData, setHomeData] = useState<HomeData>({
     icons: [],
     currentFolderId: undefined,
@@ -355,10 +355,17 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     saveHomeData(newData);
   };
 
-  // Handle item click (open website or navigate to folder)
+  // Handle item click (open website, navigate to folder, or trigger image tab)
   const handleItemClick = async (item: HomeIcon) => {
     if (item.isFolder) {
       openFolder(item.id);
+    } else if (item.name === "Google Image Generator") {
+      // Special case: trigger image tab instead of opening external URL
+      if (onImageTabClick) {
+        onImageTabClick();
+      } else {
+        window.open(item.url, "_blank");
+      }
     } else {
       window.open(item.url, "_blank");
     }
