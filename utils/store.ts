@@ -225,7 +225,7 @@ export const highlightPatternsStore =
     fallback: defaultHighlightPatternsStore,
   });
 
-// Home tab store for icons and folders
+// Home tab store for icons and folders (simplified - single array)
 export interface HomeIcon {
   id: string;
   name: string;
@@ -233,18 +233,12 @@ export interface HomeIcon {
   iconUrl?: string;
   folderId?: string;
   createdAt: string;
-}
-
-export interface Folder {
-  id: string;
-  name: string;
-  parentId?: string;
-  createdAt: string;
+  order?: number;
+  isFolder?: boolean;
 }
 
 export interface HomeData {
   icons: HomeIcon[];
-  folders: Folder[];
   currentFolderId?: string;
 }
 
