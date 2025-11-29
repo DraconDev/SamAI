@@ -233,6 +233,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: 0,
       isFolder: true,
+      isFavorite: true,
     },
     {
       id: "1",
@@ -242,6 +243,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: 1,
       isFolder: false,
+      isFavorite: true,
     },
     {
       id: "2",
@@ -251,6 +253,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: 2,
       isFolder: false,
+      isFavorite: true,
     },
     {
       id: "3",
@@ -261,6 +264,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       order: 3,
       folderId: "folder-1",
       isFolder: false,
+      isFavorite: false,
     },
     {
       id: "4",
@@ -270,6 +274,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: 4,
       isFolder: false,
+      isFavorite: false,
     },
   ];
 
@@ -310,9 +315,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const getFilteredItems = () => {
     const currentItems = getCurrentItems();
     if (!searchQuery.trim()) return currentItems;
-    return currentItems.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+
+    // Only show favorites when searching
+    return currentItems
+      .filter((item) => item.isFavorite)
+      .filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
   };
   const filteredItems = getFilteredItems();
 
@@ -815,7 +824,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search apps..."
+                placeholder="Search favorites..."
                 style={{
                   width: "100%",
                   padding: "0.75rem 1rem",
