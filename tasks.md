@@ -10,6 +10,8 @@
 
 ## Do
 
+- the home bg should be the same as the chat tab bg
+
 - we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
   - not fixed! 
 - make the icons more tightly package much like a phone screen
@@ -18,7 +20,6 @@
 - back to home button should be below the search and add site button, taking up the full width, but on the same panel, not among the icons 
   - not in the icon field we need to move it up, i tried to but now its not showing 
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
-- the home bg should be the same as the chat tab bg
 
 
 ## Done
