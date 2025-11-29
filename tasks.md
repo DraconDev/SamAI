@@ -17,6 +17,8 @@
   - make it have a much cooler icon and round corners
 - make the icons more tightly packet much like a phone screen, this also allows more space for text
 
+- fixing 
+
 ## Done
 
 - [x] the home bg should be the same as the chat tab bg
