@@ -2,6 +2,10 @@
 
 ## Do
 
+- add current and add site should be the same size
+- we need better styling for the home page
+
+
 ## Done
 
 - add site button changes
