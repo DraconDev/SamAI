@@ -2,7 +2,7 @@
   "name": "wxt-react-starter",
   "description": "manifest.json description",
   "private": true,
-  "version": "1.4.55",
+  "version": "1.4.56",
   "type": "module",
   "scripts": {
     "dev": "wxt",
