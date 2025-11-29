@@ -749,89 +749,212 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       {isAddingIcon && (
         <div
           style={{
-            padding: "1.25rem",
+            padding: "1.5rem",
             borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
-            background: "rgba(30, 41, 59, 0.8)",
-            backdropFilter: "blur(10px)",
+            background: "rgba(30, 41, 59, 0.9)",
+            backdropFilter: "blur(15px)",
+            margin: "0 1rem",
+            borderRadius: "16px",
+            marginTop: "1rem",
           }}
         >
           <div
-            style={{
-              display: "flex",
-              gap: "0.75rem",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
+            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
-            <input
-              type="text"
-              value={newItemName}
-              onChange={(e) => setNewItemName(e.target.value)}
-              placeholder="Site name (e.g., Google)"
+            {/* Site Name - First Field */}
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "#94a3b8",
+                  marginBottom: "0.5rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                Site Name
+              </label>
+              <input
+                type="text"
+                value={newItemName}
+                onChange={(e) => setNewItemName(e.target.value)}
+                placeholder="Enter site name (e.g., Google)"
+                style={{
+                  width: "100%",
+                  padding: "0.9rem 1rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(139, 92, 246, 0.3)",
+                  background: "rgba(15, 23, 42, 0.95)",
+                  color: "#f1f5f9",
+                  fontSize: "0.9rem",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#8b5cf6";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 3px rgba(139, 92, 246, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+            </div>
+
+            {/* Site URL - Second Field */}
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "#94a3b8",
+                  marginBottom: "0.5rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                Site URL
+              </label>
+              <input
+                type="text"
+                value={newItemUrl}
+                onChange={(e) => setNewItemUrl(e.target.value)}
+                placeholder="Enter URL (e.g., google.com)"
+                style={{
+                  width: "100%",
+                  padding: "0.9rem 1rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(139, 92, 246, 0.3)",
+                  background: "rgba(15, 23, 42, 0.95)",
+                  color: "#f1f5f9",
+                  fontSize: "0.9rem",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#8b5cf6";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 3px rgba(139, 92, 246, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+            </div>
+
+            {/* Icon URL - Third Field */}
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "#94a3b8",
+                  marginBottom: "0.5rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                Icon URL (Optional)
+              </label>
+              <input
+                type="text"
+                placeholder="Icon URL (optional - will auto-fetch if empty)"
+                style={{
+                  width: "100%",
+                  padding: "0.9rem 1rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(139, 92, 246, 0.2)",
+                  background: "rgba(15, 23, 42, 0.95)",
+                  color: "#f1f5f9",
+                  fontSize: "0.9rem",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#8b5cf6";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 3px rgba(139, 92, 246, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.2)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div
               style={{
-                flex: 1,
-                minWidth: "120px",
-                padding: "0.8rem",
-                borderRadius: "12px",
-                border: "1px solid rgba(139, 92, 246, 0.3)",
-                background: "rgba(15, 23, 42, 0.9)",
-                color: "#f1f5f9",
-                fontSize: "0.85rem",
-                outline: "none",
-              }}
-            />
-            <input
-              type="text"
-              value={newItemUrl}
-              onChange={(e) => setNewItemUrl(e.target.value)}
-              placeholder="URL (e.g., google.com)"
-              style={{
-                flex: 1,
-                minWidth: "120px",
-                padding: "0.8rem",
-                borderRadius: "12px",
-                border: "1px solid rgba(139, 92, 246, 0.3)",
-                background: "rgba(15, 23, 42, 0.9)",
-                color: "#f1f5f9",
-                fontSize: "0.85rem",
-                outline: "none",
-              }}
-            />
-            <button
-              onClick={handleAddIcon}
-              style={{
-                padding: "0.8rem 1.25rem",
-                borderRadius: "12px",
-                border: "1px solid rgba(34, 197, 94, 0.6)",
-                background: "rgba(34, 197, 94, 0.2)",
-                color: "#86efac",
-                fontSize: "0.85rem",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                fontWeight: 600,
-                transition: "all 0.2s ease",
+                display: "flex",
+                gap: "0.75rem",
+                justifyContent: "space-between",
+                marginTop: "0.5rem",
               }}
             >
-              Add Site
-            </button>
-            <button
-              onClick={() => {
-                setIsAddingIcon(false);
-                setNewItemName("");
-                setNewItemUrl("");
-              }}
-              style={{
-                padding: "0.8rem",
-                borderRadius: "12px",
-                border: "1px solid rgba(239, 68, 68, 0.6)",
-                background: "rgba(239, 68, 68, 0.1)",
-                color: "#fca5a5",
-                fontSize: "0.85rem",
-                cursor: "pointer",
-              }}
-            >
-              ✕
-            </button>
+              <button
+                onClick={() => {
+                  setIsAddingIcon(false);
+                  setNewItemName("");
+                  setNewItemUrl("");
+                }}
+                style={{
+                  flex: 1,
+                  padding: "0.9rem 1.5rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(239, 68, 68, 0.4)",
+                  background: "rgba(239, 68, 68, 0.1)",
+                  color: "#fca5a5",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.2)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddIcon}
+                style={{
+                  flex: 1,
+                  padding: "0.9rem 1.5rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(34, 197, 94, 0.6)",
+                  background: "rgba(34, 197, 94, 0.2)",
+                  color: "#86efac",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(34, 197, 94, 0.3)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(34, 197, 94, 0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(34, 197, 94, 0.2)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                Add Site
+              </button>
+            </div>
           </div>
         </div>
       )}
