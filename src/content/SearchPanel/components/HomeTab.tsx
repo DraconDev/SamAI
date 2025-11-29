@@ -1686,7 +1686,48 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     }}
                   >
                     {item.isFolder ? (
-                      <span style={{ fontSize: "44px" }}>📂</span>
+                      <div
+                        style={{
+                          width: "52px",
+                          height: "52px",
+                          borderRadius: "12px",
+                          background:
+                            "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "28px",
+                          position: "relative",
+                          overflow: "hidden",
+                          boxShadow:
+                            "0 6px 16px rgba(59, 130, 246, 0.4), inset 0 1px 2px rgba(255,255,255,0.2)",
+                          border: "2px solid rgba(59, 130, 246, 0.3)",
+                        }}
+                      >
+                        {/* Folder shine effect */}
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "3px",
+                            left: "3px",
+                            right: "3px",
+                            height: "30%",
+                            background:
+                              "linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1))",
+                            borderRadius: "8px",
+                            transform: "rotate(-45deg)",
+                          }}
+                        />
+                        <span
+                          style={{
+                            filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
+                            position: "relative",
+                            zIndex: 1,
+                          }}
+                        >
+                          📁
+                        </span>
+                      </div>
                     ) : (
                       (() => {
                         const iconResult = getIconForItem(item);
