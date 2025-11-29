@@ -14,7 +14,7 @@
   - can we do right click menu on the icons and folders to edit them?
   - this could support delete and edit, 
 - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
-  - folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, 
+  - folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green 
 
 
 ## Done
