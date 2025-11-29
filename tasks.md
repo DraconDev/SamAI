@@ -20,6 +20,7 @@
 
 - [x] the back to home button is in the rught place but we need to style it better, it could take up the whole space
   - this is almost perfect but i the button to take up the whole space, no rounded courses either, and make it more much cooler
+  - 
 - [x] lets have 5 icons in a row, and they should have 2 rows of text each
 
 ## Done
