@@ -4,7 +4,7 @@
 - Simplify the search highlight
   - Its either favorite or hide
 
-## Do
+## To Do
 
 - add current and add site butttons should be the same size
   - they are not currently 
