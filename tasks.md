@@ -9,8 +9,8 @@
 
 ## Do
 
-- The back to home button should not move up when hovered over
-  - make the back to home button even cool
+- [x] The back to home button should not move up when hovered over
+  - [x] make the back to home button even cool
 - when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
 - [x] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
 - be able to edit the current icons and folders, but how?

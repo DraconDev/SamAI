@@ -920,15 +920,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           >
             <div
               style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "0px",
+                width: "44px",
+                height: "44px",
+                borderRadius: "14px",
                 background: "linear-gradient(135deg, #10b981, #059669)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "18px",
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(16, 185, 129, 0.3)",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.05)";
+                e.currentTarget.style.boxShadow =
+                  "inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 20px rgba(16, 185, 129, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.boxShadow =
+                  "inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(16, 185, 129, 0.3)";
               }}
             >
               ←
@@ -939,12 +951,18 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   fontSize: "1rem",
                   fontWeight: 800,
                   letterSpacing: "0.5px",
+                  marginBottom: "2px",
                 }}
               >
                 Back to Home
               </div>
               <div
-                style={{ fontSize: "0.8rem", opacity: 0.9, fontWeight: 500 }}
+                style={{
+                  fontSize: "0.8rem",
+                  opacity: 0.9,
+                  fontWeight: 500,
+                  color: "rgba(134, 239, 172, 0.8)",
+                }}
               >
                 Drop icons here to move them back
               </div>
@@ -955,10 +973,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 right: "1rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                width: "2px",
-                height: "60%",
+                width: "3px",
+                height: "70%",
                 background:
-                  "linear-gradient(to bottom, transparent, rgba(34, 197, 94, 0.3), transparent)",
+                  "linear-gradient(to bottom, transparent, rgba(34, 197, 94, 0.4), rgba(16, 185, 129, 0.5), rgba(34, 197, 94, 0.4), transparent)",
+                borderRadius: "2px",
+                boxShadow: "0 0 8px rgba(34, 197, 94, 0.3)",
               }}
             />
           </div>
