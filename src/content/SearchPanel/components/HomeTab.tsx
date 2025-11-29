@@ -36,7 +36,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     currentFolderId: undefined,
   });
   const [searchQuery, setSearchQuery] = useState("");
-  const [isAddingItem, setIsAddingItem] = useState(false);
   const [isAddingIcon, setIsAddingIcon] = useState(false);
   const [newItemName, setNewItemName] = useState("");
   const [newItemUrl, setNewItemUrl] = useState("");
@@ -278,33 +277,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       icons: [...homeData.icons, newIcon],
     };
     await saveHomeData(newData);
-    setIsAddingItem(false);
     setIsAddingIcon(false);
-    setNewItemName("");
-    setNewItemUrl("");
-  };
-
-  // Add new folder
-  const handleAddFolder = async () => {
-    if (!newItemName.trim()) return;
-
-    const newFolder: HomeIcon = {
-      id: `folder-${Date.now().toString()}`,
-      name: newItemName,
-      url: "#",
-      iconUrl: undefined,
-      folderId: homeData.currentFolderId,
-      createdAt: new Date().toISOString(),
-      order: getCurrentItems().length,
-      isFolder: true,
-    };
-
-    const newData = {
-      ...homeData,
-      icons: [...homeData.icons, newFolder],
-    };
-    await saveHomeData(newData);
-    setIsAddingItem(false);
     setNewItemName("");
     setNewItemUrl("");
   };
