@@ -1103,7 +1103,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
         )}
 
-        {/* Back to Home Button - appears when in folder, after grid */}
+        {/* Simple Back to Home Button - appears when in folder */}
         {getCurrentFolder() && filteredItems.length > 0 && (
           <div
             style={{
@@ -1112,46 +1112,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               marginTop: "1rem",
             }}
           >
-            <div
-              onDragOver={(e) => {
-                if (draggedItem && draggedItem.isFolder === false) {
-                  e.preventDefault();
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 25px rgba(34, 197, 94, 0.4)";
-                }
-              }}
-              onDragLeave={(e) => {
-                if (!draggedItem) {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }
-              }}
-              onDrop={async (e) => {
-                if (draggedItem && draggedItem.isFolder === false) {
-                  e.preventDefault();
-                  // Move dragged item back to main level
-                  const newData = {
-                    ...homeData,
-                    currentFolderId: undefined,
-                    icons: homeData.icons.map((icon) =>
-                      icon.id === draggedItem.id
-                        ? {
-                            ...icon,
-                            folderId: undefined,
-                            order: getCurrentItems().length,
-                          }
-                        : icon
-                    ),
-                  };
-                  await saveHomeData(newData);
-                  setDraggedItem(null);
-                }
-              }}
+            <button
               onClick={goBack}
               style={{
                 background:
@@ -1180,24 +1141,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 textAlign: "center",
                 maxWidth: "200px",
               }}
-              onMouseEnter={(e) => {
-                if (!(draggedItem && draggedItem.isFolder === false)) {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3))";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 25px rgba(139, 92, 246, 0.3)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!(draggedItem && draggedItem.isFolder === false)) {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 12px rgba(0, 0, 0, 0.2)";
-                }
-              }}
             >
               <div
                 style={{
@@ -1218,10 +1161,12 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   Back to Home
                 </div>
                 <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>
-                  Drag icons here to move them back
+                  {draggedItem && draggedItem.isFolder === false
+                    ? "Drop here to move back!"
+                    : "Click to go back"}
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         )}
       </div>
