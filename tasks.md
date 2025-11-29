@@ -15,7 +15,7 @@
   - we have this not kind but we are not cutting of the 3rd row, we see part of it 
 - back to home button should be below the search and add site button, taking up the full width, but on the same panel, not among the icons 
   - not in the icon field we need to move it up, i tried to but now its not showing 
-- make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open
+- make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed the site 
 
 
 - the home bg should be the same as the chat tab bg
