@@ -486,22 +486,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     const isTargetInMain = !homeData.currentFolderId;
     const isTargetSameLevel = draggedIcon.folderId === homeData.currentFolderId;
 
-    // Case 1: Dropping onto a folder (allow adding to folders)
+    // Case 1: Dropping onto a folder - only allow reordering folders
     if (targetItem.isFolder && draggedItem.id !== targetItem.id) {
-      // Allow moving non-folders from main level into folders
-      if (!draggedIcon.isFolder && isDraggedFromMain && isTargetInMain) {
-        const newData = {
-          ...homeData,
-          icons: homeData.icons.map((icon) =>
-            icon.id === draggedItem.id
-              ? { ...icon, folderId: targetItem.id, order: undefined }
-              : icon
-          ),
-        };
-        await saveHomeData(newData);
-        setDraggedOverFolder(null);
-        setDraggedItem(null);
-        return;
+      // Folders can only be reordered, not moved into other folders
+      if (draggedIcon.isFolder) {
+        // Handle folder reordering - this will be handled by the reorder logic below
+      } else {
+        // Sites cannot be moved into folders - only reordered
+        // This case will be handled by the reorder logic below
       }
     }
 
@@ -795,10 +787,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               if (draggedItem && draggedItem.isFolder === false) {
                 e.preventDefault();
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(59, 130, 246, 0.2))";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25))";
                 e.currentTarget.style.transform = "translateY(-1px)";
                 e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(34, 197, 94, 0.25)";
+                  "0 6px 16px rgba(34, 197, 94, 0.35)";
               }
             }}
             onDragLeave={(e) => {
@@ -1308,9 +1300,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     padding: "0.1rem",
                     borderRadius: "6px",
                     overflow: "hidden",
-                    background: isDraggedOverFolder
-                      ? "rgba(59, 130, 246, 0.15)"
-                      : isDraggedOver
+                    background: isDraggedOver
                       ? "rgba(255, 255, 255, 0.08)"
                       : isPreviewIndex
                       ? "rgba(34, 197, 94, 0.1)"
@@ -1323,28 +1313,18 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     gap: "0.25rem",
-                    border: isDraggedOverFolder
-                      ? "2px solid rgba(59, 130, 246, 0.6)"
-                      : isPreviewIndex
+                    border: isPreviewIndex
                       ? "2px dashed rgba(34, 197, 94, 0.6)"
                       : "none",
                   }}
                   onMouseEnter={(e) => {
-                    if (
-                      !isDraggedOver &&
-                      !isDraggedOverFolder &&
-                      !isPreviewIndex
-                    ) {
+                    if (!isDraggedOver && !isPreviewIndex) {
                       e.currentTarget.style.background =
                         "rgba(255, 255, 255, 0.03)";
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (
-                      !isDraggedOver &&
-                      !isDraggedOverFolder &&
-                      !isPreviewIndex
-                    ) {
+                    if (!isDraggedOver && !isPreviewIndex) {
                       e.currentTarget.style.background = "transparent";
                     }
                   }}
