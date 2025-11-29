@@ -1323,13 +1323,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     padding: "0.1rem",
                     borderRadius: "6px",
                     overflow: "hidden",
-                    background: isDraggedOverFolder
-                      ? "rgba(59, 130, 246, 0.15)"
-                      : isDraggedOver
-                      ? "rgba(255, 255, 255, 0.08)"
+                    border: isDraggedOverFolder
+                      ? "2px solid rgba(59, 130, 246, 0.8)"
                       : isPreviewIndex
-                      ? "rgba(34, 197, 94, 0.1)"
-                      : "transparent",
+                      ? "2px dashed rgba(34, 197, 94, 0.8)"
+                      : "2px solid transparent",
                     color: "#ffffff",
                     textAlign: "center",
                     cursor: "pointer",
@@ -1338,11 +1336,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     gap: "0.25rem",
-                    border: isDraggedOverFolder
-                      ? "2px solid rgba(59, 130, 246, 0.6)"
-                      : isPreviewIndex
-                      ? "2px dashed rgba(34, 197, 94, 0.6)"
-                      : "none",
                   }}
                   onMouseEnter={(e) => {
                     if (
