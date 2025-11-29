@@ -413,14 +413,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
 
-    // Show visual feedback for folder drops
-    if (item.isFolder && draggedItem && !draggedItem.isFolder) {
-      setDraggedOverFolder(item.id);
-      setDragPreviewIndex(null);
-    } else {
-      setDraggedOverFolder(null);
-      setDragPreviewIndex(index);
-    }
+    // Show visual feedback for reordering - both folders and icons show green
+    // No blue highlighting for folders since they can't contain other folders
+    setDraggedOverFolder(null);
+    setDragPreviewIndex(index);
     setDragOverIndex(index);
   };
 
