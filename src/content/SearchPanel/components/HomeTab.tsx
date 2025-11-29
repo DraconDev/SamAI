@@ -917,6 +917,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           flex: 1,
           padding: "1.5rem",
           overflowY: "auto",
+          paddingBottom: getCurrentFolder() ? "1rem" : "1.5rem",
         }}
       >
         {filteredItems.length > 0 ? (
