@@ -1,7 +1,7 @@
 # Tasks
 
 ## Plan
-- have 5 icons in a row, and they should have 2 rows of text each
+
 - Simplify the search highlight
   - Its either favorite or hide
 - we need better styling for the home tab
@@ -15,6 +15,7 @@
 - we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
   - not fixed! 
 - make the icons more tightly package much like a phone screen
+  - have 5 icons in a row, and they should have 2 rows of text each
 - having 2 row descriptions for the icons is okay much like a phone screen
   - we have this not kind but we are not cutting of the 3rd row, we see part of it 
 - back to home button should be below the search and add site button, taking up the full width, but on the same panel, not among the icons 
