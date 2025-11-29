@@ -1139,10 +1139,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "0.75rem",
+              gridTemplateColumns: "repeat(5, 1fr)",
+              gap: "0.5rem",
               justifyItems: "center",
-              padding: "0.5rem",
+              padding: "0.25rem",
             }}
           >
             {filteredItems.map((item, index) => (
@@ -1157,9 +1157,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "60px",
-                  padding: "0.5rem",
-                  borderRadius: "8px",
+                  maxWidth: "48px",
+                  padding: "0.375rem",
+                  borderRadius: "6px",
                   overflow: "hidden",
                   background:
                     dragOverIndex === index
@@ -1172,7 +1172,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.375rem",
+                  gap: "0.25rem",
                 }}
                 onMouseEnter={(e) => {
                   if (dragOverIndex !== index) {
