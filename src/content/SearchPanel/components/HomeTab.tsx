@@ -699,7 +699,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </button>
 
           <button
-            onClick={() => setIsAddingItem(!isAddingItem)}
+            onClick={() => setIsAddingIcon(!isAddingIcon)}
             style={{
               padding: "0.8rem 1rem",
               borderRadius: "12px",
@@ -727,13 +727,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            ➕ Add
+            ➕ Add Site
           </button>
         </div>
       </div>
 
       {/* Enhanced Add Form */}
-      {isAddingItem && (
+      {isAddingIcon && (
         <div
           style={{
             padding: "1.25rem",
@@ -754,7 +754,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               type="text"
               value={newItemName}
               onChange={(e) => setNewItemName(e.target.value)}
-              placeholder="Name (e.g., Google)"
+              placeholder="Site name (e.g., Google)"
               style={{
                 flex: 1,
                 minWidth: "120px",
@@ -771,7 +771,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               type="text"
               value={newItemUrl}
               onChange={(e) => setNewItemUrl(e.target.value)}
-              placeholder="URL (optional, for folders)"
+              placeholder="URL (e.g., google.com)"
               style={{
                 flex: 1,
                 minWidth: "120px",
@@ -785,7 +785,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               }}
             />
             <button
-              onClick={newItemUrl ? handleAddIcon : handleAddFolder}
+              onClick={handleAddIcon}
               style={{
                 padding: "0.8rem 1.25rem",
                 borderRadius: "12px",
@@ -799,14 +799,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 transition: "all 0.2s ease",
               }}
             >
-              {newItemUrl ? "Add Site" : "Add Folder"}
+              Add Site
             </button>
             <button
               onClick={() => {
-                setIsAddingItem(false);
+                setIsAddingIcon(false);
                 setNewItemName("");
                 setNewItemUrl("");
-                setIsAddingIcon(false);
               }}
               style={{
                 padding: "0.8rem",
