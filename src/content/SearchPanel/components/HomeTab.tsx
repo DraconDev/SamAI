@@ -1125,9 +1125,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "0.5rem",
+              gap: "0.25rem",
               justifyItems: "center",
-              padding: "0.25rem",
+              padding: "0.125rem",
             }}
           >
             {filteredItems.map((item, index) => (
@@ -1142,9 +1142,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "52px",
-                  padding: "0.2rem",
+                  maxWidth: "48px",
+                  padding: "0.125rem",
                   borderRadius: "6px",
+                  overflow: "hidden",
                   background:
                     dragOverIndex === index
                       ? "rgba(255, 255, 255, 0.1)"
@@ -1206,8 +1207,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "44px",
-                    height: "44px",
+                    width: "40px",
+                    height: "40px",
                     borderRadius: "8px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
@@ -1234,8 +1235,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "44px",
-                              height: "44px",
+                              width: "40px",
+                              height: "40px",
                               borderRadius: "8px",
                             }}
                             onError={(e) => {
@@ -1262,7 +1263,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    fontSize: "0.6rem",
+                    fontSize: "0.55rem",
                     fontWeight: 600,
                     color: "#ffffff",
                     overflow: "hidden",
@@ -1271,7 +1272,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     width: "100%",
                     textAlign: "center",
                     lineHeight: "1.1",
-                    maxWidth: "48px",
+                    maxWidth: "44px",
                     minHeight: "2.4em",
                     display: "-webkit-box",
                     WebkitLineClamp: 2,
