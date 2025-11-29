@@ -10,7 +10,6 @@
 
 ## Do
 
-- now we need to take out the plus button in the icon grid, now that we have one on the home tab header, that ideally shouldn't move up when hovered over, 
 - [x] we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
   - keep in mind that we have the drag on mechanic that allows us to create folders, so that might be making this harder cause its not working now
 
@@ -28,6 +27,7 @@
 
 ## Done
 
+- now we need to take out the plus button in the icon grid, now that we have one on the home tab header, that ideally shouldn't move up when hovered over, 
 - [x] the home bg should be the same as the chat tab bg
 - add current and add site butttons should be the same size
   - they are not currently
