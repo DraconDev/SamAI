@@ -46,6 +46,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [draggedItem, setDraggedItem] = useState<DragItem | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [draggedOverFolder, setDraggedOverFolder] = useState<string | null>(null);
+  const [dragPreviewIndex, setDragPreviewIndex] = useState<number | null>(null);
+  const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
   const [faviconCache, setFaviconCache] = useState<Map<string, string>>(
     new Map()
   );
