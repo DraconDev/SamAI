@@ -1724,17 +1724,35 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                                 width: "52px",
                                 height: "52px",
                                 borderRadius: "50%",
-                                background: iconResult.color,
+                                background: `linear-gradient(135deg, ${iconResult.color}, ${iconResult.color}dd)`,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 fontSize: "20px",
                                 fontWeight: 700,
                                 color: "white",
-                                textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                                boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                                textShadow: "0 1px 3px rgba(0,0,0,0.4)",
+                                boxShadow:
+                                  "0 6px 16px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.2)",
+                                border: "2px solid rgba(255,255,255,0.1)",
+                                position: "relative",
+                                overflow: "hidden",
                               }}
                             >
+                              {/* Subtle shine effect */}
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: "2px",
+                                  left: "2px",
+                                  right: "2px",
+                                  height: "40%",
+                                  background:
+                                    "linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
+                                  borderRadius: "50%",
+                                  transform: "rotate(-45deg)",
+                                }}
+                              />
                               {iconResult.name.charAt(0).toUpperCase()}
                             </div>
                           );
