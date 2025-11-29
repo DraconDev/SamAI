@@ -1444,72 +1444,63 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               </div>
             ))}
 
-            {/* Plus button for adding new items */}
+            {/* Plus button for adding new items - positioned at top right */}
             <div
               onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}
               style={{
-                position: "relative",
-                width: "100%",
-                maxWidth: "48px",
-                padding: "0.375rem",
-                borderRadius: "6px",
-                overflow: "hidden",
-                background: "rgba(34, 197, 94, 0.1)",
-                border: "1px solid rgba(34, 197, 94, 0.3)",
+                position: "absolute",
+                top: "-0.5rem",
+                right: "-0.5rem",
+                width: "44px",
+                height: "44px",
+                padding: "0.5rem",
+                borderRadius: "50%",
+                background:
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))",
+                border: "2px solid rgba(34, 197, 94, 0.4)",
                 color: "#86efac",
-                textAlign: "center",
                 cursor: "pointer",
-                transition: "all 0.15s ease",
+                transition: "all 0.2s ease",
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
-                gap: "0.25rem",
+                justifyContent: "center",
+                zIndex: 10,
+                boxShadow: "0 4px 12px rgba(34, 197, 94, 0.25)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(34, 197, 94, 0.2)";
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25))";
                 e.currentTarget.style.transform = "translateY(-2px)";
                 e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(34, 197, 94, 0.3)";
+                  "0 8px 20px rgba(34, 197, 94, 0.35)";
+                e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.6)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(34, 197, 94, 0.1)";
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))";
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(34, 197, 94, 0.25)";
+                e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.4)";
               }}
             >
               <div
                 style={{
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "6px",
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "50%",
                   background:
                     "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3))",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "20px",
+                  fontSize: "16px",
                   fontWeight: 700,
                   color: "#86efac",
+                  boxShadow: "inset 0 1px 2px rgba(0,0,0,0.1)",
                 }}
               >
                 +
-              </div>
-              <div
-                style={{
-                  fontSize: "0.6rem",
-                  fontWeight: 600,
-                  color: "#86efac",
-                  width: "100%",
-                  textAlign: "center",
-                  lineHeight: "1.1",
-                  height: "2.2em",
-                  maxWidth: "46px",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
-                Add
               </div>
             </div>
 
@@ -1518,8 +1509,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               <div
                 style={{
                   position: "absolute",
-                  top: "100%",
-                  right: "0",
+                  top: "calc(100% + 0.5rem)",
+                  right: "-0.5rem",
                   background: "rgba(30, 41, 59, 0.98)",
                   border: "1px solid rgba(139, 92, 246, 0.3)",
                   borderRadius: "12px",
@@ -1627,8 +1618,68 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               textAlign: "center",
               padding: "4rem 2rem",
               color: "#94a3b8",
+              position: "relative",
             }}
           >
+            {/* Plus button for empty state - positioned at top right */}
+            <div
+              onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}
+              style={{
+                position: "absolute",
+                top: "1rem",
+                right: "1rem",
+                width: "44px",
+                height: "44px",
+                padding: "0.5rem",
+                borderRadius: "50%",
+                background:
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))",
+                border: "2px solid rgba(34, 197, 94, 0.4)",
+                color: "#86efac",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 10,
+                boxShadow: "0 4px 12px rgba(34, 197, 94, 0.25)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25))";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 20px rgba(34, 197, 94, 0.35)";
+                e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.6)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(34, 197, 94, 0.25)";
+                e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.4)";
+              }}
+            >
+              <div
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3))",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "16px",
+                  fontWeight: 700,
+                  color: "#86efac",
+                  boxShadow: "inset 0 1px 2px rgba(0,0,0,0.1)",
+                }}
+              >
+                +
+              </div>
+            </div>
             <div style={{ fontSize: "4rem", marginBottom: "2rem" }}>
               {searchQuery ? "🔍" : "🏠"}
             </div>
