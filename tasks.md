@@ -13,15 +13,17 @@
 - the drag does seem to work but 
   - when we drag around an icon others should shift around, i mean others that are valid to move around like folder for folders, and icons for icons, 
   - for icons we need to be able to drag onto folders so we add them 
-- make the icons more tightly packet much like a phone screen, 
-  - this is pretty close but make icon even bigger
-  - also folder icons should be big too
-    - folder icons should be much bigger like the images 
+- folder icons have a weird background lets get rid of that, also if we can use a different folder icon that would be great
+- we want the search bar to be as tall as the + add button, so they line up perfectly
 
 
 
 ## Done
 
+- make the icons more tightly packet much like a phone screen, 
+  - this is pretty close but make icon even bigger
+- also folder icons should be big too
+  - folder icons should be much bigger like the images 
 - No search bar where is it? We need it 
   - We can have Home - Search pane in the middle + Add in the corner 
 - [x] the back to home button is in the rught place but we need to style it better, it could take up the whole space
