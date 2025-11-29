@@ -10,8 +10,6 @@
 
 ## Do
 
-- No search bar where is it? We need it 
-  - We can have Home - Search pane in the middle + Add in the corner 
 - the drag does seem to work but 
   - when we drag around an icon others should shift around, i mean others that are valid to move around like folder for folders, and icons for icons, 
   - for icons we need to be able to drag onto folders so we add them 
@@ -23,6 +21,8 @@
 
 ## Done
 
+- No search bar where is it? We need it 
+  - We can have Home - Search pane in the middle + Add in the corner 
 - [x] the back to home button is in the rught place but we need to style it better, it could take up the whole space
   - this is almost perfect but i the button to take up the whole space, no rounded courses either, and make it more much cooler
   - make it have a much cooler icon and round corners
