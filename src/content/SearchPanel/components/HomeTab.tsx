@@ -380,49 +380,80 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
     if (!draggedItem) return;
 
-    // Get the dragged item
-    const draggedIcon = getCurrentItems().find(
+    // Check if we have access to the dragged item
+    const draggedIcon = homeData.icons.find(
       (item) => item.id === draggedItem.id
     );
     if (!draggedIcon) return;
 
-    // Check if dropping onto a folder
+    const isDraggedFromMain = !draggedIcon.folderId;
+    const isTargetInMain = !homeData.currentFolderId;
+    const isTargetSameLevel = draggedIcon.folderId === homeData.currentFolderId;
+
+    // Case 1: Dropping onto a folder (prevent folder-in-folder)
     if (targetItem.isFolder && draggedItem.id !== targetItem.id) {
-      // Move item to existing folder
-      const newData = {
-        ...homeData,
-        icons: homeData.icons.map((icon) =>
-          icon.id === draggedItem.id
-            ? { ...icon, folderId: targetItem.id, order: undefined }
-            : icon
-        ),
-      };
-      await saveHomeData(newData);
-    } else if (!targetItem.isFolder && draggedItem.id !== targetItem.id) {
-      // Auto-create folder when dropping one icon on another regular icon
-      await createFolderFromIcons(draggedIcon, targetItem);
-    } else if (draggedItem.id === targetItem.id) {
-      // Reorder within current view
-      const currentItems = getCurrentItems();
-      const newItems = [...currentItems];
-      newItems.splice(draggedItem.index, 1);
-      newItems.splice(targetIndex, 0, draggedIcon);
+      // Only allow moving non-folders from main level into folders
+      if (!draggedIcon.isFolder && isDraggedFromMain && isTargetInMain) {
+        const newData = {
+          ...homeData,
+          icons: homeData.icons.map((icon) =>
+            icon.id === draggedItem.id
+              ? { ...icon, folderId: targetItem.id, order: undefined }
+              : icon
+          ),
+        };
+        await saveHomeData(newData);
+      }
+      // Otherwise ignore (prevent folders in folders, or moving from folder to main)
+    }
+    // Case 2: Auto-create folder when dropping different items together
+    else if (draggedItem.id !== targetItem.id && isTargetSameLevel) {
+      // Only create folders when both items are at the same level and neither is a folder
+      if (!draggedIcon.isFolder && !targetItem.isFolder) {
+        await createFolderFromIcons(draggedIcon, targetItem);
+      }
+    }
+    // Case 3: Reorder within current view (or when dragging from folder to main)
+    else if (draggedItem.id !== targetItem.id) {
+      if (isTargetSameLevel) {
+        // Reorder within current level
+        const currentItems = getCurrentItems();
+        const newItems = [...currentItems];
+        newItems.splice(draggedItem.index, 1);
+        newItems.splice(targetIndex, 0, draggedIcon);
 
-      // Update order for all affected items
-      newItems.forEach((item, index) => {
-        item.order = index;
-      });
+        // Update order for all affected items
+        newItems.forEach((item, index) => {
+          item.order = index;
+        });
 
-      const newData = {
-        ...homeData,
-        icons: homeData.icons.map((icon) => {
-          const updatedItem = newItems.find(
-            (newItem) => newItem.id === icon.id
-          );
-          return updatedItem || icon;
-        }),
-      };
-      await saveHomeData(newData);
+        const newData = {
+          ...homeData,
+          icons: homeData.icons.map((icon) => {
+            const updatedItem = newItems.find(
+              (newItem) => newItem.id === icon.id
+            );
+            return updatedItem || icon;
+          }),
+        };
+        await saveHomeData(newData);
+      } else if (isTargetInMain && draggedIcon.folderId) {
+        // Drag item from folder back to main level
+        const newData = {
+          ...homeData,
+          currentFolderId: undefined,
+          icons: homeData.icons.map((icon) =>
+            icon.id === draggedItem.id
+              ? {
+                  ...icon,
+                  folderId: undefined,
+                  order: getCurrentItems().length,
+                }
+              : icon
+          ),
+        };
+        await saveHomeData(newData);
+      }
     }
 
     setDraggedItem(null);
@@ -1023,7 +1054,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             >
               {searchQuery
                 ? "Try a different search term"
-                : "Add some apps or folders to get started"}
+                : "Drag apps together to create folders, or add individual sites"}
             </div>
             {!searchQuery && (
               <div
