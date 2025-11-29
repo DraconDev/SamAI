@@ -43,6 +43,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
   >(null);
   const [newItemName, setNewItemName] = useState("");
   const [newItemUrl, setNewItemUrl] = useState("");
+  const [newItemIconUrl, setNewItemIconUrl] = useState("");
   const [newFolderName, setNewFolderName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [draggedItem, setDraggedItem] = useState<DragItem | null>(null);
@@ -380,8 +381,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       return;
     }
 
-    // Fetch favicon for the new URL
-    const iconUrl = await fetchFavicon(newItemUrl);
+    // Use provided icon URL or fetch favicon for the new URL
+    const iconUrl = newItemIconUrl.trim() || (await fetchFavicon(newItemUrl));
 
     const newIcon: HomeIcon = {
       id: Date.now().toString(),
@@ -403,6 +404,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     setIsAddingIcon(false);
     setNewItemName("");
     setNewItemUrl("");
+    setNewItemIconUrl("");
   };
 
   // Delete item with confirmation
@@ -1319,6 +1321,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               </label>
               <input
                 type="text"
+                value={newItemIconUrl}
+                onChange={(e) => setNewItemIconUrl(e.target.value)}
                 placeholder="Icon URL (optional - will auto-fetch if empty)"
                 style={{
                   width: "100%",
@@ -1357,6 +1361,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   setIsAddingIcon(false);
                   setNewItemName("");
                   setNewItemUrl("");
+                  setNewItemIconUrl("");
                 }}
                 style={{
                   flex: 1,
