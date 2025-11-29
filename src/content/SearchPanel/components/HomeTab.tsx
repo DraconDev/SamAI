@@ -173,6 +173,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: getCurrentItems().length,
       isFolder: false,
+      isFavorite: false,
     };
 
     const newData = {
@@ -196,6 +197,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       createdAt: new Date().toISOString(),
       order: getCurrentItems().length,
       isFolder: true,
+      isFavorite: false,
     };
 
     const newData = {
