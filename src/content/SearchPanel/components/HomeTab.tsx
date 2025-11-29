@@ -1473,12 +1473,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               return (
                 <div
                   key={item.id}
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, item, index)}
-                  onDragOver={(e) => handleDragOver(e, index, item)}
+                  draggable={!editingItem}
+                  onDragStart={(e) =>
+                    editingItem
+                      ? e.preventDefault()
+                      : handleDragStart(e, item, index)
+                  }
+                  onDragOver={(e) =>
+                    !editingItem && handleDragOver(e, index, item)
+                  }
                   onDragLeave={handleDragLeave}
-                  onDrop={(e) => handleDrop(e, index, item)}
-                  onClick={() => handleItemClick(item)}
+                  onDrop={(e) => !editingItem && handleDrop(e, index, item)}
+                  onClick={() => {
+                    if (editingItem?.id === item.id) {
+                      saveEdit();
+                    } else if (!editingItem) {
+                      handleItemClick(item);
+                    }
+                  }}
+                  onContextMenu={(e) =>
+                    !editingItem && handleContextMenu(e, item)
+                  }
                   style={{
                     position: "relative",
                     width: "100%",
@@ -1490,21 +1505,28 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                       ? "2px solid rgba(59, 130, 246, 0.8)"
                       : isPreviewIndex
                       ? "2px dashed rgba(34, 197, 94, 0.8)"
+                      : editingItem?.id === item.id
+                      ? "2px solid rgba(139, 92, 246, 0.8)"
                       : "2px solid transparent",
                     color: "#ffffff",
                     textAlign: "center",
-                    cursor: "pointer",
+                    cursor: editingItem ? "text" : "pointer",
                     transition: "all 0.15s ease",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     gap: "0.25rem",
+                    userSelect: editingItem?.id === item.id ? "text" : "none",
                   }}
                   onMouseEnter={(e) => {
-                    // Remove hover effects for cleaner border-only visuals
+                    if (!editingItem) {
+                      // Remove hover effects for cleaner border-only visuals
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    // Remove hover effects for cleaner border-only visuals
+                    if (!editingItem) {
+                      // Remove hover effects for cleaner border-only visuals
+                    }
                   }}
                 >
                   <button
