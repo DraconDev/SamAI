@@ -866,9 +866,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
-              gap: "1rem",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "1.5rem",
               justifyItems: "center",
+              padding: "0 0.5rem",
             }}
           >
             {filteredItems.map((item, index) => (
@@ -882,9 +883,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 onClick={() => handleItemClick(item)}
                 style={{
                   position: "relative",
-                  width: "80px",
-                  padding: "0.75rem 0.5rem",
-                  borderRadius: "20px",
+                  width: "100%",
+                  maxWidth: "100px",
+                  padding: "1rem 0.75rem",
+                  borderRadius: "24px",
                   background:
                     dragOverIndex === index
                       ? "linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3))"
@@ -896,23 +898,23 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.5rem",
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                  gap: "0.75rem",
+                  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
                   border:
                     dragOverIndex === index
                       ? "2px solid rgba(139, 92, 246, 0.6)"
-                      : "1px solid rgba(71, 85, 105, 0.3)",
+                      : "1px solid rgba(71, 85, 105, 0.4)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform =
-                    "translateY(-4px) scale(1.05)";
+                    "translateY(-6px) scale(1.08)";
                   e.currentTarget.style.boxShadow =
-                    "0 12px 25px rgba(0, 0, 0, 0.25)";
+                    "0 16px 32px rgba(0, 0, 0, 0.3)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0) scale(1)";
                   e.currentTarget.style.boxShadow =
-                    "0 4px 12px rgba(0, 0, 0, 0.15)";
+                    "0 6px 16px rgba(0, 0, 0, 0.2)";
                 }}
               >
                 <button
@@ -922,15 +924,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }}
                   style={{
                     position: "absolute",
-                    top: "2px",
-                    right: "2px",
-                    width: "18px",
-                    height: "18px",
+                    top: "4px",
+                    right: "4px",
+                    width: "20px",
+                    height: "20px",
                     borderRadius: "50%",
                     border: "none",
                     background: "rgba(239, 68, 68, 0.9)",
                     color: "white",
-                    fontSize: "0.6rem",
+                    fontSize: "0.7rem",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
@@ -951,24 +953,24 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "14px",
+                    width: "64px",
+                    height: "64px",
+                    borderRadius: "20px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
                       : "linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3))",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "24px",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    fontSize: "28px",
+                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "20px" }}>📁</span>
+                    <span style={{ fontSize: "28px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
@@ -981,9 +983,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "32px",
-                              height: "32px",
-                              borderRadius: "8px",
+                              width: "44px",
+                              height: "44px",
+                              borderRadius: "12px",
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -998,19 +1000,19 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "20px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "28px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "20px" }}>
+                  <span style={{ display: "none", fontSize: "28px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
 
                 <div
                   style={{
-                    fontSize: "0.7rem",
-                    fontWeight: 600,
+                    fontSize: "0.8rem",
+                    fontWeight: 700,
                     color: "#e2e8f0",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
