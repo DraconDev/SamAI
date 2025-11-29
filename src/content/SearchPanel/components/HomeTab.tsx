@@ -1342,6 +1342,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   style={{
                     width: "52px",
                     height: "52px",
+                      ? "transparent"
                     borderRadius: "10px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
