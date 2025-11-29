@@ -885,13 +885,13 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               background:
                 "linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(16, 185, 129, 0.08))",
               border: "2px solid rgba(34, 197, 94, 0.3)",
-              borderRadius: "0px",
+              borderRadius: "16px",
               padding: "1.25rem 1.5rem",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
               gap: "1rem",
-              transition: "all 0.3s ease",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
               color: "#ffffff",
               fontWeight: 700,
               fontSize: "0.9rem",
@@ -901,20 +901,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               width: "100%",
               position: "relative",
               overflow: "hidden",
+              backdropFilter: "blur(10px)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background =
-                "linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.12))";
-              e.currentTarget.style.transform = "translateY(-2px)";
+                "linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(16, 185, 129, 0.18))";
               e.currentTarget.style.boxShadow =
-                "0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)";
+                "0 10px 30px rgba(34, 197, 94, 0.3), 0 0 0 1px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)";
+              e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.6)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background =
                 "linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(16, 185, 129, 0.08))";
-              e.currentTarget.style.transform = "translateY(0)";
               e.currentTarget.style.boxShadow =
                 "0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)";
+              e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.3)";
             }}
           >
             <div
