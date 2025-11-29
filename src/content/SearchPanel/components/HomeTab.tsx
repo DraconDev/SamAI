@@ -531,7 +531,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "1.125rem",
+              marginBottom: "0.875rem",
             }}
           >
             <div
@@ -786,10 +786,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         <div
           style={{
             padding: "0.75rem 1rem",
-            display: "flex",
-            justifyContent: "center",
-            borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
-            background: "rgba(30, 41, 59, 0.9)",
+            borderBottom: "1px solid rgba(51,65,85,0.4)",
+            background: "rgba(30,41,59,0.95)",
           }}
         >
           <div
