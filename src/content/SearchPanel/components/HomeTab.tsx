@@ -1066,33 +1066,196 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               >
                 Cancel
               </button>
+              {addMenuType === "custom" ? (
+                <button
+                  onClick={handleAddIcon}
+                  style={{
+                    flex: 1,
+                    padding: "0.9rem 1.5rem",
+                    borderRadius: "12px",
+                    border: "1px solid rgba(34, 197, 94, 0.6)",
+                    background: "rgba(34, 197, 94, 0.2)",
+                    color: "#86efac",
+                    fontSize: "0.9rem",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(34, 197, 94, 0.3)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(34, 197, 94, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(34, 197, 94, 0.2)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  Add Site
+                </button>
+              ) : (
+                <button
+                  onClick={handleCreateFolder}
+                  style={{
+                    flex: 1,
+                    padding: "0.9rem 1.5rem",
+                    borderRadius: "12px",
+                    border: "1px solid rgba(96, 165, 250, 0.6)",
+                    background: "rgba(96, 165, 250, 0.2)",
+                    color: "#60a5fa",
+                    fontSize: "0.9rem",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(96, 165, 250, 0.3)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(96, 165, 250, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(96, 165, 250, 0.2)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  Create Folder
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Folder Creation Form */}
+      {addMenuType === "folder" && (
+        <div
+          style={{
+            padding: "1.5rem",
+            borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
+            background: "rgba(30, 41, 59, 0.9)",
+            backdropFilter: "blur(15px)",
+            margin: "0 1rem",
+            borderRadius: "16px",
+            marginTop: "1rem",
+          }}
+        >
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+          >
+            {/* Folder Name */}
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "#94a3b8",
+                  marginBottom: "0.5rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                Folder Name
+              </label>
+              <input
+                type="text"
+                value={newFolderName}
+                onChange={(e) => setNewFolderName(e.target.value)}
+                placeholder="Enter folder name (e.g., Work, Social, etc.)"
+                style={{
+                  width: "100%",
+                  padding: "0.9rem 1rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(96, 165, 250, 0.3)",
+                  background: "rgba(15, 23, 42, 0.95)",
+                  color: "#f1f5f9",
+                  fontSize: "0.9rem",
+                  outline: "none",
+                  transition: "all 0.3s ease",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#60a5fa";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 3px rgba(96, 165, 250, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(96, 165, 250, 0.3)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div
+              style={{
+                display: "flex",
+                gap: "0.75rem",
+                justifyContent: "space-between",
+                marginTop: "0.5rem",
+              }}
+            >
               <button
-                onClick={handleAddIcon}
+                onClick={() => {
+                  setIsAddingIcon(false);
+                  setAddMenuType(null);
+                  setNewFolderName("");
+                }}
                 style={{
                   flex: 1,
                   padding: "0.9rem 1.5rem",
                   borderRadius: "12px",
-                  border: "1px solid rgba(34, 197, 94, 0.6)",
-                  background: "rgba(34, 197, 94, 0.2)",
-                  color: "#86efac",
+                  border: "1px solid rgba(239, 68, 68, 0.4)",
+                  background: "rgba(239, 68, 68, 0.1)",
+                  color: "#fca5a5",
                   fontSize: "0.9rem",
                   cursor: "pointer",
                   fontWeight: 600,
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(34, 197, 94, 0.3)";
+                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.2)";
                   e.currentTarget.style.transform = "translateY(-1px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 12px rgba(34, 197, 94, 0.3)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(34, 197, 94, 0.2)";
+                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleCreateFolder}
+                style={{
+                  flex: 1,
+                  padding: "0.9rem 1.5rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(96, 165, 250, 0.6)",
+                  background: "rgba(96, 165, 250, 0.2)",
+                  color: "#60a5fa",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(96, 165, 250, 0.3)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(96, 165, 250, 0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(96, 165, 250, 0.2)";
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                Add Site
+                Create Folder
               </button>
             </div>
           </div>
