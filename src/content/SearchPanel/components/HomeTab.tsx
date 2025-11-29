@@ -1329,7 +1329,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "0.25rem",
+              gap: "0.125rem",
               justifyItems: "center",
               padding: "0.5rem",
               position: "relative",
