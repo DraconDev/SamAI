@@ -11,7 +11,7 @@
 ## Do
 
 - the drag does seem to work but 
-  - when we drag around an icon others should shift around, i mean others that are valid to move around like folder for folders, and icons for icons, 
+  - when we drag around an icon others should shift around, we should see this visually, i mean others that are valid to move around like folder for folders, and icons for icons, so when i drag an page icon the other page icons should shift around to show where it will go, but folders should stay put, folders should i be able to drag into, and of course when i drag around folders the same happens, and folders cant be nested
   - for icons we need to be able to drag onto folders so we add them 
 - folder icons have a weird background lets get rid of that, also if we can use a different folder icon that would be great
 - we want the search bar to be as tall as the + add button, so they line up perfectly
