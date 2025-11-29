@@ -854,12 +854,95 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       )}
 
-      {/* Phone-like App Grid */}
+      {/* Enhanced Back Button with Drop Zone */}
+      {getCurrentFolder() && (
+        <div
+          style={{
+            padding: "1rem 1.5rem 0.5rem",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          <div
+            onDragOver={(e) => {
+              if (draggedItem && draggedItem.isFolder === false) {
+                e.preventDefault();
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(59, 130, 246, 0.2))";
+              }
+            }}
+            onDragLeave={(e) => {
+              e.currentTarget.style.background =
+                "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))";
+            }}
+            onDrop={async (e) => {
+              if (draggedItem && draggedItem.isFolder === false) {
+                e.preventDefault();
+                // Move dragged item back to main level
+                const newData = {
+                  ...homeData,
+                  currentFolderId: undefined,
+                  icons: homeData.icons.map((icon) =>
+                    icon.id === draggedItem.id
+                      ? {
+                          ...icon,
+                          folderId: undefined,
+                          order: getCurrentItems().length,
+                        }
+                      : icon
+                  ),
+                };
+                await saveHomeData(newData);
+                setDraggedItem(null);
+              }
+            }}
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))",
+              border: "1px solid rgba(139, 92, 246, 0.3)",
+              borderRadius: "16px",
+              padding: "1rem",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+              transition: "all 0.3s ease",
+              color: "#ffffff",
+              fontWeight: 600,
+            }}
+          >
+            <div
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "8px",
+                background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "16px",
+              }}
+            >
+              ←
+            </div>
+            <div>
+              <div style={{ fontSize: "1rem" }}>Back to Home</div>
+              <div
+                style={{ fontSize: "0.8rem", color: "#cbd5e1", opacity: 0.8 }}
+              >
+                Drag icons here to move them back
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile-like App Grid */}
       <div
         style={{
           flex: 1,
           padding: "1.5rem",
           overflowY: "auto",
+          background: "rgba(0, 0, 0, 0.95)",
         }}
       >
         {filteredItems.length > 0 ? (
@@ -867,9 +950,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "1rem",
+              gap: "1.5rem",
               justifyItems: "center",
-              padding: "0 0.25rem",
             }}
           >
             {filteredItems.map((item, index) => (
@@ -884,36 +966,32 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "70px",
-                  padding: "0.25rem",
-                  borderRadius: "16px",
+                  maxWidth: "80px",
+                  padding: "0.5rem 0.25rem",
+                  borderRadius: "8px",
                   background:
                     dragOverIndex === index
-                      ? "linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3))"
-                      : "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9))",
-                  color: "#e2e8f0",
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "transparent",
+                  color: "#ffffff",
                   textAlign: "center",
                   cursor: "pointer",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transition: "all 0.2s ease",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.35rem",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                  border:
-                    dragOverIndex === index
-                      ? "2px solid rgba(139, 92, 246, 0.6)"
-                      : "1px solid rgba(71, 85, 105, 0.4)",
+                  gap: "0.5rem",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 16px rgba(0, 0, 0, 0.25)";
+                  if (dragOverIndex !== index) {
+                    e.currentTarget.style.background =
+                      "rgba(255, 255, 255, 0.05)";
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 2px 8px rgba(0, 0, 0, 0.15)";
+                  if (dragOverIndex !== index) {
+                    e.currentTarget.style.background = "transparent";
+                  }
                 }}
               >
                 <button
@@ -923,10 +1001,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }}
                   style={{
                     position: "absolute",
-                    top: "4px",
-                    right: "4px",
-                    width: "16px",
-                    height: "16px",
+                    top: "2px",
+                    right: "2px",
+                    width: "18px",
+                    height: "18px",
                     borderRadius: "50%",
                     border: "none",
                     background: "rgba(239, 68, 68, 0.9)",
@@ -952,24 +1030,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "48px",
-                    height: "48px",
+                    width: "64px",
+                    height: "64px",
                     borderRadius: "12px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
-                      : "linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3))",
+                      : "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "20px",
-                    border: "1px solid rgba(255, 255, 255, 0.15)",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                    fontSize: "24px",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "18px" }}>📁</span>
+                    <span style={{ fontSize: "28px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
@@ -982,9 +1058,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "32px",
-                              height: "32px",
-                              borderRadius: "8px",
+                              width: "64px",
+                              height: "64px",
+                              borderRadius: "12px",
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -999,27 +1075,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "18px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "28px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "18px" }}>
+                  <span style={{ display: "none", fontSize: "28px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
 
                 <div
                   style={{
-                    fontSize: "0.7rem",
+                    fontSize: "0.8rem",
                     fontWeight: 600,
-                    color: "#e2e8f0",
+                    color: "#ffffff",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
                     width: "100%",
                     textAlign: "center",
-                    lineHeight: "1.1",
-                    maxWidth: "65px",
+                    lineHeight: "1.2",
+                    maxWidth: "75px",
                   }}
                 >
                   {item.name}
