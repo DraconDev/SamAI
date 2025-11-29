@@ -1429,9 +1429,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "0.5rem",
+              gap: "0.25rem",
               justifyItems: "center",
-              padding: "0.25rem",
+              padding: "0.5rem",
               position: "relative",
             }}
           >
@@ -1447,9 +1447,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "48px",
-                  padding: "0.375rem",
-                  borderRadius: "6px",
+                  maxWidth: "52px",
+                  padding: "0.25rem",
+                  borderRadius: "4px",
                   overflow: "hidden",
                   background:
                     dragOverIndex === index
@@ -1462,7 +1462,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.25rem",
+                  gap: "0.125rem",
                 }}
                 onMouseEnter={(e) => {
                   if (dragOverIndex !== index) {
@@ -1483,15 +1483,15 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }}
                   style={{
                     position: "absolute",
-                    top: "2px",
-                    right: "2px",
-                    width: "16px",
-                    height: "16px",
+                    top: "1px",
+                    right: "1px",
+                    width: "14px",
+                    height: "14px",
                     borderRadius: "50%",
                     border: "none",
                     background: "rgba(239, 68, 68, 0.9)",
                     color: "white",
-                    fontSize: "0.5rem",
+                    fontSize: "0.45rem",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
@@ -1512,22 +1512,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "6px",
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "4px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
                       : "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "16px",
+                    fontSize: "14px",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "18px" }}>📁</span>
+                    <span style={{ fontSize: "16px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
@@ -1540,9 +1540,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "36px",
-                              height: "36px",
-                              borderRadius: "6px",
+                              width: "32px",
+                              height: "32px",
+                              borderRadius: "4px",
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -1557,19 +1557,19 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "18px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "16px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "18px" }}>
+                  <span style={{ display: "none", fontSize: "16px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
 
                 <div
                   style={{
-                    fontSize: "0.6rem",
-                    fontWeight: 600,
+                    fontSize: "0.55rem",
+                    fontWeight: 500,
                     color: "#ffffff",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
@@ -1578,14 +1578,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     textAlign: "center",
                     lineHeight: "1.1",
                     height: "2.2em",
-                    maxWidth: "46px",
+                    maxWidth: "50px",
                     display: "-webkit-box",
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: "vertical",
                   }}
                 >
-                  {item.name.length > 10
-                    ? item.name.substring(0, 10) + "..."
+                  {item.name.length > 12
+                    ? item.name.substring(0, 12) + "..."
                     : item.name}
                 </div>
               </div>
