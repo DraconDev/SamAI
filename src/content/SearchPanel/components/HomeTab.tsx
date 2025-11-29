@@ -509,8 +509,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         flexDirection: "column",
         height: "100%",
         background: `
-          radial-gradient(ellipse at top, rgba(139, 92, 246, 0.15) 0%, transparent 70%),
-          radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.15) 0%, transparent 70%),
           linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.98) 50%, rgba(15, 23, 42, 0.95) 100%)
         `,
         borderRadius: "1rem",
