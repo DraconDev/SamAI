@@ -1113,67 +1113,39 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               >
                 Cancel
               </button>
-              {addMenuType === "custom" ? (
-                <button
-                  onClick={handleAddIcon}
-                  style={{
-                    flex: 1,
-                    padding: "0.9rem 1.5rem",
-                    borderRadius: "12px",
-                    border: "1px solid rgba(34, 197, 94, 0.6)",
-                    background: "rgba(34, 197, 94, 0.2)",
-                    color: "#86efac",
-                    fontSize: "0.9rem",
-                    cursor: "pointer",
-                    fontWeight: 600,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(34, 197, 94, 0.3)";
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 12px rgba(34, 197, 94, 0.3)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(34, 197, 94, 0.2)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  Add Site
-                </button>
-              ) : (
-                <button
-                  onClick={handleCreateFolder}
-                  style={{
-                    flex: 1,
-                    padding: "0.9rem 1.5rem",
-                    borderRadius: "12px",
-                    border: "1px solid rgba(96, 165, 250, 0.6)",
-                    background: "rgba(96, 165, 250, 0.2)",
-                    color: "#60a5fa",
-                    fontSize: "0.9rem",
-                    cursor: "pointer",
-                    fontWeight: 600,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background =
-                      "rgba(96, 165, 250, 0.3)";
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 12px rgba(96, 165, 250, 0.3)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background =
-                      "rgba(96, 165, 250, 0.2)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  Create Folder
-                </button>
-              )}
+              <button
+                onClick={handleAddIcon}
+                style={{
+                  flex: 1,
+                  padding: "0.9rem 1.5rem",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(34, 197, 94, 0.6)",
+                  background:
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2))",
+                  color: "#86efac",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  fontWeight: 700,
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 4px 12px rgba(34, 197, 94, 0.25)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3))";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 20px rgba(34, 197, 94, 0.35)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2))";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(34, 197, 94, 0.25)";
+                }}
+              >
+                Add Site
+              </button>
             </div>
           </div>
         </div>
