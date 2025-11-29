@@ -587,36 +587,76 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
           <div style={{ display: "flex", gap: "0.5rem" }}>
             {getCurrentFolder() && (
-              <button
-                onClick={goBack}
-                style={{
-                  padding: "0.6rem 1rem",
-                  borderRadius: "12px",
-                  border: "1px solid rgba(139, 92, 246, 0.3)",
-                  background:
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))",
-                  color: "#e2e8f0",
-                  fontSize: "0.8rem",
-                  cursor: "pointer",
-                  fontWeight: 600,
-                  transition: "all 0.3s ease",
+              <div
+                onDragOver={(e) => {
+                  if (draggedItem && draggedItem.isFolder === false) {
+                    e.preventDefault();
+                    e.currentTarget.style.background =
+                      "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(59, 130, 246, 0.3))";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 25px rgba(34, 197, 94, 0.4)";
+                  }
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 25px rgba(139, 92, 246, 0.3)";
-                }}
-                onMouseLeave={(e) => {
+                onDragLeave={(e) => {
                   e.currentTarget.style.background =
                     "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))";
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
+                onDrop={async (e) => {
+                  if (draggedItem && draggedItem.isFolder === false) {
+                    e.preventDefault();
+                    // Move dragged item back to main level
+                    const newData = {
+                      ...homeData,
+                      currentFolderId: undefined,
+                      icons: homeData.icons.map((icon) =>
+                        icon.id === draggedItem.id
+                          ? {
+                              ...icon,
+                              folderId: undefined,
+                              order: getCurrentItems().length,
+                            }
+                          : icon
+                      ),
+                    };
+                    await saveHomeData(newData);
+                    setDraggedItem(null);
+                  }
+                }}
               >
-                ← Back
-              </button>
+                <button
+                  onClick={goBack}
+                  style={{
+                    padding: "0.6rem 1rem",
+                    borderRadius: "12px",
+                    border: "1px solid rgba(139, 92, 246, 0.3)",
+                    background:
+                      "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))",
+                    color: "#e2e8f0",
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background =
+                      "linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 25px rgba(139, 92, 246, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background =
+                      "linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  ← Back to Home
+                </button>
+              </div>
             )}
           </div>
         </div>
