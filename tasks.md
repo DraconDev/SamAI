@@ -2,7 +2,7 @@
 
 ## Plan
 
-- we need better styling for the home tab
+- [x] we need better styling for the home tab
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 - the page scraper doesn't follow the same tab style exactly as the rest of the app, we need to fix that, but otherwise looks good
 - add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
