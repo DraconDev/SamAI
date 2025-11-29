@@ -13,6 +13,8 @@
 - be able to edit the current icons and folders, but how? 
   - can we do right click menu on the icons and folders to edit them?
   - this could support delete and edit, 
+- 
+
 
 ## Done
 
