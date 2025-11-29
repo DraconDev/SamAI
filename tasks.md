@@ -18,7 +18,8 @@
 - [x] we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
 
 - [x] the back to home button is in the rught place but we need to style it better, it could take up the whole space
-  - this is almsot perfect but i 
+  - this is almsot perfect but i the button to take up the whole space, no rounded courses either, and make it more much cooler 
+- we need to style the 
 
 ## Done
 
