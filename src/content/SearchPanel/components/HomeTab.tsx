@@ -862,10 +862,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             onDrop={async (e) => {
               if (draggedItem && draggedItem.isFolder === false) {
                 e.preventDefault();
-                // Move dragged item back to main level
+                // Move dragged item back to main level while staying in current folder
                 const newData = {
                   ...homeData,
-                  currentFolderId: undefined,
+                  // Don't change currentFolderId - stay in current folder
                   icons: homeData.icons.map((icon) =>
                     icon.id === draggedItem.id
                       ? {
