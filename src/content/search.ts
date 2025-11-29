@@ -73,6 +73,12 @@ export async function showSidePanel(
       samaiPanelContainer.remove();
       samaiPanelContainer = null;
     }
+    // Restore floating icon visibility when panel is toggled off
+    const floatingIcon = document.getElementById("samai-floating-icon");
+    if (floatingIcon) {
+      floatingIcon.style.display = "flex";
+      floatingIcon.style.zIndex = "2147483646"; // Restore original z-index
+    }
     return;
   }
 
@@ -166,6 +172,12 @@ export async function showSidePanel(
           if (samaiPanelContainer) {
             samaiPanelContainer.remove();
             samaiPanelContainer = null;
+          }
+          // Restore floating icon visibility when panel is closed
+          const floatingIcon = document.getElementById("samai-floating-icon");
+          if (floatingIcon) {
+            floatingIcon.style.display = "flex";
+            floatingIcon.style.zIndex = "2147483646"; // Restore original z-index
           }
         },
       })
