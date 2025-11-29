@@ -472,15 +472,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       }
       // Otherwise ignore (prevent folders in folders, or moving from folder to main)
     }
-    // Case 2: Auto-create folder when dropping different items together
-    else if (draggedItem.id !== targetItem.id && isTargetSameLevel) {
-      // Only create folders when both items are at the same level and neither is a folder
-      if (!draggedIcon.isFolder && !targetItem.isFolder) {
-        await createFolderFromIcons(draggedIcon, targetItem);
-      }
-    }
-    // Case 3: Reorder within current view (improved logic)
-    else if (isTargetSameLevel) {
+    // Case 2: Reorder within current view (improved logic)
+    if (isTargetSameLevel) {
       // Get current items in the correct order
       const currentItems = getCurrentItems();
 
@@ -1412,22 +1405,23 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "4px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "8px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
                       : "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "14px",
+                    fontSize: "18px",
                     position: "relative",
                     overflow: "hidden",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "16px" }}>📁</span>
+                    <span style={{ fontSize: "20px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
@@ -1440,9 +1434,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "32px",
-                              height: "32px",
-                              borderRadius: "4px",
+                              width: "44px",
+                              height: "44px",
+                              borderRadius: "8px",
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -1457,11 +1451,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "16px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "20px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "16px" }}>
+                  <span style={{ display: "none", fontSize: "20px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
