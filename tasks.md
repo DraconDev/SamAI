@@ -4,12 +4,12 @@
 - have 5 icons in a row, and they should have 2 rows of text each
 - Simplify the search highlight
   - Its either favorite or hide
-
-## Do
-
 - we need better styling for the home tab
   - the big glow button are not very appealing
   - the top section is too fat 
+
+## Do
+
 - we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
   - not fixed! 
 - make the icons more tightly package much like a phone screen
