@@ -7,8 +7,9 @@
 ## Do
 
 - we need better styling for the home page
-  - the big glow 
+  - the big glow button are not very appealing
 - we need to be able order the icons by drag, so if i drag the 3rd icon between the 1st and 2nd icon, it becomes the 2nd icon
+  - not fixed! 
 - make the icons more tightly package much like a phone screen
 - having 2 row descriptions for the icons is okay much like a phone screen
   - we have this not kind but we are not cutting of the 3rd row, we see part of it 
