@@ -1222,22 +1222,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "8px",
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "6px",
                     background: item.isFolder
                       ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
                       : "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "20px",
+                    fontSize: "16px",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "22px" }}>📁</span>
+                    <span style={{ fontSize: "18px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
@@ -1250,9 +1250,9 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "44px",
-                              height: "44px",
-                              borderRadius: "8px",
+                              width: "36px",
+                              height: "36px",
+                              borderRadius: "6px",
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -1267,32 +1267,35 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "22px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "18px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "22px" }}>
+                  <span style={{ display: "none", fontSize: "18px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
 
                 <div
                   style={{
-                    fontSize: "0.65rem",
+                    fontSize: "0.6rem",
                     fontWeight: 600,
                     color: "#ffffff",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
+                    whiteSpace: "normal",
                     width: "100%",
                     textAlign: "center",
-                    lineHeight: "1.2",
-                    height: "1.2em",
-                    maxWidth: "58px",
+                    lineHeight: "1.1",
+                    height: "2.2em",
+                    maxWidth: "46px",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
                   }}
                 >
-                  {item.name.length > 12
-                    ? item.name.substring(0, 12) + "..."
+                  {item.name.length > 10
+                    ? item.name.substring(0, 10) + "..."
                     : item.name}
                 </div>
               </div>
