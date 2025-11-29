@@ -535,7 +535,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
   // Get domain icon or fallback icon
   const getIconForItem = (item: HomeIcon) => {
-    if (item.isFolder) return "📁";
+    if (item.isFolder) return "🗂️";
 
     if (item.iconUrl) {
       return item.iconUrl;
@@ -589,14 +589,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   width: "100%",
                   padding: "0.75rem 1rem",
+                  height: "42px",
                   borderRadius: "12px",
                   border: "1px solid rgba(139, 92, 246, 0.3)",
                   background: "rgba(15, 23, 42, 0.95)",
                   color: "#f1f5f9",
                   fontSize: "0.9rem",
-                  height: "42px",
-                  boxSizing: "border-box",
                   outline: "none",
+                  boxSizing: "border-box",
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = "#8b5cf6";
