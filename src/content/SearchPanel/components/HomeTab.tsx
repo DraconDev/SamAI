@@ -622,7 +622,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
         </div>
 
-        {/* Top Row: Search Bar and Add Current */}
+        {/* Top Row: Search Bar and Add Site */}
         <div
           style={{
             display: "flex",
@@ -710,42 +710,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             )}
           </div>
 
-          {/* Add Current - most used, goes in top right */}
-          <button
-            onClick={addCurrentSite}
-            style={{
-              padding: "0.8rem 1.25rem",
-              borderRadius: "12px",
-              border: "1px solid rgba(234, 179, 8, 0.4)",
-              background:
-                "linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05))",
-              color: "#fbbf24",
-              fontSize: "0.8rem",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              fontWeight: 600,
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(234, 179, 8, 0.15))";
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 25px rgba(234, 179, 8, 0.3)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05))";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            ⭐ Add Current
-          </button>
-        </div>
-
-        {/* Second Row: Add Site Button */}
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          {/* Add Site - moved to top row where Add Current was */}
           <button
             onClick={() => setIsAddingIcon(!isAddingIcon)}
             style={{
