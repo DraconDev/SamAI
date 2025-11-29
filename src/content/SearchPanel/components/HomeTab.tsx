@@ -847,16 +847,17 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 e.preventDefault();
                 e.currentTarget.style.background =
                   "linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(16, 185, 129, 0.25))";
-                e.currentTarget.style.transform = "translateY(-1px)";
                 e.currentTarget.style.boxShadow =
-                  "0 6px 16px rgba(34, 197, 94, 0.35)";
+                  "0 8px 25px rgba(34, 197, 94, 0.4), 0 0 0 1px rgba(34, 197, 94, 0.6)";
+                e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.8)";
               }
             }}
             onDragLeave={(e) => {
               e.currentTarget.style.background =
                 "linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15))";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.15)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)";
+              e.currentTarget.style.borderColor = "rgba(34, 197, 94, 0.3)";
             }}
             onDrop={async (e) => {
               if (draggedItem && draggedItem.isFolder === false) {
