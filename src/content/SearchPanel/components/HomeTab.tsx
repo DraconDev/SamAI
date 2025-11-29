@@ -823,7 +823,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       {/* Enhanced Header */}
       <div
         style={{
-          padding: "0.875rem",
+          padding: "1.25rem",
           borderBottom: "1px solid rgba(51,65,85,0.4)",
           background: "rgba(30,41,59,0.95)",
           position: "relative",
@@ -834,8 +834,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "1rem",
-              padding: "0.5rem 0",
+              gap: "1.25rem",
+              padding: "0.75rem 0",
             }}
           >
             <div style={{ flex: 1, maxWidth: "400px" }}>
@@ -846,24 +846,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 placeholder="Search favorites..."
                 style={{
                   width: "100%",
-                  padding: "0.75rem 1rem",
-                  height: "42px",
-                  borderRadius: "12px",
+                  padding: "0.875rem 1.25rem",
+                  height: "48px",
+                  borderRadius: "14px",
                   border: "1px solid rgba(139, 92, 246, 0.3)",
                   background: "rgba(15, 23, 42, 0.95)",
                   color: "#f1f5f9",
-                  fontSize: "0.9rem",
+                  fontSize: "0.95rem",
                   outline: "none",
                   boxSizing: "border-box",
+                  transition: "all 0.3s ease",
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = "#8b5cf6";
                   e.currentTarget.style.boxShadow =
-                    "0 0 0 3px rgba(139, 92, 246, 0.15)";
+                    "0 0 0 4px rgba(139, 92, 246, 0.15)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
                 }}
                 onBlur={(e) => {
                   e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
                   e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               />
             </div>
@@ -885,24 +888,35 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }, 100);
                 }}
                 style={{
-                  padding: "0.75rem 1rem",
-                  borderRadius: "12px",
+                  padding: "0.875rem 1.25rem",
+                  borderRadius: "14px",
                   border: "1px solid rgba(34, 197, 94, 0.4)",
                   background:
                     "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15))",
                   color: "#86efac",
-                  fontSize: "0.9rem",
+                  fontSize: "0.95rem",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
                   fontWeight: 700,
-                  transition: "all 0.2s ease",
+                  transition: "all 0.3s ease",
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.5rem",
+                  gap: "0.625rem",
                   boxShadow: "0 4px 12px rgba(34, 197, 94, 0.25)",
+                  minHeight: "48px",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 20px rgba(34, 197, 94, 0.35)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(34, 197, 94, 0.25)";
                 }}
               >
-                <span style={{ fontSize: "1.2rem", fontWeight: 900 }}>+</span>
+                <span style={{ fontSize: "1.4rem", fontWeight: 900 }}>+</span>
                 <span>Add</span>
               </button>
             </div>
