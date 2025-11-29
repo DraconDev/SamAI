@@ -10,11 +10,11 @@
 ## Do
 
 - [x] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
-- [x] be able to edit the current icons and folders, but how?
-  - [x] can we do right click menu on the icons and folders to edit them?
-  - [x] this could support delete and edit,
-- [x] Simplify the search highlight
-  - [x] Its either favorite or hide
+- [ ] be able to edit the current icons and folders, but how?
+  - [ ] can we do right click menu on the icons and folders to edit them?
+  - [ ] this could support delete and edit,
+- [ ] Simplify the search highlight, we have a search highlight feature that allows us to mark sites, this is not home tab but search tab related, we have various colors now but that is overall we should just have a 
+  - [ ] Its either favorite or hide
 
 ## Done
 
