@@ -8,6 +8,7 @@
 - add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
 - [ ] Simplify the search highlight, we have a search highlight feature that allows us to mark sites, this is not home tab but search tab related, we have various colors now but that is overall we should just have a favorite and hide feature, so we can favorite sites to show them at the top of search results with choose color decoration, and hide sites to not show them at all in search results
   - [ ] Its either favorite or hide, no other colors
+- make home bar header the same height as chat tab header and search tab header
 
 ## To Do
 
