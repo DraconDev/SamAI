@@ -1112,19 +1112,19 @@ const HomeTab: React.FC<HomeTabProps> = () => {
       <div
         style={{
           flex: 1,
-          padding: "1.5rem",
+          padding: "1rem",
           overflowY: "auto",
-          paddingBottom: "1.5rem",
+          paddingBottom: "1rem",
         }}
       >
         {filteredItems.length > 0 ? (
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "0.125rem",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "0.75rem",
               justifyItems: "center",
-              padding: "0.125rem",
+              padding: "0.5rem",
             }}
           >
             {filteredItems.map((item, index) => (
@@ -1139,27 +1139,27 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 style={{
                   position: "relative",
                   width: "100%",
-                  maxWidth: "42px",
-                  padding: "0.0625rem",
-                  borderRadius: "6px",
+                  maxWidth: "60px",
+                  padding: "0.5rem",
+                  borderRadius: "8px",
                   overflow: "hidden",
                   background:
                     dragOverIndex === index
-                      ? "rgba(255, 255, 255, 0.1)"
+                      ? "rgba(255, 255, 255, 0.08)"
                       : "transparent",
                   color: "#ffffff",
                   textAlign: "center",
                   cursor: "pointer",
-                  transition: "all 0.2s ease",
+                  transition: "all 0.15s ease",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "0.125rem",
+                  gap: "0.375rem",
                 }}
                 onMouseEnter={(e) => {
                   if (dragOverIndex !== index) {
                     e.currentTarget.style.background =
-                      "rgba(255, 255, 255, 0.05)";
+                      "rgba(255, 255, 255, 0.03)";
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -1175,21 +1175,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   }}
                   style={{
                     position: "absolute",
-                    top: "0px",
-                    right: "0px",
-                    width: "14px",
-                    height: "14px",
+                    top: "2px",
+                    right: "2px",
+                    width: "16px",
+                    height: "16px",
                     borderRadius: "50%",
                     border: "none",
                     background: "rgba(239, 68, 68, 0.9)",
                     color: "white",
-                    fontSize: "0.4rem",
+                    fontSize: "0.5rem",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     opacity: 0,
-                    transition: "opacity 0.2s ease",
+                    transition: "opacity 0.15s ease",
                     zIndex: 1,
                   }}
                   onMouseEnter={(e) => {
@@ -1204,22 +1204,22 @@ const HomeTab: React.FC<HomeTabProps> = () => {
 
                 <div
                   style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "7px",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "8px",
                     background: item.isFolder
-                      ? "linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3))"
+                      ? "linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25))"
                       : "transparent",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "18px",
+                    fontSize: "20px",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   {item.isFolder ? (
-                    <span style={{ fontSize: "20px" }}>📁</span>
+                    <span style={{ fontSize: "22px" }}>📁</span>
                   ) : (
                     (() => {
                       const iconUrl = getIconForItem(item);
@@ -1232,8 +1232,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                             src={iconUrl}
                             alt={item.name}
                             style={{
-                              width: "40px",
-                              height: "40px",
+                              width: "44px",
+                              height: "44px",
                               borderRadius: "8px",
                             }}
                             onError={(e) => {
@@ -1249,34 +1249,33 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                         );
                       }
                       return (
-                        <span style={{ fontSize: "20px" }}>{iconUrl}</span>
+                        <span style={{ fontSize: "22px" }}>{iconUrl}</span>
                       );
                     })()
                   )}
-                  <span style={{ display: "none", fontSize: "20px" }}>
+                  <span style={{ display: "none", fontSize: "22px" }}>
                     {item.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
 
                 <div
                   style={{
-                    fontSize: "0.55rem",
+                    fontSize: "0.65rem",
                     fontWeight: 600,
                     color: "#ffffff",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "normal",
+                    whiteSpace: "nowrap",
                     width: "100%",
                     textAlign: "center",
-                    lineHeight: "1.1",
-                    height: "1.21rem",
-                    maxWidth: "44px",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
+                    lineHeight: "1.2",
+                    height: "1.2em",
+                    maxWidth: "58px",
                   }}
                 >
-                  {item.name}
+                  {item.name.length > 12
+                    ? item.name.substring(0, 12) + "..."
+                    : item.name}
                 </div>
               </div>
             ))}
