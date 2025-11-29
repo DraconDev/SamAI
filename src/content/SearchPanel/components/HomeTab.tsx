@@ -611,43 +611,8 @@ const HomeTab: React.FC<HomeTabProps> = () => {
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "0.75rem" }}>
-              {/* Add Current - enhanced styling */}
-              <button
-                onClick={addCurrentSite}
-                style={{
-                  padding: "0.75rem 1rem",
-                  borderRadius: "12px",
-                  border: "1px solid rgba(34, 197, 94, 0.4)",
-                  background:
-                    "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08))",
-                  color: "#86efac",
-                  fontSize: "0.8rem",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  fontWeight: 600,
-                  transition: "all 0.2s ease",
-                  width: "120px",
-                  textAlign: "center",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.12))";
-                  e.currentTarget.style.transform = "translateY(-1px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 8px rgba(34, 197, 94, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background =
-                    "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08))";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                ⭐ Add Current
-              </button>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              {/* Search and Add Site buttons moved to main row for compactness */}
             </div>
           </div>
 
