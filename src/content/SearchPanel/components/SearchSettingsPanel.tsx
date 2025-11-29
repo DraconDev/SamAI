@@ -333,17 +333,21 @@ export default function SearchSettingsPanel({
                         className="w-4 h-4 text-[#4f46e5] bg-[#0D0E16] border-[#2E2F3E]/50 rounded focus:ring-[#4f46e5]/50"
                       />
                     </div>
-                    <div className="col-span-2">
-                      <input
-                        type="color"
-                        value={pattern.color}
+                    <div className="col-span-3">
+                      <select
+                        value={pattern.type}
                         onChange={(e) =>
-                          updatePattern(pattern.id, { color: e.target.value })
+                          updatePattern(pattern.id, {
+                            type: e.target.value as "favorite" | "hide",
+                          })
                         }
-                        className="w-full h-8 rounded border border-[#2E2F3E]/50"
-                      />
+                        className="w-full h-8 bg-[#0D0E16] border border-[#2E2F3E]/50 rounded text-sm text-gray-100 focus:outline-none focus:ring-1 focus:ring-[#4f46e5]/50"
+                      >
+                        <option value="favorite">⭐ Favorite</option>
+                        <option value="hide">🚫 Hide</option>
+                      </select>
                     </div>
-                    <div className="col-span-9">
+                    <div className="col-span-7">
                       <input
                         type="text"
                         placeholder="Domain or pattern (e.g., wikipedia.org, github.com, *.edu)"
