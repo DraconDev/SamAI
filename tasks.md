@@ -12,21 +12,21 @@
 ## Do
 
 - The back to home button should not move up when hovered over
-  - make the back to home button even cooler
+  - make the back to home button even cool
 - when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
+- sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
 - be able to edit the current icons and folders, but how?
   - can we do right click menu on the icons and folders to edit them?
   - this could support delete and edit,
+
+## Done
+
 - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
   - the current drag system is pretty good when i drag an icon we see green to see i can drag to reorder on an icon, and see blue that i can put in a folder, so icon is great
     - folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
     - [x] folder is less good, we shouldn't see blue, cause we can't put folders in folders, so we should only see green to reorder on dragging onto a folder, but currently dragging onto a folder just show a basic white highlight, and dragging onto an icon shows green
     - [x] Fixed: Green borders for reordering (site→site, folder→folder), blue for putting into folders (site→folder)
     - [x] Cleaned up: Removed background glows, now using only clean borders for visual feedback
-- sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic
-
-## Done
-
 - folder icons have a weird background lets get rid of that, also if we can use a different folder icon that would be great
 - make the icons more tightly packet much like a phone screen,
   - this is pretty close but make icon even bigger
