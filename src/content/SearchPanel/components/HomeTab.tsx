@@ -1012,7 +1012,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 Add Site
               </button>
             </div>
-          </div>
           {/* Back to Home Button - appears right after search when in folder */}
           {getCurrentFolder() && (
             <div
@@ -1106,6 +1105,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             </div>
           )}
         </div>
+          </div>
       )}
 
 
