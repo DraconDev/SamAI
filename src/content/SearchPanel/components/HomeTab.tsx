@@ -672,7 +672,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           <div
             style={{
               display: "flex",
-              gap: "1rem",
+              gap: "0.75rem",
               alignItems: "center",
             }}
           >
@@ -691,37 +691,37 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                 placeholder="Search your apps..."
                 style={{
                   width: "100%",
-                  padding: "1rem 1.25rem 1rem 3rem",
-                  borderRadius: "20px",
-                  border: "1px solid rgba(139, 92, 246, 0.4)",
+                  padding: "0.75rem 1rem 0.75rem 2.5rem",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(139, 92, 246, 0.3)",
                   background: "rgba(15, 23, 42, 0.9)",
                   color: "#f1f5f9",
-                  fontSize: "0.9rem",
+                  fontSize: "0.85rem",
                   outline: "none",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+                  transition: "all 0.2s ease",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = "#8b5cf6";
                   e.currentTarget.style.boxShadow =
-                    "0 0 0 4px rgba(139, 92, 246, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3)";
+                    "0 0 0 3px rgba(139, 92, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2)";
                   e.currentTarget.style.background = "rgba(15, 23, 42, 0.95)";
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.4)";
+                  e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
                   e.currentTarget.style.boxShadow =
-                    "0 4px 15px rgba(0, 0, 0, 0.2)";
+                    "0 2px 8px rgba(0, 0, 0, 0.15)";
                   e.currentTarget.style.background = "rgba(15, 23, 42, 0.9)";
                 }}
               />
               <div
                 style={{
                   position: "absolute",
-                  left: "1rem",
+                  left: "0.75rem",
                   top: "50%",
                   transform: "translateY(-50%)",
                   color: "#94a3b8",
-                  fontSize: "1.1rem",
+                  fontSize: "1rem",
                   pointerEvents: "none",
                 }}
               >
@@ -732,16 +732,16 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   onClick={() => setSearchQuery("")}
                   style={{
                     position: "absolute",
-                    right: "1rem",
+                    right: "0.75rem",
                     top: "50%",
                     transform: "translateY(-50%)",
                     background: "rgba(239, 68, 68, 0.2)",
                     border: "1px solid rgba(239, 68, 68, 0.4)",
                     color: "#fca5a5",
                     cursor: "pointer",
-                    fontSize: "0.8rem",
-                    width: "28px",
-                    height: "28px",
+                    fontSize: "0.75rem",
+                    width: "24px",
+                    height: "24px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -764,32 +764,30 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             <button
               onClick={() => setIsAddingIcon(!isAddingIcon)}
               style={{
-                padding: "1rem 1.5rem",
-                borderRadius: "16px",
-                border: "1px solid rgba(34, 197, 94, 0.5)",
+                padding: "0.75rem 1rem",
+                borderRadius: "12px",
+                border: "1px solid rgba(34, 197, 94, 0.4)",
                 background:
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))",
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08))",
                 color: "#86efac",
-                fontSize: "0.85rem",
+                fontSize: "0.8rem",
                 cursor: "pointer",
                 whiteSpace: "nowrap",
                 fontWeight: 600,
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                minWidth: "130px",
+                transition: "all 0.2s ease",
+                minWidth: "120px",
                 textAlign: "center",
-                position: "relative",
-                overflow: "hidden",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(34, 197, 94, 0.2))";
-                e.currentTarget.style.transform = "translateY(-3px)";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.12))";
+                e.currentTarget.style.transform = "translateY(-1px)";
                 e.currentTarget.style.boxShadow =
-                  "0 12px 35px rgba(34, 197, 94, 0.4)";
+                  "0 4px 8px rgba(34, 197, 94, 0.2)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background =
-                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))";
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08))";
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}
@@ -799,6 +797,102 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
         </div>
       </div>
+
+      {/* Back to Home Button - appears below search when in folder */}
+      {getCurrentFolder() && (
+        <div
+          style={{
+            padding: "0.75rem 1rem",
+            display: "flex",
+            justifyContent: "center",
+            borderBottom: "1px solid rgba(139, 92, 246, 0.2)",
+            background: "rgba(30, 41, 59, 0.9)",
+          }}
+        >
+          <div
+            onDragOver={(e) => {
+              if (draggedItem && draggedItem.isFolder === false) {
+                e.preventDefault();
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(59, 130, 246, 0.2))";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(34, 197, 94, 0.25)";
+              }
+            }}
+            onDragLeave={(e) => {
+              e.currentTarget.style.background =
+                "linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15))";
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.15)";
+            }}
+            onDrop={async (e) => {
+              if (draggedItem && draggedItem.isFolder === false) {
+                e.preventDefault();
+                // Move dragged item back to main level
+                const newData = {
+                  ...homeData,
+                  currentFolderId: undefined,
+                  icons: homeData.icons.map((icon) =>
+                    icon.id === draggedItem.id
+                      ? {
+                          ...icon,
+                          folderId: undefined,
+                          order: getCurrentItems().length,
+                        }
+                      : icon
+                  ),
+                };
+                await saveHomeData(newData);
+                setDraggedItem(null);
+              }
+            }}
+            onClick={goBack}
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15))",
+              border: "1px solid rgba(139, 92, 246, 0.3)",
+              borderRadius: "12px",
+              padding: "0.75rem 1.5rem",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              transition: "all 0.2s ease",
+              color: "#ffffff",
+              fontWeight: 600,
+              fontSize: "0.85rem",
+              boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+              textAlign: "center",
+              width: "100%",
+              maxWidth: "300px",
+            }}
+          >
+            <div
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "8px",
+                background: "linear-gradient(135deg, #8b5cf6, #a855f7)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "16px",
+              }}
+            >
+              ←
+            </div>
+            <div style={{ textAlign: "left" }}>
+              <div style={{ fontSize: "0.9rem", fontWeight: 700 }}>
+                Back to Home
+              </div>
+              <div style={{ fontSize: "0.75rem", opacity: 0.8 }}>
+                Drop icons here to move them back
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Enhanced Add Form */}
       {isAddingIcon && (
