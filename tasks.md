@@ -1,8 +1,8 @@
 # Tasks
 
 ## Planned
-- Filter
-    
+- Simplify the search highlight
+  - Its either favorite or hide
 
 ## Do
 
