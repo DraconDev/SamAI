@@ -515,6 +515,21 @@ const HomeTab: React.FC<HomeTabProps> = () => {
     }
   };
 
+  const handleContextToggleFavorite = async () => {
+    if (contextMenu.item) {
+      const newData = {
+        ...homeData,
+        icons: homeData.icons.map((icon) =>
+          icon.id === contextMenu.item!.id
+            ? { ...icon, isFavorite: !icon.isFavorite }
+            : icon
+        ),
+      };
+      await saveHomeData(newData);
+      closeContextMenu();
+    }
+  };
+
   // Touch handlers for mobile support
   const handleTouchStart = (e: React.TouchEvent, item: HomeIcon) => {
     if (editingItem) return;
