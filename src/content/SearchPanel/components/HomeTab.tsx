@@ -1062,7 +1062,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   ⭐ Add Current Site
                 </button>
                 <button
-                  onClick={() => setIsAddingItem(true)}
+                  onClick={() => setIsAddingIcon(true)}
                   style={{
                     padding: "1rem 2rem",
                     borderRadius: "16px",
@@ -1086,7 +1086,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
-                  ➕ Add Apps
+                  ➕ Add Site
                 </button>
               </div>
             )}
