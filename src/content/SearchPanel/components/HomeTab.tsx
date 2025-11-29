@@ -662,16 +662,16 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           </div>
         </div>
 
-        {/* Search and Action Buttons */}
+        {/* Top Row: Search Bar and Add Current */}
         <div
           style={{
             display: "flex",
             gap: "0.75rem",
             alignItems: "center",
-            flexWrap: "wrap",
+            marginBottom: "1rem",
           }}
         >
-          {/* Enhanced Search */}
+          {/* Search Bar - takes remaining space */}
           <div
             style={{
               position: "relative",
@@ -750,11 +750,11 @@ const HomeTab: React.FC<HomeTabProps> = () => {
             )}
           </div>
 
-          {/* Enhanced Action Buttons */}
+          {/* Add Current - most used, goes in top right */}
           <button
             onClick={addCurrentSite}
             style={{
-              padding: "0.8rem 1rem",
+              padding: "0.8rem 1.25rem",
               borderRadius: "12px",
               border: "1px solid rgba(234, 179, 8, 0.4)",
               background:
@@ -782,11 +782,14 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           >
             ⭐ Add Current
           </button>
+        </div>
 
+        {/* Second Row: Add Site Button */}
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button
             onClick={() => setIsAddingIcon(!isAddingIcon)}
             style={{
-              padding: "0.8rem 1rem",
+              padding: "0.8rem 1.25rem",
               borderRadius: "12px",
               border: "1px solid rgba(34, 197, 94, 0.4)",
               background:
