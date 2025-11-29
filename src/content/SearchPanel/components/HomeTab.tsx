@@ -1338,23 +1338,10 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                     gap: "0.25rem",
                   }}
                   onMouseEnter={(e) => {
-                    if (
-                      !isDraggedOver &&
-                      !isDraggedOverFolder &&
-                      !isPreviewIndex
-                    ) {
-                      e.currentTarget.style.background =
-                        "rgba(255, 255, 255, 0.03)";
-                    }
+                    // Remove hover effects for cleaner border-only visuals
                   }}
                   onMouseLeave={(e) => {
-                    if (
-                      !isDraggedOver &&
-                      !isDraggedOverFolder &&
-                      !isPreviewIndex
-                    ) {
-                      e.currentTarget.style.background = "transparent";
-                    }
+                    // Remove hover effects for cleaner border-only visuals
                   }}
                 >
                   <button
