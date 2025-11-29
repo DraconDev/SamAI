@@ -10,6 +10,7 @@
 
 ## Do
 
+- + add button doesn't open anything right now 
 - [x] the back to home button is in the rught place but we need to style it better, it could take up the whole space
   - this is almost perfect but i the button to take up the whole space, no rounded courses either, and make it more much cooler
   - make it have a much cooler icon and round corners
