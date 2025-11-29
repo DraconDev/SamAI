@@ -76,6 +76,9 @@ export default function SearchSettingsPanel({
         promptStyle,
         outputFormat,
         showFloatingIcon: true,
+        autoHighlight,
+        highlightOpacity,
+        enableHighlighting: true,
       });
 
       // Save patterns to local storage
@@ -303,18 +306,33 @@ export default function SearchSettingsPanel({
             </div>
           </div>
 
-          {/* Highlight Patterns */}
+          {/* Site Management Rules */}
           <div className="space-y-4">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-300">
+              <span className="text-[#4f46e5]">⭐</span>
+              Site Management Rules
+            </h3>
+
+            <div className="p-3 bg-[#0D0E16]/20 rounded-lg border border-[#2E2F3E]/20">
+              <div className="text-xs text-gray-400 mb-2">
+                <strong>⭐ Favorite:</strong> Show sites at the top of search
+                results with special highlighting
+              </div>
+              <div className="text-xs text-gray-400">
+                <strong>🚫 Hide:</strong> Remove sites completely from search
+                results
+              </div>
+            </div>
+
             <div className="flex items-center justify-between">
-              <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-300">
-                <span className="text-[#4f46e5]">🎨</span>
-                Highlight Patterns
-              </h3>
+              <h4 className="text-sm font-semibold text-gray-300">
+                Site Rules
+              </h4>
               <button
                 onClick={addPattern}
                 className="px-3 py-1.5 text-xs font-medium bg-[#4f46e5]/20 hover:bg-[#4f46e5]/30 text-[#818cf8] border border-[#4f46e5]/30 rounded-lg transition-all duration-200"
               >
-                + Add Pattern
+                + Add Rule
               </button>
             </div>
 
@@ -383,60 +401,15 @@ export default function SearchSettingsPanel({
 
             {patterns.length === 0 && (
               <div className="py-8 text-center text-gray-500">
-                <p className="text-sm">No highlight patterns added yet</p>
+                <p className="text-sm">No site rules added yet</p>
                 <p className="text-xs">
-                  Add patterns to automatically highlight search results
+                  Add rules to favorite or hide specific sites
                 </p>
               </div>
             )}
           </div>
 
-          {/* Highlight Settings */}
-          <div className="space-y-4">
-            <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-300">
-              <span className="text-[#4f46e5]">🎯</span>
-              Highlight Settings
-            </h3>
-
-            <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
-              <div>
-                <label className="text-sm font-medium text-gray-200">
-                  Auto-highlight results
-                </label>
-                <p className="text-xs text-gray-400">
-                  Automatically apply highlights to search results
-                </p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={autoHighlight}
-                  onChange={(e) => setAutoHighlight(e.target.checked)}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
-              </label>
-            </div>
-
-            <div>
-              <label className="block mb-2 text-xs font-medium text-gray-400">
-                Highlight Opacity: {Math.round(highlightOpacity * 100)}%
-              </label>
-              <input
-                type="range"
-                min="0.1"
-                max="1"
-                step="0.1"
-                value={highlightOpacity}
-                onChange={(e) =>
-                  setHighlightOpacity(parseFloat(e.target.value))
-                }
-                className="w-full h-2 bg-[#2E2F3E] rounded-lg appearance-none cursor-pointer"
-              />
-            </div>
-          </div>
-
-          {/* Import/Export */}
+          {/* Settings Management */}
           <div className="space-y-4">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-300">
               <span className="text-[#4f46e5]">💾</span>
