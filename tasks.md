@@ -11,8 +11,7 @@
 ## Do
 
 - the drag does seem to work but 
-  - when we drag around an icon others should shift around, we should see this visually, i mean others that are valid to move around like folder for folders, and icons for icons, so when i drag an page icon the other page icons should shift around to show where it will go, but folders should stay put, folders should i be able to drag into, and of course when i drag around folders the same happens, and folders cant be nested
-  - emphasizing that currently you cant drag a link site icon into a folder icon, it is just reordering to the first position of the site icons, 
+  - updated teh tasks and added a reference that has a similar feature of moving around icons, they dont have a folder, and let me claerify our icons do move and can be rearraged, folders too,but we dont see it nicely visually also we can't drag into folders
 - the search bar is still not the same height, we need to fix that
 - lets try to use a cool modern folder icon instead of the basic one we have now
 

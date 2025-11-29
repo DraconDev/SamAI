@@ -1,0 +1,179 @@
+{
+    "icons": [
+        {
+            "id": 1,
+            "imageUrl": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+            "link": "https://github.com",
+            "name": "GitHubaaaa",
+            "order": 1
+        },
+        {
+            "id": 2,
+            "imageUrl": "https://www.google.com/gmail/about/static-2.0/images/logo-gmail.png",
+            "link": "https://mail.google.com",
+            "name": "Gmail",
+            "order": 2
+        },
+        {
+            "id": 3,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/2048px-YouTube_social_white_square_%282017%29.svg.png",
+            "link": "https://youtube.com",
+            "name": "YouTube",
+            "order": 3
+        },
+        {
+            "id": 4,
+            "imageUrl": "https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png",
+            "link": "https://reddit.com",
+            "name": "Reddit",
+            "order": 4
+        },
+        {
+            "id": 5,
+            "imageUrl": "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc727a.png",
+            "link": "https://twitter.com",
+            "name": "Twitter",
+            "order": 5
+        },
+        {
+            "id": 6,
+            "imageUrl": "https://static.licdn.com/aero-v1/sc/h/al2o9zrvru7aqj8e1x2rzsrca",
+            "link": "https://linkedin.com",
+            "name": "LinkedIn",
+            "order": 6
+        },
+        {
+            "id": 7,
+            "imageUrl": "https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png",
+            "link": "https://netflix.com",
+            "name": "Netflix",
+            "order": 7
+        },
+        {
+            "id": 8,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Amazon_icon.svg/2500px-Amazon_icon.svg.png",
+            "link": "https://amazon.com",
+            "name": "Amazon",
+            "order": 8
+        },
+        {
+            "id": 9,
+            "imageUrl": "https://ssl.gstatic.com/images/branding/product/2x/drive_2020q4_48dp.png",
+            "link": "https://drive.google.com",
+            "name": "Google Drive",
+            "order": 9
+        },
+        {
+            "id": 10,
+            "imageUrl": "https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_31_2x.png",
+            "link": "https://calendar.google.com",
+            "name": "Google Calendar",
+            "order": 10
+        },
+        {
+            "id": 11,
+            "imageUrl": "https://open.spotifycdn.com/cdn/images/favicon.0f31d2ea.ico",
+            "link": "https://open.spotify.com",
+            "name": "Spotify",
+            "order": 11
+        },
+        {
+            "id": 12,
+            "imageUrl": "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png",
+            "link": "https://discord.com/app",
+            "name": "Discord",
+            "order": 12
+        },
+        {
+            "id": 13,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png",
+            "link": "https://chat.openai.com",
+            "name": "ChatGPT",
+            "order": 13
+        },
+        {
+            "id": 14,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Google_Photos_icon_%282015-2020%29.svg/2048px-Google_Photos_icon_%282015-2020%29.svg.png",
+            "link": "https://photos.google.com",
+            "name": "Google Photos",
+            "order": 14
+        },
+        {
+            "id": 15,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Google_Maps_icon_%282020%29.svg/1200px-Google_Maps_icon_%282020%29.svg.png",
+            "link": "https://maps.google.com",
+            "name": "Google Maps",
+            "order": 15
+        },
+        {
+            "id": 16,
+            "imageUrl": "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico",
+            "link": "https://docs.google.com",
+            "name": "Google Docs",
+            "order": 16
+        },
+        {
+            "id": 17,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Twitch_logo.svg/2560px-Twitch_logo.svg.png",
+            "link": "https://twitch.tv",
+            "name": "Twitch",
+            "order": 17
+        },
+        {
+            "id": 18,
+            "imageUrl": "https://www.wikipedia.org/static/apple-touch/wikipedia.png",
+            "link": "https://wikipedia.org",
+            "name": "Wikipedia",
+            "order": 18
+        },
+        {
+            "id": 19,
+            "imageUrl": "https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png",
+            "link": "https://stackoverflow.com",
+            "name": "Stack Overflow",
+            "order": 19
+        },
+        {
+            "id": 20,
+            "imageUrl": "https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/logo-dark-e95da587b6efa1520dcd11f4b45c0cf6.svg",
+            "link": "https://tiktok.com",
+            "name": "TikTok",
+            "order": 20
+        },
+        {
+            "id": 21,
+            "imageUrl": "https://www.notion.so/images/logo-ios.png",
+            "link": "https://notion.so",
+            "name": "Notion",
+            "order": 21
+        },
+        {
+            "id": 22,
+            "imageUrl": "https://static.figma.com/app/icon/1/touch-180.png",
+            "link": "https://figma.com",
+            "name": "Figma",
+            "order": 22
+        },
+        {
+            "id": 23,
+            "imageUrl": "https://aem.dropbox.com/cms/content/dam/dropbox/www/en-us/branding/app-dropbox-ios.png",
+            "link": "https://dropbox.com",
+            "name": "Dropbox",
+            "order": 23
+        },
+        {
+            "id": 24,
+            "imageUrl": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
+            "link": "https://vercel.com",
+            "name": "Vercel",
+            "order": 24
+        },
+        {
+            "id": 25,
+            "imageUrl": "https://ssl.gstatic.com/keep/keep_2020q4v2.ico",
+            "link": "https://keep.google.com",
+            "name": "Google Keep",
+            "order": 25
+        }
+    ]
+}
