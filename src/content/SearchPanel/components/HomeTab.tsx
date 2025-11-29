@@ -561,7 +561,6 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           borderBottom: "1px solid rgba(51,65,85,0.4)",
           background: "rgba(30,41,59,0.95)",
           position: "relative",
-          overflow: "hidden",
         }}
       >
         <div style={{ position: "relative", zIndex: 1 }}>
@@ -698,18 +697,18 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         </div>
       </div>
 
-      {/* Add Menu Dropdown - positioned relative to header button */}
+      {/* Add Menu Dropdown - positioned relative to the main container */}
       {isAddMenuOpen && (
         <div
           style={{
-            position: "absolute",
-            top: "calc(100% + 0.5rem)",
-            right: "0.875rem",
+            position: "fixed",
+            top: "120px",
+            right: "20px",
             background: "rgba(30, 41, 59, 0.98)",
             border: "1px solid rgba(139, 92, 246, 0.3)",
             borderRadius: "12px",
             boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4)",
-            zIndex: 1000,
+            zIndex: 9999,
             padding: "0.5rem",
             minWidth: "160px",
             backdropFilter: "blur(20px)",
@@ -1257,23 +1256,28 @@ const HomeTab: React.FC<HomeTabProps> = () => {
                   padding: "0.9rem 1.5rem",
                   borderRadius: "12px",
                   border: "1px solid rgba(96, 165, 250, 0.6)",
-                  background: "rgba(96, 165, 250, 0.2)",
+                  background:
+                    "linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(59, 130, 246, 0.2))",
                   color: "#60a5fa",
                   fontSize: "0.9rem",
                   cursor: "pointer",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   transition: "all 0.3s ease",
+                  boxShadow: "0 4px 12px rgba(96, 165, 250, 0.25)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(96, 165, 250, 0.3)";
-                  e.currentTarget.style.transform = "translateY(-1px)";
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(59, 130, 246, 0.3))";
+                  e.currentTarget.style.transform = "translateY(-2px)";
                   e.currentTarget.style.boxShadow =
-                    "0 4px 12px rgba(96, 165, 250, 0.3)";
+                    "0 8px 20px rgba(96, 165, 250, 0.35)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(96, 165, 250, 0.2)";
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(59, 130, 246, 0.2))";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(96, 165, 250, 0.25)";
                 }}
               >
                 Create Folder
