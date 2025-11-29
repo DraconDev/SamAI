@@ -5,8 +5,7 @@
 - Simplify the search highlight
   - Its either favorite or hide
 - we need better styling for the home tab
-  - the big glow button are not very appealing
-  - the top section is too fat
+
 - make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 
 ## Do
