@@ -419,12 +419,16 @@ const HomeTab: React.FC<HomeTabProps> = () => {
         // Folders dragged onto folders → green (reordering)
         setDraggedOverFolder(null);
         setDragPreviewIndex(index);
+      } else if (!draggedItem.isFolder && !item.isFolder) {
+        // Site icons dragged onto site icons → green (reordering)
+        setDraggedOverFolder(null);
+        setDragPreviewIndex(index);
       } else if (!draggedItem.isFolder && item.isFolder) {
         // Site icons dragged onto folders → blue (put into)
         setDraggedOverFolder(item.id);
         setDragPreviewIndex(null);
       } else {
-        // Everything else → no special highlighting for now
+        // Folders dragged onto site icons → no highlighting (invalid)
         setDraggedOverFolder(null);
         setDragPreviewIndex(null);
       }
