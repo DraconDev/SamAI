@@ -1278,7 +1278,7 @@ const HomeTab: React.FC<HomeTabProps> = () => {
           paddingBottom: "1rem",
         }}
       >
-        {filteredItems.length > 0 ? (
+        {filteredItems.length > 0 || true ? (
           <div
             style={{
               display: "grid",
