@@ -177,34 +177,34 @@ class SearchHighlighter {
       // Add favorite button
       const favoriteBtn = document.createElement("button");
       favoriteBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
         </svg>
       `;
       favoriteBtn.title = `Add ${domain} to favorites`;
       favoriteBtn.style.cursor = "pointer";
-      favoriteBtn.style.background = "rgba(245, 158, 11, 0.1)";
-      favoriteBtn.style.border = "1px solid rgba(245, 158, 11, 0.3)";
+      favoriteBtn.style.border = "1px solid rgba(34, 197, 94, 0.4)";
       favoriteBtn.style.padding = "4px";
-      favoriteBtn.style.fontSize = "16px";
-      favoriteBtn.style.color = "#f59e0b";
+      favoriteBtn.style.fontSize = "18px";
+      favoriteBtn.style.color = "#22c55e";
       favoriteBtn.style.borderRadius = "6px";
       favoriteBtn.style.transition = "all 0.2s";
-      favoriteBtn.style.width = "24px";
-      favoriteBtn.style.height = "24px";
+      favoriteBtn.style.width = "28px";
+      favoriteBtn.style.height = "28px";
       favoriteBtn.style.display = "flex";
       favoriteBtn.style.alignItems = "center";
       favoriteBtn.style.justifyContent = "center";
+      favoriteBtn.style.backdropFilter = "blur(8px)";
 
       favoriteBtn.onmouseenter = () => {
-        favoriteBtn.style.background = "rgba(245, 158, 11, 0.2)";
-        favoriteBtn.style.borderColor = "#f59e0b";
+        favoriteBtn.style.background = "rgba(34, 197, 94, 0.15)";
+        favoriteBtn.style.borderColor = "#22c55e";
         favoriteBtn.style.transform = "scale(1.1)";
       };
 
       favoriteBtn.onmouseleave = () => {
-        favoriteBtn.style.background = "rgba(245, 158, 11, 0.1)";
-        favoriteBtn.style.borderColor = "rgba(245, 158, 11, 0.3)";
+        favoriteBtn.style.background = "transparent";
+        favoriteBtn.style.borderColor = "rgba(34, 197, 94, 0.4)";
         favoriteBtn.style.transform = "scale(1)";
       };
 
@@ -224,8 +224,8 @@ class SearchHighlighter {
               (p) => p.id !== existingPattern.id
             );
             this.updatePatterns(updatedPatterns);
-            favoriteBtn.style.background = "rgba(245, 158, 11, 0.1)";
-            favoriteBtn.style.color = "#f59e0b";
+            favoriteBtn.style.borderColor = "rgba(34, 197, 94, 0.4)";
+            favoriteBtn.style.color = "#22c55e";
             console.log("[SamAI Highlighter] Removed from favorites:", domain);
           } else {
             // Convert hide to favorite
@@ -235,8 +235,8 @@ class SearchHighlighter {
                 : p
             );
             this.updatePatterns(updatedPatterns);
-            favoriteBtn.style.background = "rgba(245, 158, 11, 0.3)";
-            favoriteBtn.style.color = "#fbbf24";
+            favoriteBtn.style.borderColor = "#22c55e";
+            favoriteBtn.style.color = "#16a34a";
             console.log("[SamAI Highlighter] Converted to favorite:", domain);
           }
         } else {
@@ -250,8 +250,8 @@ class SearchHighlighter {
           };
           const updatedPatterns = [...currentPatterns, newPattern];
           this.updatePatterns(updatedPatterns);
-          favoriteBtn.style.background = "rgba(245, 158, 11, 0.3)";
-          favoriteBtn.style.color = "#fbbf24";
+          favoriteBtn.style.borderColor = "#22c55e";
+          favoriteBtn.style.color = "#16a34a";
           console.log("[SamAI Highlighter] Added to favorites:", domain);
         }
 
