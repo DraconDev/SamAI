@@ -582,7 +582,7 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
     const touchDuration = Date.now() - touchStartTime;
 
     // If it was a short tap and context menu is not open, treat as regular click
-    if (touchDuration < 500 && !contextMenu.visible && editingItem) {
+    if (touchDuration < 500 && !contextMenu.visible && !editingItem) {
       if (contextMenu.item) {
         handleItemClick(contextMenu.item);
         closeContextMenu();
