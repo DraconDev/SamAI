@@ -10,6 +10,10 @@
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
   - right click not working, perhaps drag related conflict ?
 
+- Form tab 
+  - Rename Fill
+  - Add default such as work, youtube, custom default fields, but can be modified 
+
 ## Check
 
 
