@@ -1579,11 +1579,12 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "0.25rem",
+              gridTemplateColumns: "repeat(auto-fit, minmax(72px, 1fr))",
+              gap: "0.2rem",
               justifyItems: "center",
               padding: "0.75rem",
               position: "relative",
+              maxWidth: "100%",
             }}
           >
             {filteredItems.map((item, index) => {
