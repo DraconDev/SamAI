@@ -1612,9 +1612,13 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                       handleItemClick(item);
                     }
                   }}
-                  onContextMenu={(e) =>
-                    !editingItem && handleContextMenu(e, item)
-                  }
+                  onContextMenu={(e) => {
+                    if (!editingItem) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleContextMenu(e, item);
+                    }
+                  }}
                   onTouchStart={(e) =>
                     !editingItem && handleTouchStart(e, item)
                   }
