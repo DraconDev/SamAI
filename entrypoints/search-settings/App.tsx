@@ -346,15 +346,11 @@ export default function SearchSettingsPage() {
                         />
                       </div>
                       <div className="col-span-2">
-                        <input
-                          type="color"
-                          value={pattern.color}
-                          onChange={(e) =>
-                            updatePattern(pattern.id, { color: e.target.value })
-                          }
-                          className="w-full h-8 rounded border border-[#2E2F3E]/50"
-                          disabled={pattern.color === "#000000"}
-                        />
+                        <div className="flex items-center justify-center w-full h-8 rounded border border-[#2E2F3E]/50 bg-gray-700">
+                          <span className="text-2xl">
+                            {getIconForType(pattern.type)}
+                          </span>
+                        </div>
                       </div>
                       <div className="col-span-9">
                         <input
