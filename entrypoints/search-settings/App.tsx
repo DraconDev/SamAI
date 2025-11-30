@@ -287,7 +287,7 @@ export default function SearchSettingsPage() {
             </div>
 
             <div className="space-y-3">
-              {patterns.length === 0 ? (
+              {patterns.filter((p) => p.type === "favorite").length === 0 ? (
                 <div className="py-8 text-center text-gray-500">
                   <p className="mb-2 text-sm">No patterns added yet</p>
                   <p className="text-xs">
@@ -296,78 +296,80 @@ export default function SearchSettingsPage() {
                   </p>
                 </div>
               ) : (
-                patterns.map((pattern) => (
-                  <div
-                    key={pattern.id}
-                    className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">
-                          {getIconForType(pattern.type)}
-                        </span>
-                        <span className="text-sm text-gray-400">
-                          ({pattern.type})
-                        </span>
-                        {pattern.type === "hide" && (
-                          <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">
-                            Hidden
-                          </span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => removePattern(pattern.id)}
-                        className="p-2 text-red-400 transition-colors rounded-lg hover:text-red-300 hover:bg-red-900/20"
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
-                          <line x1="18" y1="6" x2="6" y2="18" />
-                          <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="grid items-center grid-cols-12 gap-3">
-                      <div className="col-span-1">
-                        <input
-                          type="checkbox"
-                          checked={pattern.enabled}
-                          onChange={(e) =>
-                            updatePattern(pattern.id, {
-                              enabled: e.target.checked,
-                            })
-                          }
-                          className="w-4 h-4 text-[#4f46e5] bg-[#0D0E16] border-[#2E2F3E]/50 rounded focus:ring-[#4f46e5]/50"
-                        />
-                      </div>
-                      <div className="col-span-2">
-                        <div className="flex items-center justify-center w-full h-8 rounded border border-[#2E2F3E]/50 bg-gray-700">
+                patterns
+                  .filter((p) => p.type === "favorite")
+                  .map((pattern) => (
+                    <div
+                      key={pattern.id}
+                      className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30"
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
                           <span className="text-2xl">
                             {getIconForType(pattern.type)}
                           </span>
+                          <span className="text-sm text-gray-400">
+                            ({pattern.type})
+                          </span>
+                          {pattern.type === "hide" && (
+                            <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">
+                              Hidden
+                            </span>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => removePattern(pattern.id)}
+                          className="p-2 text-red-400 transition-colors rounded-lg hover:text-red-300 hover:bg-red-900/20"
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div className="grid items-center grid-cols-12 gap-3">
+                        <div className="col-span-1">
+                          <input
+                            type="checkbox"
+                            checked={pattern.enabled}
+                            onChange={(e) =>
+                              updatePattern(pattern.id, {
+                                enabled: e.target.checked,
+                              })
+                            }
+                            className="w-4 h-4 text-[#4f46e5] bg-[#0D0E16] border-[#2E2F3E]/50 rounded focus:ring-[#4f46e5]/50"
+                          />
+                        </div>
+                        <div className="col-span-2">
+                          <div className="flex items-center justify-center w-full h-8 rounded border border-[#2E2F3E]/50 bg-gray-700">
+                            <span className="text-2xl">
+                              {getIconForType(pattern.type)}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="col-span-9">
+                          <input
+                            type="text"
+                            placeholder="Domain or pattern (e.g., wikipedia.org, github.com)"
+                            value={pattern.pattern}
+                            onChange={(e) =>
+                              updatePattern(pattern.id, {
+                                pattern: e.target.value,
+                              })
+                            }
+                            className="w-full p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-[#4f46e5]"
+                          />
                         </div>
                       </div>
-                      <div className="col-span-9">
-                        <input
-                          type="text"
-                          placeholder="Domain or pattern (e.g., wikipedia.org, github.com)"
-                          value={pattern.pattern}
-                          onChange={(e) =>
-                            updatePattern(pattern.id, {
-                              pattern: e.target.value,
-                            })
-                          }
-                          className="w-full p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-[#4f46e5]"
-                        />
-                      </div>
                     </div>
-                  </div>
-                ))
+                  ))
               )}
             </div>
           </div>
