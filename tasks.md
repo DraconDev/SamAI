@@ -3,6 +3,8 @@
 ## To Do
 
 - search enhacement looks great, but we need to update teh search enhancement settings too, that still has the old style 
+  - lets first of all make sure that hte search enhancement settings is fixed, currently we hadve add blue red green, and the highlight pattern listing looks off, they are all category, while we shouldn't have categories at all, just favorite and hidden, and hidden patterns dont show up at all,
+  - its the search settings tab
 
 - [ ] add a default icon to the home tab that lead to google image generator, i mean in the icon grid this should be a default icon, not sure what else we would make default that is the topic here
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
