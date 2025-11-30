@@ -7,6 +7,8 @@
 - [ ] add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
 
 
+
+
 ## Done
 
 - we need even bigger pictures for folders, and the folder icon should be very modern and cool looking, we don't need that blue background behind the folder icon
