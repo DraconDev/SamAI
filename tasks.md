@@ -5,7 +5,7 @@
 
 - search enhacement looks great, but we need to update teh search enhancement settings too, that still has the old style 
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
-- [ ] add a default icon to the home page icons that lead to google image generator, i mean in the icon grid this should be a default icon, not sure what else we would make default 
+- [ ] add a default icon to the home tab that lead to google image generator, i mean in the icon grid this should be a default icon, not sure what else we would make default that is the topic here
 
 
 ## Done
