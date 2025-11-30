@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { highlightPatternsStore, searchSettingsStore, type HighlightPattern } from "../../utils/store";
+import {
+  highlightPatternsStore,
+  searchSettingsStore,
+  type HighlightPattern,
+} from "../../utils/store";
 
 export default function SearchSettingsPage() {
   const [patterns, setPatterns] = useState<HighlightPattern[]>([]);
@@ -13,17 +17,17 @@ export default function SearchSettingsPage() {
 
   useEffect(() => {
     loadSettings();
-    
+
     // Set up storage listeners for real-time sync
     const handleStorageChange = () => {
       loadSettings();
     };
-    
+
     // Listen for storage changes across tabs
-    window.addEventListener('storage', handleStorageChange);
-    
+    window.addEventListener("storage", handleStorageChange);
+
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
@@ -32,7 +36,7 @@ export default function SearchSettingsPage() {
       // Load from sync stores
       const settings = await searchSettingsStore.getValue();
       const patternsStore = await highlightPatternsStore.getValue();
-      
+
       setSearchSettings({
         searchActive: settings.searchActive,
         promptStyle: settings.promptStyle,
@@ -40,25 +44,31 @@ export default function SearchSettingsPage() {
         highlightOpacity: settings.highlightOpacity,
         enableHighlighting: settings.enableHighlighting,
       });
-      
+
       setPatterns(patternsStore.patterns);
-      
-      console.log("[Search Settings] Loaded from sync store:", settings, patternsStore.patterns.length);
+
+      console.log(
+        "[Search Settings] Loaded from sync store:",
+        settings,
+        patternsStore.patterns.length
+      );
     } catch (error) {
       console.error("Error loading search settings:", error);
     }
   };
 
-  const updateSearchSettings = async (updates: Partial<typeof searchSettings>) => {
+  const updateSearchSettings = async (
+    updates: Partial<typeof searchSettings>
+  ) => {
     try {
       const currentSettings = await searchSettingsStore.getValue();
       const newSettings = { ...currentSettings, ...updates };
-      
+
       await searchSettingsStore.setValue(newSettings);
       setSearchSettings(newSettings);
-      
+
       console.log("[Search Settings] Updated search settings:", newSettings);
-      
+
       // Send message to content scripts
       window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
     } catch (error) {
@@ -66,23 +76,22 @@ export default function SearchSettingsPage() {
     }
   };
 
-  const addPattern = (category: HighlightPattern["category"] = "default") => {
+  const addPattern = (type: HighlightPattern["type"] = "favorite") => {
     const newPattern: HighlightPattern = {
       id: Date.now().toString(),
       pattern: "",
-      color: category === "default" ? "#4f46e5" : category === "important" ? "#dc2626" : "#059669",
+      type,
       description: "",
       enabled: true,
-      category,
     };
-    
+
     const updatedPatterns = [...patterns, newPattern];
     setPatterns(updatedPatterns);
     savePatterns(updatedPatterns);
   };
 
   const updatePattern = (id: string, updates: Partial<HighlightPattern>) => {
-    const updatedPatterns = patterns.map(p => 
+    const updatedPatterns = patterns.map((p) =>
       p.id === id ? { ...p, ...updates } : p
     );
     setPatterns(updatedPatterns);
@@ -90,7 +99,7 @@ export default function SearchSettingsPage() {
   };
 
   const removePattern = (id: string) => {
-    const updatedPatterns = patterns.filter(p => p.id !== id);
+    const updatedPatterns = patterns.filter((p) => p.id !== id);
     setPatterns(updatedPatterns);
     savePatterns(updatedPatterns);
   };
@@ -98,8 +107,11 @@ export default function SearchSettingsPage() {
   const savePatterns = async (updatedPatterns: HighlightPattern[]) => {
     try {
       await highlightPatternsStore.setValue({ patterns: updatedPatterns });
-      console.log("[Search Settings] Updated patterns:", updatedPatterns.length);
-      
+      console.log(
+        "[Search Settings] Updated patterns:",
+        updatedPatterns.length
+      );
+
       // Send message to content scripts
       window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
     } catch (error) {
@@ -109,10 +121,14 @@ export default function SearchSettingsPage() {
 
   const getIconForCategory = (category: HighlightPattern["category"]) => {
     switch (category) {
-      case "default": return "🔵"; // Blue
-      case "important": return "🔴"; // Red
-      case "favorite": return "🟢"; // Green
-      default: return "🔵";
+      case "default":
+        return "🔵"; // Blue
+      case "important":
+        return "🔴"; // Red
+      case "favorite":
+        return "🟢"; // Green
+      default:
+        return "🔵";
     }
   };
 
@@ -123,7 +139,16 @@ export default function SearchSettingsPage() {
         <div className="flex items-center justify-between pb-8 mb-8 border-b border-[#2E2F3E]/30">
           <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-[#4f46e5] to-[#818cf8] shadow-xl shadow-[#4f46e5]/50">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
                 <circle cx="11" cy="11" r="3" />
@@ -133,12 +158,12 @@ export default function SearchSettingsPage() {
               <h1 className="text-3xl font-bold text-transparent bg-gradient-to-r from-[#818cf8] via-[#6366f1] to-[#4f46e5] bg-clip-text">
                 Search Enhancement Settings
               </h1>
-              <p className="text-sm text-gray-400">Customize your search experience</p>
+              <p className="text-sm text-gray-400">
+                Customize your search experience
+              </p>
             </div>
           </div>
-          <div className="text-xs text-gray-500">
-            ✅ Real-time sync enabled
-          </div>
+          <div className="text-xs text-gray-500">✅ Real-time sync enabled</div>
         </div>
 
         <div className="space-y-8">
@@ -148,7 +173,7 @@ export default function SearchSettingsPage() {
               <span className="text-[#4f46e5]">⚙️</span>
               Search Behavior
             </h2>
-            
+
             <div className="space-y-6">
               <div>
                 <label className="block mb-4 text-sm font-bold tracking-wider text-gray-300 uppercase">
@@ -178,7 +203,9 @@ export default function SearchSettingsPage() {
                     <button
                       key={value}
                       type="button"
-                      onClick={() => updateSearchSettings({ promptStyle: value as any })}
+                      onClick={() =>
+                        updateSearchSettings({ promptStyle: value as any })
+                      }
                       className={`group relative flex flex-col items-center p-4 rounded-xl border transition-all duration-300
                                 hover:transform hover:scale-105 hover:shadow-xl
                                 ${
@@ -211,14 +238,20 @@ export default function SearchSettingsPage() {
 
               <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
                 <div>
-                  <label className="text-sm font-medium text-gray-200">Enable Search Enhancement</label>
-                  <p className="text-xs text-gray-400">Toggle AI-powered search assistance</p>
+                  <label className="text-sm font-medium text-gray-200">
+                    Enable Search Enhancement
+                  </label>
+                  <p className="text-xs text-gray-400">
+                    Toggle AI-powered search assistance
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={searchSettings.searchActive}
-                    onChange={(e) => updateSearchSettings({ searchActive: e.target.checked })}
+                    onChange={(e) =>
+                      updateSearchSettings({ searchActive: e.target.checked })
+                    }
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
@@ -266,24 +299,43 @@ export default function SearchSettingsPage() {
               {patterns.length === 0 ? (
                 <div className="py-8 text-center text-gray-500">
                   <p className="mb-2 text-sm">No patterns added yet</p>
-                  <p className="text-xs">Use the buttons above to add highlight patterns, or mark sites directly from search results</p>
+                  <p className="text-xs">
+                    Use the buttons above to add highlight patterns, or mark
+                    sites directly from search results
+                  </p>
                 </div>
               ) : (
                 patterns.map((pattern) => (
-                  <div key={pattern.id} className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                  <div
+                    key={pattern.id}
+                    className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30"
+                  >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">{getIconForCategory(pattern.category)}</span>
-                        <span className="text-sm text-gray-400">({pattern.category})</span>
+                        <span className="text-2xl">
+                          {getIconForCategory(pattern.category)}
+                        </span>
+                        <span className="text-sm text-gray-400">
+                          ({pattern.category})
+                        </span>
                         {pattern.color === "#000000" && (
-                          <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">Hidden</span>
+                          <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">
+                            Hidden
+                          </span>
                         )}
                       </div>
                       <button
                         onClick={() => removePattern(pattern.id)}
                         className="p-2 text-red-400 transition-colors rounded-lg hover:text-red-300 hover:bg-red-900/20"
                       >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
                           <line x1="18" y1="6" x2="6" y2="18" />
                           <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
@@ -294,7 +346,11 @@ export default function SearchSettingsPage() {
                         <input
                           type="checkbox"
                           checked={pattern.enabled}
-                          onChange={(e) => updatePattern(pattern.id, { enabled: e.target.checked })}
+                          onChange={(e) =>
+                            updatePattern(pattern.id, {
+                              enabled: e.target.checked,
+                            })
+                          }
                           className="w-4 h-4 text-[#4f46e5] bg-[#0D0E16] border-[#2E2F3E]/50 rounded focus:ring-[#4f46e5]/50"
                         />
                       </div>
@@ -302,7 +358,9 @@ export default function SearchSettingsPage() {
                         <input
                           type="color"
                           value={pattern.color}
-                          onChange={(e) => updatePattern(pattern.id, { color: e.target.value })}
+                          onChange={(e) =>
+                            updatePattern(pattern.id, { color: e.target.value })
+                          }
                           className="w-full h-8 rounded border border-[#2E2F3E]/50"
                           disabled={pattern.color === "#000000"}
                         />
@@ -312,7 +370,11 @@ export default function SearchSettingsPage() {
                           type="text"
                           placeholder="Domain or pattern (e.g., wikipedia.org, github.com)"
                           value={pattern.pattern}
-                          onChange={(e) => updatePattern(pattern.id, { pattern: e.target.value })}
+                          onChange={(e) =>
+                            updatePattern(pattern.id, {
+                              pattern: e.target.value,
+                            })
+                          }
                           className="w-full p-3 text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-[#4f46e5]"
                         />
                       </div>
@@ -329,7 +391,9 @@ export default function SearchSettingsPage() {
               <span className="text-red-500">🗑️</span>
               Hidden Patterns
               {(() => {
-                const hiddenCount = patterns.filter(p => p.color === "#000000").length;
+                const hiddenCount = patterns.filter(
+                  (p) => p.color === "#000000"
+                ).length;
                 return hiddenCount > 0 ? (
                   <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">
                     {hiddenCount}
@@ -337,26 +401,35 @@ export default function SearchSettingsPage() {
                 ) : null;
               })()}
             </h2>
-            
+
             <div className="space-y-3">
               {(() => {
-                const hiddenPatterns = patterns.filter(p => p.color === "#000000");
-                
+                const hiddenPatterns = patterns.filter(
+                  (p) => p.color === "#000000"
+                );
+
                 if (hiddenPatterns.length === 0) {
                   return (
                     <div className="py-6 text-center text-gray-500">
                       <p className="text-sm">No hidden patterns</p>
-                      <p className="text-xs">Hide domains directly from search results to manage here</p>
+                      <p className="text-xs">
+                        Hide domains directly from search results to manage here
+                      </p>
                     </div>
                   );
                 }
-                
+
                 return hiddenPatterns.map((pattern) => (
-                  <div key={pattern.id} className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
+                  <div
+                    key={pattern.id}
+                    className="p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30"
+                  >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <span className="text-red-400">✕</span>
-                        <span className="text-sm text-gray-400">Hidden domain</span>
+                        <span className="text-sm text-gray-400">
+                          Hidden domain
+                        </span>
                       </div>
                       <button
                         onClick={() => removePattern(pattern.id)}
@@ -380,18 +453,26 @@ export default function SearchSettingsPage() {
               <span className="text-[#4f46e5]">🎯</span>
               Highlight Settings
             </h2>
-            
+
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
                 <div>
-                  <label className="text-sm font-medium text-gray-200">Enable Highlighting</label>
-                  <p className="text-xs text-gray-400">Show highlight buttons and controls</p>
+                  <label className="text-sm font-medium text-gray-200">
+                    Enable Highlighting
+                  </label>
+                  <p className="text-xs text-gray-400">
+                    Show highlight buttons and controls
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={searchSettings.enableHighlighting}
-                    onChange={(e) => updateSearchSettings({ enableHighlighting: e.target.checked })}
+                    onChange={(e) =>
+                      updateSearchSettings({
+                        enableHighlighting: e.target.checked,
+                      })
+                    }
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
@@ -400,14 +481,20 @@ export default function SearchSettingsPage() {
 
               <div className="flex items-center justify-between p-4 bg-[#0D0E16]/30 rounded-xl border border-[#2E2F3E]/30">
                 <div>
-                  <label className="text-sm font-medium text-gray-200">Auto-highlight results</label>
-                  <p className="text-xs text-gray-400">Automatically apply highlights to search results</p>
+                  <label className="text-sm font-medium text-gray-200">
+                    Auto-highlight results
+                  </label>
+                  <p className="text-xs text-gray-400">
+                    Automatically apply highlights to search results
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={searchSettings.autoHighlight}
-                    onChange={(e) => updateSearchSettings({ autoHighlight: e.target.checked })}
+                    onChange={(e) =>
+                      updateSearchSettings({ autoHighlight: e.target.checked })
+                    }
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-[#2E2F3E] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f46e5]"></div>
@@ -416,7 +503,8 @@ export default function SearchSettingsPage() {
 
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-400">
-                  Highlight Opacity: {Math.round(searchSettings.highlightOpacity * 100)}%
+                  Highlight Opacity:{" "}
+                  {Math.round(searchSettings.highlightOpacity * 100)}%
                 </label>
                 <input
                   type="range"
@@ -424,7 +512,11 @@ export default function SearchSettingsPage() {
                   max="1"
                   step="0.1"
                   value={searchSettings.highlightOpacity}
-                  onChange={(e) => updateSearchSettings({ highlightOpacity: parseFloat(e.target.value) })}
+                  onChange={(e) =>
+                    updateSearchSettings({
+                      highlightOpacity: parseFloat(e.target.value),
+                    })
+                  }
                   className="w-full h-2 bg-[#2E2F3E] rounded-lg appearance-none cursor-pointer slider"
                 />
               </div>
@@ -433,27 +525,43 @@ export default function SearchSettingsPage() {
 
           {/* Instructions */}
           <div className="p-6 bg-[#0D0E16]/20 border border-[#2E2F3E]/30 rounded-2xl">
-            <h3 className="mb-3 text-sm font-semibold text-gray-300">How it works:</h3>
+            <h3 className="mb-3 text-sm font-semibold text-gray-300">
+              How it works:
+            </h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li className="flex items-start gap-2">
                 <div className="w-3 h-3 mt-1 bg-blue-500 rounded-full"></div>
-                <span><strong>Blue</strong> - General highlights for informational sites</span>
+                <span>
+                  <strong>Blue</strong> - General highlights for informational
+                  sites
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <div className="w-3 h-3 mt-1 bg-red-500 rounded-full"></div>
-                <span><strong>Red</strong> - Highlight important or trusted sites</span>
+                <span>
+                  <strong>Red</strong> - Highlight important or trusted sites
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <div className="w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
-                <span><strong>Green</strong> - Highlight your favorite or frequently used sites</span>
+                <span>
+                  <strong>Green</strong> - Highlight your favorite or frequently
+                  used sites
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 text-gray-400">✕</span>
-                <span><strong>Hide button</strong> - Hide domains directly from search results</span>
+                <span>
+                  <strong>Hide button</strong> - Hide domains directly from
+                  search results
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 text-green-400">⚡</span>
-                <span><strong>Real-time sync</strong> - All changes save automatically and sync across tabs</span>
+                <span>
+                  <strong>Real-time sync</strong> - All changes save
+                  automatically and sync across tabs
+                </span>
               </li>
             </ul>
           </div>
