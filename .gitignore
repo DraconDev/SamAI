@@ -46,3 +46,6 @@ build/**
 *.swp
 *.swo
 Thumbs.db
+
+# Auto-committer ignored files
+reference/**

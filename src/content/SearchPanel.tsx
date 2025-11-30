@@ -534,7 +534,9 @@ Please provide a helpful response about the user's question specifically related
             minHeight: 0,
           }}
         >
-          {activeTab === "home" && <HomeTab />}
+          {activeTab === "home" && (
+            <HomeTab onImageTabClick={() => setActiveTab("image")} />
+          )}
 
           {activeTab === "search" && (
             <div style={{ flex: 1, overflowY: "auto" }}>
