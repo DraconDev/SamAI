@@ -265,7 +265,7 @@ export default function SearchSettingsPage() {
                 <span className="text-[#4f46e5]">🎨</span>
                 Highlight Patterns
                 <span className="text-xs bg-[#4f46e5]/20 text-[#4f46e5] px-2 py-1 rounded-full">
-                  {patterns.length}
+                  {patterns.filter((p) => p.type === "favorite").length}
                 </span>
               </h2>
               <div className="flex gap-2">

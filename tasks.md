@@ -13,6 +13,7 @@
 - Form tab 
   - Rename Fill
   - Add default such as work, youtube, custom default fields, but can be modified 
+  - support fillings tags, checking checkmarks, 
 
 ## Check
 
