@@ -1693,77 +1693,28 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                     style={{
                       width: item.isFolder ? "72px" : "52px",
                       height: item.isFolder ? "72px" : "52px",
-                      borderRadius: item.isFolder ? "16px" : "10px",
+                      borderRadius: item.isFolder ? "12px" : "10px",
                       background: "transparent",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: item.isFolder ? "32px" : "22px",
+                      fontSize: item.isFolder ? "36px" : "22px",
                       position: "relative",
                       overflow: "hidden",
                       boxShadow: item.isFolder
-                        ? "0 8px 20px rgba(0,0,0,0.4)"
+                        ? "0 4px 12px rgba(0,0,0,0.3)"
                         : "0 4px 12px rgba(0,0,0,0.4)",
                     }}
                   >
                     {item.isFolder ? (
-                      <div
+                      <span
                         style={{
-                          width: "72px",
-                          height: "72px",
-                          borderRadius: "16px",
-                          background: "rgba(255, 255, 255, 0.08)",
-                          backdropFilter: "blur(12px)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: "38px",
-                          position: "relative",
-                          overflow: "hidden",
-                          boxShadow:
-                            "0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 3px rgba(255,255,255,0.15)",
-                          border: "1px solid rgba(148, 163, 184, 0.25)",
+                          fontSize: "36px",
+                          color: "#f1f5f9",
                         }}
                       >
-                        {/* Enhanced glass effect */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "0",
-                            left: "0",
-                            right: "0",
-                            bottom: "0",
-                            background:
-                              "linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))",
-                            borderRadius: "16px",
-                          }}
-                        />
-                        {/* Glow effect */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "2px",
-                            left: "2px",
-                            right: "2px",
-                            height: "35%",
-                            background:
-                              "linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.15))",
-                            borderRadius: "14px",
-                            transform: "rotate(-45deg)",
-                          }}
-                        />
-                        <span
-                          style={{
-                            filter: "drop-shadow(0 3px 12px rgba(0,0,0,0.6))",
-                            position: "relative",
-                            zIndex: 1,
-                            color: "#f1f5f9",
-                            textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                          }}
-                        >
-                          🗂️
-                        </span>
-                      </div>
+                        🗂️
+                      </span>
                     ) : (
                       (() => {
                         const iconResult = getIconForItem(item);
