@@ -195,17 +195,20 @@ class SearchHighlighter {
       favoriteBtn.style.alignItems = "center";
       favoriteBtn.style.justifyContent = "center";
       favoriteBtn.style.backdropFilter = "blur(8px)";
+      favoriteBtn.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.3)";
 
       favoriteBtn.onmouseenter = () => {
         favoriteBtn.style.background = "rgba(34, 197, 94, 0.15)";
         favoriteBtn.style.borderColor = "#22c55e";
         favoriteBtn.style.transform = "scale(1.1)";
+        favoriteBtn.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.4)";
       };
 
       favoriteBtn.onmouseleave = () => {
         favoriteBtn.style.background = "transparent";
         favoriteBtn.style.borderColor = "rgba(34, 197, 94, 0.4)";
         favoriteBtn.style.transform = "scale(1)";
+        favoriteBtn.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.3)";
       };
 
       favoriteBtn.onclick = async (e) => {
@@ -323,10 +326,10 @@ class SearchHighlighter {
 
       actions.appendChild(hideBtn);
 
-      // Position buttons to the right of the result
+      // Position buttons to the right of the result (5px left from original -55px)
       resultElement.style.position = "relative";
       (actions as HTMLElement).style.position = "absolute";
-      (actions as HTMLElement).style.right = "-55px";
+      (actions as HTMLElement).style.right = "-50px";
       (actions as HTMLElement).style.top = "4px";
       (actions as HTMLElement).style.zIndex = "1000";
       resultElement.appendChild(actions);
@@ -380,7 +383,7 @@ class SearchHighlighter {
       if (matchingPattern.type === "favorite") {
         // Apply favorite highlight
         element.setAttribute("data-samai-highlight-style", "true");
-        htmlElement.style.borderLeft = "3px solid #f59e0b";
+        htmlElement.style.borderLeft = "3px solid #22c55e";
         htmlElement.style.paddingLeft = "8px";
 
         console.log(

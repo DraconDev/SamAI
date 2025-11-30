@@ -2,7 +2,8 @@
 
 ## To Do
 
-- the search highlight tweak is guide good but lets move the icons like 5px to the left, and i don't think we want them to have backgorund colors, just the icon color, slightly bigger icons too, and the highlight color should be green, red is good for the hide icon, i think the icons are good, albeit my backgorund is now dark, so maybe we need to have some border or background to support light and dark modes  
+
+- search enhacement looks great, but we need to update teh search enhancement settings too, that still has the old style 
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
 - [ ] add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
 
@@ -11,6 +12,7 @@
 
 ## Done
 
+- the search highlight tweak is guide good but lets move the icons like 5px to the left, and i don't think we want them to have backgorund colors, just the icon color, slightly bigger icons too, and the highlight color should be green, red is good for the hide icon, i think the icons are good, albeit my backgorund is now dark, so maybe we need to have some border or background to support light and dark modes  
 - we need even bigger pictures for folders, and the folder icon should be very modern and cool looking, we don't need that blue background behind the folder icon
 - make home bar header the same height as chat tab header and search tab header
 - [x] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
