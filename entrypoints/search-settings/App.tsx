@@ -119,16 +119,14 @@ export default function SearchSettingsPage() {
     }
   };
 
-  const getIconForCategory = (category: HighlightPattern["category"]) => {
-    switch (category) {
-      case "default":
-        return "🔵"; // Blue
-      case "important":
-        return "🔴"; // Red
+  const getIconForType = (type: HighlightPattern["type"]) => {
+    switch (type) {
       case "favorite":
         return "🟢"; // Green
+      case "hide":
+        return "✕"; // Hide icon
       default:
-        return "🔵";
+        return "🟢";
     }
   };
 
@@ -272,25 +270,18 @@ export default function SearchSettingsPage() {
               </h2>
               <div className="flex gap-2">
                 <button
-                  onClick={() => addPattern("default")}
-                  className="px-3 py-1.5 text-xs font-medium bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
-                >
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  Add Blue
-                </button>
-                <button
-                  onClick={() => addPattern("important")}
-                  className="px-3 py-1.5 text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
-                >
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  Add Red
-                </button>
-                <button
                   onClick={() => addPattern("favorite")}
                   className="px-3 py-1.5 text-xs font-medium bg-green-600/20 hover:bg-green-600/30 text-green-400 border border-green-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
                 >
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  Add Green
+                  Add Favorite
+                </button>
+                <button
+                  onClick={() => addPattern("hide")}
+                  className="px-3 py-1.5 text-xs font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 rounded-lg transition-all duration-200 flex items-center gap-2"
+                >
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  Add Hide
                 </button>
               </div>
             </div>
@@ -313,12 +304,12 @@ export default function SearchSettingsPage() {
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <span className="text-2xl">
-                          {getIconForCategory(pattern.category)}
+                          {getIconForType(pattern.type)}
                         </span>
                         <span className="text-sm text-gray-400">
-                          ({pattern.category})
+                          ({pattern.type})
                         </span>
-                        {pattern.color === "#000000" && (
+                        {pattern.type === "hide" && (
                           <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">
                             Hidden
                           </span>
