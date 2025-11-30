@@ -5,7 +5,6 @@
 
 - we need even bigger pictures for folders, and the folder icon should be very modern and cool looking, we don't need that blue background behind the folder icon
 
-- [ ] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
 - [ ] we need better styling for the home tab the top section of our home tab should be just as tall as the chat tab header and search tab header, currently it is much taller than those two headers, we need to make it the same height
 - [ ] add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
@@ -15,6 +14,7 @@
 
 ## Done
 
+- [x] sites without icons should have a very cool default icon, maybe a random colorful circle with the first letter of the site in it, like a profile pic, this includes customer sites we add without an icon
 - one fix we need that hte text in the search bar and custom site and add folder are all black which is near impossible to read on our background, and our backgroudn is fine, we just need to adjust the text color
 - [x] the page scraper doesn't follow the same tab style exactly as the rest of the app, we need to fix that, but otherwise looks good
 - [x] make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
