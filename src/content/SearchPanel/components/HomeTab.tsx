@@ -1691,25 +1691,23 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
 
                   <div
                     style={{
-                      width: item.isFolder ? "72px" : "52px",
-                      height: item.isFolder ? "72px" : "52px",
-                      borderRadius: item.isFolder ? "12px" : "10px",
+                      width: "52px",
+                      height: "52px",
+                      borderRadius: "10px",
                       background: "transparent",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: item.isFolder ? "36px" : "22px",
+                      fontSize: "42px",
                       position: "relative",
                       overflow: "hidden",
-                      boxShadow: item.isFolder
-                        ? "0 4px 12px rgba(0,0,0,0.3)"
-                        : "0 4px 12px rgba(0,0,0,0.4)",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
                     }}
                   >
                     {item.isFolder ? (
                       <span
                         style={{
-                          fontSize: "36px",
+                          fontSize: "42px",
                           color: "#f1f5f9",
                         }}
                       >
