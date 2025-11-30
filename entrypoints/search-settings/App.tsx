@@ -379,7 +379,7 @@ export default function SearchSettingsPage() {
               Hidden Patterns
               {(() => {
                 const hiddenCount = patterns.filter(
-                  (p) => p.color === "#000000"
+                  (p) => p.type === "hide"
                 ).length;
                 return hiddenCount > 0 ? (
                   <span className="px-2 py-1 text-xs text-red-400 rounded-full bg-red-900/30">
@@ -392,7 +392,7 @@ export default function SearchSettingsPage() {
             <div className="space-y-3">
               {(() => {
                 const hiddenPatterns = patterns.filter(
-                  (p) => p.color === "#000000"
+                  (p) => p.type === "hide"
                 );
 
                 if (hiddenPatterns.length === 0) {
@@ -517,19 +517,6 @@ export default function SearchSettingsPage() {
             </h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li className="flex items-start gap-2">
-                <div className="w-3 h-3 mt-1 bg-blue-500 rounded-full"></div>
-                <span>
-                  <strong>Blue</strong> - General highlights for informational
-                  sites
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-3 h-3 mt-1 bg-red-500 rounded-full"></div>
-                <span>
-                  <strong>Red</strong> - Highlight important or trusted sites
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
                 <div className="w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
                 <span>
                   <strong>Green</strong> - Highlight your favorite or frequently
@@ -537,10 +524,10 @@ export default function SearchSettingsPage() {
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1 text-gray-400">✕</span>
+                <span className="mt-1 text-red-400">✕</span>
                 <span>
-                  <strong>Hide button</strong> - Hide domains directly from
-                  search results
+                  <strong>Hide</strong> - Hide domains directly from search
+                  results
                 </span>
               </li>
               <li className="flex items-start gap-2">
