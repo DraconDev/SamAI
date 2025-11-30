@@ -1623,7 +1623,7 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                   style={{
                     position: "relative",
                     width: "100%",
-                    maxWidth: item.isFolder ? "92px" : "76px",
+                    maxWidth: "76px",
                     padding: "0.1rem",
                     borderRadius: "8px",
                     overflow: "hidden",
@@ -1641,7 +1641,7 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: item.isFolder ? "0.4rem" : "0.25rem",
+                    gap: "0.25rem",
                     userSelect: editingItem?.id === item.id ? "text" : "none",
                   }}
                   onMouseEnter={(e) => {
