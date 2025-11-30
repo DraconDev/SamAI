@@ -206,10 +206,9 @@ export const pageContextStore = storage.defineItem<PageContextStore>(
 export interface HighlightPattern {
   id: string;
   pattern: string;
-  color: string;
+  type: "favorite" | "hide";
   description: string;
   enabled: boolean;
-  category: "default" | "important" | "favorite";
 }
 
 export interface HighlightPatternsStore {

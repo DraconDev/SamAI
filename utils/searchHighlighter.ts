@@ -53,7 +53,7 @@ class SearchHighlighter {
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       try {
         const typedMessage = message as Message;
-        
+
         if (typedMessage.type === "SAMAI_SEARCH_SETTINGS_UPDATED") {
           this.loadSettings().then(() => {
             this.processResults();
@@ -61,7 +61,10 @@ class SearchHighlighter {
           return true;
         }
 
-        if (typedMessage.type === "TOGGLE_AUTO_HIGHLIGHT" && typedMessage.enabled !== undefined) {
+        if (
+          typedMessage.type === "TOGGLE_AUTO_HIGHLIGHT" &&
+          typedMessage.enabled !== undefined
+        ) {
           this.settings.autoHighlight = typedMessage.enabled;
           if (typedMessage.enabled) {
             this.processResults();
@@ -71,7 +74,10 @@ class SearchHighlighter {
           return true;
         }
 
-        if (typedMessage.type === "TOGGLE_ENABLE_HIGHLIGHTING" && typedMessage.enabled !== undefined) {
+        if (
+          typedMessage.type === "TOGGLE_ENABLE_HIGHLIGHTING" &&
+          typedMessage.enabled !== undefined
+        ) {
           this.settings.enableHighlighting = typedMessage.enabled;
           if (!typedMessage.enabled) {
             this.clearHighlights();
@@ -83,7 +89,7 @@ class SearchHighlighter {
       } catch (error) {
         console.error("Error handling message:", error);
       }
-      
+
       return undefined;
     });
   }
@@ -95,7 +101,7 @@ class SearchHighlighter {
       patternsCount: this.patterns.length,
       patterns: this.patterns,
       currentURL: window.location.href,
-      isSearchPage: this.isSearchResultsPage()
+      isSearchPage: this.isSearchResultsPage(),
     });
 
     // Only process on search results pages
@@ -106,7 +112,9 @@ class SearchHighlighter {
 
     // If highlighting is disabled, clear any existing highlights and return
     if (!this.settings.enableHighlighting) {
-      console.log("[SamAI Highlighter] Highlighting disabled, clearing highlights");
+      console.log(
+        "[SamAI Highlighter] Highlighting disabled, clearing highlights"
+      );
       this.clearHighlights();
       return;
     }
@@ -114,10 +122,10 @@ class SearchHighlighter {
     // Get all search result elements - try multiple selectors for different search engines
     const results = this.getSearchResultElements();
     console.log("[SamAI Highlighter] Found search results:", results.length);
-    
+
     results.forEach((result) => {
       const resultElement = result as HTMLElement;
-      
+
       // Check if this result has already been processed
       if (resultElement.classList.contains("samai-processed-result")) {
         return;
@@ -134,7 +142,7 @@ class SearchHighlighter {
       try {
         let urlToParse = url;
         // Handle relative URLs by prepending the current page's origin
-        if (url.startsWith('/') || !url.includes('://')) {
+        if (url.startsWith("/") || !url.includes("://")) {
           urlToParse = `${window.location.origin}${url}`;
         }
         const urlObject = new URL(urlToParse);
@@ -144,7 +152,12 @@ class SearchHighlighter {
         return;
       }
 
-      console.log("[SamAI Highlighter] Processing result with URL:", url, "Domain:", domain);
+      console.log(
+        "[SamAI Highlighter] Processing result with URL:",
+        url,
+        "Domain:",
+        domain
+      );
 
       // Check if action buttons already exist for this result
       if (resultElement.querySelector(".samai-search-result-actions")) {
@@ -162,12 +175,27 @@ class SearchHighlighter {
 
       // Create color selection buttons
       const colors = [
-        { name: "Red", color: "#dc2626", bg: "rgba(220, 38, 38, 0.1)", border: "#dc2626" },
-        { name: "Green", color: "#059669", bg: "rgba(5, 150, 105, 0.1)", border: "#059669" },
-        { name: "Blue", color: "#4f46e5", bg: "rgba(79, 70, 229, 0.1)", border: "#4f46e5" }
+        {
+          name: "Red",
+          color: "#dc2626",
+          bg: "rgba(220, 38, 38, 0.1)",
+          border: "#dc2626",
+        },
+        {
+          name: "Green",
+          color: "#059669",
+          bg: "rgba(5, 150, 105, 0.1)",
+          border: "#059669",
+        },
+        {
+          name: "Blue",
+          color: "#4f46e5",
+          bg: "rgba(79, 70, 229, 0.1)",
+          border: "#4f46e5",
+        },
       ];
 
-      colors.forEach(colorConfig => {
+      colors.forEach((colorConfig) => {
         const colorBtn = document.createElement("button");
         colorBtn.innerHTML = `
           <div style="
@@ -193,31 +221,43 @@ class SearchHighlighter {
         colorBtn.style.display = "flex";
         colorBtn.style.alignItems = "center";
         colorBtn.style.justifyContent = "center";
-        
+
         colorBtn.onclick = async (e) => {
           e.preventDefault();
           e.stopPropagation();
-          
+
           const currentPatterns = this.patterns.slice();
-          const existingPattern = currentPatterns.find(p =>
-            p.enabled && domain.includes(p.pattern.toLowerCase())
+          const existingPattern = currentPatterns.find(
+            (p) => p.enabled && domain.includes(p.pattern.toLowerCase())
           );
-          
+
           if (existingPattern) {
             if (existingPattern.color === colorConfig.color) {
               // Same color clicked - toggle off (remove highlight)
-              const updatedPatterns = currentPatterns.filter(p => p.id !== existingPattern.id);
+              const updatedPatterns = currentPatterns.filter(
+                (p) => p.id !== existingPattern.id
+              );
               this.updatePatterns(updatedPatterns);
               colorBtn.style.background = "none";
-              console.log("[SamAI Highlighter] Removed highlight for domain:", domain);
+              console.log(
+                "[SamAI Highlighter] Removed highlight for domain:",
+                domain
+              );
             } else {
               // Different color - update existing pattern color
-              const updatedPatterns = currentPatterns.map(p =>
-                p.id === existingPattern.id ? { ...p, color: colorConfig.color } : p
+              const updatedPatterns = currentPatterns.map((p) =>
+                p.id === existingPattern.id
+                  ? { ...p, color: colorConfig.color }
+                  : p
               );
               this.updatePatterns(updatedPatterns);
               colorBtn.style.background = colorConfig.bg;
-              console.log("[SamAI Highlighter] Updated highlight for domain to", colorConfig.name, ":", domain);
+              console.log(
+                "[SamAI Highlighter] Updated highlight for domain to",
+                colorConfig.name,
+                ":",
+                domain
+              );
             }
           } else {
             // Add new highlight pattern
@@ -227,17 +267,27 @@ class SearchHighlighter {
               color: colorConfig.color,
               description: `${colorConfig.name} highlight: ${domain}`,
               enabled: true,
-              category: colorConfig.name === "Red" ? "important" : colorConfig.name === "Green" ? "favorite" : "default",
+              category:
+                colorConfig.name === "Red"
+                  ? "important"
+                  : colorConfig.name === "Green"
+                  ? "favorite"
+                  : "default",
             };
             const updatedPatterns = [...currentPatterns, newPattern];
             this.updatePatterns(updatedPatterns);
             colorBtn.style.background = colorConfig.bg;
-            console.log("[SamAI Highlighter] Added", colorConfig.name, "highlight for domain:", domain);
+            console.log(
+              "[SamAI Highlighter] Added",
+              colorConfig.name,
+              "highlight for domain:",
+              domain
+            );
           }
-          
+
           this.applyPatternHighlighting(resultElement, domain);
         };
-        
+
         actions.appendChild(colorBtn);
       });
 
@@ -264,25 +314,25 @@ class SearchHighlighter {
       hideBtn.style.display = "flex";
       hideBtn.style.alignItems = "center";
       hideBtn.style.justifyContent = "center";
-      
+
       hideBtn.onmouseenter = () => {
         hideBtn.style.background = "rgba(220, 38, 38, 0.2)";
         hideBtn.style.borderColor = "#dc2626";
         hideBtn.style.transform = "scale(1.1)";
       };
-      
+
       hideBtn.onmouseleave = () => {
         hideBtn.style.background = "rgba(220, 38, 38, 0.1)";
         hideBtn.style.borderColor = "rgba(220, 38, 38, 0.3)";
         hideBtn.style.transform = "scale(1)";
       };
-      
+
       hideBtn.onclick = async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         console.log("[SamAI Highlighter] Hiding result for domain:", domain);
-        
+
         // Add to hidden patterns
         const hiddenPattern: HighlightPattern = {
           id: `hidden-${Date.now()}`,
@@ -292,14 +342,14 @@ class SearchHighlighter {
           enabled: true,
           category: "default",
         };
-        
+
         const updatedPatterns = [...this.patterns, hiddenPattern];
         this.updatePatterns(updatedPatterns);
-        
+
         // Hide the element immediately
         resultElement.style.display = "none";
       };
-      
+
       actions.appendChild(hideBtn);
 
       // Position buttons to the right of the result
@@ -320,41 +370,52 @@ class SearchHighlighter {
 
   private async updatePatterns(newPatterns: HighlightPattern[]) {
     this.patterns = newPatterns;
-    
+
     // Save to sync store for proper cross-tab synchronization
     try {
       await highlightPatternsStore.setValue({ patterns: newPatterns });
-      console.log("[SamAI Highlighter] Patterns saved to sync store:", newPatterns.length);
-      
+      console.log(
+        "[SamAI Highlighter] Patterns saved to sync store:",
+        newPatterns.length
+      );
+
       // Send message to content scripts for immediate updates
       window.postMessage({ type: "SAMAI_SEARCH_SETTINGS_UPDATED" }, "*");
     } catch (error) {
-      console.error("[SamAI Highlighter] Error saving patterns to sync store:", error);
+      console.error(
+        "[SamAI Highlighter] Error saving patterns to sync store:",
+        error
+      );
     }
-    
+
     // Trigger re-processing
     this.processResults();
   }
 
   private applyPatternHighlighting(element: Element, domain: string) {
     // Remove existing highlight styles first
-    element.removeAttribute('data-samai-highlight-style');
+    element.removeAttribute("data-samai-highlight-style");
     const htmlElement = element as HTMLElement;
     htmlElement.style.borderLeft = "";
     htmlElement.style.paddingLeft = "";
-    
+
     // Check if domain matches any enabled patterns
-    const matchingPattern = this.patterns.find(p => 
-      p.enabled && domain.toLowerCase().includes(p.pattern.toLowerCase())
+    const matchingPattern = this.patterns.find(
+      (p) => p.enabled && domain.toLowerCase().includes(p.pattern.toLowerCase())
     );
-    
+
     if (matchingPattern && matchingPattern.color !== "#000000") {
       // Apply highlight
-      element.setAttribute('data-samai-highlight-style', 'true');
+      element.setAttribute("data-samai-highlight-style", "true");
       htmlElement.style.borderLeft = `3px solid ${matchingPattern.color}`;
       htmlElement.style.paddingLeft = "8px";
-      
-      console.log("[SamAI Highlighter] Applied highlight for domain:", domain, "with color:", matchingPattern.color);
+
+      console.log(
+        "[SamAI Highlighter] Applied highlight for domain:",
+        domain,
+        "with color:",
+        matchingPattern.color
+      );
     } else if (matchingPattern && matchingPattern.color === "#000000") {
       // Hidden domain
       htmlElement.style.display = "none";
@@ -363,56 +424,60 @@ class SearchHighlighter {
 
   public clearHighlights() {
     // Remove action buttons and highlighting from all processed results
-    const processedResults = document.querySelectorAll('.samai-processed-result');
-    processedResults.forEach(result => {
+    const processedResults = document.querySelectorAll(
+      ".samai-processed-result"
+    );
+    processedResults.forEach((result) => {
       const htmlElement = result as HTMLElement;
-      htmlElement.removeAttribute('data-samai-highlight-style');
+      htmlElement.removeAttribute("data-samai-highlight-style");
       htmlElement.style.borderLeft = "";
       htmlElement.style.paddingLeft = "";
       htmlElement.style.display = "";
-      
-      const actions = result.querySelector('.samai-search-result-actions');
+
+      const actions = result.querySelector(".samai-search-result-actions");
       if (actions) {
         actions.remove();
       }
-      
-      result.classList.remove('samai-processed-result');
+
+      result.classList.remove("samai-processed-result");
     });
   }
 
   private isSearchResultsPage(): boolean {
     const url = window.location.href.toLowerCase();
-    return url.includes('google.com/search') ||
-           url.includes('bing.com/search') ||
-           url.includes('duckduckgo.com/') ||
-           url.includes('yahoo.com/search') ||
-           url.includes('search.yahoo.com') ||
-           url.includes('ask.com/web') ||
-           url.includes('?q=') ||
-           url.includes('?query=');
+    return (
+      url.includes("google.com/search") ||
+      url.includes("bing.com/search") ||
+      url.includes("duckduckgo.com/") ||
+      url.includes("yahoo.com/search") ||
+      url.includes("search.yahoo.com") ||
+      url.includes("ask.com/web") ||
+      url.includes("?q=") ||
+      url.includes("?query=")
+    );
   }
 
   private getSearchResultElements(): Element[] {
     const selectors = [
       // Google
-      'div[data-ved] .g',
-      'div[data-ved] .rc',
-      'div[data-ved] .r',
-      '.tF2Cxc',
-      '.MjjYud',
+      "div[data-ved] .g",
+      "div[data-ved] .rc",
+      "div[data-ved] .r",
+      ".tF2Cxc",
+      ".MjjYud",
       // Bing
-      'li.b_algo',
-      'div.b_algo',
+      "li.b_algo",
+      "div.b_algo",
       // DuckDuckGo
-      'div.result',
-      'div.results .result',
+      "div.result",
+      "div.results .result",
       // Yahoo
-      'div.dd',
-      'div.wc',
+      "div.dd",
+      "div.wc",
       // General
-      '.search-result',
-      '.result-item',
-      '.search-result-item'
+      ".search-result",
+      ".result-item",
+      ".search-result-item",
     ];
 
     const elements: Element[] = [];
@@ -423,26 +488,31 @@ class SearchHighlighter {
 
     // Fallback: try to find common search result patterns
     if (elements.length === 0) {
-      const candidates = document.querySelectorAll('a[href]');
-      candidates.forEach(candidate => {
-        const parent = candidate.closest('div, li, article');
+      const candidates = document.querySelectorAll("a[href]");
+      candidates.forEach((candidate) => {
+        const parent = candidate.closest("div, li, article");
         if (parent && parent.textContent && parent.textContent.length > 100) {
           elements.push(parent);
         }
       });
     }
 
-    console.log("[SamAI Highlighter] Search result elements found:", elements.length);
+    console.log(
+      "[SamAI Highlighter] Search result elements found:",
+      elements.length
+    );
 
     return elements;
   }
 
   public getHighlightStats() {
-    const highlights = document.querySelectorAll('[data-samai-highlight-style="true"]');
+    const highlights = document.querySelectorAll(
+      '[data-samai-highlight-style="true"]'
+    );
     return {
       highlighted: highlights.length,
       total: this.getSearchResultElements().length,
-      enabledPatterns: this.patterns.filter(p => p.enabled).length,
+      enabledPatterns: this.patterns.filter((p) => p.enabled).length,
     };
   }
 
@@ -455,10 +525,10 @@ class SearchHighlighter {
 }
 
 // Initialize the highlighter when the content script loads
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   // Wait for DOM to be ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
       new SearchHighlighter();
     });
   } else {
@@ -470,5 +540,4 @@ if (typeof window !== 'undefined') {
 export { SearchHighlighter };
 
 // Export types for use in other modules
-  export type { HighlightPattern, HighlightSettings };
-
+export type { HighlightSettings };
