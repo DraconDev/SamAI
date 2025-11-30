@@ -1596,19 +1596,25 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                   key={item.id}
                   draggable={!editingItem}
                   onDragStart={(e) =>
-                    editingItem
-                      ? e.preventDefault()
-                      : handleDragStart(e, item, index)
+                    !editingItem && !contextMenu.visible
+                      ? handleDragStart(e, item, index)
+                      : e.preventDefault()
                   }
                   onDragOver={(e) =>
-                    !editingItem && handleDragOver(e, index, item)
+                    !editingItem &&
+                    !contextMenu.visible &&
+                    handleDragOver(e, index, item)
                   }
                   onDragLeave={handleDragLeave}
-                  onDrop={(e) => !editingItem && handleDrop(e, index, item)}
+                  onDrop={(e) =>
+                    !editingItem &&
+                    !contextMenu.visible &&
+                    handleDrop(e, index, item)
+                  }
                   onClick={() => {
                     if (editingItem?.id === item.id) {
                       saveEdit();
-                    } else if (!editingItem) {
+                    } else if (!editingItem && !contextMenu.visible) {
                       handleItemClick(item);
                     }
                   }}
@@ -1620,7 +1626,9 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                     }
                   }}
                   onTouchStart={(e) =>
-                    !editingItem && handleTouchStart(e, item)
+                    !editingItem &&
+                    !contextMenu.visible &&
+                    handleTouchStart(e, item)
                   }
                   onTouchEnd={handleTouchEnd}
                   onTouchCancel={handleTouchCancel}
