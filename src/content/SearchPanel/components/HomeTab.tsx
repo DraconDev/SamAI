@@ -1579,10 +1579,10 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "0.125rem",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "0.25rem",
               justifyItems: "center",
-              padding: "0.5rem",
+              padding: "0.75rem",
               position: "relative",
             }}
           >
@@ -1623,9 +1623,9 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                   style={{
                     position: "relative",
                     width: "100%",
-                    maxWidth: "76px",
+                    maxWidth: item.isFolder ? "92px" : "76px",
                     padding: "0.1rem",
-                    borderRadius: "6px",
+                    borderRadius: "8px",
                     overflow: "hidden",
                     border: isDraggedOverFolder
                       ? "2px solid rgba(59, 130, 246, 0.8)"
@@ -1641,7 +1641,7 @@ const HomeTab: React.FC<HomeTabProps> = ({ onImageTabClick }) => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: "0.25rem",
+                    gap: item.isFolder ? "0.4rem" : "0.25rem",
                     userSelect: editingItem?.id === item.id ? "text" : "none",
                   }}
                   onMouseEnter={(e) => {
