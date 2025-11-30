@@ -2,7 +2,6 @@
 
 ## To Do
 
-- one fix we need that hte text in the search bar and custom site and add folder are all black which is near impossible to read on our background, and our backgroudn is fine, we just need to adjust the text color
 
 - folders should have a big icon just like sites do, i am talking about their picture, and the folder icon should be modern and cool looking, we dont need that blue background behind the folder icon
 
@@ -16,6 +15,7 @@
 
 ## Done
 
+- one fix we need that hte text in the search bar and custom site and add folder are all black which is near impossible to read on our background, and our backgroudn is fine, we just need to adjust the text color
 - [x] the page scraper doesn't follow the same tab style exactly as the rest of the app, we need to fix that, but otherwise looks good
 - [x] make sure our bottom right corner toggle sidebar button is always above the icons, no matter what site is loaded, but obviously we want it behind the side panel when that is open, no fixed a site icon still covering it
 - [x] when i drag an icon back to the home tab we should stay in the folder tab, not go back to home tab
