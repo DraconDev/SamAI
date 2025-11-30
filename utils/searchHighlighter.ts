@@ -173,123 +173,92 @@ class SearchHighlighter {
       actions.style.gap = "4px";
       actions.style.marginTop = "4px";
 
-      // Create color selection buttons
-      const colors = [
-        {
-          name: "Red",
-          color: "#dc2626",
-          bg: "rgba(220, 38, 38, 0.1)",
-          border: "#dc2626",
-        },
-        {
-          name: "Green",
-          color: "#059669",
-          bg: "rgba(5, 150, 105, 0.1)",
-          border: "#059669",
-        },
-        {
-          name: "Blue",
-          color: "#4f46e5",
-          bg: "rgba(79, 70, 229, 0.1)",
-          border: "#4f46e5",
-        },
-      ];
+      // Create action buttons for favorite/hide
+      // Add favorite button
+      const favoriteBtn = document.createElement("button");
+      favoriteBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      `;
+      favoriteBtn.title = `Add ${domain} to favorites`;
+      favoriteBtn.style.cursor = "pointer";
+      favoriteBtn.style.background = "rgba(245, 158, 11, 0.1)";
+      favoriteBtn.style.border = "1px solid rgba(245, 158, 11, 0.3)";
+      favoriteBtn.style.padding = "4px";
+      favoriteBtn.style.fontSize = "16px";
+      favoriteBtn.style.color = "#f59e0b";
+      favoriteBtn.style.borderRadius = "6px";
+      favoriteBtn.style.transition = "all 0.2s";
+      favoriteBtn.style.width = "24px";
+      favoriteBtn.style.height = "24px";
+      favoriteBtn.style.display = "flex";
+      favoriteBtn.style.alignItems = "center";
+      favoriteBtn.style.justifyContent = "center";
 
-      colors.forEach((colorConfig) => {
-        const colorBtn = document.createElement("button");
-        colorBtn.innerHTML = `
-          <div style="
-            width: 16px;
-            height: 16px;
-            background: ${colorConfig.color};
-            border-radius: 50%;
-            border: 1px solid ${colorConfig.border};
-            opacity: 0.8;
-          "></div>
-        `;
-        colorBtn.title = `Highlight ${colorConfig.name.toLowerCase()} - ${domain}`;
-        colorBtn.style.cursor = "pointer";
-        colorBtn.style.background = "none";
-        colorBtn.style.border = "none";
-        colorBtn.style.padding = "2px";
-        colorBtn.style.fontSize = "16px";
-        colorBtn.style.color = colorConfig.color;
-        colorBtn.style.borderRadius = "50%";
-        colorBtn.style.transition = "all 0.2s";
-        colorBtn.style.width = "24px";
-        colorBtn.style.height = "24px";
-        colorBtn.style.display = "flex";
-        colorBtn.style.alignItems = "center";
-        colorBtn.style.justifyContent = "center";
+      favoriteBtn.onmouseenter = () => {
+        favoriteBtn.style.background = "rgba(245, 158, 11, 0.2)";
+        favoriteBtn.style.borderColor = "#f59e0b";
+        favoriteBtn.style.transform = "scale(1.1)";
+      };
 
-        colorBtn.onclick = async (e) => {
-          e.preventDefault();
-          e.stopPropagation();
+      favoriteBtn.onmouseleave = () => {
+        favoriteBtn.style.background = "rgba(245, 158, 11, 0.1)";
+        favoriteBtn.style.borderColor = "rgba(245, 158, 11, 0.3)";
+        favoriteBtn.style.transform = "scale(1)";
+      };
 
-          const currentPatterns = this.patterns.slice();
-          const existingPattern = currentPatterns.find(
-            (p) => p.enabled && domain.includes(p.pattern.toLowerCase())
-          );
+      favoriteBtn.onclick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-          if (existingPattern) {
-            if (existingPattern.color === colorConfig.color) {
-              // Same color clicked - toggle off (remove highlight)
-              const updatedPatterns = currentPatterns.filter(
-                (p) => p.id !== existingPattern.id
-              );
-              this.updatePatterns(updatedPatterns);
-              colorBtn.style.background = "none";
-              console.log(
-                "[SamAI Highlighter] Removed highlight for domain:",
-                domain
-              );
-            } else {
-              // Different color - update existing pattern color
-              const updatedPatterns = currentPatterns.map((p) =>
-                p.id === existingPattern.id
-                  ? { ...p, color: colorConfig.color }
-                  : p
-              );
-              this.updatePatterns(updatedPatterns);
-              colorBtn.style.background = colorConfig.bg;
-              console.log(
-                "[SamAI Highlighter] Updated highlight for domain to",
-                colorConfig.name,
-                ":",
-                domain
-              );
-            }
-          } else {
-            // Add new highlight pattern
-            const newPattern: HighlightPattern = {
-              id: Date.now().toString(),
-              pattern: domain,
-              color: colorConfig.color,
-              description: `${colorConfig.name} highlight: ${domain}`,
-              enabled: true,
-              category:
-                colorConfig.name === "Red"
-                  ? "important"
-                  : colorConfig.name === "Green"
-                  ? "favorite"
-                  : "default",
-            };
-            const updatedPatterns = [...currentPatterns, newPattern];
-            this.updatePatterns(updatedPatterns);
-            colorBtn.style.background = colorConfig.bg;
-            console.log(
-              "[SamAI Highlighter] Added",
-              colorConfig.name,
-              "highlight for domain:",
-              domain
+        const currentPatterns = this.patterns.slice();
+        const existingPattern = currentPatterns.find(
+          (p) => p.enabled && domain.includes(p.pattern.toLowerCase())
+        );
+
+        if (existingPattern) {
+          if (existingPattern.type === "favorite") {
+            // Toggle off (remove from favorites)
+            const updatedPatterns = currentPatterns.filter(
+              (p) => p.id !== existingPattern.id
             );
+            this.updatePatterns(updatedPatterns);
+            favoriteBtn.style.background = "rgba(245, 158, 11, 0.1)";
+            favoriteBtn.style.color = "#f59e0b";
+            console.log("[SamAI Highlighter] Removed from favorites:", domain);
+          } else {
+            // Convert hide to favorite
+            const updatedPatterns = currentPatterns.map((p) =>
+              p.id === existingPattern.id
+                ? { ...p, type: "favorite" as const }
+                : p
+            );
+            this.updatePatterns(updatedPatterns);
+            favoriteBtn.style.background = "rgba(245, 158, 11, 0.3)";
+            favoriteBtn.style.color = "#fbbf24";
+            console.log("[SamAI Highlighter] Converted to favorite:", domain);
           }
+        } else {
+          // Add new favorite pattern
+          const newPattern: HighlightPattern = {
+            id: Date.now().toString(),
+            pattern: domain,
+            type: "favorite",
+            description: `Favorite: ${domain}`,
+            enabled: true,
+          };
+          const updatedPatterns = [...currentPatterns, newPattern];
+          this.updatePatterns(updatedPatterns);
+          favoriteBtn.style.background = "rgba(245, 158, 11, 0.3)";
+          favoriteBtn.style.color = "#fbbf24";
+          console.log("[SamAI Highlighter] Added to favorites:", domain);
+        }
 
-          this.applyPatternHighlighting(resultElement, domain);
-        };
+        this.applyPatternHighlighting(resultElement, domain);
+      };
 
-        actions.appendChild(colorBtn);
-      });
+      actions.appendChild(favoriteBtn);
 
       // Add hide button - more prominent styling
       const hideBtn = document.createElement("button");
@@ -337,10 +306,9 @@ class SearchHighlighter {
         const hiddenPattern: HighlightPattern = {
           id: `hidden-${Date.now()}`,
           pattern: domain,
-          color: "#000000",
+          type: "hide",
           description: `Hidden: ${domain}`,
           enabled: true,
-          category: "default",
         };
 
         const updatedPatterns = [...this.patterns, hiddenPattern];
@@ -398,27 +366,29 @@ class SearchHighlighter {
     const htmlElement = element as HTMLElement;
     htmlElement.style.borderLeft = "";
     htmlElement.style.paddingLeft = "";
+    htmlElement.style.display = "";
 
     // Check if domain matches any enabled patterns
     const matchingPattern = this.patterns.find(
       (p) => p.enabled && domain.toLowerCase().includes(p.pattern.toLowerCase())
     );
 
-    if (matchingPattern && matchingPattern.color !== "#000000") {
-      // Apply highlight
-      element.setAttribute("data-samai-highlight-style", "true");
-      htmlElement.style.borderLeft = `3px solid ${matchingPattern.color}`;
-      htmlElement.style.paddingLeft = "8px";
+    if (matchingPattern) {
+      if (matchingPattern.type === "favorite") {
+        // Apply favorite highlight
+        element.setAttribute("data-samai-highlight-style", "true");
+        htmlElement.style.borderLeft = "3px solid #f59e0b";
+        htmlElement.style.paddingLeft = "8px";
 
-      console.log(
-        "[SamAI Highlighter] Applied highlight for domain:",
-        domain,
-        "with color:",
-        matchingPattern.color
-      );
-    } else if (matchingPattern && matchingPattern.color === "#000000") {
-      // Hidden domain
-      htmlElement.style.display = "none";
+        console.log(
+          "[SamAI Highlighter] Applied favorite highlight for domain:",
+          domain
+        );
+      } else if (matchingPattern.type === "hide") {
+        // Hide domain
+        htmlElement.style.display = "none";
+        console.log("[SamAI Highlighter] Hidden domain:", domain);
+      }
     }
   }
 

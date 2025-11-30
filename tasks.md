@@ -5,9 +5,10 @@
 ### Future 
 - [ ] Simplify the search highlight, we have a search highlight feature that allows us to mark sites, this is not home tab but search tab related, we have various colors now but that is overall we should just have a favorite and hide feature, so we can favorite sites to show them at the top of search results with choose color decoration, and hide sites to not show them at all in search results
   - [ ] Its either favorite or hide, no other colors
-  
+
 ### Current 
 
+- the search highlight tweak is guide good but lets move the icons like 5px to the left, and i don't think we want them to have backgorund colors, just the icon color, slightly bigger icons too, and the highlight color should be green, red is good for the hide icon 
 - [ ] right click edit or delete when right clicking on an icon or folder on the home tab
 - [ ] add a default icon to the home page icons that lead to google image generator, that we are currently linking to with the image tab
 
