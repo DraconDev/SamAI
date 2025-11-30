@@ -263,7 +263,7 @@ class SearchHighlighter {
       // Add hide button - more prominent styling
       const hideBtn = document.createElement("button");
       hideBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
           <circle cx="12" cy="12" r="3"/>
           <path d="M3 3L21 21"/>
@@ -271,29 +271,32 @@ class SearchHighlighter {
       `;
       hideBtn.title = "Hide this domain";
       hideBtn.style.cursor = "pointer";
-      hideBtn.style.background = "rgba(220, 38, 38, 0.1)";
-      hideBtn.style.border = "1px solid rgba(220, 38, 38, 0.3)";
+      hideBtn.style.border = "1px solid rgba(220, 38, 38, 0.4)";
       hideBtn.style.padding = "4px";
-      hideBtn.style.fontSize = "16px";
+      hideBtn.style.fontSize = "18px";
       hideBtn.style.color = "#dc2626";
       hideBtn.style.borderRadius = "6px";
       hideBtn.style.transition = "all 0.2s";
-      hideBtn.style.width = "24px";
-      hideBtn.style.height = "24px";
+      hideBtn.style.width = "28px";
+      hideBtn.style.height = "28px";
       hideBtn.style.display = "flex";
       hideBtn.style.alignItems = "center";
       hideBtn.style.justifyContent = "center";
+      hideBtn.style.backdropFilter = "blur(8px)";
+      hideBtn.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.3)";
 
       hideBtn.onmouseenter = () => {
-        hideBtn.style.background = "rgba(220, 38, 38, 0.2)";
+        hideBtn.style.background = "rgba(220, 38, 38, 0.15)";
         hideBtn.style.borderColor = "#dc2626";
         hideBtn.style.transform = "scale(1.1)";
+        hideBtn.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.4)";
       };
 
       hideBtn.onmouseleave = () => {
-        hideBtn.style.background = "rgba(220, 38, 38, 0.1)";
-        hideBtn.style.borderColor = "rgba(220, 38, 38, 0.3)";
+        hideBtn.style.background = "transparent";
+        hideBtn.style.borderColor = "rgba(220, 38, 38, 0.4)";
         hideBtn.style.transform = "scale(1)";
+        hideBtn.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.3)";
       };
 
       hideBtn.onclick = async (e) => {
